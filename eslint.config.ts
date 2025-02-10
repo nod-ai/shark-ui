@@ -13,12 +13,12 @@ import pluginCypress from 'eslint-plugin-cypress/flat';
 
 export default defineConfigWithVueTs(
   {
-    name: 'app/files-to-lint',
+    name : 'app/files-to-lint',
     files: ['**/*.{ts,mts,tsx,vue}'],
   },
 
   {
-    name: 'app/files-to-ignore',
+    name   : 'app/files-to-ignore',
     ignores: [
       '**/dist/**',
       '**/dist-ssr/**',
@@ -27,11 +27,24 @@ export default defineConfigWithVueTs(
   },
 
   stylistic.configs.customize({
-    flat: true,
+    flat       : true,
     commaDangle: 'always-multiline',
-    quotes: 'single',
-    semi: true,
+    quotes     : 'single',
+    semi       : true,
   }),
+  {
+    plugins: {
+      '@stylistic': stylistic,
+    },
+    rules: {
+      '@stylistic/key-spacing': [
+        'error',
+        {
+          align: 'colon',
+        },
+      ], // Makes object literals more tabular, helping identify inconsistencies and repetition
+    },
+  },
 
   pluginVue.configs['flat/strongly-recommended'],
   vueTsConfigs.strictTypeChecked,

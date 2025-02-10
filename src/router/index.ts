@@ -7,11 +7,11 @@ import TextToImagePage from '../pages/TextToImagePage.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
+  routes : [
     {
-      path: '/text-to-image',
-      alias: '/',
-      name: 'text-to-image',
+      path     : '/text-to-image',
+      alias    : '/',
+      name     : 'text-to-image',
       component: TextToImagePage,
     },
   ],
