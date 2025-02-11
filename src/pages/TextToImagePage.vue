@@ -7,7 +7,7 @@ import {
   set,
 } from '@/library/vue/reactivity.ts';
 
-const inputText = ref('');
+const promptEntry = ref('');
 
 const presentableImage = ref<string | null>(placeholderImage);
 
@@ -23,8 +23,8 @@ const generateImageFromText = () => {
     <row>
       <column col="6">
         <input
-          v-model="inputText"
-          placeholder="Enter text here"
+          v-model="promptEntry"
+          placeholder="Enter prompt here"
         >
       </column>
 
