@@ -2,14 +2,17 @@
 import exampleOutputImage from '@/assets/stable-diffusion-example-output-image.png';
 import placeholderImage from '@/assets/logo.svg';
 
-import { ref } from 'vue';
+import {
+  ref,
+  set,
+} from '@/library/vue/reactivity.ts';
 
 const inputText = ref('');
 
 const presentableImage = ref<string | null>(placeholderImage);
 
 const generateImageFromText = () => {
-  presentableImage.value = exampleOutputImage;
+  set(presentableImage, exampleOutputImage);
 };
 </script>
 
