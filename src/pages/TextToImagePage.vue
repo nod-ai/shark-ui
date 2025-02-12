@@ -20,22 +20,18 @@ const generateImageFromText = () => {
   <section
     class="text-to-image-view"
   >
-    <row>
-      <column col="6">
-        <input
-          v-model="promptEntry"
-          placeholder="Enter prompt here"
-        >
-      </column>
+    <div class="input-section">
+      <input
+        v-model="promptEntry"
+        placeholder="Enter prompt here"
+      >
 
-      <column col="6">
-        <button
-          @click="generateImageFromText"
-        >
-          Generate
-        </button>
-      </column>
-    </row>
+      <button
+        @click="generateImageFromText"
+      >
+        Generate
+      </button>
+    </div>
 
     <img
       v-if="presentableImage !== null"
@@ -54,7 +50,12 @@ const generateImageFromText = () => {
   align-items: center;
   width: 300px;
 
-  .generated-image {
+  >.input-section {
+    display: grid;
+    grid-template-columns: 67% 33%;
+  }
+
+  >.generated-image {
     height: 100%;
     width: 100%;
   }
