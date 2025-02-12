@@ -43,6 +43,19 @@ export default defineConfigWithVueTs(
           align: 'colon',
         },
       ], // Makes object literals more tabular, helping identify inconsistencies and repetition
+      '@stylistic/object-curly-newline': [
+        'error',
+        {
+          multiline    : true,
+          minProperties: 1,
+        },
+      ],
+      '@stylistic/object-property-newline': [
+        'error',
+        {
+          allowAllPropertiesOnSameLine: false,
+        },
+      ],
     },
   },
 
