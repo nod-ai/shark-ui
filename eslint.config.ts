@@ -40,7 +40,8 @@ export default defineConfigWithVueTs(
       '@stylistic/key-spacing': [
         'error',
         {
-          align: 'colon',
+          align       : 'colon',
+          ignoredNodes: ['TSTypeLiteral'],
         },
       ], // Makes object literals more tabular, helping identify inconsistencies and repetition
       '@stylistic/object-curly-newline': [
