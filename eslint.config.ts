@@ -41,7 +41,10 @@ export default defineConfigWithVueTs(
         'error',
         {
           align       : 'colon',
-          ignoredNodes: ['TSTypeLiteral'],
+          ignoredNodes: [
+            'TSTypeLiteral',
+            'TSInterfaceBody',
+          ],
         },
       ], // Makes object literals more tabular, helping identify inconsistencies and repetition
       '@stylistic/object-curly-newline': [
