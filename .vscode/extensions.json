@@ -5,6 +5,7 @@
     "dbaeumer.vscode-eslint",
     "EditorConfig.EditorConfig",
     "streetsidesoftware.code-spell-checker",
-    "DavidAnson.vscode-markdownlint"
+    "DavidAnson.vscode-markdownlint",
+    "nicoespeon.abracadabra"
   ]
 }
