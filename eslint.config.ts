@@ -49,13 +49,13 @@ const configWithVueTS = defineConfigWithVueTs(
       '@stylistic/key-spacing': [
         'error',
         {
-          align       : 'colon',
+          align       : 'colon', // Makes object literals more tabular, helping identify inconsistencies and repetition
           ignoredNodes: [
             'TSTypeLiteral',
             'TSInterfaceBody',
           ],
         },
-      ], // Makes object literals more tabular, helping identify inconsistencies and repetition
+      ],
       '@stylistic/object-curly-newline': [
         'error',
         {
