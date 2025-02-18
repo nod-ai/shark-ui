@@ -1,3 +1,6 @@
+import tseslint, {
+  type ConfigWithExtends,
+} from 'typescript-eslint';
 import stylistic from '@stylistic/eslint-plugin';
 
 import {
@@ -11,7 +14,7 @@ import pluginVitest from '@vitest/eslint-plugin';
 // @ts-ignore
 import pluginCypress from 'eslint-plugin-cypress/flat';
 
-export default defineConfigWithVueTs(
+const configWithVueTS = defineConfigWithVueTs(
   {
     name : 'app/files-to-lint',
     files: ['**/*.{ts,mts,tsx,vue}'],
@@ -38,6 +41,7 @@ export default defineConfigWithVueTs(
     semi       : true,
   }),
   {
+    name   : 'shark-ui/extra-stylistic',
     plugins: {
       '@stylistic': stylistic,
     },
@@ -78,10 +82,27 @@ export default defineConfigWithVueTs(
   },
 
   {
-    ...pluginCypress.configs.recommended,
+    ...pluginCypress.configs.recommended as ConfigWithExtends,
     files: [
       'cypress/e2e/**/*.{cy,spec}.{js,ts,jsx,tsx}',
       'cypress/support/**/*.{js,ts,jsx,tsx}',
     ],
   },
 );
+
+export default tseslint.config([
+  ...configWithVueTS,
+  {
+    name : 'shark-ui/safety-override',
+    files: [
+      '*/**/*.ts',
+    ],
+    rules: {
+      '@typescript-eslint/no-unsafe-argument'     : 'error',
+      '@typescript-eslint/no-unsafe-assignment'   : 'error',
+      '@typescript-eslint/no-unsafe-call'         : 'error',
+      '@typescript-eslint/no-unsafe-member-access': 'error',
+      '@typescript-eslint/no-unsafe-return'       : 'error',
+    },
+  },
+]);
