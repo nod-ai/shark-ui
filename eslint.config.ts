@@ -26,6 +26,12 @@ export default defineConfigWithVueTs(
     ],
   },
 
+  {
+    rules: {
+      eqeqeq: 'error', // Avoids `==` and `!=`, which perform type coercions that follow the rather obscure Abstract Equality Comparison Algorithm: https://www.ecma-international.org/ecma-262/5.1/#sec-11.9.3
+    },
+  },
+
   stylistic.configs.customize({
     commaDangle: 'always-multiline',
     quotes     : 'single',
