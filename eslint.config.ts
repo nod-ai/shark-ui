@@ -27,7 +27,6 @@ export default defineConfigWithVueTs(
   },
 
   stylistic.configs.customize({
-    flat       : true,
     commaDangle: 'always-multiline',
     quotes     : 'single',
     semi       : true,
