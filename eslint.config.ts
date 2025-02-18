@@ -56,6 +56,10 @@ const configWithVueTS = defineConfigWithVueTs(
           ],
         },
       ],
+      '@stylistic/nonblock-statement-body-position': [
+        'error',
+        'beside', // allows for single-line statements, useful for simple guards and "conditional sentences"
+      ],
       '@stylistic/object-curly-newline': [
         'error',
         {
