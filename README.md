@@ -1,6 +1,8 @@
 # shark-ui
 
-This template should help get you started developing with Vue 3 in Vite.
+## Introduction
+
+Welcome to SHARK UI! This repo contains a basic app to demonstrate how to use the [Shortfin](https://github.com/nod-ai/shark-ai/tree/main/shortfin) Web APIs for text-to-image and text-to-text inference.
 
 ## Recommended IDE Setup
 
