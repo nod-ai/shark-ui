@@ -41,6 +41,20 @@ To get SHARK UI up and running:
 
         NOTE: https is not yet supported
 
+## Usage
+
+1. If you haven't already:
+    1. [Complete installation](#installation)
+    1. Server the text-to-image API from Shortfin, i.e. [for SDXL](https://github.com/nod-ai/shark-ai/tree/main/shortfin/python/shortfin_apps/sd)
+1. Serve the project (and avoid minification) by running:
+
+    ```shell
+    npm run dev 
+    ```
+
+1. Open the "Network" URL in your browser of choice.
+1. Take it for a spin!
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
