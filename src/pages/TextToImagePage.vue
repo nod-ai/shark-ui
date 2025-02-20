@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import exampleOutputImage from '@/assets/stable-diffusion-example-output-image.png';
-import placeholderImage from '@/assets/logo.svg';
-
 import {
   ref,
   set,
 } from '@/library/vue/reactivity.ts';
+
+import placeholderImage from '@/assets/logo.svg';
+import exampleOutputImage from '@/assets/stable-diffusion-example-output-image.png';
 
 const promptEntry = ref('');
 
