@@ -55,60 +55,41 @@ To get SHARK UI up and running:
 1. Open the "Network" URL in your browser of choice.
 1. Take it for a spin!
 
-## Recommended IDE Setup
+## Development
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+1. If you haven't already, [complete the basic installation](#installation)
+1. In VSCode, [add the extensions recommended by the project](https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_extension-recommendations).
+1. Lint early and often with [ESLint](https://eslint.org/) by running:
 
-## Type Support for `.vue` Imports in TS
+    ```sh
+    npm run lint
+    ```
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+1. Run Unit Tests with [Vitest](https://vitest.dev/):
 
-## Customize configuration
+    ```sh
+    npm run test:unit
+    ```
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+1. Run End-to-End Tests against the development server with [Cypress](https://www.cypress.io/):
 
-## Project Setup
+    ```sh
+    npm run test:e2e:dev
+    ```
 
-```sh
-npm install
-```
+    NOTE: It is much faster than doing so against the production build.
 
-### Compile and Hot-Reload for Development
+## Deployment
 
-```sh
-npm run dev
-```
+1. If you haven't already, [complete the basic installation](#installation)
+1. Type-Check, compile and minify for production by running:
 
-### Type-Check, Compile and Minify for Production
+    ```sh
+    npm run build
+    ```
 
-```sh
-npm run build
-```
+1. Test the production build (e.g. in CI environments):
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
-```sh
-npm run test:e2e:dev
-```
-
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-npm run build
-npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+    ```sh
+    npm run test:e2e
+    ```
