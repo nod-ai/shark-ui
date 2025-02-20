@@ -1,4 +1,4 @@
-# shark-ui
+# SHARK UI
 
 ## Introduction
 
