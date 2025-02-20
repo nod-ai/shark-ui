@@ -4,6 +4,43 @@
 
 Welcome to SHARK UI! This repo contains a basic app to demonstrate how to use the [Shortfin](https://github.com/nod-ai/shark-ai/tree/main/shortfin) Web APIs for text-to-image and text-to-text inference.
 
+## Installation
+
+To get SHARK UI up and running:
+
+1. Clone the project
+
+    ```shell
+    git clone https://github.com/nod-ai/shark-ui.git && cd shark-ui
+    ```
+
+1. Configure dependencies
+    1. [Install node and npm](https://nodejs.org/en/download)
+
+        NOTE: prefer the latest LTS version of node (even-numbered major version)
+    1. Install project dependencies, by running (from the project root):
+
+        ```shell
+        npm install
+        ```
+
+1. Configure environment
+    1. Open in [VSCode](https://code.visualstudio.com/)
+        NOTE: Recommended because of the included workspace settings and recommended extensions
+    1. Add a `.env` file to the project root:
+
+        ```env
+        VITE_TEXT_TO_IMAGE_API_ORIGIN=http://<shortfin-server-ip-address>:<server-port>
+        ```
+
+        OR
+
+        ```env
+        VITE_TEXT_TO_IMAGE_API_ORIGIN=http://www.example.com
+        ```
+
+        NOTE: https is not yet supported
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
