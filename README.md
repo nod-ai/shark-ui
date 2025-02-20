@@ -59,6 +59,13 @@ To get SHARK UI up and running:
 
 1. If you haven't already, [complete the basic installation](#installation)
 1. In VSCode, [add the extensions recommended by the project](https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_extension-recommendations).
+1. Serve the project with HMR by running:
+
+    ```shell
+    npm run dev
+    ```
+
+    NOTE: Shows [Vue Dev Tools](https://devtools.vuejs.org/getting-started/features) for debugging UI
 1. Lint early and often with [ESLint](https://eslint.org/) by running:
 
     ```sh
