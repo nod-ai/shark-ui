@@ -1,7 +1,10 @@
 {
     "cSpell.words": [
+        "cbor",
+        "fastinfoset",
         "SDXL",
         "Shortfin",
+        "wbxml",
     ],
     "editor.codeActionsOnSave": {
         "source.fixAll": "explicit",
