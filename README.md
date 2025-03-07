@@ -26,7 +26,8 @@ To get SHARK UI up and running:
 
 1. Configure environment
     1. Open in [VSCode](https://code.visualstudio.com/)
-        NOTE: Recommended because of the included workspace settings and recommended extensions
+
+       NOTE: Recommended because of the included workspace settings and recommended extensions
     1. Add a `.env` file to the project root:
 
         ```env
