@@ -9,6 +9,8 @@ import {
   useStatefulProcess,
 } from '@/library/vue/statefulProcess.ts';
 
+import * as StabilityAIClient from 'stabilityai-client-typescript/models/components';
+
 import * as InferenceClient from '@/library/InferenceClient/index.ts';
 
 import type ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image/index.ts';
@@ -19,6 +21,9 @@ import {
 
 import exampleOutputImage from '@/assets/stable-diffusion-example-output-image.png';
 import type ImageGenerationPrompt from '@/models/ImageGenerationPrompt.ts';
+import ImageGenerationPromptWeight, {
+  quantitative,
+} from '@/models/ImageGenerationPromptWeight.ts';
 
 const newPrompt: ImageGenerationPrompt = {
   positive: 'a cat under the snow with blue eyes, covered by snow, cinematic style, medium shot, professional photo, animal',
@@ -29,17 +34,42 @@ const promptEntry = ref(cloneOf(newPrompt));
 
 const presentableImage: Ref<ImageURI | null> = ref(null);
 
+const promptDelimiter = ',';
+
+const toTextPrompts = (
+  givenPrompt: ImageGenerationPrompt,
+  givenWeightQuality: 'positive' | 'negative',
+): StabilityAIClient.TextToImageRequestBody['textPrompts'] => {
+  return givenPrompt[givenWeightQuality]
+    .split(promptDelimiter)
+    .map($0 => ({
+      text  : $0.trim(),
+      weight: quantitative(ImageGenerationPromptWeight[givenWeightQuality]),
+    }));
+};
+
+const toStabilityAITextPrompts = (
+  givenPrompt: ImageGenerationPrompt,
+): StabilityAIClient.TextToImageRequestBody['textPrompts'] => {
+  const positivePrompts = toTextPrompts(givenPrompt, 'positive');
+  const negativePrompts = toTextPrompts(givenPrompt, 'negative');
+
+  return [
+    ...positivePrompts,
+    ...negativePrompts,
+  ];
+};
+
 const imageGeneration = useStatefulProcess(async () => {
   const proposedPrompt = get(promptEntry);
 
   const newImage = await InferenceClient.tryToGenerateImage({
-    prompt        : proposedPrompt.positive,
-    neg_prompt    : proposedPrompt.negative,
-    height        : 1024,
-    width         : 1024,
-    steps         : 20,
-    guidance_scale: 7.5,
-    seed          : 0,
+    textPrompts: toStabilityAITextPrompts(proposedPrompt),
+    height     : 1024,
+    width      : 1024,
+    steps      : 20,
+    cfgScale   : 7.5,
+    seed       : 0,
   });
 
   set(presentableImage, newImage);
