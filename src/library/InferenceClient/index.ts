@@ -1,3 +1,5 @@
+import * as StabilityAIClient from 'stabilityai-client-typescript/models/components';
+
 import {
   z,
 } from 'zod';
@@ -17,6 +19,11 @@ import type {
 import {
   cloneOf,
 } from '@/library/utilitiesByType/reference.ts';
+
+import type ImageGenerationPrompt from '@/models/ImageGenerationPrompt';
+import ImageGenerationPromptWeight, {
+  quantitative,
+} from '@/models/ImageGenerationPromptWeight.ts';
 
 type UnsignedInteger = Branded<number, 'UnsignedInteger'>;
 type FloatingPoint = Branded<number, 'FloatingPoint'>;
@@ -92,12 +99,40 @@ const z_imageGenerationResponseBody = z.object({
   images: z.tuple([z_image]).rest(z_image),
 });
 
+const promptDelimiter = ',';
+
+const toSerializedPromptValue = (
+  givenTextPrompts: StabilityAIClient.TextToImageRequestBody['textPrompts'],
+  givenWeight: ImageGenerationPromptWeight,
+): ImageGenerationPrompt['positive' | 'negative'] => {
+  return givenTextPrompts
+    .filter($0 => $0.weight === quantitative(givenWeight))
+    .map($0 => $0.text.trim())
+    .join(promptDelimiter);
+};
+
+const toImageGenerationPrompt = (
+  givenPrompts: StabilityAIClient.TextToImageRequestBody['textPrompts'],
+) => ({
+  prompt    : toSerializedPromptValue(givenPrompts, ImageGenerationPromptWeight.positive),
+  neg_prompt: toSerializedPromptValue(givenPrompts, ImageGenerationPromptWeight.negative),
+});
+
 export const tryToGenerateImage = async (
-  givenRequest: StabilityAIClient_ImageGenerationRequest,
+  givenBody: StabilityAIClient.TextToImageRequestBody,
 ): Promise<ImageURI> => {
+  const adaptedBody: StabilityAIClient_ImageGenerationRequest = {
+    ...toImageGenerationPrompt(givenBody.textPrompts),
+    height        : givenBody.height,
+    width         : givenBody.width,
+    steps         : givenBody.steps,
+    guidance_scale: givenBody.cfgScale,
+    seed          : givenBody.seed,
+  };
+
   const newResource = await ShortfinClient.tryToSubmitResource({
     bySending: toBatchGenerationRequest([
-      givenRequest,
+      adaptedBody,
     ]),
     to: ShortfinTextToImageAPI.generationEndpoint,
   });
