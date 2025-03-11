@@ -5,7 +5,8 @@
         "Flaggable",
         "SDXL",
         "Shortfin",
-        "wbxml",
+        "stabilityai",
+        "wbxml"
     ],
     "editor.codeActionsOnSave": {
         "source.fixAll": "explicit",
