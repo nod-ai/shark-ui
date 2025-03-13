@@ -26,23 +26,19 @@ To get SHARK UI up and running:
         npm install
         ```
 
-1. Configure environment
-    1. Open in [VSCode](https://code.visualstudio.com/)
+1. Add your environment to the project root:
 
-       NOTE: Recommended because of the included workspace settings and recommended extensions
-    1. Add a `.env` file to the project root:
+    ```shell
+    echo "VITE_TEXT_TO_IMAGE_API_ORIGIN=http://<shortfin-server-ip-address>:<server-port>" > .env
+    ```
 
-        ```env
-        VITE_TEXT_TO_IMAGE_API_ORIGIN=http://<shortfin-server-ip-address>:<server-port>
-        ```
+    OR
 
-        OR
+    ```shell
+    echo "VITE_TEXT_TO_IMAGE_API_ORIGIN=http://www.example.com" > .env
+    ```
 
-        ```env
-        VITE_TEXT_TO_IMAGE_API_ORIGIN=http://www.example.com
-        ```
-
-        NOTE: https is not yet supported
+    NOTE: https is not yet supported
 
 ## Usage
 
@@ -61,7 +57,7 @@ To get SHARK UI up and running:
 ## Development
 
 1. If you haven't already, [complete the basic installation](#installation)
-1. In VSCode, [add the extensions recommended by the project](https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_extension-recommendations).
+1. In [VSCode](https://code.visualstudio.com/), [add the extensions recommended by the project](https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_extension-recommendations).
 1. Serve the project with HMR by running:
 
     ```shell
