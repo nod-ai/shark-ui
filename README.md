@@ -17,7 +17,9 @@ To get SHARK UI up and running:
 1. Configure dependencies
     1. [Install node and npm](https://nodejs.org/en/download)
 
-        NOTE: prefer the latest LTS version of node (even-numbered major version)
+        1. Prefer the latest LTS version of node (even-numbered major version)
+        2. For "using", select `nvm` if available, otherwise select `fnm`
+        3. For "with", select `npm`
     1. Install project dependencies, by running (from the project root):
 
         ```shell
