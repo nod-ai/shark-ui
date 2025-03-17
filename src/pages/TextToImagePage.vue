@@ -35,8 +35,8 @@ const generateImageFromText = () => {
 
     <img
       :src="presentableImage ?? placeholderImage"
-      alt="generated image"
-      class="generated-image"
+      alt="presented image"
+      class="presented-image"
     >
   </section>
 </template>
@@ -54,7 +54,7 @@ const generateImageFromText = () => {
     grid-template-columns: 67% 33%;
   }
 
-  >.generated-image {
+  >.presented-image {
     height: 100%;
     width: 100%;
   }
