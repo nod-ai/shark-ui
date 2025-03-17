@@ -28,10 +28,11 @@ const generateImageFromText = () => {
     class="text-to-image-view"
   >
     <div class="input-section">
-      <input
+      <textarea
         v-model="promptEntry"
         placeholder="Enter prompt here"
-      >
+        rows="5"
+      />
 
       <br>
 
