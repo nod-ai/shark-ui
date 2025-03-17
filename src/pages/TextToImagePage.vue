@@ -9,10 +9,10 @@ import exampleOutputImage from '@/assets/stable-diffusion-example-output-image.p
 
 const promptEntry = ref('');
 
-const presentableImage = ref<string | null>(null);
+const generatedImage = ref<string | null>(null);
 
 const generateImageFromText = () => {
-  set(presentableImage, exampleOutputImage);
+  set(generatedImage, exampleOutputImage);
 };
 </script>
 
@@ -34,7 +34,7 @@ const generateImageFromText = () => {
     </div>
 
     <img
-      :src="presentableImage ?? placeholderImage"
+      :src="generatedImage ?? placeholderImage"
       alt="presented image"
       class="presented-image"
     >
