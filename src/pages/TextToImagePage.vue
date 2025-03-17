@@ -44,6 +44,9 @@ const generateImageFromText = () => {
       :src="generatedImage ?? placeholderImage"
       alt="presented image"
       class="presented-image"
+      :class="{
+        'placeholder-image': (generatedImage === null),
+      }"
     >
   </section>
 </template>
@@ -64,6 +67,11 @@ const generateImageFromText = () => {
   >.presented-image {
     height: 100%;
     width: 100%;
+  }
+
+  >.placeholder-image {
+    filter: grayscale(1);
+    opacity: 0.5;
   }
 }
 </style>
