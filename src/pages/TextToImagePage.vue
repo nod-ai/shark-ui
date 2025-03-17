@@ -4,15 +4,15 @@ import {
   set,
 } from '@/library/vue/reactivity.ts';
 
-import placeholderImage from '@/assets/logo.svg';
-import exampleOutputImage from '@/assets/stable-diffusion-example-output-image.png';
+import mockImage from '@/assets/stable-diffusion-image-output-mock.png';
+import placeholderImage from '@/assets/stable-diffusion-image-output-placeholder.png';
 
 const promptEntry = ref('');
 
 const generatedImage = ref<string | null>(null);
 
 const generateImageFromText = () => {
-  set(generatedImage, exampleOutputImage);
+  set(generatedImage, mockImage);
 };
 </script>
 
