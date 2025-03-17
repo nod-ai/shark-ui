@@ -33,12 +33,16 @@ const generateImageFromText = () => {
         placeholder="Enter prompt here"
       >
 
+      <br>
+
       <button
         @click="generateImageFromText"
       >
         Generate Image
       </button>
     </div>
+
+    <br>
 
     <img
       :src="generatedImage ?? placeholderImage"
@@ -60,8 +64,9 @@ const generateImageFromText = () => {
   width: 300px;
 
   >.input-section {
-    display: grid;
-    grid-template-columns: 67% 33%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   >.presented-image {
