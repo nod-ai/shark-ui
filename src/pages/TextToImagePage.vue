@@ -2,17 +2,24 @@
 import {
   ref,
   set,
+  type Ref,
 } from '@/library/vue/reactivity.ts';
+
+import type {
+  Branded,
+} from '@/library/typeUtilities/Branded.ts';
 
 import mockImage from '@/assets/stable-diffusion-image-output-mock.png';
 import placeholderImage from '@/assets/stable-diffusion-image-output-placeholder.png';
 
+type RelativeImagePath = Branded<string, 'RelativeImagePath'>;
+
 const promptEntry = ref('');
 
-const generatedImage = ref<string | null>(null);
+const generatedImage: Ref<RelativeImagePath | null> = ref(null);
 
 const generateImageFromText = () => {
-  set(generatedImage, mockImage);
+  set(generatedImage, mockImage as RelativeImagePath);
 };
 </script>
 
