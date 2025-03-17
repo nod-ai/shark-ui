@@ -29,7 +29,7 @@ const generateImageFromText = () => {
       <button
         @click="generateImageFromText"
       >
-        Generate
+        Generate Image
       </button>
     </div>
 
