@@ -8,13 +8,22 @@ import {
 import type {
   Branded,
 } from '@/library/typeUtilities/Branded.ts';
+import {
+  cloneOf,
+} from '@/library/utilitiesByType/reference.ts';
 
 import mockImage from '@/assets/stable-diffusion-image-output-mock.png';
 import placeholderImage from '@/assets/stable-diffusion-image-output-placeholder.png';
+import type ImageGenerationPrompt from '@/models/ImageGenerationPrompt.ts';
 
 type RelativeImagePath = Branded<string, 'RelativeImagePath'>;
 
-const promptEntry = ref('');
+const defaultPrompt: ImageGenerationPrompt = {
+  positive: 'a cat under the snow with blue eyes, covered by snow, cinematic style, medium shot, professional photo, animal',
+  negative: 'Watermark, blurry, over-saturated, low resolution, pollution',
+};
+
+const promptEntry = ref(cloneOf(defaultPrompt));
 
 const generatedImage: Ref<RelativeImagePath | null> = ref(null);
 
@@ -29,7 +38,7 @@ const generateImageFromText = () => {
   >
     <div class="input-section">
       <textarea
-        v-model="promptEntry"
+        v-model="promptEntry.positive"
         placeholder="Enter prompt here"
         rows="5"
       />
