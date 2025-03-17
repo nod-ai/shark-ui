@@ -51,6 +51,20 @@ const generateImageFromText = () => {
 
       <br>
 
+      <label
+        for="prompt_negative"
+      >
+        Negative prompt
+      </label>
+      <textarea
+        id="prompt_negative"
+        v-model="promptEntry.negative"
+        placeholder="Enter negative prompt here"
+        rows="5"
+      />
+
+      <br>
+
       <button
         @click="generateImageFromText"
       >
