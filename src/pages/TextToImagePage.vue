@@ -37,7 +37,13 @@ const generateImageFromText = () => {
     class="text-to-image-view"
   >
     <div class="input-section">
+      <label
+        for="prompt_positive"
+      >
+        Prompt
+      </label>
       <textarea
+        id="prompt_positive"
         v-model="promptEntry.positive"
         placeholder="Enter prompt here"
         rows="5"
