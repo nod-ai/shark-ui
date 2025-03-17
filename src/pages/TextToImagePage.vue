@@ -9,7 +9,7 @@ import exampleOutputImage from '@/assets/stable-diffusion-example-output-image.p
 
 const promptEntry = ref('');
 
-const presentableImage = ref<string | null>(placeholderImage);
+const presentableImage = ref<string | null>(null);
 
 const generateImageFromText = () => {
   set(presentableImage, exampleOutputImage);
@@ -34,8 +34,7 @@ const generateImageFromText = () => {
     </div>
 
     <img
-      v-if="presentableImage !== null"
-      :src="presentableImage"
+      :src="presentableImage ?? placeholderImage"
       alt="generated image"
       class="generated-image"
     >
