@@ -70,13 +70,10 @@ const toTextPrompts = (
 const imageGeneration = useStatefulProcess(async () => {
   const proposedPrompt = get(promptEntry);
 
-  const proposedPositivePrompts = toTextPrompts(proposedPrompt, 'positive');
-  const proposedNegativePrompts = toTextPrompts(proposedPrompt, 'negative');
-
   const newImage = await MockClient.tryToGenerateImage({
     textPrompts: [
-      ...proposedPositivePrompts,
-      ...proposedNegativePrompts,
+      ...toTextPrompts(proposedPrompt, 'positive'),
+      ...toTextPrompts(proposedPrompt, 'negative'),
     ],
     height  : 1024,
     width   : 1024,
