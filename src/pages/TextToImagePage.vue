@@ -30,17 +30,21 @@ import ImageGenerationPromptWeight, {
 
 type RelativeImagePath = Branded<string, 'RelativeImagePath'>;
 
-const MockClient = {
-  async tryToGenerateImage(
-    givenBody: TextToImageRequestBody,
-  ): Promise<RelativeImagePath> {
-    console.debug(givenBody);
+const mockStabilityAIClient = {
+  version1: {
+    image: {
+      async tryToGenerateFromText(
+        givenBody: TextToImageRequestBody,
+      ): Promise<RelativeImagePath> {
+        console.debug(givenBody);
 
-    return await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(mockImage as RelativeImagePath);
-      }, 1000);
-    });
+        return await new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(mockImage as RelativeImagePath);
+          }, 1000);
+        });
+      },
+    },
   },
 };
 
@@ -70,7 +74,7 @@ const toTextPrompts = (
 const imageGeneration = useStatefulProcess(async () => {
   const proposedPrompt = get(promptEntry);
 
-  const newImage = await MockClient.tryToGenerateImage({
+  const newImage = await mockStabilityAIClient.version1.image.tryToGenerateFromText({
     textPrompts: [
       ...toTextPrompts(proposedPrompt, 'positive'),
       ...toTextPrompts(proposedPrompt, 'negative'),
