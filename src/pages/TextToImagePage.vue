@@ -4,6 +4,9 @@ import {
   set,
   type Ref,
 } from '@/library/vue/reactivity.ts';
+import {
+  useStatefulProcess,
+} from '@/library/vue/statefulProcess.ts';
 
 import type {
   Branded,
@@ -18,6 +21,16 @@ import type ImageGenerationPrompt from '@/models/ImageGenerationPrompt.ts';
 
 type RelativeImagePath = Branded<string, 'RelativeImagePath'>;
 
+const MockClient = {
+  async tryToGenerateImage(): Promise<RelativeImagePath> {
+    return await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(mockImage as RelativeImagePath);
+      }, 1000);
+    });
+  },
+};
+
 const defaultPrompt: ImageGenerationPrompt = {
   positive: 'a cat under the snow with blue eyes, covered by snow, cinematic style, medium shot, professional photo, animal',
   negative: 'Watermark, blurry, over-saturated, low resolution, pollution',
@@ -27,9 +40,10 @@ const promptEntry = ref(cloneOf(defaultPrompt));
 
 const generatedImage: Ref<RelativeImagePath | null> = ref(null);
 
-const generateImageFromText = () => {
-  set(generatedImage, mockImage as RelativeImagePath);
-};
+const imageGeneration = useStatefulProcess(async () => {
+  const newImage = await MockClient.tryToGenerateImage();
+  set(generatedImage, newImage);
+});
 </script>
 
 <template>
@@ -66,9 +80,14 @@ const generateImageFromText = () => {
       <br>
 
       <button
-        @click="generateImageFromText"
+        @click="imageGeneration.try"
+        :disabled="imageGeneration.isInProgress"
       >
-        Generate Image
+        {{
+          imageGeneration.isInProgress
+            ? 'Generating Image...'
+            : 'Generate Image'
+        }}
       </button>
     </div>
 
