@@ -107,9 +107,10 @@ const configWithVueTS = defineConfigWithVueTs(
         {
           align       : 'colon', // Makes object literals more tabular, helping identify inconsistencies and repetition
           ignoredNodes: [
+            'ClassBody',
             'TSTypeLiteral',
             'TSInterfaceBody',
-          ],
+          ], // Avoids conflicts with "@stylistic/no-multi-spaces" and "@stylistic/type-annotation-spacing"
         },
       ],
       '@stylistic/nonblock-statement-body-position': [
