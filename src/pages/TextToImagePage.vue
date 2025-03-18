@@ -53,7 +53,7 @@ const promptEntry: Ref<ImageGenerationPrompt> = ref(cloneOf(defaultPrompt));
 
 const generatedImage: Ref<RelativeImagePath | null> = ref(null);
 
-const toStabilityAITextPrompts = (
+const toTextPrompts = (
   givenPrompt: ImageGenerationPrompt,
   givenWeightQuality: 'positive' | 'negative',
 ): TextToImageRequestBody['textPrompts'] => {
@@ -70,8 +70,8 @@ const toStabilityAITextPrompts = (
 const imageGeneration = useStatefulProcess(async () => {
   const proposedPrompt = get(promptEntry);
 
-  const proposedPositivePrompts = toStabilityAITextPrompts(proposedPrompt, 'positive');
-  const proposedNegativePrompts = toStabilityAITextPrompts(proposedPrompt, 'negative');
+  const proposedPositivePrompts = toTextPrompts(proposedPrompt, 'positive');
+  const proposedNegativePrompts = toTextPrompts(proposedPrompt, 'negative');
 
   const newImage = await MockClient.tryToGenerateImage({
     textPrompts: [
