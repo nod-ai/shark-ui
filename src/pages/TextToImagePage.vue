@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {
+  get,
   ref,
   set,
   type Ref,
@@ -7,6 +8,8 @@ import {
 import {
   useStatefulProcess,
 } from '@/library/vue/statefulProcess.ts';
+
+import * as StabilityAIClient from 'stabilityai-client-typescript/models/components';
 
 import type {
   Branded,
@@ -19,10 +22,18 @@ import mockImage from '@/assets/stable-diffusion-image-output-mock.png';
 import placeholderImage from '@/assets/stable-diffusion-image-output-placeholder.png';
 import type ImageGenerationPrompt from '@/models/ImageGenerationPrompt.ts';
 
+import ImageGenerationPromptWeight, {
+  quantitative,
+} from '@/models/ImageGenerationPromptWeight.ts';
+
 type RelativeImagePath = Branded<string, 'RelativeImagePath'>;
 
 const MockClient = {
-  async tryToGenerateImage(): Promise<RelativeImagePath> {
+  async tryToGenerateImage(
+    givenBody: StabilityAIClient.TextToImageRequestBody,
+  ): Promise<RelativeImagePath> {
+    console.debug(givenBody);
+
     return await new Promise((resolve) => {
       setTimeout(() => {
         resolve(mockImage as RelativeImagePath);
@@ -40,8 +51,38 @@ const promptEntry: Ref<ImageGenerationPrompt> = ref(cloneOf(defaultPrompt));
 
 const generatedImage: Ref<RelativeImagePath | null> = ref(null);
 
+const toStabilityAITextPrompts = (
+  givenPrompt: ImageGenerationPrompt,
+  givenWeightQuality: 'positive' | 'negative',
+): StabilityAIClient.TextToImageRequestBody['textPrompts'] => {
+  const derivedWeight = ImageGenerationPromptWeight[givenWeightQuality];
+
+  return givenPrompt[givenWeightQuality]
+    .split(',')
+    .map($0 => ({
+      text  : $0.trim(),
+      weight: quantitative(derivedWeight),
+    }));
+};
+
 const imageGeneration = useStatefulProcess(async () => {
-  const newImage = await MockClient.tryToGenerateImage();
+  const proposedPrompt = get(promptEntry);
+
+  const proposedPositivePrompts = toStabilityAITextPrompts(proposedPrompt, 'positive');
+  const proposedNegativePrompts = toStabilityAITextPrompts(proposedPrompt, 'negative');
+
+  const newImage = await MockClient.tryToGenerateImage({
+    textPrompts: [
+      ...proposedPositivePrompts,
+      ...proposedNegativePrompts,
+    ],
+    height  : 1024,
+    width   : 1024,
+    steps   : 20,
+    cfgScale: 7.5,
+    seed    : 0,
+  });
+
   set(generatedImage, newImage);
 });
 </script>

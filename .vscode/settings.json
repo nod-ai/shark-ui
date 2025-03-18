@@ -3,6 +3,7 @@
         "Flaggable",
         "SDXL",
         "Shortfin",
+        "stabilityai"
     ],
     "editor.codeActionsOnSave": {
         "source.fixAll": "explicit",
