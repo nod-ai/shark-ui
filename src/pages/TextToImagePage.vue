@@ -9,7 +9,9 @@ import {
   useStatefulProcess,
 } from '@/library/vue/statefulProcess.ts';
 
-import * as StabilityAIClient from 'stabilityai-client-typescript/models/components';
+import type {
+  TextToImageRequestBody,
+} from 'stabilityai-client-typescript/models/components';
 
 import type {
   Branded,
@@ -54,7 +56,7 @@ const generatedImage: Ref<RelativeImagePath | null> = ref(null);
 const toStabilityAITextPrompts = (
   givenPrompt: ImageGenerationPrompt,
   givenWeightQuality: 'positive' | 'negative',
-): StabilityAIClient.TextToImageRequestBody['textPrompts'] => {
+): TextToImageRequestBody['textPrompts'] => {
   const derivedWeight = ImageGenerationPromptWeight[givenWeightQuality];
 
   return givenPrompt[givenWeightQuality]
