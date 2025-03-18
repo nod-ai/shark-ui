@@ -36,7 +36,7 @@ const defaultPrompt: ImageGenerationPrompt = {
   negative: 'Watermark, blurry, over-saturated, low resolution, pollution',
 };
 
-const promptEntry = ref(cloneOf(defaultPrompt));
+const promptEntry: Ref<ImageGenerationPrompt> = ref(cloneOf(defaultPrompt));
 
 const generatedImage: Ref<RelativeImagePath | null> = ref(null);
 
