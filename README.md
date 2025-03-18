@@ -11,7 +11,8 @@ To get SHARK UI up and running:
 1. Clone the project
 
     ```shell
-    git clone https://github.com/nod-ai/shark-ui.git && cd shark-ui
+    git clone https://github.com/nod-ai/shark-ui.git
+    cd shark-ui
     ```
 
 1. Configure dependencies
