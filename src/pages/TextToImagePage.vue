@@ -32,7 +32,7 @@ type RelativeImagePath = Branded<string, 'RelativeImagePath'>;
 
 const MockClient = {
   async tryToGenerateImage(
-    givenBody: StabilityAIClient.TextToImageRequestBody,
+    givenBody: TextToImageRequestBody,
   ): Promise<RelativeImagePath> {
     console.debug(givenBody);
 
