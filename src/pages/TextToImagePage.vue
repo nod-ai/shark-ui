@@ -13,12 +13,15 @@ import type {
   TextToImageRequestBody,
 } from 'stabilityai-client-typescript/models/components';
 
-import type {
-  Branded,
-} from '@/library/typeUtilities/Branded.ts';
+import ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image/index.ts';
+
 import {
   cloneOf,
 } from '@/library/utilitiesByType/reference.ts';
+
+import {
+  isString,
+} from '@/library/utilitiesByType/string.ts';
 
 import mockImage from '@/assets/stable-diffusion-image-output-mock.png';
 import placeholderImage from '@/assets/stable-diffusion-image-output-placeholder.png';
@@ -28,21 +31,48 @@ import ImageGenerationPromptWeight, {
   quantitative,
 } from '@/models/ImageGenerationPromptWeight.ts';
 
-type RelativeImagePath = Branded<string, 'RelativeImagePath'>;
+const asError = (givenException: unknown): Error => {
+  if (givenException instanceof Error) return givenException;
+
+  if (isString(givenException)) return new Error(givenException);
+
+  return new Error(String(givenException));
+};
+
+const tryToLoad = async (givenImageURL: string): Promise<ImageURI> => {
+  const imageResponse = await fetch(givenImageURL);
+  const imageBlob = await imageResponse.blob();
+
+  return new Promise((resolve, reject) => {
+    const imageReader = new FileReader();
+
+    imageReader.onloadend = function () {
+      try {
+        const rawImageURI = this.result;
+
+        if (!isString(rawImageURI)) throw new Error('Expected serialized URI for image');
+
+        const imageURI = ImageURI.tryToParse(rawImageURI);
+        resolve(imageURI);
+      }
+      catch (exception) {
+        const error = asError(exception);
+        reject(error);
+      }
+    };
+
+    imageReader.readAsDataURL(imageBlob);
+  });
+};
 
 const mockStabilityAIClient = {
   version1: {
     image: {
       async tryToGenerateFromText(
         givenBody: TextToImageRequestBody,
-      ): Promise<RelativeImagePath> {
+      ): Promise<ImageURI> {
         console.debug(givenBody);
-
-        return await new Promise((resolve) => {
-          setTimeout(() => {
-            resolve(mockImage as RelativeImagePath);
-          }, 1000);
-        });
+        return await tryToLoad(mockImage);
       },
     },
   },
@@ -55,7 +85,7 @@ const defaultPrompt: ImageGenerationPrompt = {
 
 const promptEntry: Ref<ImageGenerationPrompt> = ref(cloneOf(defaultPrompt));
 
-const generatedImage: Ref<RelativeImagePath | null> = ref(null);
+const generatedImage: Ref<ImageURI | null> = ref(null);
 
 const toTextPrompts = (
   givenPrompt: ImageGenerationPrompt,
@@ -138,7 +168,7 @@ const imageGeneration = useStatefulProcess(async () => {
     <br>
 
     <img
-      :src="generatedImage ?? placeholderImage"
+      :src="generatedImage?.toString() ?? placeholderImage"
       alt="presented image"
       class="presented-image"
       :class="{
