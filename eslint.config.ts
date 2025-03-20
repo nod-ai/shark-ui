@@ -87,7 +87,8 @@ const configWithVueTS = defineConfigWithVueTs(
 
   {
     rules: {
-      eqeqeq: 'error', // Avoids `==` and `!=`, which perform type coercions that follow the rather obscure Abstract Equality Comparison Algorithm: https://www.ecma-international.org/ecma-262/5.1/#sec-11.9.3
+      'eqeqeq'                                          : 'error', // Avoids `==` and `!=`, which perform type coercions that follow the rather obscure Abstract Equality Comparison Algorithm: https://www.ecma-international.org/ecma-262/5.1/#sec-11.9.3
+      '@typescript-eslint/explicit-member-accessibility': 'error', // Easier to see dead code in situations where a member is marked `private`
     },
   },
 
