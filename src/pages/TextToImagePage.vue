@@ -13,6 +13,10 @@ import type {
   TextToImageRequestBody,
 } from 'stabilityai-client-typescript/models/components';
 
+import type {
+  GenerateFromTextRequest,
+} from 'stabilityai-client-typescript/models/operations';
+
 import ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image/index.ts';
 
 import {
@@ -69,9 +73,9 @@ const mockStabilityAIClient = {
   version1: {
     image: {
       async tryToGenerateFromText(
-        givenBody: TextToImageRequestBody,
+        givenRequest: GenerateFromTextRequest,
       ): Promise<ImageURI> {
-        console.debug(givenBody);
+        console.debug(givenRequest);
         return await tryToLoad(mockImage);
       },
     },
@@ -105,15 +109,18 @@ const imageGeneration = useStatefulProcess(async () => {
   const proposedPrompt = get(promptEntry);
 
   const newImage = await mockStabilityAIClient.version1.image.tryToGenerateFromText({
-    textPrompts: [
-      ...toTextPrompts(proposedPrompt, 'positive'),
-      ...toTextPrompts(proposedPrompt, 'negative'),
-    ],
-    height  : 1024,
-    width   : 1024,
-    steps   : 20,
-    cfgScale: 7.5,
-    seed    : 0,
+    engineId              : 'stable-diffusion-xl-1024-v1-0',
+    textToImageRequestBody: {
+      textPrompts: [
+        ...toTextPrompts(proposedPrompt, 'positive'),
+        ...toTextPrompts(proposedPrompt, 'negative'),
+      ],
+      height  : 1024,
+      width   : 1024,
+      steps   : 20,
+      cfgScale: 7.5,
+      seed    : 0,
+    },
   });
 
   set(generatedImage, newImage);
