@@ -29,15 +29,19 @@ To get SHARK UI up and running:
 
 1. Add your environment to the project root:
 
-    ```shell
-    echo "VITE_TEXT_TO_IMAGE_API_ORIGIN=http://<shortfin-server-ip-address>:<server-port>" > .env
-    ```
+    - Run:
 
-    OR
+        ```shell
+        echo "VITE_TEXT_TO_IMAGE_API_ORIGIN=http://localhost:<server-port>" > .env
+        ```
 
-    ```shell
-    echo "VITE_TEXT_TO_IMAGE_API_ORIGIN=http://www.example.com" > .env
-    ```
+    - **If you are connecting to a server on a virtual machine**, have your local machine forward the port.
+        - Helps when the VM has a firewall
+        - i.e. via SSH:
+
+            ```shell
+            ssh -l <server-port>:localhost:<local-port> user@server_origin
+            ```
 
     NOTE: https is not yet supported
 
