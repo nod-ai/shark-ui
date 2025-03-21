@@ -29,15 +29,19 @@ To get SHARK UI up and running:
 
 1. Add your environment to the project root:
 
-    ```shell
-    echo "VITE_TEXT_TO_IMAGE_API_ORIGIN=http://<shortfin-server-ip-address>:<server-port>" > .env
-    ```
+    - Run:
 
-    OR
+        ```shell
+        echo "VITE_TEXT_TO_IMAGE_API_ORIGIN=http://localhost:<server-port>" > .env
+        ```
 
-    ```shell
-    echo "VITE_TEXT_TO_IMAGE_API_ORIGIN=http://www.example.com" > .env
-    ```
+    - **If you are connecting to a server on a virtual machine**, have your local machine forward the port.
+        - Helps when the VM has a firewall
+        - i.e. via SSH:
+
+            ```shell
+            ssh -L <server-port>:localhost:<local-port> user@server_origin
+            ```
 
     NOTE: https is not yet supported
 
@@ -52,7 +56,7 @@ To get SHARK UI up and running:
     npm run dev 
     ```
 
-1. Open the "Network" URL in your browser of choice.
+1. Open the "localhost" URL in your browser of choice.
 1. Take it for a spin!
 
 ## Development
