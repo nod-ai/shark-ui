@@ -101,7 +101,7 @@ export default class DataURI extends UniformResourceIdentifier {
     return new DataURI(
       MediaType.tryToParse(rawMediaType),
       coercedEncoding,
-      Base64CharacterEncodedByteSequence.tryToParse(rawData),
+      Base64CharacterEncodedByteSequence.tryToParseFrom(rawData),
     );
   }
 }

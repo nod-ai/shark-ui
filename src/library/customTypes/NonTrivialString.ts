@@ -1,10 +1,16 @@
+import type {
+  StaticStringParser,
+} from '@/library/typeUtilities/StaticStringParser.ts';
+
 import {
   isEmpty,
 } from '@/library/utilitiesByType/string.ts';
 
 import StringSubset from './StringSubset.ts';
 
-export default class NonTrivialString extends StringSubset<'NonTrivialString'> {
+export default class NonTrivialString
+  extends StringSubset<'NonTrivialString'>
+  implements StaticStringParser<typeof NonTrivialString> {
   public static tryToParseFrom(givenSubject: string): NonTrivialString {
     const trimmedSubject = givenSubject.trim();
 

@@ -160,7 +160,7 @@ const imageGeneration = useStatefulProcess(async () => {
     soleGeneratedArtifact.base64 === undefined
   ) throw new Error('Expected image data from sole artifact');
 
-  const base64DataOfNewImage = Base64CharacterEncodedByteSequence.tryToParse(soleGeneratedArtifact.base64);
+  const base64DataOfNewImage = Base64CharacterEncodedByteSequence.tryToParseFrom(soleGeneratedArtifact.base64);
   const newImage = new ImageURI('png', 'base64', base64DataOfNewImage);
   set(generatedImage, newImage);
 });
