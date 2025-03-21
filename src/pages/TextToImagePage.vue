@@ -13,10 +13,7 @@ import type {
   TextToImageRequestBody,
 } from 'stabilityai-client-typescript/models/components';
 
-import type {
-  GenerateFromTextRequest,
-  GenerateFromTextResponse,
-} from 'stabilityai-client-typescript/models/operations';
+import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
 
 import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
 
@@ -26,78 +23,12 @@ import {
   cloneOf,
 } from '@/library/utilitiesByType/reference.ts';
 
-import {
-  isString,
-} from '@/library/utilitiesByType/string.ts';
-
-import mockImage from '@/assets/stable-diffusion-image-output-mock.png';
 import placeholderImage from '@/assets/stable-diffusion-image-output-placeholder.png';
 import type ImageGenerationPrompt from '@/models/ImageGenerationPrompt.ts';
 
 import ImageGenerationPromptWeight, {
   quantitative,
 } from '@/models/ImageGenerationPromptWeight.ts';
-
-const asError = (givenException: unknown): Error => {
-  if (givenException instanceof Error) return givenException;
-
-  if (isString(givenException)) return new Error(givenException);
-
-  return new Error(String(givenException));
-};
-
-const tryToLoad = async (givenImageURL: string): Promise<ImageURI> => {
-  const imageResponse = await fetch(givenImageURL);
-  const imageBlob = await imageResponse.blob();
-
-  return new Promise((resolve, reject) => {
-    const imageReader = new FileReader();
-
-    imageReader.onloadend = function () {
-      try {
-        const rawImageURI = this.result;
-
-        if (!isString(rawImageURI)) throw new Error('Expected serialized URI for image');
-
-        const imageURI = ImageURI.tryToParse(rawImageURI);
-        resolve(imageURI);
-      }
-      catch (exception) {
-        const error = asError(exception);
-        reject(error);
-      }
-    };
-
-    imageReader.readAsDataURL(imageBlob);
-  });
-};
-
-const mockStabilityAIClient = {
-  version1: {
-    image: {
-      async tryToGenerateFromText(
-        givenRequest: GenerateFromTextRequest,
-      ): Promise<GenerateFromTextResponse> {
-        console.debug(givenRequest);
-
-        const uriForMockImage = await tryToLoad(mockImage);
-
-        return {
-          headers: {},
-          result : {
-            artifacts: [
-              {
-                finishReason: 'SUCCESS',
-                base64      : uriForMockImage.data.toString(),
-                seed        : givenRequest.textToImageRequestBody.seed,
-              },
-            ],
-          },
-        };
-      },
-    },
-  },
-};
 
 const defaultPrompt: ImageGenerationPrompt = {
   positive: 'a cat under the snow with blue eyes, covered by snow, cinematic style, medium shot, professional photo, animal',
@@ -122,10 +53,14 @@ const toTextPrompts = (
     }));
 };
 
+const shimmedStabilityAIClient = new ShimmedStabilityAIClient({
+  serverURL: import.meta.env.VITE_TEXT_TO_IMAGE_API_ORIGIN,
+});
+
 const imageGeneration = useStatefulProcess(async () => {
   const proposedPrompt = get(promptEntry);
 
-  const textToImageResponse = await mockStabilityAIClient.version1.image.tryToGenerateFromText({
+  const textToImageResponse = await shimmedStabilityAIClient.version1.image.tryToGenerateFromText({
     engineId              : 'stable-diffusion-xl-1024-v1-0',
     textToImageRequestBody: {
       textPrompts: [
