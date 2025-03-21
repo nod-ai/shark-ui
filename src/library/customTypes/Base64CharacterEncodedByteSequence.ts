@@ -63,7 +63,7 @@ export default class Base64CharacterEncodedByteSequence extends StringSubset<'Ba
     throw new TypeError(`Characters contained 1+ characters outside of the Base64 Alphabet: ${regExForBase64Alphabet.toString()}`);
   }
 
-  public static tryToParse(
+  public static tryToParseFrom(
     givenCharacters: string,
   ): Base64CharacterEncodedByteSequence {
     const paddedByteEncodableCharacters = this.assertIsByteEncodable(givenCharacters);
