@@ -2,13 +2,9 @@ import {
   isEmpty,
 } from '@/library/utilitiesByType/string.ts';
 
-export default class NonTrivialString extends String {
-  private constructor(
-    givenSubject: string,
-  ) {
-    super(givenSubject);
-  }
+import StringSubset from './StringSubset.ts';
 
+export default class NonTrivialString extends StringSubset<'NonTrivialString'> {
   public static tryToParseFrom(givenSubject: string): NonTrivialString {
     const trimmedSubject = givenSubject.trim();
 
