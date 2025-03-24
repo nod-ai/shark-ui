@@ -1,0 +1,16 @@
+name: Conventional Commit
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+jobs:
+  validate-pr-title:
+    permissions:
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ensure PR Title Conforms To Conventional Commit Message
+        uses:  ytanikin/pr-conventional-commits@1.4.0
+        with:
+         task_types: '["feature","fix","docs","tests","build","ci","refactor","chore","revert","linter","types"]'
