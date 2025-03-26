@@ -118,9 +118,16 @@ gitGraph
 
 1. _Why use a strategy centered around discrete versions when we've got CI/CD?_
 
-    Because we don't have CI/CD, we've got CI/...DD:
-    - Discrete stable deliveries every 6 weeks
-    - Discrete nightly deliveries every...night
+    Because discrete versioning and continuous delivery go hand in hand!
+
+    Every cycle, a merge commit from a `staging/v#.#.#` branch is added to the `release` branch which can then trigger things like:
+      - the CI suite (for one last sanity check)
+      - the compilation of release notes
+      - the creation of the next tag
+      - a publish to npm
+      - a build onto a production server
+
+    And of course, discrete versioning and scheduled delivery also go hand in hand.
 
 1. _Doesn't this slow down each of our contributors?_
 
