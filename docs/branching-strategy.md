@@ -106,7 +106,7 @@ gitGraph
     - the clear separation between a stable releases (`release`) and the nightly releases (`integration`)
     - the simplicity of being able to point to `release` and know that this was indeed the latest stable release
 
-1. _Shouldn't the default branch to be the stable one since users will interact with that by default?_
+1. _Shouldn't the default branch be the stable one since users will interact with that by default?_
 
     If users are interacting with a branch, we might have a bigger problem. We don't want _anyone_ interacting with _branches_, but rather:
 
