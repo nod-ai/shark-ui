@@ -124,7 +124,7 @@ gitGraph
 
 1. _Doesn't this slow down each of our contributors?_
 
-    We sure do hope so, yes.
+    It can, but that doesn't mean it slows the project down as a whole. The idea is to help bring into balance the velocities of both contributors _and_ maintainers.
 
     Contributor alignment and contribution standards tend to slow some things down to protect the speed of other things such as
     - onboarding new contributors
