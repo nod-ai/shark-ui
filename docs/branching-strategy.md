@@ -108,7 +108,7 @@ gitGraph
 
 1. _Shouldn't the default branch be the stable one since users will interact with that by default?_
 
-    If users are interacting with a branch, we might have a bigger problem. We don't want _anyone_ interacting with _branches_, but rather:
+    If users are interacting with a branch, we might have a UX problem. The goal is to have:
 
     - _users_ interacting with _releases_ (via the "Releases" page)
     - _contributors_ interacting with _issues_ and _PRs_
