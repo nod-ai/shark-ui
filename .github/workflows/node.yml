@@ -6,6 +6,7 @@ on:
       - integration
     paths:
       - '.github/workflows/node.yml' # Trigger workflow when it's modified
+      - 'package.json'               # For dependency changes
       - '**/*.?(c|m)@(js|ts)?(x)'    # ?(Common|Module) @(JavaScript|TypeScript) ?(XML) files
       - '**/*.vue'                   # For single-file components that contain a script block
       - '!**/*.md'                   # Ignore markdown files (and their constituent fenced code blocks)
@@ -15,6 +16,7 @@ on:
       - integration
     paths:
       - '.github/workflows/node.yml' # Trigger workflow when it's modified
+      - 'package.json'               # For dependency changes
       - '**/*.?(c|m)@(js|ts)?(x)'    # ?(Common|Module) @(JavaScript|TypeScript) ?(XML) files
       - '**/*.vue'                   # For single-file components that contain a script block
       - '!**/*.md'                   # Ignore markdown files (and their constituent fenced code blocks)
