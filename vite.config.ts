@@ -18,7 +18,11 @@ export default defineConfig({
     vue(),
     vueDevTools(),
     vuetify({
-      autoImport: false, // To keep the app agnostic to whatever component library, prefer wrapping vuetify components in a facade and importing that instead
+      // Prefer explicit imports because
+      // a) it keeps dev server snappier when paired with explicit component imports
+      // b) it makes usage easier to track (and therefore rip out if needed)
+      // c) it keeps package size top-of-mind
+      autoImport: false,
     }),
   ],
   resolve: {
