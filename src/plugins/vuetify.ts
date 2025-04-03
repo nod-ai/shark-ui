@@ -8,6 +8,11 @@ const vuetify = createVuetify({
   theme: {
     defaultTheme: 'dark',
   },
+  defaults: {
+    VBtn: {
+      color: 'primary',
+    },
+  },
 });
 
 export default vuetify;
