@@ -13,6 +13,16 @@ import type {
   TextToImageRequestBody,
 } from 'stabilityai-client-typescript/models/components';
 
+import {
+  VBtn,
+} from 'vuetify/components/VBtn';
+import {
+  VImg,
+} from 'vuetify/components/VImg';
+import {
+  VTextarea,
+} from 'vuetify/components/VTextarea';
+
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
 
 import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
@@ -106,36 +116,25 @@ const imageGeneration = useStatefulProcess(async () => {
     class="text-to-image-view"
   >
     <div class="input-section">
-      <label
-        for="prompt_positive"
-      >
-        Prompt
-      </label>
-      <textarea
+      <VTextarea
         id="prompt_positive"
         v-model="promptEntry.positive"
+        label="Prompt"
         placeholder="Enter prompt here"
         rows="5"
       />
 
-      <br>
-
-      <label
-        for="prompt_negative"
-      >
-        Negative prompt
-      </label>
-      <textarea
+      <VTextarea
         id="prompt_negative"
         v-model="promptEntry.negative"
+        label="Negative prompt"
         placeholder="Enter negative prompt here"
         rows="5"
       />
 
-      <br>
-
-      <button
+      <VBtn
         @click="imageGeneration.try"
+        color="primary"
         :disabled="imageGeneration.isInProgress"
       >
         {{
@@ -143,19 +142,20 @@ const imageGeneration = useStatefulProcess(async () => {
             ? 'Generating Image...'
             : 'Generate Image'
         }}
-      </button>
+      </VBtn>
     </div>
 
     <br>
 
-    <img
+    <VImg
       :src="generatedImage?.toString() ?? placeholderImage"
       alt="presented image"
-      class="presented-image"
+      height="300px"
+      width="300px"
       :class="{
         'placeholder-image': (generatedImage === null),
       }"
-    >
+    />
   </section>
 </template>
 
@@ -171,11 +171,6 @@ const imageGeneration = useStatefulProcess(async () => {
     width: 100%;
     display: flex;
     flex-direction: column;
-  }
-
-  >.presented-image {
-    height: 100%;
-    width: 100%;
   }
 
   >.placeholder-image {
