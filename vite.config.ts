@@ -10,12 +10,20 @@ import {
 } from 'vite';
 
 import vueDevTools from 'vite-plugin-vue-devtools';
+import vuetify from 'vite-plugin-vuetify';
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     vueDevTools(),
+    vuetify({
+      // Prefer explicit imports because
+      // a) it keeps dev server snappier when paired with explicit component imports
+      // b) it makes usage easier to track (and therefore rip out if needed)
+      // c) it keeps package size top-of-mind
+      autoImport: false,
+    }),
   ],
   resolve: {
     alias: {
