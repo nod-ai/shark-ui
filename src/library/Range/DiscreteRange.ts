@@ -37,4 +37,10 @@ export default class DiscreteRange extends Range {
       givenStepSize,
     );
   }
+
+  public override exclusivelyContains(givenValue: number): boolean {
+    const overstep = (givenValue - this.lowerBound) % this.stepSize;
+
+    return (overstep === 0) && super.exclusivelyContains(givenValue);
+  }
 }
