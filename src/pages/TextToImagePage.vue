@@ -27,6 +27,7 @@ import {
 } from 'vuetify/components/VTextarea';
 
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
+import SDXLDiffusionStepCount from '@/library/ShimmedStabilityAIClient/models/SDXLDiffusionStepCount.ts';
 
 import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
 
@@ -37,6 +38,9 @@ import {
 } from '@/library/utilitiesByType/reference.ts';
 
 import placeholderImage from '@/assets/stable-diffusion-image-output-placeholder.png';
+
+import DiscreteSlider from '@/components/DiscreteSlider.vue';
+
 import type ImageGenerationPrompt from '@/models/ImageGenerationPrompt.ts';
 
 import ImageGenerationPromptWeight, {
@@ -49,6 +53,12 @@ const defaultPrompt: ImageGenerationPrompt = {
 };
 
 const promptEntry: Ref<ImageGenerationPrompt> = ref(cloneOf(defaultPrompt));
+
+const {
+  range,
+} = SDXLDiffusionStepCount;
+
+const proposedNumberOfDiffusionSteps = ref<number>(range.midpoint);
 
 const generatedImage: Ref<ImageURI | null> = ref(null);
 
@@ -82,7 +92,7 @@ const imageGeneration = useStatefulProcess(async () => {
       ],
       height  : 1024,
       width   : 1024,
-      steps   : 20,
+      steps   : get(proposedNumberOfDiffusionSteps),
       cfgScale: 7.5,
       seed    : 0,
     },
@@ -140,6 +150,14 @@ const imageGeneration = useStatefulProcess(async () => {
         auto-grow
         max-rows="10"
       />
+
+      <DiscreteSlider
+        v-model="proposedNumberOfDiffusionSteps"
+        label="Number of Diffusion Steps"
+        :range="range"
+      />
+
+      <br>
 
       <VBtn
         type="submit"
