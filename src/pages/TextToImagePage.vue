@@ -160,6 +160,7 @@ const imageGeneration = useStatefulProcess(async () => {
 
 <style scoped>
 .text-to-image-view {
+  padding: 16px;
   margin: auto;
   display: flex;
   flex-direction: column;
