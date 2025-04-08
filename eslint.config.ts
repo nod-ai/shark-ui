@@ -134,7 +134,7 @@ const configWithVueTS = defineConfigWithVueTs(
     },
   },
 
-  pluginVue.configs['flat/strongly-recommended'],
+  pluginVue.configs['flat/recommended'],
   vueTsConfigs.strictTypeChecked,
   vueTsConfigs.stylisticTypeChecked,
 

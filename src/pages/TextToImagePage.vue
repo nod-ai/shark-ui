@@ -133,8 +133,8 @@ const imageGeneration = useStatefulProcess(async () => {
       />
 
       <VBtn
-        @click="imageGeneration.try"
         :disabled="imageGeneration.isInProgress"
+        @click="imageGeneration.try"
       >
         {{
           imageGeneration.isInProgress
