@@ -1,6 +1,6 @@
 import {
   cofactor,
-} from '@/library/math.ts';
+} from '@/library/math/operators.ts';
 
 import type {
   StaticStringParser,
