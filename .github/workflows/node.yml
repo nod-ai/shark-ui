@@ -7,7 +7,14 @@ on:
     paths:
       - '.github/workflows/node.yml' # Trigger workflow when it's modified
       - 'package.json'               # For dependency changes
-      - '**/*.?(c|m)@(js|ts)?(x)'    # ?(Common|Module) @(JavaScript|TypeScript) ?(XML) files
+      - '**/*.js'                    # For scripts
+      - '**/*.ts'                    # For scripts
+      - '**/*.cjs'                   # For scripts
+      - '**/*.cts'                   # For scripts
+      - '**/*.mjs'                   # For scripts
+      - '**/*.mts'                   # For scripts
+      - '**/*.jsx'                   # For scripts
+      - '**/*.tsx'                   # For scripts
       - '**/*.vue'                   # For single-file components that contain a script block
       - '!**/*.md'                   # Ignore markdown files (and their constituent fenced code blocks)
       - '!docs/**'                   # Ignore docs folder
@@ -17,7 +24,14 @@ on:
     paths:
       - '.github/workflows/node.yml' # Trigger workflow when it's modified
       - 'package.json'               # For dependency changes
-      - '**/*.?(c|m)@(js|ts)?(x)'    # ?(Common|Module) @(JavaScript|TypeScript) ?(XML) files
+      - '**/*.js'                    # For scripts
+      - '**/*.ts'                    # For scripts
+      - '**/*.cjs'                   # For scripts
+      - '**/*.cts'                   # For scripts
+      - '**/*.mjs'                   # For scripts
+      - '**/*.mts'                   # For scripts
+      - '**/*.jsx'                   # For scripts
+      - '**/*.tsx'                   # For scripts
       - '**/*.vue'                   # For single-file components that contain a script block
       - '!**/*.md'                   # Ignore markdown files (and their constituent fenced code blocks)
       - '!docs/**'                   # Ignore docs folder
