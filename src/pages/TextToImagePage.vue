@@ -17,6 +17,9 @@ import {
   VBtn,
 } from 'vuetify/components/VBtn';
 import {
+  VForm,
+} from 'vuetify/components/VForm';
+import {
   VImg,
 } from 'vuetify/components/VImg';
 import {
@@ -115,7 +118,11 @@ const imageGeneration = useStatefulProcess(async () => {
   <section
     class="text-to-image-view"
   >
-    <div class="input-section">
+    <VForm
+      :disabled="imageGeneration.isInProgress"
+      class="w-100"
+      @submit.prevent="imageGeneration.try"
+    >
       <VTextarea
         v-model="promptEntry.positive"
         label="Prompt"
@@ -135,8 +142,9 @@ const imageGeneration = useStatefulProcess(async () => {
       />
 
       <VBtn
+        type="submit"
         :disabled="imageGeneration.isInProgress"
-        @click="imageGeneration.try"
+        block
       >
         {{
           imageGeneration.isInProgress
@@ -144,7 +152,7 @@ const imageGeneration = useStatefulProcess(async () => {
             : 'Generate Image'
         }}
       </VBtn>
-    </div>
+    </VForm>
 
     <br>
 
@@ -168,12 +176,6 @@ const imageGeneration = useStatefulProcess(async () => {
   flex-direction: column;
   align-items: center;
   width: 300px;
-
-  >.input-section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
 
   >.placeholder-image {
     filter: grayscale(1);
