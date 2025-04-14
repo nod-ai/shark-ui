@@ -120,14 +120,18 @@ const imageGeneration = useStatefulProcess(async () => {
         v-model="promptEntry.positive"
         label="Prompt"
         placeholder="Enter prompt here"
-        rows="5"
+        rows="3"
+        auto-grow
+        max-rows="10"
       />
 
       <VTextarea
         v-model="promptEntry.negative"
         label="Negative prompt"
         placeholder="Enter negative prompt here"
-        rows="5"
+        rows="3"
+        auto-grow
+        max-rows="10"
       />
 
       <VBtn
