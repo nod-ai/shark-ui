@@ -6,6 +6,7 @@
     "EditorConfig.EditorConfig",
     "streetsidesoftware.code-spell-checker",
     "DavidAnson.vscode-markdownlint",
-    "nicoespeon.abracadabra"
+    "nicoespeon.abracadabra",
+    "bierner.github-markdown-preview"
   ]
 }
