@@ -119,6 +119,7 @@ const imageGeneration = useStatefulProcess(async () => {
     class="text-to-image-view"
   >
     <VForm
+      :disabled="imageGeneration.isInProgress"
       class="w-100"
       @submit.prevent="imageGeneration.try"
     >
