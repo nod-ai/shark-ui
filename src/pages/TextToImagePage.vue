@@ -117,7 +117,6 @@ const imageGeneration = useStatefulProcess(async () => {
   >
     <div class="input-section">
       <VTextarea
-        id="prompt_positive"
         v-model="promptEntry.positive"
         label="Prompt"
         placeholder="Enter prompt here"
@@ -125,7 +124,6 @@ const imageGeneration = useStatefulProcess(async () => {
       />
 
       <VTextarea
-        id="prompt_negative"
         v-model="promptEntry.negative"
         label="Negative prompt"
         placeholder="Enter negative prompt here"
