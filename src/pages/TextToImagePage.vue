@@ -20,8 +20,14 @@ import {
   VForm,
 } from 'vuetify/components/VForm';
 import {
+  VContainer,
+} from 'vuetify/components/VGrid';
+import {
   VImg,
 } from 'vuetify/components/VImg';
+import {
+  VMain,
+} from 'vuetify/components/VMain';
 import {
   VTextarea,
 } from 'vuetify/components/VTextarea';
@@ -40,6 +46,7 @@ import {
 import placeholderImage from '@/assets/stable-diffusion-image-output-placeholder.png';
 
 import DiscreteSlider from '@/components/DiscreteSlider.vue';
+import NavigationPanel from '@/components/NavigationPanel.vue';
 
 import type ImageGenerationPrompt from '@/models/ImageGenerationPrompt.ts';
 
@@ -125,12 +132,9 @@ const imageGeneration = useStatefulProcess(async () => {
 </script>
 
 <template>
-  <section
-    class="text-to-image-view"
-  >
+  <NavigationPanel>
     <VForm
       :disabled="imageGeneration.isInProgress"
-      class="w-100"
       @submit.prevent="imageGeneration.try"
     >
       <VTextarea
@@ -172,33 +176,28 @@ const imageGeneration = useStatefulProcess(async () => {
         }}
       </VBtn>
     </VForm>
+  </NavigationPanel>
 
-    <br>
-
-    <VImg
-      :src="generatedImage?.toString() ?? placeholderImage"
-      alt="presented image"
-      height="300px"
-      width="300px"
-      :class="{
-        'placeholder-image': (generatedImage === null),
-      }"
-    />
-  </section>
+  <VMain>
+    <VContainer
+      fluid
+      max-width="100vh"
+      class="fill-height"
+    >
+      <VImg
+        :src="generatedImage?.toString() ?? placeholderImage"
+        alt="presented image"
+        :class="{
+          'placeholder-image': (generatedImage === null),
+        }"
+      />
+    </VContainer>
+  </VMain>
 </template>
 
 <style scoped>
-.text-to-image-view {
-  padding: 16px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 300px;
-
-  >.placeholder-image {
-    filter: grayscale(1);
-    opacity: 0.5;
-  }
+.placeholder-image {
+  filter: grayscale(1);
+  opacity: 0.5;
 }
 </style>
