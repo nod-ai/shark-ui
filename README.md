@@ -42,6 +42,11 @@ To get SHARK UI up and running:
             -L <port-on-virtual-machine-serving-text-to-image-api>:localhost:<port-on-local-machine-forwarding-text-to-image-api>
         ```
 
+        ```shell
+        ssh <user>@<origin-for-virtual-machine-serving-browser-ui> \
+            -L <port-on-virtual-machine-serving-browser-ui>:localhost:<port-on-local-machine-forwarding-browser-ui>
+        ```
+
 ## Usage
 
 1. If you haven't already:
