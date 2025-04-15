@@ -73,6 +73,38 @@ When the scope _is_ included...
 
 #### Summary
 
+Use the summary field to provide a succinct description of the change.
+
+It should read as if prepended by "This commit...":
+
+- "\[This commit \]**adds generation button**"
+- "\[This commit \]**describes how to contribute**"
+- "\[This commit \]**extracts `foo` from `bar`**"
+
+Summaries should:
+
+- start with a verb in the simple present tense: "changes..."
+  - not "change..."[^1]
+  - not "changed..."[^2]
+  - not "changing..."[^3]
+- forgo punctuation at the end (i.e. ".", "!")
+  - the summary is not necessarily a complete sentence, nor should it be followed by a sentence
+  - put any extra details in the [body](#body) section
+- keep the first letter lowercase
+  - verbs aren't proper nouns, so they don't need to be capitalized
+
+[^1]: because
+
+    the first-person present tense ("\[I \]**change...**") is not "author-agnostic". The "who" is part of the commit metadata, so it doesn't need to be called out in the summary;
+
+    the imperative present tense ("\[It's been requested that we \]**change...**") is reserved for issues and requests. i.e. when we're told what we should do next;
+
+    the simple future tense ("\[This commit will \]**change...**") is not "release agnostic", implies need to reword as past tense after release
+
+[^2]: because past tense "\[This commit has | I \]**changed...**" is not release agnostic, implies it would need to be in future tense until released
+
+[^3]: because the present progressive tense "\[This commit is \]**changing...**" suggests "work-in-progress", which usually is only relevant during PRs
+
 ### Body
 
 ### Footer
