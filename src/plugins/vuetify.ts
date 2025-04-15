@@ -1,8 +1,14 @@
 import 'vuetify/styles';
+import '@mdi/font/css/materialdesignicons.css';
 
 import {
   createVuetify,
 } from 'vuetify';
+
+import {
+  aliases,
+  mdi,
+} from 'vuetify/iconsets/mdi';
 
 const vuetify = createVuetify({
   theme: {
@@ -12,6 +18,13 @@ const vuetify = createVuetify({
     VBtn: {
       color: 'primary',
     },
+  },
+  icons: {
+    sets: {
+      mdi,
+    },
+    defaultSet: 'mdi',
+    aliases,
   },
 });
 
