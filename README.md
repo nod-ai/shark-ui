@@ -40,7 +40,7 @@ To get SHARK UI up and running:
         - i.e. via SSH:
 
             ```shell
-            ssh -L <server-port>:localhost:<local-port> <user>@<server_origin>
+            ssh <user>@<server_origin> -L <server-port>:localhost:<local-port>
             ```
 
     NOTE: https is not yet supported
