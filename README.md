@@ -34,7 +34,7 @@ To get SHARK UI up and running:
     ```
 
 1. **If you are connecting to a server on a virtual machine**, have your local machine forward the port.
-    - Helps when the VM has a firewall
+    - TIP: try this when the VM's firewall is preventing the browser from accessing the UI or using the API
     - i.e. via SSH:
 
         ```shell
