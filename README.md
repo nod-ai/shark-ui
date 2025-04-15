@@ -38,7 +38,8 @@ To get SHARK UI up and running:
     - i.e. via SSH:
 
         ```shell
-        ssh <user>@<server_origin> -L <server-port>:localhost:<local-port>
+        ssh <user>@<server_origin> \
+            -L <server-port>:localhost:<local-port>
         ```
 
 ## Usage
