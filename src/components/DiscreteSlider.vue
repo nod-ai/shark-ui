@@ -95,11 +95,6 @@ const boundaryTickLabels = (
     !givenRange.inclusivelyContains(givenValue)
   ) throw new RangeError(`Expected value within range: ${givenRange.inInclusiveNotation}, got: ${givenValue.toString()}`);
 
-  const valueLabels = tickLabels({
-    for: givenValue,
-    in : givenRange,
-  });
-
   const proximityOffset = 5;
 
   const minLabels = tickLabels({
@@ -117,7 +112,6 @@ const boundaryTickLabels = (
   return shallowlyMerged(
     minLabels,
     maxLabels,
-    valueLabels,
   );
 };
 </script>
