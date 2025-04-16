@@ -139,6 +139,8 @@ const boundaryTickLabels = (
         <VBtn
           icon="mdi-minus"
           variant="text"
+          size="small"
+          density="compact"
           :disabled="currentValue <= range.lowerBound"
           @click="() => incrementCurrentValueBy(-1)"
         />
@@ -147,6 +149,8 @@ const boundaryTickLabels = (
         <VBtn
           icon="mdi-plus"
           variant="text"
+          size="small"
+          density="compact"
           :disabled="range.upperBound <= currentValue"
           @click="() => incrementCurrentValueBy(+1)"
         />
