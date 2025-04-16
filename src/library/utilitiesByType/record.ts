@@ -1,8 +1,7 @@
 export const shallowlyMerged = <
   SomeRecord extends Record<string, unknown>,
-  SomeNullableRecord = SomeRecord | null,
 >(
-  ...givenRecords: [SomeNullableRecord, ...SomeNullableRecord[]]
+  ...givenRecords: (SomeRecord | null)[]
 ): SomeRecord => {
   return givenRecords.reduce<SomeRecord>((runningRecords, eachRecord) => {
     return {
