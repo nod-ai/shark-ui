@@ -36,45 +36,51 @@ const incrementCurrentValueBy = (givenStepCount: number) => {
   set(currentValue, nextValue);
 };
 
+type SliderTickPosition = number;
+
 const endpointOffset = 1;
 const defaultOffset = 0;
 
 const stylisticOffset = (
   {
-    for: givenValue,
+    for: givenPosition,
     in: givenRange,
   }: {
-    for: number;
+    for: SliderTickPosition;
     in: Range;
   },
 ): number => {
   const leftwardOffset = -endpointOffset;
   const rightwardOffset = endpointOffset;
 
-  if (givenValue === givenRange.lowerBound) return leftwardOffset;
-  if (givenValue === givenRange.upperBound) return rightwardOffset;
+  if (givenPosition === givenRange.lowerBound) return leftwardOffset;
+  if (givenPosition === givenRange.upperBound) return rightwardOffset;
 
   return defaultOffset;
 };
 
-type SliderLabelsByTick = Record<number, string>;
+type SliderTickLabel = string;
+type SliderTickLabelsByPosition = Record<SliderTickPosition, SliderTickLabel>;
 
 const tickLabels = (
   {
-    for: givenValue,
+    by: givenPosition,
     in : givenRange,
   }: {
-    for: number;
+    by: SliderTickPosition;
     in: Range;
   },
-): SliderLabelsByTick | null => {
+): SliderTickLabelsByPosition | null => {
   const derivedOffset = stylisticOffset({
-    for: givenValue,
+    for: givenPosition,
     in : givenRange,
   });
 
+  const tickPosition = givenPosition + derivedOffset;
+  const tickLabel = givenPosition.toString();
+
   return {
-    [givenValue + derivedOffset]: givenValue.toString(),
+    [tickPosition]: tickLabel,
   };
 };
 
@@ -84,15 +90,15 @@ const boundaryTickLabels = (
   }: {
     in: Range;
   },
-): SliderLabelsByTick => {
+): SliderTickLabelsByPosition => {
   const minLabels = tickLabels({
-    for: givenRange.lowerBound,
-    in : givenRange,
+    by: givenRange.lowerBound,
+    in: givenRange,
   });
 
   const maxLabels = tickLabels({
-    for: givenRange.upperBound,
-    in : givenRange,
+    by: givenRange.upperBound,
+    in: givenRange,
   });
 
   return shallowlyMerged(
