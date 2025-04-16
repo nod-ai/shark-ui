@@ -60,7 +60,7 @@ const stylisticOffset = (
 };
 
 type SliderTickLabel = string;
-type SliderLabelsByTick = Record<SliderTickPosition, SliderTickLabel>;
+type SliderTickLabelsByPosition = Record<SliderTickPosition, SliderTickLabel>;
 
 const tickLabels = (
   {
@@ -70,7 +70,7 @@ const tickLabels = (
     by: SliderTickPosition;
     in: Range;
   },
-): SliderLabelsByTick | null => {
+): SliderTickLabelsByPosition | null => {
   const derivedOffset = stylisticOffset({
     for: givenPosition,
     in : givenRange,
@@ -90,7 +90,7 @@ const boundaryTickLabels = (
   }: {
     in: Range;
   },
-): SliderLabelsByTick => {
+): SliderTickLabelsByPosition => {
   const minLabels = tickLabels({
     by: givenRange.lowerBound,
     in: givenRange,
