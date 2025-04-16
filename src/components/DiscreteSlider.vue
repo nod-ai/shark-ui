@@ -63,15 +63,11 @@ const tickLabels = (
   {
     for: givenValue,
     in : givenRange,
-    when: shouldMakeLabelsFor = () => true,
   }: {
     for: number;
     in: Range;
-    when?: (value: number) => boolean;
   },
 ): SliderLabelsByTick | null => {
-  if (!shouldMakeLabelsFor(givenValue)) return null;
-
   const derivedOffset = stylisticOffset({
     for: givenValue,
     in : givenRange,
@@ -85,39 +81,23 @@ const tickLabels = (
 const boundaryTickLabels = (
   {
     in: givenRange,
-    around: givenValue,
   }: {
     in: Range;
-    around: number;
   },
 ): SliderLabelsByTick => {
-  if (
-    !givenRange.inclusivelyContains(givenValue)
-  ) throw new RangeError(`Expected value within range: ${givenRange.inInclusiveNotation}, got: ${givenValue.toString()}`);
-
-  const valueLabels = tickLabels({
-    for: givenValue,
+  const minLabels = tickLabels({
+    for: givenRange.lowerBound,
     in : givenRange,
   });
 
-  const proximityOffset = 5;
-
-  const minLabels = tickLabels({
-    for : givenRange.lowerBound,
-    in  : givenRange,
-    when: $0 => (($0 + proximityOffset) <= givenValue),
-  });
-
   const maxLabels = tickLabels({
-    for : givenRange.upperBound,
-    in  : givenRange,
-    when: $0 => (givenValue <= ($0 - proximityOffset)),
+    for: givenRange.upperBound,
+    in : givenRange,
   });
 
   return shallowlyMerged(
     minLabels,
     maxLabels,
-    valueLabels,
   );
 };
 </script>
@@ -131,9 +111,11 @@ const boundaryTickLabels = (
       :min="range.lowerBound"
       :step="range.stepSize"
       :max="range.upperBound"
-      :ticks="boundaryTickLabels({ in: range, around: currentValue})"
+      :ticks="boundaryTickLabels({ in: range })"
       show-ticks="always"
       thumb-color="primary"
+      thumb-label="always"
+      class="pt-6"
     >
       <template #prepend>
         <VBtn
@@ -145,6 +127,15 @@ const boundaryTickLabels = (
           @click="() => incrementCurrentValueBy(-1)"
         />
       </template>
+
+      <template #thumb-label="{ modelValue }">
+        <span
+          style="color: rgb(var(--v-theme-on-background));"
+        >
+          {{ modelValue }}
+        </span>
+      </template>
+
       <template #append>
         <VBtn
           icon="mdi-plus"
