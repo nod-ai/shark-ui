@@ -114,6 +114,8 @@ const boundaryTickLabels = (
       :ticks="boundaryTickLabels({ in: range })"
       show-ticks="always"
       thumb-color="primary"
+      thumb-label="always"
+      class="pt-6"
     >
       <template #prepend>
         <VBtn
@@ -125,6 +127,15 @@ const boundaryTickLabels = (
           @click="() => incrementCurrentValueBy(-1)"
         />
       </template>
+
+      <template #thumb-label="{ modelValue }">
+        <span
+          style="color: rgb(var(--v-theme-on-background));"
+        >
+          {{ modelValue }}
+        </span>
+      </template>
+
       <template #append>
         <VBtn
           icon="mdi-plus"
