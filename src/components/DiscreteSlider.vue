@@ -15,6 +15,7 @@ import {
 } from 'vuetify/components/VSlider';
 
 import type DiscreteRange from '@/library/Range/DiscreteRange.ts';
+import Range from '@/library/Range/index.ts';
 
 import {
   shallowlyMerged,
@@ -44,7 +45,7 @@ const stylisticOffset = (
     in: givenRange,
   }: {
     for: number;
-    in: DiscreteRange;
+    in: Range;
   },
 ): number => {
   const leftwardOffset = -endpointOffset;
@@ -65,7 +66,7 @@ const tickLabels = (
     when: shouldMakeLabelsFor = () => true,
   }: {
     for: number;
-    in: DiscreteRange;
+    in: Range;
     when?: (value: number) => boolean;
   },
 ): SliderLabelsByTick | null => {
@@ -86,7 +87,7 @@ const boundaryTickLabels = (
     in: givenRange,
     around: givenValue,
   }: {
-    in: DiscreteRange;
+    in: Range;
     around: number;
   },
 ): SliderLabelsByTick => {
