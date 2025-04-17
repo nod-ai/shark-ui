@@ -29,6 +29,9 @@ import {
   VMain,
 } from 'vuetify/components/VMain';
 import {
+  VSkeletonLoader,
+} from 'vuetify/components/VSkeletonLoader';
+import {
   VTextarea,
 } from 'vuetify/components/VTextarea';
 
@@ -42,8 +45,6 @@ import ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image
 import {
   cloneOf,
 } from '@/library/utilitiesByType/reference.ts';
-
-import placeholderImage from '@/assets/stable-diffusion-image-output-placeholder.png';
 
 import DiscreteSlider from '@/components/DiscreteSlider.vue';
 import NavigationPanel from '@/components/NavigationPanel.vue';
@@ -190,14 +191,13 @@ const imageGeneration = useStatefulProcess(async () => {
         :src="generatedImage.toString()"
         alt="presented image"
       />
-      <VImg
+      <VSkeletonLoader
         v-else
-        :src="placeholderImage"
+        :boilerplate="!imageGeneration.isInProgress"
+        width="100vh"
         :style="{
-          filter: 'grayscale(1)',
-          opacity: 0.5,
+          'aspect-ratio': 1,
         }"
-        alt="placeholder image"
       />
     </VContainer>
   </VMain>
