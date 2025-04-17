@@ -186,11 +186,15 @@ const imageGeneration = useStatefulProcess(async () => {
       class="fill-height"
     >
       <VImg
-        :src="generatedImage?.toString() ?? placeholderImage"
+        v-if="generatedImage !== null"
+        :src="generatedImage.toString()"
         alt="presented image"
-        :class="{
-          'placeholder-image': (generatedImage === null),
-        }"
+      />
+      <VImg
+        v-else
+        :src="placeholderImage"
+        class="placeholder-image"
+        alt="placeholder image"
       />
     </VContainer>
   </VMain>
