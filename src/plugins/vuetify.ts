@@ -18,6 +18,9 @@ const vuetify = createVuetify({
     VBtn: {
       color: 'primary',
     },
+    VCard: {
+      variant: 'tonal',
+    },
   },
   icons: {
     sets: {
