@@ -193,16 +193,12 @@ const imageGeneration = useStatefulProcess(async () => {
       <VImg
         v-else
         :src="placeholderImage"
-        class="placeholder-image"
+        :style="{
+          filter: 'grayscale(1)',
+          opacity: 0.5,
+        }"
         alt="placeholder image"
       />
     </VContainer>
   </VMain>
 </template>
-
-<style scoped>
-.placeholder-image {
-  filter: grayscale(1);
-  opacity: 0.5;
-}
-</style>
