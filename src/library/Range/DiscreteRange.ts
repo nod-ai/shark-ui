@@ -1,6 +1,6 @@
 import Range from './index.ts';
 
-export default class DiscreteRange extends Range {
+export default class DiscreteRange extends Range implements Iterable<number> {
   public constructor(
     lowerBound: Range['lowerBound'],
     upperBound: Range['upperBound'],
@@ -42,5 +42,45 @@ export default class DiscreteRange extends Range {
     const overstep = (givenValue - this.lowerBound) % this.stepSize;
 
     return (overstep === 0) && super.exclusivelyContains(givenValue);
+  }
+
+  public [Symbol.iterator](): Iterator<number> {
+    let eachValue = this.lowerBound;
+
+    const proceedWithBoundsExcluded = (): IteratorResult<number> => {
+      eachValue = eachValue + this.stepSize;
+
+      if (
+        this.upperBound < eachValue
+      ) throw new RangeError(`Unexpected overstep when iterating over ${this.inInclusiveNotation} with step size ${this.stepSize.toString()}`);
+
+      if (this.upperBound === eachValue) {
+        return {
+          done : true,
+          value: undefined,
+        };
+      }
+
+      return {
+        done : false,
+        value: eachValue,
+      };
+    };
+
+    return {
+      next: proceedWithBoundsExcluded,
+    };
+  }
+
+  public get exclusiveValues(): number[] {
+    return Array.from(this);
+  }
+
+  public get inclusiveValues(): number[] {
+    return [
+      this.lowerBound,
+      ...this.exclusiveValues,
+      this.upperBound,
+    ];
   }
 }

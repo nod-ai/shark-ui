@@ -155,6 +155,7 @@ const imageGeneration = useStatefulProcess(async () => {
         v-model="proposedNumberOfDiffusionSteps"
         label="Number of Diffusion Steps"
         :range="range"
+        :tick-step="10"
       />
 
       <br>

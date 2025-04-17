@@ -14,7 +14,7 @@ import {
   VSlider,
 } from 'vuetify/components/VSlider';
 
-import type DiscreteRange from '@/library/Range/DiscreteRange.ts';
+import DiscreteRange from '@/library/Range/DiscreteRange.ts';
 import Range from '@/library/Range/index.ts';
 
 import {
@@ -28,6 +28,7 @@ const currentValue = defineModel<number>({
 const given = defineProps<{
   label: string;
   range: DiscreteRange;
+  tickStep: DiscreteRange['stepSize'];
 }>();
 
 const incrementCurrentValueBy = (givenStepCount: number) => {
@@ -84,27 +85,28 @@ const tickLabels = (
   };
 };
 
-const boundaryTickLabels = (
+const tickLabelsAlong = (
+  givenRange: Range,
   {
-    in: givenRange,
+    atEvery: givenStepSize,
   }: {
-    in: Range;
+    atEvery: DiscreteRange['stepSize'];
   },
 ): SliderTickLabelsByPosition => {
-  const minLabels = tickLabels({
-    by: givenRange.lowerBound,
-    in: givenRange,
+  const tickRange = DiscreteRange.spanning({
+    from: givenRange.lowerBound,
+    to  : givenRange.upperBound,
+    by  : givenStepSize,
   });
 
-  const maxLabels = tickLabels({
-    by: givenRange.upperBound,
-    in: givenRange,
+  const labelSets = tickRange.inclusiveValues.map((eachPosition) => {
+    return tickLabels({
+      by: eachPosition,
+      in: tickRange,
+    });
   });
 
-  return shallowlyMerged(
-    minLabels,
-    maxLabels,
-  );
+  return shallowlyMerged(...labelSets);
 };
 </script>
 
@@ -117,7 +119,7 @@ const boundaryTickLabels = (
       :min="range.lowerBound"
       :step="range.stepSize"
       :max="range.upperBound"
-      :ticks="boundaryTickLabels({ in: range })"
+      :ticks="tickLabelsAlong(range, { atEvery: tickStep })"
       show-ticks="always"
       thumb-color="primary"
       thumb-label="always"
