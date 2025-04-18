@@ -124,7 +124,12 @@ const imageGeneration = useStatefulProcess(async () => {
   ) throw new Error('Expected image data from sole artifact');
 
   const base64DataOfNewImage = Base64CharacterEncodedByteSequence.tryToParseFrom(soleGeneratedArtifact.base64);
-  return new ImageURI('png', 'base64', base64DataOfNewImage);
+  const uriForNewImage = new ImageURI('png', 'base64', base64DataOfNewImage);
+
+  return {
+    uri        : uriForNewImage,
+    description: proposedPrompt.positive,
+  };
 });
 </script>
 
@@ -183,8 +188,8 @@ const imageGeneration = useStatefulProcess(async () => {
     >
       <VImg
         v-if="imageGeneration.result !== null"
-        :src="imageGeneration.result.serialized"
-        alt="presented image"
+        :src="imageGeneration.result.uri.serialized"
+        :alt="imageGeneration.result.description"
       />
       <VSkeletonLoader
         v-else
