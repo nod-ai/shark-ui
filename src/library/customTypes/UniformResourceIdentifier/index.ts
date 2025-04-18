@@ -77,7 +77,7 @@ export default class UniformResourceIdentifier {
     return UniformResourceIdentifier.fragmentPrefix + this.fragment.toString();
   }
 
-  public toString(): string {
+  public get serialized(): string {
     const components: (string | null | undefined)[] = [
       this.scheme.toString(),
       UniformResourceIdentifier.schemeSuffix,

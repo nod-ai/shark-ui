@@ -188,7 +188,7 @@ const imageGeneration = useStatefulProcess(async () => {
     >
       <VImg
         v-if="generatedImage !== null"
-        :src="generatedImage.toString()"
+        :src="generatedImage.serialized"
         alt="presented image"
       />
       <VSkeletonLoader
