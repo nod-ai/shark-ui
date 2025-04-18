@@ -2,7 +2,6 @@
 import {
   get,
   ref,
-  set,
   type Ref,
 } from '@/library/vue/reactivity.ts';
 import {
@@ -68,8 +67,6 @@ const {
 
 const proposedNumberOfDiffusionSteps = ref<number>(range.midpoint);
 
-const generatedImage: Ref<ImageURI | null> = ref(null);
-
 const toTextPrompts = (
   givenPrompt: ImageGenerationPrompt,
   givenWeightQuality: 'positive' | 'negative',
@@ -89,7 +86,6 @@ const shimmedStabilityAIClient = new ShimmedStabilityAIClient({
 });
 
 const imageGeneration = useStatefulProcess(async () => {
-  set(generatedImage, null);
   const proposedPrompt = get(promptEntry);
 
   const textToImageResponse = await shimmedStabilityAIClient.version1.image.tryToGenerateFromText({
@@ -128,8 +124,7 @@ const imageGeneration = useStatefulProcess(async () => {
   ) throw new Error('Expected image data from sole artifact');
 
   const base64DataOfNewImage = Base64CharacterEncodedByteSequence.tryToParseFrom(soleGeneratedArtifact.base64);
-  const newImage = new ImageURI('png', 'base64', base64DataOfNewImage);
-  set(generatedImage, newImage);
+  return new ImageURI('png', 'base64', base64DataOfNewImage);
 });
 </script>
 
@@ -187,8 +182,8 @@ const imageGeneration = useStatefulProcess(async () => {
       class="fill-height"
     >
       <VImg
-        v-if="generatedImage !== null"
-        :src="generatedImage.serialized"
+        v-if="imageGeneration.result !== null"
+        :src="imageGeneration.result.serialized"
         alt="presented image"
       />
       <VSkeletonLoader
