@@ -88,6 +88,7 @@ const shimmedStabilityAIClient = new ShimmedStabilityAIClient({
 });
 
 const imageGeneration = useStatefulProcess(async () => {
+  set(generatedImage, null);
   const proposedPrompt = get(promptEntry);
 
   const textToImageResponse = await shimmedStabilityAIClient.version1.image.tryToGenerateFromText({
