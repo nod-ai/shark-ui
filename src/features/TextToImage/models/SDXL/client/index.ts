@@ -27,7 +27,7 @@ export const tryToGenerateOutputFrom = async (
     | 'seed'
     >;
   },
-): Promise<Output['image']> => {
+): Promise<Output> => {
   const textToImageResponse = await shimmedStabilityAIClient.version1.image.tryToGenerateFromText({
     engineId              : 'stable-diffusion-xl-1024-v1-0',
     textToImageRequestBody: {
@@ -62,7 +62,7 @@ export const tryToGenerateOutputFrom = async (
 
   const base64DataOfNewImage = Base64CharacterEncodedByteSequence.tryToParseFrom(soleGeneratedArtifact.base64);
 
-  return {
+  const newImage = {
     uri        : new ImageURI('png', 'base64', base64DataOfNewImage),
     description: given.textToImageRequestBody.textPrompts
       .map($0 => (($0.weight === undefined) || ($0.weight === 1))
@@ -70,6 +70,10 @@ export const tryToGenerateOutputFrom = async (
         : `(${$0.text}: ${$0.weight.toString()})`,
       )
       .join(', '),
+  };
+
+  return {
+    image: newImage,
   };
 };
 
