@@ -16,9 +16,6 @@ import {
   VBtn,
 } from 'vuetify/components/VBtn';
 import {
-  VCard,
-} from 'vuetify/components/VCard';
-import {
   VForm,
 } from 'vuetify/components/VForm';
 import {
@@ -33,9 +30,6 @@ import {
 import {
   VSkeletonLoader,
 } from 'vuetify/components/VSkeletonLoader';
-import {
-  VTextarea,
-} from 'vuetify/components/VTextarea';
 
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
 import SDXLDiffusionStepCount from '@/library/ShimmedStabilityAIClient/models/SDXLDiffusionStepCount.ts';
@@ -50,6 +44,8 @@ import {
 
 import DiscreteSlider from '@/components/DiscreteSlider.vue';
 import NavigationPanel from '@/components/NavigationPanel.vue';
+
+import TextToImageInputSection from '@/features/TextToImage/TextToImageInputSection.vue';
 
 import type ImageGenerationPrompt from '@/models/ImageGenerationPrompt.ts';
 
@@ -142,33 +138,9 @@ const imageGeneration = useStatefulProcess(async () => {
       :disabled="imageGeneration.isInProgress"
       @submit.prevent="imageGeneration.try"
     >
-      <VCard
-        subtitle="Prompts"
-      >
-        <template #text>
-          <VTextarea
-            v-model="currentPrompt.positive"
-            label="Imagine..."
-            placeholder="What would you like to see?"
-            rows="3"
-            auto-grow
-            max-rows="10"
-            hide-details
-          />
-
-          <br>
-
-          <VTextarea
-            v-model="currentPrompt.negative"
-            label="Avoid..."
-            placeholder="What should be avoided?"
-            rows="3"
-            auto-grow
-            max-rows="10"
-            hide-details
-          />
-        </template>
-      </VCard>
+      <TextToImageInputSection
+        v-model="currentPrompt"
+      />
 
       <br>
 
