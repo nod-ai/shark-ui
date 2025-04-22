@@ -8,10 +8,6 @@ import {
   useStatefulProcess,
 } from '@/library/vue/statefulProcess.ts';
 
-import type {
-  TextToImageRequestBody,
-} from 'stabilityai-client-typescript/models/components';
-
 import {
   VBtn,
 } from 'vuetify/components/VBtn';
@@ -42,6 +38,7 @@ import DiscreteSlider from '@/components/DiscreteSlider.vue';
 import NavigationPanel from '@/components/NavigationPanel.vue';
 
 import TextToImageInputSection from '@/features/TextToImage/TextToImageInputSection.vue';
+import type TextToImageInput from '@/features/TextToImage/models/TextToImageInput.ts';
 
 import type ImageGenerationPrompt from '@/models/ImageGenerationPrompt.ts';
 
@@ -60,7 +57,7 @@ const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
 const toTextPrompts = (
   givenPrompt: ImageGenerationPrompt,
   givenWeightQuality: 'positive' | 'negative',
-): TextToImageRequestBody['textPrompts'] => {
+): TextToImageInput['text'] => {
   const derivedWeight = ImageGenerationPromptWeight[givenWeightQuality];
 
   return givenPrompt[givenWeightQuality]
