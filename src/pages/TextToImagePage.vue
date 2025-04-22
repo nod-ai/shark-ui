@@ -38,10 +38,6 @@ import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64Char
 
 import ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image/index.ts';
 
-import {
-  cloneOf,
-} from '@/library/utilitiesByType/reference.ts';
-
 import DiscreteSlider from '@/components/DiscreteSlider.vue';
 import NavigationPanel from '@/components/NavigationPanel.vue';
 
@@ -53,12 +49,7 @@ import ImageGenerationPromptWeight, {
   quantitative,
 } from '@/models/ImageGenerationPromptWeight.ts';
 
-const defaultPrompt: ImageGenerationPrompt = {
-  positive: 'a cat under the snow with blue eyes, covered by snow, cinematic style, medium shot, professional photo, animal',
-  negative: 'Watermark, blurry, over-saturated, low resolution, pollution',
-};
-
-const currentPrompt: Ref<ImageGenerationPrompt> = ref(cloneOf(defaultPrompt));
+const currentPrompt: Ref<ImageGenerationPrompt | null> = ref(null);
 
 const {
   range,
@@ -86,6 +77,8 @@ const shimmedStabilityAIClient = new ShimmedStabilityAIClient({
 
 const imageGeneration = useStatefulProcess(async () => {
   const proposedPrompt = get(currentPrompt);
+
+  if (proposedPrompt === null) throw new Error('Prompt was not set before submission');
 
   const textToImageResponse = await shimmedStabilityAIClient.version1.image.tryToGenerateFromText({
     engineId              : 'stable-diffusion-xl-1024-v1-0',
