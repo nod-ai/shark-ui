@@ -1,7 +1,7 @@
 import DiscreteRange from '@/library/Range/DiscreteRange.ts';
 
 /**
- * Source from the [StabilityAI OpenAPI spec](https://github.com/nod-ai/StabilityAI-client-typescript/blob/HEAD/openapi.json)
+ * Sourced from the [StabilityAI OpenAPI spec](https://github.com/nod-ai/StabilityAI-client-typescript/blob/HEAD/openapi.json)
  *
  * Defined at "components.schemas.Steps"
  */
