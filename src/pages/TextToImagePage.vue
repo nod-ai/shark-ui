@@ -146,7 +146,10 @@ const imageGeneration = useStatefulProcess(async () => {
         rows="3"
         auto-grow
         max-rows="10"
+        hide-details
       />
+
+      <br>
 
       <VTextarea
         v-model="promptEntry.negative"
@@ -155,7 +158,10 @@ const imageGeneration = useStatefulProcess(async () => {
         rows="3"
         auto-grow
         max-rows="10"
+        hide-details
       />
+
+      <br>
 
       <DiscreteSlider
         v-model="proposedNumberOfDiffusionSteps"
