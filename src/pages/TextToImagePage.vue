@@ -40,33 +40,13 @@ import NavigationPanel from '@/components/NavigationPanel.vue';
 import TextToImageInputSection from '@/features/TextToImage/TextToImageInputSection.vue';
 import type TextToImageInput from '@/features/TextToImage/models/TextToImageInput.ts';
 
-import type ImageGenerationPrompt from '@/models/ImageGenerationPrompt.ts';
-
-import ImageGenerationPromptWeight, {
-  quantitative,
-} from '@/models/ImageGenerationPromptWeight.ts';
-
-const currentPrompt: Ref<ImageGenerationPrompt | null> = ref(null);
+const currentPrompt: Ref<TextToImageInput['text'] | null> = ref(null);
 
 const {
   range,
 } = SDXLDiffusionStepCount;
 
 const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
-
-const toTextPrompts = (
-  givenPrompt: ImageGenerationPrompt,
-  givenWeightQuality: 'positive' | 'negative',
-): TextToImageInput['text'] => {
-  const derivedWeight = ImageGenerationPromptWeight[givenWeightQuality];
-
-  return givenPrompt[givenWeightQuality]
-    .split(',')
-    .map($0 => ({
-      text  : $0.trim(),
-      weight: quantitative(derivedWeight),
-    }));
-};
 
 const shimmedStabilityAIClient = new ShimmedStabilityAIClient({
   serverURL: import.meta.env.VITE_TEXT_TO_IMAGE_API_ORIGIN,
@@ -80,15 +60,12 @@ const imageGeneration = useStatefulProcess(async () => {
   const textToImageResponse = await shimmedStabilityAIClient.version1.image.tryToGenerateFromText({
     engineId              : 'stable-diffusion-xl-1024-v1-0',
     textToImageRequestBody: {
-      textPrompts: [
-        ...toTextPrompts(proposedPrompt, 'positive'),
-        ...toTextPrompts(proposedPrompt, 'negative'),
-      ],
-      height  : 1024,
-      width   : 1024,
-      steps   : get(currentNumberOfDiffusionSteps),
-      cfgScale: 7.5,
-      seed    : 0,
+      textPrompts: proposedPrompt,
+      height     : 1024,
+      width      : 1024,
+      steps      : get(currentNumberOfDiffusionSteps),
+      cfgScale   : 7.5,
+      seed       : 0,
     },
   });
 
@@ -117,7 +94,12 @@ const imageGeneration = useStatefulProcess(async () => {
 
   return {
     uri        : uriForNewImage,
-    description: proposedPrompt.positive,
+    description: proposedPrompt
+      .map($0 => (($0.weight === undefined) || ($0.weight === 1))
+        ? $0.text
+        : `(${$0.text}: ${$0.weight.toString()})`,
+      )
+      .join(', '),
   };
 });
 </script>
