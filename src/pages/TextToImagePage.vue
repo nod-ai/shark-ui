@@ -16,6 +16,9 @@ import {
   VBtn,
 } from 'vuetify/components/VBtn';
 import {
+  VCard,
+} from 'vuetify/components/VCard';
+import {
   VForm,
 } from 'vuetify/components/VForm';
 import {
@@ -139,27 +142,33 @@ const imageGeneration = useStatefulProcess(async () => {
       :disabled="imageGeneration.isInProgress"
       @submit.prevent="imageGeneration.try"
     >
-      <VTextarea
-        v-model="promptEntry.positive"
-        label="Prompt"
-        placeholder="What would you like to see?"
-        rows="3"
-        auto-grow
-        max-rows="10"
-        hide-details
-      />
+      <VCard
+        subtitle="Prompts"
+      >
+        <template #text>
+          <VTextarea
+            v-model="promptEntry.positive"
+            label="Imagine..."
+            placeholder="What would you like to see?"
+            rows="3"
+            auto-grow
+            max-rows="10"
+            hide-details
+          />
 
-      <br>
+          <br>
 
-      <VTextarea
-        v-model="promptEntry.negative"
-        label="Negative prompt"
-        placeholder="What should be avoided?"
-        rows="3"
-        auto-grow
-        max-rows="10"
-        hide-details
-      />
+          <VTextarea
+            v-model="promptEntry.negative"
+            label="Avoid..."
+            placeholder="What should be avoided?"
+            rows="3"
+            auto-grow
+            max-rows="10"
+            hide-details
+          />
+        </template>
+      </VCard>
 
       <br>
 
