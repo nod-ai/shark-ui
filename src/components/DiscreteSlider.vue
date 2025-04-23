@@ -127,7 +127,7 @@ const tickLabelsAlong = (
     >
       <template #prepend>
         <VBtn
-          icon="mdi-minus"
+          icon="$minus"
           variant="text"
           size="small"
           density="compact"
@@ -146,7 +146,7 @@ const tickLabelsAlong = (
 
       <template #append>
         <VBtn
-          icon="mdi-plus"
+          icon="$plus"
           variant="text"
           size="small"
           density="compact"
