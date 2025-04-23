@@ -42,34 +42,46 @@ const quantitative = (givenQualitativeWeight: QualitativeTextWeight): Quantitati
   }
 };
 
-const toValueOfInputTextByQualitativeWeight = (
+const serialized = (
   givenInputText: TextToImageInput['text'],
-  givenWeightQuality: QualitativeTextWeight,
+  given: {
+    weight: QualitativeTextWeight;
+  },
 ): InputTextByQualitativeWeight[QualitativeTextWeight] => {
   return cloneOf(givenInputText)
-    .filter($0 => $0.weight === quantitative(givenWeightQuality))
+    .filter($0 => $0.weight === quantitative(given.weight))
     .map($0 => $0.text.trim())
     .join(', ');
 };
 
-const asInputTextByQualitativeWeight = (givenInputText: TextToImageInput['text']): InputTextByQualitativeWeight => ({
-  positive: toValueOfInputTextByQualitativeWeight(givenInputText, 'positive'),
-  negative: toValueOfInputTextByQualitativeWeight(givenInputText, 'negative'),
+const byQualitativeWeight = (givenInputText: TextToImageInput['text']): InputTextByQualitativeWeight => ({
+  positive: serialized(givenInputText, {
+    weight: 'positive',
+  }),
+  negative: serialized(givenInputText, {
+    weight: 'negative',
+  }),
 });
 
-const toElementOfInputText = (
+const standardizedElement = (
   givenInputText: InputTextByQualitativeWeight,
-  givenWeightQuality: QualitativeTextWeight,
+  given: {
+    weight: QualitativeTextWeight;
+  },
 ): TextToImageInput['text'][number] => {
   return {
-    text  : givenInputText[givenWeightQuality],
-    weight: quantitative(givenWeightQuality),
+    text  : givenInputText[given.weight],
+    weight: quantitative(given.weight),
   };
 };
 
-const asInputText = (givenInputText: InputTextByQualitativeWeight): TextToImageInput['text'] => [
-  toElementOfInputText(givenInputText, 'positive'),
-  toElementOfInputText(givenInputText, 'negative'),
+const standardized = (givenInputText: InputTextByQualitativeWeight): TextToImageInput['text'] => [
+  standardizedElement(givenInputText, {
+    weight: 'positive',
+  }),
+  standardizedElement(givenInputText, {
+    weight: 'negative',
+  }),
 ];
 
 const defaultInitialInputText: InputTextByQualitativeWeight = {
@@ -84,7 +96,7 @@ const initialInputText: InputTextByQualitativeWeight = (() => {
     initialExposedInputText === null
   ) return defaultInitialInputText;
 
-  return asInputTextByQualitativeWeight(initialExposedInputText);
+  return byQualitativeWeight(initialExposedInputText);
 })();
 
 const currentInputText: Ref<InputTextByQualitativeWeight> = ref(initialInputText);
@@ -92,7 +104,7 @@ const currentInputText: Ref<InputTextByQualitativeWeight> = ref(initialInputText
 watch(
   currentInputText,
   (updatedInputText) => {
-    set(exposedInputText, asInputText(updatedInputText));
+    set(exposedInputText, standardized(updatedInputText));
   },
   {
     deep     : true,
