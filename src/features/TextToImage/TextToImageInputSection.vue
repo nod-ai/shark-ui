@@ -22,58 +22,62 @@ import {
 
 import type TextToImageInput from './models/TextToImageInput.ts';
 
-import type ImageGenerationPrompt from '@/models/ImageGenerationPrompt.ts';
-
-import ImageGenerationPromptWeight, {
-  quantitative,
-} from '@/models/ImageGenerationPromptWeight.ts';
-
 const exposedPrompt = defineModel<TextToImageInput['text'] | null>({
   required: true,
 });
 
 type QualitativeTextWeight = 'positive' | 'negative';
 
+type QuantitativeTextWeight = 1 | -1;
+
+interface InputTextByQualitativeWeight {
+  positive: string;
+  negative: string;
+}
+
+const quantitative = (givenQualitativeWeight: QualitativeTextWeight): QuantitativeTextWeight => {
+  switch (givenQualitativeWeight) {
+    case 'positive': return +1;
+    case 'negative': return -1;
+  }
+};
+
 const toValueOfInputTextByQualitativeWeight = (
   givenInputText: TextToImageInput['text'],
   givenWeightQuality: QualitativeTextWeight,
-): ImageGenerationPrompt[QualitativeTextWeight] => {
-  const derivedWeight = ImageGenerationPromptWeight[givenWeightQuality];
-
+): InputTextByQualitativeWeight[QualitativeTextWeight] => {
   return cloneOf(givenInputText)
-    .filter($0 => $0.weight === quantitative(derivedWeight))
+    .filter($0 => $0.weight === quantitative(givenWeightQuality))
     .map($0 => $0.text.trim())
     .join(', ');
 };
 
-const asInputTextByQualitativeWeight = (givenPrompt: TextToImageInput['text']): ImageGenerationPrompt => ({
+const asInputTextByQualitativeWeight = (givenPrompt: TextToImageInput['text']): InputTextByQualitativeWeight => ({
   positive: toValueOfInputTextByQualitativeWeight(givenPrompt, 'positive'),
   negative: toValueOfInputTextByQualitativeWeight(givenPrompt, 'negative'),
 });
 
 const toElementOfInputText = (
-  givenPrompt: ImageGenerationPrompt,
+  givenPrompt: InputTextByQualitativeWeight,
   givenWeightQuality: QualitativeTextWeight,
 ): TextToImageInput['text'][number] => {
-  const derivedWeight = ImageGenerationPromptWeight[givenWeightQuality];
-
   return {
     text  : givenPrompt[givenWeightQuality],
-    weight: quantitative(derivedWeight),
+    weight: quantitative(givenWeightQuality),
   };
 };
 
-const asInputText = (givenPrompt: ImageGenerationPrompt): TextToImageInput['text'] => [
+const asInputText = (givenPrompt: InputTextByQualitativeWeight): TextToImageInput['text'] => [
   toElementOfInputText(givenPrompt, 'positive'),
   toElementOfInputText(givenPrompt, 'negative'),
 ];
 
-const defaultInitialPrompt: ImageGenerationPrompt = {
+const defaultInitialPrompt: InputTextByQualitativeWeight = {
   positive: 'a cat under the snow with blue eyes, covered by snow, cinematic style, medium shot, professional photo, animal',
   negative: 'Watermark, blurry, over-saturated, low resolution, pollution',
 };
 
-const initialPrompt: ImageGenerationPrompt = (() => {
+const initialPrompt: InputTextByQualitativeWeight = (() => {
   const initialExposedPrompt = get(exposedPrompt);
 
   if (
@@ -83,7 +87,7 @@ const initialPrompt: ImageGenerationPrompt = (() => {
   return asInputTextByQualitativeWeight(initialExposedPrompt);
 })();
 
-const currentPrompt: Ref<ImageGenerationPrompt> = ref(initialPrompt);
+const currentPrompt: Ref<InputTextByQualitativeWeight> = ref(initialPrompt);
 
 watch(
   currentPrompt,
