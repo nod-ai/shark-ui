@@ -16,9 +16,11 @@ import {
   VTextarea,
 } from 'vuetify/components/VTextarea';
 
-import type TextToImageInput from './models/TextToImageInput.ts';
+import type {
+  Input,
+} from '../types';
 
-type StandardizedInputText = TextToImageInput['text'];
+type StandardizedInputText = Input['text'];
 
 const exposedInputText = defineModel<StandardizedInputText | null>({
   required: true,
