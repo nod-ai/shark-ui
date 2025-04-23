@@ -62,7 +62,7 @@ const defaultPrompt: ImageGenerationPrompt = {
   negative: 'Watermark, blurry, over-saturated, low resolution, pollution',
 };
 
-const promptEntry: Ref<ImageGenerationPrompt> = ref(cloneOf(defaultPrompt));
+const currentPrompt: Ref<ImageGenerationPrompt> = ref(cloneOf(defaultPrompt));
 
 const {
   range,
@@ -89,7 +89,7 @@ const shimmedStabilityAIClient = new ShimmedStabilityAIClient({
 });
 
 const imageGeneration = useStatefulProcess(async () => {
-  const proposedPrompt = get(promptEntry);
+  const proposedPrompt = get(currentPrompt);
 
   const textToImageResponse = await shimmedStabilityAIClient.version1.image.tryToGenerateFromText({
     engineId              : 'stable-diffusion-xl-1024-v1-0',
@@ -147,7 +147,7 @@ const imageGeneration = useStatefulProcess(async () => {
       >
         <template #text>
           <VTextarea
-            v-model="promptEntry.positive"
+            v-model="currentPrompt.positive"
             label="Imagine..."
             placeholder="What would you like to see?"
             rows="3"
@@ -159,7 +159,7 @@ const imageGeneration = useStatefulProcess(async () => {
           <br>
 
           <VTextarea
-            v-model="promptEntry.negative"
+            v-model="currentPrompt.negative"
             label="Avoid..."
             placeholder="What should be avoided?"
             rows="3"
