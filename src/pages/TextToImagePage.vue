@@ -38,7 +38,7 @@ import DiscreteSlider from '@/components/DiscreteSlider.vue';
 import NavigationPanel from '@/components/NavigationPanel.vue';
 
 import TextToImageInputSection from '@/features/TextToImage/components/TextToImageInputSection.vue';
-import type TextToImageInput from '@/features/TextToImage/models/TextToImageInput.ts';
+import type TextToImageInput from '@/features/TextToImage/types/TextToImageInput.ts';
 
 const currentPrompt: Ref<TextToImageInput['text'] | null> = ref(null);
 

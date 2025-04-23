@@ -16,7 +16,7 @@ import {
   VTextarea,
 } from 'vuetify/components/VTextarea';
 
-import type TextToImageInput from '../models/TextToImageInput.ts';
+import type TextToImageInput from '../types/TextToImageInput.ts';
 
 type StandardizedInputText = TextToImageInput['text'];
 
