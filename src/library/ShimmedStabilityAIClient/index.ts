@@ -23,12 +23,6 @@ import {
   cloneOf,
 } from '@/library/utilitiesByType/reference.ts';
 
-import type ImageGenerationPrompt from '@/models/ImageGenerationPrompt.ts';
-
-import ImageGenerationPromptWeight, {
-  quantitative,
-} from '@/models/ImageGenerationPromptWeight.ts';
-
 type UnsignedInteger = number;
 type FloatingPoint = number;
 
@@ -42,12 +36,14 @@ interface ShortfinSDClient_ImageGenerationBatchRequest_Body {
   seed: /*          */ UnsignedInteger[];
 };
 
+type Shortfin_TextToImage_SD_Input_Text_SupportedWeight = 1 | -1;
+
 const toSerializedPromptValue = (
   givenTextPrompts: TextToImageRequestBody['textPrompts'],
-  givenWeight: ImageGenerationPromptWeight,
-): ImageGenerationPrompt['positive' | 'negative'] => {
+  givenWeight: Shortfin_TextToImage_SD_Input_Text_SupportedWeight,
+): string => {
   return givenTextPrompts
-    .filter($0 => $0.weight === quantitative(givenWeight))
+    .filter($0 => $0.weight === givenWeight)
     .map($0 => $0.text.trim())
     .join(',');
 };
@@ -73,13 +69,8 @@ const toBatchGenerationRequestBody = (givenRequests: GenerateFromTextRequest['te
       && (eachRequest.cfgScale !== undefined)
       && (eachRequest.seed !== undefined)
     ) {
-      const {
-        positive,
-        negative,
-      } = ImageGenerationPromptWeight;
-
-      const positiveTextPrompts = toSerializedPromptValue(eachRequest.textPrompts, positive);
-      const negativeTextPrompts = toSerializedPromptValue(eachRequest.textPrompts, negative);
+      const positiveTextPrompts = toSerializedPromptValue(eachRequest.textPrompts, 1);
+      const negativeTextPrompts = toSerializedPromptValue(eachRequest.textPrompts, -1);
 
       (runningBatchRequest.prompt/*    */).push(positiveTextPrompts/* */);
       (runningBatchRequest.neg_prompt/**/).push(negativeTextPrompts/* */);
