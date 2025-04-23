@@ -22,7 +22,9 @@ import {
 
 import type TextToImageInput from './models/TextToImageInput.ts';
 
-const exposedInputText = defineModel<TextToImageInput['text'] | null>({
+type StandardizedInputText = TextToImageInput['text'];
+
+const exposedInputText = defineModel<StandardizedInputText | null>({
   required: true,
 });
 
@@ -43,7 +45,7 @@ const quantitative = (givenQualitativeWeight: QualitativeTextWeight): Quantitati
 };
 
 const serialized = (
-  givenInputText: TextToImageInput['text'],
+  givenInputText: StandardizedInputText,
   given: {
     weight: QualitativeTextWeight;
   },
@@ -54,7 +56,7 @@ const serialized = (
     .join(', ');
 };
 
-const byQualitativeWeight = (givenInputText: TextToImageInput['text']): InputTextByQualitativeWeight => ({
+const byQualitativeWeight = (givenInputText: StandardizedInputText): InputTextByQualitativeWeight => ({
   positive: serialized(givenInputText, {
     weight: 'positive',
   }),
@@ -68,14 +70,14 @@ const standardizedElement = (
   given: {
     weight: QualitativeTextWeight;
   },
-): TextToImageInput['text'][number] => {
+): StandardizedInputText[number] => {
   return {
     text  : givenInputText[given.weight],
     weight: quantitative(given.weight),
   };
 };
 
-const standardized = (givenInputText: InputTextByQualitativeWeight): TextToImageInput['text'] => [
+const standardized = (givenInputText: InputTextByQualitativeWeight): StandardizedInputText => [
   standardizedElement(givenInputText, {
     weight: 'positive',
   }),
