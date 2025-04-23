@@ -2,6 +2,7 @@ import type {
   TextToImageRequestBody,
 } from 'stabilityai-client-typescript/models/components';
 
-export default interface TextToImageInput {
+/** The information that's eventually ingested by some text-to-image model */
+export interface TextToImageInput {
   text: TextToImageRequestBody['textPrompts'];
 }
