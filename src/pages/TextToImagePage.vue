@@ -112,6 +112,15 @@ const imageGeneration = useStatefulProcess(async () => {
     >
       <TextToImageInputSection
         v-model="currentPrompt"
+        label="Prompts"
+        :positive="{
+          label: 'Imagine...',
+          placeholder: 'What would you like to see?',
+        }"
+        :negative="{
+          label: 'Avoid...',
+          placeholder: 'What should be avoided?',
+        }"
       />
 
       <br>

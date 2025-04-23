@@ -28,6 +28,17 @@ const exposedInputText = defineModel<StandardizedInputText | null>({
   required: true,
 });
 
+interface InputTextFieldProps {
+  label: string;
+  placeholder: string;
+}
+
+defineProps<{
+  label: string;
+  positive: InputTextFieldProps;
+  negative: InputTextFieldProps;
+}>();
+
 type QualitativeTextWeight = 'positive' | 'negative';
 
 type QuantitativeTextWeight = 1 | -1;
@@ -117,13 +128,13 @@ watch(
 
 <template>
   <VCard
-    subtitle="Prompts"
+    :subtitle="label"
   >
     <template #text>
       <VTextarea
         v-model="currentInputText.positive"
-        label="Imagine..."
-        placeholder="What would you like to see?"
+        :label="positive.label"
+        :placeholder="positive.placeholder"
         rows="3"
         auto-grow
         max-rows="10"
@@ -134,8 +145,8 @@ watch(
 
       <VTextarea
         v-model="currentInputText.negative"
-        label="Avoid..."
-        placeholder="What should be avoided?"
+        :label="negative.label"
+        :placeholder="negative.placeholder"
         rows="3"
         auto-grow
         max-rows="10"
