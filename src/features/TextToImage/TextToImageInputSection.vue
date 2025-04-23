@@ -39,9 +39,16 @@ defineProps<{
   negative: InputTextFieldProps;
 }>();
 
-type QualitativeTextWeight = 'positive' | 'negative';
+const qualitativeToQuantitativeTextWeightMap = {
+  positive: 1,
+  negative: -1,
+} as const;
 
-type QuantitativeTextWeight = 1 | -1;
+type QualitativeToQuantitativeTextWeightMap = typeof qualitativeToQuantitativeTextWeightMap;
+
+type QualitativeTextWeight = keyof QualitativeToQuantitativeTextWeightMap;
+
+type QuantitativeTextWeight = QualitativeToQuantitativeTextWeightMap[QualitativeTextWeight];
 
 interface InputTextByQualitativeWeight {
   positive: string;
@@ -49,32 +56,36 @@ interface InputTextByQualitativeWeight {
 }
 
 const quantitative = (givenQualitativeWeight: QualitativeTextWeight): QuantitativeTextWeight => {
-  switch (givenQualitativeWeight) {
-    case 'positive': return +1;
-    case 'negative': return -1;
-  }
+  return qualitativeToQuantitativeTextWeightMap[givenQualitativeWeight];
 };
 
 const serialized = (
   givenInputText: StandardizedInputText,
   given: {
-    weight: QualitativeTextWeight;
+    weight: QuantitativeTextWeight;
   },
 ): InputTextByQualitativeWeight[QualitativeTextWeight] => {
   return cloneOf(givenInputText)
-    .filter($0 => $0.weight === quantitative(given.weight))
+    .filter($0 => $0.weight === given.weight)
     .map($0 => $0.text.trim())
     .join(', ');
 };
 
-const byQualitativeWeight = (givenInputText: StandardizedInputText): InputTextByQualitativeWeight => ({
-  positive: serialized(givenInputText, {
-    weight: 'positive',
-  }),
-  negative: serialized(givenInputText, {
-    weight: 'negative',
-  }),
-});
+const byQualitativeWeight = (givenInputText: StandardizedInputText): InputTextByQualitativeWeight => {
+  const entriesForInputTextByQualitativeWeight = Object.entries(qualitativeToQuantitativeTextWeightMap)
+    .map(([eachQualitativeWeight, eachQuantitativeWeight]) => {
+      const eachSerializationByWeight = serialized(givenInputText, {
+        weight: eachQuantitativeWeight,
+      });
+
+      return [
+        eachQualitativeWeight as QualitativeTextWeight,
+        eachSerializationByWeight,
+      ] as const;
+    });
+
+  return Object.fromEntries(entriesForInputTextByQualitativeWeight) as unknown as InputTextByQualitativeWeight;
+};
 
 const standardizedElement = (
   givenInputText: InputTextByQualitativeWeight,
