@@ -68,7 +68,7 @@ const {
   range,
 } = SDXLDiffusionStepCount;
 
-const proposedNumberOfDiffusionSteps = ref<number>(range.midpoint);
+const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
 
 const toTextPrompts = (
   givenPrompt: ImageGenerationPrompt,
@@ -100,7 +100,7 @@ const imageGeneration = useStatefulProcess(async () => {
       ],
       height  : 1024,
       width   : 1024,
-      steps   : get(proposedNumberOfDiffusionSteps),
+      steps   : get(currentNumberOfDiffusionSteps),
       cfgScale: 7.5,
       seed    : 0,
     },
@@ -173,7 +173,7 @@ const imageGeneration = useStatefulProcess(async () => {
       <br>
 
       <DiscreteSlider
-        v-model="proposedNumberOfDiffusionSteps"
+        v-model="currentNumberOfDiffusionSteps"
         label="Number of Diffusion Steps"
         :range="range"
         :tick-step="10"
