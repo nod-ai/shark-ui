@@ -27,12 +27,7 @@ import {
   VSkeletonLoader,
 } from 'vuetify/components/VSkeletonLoader';
 
-import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
 import SDXLDiffusionStepCount from '@/library/ShimmedStabilityAIClient/models/SDXLDiffusionStepCount.ts';
-
-import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
-
-import ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image/index.ts';
 
 import DiscreteSlider from '@/components/DiscreteSlider.vue';
 import NavigationPanel from '@/components/NavigationPanel.vue';
@@ -48,17 +43,12 @@ const {
 
 const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
 
-const shimmedStabilityAIClient = new ShimmedStabilityAIClient({
-  serverURL: import.meta.env.VITE_TEXT_TO_IMAGE_API_ORIGIN,
-});
-
 const imageGeneration = useStatefulProcess(async () => {
   const proposedPrompt = get(currentPrompt);
 
   if (proposedPrompt === null) throw new Error('Prompt was not set before submission');
 
-  const textToImageResponse = await shimmedStabilityAIClient.version1.image.tryToGenerateFromText({
-    engineId              : 'stable-diffusion-xl-1024-v1-0',
+  const generatedOutput = await TextToImage.Client.SDXL.tryToGenerateOutputFrom({
     textToImageRequestBody: {
       textPrompts: proposedPrompt,
       height     : 1024,
@@ -69,38 +59,7 @@ const imageGeneration = useStatefulProcess(async () => {
     },
   });
 
-  if (
-    !('artifacts' in textToImageResponse.result)
-  ) throw new Error('Expected response rather than readable stream');
-
-  const generatedArtifacts = textToImageResponse.result.artifacts;
-
-  if (
-    generatedArtifacts === undefined
-  ) throw new Error('Expected artifacts in response result');
-
-  const [soleGeneratedArtifact] = generatedArtifacts;
-
-  if (
-    soleGeneratedArtifact === undefined
-  ) throw new Error('Expected at least one artifact in response');
-
-  if (
-    soleGeneratedArtifact.base64 === undefined
-  ) throw new Error('Expected image data from sole artifact');
-
-  const base64DataOfNewImage = Base64CharacterEncodedByteSequence.tryToParseFrom(soleGeneratedArtifact.base64);
-  const uriForNewImage = new ImageURI('png', 'base64', base64DataOfNewImage);
-
-  return {
-    uri        : uriForNewImage,
-    description: proposedPrompt
-      .map($0 => (($0.weight === undefined) || ($0.weight === 1))
-        ? $0.text
-        : `(${$0.text}: ${$0.weight.toString()})`,
-      )
-      .join(', '),
-  };
+  return generatedOutput.image;
 });
 </script>
 
