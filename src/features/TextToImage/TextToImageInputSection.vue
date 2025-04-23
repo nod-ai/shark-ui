@@ -22,7 +22,7 @@ import {
 
 import type TextToImageInput from './models/TextToImageInput.ts';
 
-const exposedPrompt = defineModel<TextToImageInput['text'] | null>({
+const exposedInputText = defineModel<TextToImageInput['text'] | null>({
   required: true,
 });
 
@@ -52,47 +52,47 @@ const toValueOfInputTextByQualitativeWeight = (
     .join(', ');
 };
 
-const asInputTextByQualitativeWeight = (givenPrompt: TextToImageInput['text']): InputTextByQualitativeWeight => ({
-  positive: toValueOfInputTextByQualitativeWeight(givenPrompt, 'positive'),
-  negative: toValueOfInputTextByQualitativeWeight(givenPrompt, 'negative'),
+const asInputTextByQualitativeWeight = (givenInputText: TextToImageInput['text']): InputTextByQualitativeWeight => ({
+  positive: toValueOfInputTextByQualitativeWeight(givenInputText, 'positive'),
+  negative: toValueOfInputTextByQualitativeWeight(givenInputText, 'negative'),
 });
 
 const toElementOfInputText = (
-  givenPrompt: InputTextByQualitativeWeight,
+  givenInputText: InputTextByQualitativeWeight,
   givenWeightQuality: QualitativeTextWeight,
 ): TextToImageInput['text'][number] => {
   return {
-    text  : givenPrompt[givenWeightQuality],
+    text  : givenInputText[givenWeightQuality],
     weight: quantitative(givenWeightQuality),
   };
 };
 
-const asInputText = (givenPrompt: InputTextByQualitativeWeight): TextToImageInput['text'] => [
-  toElementOfInputText(givenPrompt, 'positive'),
-  toElementOfInputText(givenPrompt, 'negative'),
+const asInputText = (givenInputText: InputTextByQualitativeWeight): TextToImageInput['text'] => [
+  toElementOfInputText(givenInputText, 'positive'),
+  toElementOfInputText(givenInputText, 'negative'),
 ];
 
-const defaultInitialPrompt: InputTextByQualitativeWeight = {
+const defaultInitialInputText: InputTextByQualitativeWeight = {
   positive: 'a cat under the snow with blue eyes, covered by snow, cinematic style, medium shot, professional photo, animal',
   negative: 'Watermark, blurry, over-saturated, low resolution, pollution',
 };
 
-const initialPrompt: InputTextByQualitativeWeight = (() => {
-  const initialExposedPrompt = get(exposedPrompt);
+const initialInputText: InputTextByQualitativeWeight = (() => {
+  const initialExposedInputText = get(exposedInputText);
 
   if (
-    initialExposedPrompt === null
-  ) return defaultInitialPrompt;
+    initialExposedInputText === null
+  ) return defaultInitialInputText;
 
-  return asInputTextByQualitativeWeight(initialExposedPrompt);
+  return asInputTextByQualitativeWeight(initialExposedInputText);
 })();
 
-const currentPrompt: Ref<InputTextByQualitativeWeight> = ref(initialPrompt);
+const currentInputText: Ref<InputTextByQualitativeWeight> = ref(initialInputText);
 
 watch(
-  currentPrompt,
-  (updatedPrompt) => {
-    set(exposedPrompt, asInputText(updatedPrompt));
+  currentInputText,
+  (updatedInputText) => {
+    set(exposedInputText, asInputText(updatedInputText));
   },
   {
     deep     : true,
@@ -107,7 +107,7 @@ watch(
   >
     <template #text>
       <VTextarea
-        v-model="currentPrompt.positive"
+        v-model="currentInputText.positive"
         label="Imagine..."
         placeholder="What would you like to see?"
         rows="3"
@@ -119,7 +119,7 @@ watch(
       <br>
 
       <VTextarea
-        v-model="currentPrompt.negative"
+        v-model="currentInputText.negative"
         label="Avoid..."
         placeholder="What should be avoided?"
         rows="3"
