@@ -16,10 +16,6 @@ import {
   VTextarea,
 } from 'vuetify/components/VTextarea';
 
-import {
-  cloneOf,
-} from '@/library/utilitiesByType/reference.ts';
-
 import type TextToImageInput from './models/TextToImageInput.ts';
 
 type StandardizedInputText = TextToImageInput['text'];
@@ -48,65 +44,40 @@ type QualitativeToQuantitativeTextWeightMap = typeof qualitativeToQuantitativeTe
 
 type QualitativeTextWeight = keyof QualitativeToQuantitativeTextWeightMap;
 
-type QuantitativeTextWeight = QualitativeToQuantitativeTextWeightMap[QualitativeTextWeight];
-
-interface InputTextByQualitativeWeight {
-  positive: string;
-  negative: string;
-}
-
-const quantitative = (givenQualitativeWeight: QualitativeTextWeight): QuantitativeTextWeight => {
-  return qualitativeToQuantitativeTextWeightMap[givenQualitativeWeight];
-};
-
-const serialized = (
-  givenInputText: StandardizedInputText,
-  given: {
-    weight: QuantitativeTextWeight;
-  },
-): InputTextByQualitativeWeight[QualitativeTextWeight] => {
-  return cloneOf(givenInputText)
-    .filter($0 => $0.weight === given.weight)
-    .map($0 => $0.text.trim())
-    .join(', ');
-};
+type InputTextByQualitativeWeight = Record<QualitativeTextWeight, string>;
 
 const byQualitativeWeight = (givenInputText: StandardizedInputText): InputTextByQualitativeWeight => {
   const entriesForInputTextByQualitativeWeight = Object.entries(qualitativeToQuantitativeTextWeightMap)
-    .map(([eachQualitativeWeight, eachQuantitativeWeight]) => {
-      const eachSerializationByWeight = serialized(givenInputText, {
-        weight: eachQuantitativeWeight,
-      });
+    .map(([eachUnsafeQualitativeWeight, eachQuantitativeWeight]) => {
+      const eachSerializationByWeight = givenInputText
+        .filter($0 => $0.weight === eachQuantitativeWeight)
+        .map($0 => $0.text.trim())
+        .join(', ');
 
       return [
-        eachQualitativeWeight as QualitativeTextWeight,
+        eachUnsafeQualitativeWeight,
         eachSerializationByWeight,
-      ] as const;
+      ] as [
+        QualitativeTextWeight,
+        string,
+      ];
     });
 
   return Object.fromEntries(entriesForInputTextByQualitativeWeight) as unknown as InputTextByQualitativeWeight;
 };
 
-const standardizedElement = (
-  givenInputText: InputTextByQualitativeWeight,
-  given: {
-    weight: QualitativeTextWeight;
-  },
-): StandardizedInputText[number] => {
-  return {
-    text  : givenInputText[given.weight],
-    weight: quantitative(given.weight),
-  };
-};
+const standardized = (givenInputText: InputTextByQualitativeWeight): StandardizedInputText => {
+  return Object.entries(qualitativeToQuantitativeTextWeightMap)
+    .map(([eachUnsafeQualitativeWeight, eachQuantitativeWeight]): StandardizedInputText[number] => {
+      const eachQualitativeWeight = eachUnsafeQualitativeWeight as QualitativeTextWeight;
+      const weightedText = givenInputText[eachQualitativeWeight];
 
-const standardized = (givenInputText: InputTextByQualitativeWeight): StandardizedInputText => [
-  standardizedElement(givenInputText, {
-    weight: 'positive',
-  }),
-  standardizedElement(givenInputText, {
-    weight: 'negative',
-  }),
-];
+      return {
+        text  : weightedText,
+        weight: eachQuantitativeWeight,
+      };
+    }); ;
+};
 
 const defaultInitialInputText: InputTextByQualitativeWeight = {
   positive: 'a cat under the snow with blue eyes, covered by snow, cinematic style, medium shot, professional photo, animal',
