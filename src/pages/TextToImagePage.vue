@@ -8,16 +8,9 @@ import {
   useStatefulProcess,
 } from '@/library/vue/statefulProcess.ts';
 
-import type {
-  TextToImageRequestBody,
-} from 'stabilityai-client-typescript/models/components';
-
 import {
   VBtn,
 } from 'vuetify/components/VBtn';
-import {
-  VCard,
-} from 'vuetify/components/VCard';
 import {
   VForm,
 } from 'vuetify/components/VForm';
@@ -33,9 +26,6 @@ import {
 import {
   VSkeletonLoader,
 } from 'vuetify/components/VSkeletonLoader';
-import {
-  VTextarea,
-} from 'vuetify/components/VTextarea';
 
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
 import SDXLDiffusionStepCount from '@/library/ShimmedStabilityAIClient/models/SDXLDiffusionStepCount.ts';
@@ -44,45 +34,19 @@ import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64Char
 
 import ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image/index.ts';
 
-import {
-  cloneOf,
-} from '@/library/utilitiesByType/reference.ts';
-
 import DiscreteSlider from '@/components/DiscreteSlider.vue';
 import NavigationPanel from '@/components/NavigationPanel.vue';
 
-import type ImageGenerationPrompt from '@/models/ImageGenerationPrompt.ts';
+import TextToImageInputSection from '@/features/TextToImage/TextToImageInputSection.vue';
+import type TextToImageInput from '@/features/TextToImage/models/TextToImageInput.ts';
 
-import ImageGenerationPromptWeight, {
-  quantitative,
-} from '@/models/ImageGenerationPromptWeight.ts';
-
-const defaultPrompt: ImageGenerationPrompt = {
-  positive: 'a cat under the snow with blue eyes, covered by snow, cinematic style, medium shot, professional photo, animal',
-  negative: 'Watermark, blurry, over-saturated, low resolution, pollution',
-};
-
-const currentPrompt: Ref<ImageGenerationPrompt> = ref(cloneOf(defaultPrompt));
+const currentPrompt: Ref<TextToImageInput['text'] | null> = ref(null);
 
 const {
   range,
 } = SDXLDiffusionStepCount;
 
 const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
-
-const toTextPrompts = (
-  givenPrompt: ImageGenerationPrompt,
-  givenWeightQuality: 'positive' | 'negative',
-): TextToImageRequestBody['textPrompts'] => {
-  const derivedWeight = ImageGenerationPromptWeight[givenWeightQuality];
-
-  return givenPrompt[givenWeightQuality]
-    .split(',')
-    .map($0 => ({
-      text  : $0.trim(),
-      weight: quantitative(derivedWeight),
-    }));
-};
 
 const shimmedStabilityAIClient = new ShimmedStabilityAIClient({
   serverURL: import.meta.env.VITE_TEXT_TO_IMAGE_API_ORIGIN,
@@ -91,18 +55,17 @@ const shimmedStabilityAIClient = new ShimmedStabilityAIClient({
 const imageGeneration = useStatefulProcess(async () => {
   const proposedPrompt = get(currentPrompt);
 
+  if (proposedPrompt === null) throw new Error('Prompt was not set before submission');
+
   const textToImageResponse = await shimmedStabilityAIClient.version1.image.tryToGenerateFromText({
     engineId              : 'stable-diffusion-xl-1024-v1-0',
     textToImageRequestBody: {
-      textPrompts: [
-        ...toTextPrompts(proposedPrompt, 'positive'),
-        ...toTextPrompts(proposedPrompt, 'negative'),
-      ],
-      height  : 1024,
-      width   : 1024,
-      steps   : get(currentNumberOfDiffusionSteps),
-      cfgScale: 7.5,
-      seed    : 0,
+      textPrompts: proposedPrompt,
+      height     : 1024,
+      width      : 1024,
+      steps      : get(currentNumberOfDiffusionSteps),
+      cfgScale   : 7.5,
+      seed       : 0,
     },
   });
 
@@ -131,7 +94,12 @@ const imageGeneration = useStatefulProcess(async () => {
 
   return {
     uri        : uriForNewImage,
-    description: proposedPrompt.positive,
+    description: proposedPrompt
+      .map($0 => (($0.weight === undefined) || ($0.weight === 1))
+        ? $0.text
+        : `(${$0.text}: ${$0.weight.toString()})`,
+      )
+      .join(', '),
   };
 });
 </script>
@@ -142,33 +110,18 @@ const imageGeneration = useStatefulProcess(async () => {
       :disabled="imageGeneration.isInProgress"
       @submit.prevent="imageGeneration.try"
     >
-      <VCard
-        subtitle="Prompts"
-      >
-        <template #text>
-          <VTextarea
-            v-model="currentPrompt.positive"
-            label="Imagine..."
-            placeholder="What would you like to see?"
-            rows="3"
-            auto-grow
-            max-rows="10"
-            hide-details
-          />
-
-          <br>
-
-          <VTextarea
-            v-model="currentPrompt.negative"
-            label="Avoid..."
-            placeholder="What should be avoided?"
-            rows="3"
-            auto-grow
-            max-rows="10"
-            hide-details
-          />
-        </template>
-      </VCard>
+      <TextToImageInputSection
+        v-model="currentPrompt"
+        label="Prompts"
+        :positive="{
+          label: 'Imagine...',
+          placeholder: 'What would you like to see?',
+        }"
+        :negative="{
+          label: 'Avoid...',
+          placeholder: 'What should be avoided?',
+        }"
+      />
 
       <br>
 
