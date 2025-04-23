@@ -62,13 +62,13 @@ const defaultPrompt: ImageGenerationPrompt = {
   negative: 'Watermark, blurry, over-saturated, low resolution, pollution',
 };
 
-const promptEntry: Ref<ImageGenerationPrompt> = ref(cloneOf(defaultPrompt));
+const currentPrompt: Ref<ImageGenerationPrompt> = ref(cloneOf(defaultPrompt));
 
 const {
   range,
 } = SDXLDiffusionStepCount;
 
-const proposedNumberOfDiffusionSteps = ref<number>(range.midpoint);
+const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
 
 const toTextPrompts = (
   givenPrompt: ImageGenerationPrompt,
@@ -89,7 +89,7 @@ const shimmedStabilityAIClient = new ShimmedStabilityAIClient({
 });
 
 const imageGeneration = useStatefulProcess(async () => {
-  const proposedPrompt = get(promptEntry);
+  const proposedPrompt = get(currentPrompt);
 
   const textToImageResponse = await shimmedStabilityAIClient.version1.image.tryToGenerateFromText({
     engineId              : 'stable-diffusion-xl-1024-v1-0',
@@ -100,7 +100,7 @@ const imageGeneration = useStatefulProcess(async () => {
       ],
       height  : 1024,
       width   : 1024,
-      steps   : get(proposedNumberOfDiffusionSteps),
+      steps   : get(currentNumberOfDiffusionSteps),
       cfgScale: 7.5,
       seed    : 0,
     },
@@ -147,7 +147,7 @@ const imageGeneration = useStatefulProcess(async () => {
       >
         <template #text>
           <VTextarea
-            v-model="promptEntry.positive"
+            v-model="currentPrompt.positive"
             label="Imagine..."
             placeholder="What would you like to see?"
             rows="3"
@@ -159,7 +159,7 @@ const imageGeneration = useStatefulProcess(async () => {
           <br>
 
           <VTextarea
-            v-model="promptEntry.negative"
+            v-model="currentPrompt.negative"
             label="Avoid..."
             placeholder="What should be avoided?"
             rows="3"
@@ -173,7 +173,7 @@ const imageGeneration = useStatefulProcess(async () => {
       <br>
 
       <DiscreteSlider
-        v-model="proposedNumberOfDiffusionSteps"
+        v-model="currentNumberOfDiffusionSteps"
         label="Number of Diffusion Steps"
         :range="range"
         :tick-step="10"
