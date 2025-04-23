@@ -40,10 +40,12 @@ type Shortfin_TextToImage_SD_Input_Text_SupportedWeight = 1 | -1;
 
 const toSerializedPromptValue = (
   givenTextPrompts: TextToImageRequestBody['textPrompts'],
-  givenWeight: Shortfin_TextToImage_SD_Input_Text_SupportedWeight,
+  given: {
+    weight: Shortfin_TextToImage_SD_Input_Text_SupportedWeight;
+  },
 ): string => {
   return givenTextPrompts
-    .filter($0 => $0.weight === givenWeight)
+    .filter($0 => $0.weight === given.weight)
     .map($0 => $0.text.trim())
     .join(',');
 };
@@ -69,8 +71,13 @@ const toBatchGenerationRequestBody = (givenRequests: GenerateFromTextRequest['te
       && (eachRequest.cfgScale !== undefined)
       && (eachRequest.seed !== undefined)
     ) {
-      const positiveTextPrompts = toSerializedPromptValue(eachRequest.textPrompts, 1);
-      const negativeTextPrompts = toSerializedPromptValue(eachRequest.textPrompts, -1);
+      const positiveTextPrompts = toSerializedPromptValue(eachRequest.textPrompts, {
+        weight: 1,
+      });
+
+      const negativeTextPrompts = toSerializedPromptValue(eachRequest.textPrompts, {
+        weight: -1,
+      });
 
       (runningBatchRequest.prompt/*    */).push(positiveTextPrompts/* */);
       (runningBatchRequest.neg_prompt/**/).push(negativeTextPrompts/* */);
