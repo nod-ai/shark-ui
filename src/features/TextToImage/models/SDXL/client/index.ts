@@ -13,7 +13,7 @@ import type {
 } from '@/features/TextToImage/types';
 
 const shimmedStabilityAIClient = new ShimmedStabilityAIClient({
-  serverURL: import.meta.env.VITE_TEXT_TO_IMAGE_API_ORIGIN,
+  serverURL: import.meta.env.VITE_TEXT_TO_IMAGE_API_SERVER_ORIGIN,
 });
 
 export const tryToGenerateOutputFrom = async (
