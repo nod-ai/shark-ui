@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly VITE_TEXT_TO_IMAGE_API_SERVER_ORIGIN: string;
+  readonly VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN: string;
 }
 
 interface ImportMeta {
