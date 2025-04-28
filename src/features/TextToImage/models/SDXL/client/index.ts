@@ -15,11 +15,24 @@ import {
   Server,
 } from '@/features/TextToImage/webAPI';
 
-const textToImageServer = Server.accordingToEnvironment;
+const tryToInitializeShimmedStabilityAIClient = async (): Promise<ShimmedStabilityAIClient> => {
+  try {
+    const textToImageServer = await Server.tryToGetFrom();
 
-const shimmedStabilityAIClient = new ShimmedStabilityAIClient({
-  serverURL: textToImageServer.origin,
-});
+    return new ShimmedStabilityAIClient({
+      serverURL: textToImageServer.origin,
+    });
+  }
+  catch {
+    throw new Error([
+      'No text-to-image server was specified!',
+      'Either:',
+      `a) supply it's corresponding environment variable named \`${Server.environmentKeyForOrigin}\` and rebuild`,
+      'OR',
+      `b) specify it within the response for ${Server.filePath.toString()}`,
+    ].join('\n'));
+  }
+};
 
 export const tryToGenerateOutputFrom = async (
   given: {
@@ -33,6 +46,8 @@ export const tryToGenerateOutputFrom = async (
     >;
   },
 ): Promise<Output> => {
+  const shimmedStabilityAIClient = await tryToInitializeShimmedStabilityAIClient();
+
   const textToImageResponse = await shimmedStabilityAIClient.version1.image.tryToGenerateFromText({
     engineId              : 'stable-diffusion-xl-1024-v1-0',
     textToImageRequestBody: {
