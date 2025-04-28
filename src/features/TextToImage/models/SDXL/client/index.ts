@@ -11,9 +11,14 @@ import ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image
 import type {
   Output,
 } from '@/features/TextToImage/types';
+import {
+  Server,
+} from '@/features/TextToImage/webAPI';
+
+const textToImageServer = Server.accordingToEnvironment;
 
 const shimmedStabilityAIClient = new ShimmedStabilityAIClient({
-  serverURL: import.meta.env.VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN,
+  serverURL: textToImageServer.origin,
 });
 
 export const tryToGenerateOutputFrom = async (
