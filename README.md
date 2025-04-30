@@ -1,5 +1,7 @@
 # SHARK UI
 
+![The logo for SHARK UI, depicted as the letter "u" with shark teeth and the letter "i" with a shark fin instead of a dot](public/logo/banner-1280x640.png "SHARK UI Logo")
+
 ## Introduction
 
 Welcome to SHARK UI! This repo contains a basic app to demonstrate how to use the [Shortfin](https://github.com/nod-ai/shark-ai/tree/main/shortfin) Web APIs for text-to-image and text-to-text inference.
