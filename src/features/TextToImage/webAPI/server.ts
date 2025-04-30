@@ -3,16 +3,10 @@ import {
 } from '@/library/WebAPI';
 
 import {
-  URLPath,
-} from '@/library/customTypes/URLComponent';
-
-import {
-  ApplicationConfig,
-} from '@/utilities/ApplicationConfig';
+  DynamicConfig,
+} from '../config';
 
 export const environmentKeyForOrigin = 'VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN';
-
-export const filePath = URLPath.tryToParseFrom('/config');
 
 export const accordingToEnvironment = ((): Server | null => {
   const originAccordingToEnvironment = import.meta.env[environmentKeyForOrigin];
@@ -31,6 +25,11 @@ export const tryToGetFrom = async (): Promise<Server> => {
     accordingToEnvironment !== null
   ) return accordingToEnvironment;
 
-  const fetchedConfig = await ApplicationConfig.tryToFetchFrom(filePath);
-  return fetchedConfig.server;
+  const dynamicConfig = await DynamicConfig.tryToFetch();
+
+  if (
+    dynamicConfig.server !== null
+  ) return dynamicConfig.server;
+
+  throw new Error('Server not specified');
 };

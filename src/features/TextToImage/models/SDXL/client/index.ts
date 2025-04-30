@@ -8,6 +8,9 @@ import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64Char
 
 import ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image/index.ts';
 
+import {
+  DynamicConfig,
+} from '@/features/TextToImage/config';
 import type {
   Output,
 } from '@/features/TextToImage/types';
@@ -29,7 +32,7 @@ const tryToInitializeShimmedStabilityAIClient = async (): Promise<ShimmedStabili
       'Either:',
       `a) supply it's corresponding environment variable named \`${Server.environmentKeyForOrigin}\` and rebuild`,
       'OR',
-      `b) specify it within the response for ${Server.filePath.toString()}`,
+      `b) specify it within the response from ${DynamicConfig.endpoint.toString()}`,
     ].join('\n'));
   }
 };
