@@ -4,6 +4,7 @@ import {
 
 import {
   DynamicConfig,
+  StaticConfig,
 } from '../config';
 
 export const environmentKeyForOrigin = 'VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN';
@@ -24,6 +25,12 @@ export const tryToGetFrom = async (): Promise<Server> => {
   if (
     accordingToEnvironment !== null
   ) return accordingToEnvironment;
+
+  const staticConfig = await StaticConfig.tryToRead();
+
+  if (
+    staticConfig.server !== null
+  ) return staticConfig.server;
 
   const dynamicConfig = await DynamicConfig.tryToFetch();
 

@@ -10,6 +10,7 @@ import ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image
 
 import {
   DynamicConfig,
+  StaticConfig,
 } from '@/features/TextToImage/config';
 import type {
   Output,
@@ -31,8 +32,9 @@ const tryToInitializeShimmedStabilityAIClient = async (): Promise<ShimmedStabili
       'No text-to-image server was specified!',
       'Either:',
       `a) supply it's corresponding environment variable named \`${Server.environmentKeyForOrigin}\` and rebuild`,
+      `b) specify it within ${StaticConfig.file.toString()}`,
       'OR',
-      `b) specify it within the response from ${DynamicConfig.endpoint.toString()}`,
+      `c) specify it within the response from ${DynamicConfig.endpoint.toString()}`,
     ].join('\n'));
   }
 };
