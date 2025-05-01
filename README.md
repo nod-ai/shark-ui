@@ -109,18 +109,7 @@ To get SHARK UI up and running:
 
 ## Deployment
 
-1. If you haven't already, [complete the basic installation](#installation)
-1. Type-Check, compile and minify for production by running:
-
-    ```sh
-    npm run build
-    ```
-
-1. Test the production build (e.g. in CI environments):
-
-    ```sh
-    npm run test:e2e
-    ```
+DISCLAIMER: this application is for demonstration purposes only and is not intended for production environments
 
 ## Need Anything?
 
