@@ -39,28 +39,7 @@ To get SHARK UI up and running:
     echo "VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN=http://localhost:<port-on-virtual-machine-serving-text-to-image-api>" > .env
     ```
 
-1. **If you are connecting to a server on a virtual machine**, have your local machine forward the port.
-    - TIP: try this when the VM's firewall is preventing the browser from accessing the UI or using the API
-    - Via SSH:
-        - i.e. serving both the browser UI and the text-to-image API from the same virtual machine using the default ports
-
-            ```shell
-            ssh <user>@<origin-for-virtual-machine> \
-                -L 8000:localhost:8000 \
-                -L 5173:localhost:5173
-            ```
-
-        - In general:
-
-            ```shell
-            ssh <user>@<origin-for-virtual-machine-serving-text-to-image-api> \
-                -L <port-on-virtual-machine-serving-text-to-image-api>:localhost:<port-on-local-machine-forwarding-text-to-image-api>
-            ```
-
-            ```shell
-            ssh <user>@<origin-for-virtual-machine-serving-browser-ui> \
-                -L <port-on-virtual-machine-serving-browser-ui>:localhost:<port-on-local-machine-forwarding-browser-ui>
-            ```
+1. **If inference is being served from a remote machine**, [have your local machine forward the requests](docs/setup/local_forwarding.md)
 
 ## Usage
 
