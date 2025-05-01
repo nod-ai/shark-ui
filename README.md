@@ -121,3 +121,7 @@ To get SHARK UI up and running:
     ```sh
     npm run test:e2e
     ```
+
+## Need Anything?
+
+- [Create an issue](https://github.com/nod-ai/shark-ui/issues)
