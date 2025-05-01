@@ -10,6 +10,10 @@ Welcome to SHARK UI! This repo contains a basic app to demonstrate how to use th
 
 ![A screenshot of SHARK UI, depicted after a successful inference request for the legendary Blue-Eyes White Snow Cat](docs/screenshots/shark-ui-after-successful-image-generation.png "Shark UI after Successful Image Generation")
 
+## Prerequisites
+
+1. Follow the [common prerequisites](docs/setup/common_prerequisites.md)
+
 ## Installation
 
 To get SHARK UI up and running:
@@ -39,13 +43,9 @@ To get SHARK UI up and running:
     echo "VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN=http://localhost:<port-on-virtual-machine-serving-text-to-image-api>" > .env
     ```
 
-1. **If inference is being served from a remote machine**, [have your local machine forward the requests](docs/setup/local_forwarding.md)
-
 ## Usage
 
-1. If you haven't already:
-    1. [Complete installation](#installation)
-    1. Serve the text-to-image API from Shortfin, i.e. [for SDXL](https://github.com/nod-ai/shark-ai/tree/main/shortfin/python/shortfin_apps/sd)
+1. If you haven't already, [complete installation](#installation)
 1. Serve the project (and avoid minification) by running:
 
     ```shell
