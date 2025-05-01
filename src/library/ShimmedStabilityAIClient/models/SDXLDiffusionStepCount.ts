@@ -11,4 +11,4 @@ export default abstract class SDXLDiffusionStepCount { // eslint-disable-line @t
     to  : 50,
     by  : 1,
   });
-};
+}

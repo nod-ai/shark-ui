@@ -32,4 +32,4 @@ export default class Server implements ServerSchema {
     const parsedSubject = z_serverSchema.parse(givenSubject);
     return Server.from(parsedSubject);
   }
-};
+}

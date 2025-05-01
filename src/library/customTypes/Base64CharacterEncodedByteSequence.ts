@@ -59,7 +59,7 @@ export default class Base64CharacterEncodedByteSequence
     }
 
     return [remainingSequence, accumulatedPadding];
-  };
+  }
 
   private static assertConsistsOfBase64Alphabet(givenCharacters: string): string {
     const regExForBase64Alphabet = /^[A-Za-z\d\+\/]+$/;
@@ -77,5 +77,5 @@ export default class Base64CharacterEncodedByteSequence
     const base64ByteEncodableCharacters = this.assertConsistsOfBase64Alphabet(byteEncodableCharacters);
     const base64CharacterEncodedByteSequence = base64ByteEncodableCharacters + padding;
     return new this(base64CharacterEncodedByteSequence);
-  };
+  }
 }

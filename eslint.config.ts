@@ -115,6 +115,7 @@ const configWithVueTS = defineConfigWithVueTs(
           ], // Avoids conflicts with "@stylistic/no-multi-spaces" and "@stylistic/type-annotation-spacing"
         },
       ],
+      '@stylistic/no-extra-semi'                   : 'error', // Reduces noise in diffs
       '@stylistic/nonblock-statement-body-position': [
         'error',
         'beside', // allows for single-line statements, useful for simple guards and "conditional sentences"

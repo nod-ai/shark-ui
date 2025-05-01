@@ -78,7 +78,7 @@ const standardized = (givenInputText: InputTextByQualitativeWeight): Standardize
         text  : weightedText,
         weight: eachQuantitativeWeight,
       };
-    }); ;
+    });
 };
 
 const defaultInitialInputText: InputTextByQualitativeWeight = {

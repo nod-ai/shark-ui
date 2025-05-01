@@ -34,7 +34,7 @@ interface ShortfinSDClient_ImageGenerationBatchRequest_Body {
   steps: /*         */ UnsignedInteger[];
   guidance_scale: /**/ FloatingPoint[];
   seed: /*          */ UnsignedInteger[];
-};
+}
 
 type Shortfin_TextToImage_SD_Input_Text_SupportedWeight = 1 | -1;
 
