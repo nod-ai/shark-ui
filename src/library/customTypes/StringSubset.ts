@@ -11,4 +11,4 @@ export default abstract class StringSubset<Brand extends string> extends String 
   protected constructor(givenInstance: string) {
     super(givenInstance);
   }
-};
+}

@@ -28,7 +28,7 @@ window.onunhandledrejection = (someEvent) => {
     referencedParameters.set('labels', ['bug'].join());
     referencedParameters.set('type', 'Bug');
     window.open(newGitHubIssue);
-  };
+  }
 
   someEvent.preventDefault();
 };

@@ -28,7 +28,7 @@ export class ApplicationConfig implements ApplicationConfigSchema {
   public static tryToParseFrom(given: unknown): ApplicationConfig {
     const parsedConfig = z_applicationConfig.parse(given);
     return ApplicationConfig.from(parsedConfig);
-  };
+  }
 
   public static async tryToFetchFrom(givenPath: URLPath): Promise<ApplicationConfig> {
     const configResponse = await fetch(givenPath.toString());
@@ -40,5 +40,5 @@ export class ApplicationConfig implements ApplicationConfigSchema {
 
     const unparsedConfig = await configResponse.json() as unknown;
     return this.tryToParseFrom(unparsedConfig);
-  };
+  }
 }

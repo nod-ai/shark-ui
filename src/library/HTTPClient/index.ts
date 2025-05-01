@@ -48,7 +48,7 @@ export default class HTTPClient {
     if (!response.ok) throw new HTTPResponseError(response.statusText, response.status);
 
     return await response.json();
-  };
+  }
 
   public async tryToFetchResource(
     {
@@ -61,7 +61,7 @@ export default class HTTPClient {
       to   : givenPath,
       using: HTTPRequest.Method.FETCH,
     });
-  };
+  }
 
   public async tryToSubmitResource(
     {
@@ -76,7 +76,7 @@ export default class HTTPClient {
       to   : givenPath,
       using: HTTPRequest.Method.SUBMIT,
     });
-  };
+  }
 
   public async tryToCreateResource(
     {
@@ -91,7 +91,7 @@ export default class HTTPClient {
       to   : givenPath,
       using: HTTPRequest.Method.CREATE,
     });
-  };
+  }
 
   public async tryToUpdateResource(
     {
@@ -106,12 +106,12 @@ export default class HTTPClient {
       to   : givenPath,
       using: HTTPRequest.Method.UPDATE,
     });
-  };
+  }
 
   public async tryToDeleteResourceAt(givenPath: URLPath): Promise<unknown> {
     return await this.tryToSend(null, {
       to   : givenPath,
       using: HTTPRequest.Method.DELETE,
     });
-  };
+  }
 }
