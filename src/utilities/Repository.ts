@@ -1,0 +1,21 @@
+import {
+  cloneOf,
+} from '@/library/utilitiesByType/reference';
+
+const emptyDraftOfNewIssue = new URL('https://github.com/nod-ai/shark-ui/issues/new');
+
+/** Creates a URL that drafts a new issue with pre-populated fields  */
+export const draftIssueFor = (givenErrorMessage: string): URL => {
+  const mutableDraft = cloneOf(emptyDraftOfNewIssue);
+
+  const referencedParameters = mutableDraft.searchParams;
+
+  referencedParameters.set('title', `[Unexpected Error]: can't <some task> when <some context>`);
+  const quotedErrorMessage = `Error Message:\n${givenErrorMessage}`.replace('\n', '\n> ');
+
+  referencedParameters.set('body', quotedErrorMessage);
+  referencedParameters.set('labels', ['bug'].join());
+  referencedParameters.set('type', 'Bug');
+
+  return mutableDraft;
+};
