@@ -2,6 +2,14 @@ export const isString = (givenSubject: unknown): givenSubject is string => {
   return (typeof givenSubject === 'string');
 };
 
+export const asString = (givenSubject: unknown): string => {
+  if (
+    isString(givenSubject)
+  ) return givenSubject;
+
+  return JSON.stringify(givenSubject);
+};
+
 export const emptyString = '';
 
 export type EmptyString = typeof emptyString;
