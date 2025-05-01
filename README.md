@@ -10,7 +10,10 @@ Welcome to SHARK UI! This repo contains a basic app to demonstrate how to use th
 
 ![A screenshot of SHARK UI, depicted after a successful inference request for the legendary Blue-Eyes White Snow Cat](docs/screenshots/shark-ui-after-successful-image-generation.png "Shark UI after Successful Image Generation")
 
-## [Setup](docs/setup/for_developers.md)
+## Setup
+
+- [For users](docs/setup/for_users.md)
+- [For developers](docs/setup/for_developers.md)
 
 ## Deployment
 
