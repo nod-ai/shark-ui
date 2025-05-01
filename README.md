@@ -6,6 +6,10 @@
 
 Welcome to SHARK UI! This repo contains a basic app to demonstrate how to use the [Shortfin](https://github.com/nod-ai/shark-ai/tree/main/shortfin) Web APIs for text-to-image and text-to-text inference.
 
+## Preview
+
+![A screenshot of SHARK UI, depicted after a successful inference request for the legendary Blue-Eyes White Snow Cat](docs/screenshots/shark-ui-after-successful-image-generation.png "Shark UI after Successful Image Generation")
+
 ## Installation
 
 To get SHARK UI up and running:
