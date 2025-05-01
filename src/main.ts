@@ -12,15 +12,17 @@ app.use(vuetify);
 app.mount('#app');
 
 window.onunhandledrejection = (someEvent) => {
+  const rejectionReason = String(someEvent.reason);
+
   const windowShouldOpenNewGitHubIssue = window.confirm([
     'Unexpected Error:',
-    `"${String(someEvent.reason)}"`,
+    `"${rejectionReason}"`,
     '',
     'Proceed to file an issue?',
   ].join('\n'));
 
   if (windowShouldOpenNewGitHubIssue) {
-    const quotedErrorMessage = `Error Message:\n${String(someEvent.reason)}`.replace('\n', '\n> ');
+    const quotedErrorMessage = `Error Message:\n${rejectionReason}`.replace('\n', '\n> ');
     const newGitHubIssue = new URL('https://github.com/nod-ai/shark-ui/issues/new');
     const referencedParameters = newGitHubIssue.searchParams;
     referencedParameters.set('title', `[Unexpected Error]: can't <some task> when <some context>`);
