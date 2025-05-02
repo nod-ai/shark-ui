@@ -8,6 +8,10 @@ import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64Char
 
 import ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image/index.ts';
 
+import {
+  DynamicConfig,
+  StaticConfig,
+} from '@/features/TextToImage/config';
 import type {
   Output,
 } from '@/features/TextToImage/types';
@@ -28,8 +32,9 @@ const tryToInitializeShimmedStabilityAIClient = async (): Promise<ShimmedStabili
       'No text-to-image server was specified!',
       'Either:',
       `a) supply it's corresponding environment variable named \`${Server.environmentKeyForOrigin}\` and rebuild`,
+      `b) specify it within ${StaticConfig.file.toString()}`,
       'OR',
-      `b) specify it within the response for ${Server.filePath.toString()}`,
+      `c) specify it within the response from ${DynamicConfig.endpoint.toString()}`,
     ].join('\n'));
   }
 };
