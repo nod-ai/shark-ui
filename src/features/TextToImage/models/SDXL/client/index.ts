@@ -1,5 +1,6 @@
 import type {
   GenerateFromTextRequest,
+  GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
@@ -7,6 +8,10 @@ import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.t
 import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
 
 import ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image/index.ts';
+
+import {
+  asError,
+} from '@/library/utilitiesByType/error';
 
 import {
   DynamicConfig,
@@ -53,17 +58,36 @@ export const tryToGenerateOutputFrom = async (
 ): Promise<Output> => {
   const shimmedStabilityAIClient = await tryToInitializeShimmedStabilityAIClient();
 
-  const textToImageResponse = await shimmedStabilityAIClient.version1.image.tryToGenerateFromText({
-    engineId              : 'stable-diffusion-xl-1024-v1-0',
-    textToImageRequestBody: {
-      textPrompts: given.textToImageRequestBody.textPrompts,
-      height     : given.textToImageRequestBody.height,
-      width      : given.textToImageRequestBody.width,
-      seed       : given.textToImageRequestBody.seed,
-      steps      : given.textToImageRequestBody.steps,
-      cfgScale   : given.textToImageRequestBody.cfgScale,
-    },
-  });
+  let textToImageResponse: GenerateFromTextResponse;
+
+  try {
+    textToImageResponse = await shimmedStabilityAIClient.version1.image.tryToGenerateFromText({
+      engineId              : 'stable-diffusion-xl-1024-v1-0',
+      textToImageRequestBody: {
+        textPrompts: given.textToImageRequestBody.textPrompts,
+        height     : given.textToImageRequestBody.height,
+        width      : given.textToImageRequestBody.width,
+        seed       : given.textToImageRequestBody.seed,
+        steps      : given.textToImageRequestBody.steps,
+        cfgScale   : given.textToImageRequestBody.cfgScale,
+      },
+    });
+  }
+  catch (someException) {
+    const someError = asError(someException);
+    const clientFailedToReachServer = someError.message.includes('Failed to fetch');
+
+    if (
+      !clientFailedToReachServer
+    ) throw someError;
+
+    const serverConnectionException = [
+      'Failed to reach the text-to-image server.',
+      `Are you sure it's running?`,
+    ].join('\n');
+
+    throw new Error(serverConnectionException);
+  }
 
   if (
     !('artifacts' in textToImageResponse.result)
