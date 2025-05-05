@@ -7,7 +7,7 @@ import {
   StaticConfig,
 } from '../config';
 
-export const environmentKeyForOrigin = 'VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN';
+const environmentKeyForOrigin = 'VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN';
 
 export const accordingToEnvironment = ((): Server | null => {
   const originAccordingToEnvironment = import.meta.env[environmentKeyForOrigin];
@@ -38,5 +38,14 @@ export const tryToGetFrom = async (): Promise<Server> => {
     dynamicConfig.server !== null
   ) return dynamicConfig.server;
 
-  throw new Error('Server not specified');
+  const serverNotSpecifiedErrorMessage = [
+    'No text-to-image server was specified!',
+    'Either:',
+    `a) supply it's corresponding environment variable named \`${environmentKeyForOrigin}\` and rebuild`,
+    `b) specify it within ${StaticConfig.file.toString()}`,
+    'OR',
+    `c) specify it within the response from ${DynamicConfig.endpoint.toString()}`,
+  ].join('\n');
+
+  throw new Error(serverNotSpecifiedErrorMessage);
 };
