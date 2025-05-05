@@ -17,7 +17,7 @@ import MediaType from './MediaType.ts';
 
 /** See [RFC 2397](https://datatracker.ietf.org/doc/rfc2397) for more info */
 export default class DataURI extends UniformResourceIdentifier {
-  public static readonly scheme = NonTrivialString.tryToParseFrom('data');
+  public static readonly scheme = NonTrivialString.forciblyParsedFrom('data');
   public static readonly encodingPrefix = ';';
   public static readonly dataPrefix = ',';
 
@@ -62,11 +62,11 @@ export default class DataURI extends UniformResourceIdentifier {
       this.data.toString(),
     ];
 
-    return NonTrivialString.tryToParseFrom(components.join(''));
+    return NonTrivialString.forciblyParsedFrom(components.join(''));
   }
 
-  public static override tryToParseFrom(givenSubject: string): DataURI {
-    const proposedURI = super.tryToParseFrom(givenSubject);
+  public static override forciblyParsedFrom(givenSubject: string): DataURI {
+    const proposedURI = super.forciblyParsedFrom(givenSubject);
 
     if (!proposedURI.scheme.isEqualTo(DataURI.scheme)) throw new Error(`Expected scheme to be "${DataURI.scheme.toString()}"`);
 
@@ -99,9 +99,9 @@ export default class DataURI extends UniformResourceIdentifier {
     if (coercedEncoding === undefined) throw new Error(`Expected encoding portion to be defined as one of: ${allDataURIBinaryEncodings.toString()}`);
 
     return new DataURI(
-      MediaType.tryToParseFrom(rawMediaType),
+      MediaType.forciblyParsedFrom(rawMediaType),
       coercedEncoding,
-      Base64CharacterEncodedByteSequence.tryToParseFrom(rawData),
+      Base64CharacterEncodedByteSequence.forciblyParsedFrom(rawData),
     );
   }
 }

@@ -7,7 +7,7 @@ import {
   ConfigSchema,
 } from '../types';
 
-const configFile = URLPath.tryToParseFrom('/config/text-to-image.json');
+const configFile = URLPath.forciblyParsedFrom('/config/text-to-image.json');
 
 const tryToReadConfig = async (): Promise<Config> => {
   const fileResponse = await fetch(configFile.toString());

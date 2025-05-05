@@ -92,7 +92,7 @@ export default class MediaType implements StaticStringParser<typeof MediaType> {
     return components.map($0 => $0 ?? '').join('');
   }
 
-  public static tryToParseFrom(givenSubject: string): MediaType {
+  public static forciblyParsedFrom(givenSubject: string): MediaType {
     const [
       rawFileType,
       remainderAfterFileType,

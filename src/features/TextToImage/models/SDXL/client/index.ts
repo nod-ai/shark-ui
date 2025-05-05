@@ -93,7 +93,7 @@ export const tryToGenerateOutputFrom = async (
     soleGeneratedArtifact.base64 === undefined
   ) throw new Error('Expected image data from sole artifact');
 
-  const base64DataOfNewImage = Base64CharacterEncodedByteSequence.tryToParseFrom(soleGeneratedArtifact.base64);
+  const base64DataOfNewImage = Base64CharacterEncodedByteSequence.forciblyParsedFrom(soleGeneratedArtifact.base64);
 
   const newImage = {
     uri        : new ImageURI('png', 'base64', base64DataOfNewImage),
