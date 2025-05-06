@@ -24,8 +24,6 @@ import {
   VSkeletonLoader,
 } from 'vuetify/components/VSkeletonLoader';
 
-import Attempt from '@/library/Attempt';
-
 import SDXLDiffusionStepCount from '@/library/ShimmedStabilityAIClient/models/SDXLDiffusionStepCount.ts';
 
 import DiscreteSlider from '@/components/DiscreteSlider.vue';
@@ -43,12 +41,12 @@ const {
 
 const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
 
-const imageGeneration = useStatefulProcess(async () => {
+const imageGeneration = useStatefulProcess(async (ends) => {
   const proposedPrompt = get(currentPrompt);
 
   if (
     proposedPrompt === null
-  ) return Attempt.abandon('Prompt was not set before submission');
+  ) return ends.inFlamesBecause('Prompt was not set before submission');
 
   const outcomeOfGeneratingOutput = await TextToImage.Client.SDXL.generateOutputFrom({
     textToImageRequestBody: {
@@ -62,7 +60,7 @@ const imageGeneration = useStatefulProcess(async () => {
   });
 
   const generatedOutput = outcomeOfGeneratingOutput.forciblyUnwrap();
-  return generatedOutput.image;
+  return ends.inSuccessWith(generatedOutput.image);
 });
 </script>
 
@@ -117,7 +115,7 @@ const imageGeneration = useStatefulProcess(async () => {
       class="fill-height"
     >
       <VSkeletonLoader
-        v-if="imageGeneration.product === null"
+        v-if="imageGeneration.outcome === null"
         :boilerplate="!imageGeneration.isInProgress"
         width="100vh"
         :style="{
@@ -126,7 +124,7 @@ const imageGeneration = useStatefulProcess(async () => {
       />
       <TextToImageOutputImg
         v-else
-        :model-value="imageGeneration.product"
+        :model-value="imageGeneration.outcome.forciblyUnwrap()"
       />
     </VContainer>
   </VMain>

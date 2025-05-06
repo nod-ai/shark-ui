@@ -5,49 +5,56 @@ import {
   type Ref,
 } from '@/library/vue/reactivity.ts';
 
+import Attempt from '@/library/Attempt';
+
 interface StatefulProcess<
   SomeProduct,
+  SomeActionableError extends Attempt.ActionableError<string>,
 > {
   initiate: () => Promise<void>;
   isInProgress: boolean;
-  product: SomeProduct | null;
+  outcome: Attempt.Outcome<SomeProduct, SomeActionableError> | null;
 }
 
-/** Useful when state of UI is dependent on some async operation and the product it produces */
+/** Useful when state of UI is dependent on some async operation and the outcome upon completion */
 export const useStatefulProcess = <
   SomeProduct,
+  SomeActionableError extends Attempt.ActionableError<string>,
 >(
-  forciblyRetrieveProduct: () => Promise<SomeProduct>,
-): StatefulProcess<SomeProduct> => {
+  retrieveOutcome: Attempt.EndRetriever<
+    Attempt.Outcome<SomeProduct, SomeActionableError>
+  >,
+): StatefulProcess<SomeProduct, SomeActionableError> => {
   const flagIsRaised = ref(false);
 
-  const capturedProduct: Ref<SomeProduct | null> = ref(null);
+  type CapturedOutcome = Attempt.Outcome<SomeProduct, SomeActionableError>;
+  const capturedOutcome: Ref<CapturedOutcome | null> = ref(null);
 
-  const forciblyCaptureProduct = async (): Promise<void> => {
+  const captureOutcome = async (): Promise<void> => {
     using cleanup = new DisposableStack();
 
-    set(capturedProduct, null);
+    set(capturedOutcome, null);
     set(flagIsRaised, true);
 
     cleanup.defer(() => {
       set(flagIsRaised, false);
     });
 
-    const retrievedProduct = await forciblyRetrieveProduct();
-    set(capturedProduct, retrievedProduct);
+    const retrievedOutcome = await Attempt.thatEventually(retrieveOutcome);
+    set(capturedOutcome, retrievedOutcome);
   };
 
   return {
-    initiate: forciblyCaptureProduct,
+    initiate: captureOutcome,
     get isInProgress() {
       return get(flagIsRaised);
     },
-    get product() {
+    get outcome() {
       if (
         this.isInProgress
       ) return null;
 
-      return get(capturedProduct);
+      return get(capturedOutcome);
     },
   };
 };
