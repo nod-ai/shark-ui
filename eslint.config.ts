@@ -93,6 +93,13 @@ const configWithVueTS = defineConfigWithVueTs(
       'no-implicit-coercion': [
         'error', // Using constructors, factories, and parsers for coercion rather than operators leads to less confusing behavior
       ],
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'TryStatement',
+          message : 'Prefer `Attempt` over `try`/`catch` for error handling.',
+        },
+      ],
       '@typescript-eslint/explicit-member-accessibility': [
         'error', // Easier to see dead code in situations where a member is marked `private`
       ],

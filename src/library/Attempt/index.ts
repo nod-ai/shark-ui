@@ -12,6 +12,7 @@ const attemptTo = <
 >(
   getProductFromSomeProcessThatCanThrow: () => SomeProduct,
 ): Outcome<SomeProduct> => {
+  // eslint-disable-next-line no-restricted-syntax
   try {
     const productFromSomeProcessThatDidNotThrow = getProductFromSomeProcessThatCanThrow();
     return Success.thatYielded(productFromSomeProcessThatDidNotThrow);
@@ -41,6 +42,7 @@ const attemptToEventually = async <
 >(
   getProductFromSomeAsyncProcessThatCanThrow: () => Promise<SomeProduct>,
 ): Promise<Outcome<SomeProduct>> => {
+  // eslint-disable-next-line no-restricted-syntax
   try {
     const productFromSomeSuccessfulAsyncProcess: SomeProduct = await getProductFromSomeAsyncProcessThatCanThrow();
     return Success.thatYielded(productFromSomeSuccessfulAsyncProcess);
