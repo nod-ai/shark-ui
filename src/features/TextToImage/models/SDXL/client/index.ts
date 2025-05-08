@@ -1,6 +1,5 @@
 import type {
   GenerateFromTextRequest,
-  GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
@@ -42,20 +41,22 @@ export const forciblyGenerateOutputFrom = async (
 ): Promise<Output> => {
   const shimmedStabilityAIClient = await forciblyInitializeShimmedStabilityAIClient();
 
-  let textToImageResponse: GenerateFromTextResponse;
+  const promisedTextToImageResponse = shimmedStabilityAIClient.version1.image.forciblyGenerateFromText({
+    engineId              : 'stable-diffusion-xl-1024-v1-0',
+    textToImageRequestBody: {
+      textPrompts: given.textToImageRequestBody.textPrompts,
+      height     : given.textToImageRequestBody.height,
+      width      : given.textToImageRequestBody.width,
+      seed       : given.textToImageRequestBody.seed,
+      steps      : given.textToImageRequestBody.steps,
+      cfgScale   : given.textToImageRequestBody.cfgScale,
+    },
+  });
+
+  let textToImageResponse: Awaited<typeof promisedTextToImageResponse>;
 
   try {
-    textToImageResponse = await shimmedStabilityAIClient.version1.image.forciblyGenerateFromText({
-      engineId              : 'stable-diffusion-xl-1024-v1-0',
-      textToImageRequestBody: {
-        textPrompts: given.textToImageRequestBody.textPrompts,
-        height     : given.textToImageRequestBody.height,
-        width      : given.textToImageRequestBody.width,
-        seed       : given.textToImageRequestBody.seed,
-        steps      : given.textToImageRequestBody.steps,
-        cfgScale   : given.textToImageRequestBody.cfgScale,
-      },
-    });
+    textToImageResponse = await promisedTextToImageResponse;
   }
   catch (someException) {
     const someError = asError(someException);
