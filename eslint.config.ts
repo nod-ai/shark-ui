@@ -87,9 +87,22 @@ const configWithVueTS = defineConfigWithVueTs(
 
   {
     rules: {
-      'eqeqeq'                                          : 'error', // Avoids `==` and `!=`, which perform type coercions that follow the rather obscure Abstract Equality Comparison Algorithm: https://www.ecma-international.org/ecma-262/5.1/#sec-11.9.3
-      'no-implicit-coercion'                            : 'error', // Using constructors, factories, and parsers for coercion rather than operators leads to less confusing behavior
-      '@typescript-eslint/explicit-member-accessibility': 'error', // Easier to see dead code in situations where a member is marked `private`
+      'eqeqeq': [
+        'error', // Avoids `==` and `!=`, which perform type coercions that follow the rather obscure Abstract Equality Comparison Algorithm: https://www.ecma-international.org/ecma-262/5.1/#sec-11.9.3
+      ],
+      'no-implicit-coercion': [
+        'error', // Using constructors, factories, and parsers for coercion rather than operators leads to less confusing behavior
+      ],
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'TryStatement',
+          message : 'Prefer `Attempt` over `try`/`catch` for error handling.',
+        },
+      ],
+      '@typescript-eslint/explicit-member-accessibility': [
+        'error', // Easier to see dead code in situations where a member is marked `private`
+      ],
     },
   },
 

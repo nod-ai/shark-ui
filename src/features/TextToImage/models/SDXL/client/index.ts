@@ -2,15 +2,12 @@ import type {
   GenerateFromTextRequest,
 } from 'stabilityai-client-typescript/models/operations';
 
+import Attempt from '@/library/Attempt';
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
 
 import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
 
 import ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image/index.ts';
-
-import {
-  asError,
-} from '@/library/utilitiesByType/error';
 
 import type {
   Output,
@@ -53,18 +50,15 @@ export const forciblyGenerateOutputFrom = async (
     },
   });
 
-  let textToImageResponse: Awaited<typeof promisedTextToImageResponse>;
+  const outcomeOfSettlingTextToImageResponse = await Attempt.toSettle(promisedTextToImageResponse);
 
-  try {
-    textToImageResponse = await promisedTextToImageResponse;
-  }
-  catch (someException) {
-    const someError = asError(someException);
-    const clientFailedToReachServer = someError.message.includes('Failed to fetch');
+  if (outcomeOfSettlingTextToImageResponse.isFailure) {
+    const errorThatPreventedResponse = outcomeOfSettlingTextToImageResponse.causeOfFailure;
+    const clientFailedToReachServer = errorThatPreventedResponse.message.includes('Failed to fetch');
 
     if (
       !clientFailedToReachServer
-    ) throw someError;
+    ) throw errorThatPreventedResponse;
 
     const serverConnectionException = [
       'Failed to reach the text-to-image server.',
@@ -73,6 +67,8 @@ export const forciblyGenerateOutputFrom = async (
 
     throw new Error(serverConnectionException);
   }
+
+  const textToImageResponse = outcomeOfSettlingTextToImageResponse.productOfSuccess;
 
   if (
     !('artifacts' in textToImageResponse.result)
