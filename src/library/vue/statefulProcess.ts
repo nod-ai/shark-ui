@@ -20,16 +20,16 @@ export const useStatefulProcess = <
   const capturedResult: Ref<SomeResult | null> = ref(null);
 
   const tryToPerformFlaggedProcess = async (): Promise<void> => {
+    using cleanup = new DisposableStack();
     set(flagIsRaised, true);
 
-    try {
-      set(capturedResult, null);
-      const resultOfProcess = await tryToPerformFlaggableProcess();
-      set(capturedResult, resultOfProcess);
-    }
-    finally {
+    cleanup.defer(() => {
       set(flagIsRaised, false);
-    }
+    });
+
+    set(capturedResult, null);
+    const resultOfProcess = await tryToPerformFlaggableProcess();
+    set(capturedResult, resultOfProcess);
   };
 
   return {
