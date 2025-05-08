@@ -11,7 +11,7 @@ export const useStatefulProcess = <
 >(
   tryToPerformFlaggableProcess: () => Promise<SomeResult>,
 ): ({
-  try: () => Promise<void>;
+  initiate: () => Promise<void>;
   isInProgress: boolean;
   result: SomeResult | null;
 }) => {
@@ -33,7 +33,7 @@ export const useStatefulProcess = <
   };
 
   return {
-    try: tryToPerformFlaggedProcess,
+    initiate: tryToPerformFlaggedProcess,
     get isInProgress() {
       return get(flagIsRaised);
     },
