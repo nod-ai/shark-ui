@@ -104,7 +104,7 @@ class ImageClient extends HTTPClient {
   public async tryToGenerateFromText(
     givenRequest: GenerateFromTextRequest,
   ): Promise<GenerateFromTextResponse> {
-    const newResource = await this.tryToSubmitResource({
+    const newResource = await this.forciblySubmitResource({
       bySending: toBatchGenerationRequestBody([
         givenRequest.textToImageRequestBody,
       ]),
