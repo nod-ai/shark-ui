@@ -45,7 +45,7 @@ export const forciblyGenerateOutputFrom = async (
   let textToImageResponse: GenerateFromTextResponse;
 
   try {
-    textToImageResponse = await shimmedStabilityAIClient.version1.image.tryToGenerateFromText({
+    textToImageResponse = await shimmedStabilityAIClient.version1.image.forciblyGenerateFromText({
       engineId              : 'stable-diffusion-xl-1024-v1-0',
       textToImageRequestBody: {
         textPrompts: given.textToImageRequestBody.textPrompts,

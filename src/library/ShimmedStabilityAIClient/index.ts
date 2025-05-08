@@ -101,7 +101,7 @@ const z_imageGenerationResponseBody = z.object({
 });
 
 class ImageClient extends HTTPClient {
-  public async tryToGenerateFromText(
+  public async forciblyGenerateFromText(
     givenRequest: GenerateFromTextRequest,
   ): Promise<GenerateFromTextResponse> {
     const newResource = await this.forciblySubmitResource({
