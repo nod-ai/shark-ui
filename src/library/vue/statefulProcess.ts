@@ -6,35 +6,35 @@ import {
 } from '@/library/vue/reactivity.ts';
 
 interface StatefulProcess<
-  SomeResult,
+  SomeProduct,
 > {
   initiate: () => Promise<void>;
   isInProgress: boolean;
-  result: SomeResult | null;
+  product: SomeProduct | null;
 }
 
-/** Useful when state of UI is dependent on some async operation and its result */
+/** Useful when state of UI is dependent on some async operation and the product it produces */
 export const useStatefulProcess = <
-  SomeResult,
+  SomeProduct,
 >(
-  forciblyPerformFlaggableProcess: () => Promise<SomeResult>,
-): StatefulProcess<SomeResult> => {
+  forciblyPerformFlaggableProcess: () => Promise<SomeProduct>,
+): StatefulProcess<SomeProduct> => {
   const flagIsRaised = ref(false);
 
-  const capturedResult: Ref<SomeResult | null> = ref(null);
+  const capturedProduct: Ref<SomeProduct | null> = ref(null);
 
   const forciblyPerformFlaggedProcess = async (): Promise<void> => {
     using cleanup = new DisposableStack();
 
-    set(capturedResult, null);
+    set(capturedProduct, null);
     set(flagIsRaised, true);
 
     cleanup.defer(() => {
       set(flagIsRaised, false);
     });
 
-    const resultOfProcess = await forciblyPerformFlaggableProcess();
-    set(capturedResult, resultOfProcess);
+    const productOfProcess = await forciblyPerformFlaggableProcess();
+    set(capturedProduct, productOfProcess);
   };
 
   return {
@@ -42,12 +42,12 @@ export const useStatefulProcess = <
     get isInProgress() {
       return get(flagIsRaised);
     },
-    get result() {
+    get product() {
       if (
         this.isInProgress
       ) return null;
 
-      return get(capturedResult);
+      return get(capturedProduct);
     },
   };
 };

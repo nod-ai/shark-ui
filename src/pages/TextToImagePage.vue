@@ -117,7 +117,7 @@ const imageGeneration = useStatefulProcess(async () => {
       class="fill-height"
     >
       <VSkeletonLoader
-        v-if="imageGeneration.result === null"
+        v-if="imageGeneration.product === null"
         :boilerplate="!imageGeneration.isInProgress"
         width="100vh"
         :style="{
@@ -126,7 +126,7 @@ const imageGeneration = useStatefulProcess(async () => {
       />
       <TextToImageOutputImg
         v-else
-        :model-value="imageGeneration.result"
+        :model-value="imageGeneration.product"
       />
     </VContainer>
   </VMain>
