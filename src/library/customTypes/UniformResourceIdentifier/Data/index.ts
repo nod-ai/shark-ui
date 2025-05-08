@@ -65,8 +65,8 @@ export default class DataURI extends UniformResourceIdentifier {
     return NonTrivialString.tryToParseFrom(components.join(''));
   }
 
-  public static override tryToParse(givenSubject: string): DataURI {
-    const proposedURI = super.tryToParse(givenSubject);
+  public static override tryToParseFrom(givenSubject: string): DataURI {
+    const proposedURI = super.tryToParseFrom(givenSubject);
 
     if (!proposedURI.scheme.isEqualTo(DataURI.scheme)) throw new Error(`Expected scheme to be "${DataURI.scheme.toString()}"`);
 
@@ -99,7 +99,7 @@ export default class DataURI extends UniformResourceIdentifier {
     if (coercedEncoding === undefined) throw new Error(`Expected encoding portion to be defined as one of: ${allDataURIBinaryEncodings.toString()}`);
 
     return new DataURI(
-      MediaType.tryToParse(rawMediaType),
+      MediaType.tryToParseFrom(rawMediaType),
       coercedEncoding,
       Base64CharacterEncodedByteSequence.tryToParseFrom(rawData),
     );

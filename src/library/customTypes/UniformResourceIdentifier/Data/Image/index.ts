@@ -45,8 +45,8 @@ export default class ImageURI extends DataURI {
     );
   }
 
-  public static override tryToParse(givenSubject: string): ImageURI {
-    const proposedURI = super.tryToParse(givenSubject);
+  public static override tryToParseFrom(givenSubject: string): ImageURI {
+    const proposedURI = super.tryToParseFrom(givenSubject);
 
     if (proposedURI.mediaType.fileType !== ImageURI.mediaType) throw new Error(`Expected media type starting with ${ImageURI.mediaType}`);
 
