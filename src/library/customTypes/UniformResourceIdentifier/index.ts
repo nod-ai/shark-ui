@@ -1,5 +1,9 @@
 import NonTrivialString from '@/library/customTypes/NonTrivialString.ts';
 
+import type {
+  StaticStringParser,
+} from '@/library/typeUtilities/StaticStringParser';
+
 import {
   isEmpty,
 } from '@/library/utilitiesByType/array.ts';
@@ -8,7 +12,7 @@ import {
  * Identifies an abstract or physical resource.
  * See [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986) for more information
  */
-export default class UniformResourceIdentifier {
+export default class UniformResourceIdentifier implements StaticStringParser<typeof UniformResourceIdentifier> {
   private readonly _scheme: /*   */ NonTrivialString;
   private readonly _authority: /**/ NonTrivialString | null;
   private readonly _path: /*     */ NonTrivialString | null;
@@ -90,7 +94,7 @@ export default class UniformResourceIdentifier {
     return components.map($0 => $0 ?? '').join('');
   }
 
-  public static tryToParse(givenSubject: string): UniformResourceIdentifier {
+  public static tryToParseFrom(givenSubject: string): UniformResourceIdentifier {
     const {
       schemeSuffix,
       authorityPrefix,
