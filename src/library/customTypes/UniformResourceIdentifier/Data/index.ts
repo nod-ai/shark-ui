@@ -99,7 +99,7 @@ export default class DataURI extends UniformResourceIdentifier {
     if (coercedEncoding === undefined) throw new Error(`Expected encoding portion to be defined as one of: ${allDataURIBinaryEncodings.toString()}`);
 
     return new DataURI(
-      MediaType.tryToParse(rawMediaType),
+      MediaType.tryToParseFrom(rawMediaType),
       coercedEncoding,
       Base64CharacterEncodedByteSequence.tryToParseFrom(rawData),
     );

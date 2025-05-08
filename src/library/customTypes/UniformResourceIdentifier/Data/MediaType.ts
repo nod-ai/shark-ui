@@ -1,3 +1,7 @@
+import type {
+  StaticStringParser,
+} from '@/library/typeUtilities/StaticStringParser';
+
 import {
   isEmpty,
 } from '@/library/utilitiesByType/array.ts';
@@ -29,7 +33,7 @@ const allStructuredSyntaxNameSuffix = [
 type StructuredSyntaxNameSuffix = (typeof allStructuredSyntaxNameSuffix)[number];
 
 /** See [RFC 2045](https://datatracker.ietf.org/doc/html/rfc2045) for more information */
-export default class MediaType {
+export default class MediaType implements StaticStringParser<typeof MediaType> {
   public constructor(
     public fileType: FileType,
     public tree: string[] | null,
@@ -88,7 +92,7 @@ export default class MediaType {
     return components.map($0 => $0 ?? '').join('');
   }
 
-  public static tryToParse(givenSubject: string): MediaType {
+  public static tryToParseFrom(givenSubject: string): MediaType {
     const [
       rawFileType,
       remainderAfterFileType,
