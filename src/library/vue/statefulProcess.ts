@@ -17,13 +17,13 @@ interface StatefulProcess<
 export const useStatefulProcess = <
   SomeProduct,
 >(
-  forciblyPerformFlaggableProcess: () => Promise<SomeProduct>,
+  forciblyRetrieveProduct: () => Promise<SomeProduct>,
 ): StatefulProcess<SomeProduct> => {
   const flagIsRaised = ref(false);
 
   const capturedProduct: Ref<SomeProduct | null> = ref(null);
 
-  const forciblyPerformFlaggedProcess = async (): Promise<void> => {
+  const forciblyCaptureProduct = async (): Promise<void> => {
     using cleanup = new DisposableStack();
 
     set(capturedProduct, null);
@@ -33,12 +33,12 @@ export const useStatefulProcess = <
       set(flagIsRaised, false);
     });
 
-    const productOfProcess = await forciblyPerformFlaggableProcess();
-    set(capturedProduct, productOfProcess);
+    const retrievedProduct = await forciblyRetrieveProduct();
+    set(capturedProduct, retrievedProduct);
   };
 
   return {
-    initiate: forciblyPerformFlaggedProcess,
+    initiate: forciblyCaptureProduct,
     get isInProgress() {
       return get(flagIsRaised);
     },
