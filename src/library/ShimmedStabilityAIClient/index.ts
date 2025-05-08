@@ -93,7 +93,7 @@ const toBatchGenerationRequestBody = (givenRequests: GenerateFromTextRequest['te
 };
 
 const z_image = z.string().transform((someSubject) => {
-  return Base64CharacterEncodedByteSequence.tryToParseFrom(someSubject);
+  return Base64CharacterEncodedByteSequence.forciblyParsedFrom(someSubject);
 });
 
 const z_imageGenerationResponseBody = z.object({
@@ -101,14 +101,14 @@ const z_imageGenerationResponseBody = z.object({
 });
 
 class ImageClient extends HTTPClient {
-  public async tryToGenerateFromText(
+  public async forciblyGenerateFromText(
     givenRequest: GenerateFromTextRequest,
   ): Promise<GenerateFromTextResponse> {
-    const newResource = await this.tryToSubmitResource({
+    const newResource = await this.forciblySubmitResource({
       bySending: toBatchGenerationRequestBody([
         givenRequest.textToImageRequestBody,
       ]),
-      to: URLPath.tryToParseFrom('/generate'),
+      to: URLPath.forciblyParsedFrom('/generate'),
     });
 
     const {
@@ -146,7 +146,7 @@ export default class ShimmedStabilityAIClient extends HTTPClient {
     serverURL: string;
   }) {
     super({
-      origin : URLOrigin.tryToParseFrom(given.serverURL),
+      origin : URLOrigin.forciblyParsedFrom(given.serverURL),
       headers: {
         'Content-Type': 'application/json',
       },

@@ -11,7 +11,7 @@ import StringSubset from './StringSubset.ts';
 export default class NonTrivialString
   extends StringSubset<'NonTrivialString'>
   implements StaticStringParser<typeof NonTrivialString> {
-  public static tryToParseFrom(givenSubject: string): NonTrivialString {
+  public static forciblyParsedFrom(givenSubject: string): NonTrivialString {
     const trimmedSubject = givenSubject.trim();
 
     if (isEmpty(trimmedSubject)) throw new Error('Expected a non-trivial string');
@@ -23,7 +23,7 @@ export default class NonTrivialString
     if (givenSubject === null) return givenSubject;
 
     try {
-      return this.tryToParseFrom(givenSubject);
+      return this.forciblyParsedFrom(givenSubject);
     }
     catch {
       return null;

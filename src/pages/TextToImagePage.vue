@@ -48,7 +48,7 @@ const imageGeneration = useStatefulProcess(async () => {
 
   if (proposedPrompt === null) throw new Error('Prompt was not set before submission');
 
-  const generatedOutput = await TextToImage.Client.SDXL.tryToGenerateOutputFrom({
+  const generatedOutput = await TextToImage.Client.SDXL.forciblyGenerateOutputFrom({
     textToImageRequestBody: {
       textPrompts: proposedPrompt,
       height     : 1024,

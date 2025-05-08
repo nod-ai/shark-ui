@@ -7,9 +7,9 @@ import {
   ConfigSchema,
 } from '../types';
 
-const configFile = URLPath.tryToParseFrom('/config/text-to-image.json');
+const configFile = URLPath.forciblyParsedFrom('/config/text-to-image.json');
 
-const tryToReadConfig = async (): Promise<Config> => {
+const forciblyReadConfig = async (): Promise<Config> => {
   const fileResponse = await fetch(configFile.toString());
 
   if (
@@ -22,5 +22,5 @@ const tryToReadConfig = async (): Promise<Config> => {
 
 export {
   configFile as file,
-  tryToReadConfig as tryToRead,
+  forciblyReadConfig as forciblyRead,
 };

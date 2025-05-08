@@ -20,15 +20,15 @@ import {
   Server,
 } from '@/features/TextToImage/webAPI';
 
-const tryToInitializeShimmedStabilityAIClient = async (): Promise<ShimmedStabilityAIClient> => {
-  const textToImageServer = await Server.tryToGetFrom();
+const forciblyInitializeShimmedStabilityAIClient = async (): Promise<ShimmedStabilityAIClient> => {
+  const textToImageServer = await Server.forciblyRetrieveCurrent();
 
   return new ShimmedStabilityAIClient({
     serverURL: textToImageServer.origin,
   });
 };
 
-export const tryToGenerateOutputFrom = async (
+export const forciblyGenerateOutputFrom = async (
   given: {
     textToImageRequestBody: Pick<GenerateFromTextRequest['textToImageRequestBody'],
     | 'textPrompts'
@@ -40,12 +40,12 @@ export const tryToGenerateOutputFrom = async (
     >;
   },
 ): Promise<Output> => {
-  const shimmedStabilityAIClient = await tryToInitializeShimmedStabilityAIClient();
+  const shimmedStabilityAIClient = await forciblyInitializeShimmedStabilityAIClient();
 
   let textToImageResponse: GenerateFromTextResponse;
 
   try {
-    textToImageResponse = await shimmedStabilityAIClient.version1.image.tryToGenerateFromText({
+    textToImageResponse = await shimmedStabilityAIClient.version1.image.forciblyGenerateFromText({
       engineId              : 'stable-diffusion-xl-1024-v1-0',
       textToImageRequestBody: {
         textPrompts: given.textToImageRequestBody.textPrompts,
@@ -93,7 +93,7 @@ export const tryToGenerateOutputFrom = async (
     soleGeneratedArtifact.base64 === undefined
   ) throw new Error('Expected image data from sole artifact');
 
-  const base64DataOfNewImage = Base64CharacterEncodedByteSequence.tryToParseFrom(soleGeneratedArtifact.base64);
+  const base64DataOfNewImage = Base64CharacterEncodedByteSequence.forciblyParsedFrom(soleGeneratedArtifact.base64);
 
   const newImage = {
     uri        : new ImageURI('png', 'base64', base64DataOfNewImage),
@@ -111,7 +111,7 @@ export const tryToGenerateOutputFrom = async (
 };
 
 const SDXLTextToImageClient = {
-  tryToGenerateOutputFrom,
+  forciblyGenerateOutputFrom,
 };
 
 export default SDXLTextToImageClient;

@@ -15,9 +15,9 @@ const contentIsJSONIn = (givenResponse: Response): boolean => {
   return contentType.includes('application/json');
 };
 
-const configEndpoint = URLPath.tryToParseFrom('/config/text-to-image');
+const configEndpoint = URLPath.forciblyParsedFrom('/config/text-to-image');
 
-const tryToFetchConfig = async (): Promise<Config> => {
+const forciblyFetchConfig = async (): Promise<Config> => {
   const endpointResponse = await fetch(configEndpoint.toString());
 
   if (
@@ -34,5 +34,5 @@ const tryToFetchConfig = async (): Promise<Config> => {
 
 export {
   configEndpoint as endpoint,
-  tryToFetchConfig as tryToFetch,
+  forciblyFetchConfig as forciblyFetch,
 };

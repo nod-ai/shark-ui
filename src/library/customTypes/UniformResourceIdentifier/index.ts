@@ -94,7 +94,7 @@ export default class UniformResourceIdentifier implements StaticStringParser<typ
     return components.map($0 => $0 ?? '').join('');
   }
 
-  public static tryToParseFrom(givenSubject: string): UniformResourceIdentifier {
+  public static forciblyParsedFrom(givenSubject: string): UniformResourceIdentifier {
     const {
       schemeSuffix,
       authorityPrefix,
@@ -173,9 +173,9 @@ export default class UniformResourceIdentifier implements StaticStringParser<typ
     })();
 
     return new UniformResourceIdentifier(
-      NonTrivialString.tryToParseFrom(scheme),
+      NonTrivialString.forciblyParsedFrom(scheme),
       NonTrivialString.nullableParsedFrom(authority),
-      NonTrivialString.tryToParseFrom(path),
+      NonTrivialString.forciblyParsedFrom(path),
       NonTrivialString.nullableParsedFrom(query ?? null),
       NonTrivialString.nullableParsedFrom(fragment ?? null),
     );

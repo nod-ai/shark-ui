@@ -21,18 +21,18 @@ export const accordingToEnvironment = ((): Server | null => {
   });
 })();
 
-export const tryToGetFrom = async (): Promise<Server> => {
+export const forciblyRetrieveCurrent = async (): Promise<Server> => {
   if (
     accordingToEnvironment !== null
   ) return accordingToEnvironment;
 
-  const staticConfig = await StaticConfig.tryToRead();
+  const staticConfig = await StaticConfig.forciblyRead();
 
   if (
     staticConfig.server !== null
   ) return staticConfig.server;
 
-  const dynamicConfig = await DynamicConfig.tryToFetch();
+  const dynamicConfig = await DynamicConfig.forciblyFetch();
 
   if (
     dynamicConfig.server !== null

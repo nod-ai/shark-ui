@@ -69,7 +69,7 @@ export default class Base64CharacterEncodedByteSequence
     throw new TypeError(`Characters contained 1+ characters outside of the Base64 Alphabet: ${regExForBase64Alphabet.toString()}`);
   }
 
-  public static tryToParseFrom(
+  public static forciblyParsedFrom(
     givenCharacters: string,
   ): Base64CharacterEncodedByteSequence {
     const paddedByteEncodableCharacters = this.assertIsByteEncodable(givenCharacters);

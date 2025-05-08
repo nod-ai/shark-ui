@@ -29,7 +29,7 @@ export default class HTTPClient {
     );
   }
 
-  public async tryToSend(
+  public async forciblySend(
     givenRequestBody: unknown,
     {
       to: givenPath,
@@ -50,20 +50,20 @@ export default class HTTPClient {
     return await response.json();
   }
 
-  public async tryToFetchResource(
+  public async forciblyFetchResource(
     {
       from: givenPath,
     }: {
       from: URLPath;
     },
   ): Promise<unknown> {
-    return await this.tryToSend(null, {
+    return await this.forciblySend(null, {
       to   : givenPath,
       using: HTTPRequest.Method.FETCH,
     });
   }
 
-  public async tryToSubmitResource(
+  public async forciblySubmitResource(
     {
       bySending: givenSubmission,
       to: givenPath,
@@ -72,13 +72,13 @@ export default class HTTPClient {
       to: URLPath;
     },
   ): Promise<unknown> {
-    return await this.tryToSend(givenSubmission, {
+    return await this.forciblySend(givenSubmission, {
       to   : givenPath,
       using: HTTPRequest.Method.SUBMIT,
     });
   }
 
-  public async tryToCreateResource(
+  public async forciblyCreateResource(
     {
       bySending: givenProperties,
       to: givenPath,
@@ -87,13 +87,13 @@ export default class HTTPClient {
       to: URLPath;
     },
   ): Promise<unknown> {
-    return await this.tryToSend(givenProperties, {
+    return await this.forciblySend(givenProperties, {
       to   : givenPath,
       using: HTTPRequest.Method.CREATE,
     });
   }
 
-  public async tryToUpdateResource(
+  public async forciblyUpdateResource(
     {
       bySending: givenChanges,
       to: givenPath,
@@ -102,14 +102,14 @@ export default class HTTPClient {
       to: URLPath;
     },
   ): Promise<unknown> {
-    return await this.tryToSend(givenChanges, {
+    return await this.forciblySend(givenChanges, {
       to   : givenPath,
       using: HTTPRequest.Method.UPDATE,
     });
   }
 
-  public async tryToDeleteResourceAt(givenPath: URLPath): Promise<unknown> {
-    return await this.tryToSend(null, {
+  public async forciblyDeleteResourceAt(givenPath: URLPath): Promise<unknown> {
+    return await this.forciblySend(null, {
       to   : givenPath,
       using: HTTPRequest.Method.DELETE,
     });

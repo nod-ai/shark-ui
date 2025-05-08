@@ -7,7 +7,7 @@ import type {
 export class URLOrigin
   extends StringSubset<'URLOrigin'>
   implements StaticStringParser<typeof URLOrigin> {
-  public static tryToParseFrom(givenSubject: string): URLOrigin {
+  public static forciblyParsedFrom(givenSubject: string): URLOrigin {
     const derived = new URL(givenSubject);
 
     if (
