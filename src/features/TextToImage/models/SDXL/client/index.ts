@@ -20,7 +20,7 @@ import {
   Server,
 } from '@/features/TextToImage/webAPI';
 
-const tryToInitializeShimmedStabilityAIClient = async (): Promise<ShimmedStabilityAIClient> => {
+const forciblyInitializeShimmedStabilityAIClient = async (): Promise<ShimmedStabilityAIClient> => {
   const textToImageServer = await Server.forciblyRetrieveCurrent();
 
   return new ShimmedStabilityAIClient({
@@ -28,7 +28,7 @@ const tryToInitializeShimmedStabilityAIClient = async (): Promise<ShimmedStabili
   });
 };
 
-export const tryToGenerateOutputFrom = async (
+export const forciblyGenerateOutputFrom = async (
   given: {
     textToImageRequestBody: Pick<GenerateFromTextRequest['textToImageRequestBody'],
     | 'textPrompts'
@@ -40,7 +40,7 @@ export const tryToGenerateOutputFrom = async (
     >;
   },
 ): Promise<Output> => {
-  const shimmedStabilityAIClient = await tryToInitializeShimmedStabilityAIClient();
+  const shimmedStabilityAIClient = await forciblyInitializeShimmedStabilityAIClient();
 
   let textToImageResponse: GenerateFromTextResponse;
 
@@ -111,7 +111,7 @@ export const tryToGenerateOutputFrom = async (
 };
 
 const SDXLTextToImageClient = {
-  tryToGenerateOutputFrom,
+  forciblyGenerateOutputFrom,
 };
 
 export default SDXLTextToImageClient;
