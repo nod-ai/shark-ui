@@ -1,6 +1,5 @@
 import type {
   GenerateFromTextRequest,
-  GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
@@ -54,7 +53,7 @@ export const forciblyGenerateOutputFrom = async (
     },
   });
 
-  let textToImageResponse: GenerateFromTextResponse;
+  let textToImageResponse: Awaited<typeof promisedTextToImageResponse>;
 
   try {
     textToImageResponse = await promisedTextToImageResponse;
