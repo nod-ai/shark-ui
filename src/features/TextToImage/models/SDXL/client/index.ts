@@ -42,21 +42,21 @@ export const forciblyGenerateOutputFrom = async (
 ): Promise<Output> => {
   const shimmedStabilityAIClient = await forciblyInitializeShimmedStabilityAIClient();
 
+  const promisedTextToImageResponse = shimmedStabilityAIClient.version1.image.forciblyGenerateFromText({
+    engineId              : 'stable-diffusion-xl-1024-v1-0',
+    textToImageRequestBody: {
+      textPrompts: given.textToImageRequestBody.textPrompts,
+      height     : given.textToImageRequestBody.height,
+      width      : given.textToImageRequestBody.width,
+      seed       : given.textToImageRequestBody.seed,
+      steps      : given.textToImageRequestBody.steps,
+      cfgScale   : given.textToImageRequestBody.cfgScale,
+    },
+  });
+
   let textToImageResponse: GenerateFromTextResponse;
 
   try {
-    const promisedTextToImageResponse = shimmedStabilityAIClient.version1.image.forciblyGenerateFromText({
-      engineId              : 'stable-diffusion-xl-1024-v1-0',
-      textToImageRequestBody: {
-        textPrompts: given.textToImageRequestBody.textPrompts,
-        height     : given.textToImageRequestBody.height,
-        width      : given.textToImageRequestBody.width,
-        seed       : given.textToImageRequestBody.seed,
-        steps      : given.textToImageRequestBody.steps,
-        cfgScale   : given.textToImageRequestBody.cfgScale,
-      },
-    });
-
     textToImageResponse = await promisedTextToImageResponse;
   }
   catch (someException) {
