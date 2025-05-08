@@ -26,7 +26,7 @@ export const tryToRetrieveCurrent = async (): Promise<Server> => {
     accordingToEnvironment !== null
   ) return accordingToEnvironment;
 
-  const staticConfig = await StaticConfig.tryToRead();
+  const staticConfig = await StaticConfig.forciblyRead();
 
   if (
     staticConfig.server !== null
