@@ -21,7 +21,7 @@ export const accordingToEnvironment = ((): Server | null => {
   });
 })();
 
-export const tryToGetFrom = async (): Promise<Server> => {
+export const tryToRetrieveCurrent = async (): Promise<Server> => {
   if (
     accordingToEnvironment !== null
   ) return accordingToEnvironment;

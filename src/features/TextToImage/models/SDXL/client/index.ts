@@ -21,7 +21,7 @@ import {
 } from '@/features/TextToImage/webAPI';
 
 const tryToInitializeShimmedStabilityAIClient = async (): Promise<ShimmedStabilityAIClient> => {
-  const textToImageServer = await Server.tryToGetFrom();
+  const textToImageServer = await Server.tryToRetrieveCurrent();
 
   return new ShimmedStabilityAIClient({
     serverURL: textToImageServer.origin,
