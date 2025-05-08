@@ -67,7 +67,7 @@ const imageGeneration = useStatefulProcess(async () => {
   <NavigationPanel>
     <VForm
       :disabled="imageGeneration.isInProgress"
-      @submit.prevent="imageGeneration.try"
+      @submit.prevent="imageGeneration.initiate"
     >
       <TextToImageInputSection
         v-model="currentPrompt"
