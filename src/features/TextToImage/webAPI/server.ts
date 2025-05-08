@@ -32,7 +32,7 @@ export const tryToRetrieveCurrent = async (): Promise<Server> => {
     staticConfig.server !== null
   ) return staticConfig.server;
 
-  const dynamicConfig = await DynamicConfig.tryToFetch();
+  const dynamicConfig = await DynamicConfig.forciblyFetch();
 
   if (
     dynamicConfig.server !== null
