@@ -13,10 +13,6 @@ import {
   asError,
 } from '@/library/utilitiesByType/error';
 
-import {
-  DynamicConfig,
-  StaticConfig,
-} from '@/features/TextToImage/config';
 import type {
   Output,
 } from '@/features/TextToImage/types';
@@ -25,23 +21,11 @@ import {
 } from '@/features/TextToImage/webAPI';
 
 const tryToInitializeShimmedStabilityAIClient = async (): Promise<ShimmedStabilityAIClient> => {
-  try {
-    const textToImageServer = await Server.tryToGetFrom();
+  const textToImageServer = await Server.tryToGetFrom();
 
-    return new ShimmedStabilityAIClient({
-      serverURL: textToImageServer.origin,
-    });
-  }
-  catch {
-    throw new Error([
-      'No text-to-image server was specified!',
-      'Either:',
-      `a) supply it's corresponding environment variable named \`${Server.environmentKeyForOrigin}\` and rebuild`,
-      `b) specify it within ${StaticConfig.file.toString()}`,
-      'OR',
-      `c) specify it within the response from ${DynamicConfig.endpoint.toString()}`,
-    ].join('\n'));
-  }
+  return new ShimmedStabilityAIClient({
+    serverURL: textToImageServer.origin,
+  });
 };
 
 export const tryToGenerateOutputFrom = async (
