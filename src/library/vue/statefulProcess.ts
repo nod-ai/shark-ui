@@ -9,7 +9,7 @@ import {
 export const useStatefulProcess = <
   SomeResult,
 >(
-  tryToPerformFlaggableProcess: () => Promise<SomeResult>,
+  forciblyPerformFlaggableProcess: () => Promise<SomeResult>,
 ): ({
   initiate: () => Promise<void>;
   isInProgress: boolean;
@@ -19,7 +19,7 @@ export const useStatefulProcess = <
 
   const capturedResult: Ref<SomeResult | null> = ref(null);
 
-  const tryToPerformFlaggedProcess = async (): Promise<void> => {
+  const forciblyPerformFlaggedProcess = async (): Promise<void> => {
     using cleanup = new DisposableStack();
     set(flagIsRaised, true);
 
@@ -28,12 +28,12 @@ export const useStatefulProcess = <
     });
 
     set(capturedResult, null);
-    const resultOfProcess = await tryToPerformFlaggableProcess();
+    const resultOfProcess = await forciblyPerformFlaggableProcess();
     set(capturedResult, resultOfProcess);
   };
 
   return {
-    initiate: tryToPerformFlaggedProcess,
+    initiate: forciblyPerformFlaggedProcess,
     get isInProgress() {
       return get(flagIsRaised);
     },
