@@ -17,8 +17,8 @@ const attemptTo = <
     const productFromSomeProcessThatDidNotThrow = getProductFromSomeProcessThatCanThrow();
     return Success.thatYielded(productFromSomeProcessThatDidNotThrow);
   }
-  catch (someException) {
-    const someError = asError(someException);
+  catch (whateverThatWasThrown) {
+    const someError = asError(whateverThatWasThrown);
     return Failure.dueTo(someError);
   }
 };
@@ -47,8 +47,8 @@ const attemptToEventually = async <
     const productFromSomeSuccessfulAsyncProcess: SomeProduct = await getProductFromSomeAsyncProcessThatCanThrow();
     return Success.thatYielded(productFromSomeSuccessfulAsyncProcess);
   }
-  catch (someException) {
-    const someError = asError(someException);
+  catch (whateverThatWasThrown) {
+    const someError = asError(whateverThatWasThrown);
     return Failure.dueTo(someError);
   }
 };
