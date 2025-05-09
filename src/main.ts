@@ -27,7 +27,7 @@ window.onunhandledrejection = (someEvent) => {
 };
 
 // In production version (post build/bundling), errors that originate from Vue components bypass the listeners on the current `Window` instance
-app.config.errorHandler = (someException) => {
-  const someError = asError(someException);
+app.config.errorHandler = (whateverThatWasThrown) => {
+  const someError = asError(whateverThatWasThrown);
   promptUserToReport(someError.message);
 };
