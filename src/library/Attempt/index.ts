@@ -7,6 +7,19 @@ import Outcome, {
   Success,
 } from './Outcome';
 
+const outcomeOfFailedAttempt = <
+  SomeProduct,
+>(
+  {
+    basedOn: givenSubject,
+  }: {
+    basedOn: unknown;
+  },
+): Outcome<SomeProduct> => {
+  const someError = asError(givenSubject);
+  return Failure.dueTo(someError);
+};
+
 const attemptTo = <
   SomeProduct,
 >(
@@ -18,8 +31,9 @@ const attemptTo = <
     return Success.thatYielded(productFromSomeProcessThatDidNotThrow);
   }
   catch (whateverThatWasThrown) {
-    const someError = asError(whateverThatWasThrown);
-    return Failure.dueTo(someError);
+    return outcomeOfFailedAttempt<SomeProduct>({
+      basedOn: whateverThatWasThrown,
+    });
   }
 };
 
@@ -48,8 +62,9 @@ const attemptToEventually = async <
     return Success.thatYielded(productFromSomeSuccessfulAsyncProcess);
   }
   catch (whateverThatWasThrown) {
-    const someError = asError(whateverThatWasThrown);
-    return Failure.dueTo(someError);
+    return outcomeOfFailedAttempt<SomeProduct>({
+      basedOn: whateverThatWasThrown,
+    });
   }
 };
 
