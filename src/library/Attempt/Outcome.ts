@@ -6,6 +6,10 @@ import type {
   Filter,
 } from '@/library/typeUtilities/Filter';
 
+import {
+  type ActionableError,
+} from './error';
+
 // cspell:words sugarfree
 interface SyntacticallySugarfreeEmptyOutcome {
   readonly case: 'success' | 'failure';
@@ -21,9 +25,11 @@ interface SemanticallySugarfreeSuccess<SomeProduct> extends EmptyOutcome {
   readonly product: SomeProduct;
 }
 
-interface SemanticallySugarfreeFailure extends EmptyOutcome {
+interface SemanticallySugarfreeFailure<
+  SomeActionableError extends ActionableError<string>,
+> extends EmptyOutcome {
   readonly case: 'failure';
-  readonly cause: Error;
+  readonly cause: SomeActionableError;
 }
 
 interface Success<SomeProduct> extends SemanticallySugarfreeSuccess<SomeProduct> {
@@ -42,7 +48,9 @@ interface Success<SomeProduct> extends SemanticallySugarfreeSuccess<SomeProduct>
   readonly productOfSuccess: this['product'];
 }
 
-interface Failure extends SemanticallySugarfreeFailure {
+interface Failure<
+  SomeActionableError extends ActionableError<string>,
+> extends SemanticallySugarfreeFailure<SomeActionableError> {
   /**
    * Semantic sugar for `cause`; useful for juxtaposition against guard statements:
    * ```ts
@@ -60,12 +68,13 @@ interface Failure extends SemanticallySugarfreeFailure {
 
 type Outcome<
   SomeProduct,
+  SomeActionableError extends ActionableError<string>,
 > =
   | Success<SomeProduct>
-  | Failure;
+  | Failure<SomeActionableError>;
 
 type Sugarfree<
-  SomeOutcome extends Outcome<unknown>,
+  SomeOutcome extends Outcome<unknown, ActionableError<string>>,
 > = Filter<SomeOutcome,
 | 'case'
 | 'product'
@@ -74,27 +83,30 @@ type Sugarfree<
 
 const sugarfreeFailureDueTo = <
   SomeProduct,
+  SomeActionableError extends ActionableError<string>,
 >(
-  givenError: Error,
-): Sugarfree<Outcome<SomeProduct>> => ({
+  givenError: SomeActionableError,
+): Sugarfree<Outcome<SomeProduct, SomeActionableError>> => ({
   case : 'failure',
   cause: givenError,
 });
 
 const sugarfreeSuccessThatYielded = <
   SomeProduct,
+  SomeActionableError extends ActionableError<string>,
 >(
   givenProduct: SomeProduct,
-): Sugarfree<Outcome<SomeProduct>> => ({
+): Sugarfree<Outcome<SomeProduct, SomeActionableError>> => ({
   case   : 'success',
   product: givenProduct,
 });
 
 const withSugar = <
   SomeProduct,
+  SomeActionableError extends ActionableError<string>,
 >(
-  given: Sugarfree<Outcome<SomeProduct>>,
-): Outcome<SomeProduct> => {
+  given: Sugarfree<Outcome<SomeProduct, SomeActionableError>>,
+): Outcome<SomeProduct, SomeActionableError> => {
   switch (given.case) {
     case 'success': return {
       ...given,
@@ -113,19 +125,21 @@ const withSugar = <
 
 const failureDueTo = <
   SomeProduct,
+  SomeActionableError extends ActionableError<string>,
 >(
-  givenError: Error,
-): Outcome<SomeProduct> => {
-  return withSugar<SomeProduct>(
+  givenError: SomeActionableError,
+): Outcome<SomeProduct, SomeActionableError> => {
+  return withSugar(
     sugarfreeFailureDueTo(givenError),
   );
 };
 
 const successThatYielded = <
   SomeProduct,
+  SomeActionableError extends ActionableError<string>,
 >(
   givenProduct: SomeProduct,
-): Outcome<SomeProduct> => {
+): Outcome<SomeProduct, SomeActionableError> => {
   return withSugar(
     sugarfreeSuccessThatYielded(givenProduct),
   );
