@@ -27,6 +27,10 @@ import {
   VSkeletonLoader,
 } from 'vuetify/components/VSkeletonLoader';
 
+import {
+  NonActionableError,
+} from '@/library/Attempt';
+
 import SDXLDiffusionStepCount from '@/library/ShimmedStabilityAIClient/models/SDXLDiffusionStepCount.ts';
 
 import DiscreteSlider from '@/components/DiscreteSlider.vue';
@@ -46,7 +50,9 @@ const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
 const imageGeneration = useStatefulProcess(async () => {
   const proposedPrompt = get(currentPrompt);
 
-  if (proposedPrompt === null) throw new Error('Prompt was not set before submission');
+  if (
+    proposedPrompt === null
+  ) throw new NonActionableError('Prompt was not set before submission');
 
   const generatedOutput = await TextToImage.Client.SDXL.forciblyGenerateOutputFrom({
     textToImageRequestBody: {

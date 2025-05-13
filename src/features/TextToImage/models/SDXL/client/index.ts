@@ -3,7 +3,10 @@ import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
-import Attempt from '@/library/Attempt';
+import Attempt, {
+  NonActionableError,
+} from '@/library/Attempt';
+
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
 
 import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
@@ -80,23 +83,23 @@ export const forciblyGenerateOutputFrom = async (
 
   if (
     !('artifacts' in textToImageResponse.result)
-  ) throw new Error('Expected response rather than readable stream');
+  ) throw new NonActionableError('Expected response rather than readable stream');
 
   const generatedArtifacts = textToImageResponse.result.artifacts;
 
   if (
     generatedArtifacts === undefined
-  ) throw new Error('Expected artifacts in response result');
+  ) throw new NonActionableError('Expected artifacts in response result');
 
   const [soleGeneratedArtifact] = generatedArtifacts;
 
   if (
     soleGeneratedArtifact === undefined
-  ) throw new Error('Expected at least one artifact in response');
+  ) throw new NonActionableError('Expected at least one artifact in response');
 
   if (
     soleGeneratedArtifact.base64 === undefined
-  ) throw new Error('Expected image data from sole artifact');
+  ) throw new NonActionableError('Expected image data from sole artifact');
 
   const base64DataOfNewImage = Base64CharacterEncodedByteSequence.forciblyParsedFrom(soleGeneratedArtifact.base64);
 

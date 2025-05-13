@@ -1,3 +1,7 @@
+import {
+  NonActionableError,
+} from '@/library/Attempt';
+
 import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
 
 import NonTrivialString from '@/library/customTypes/NonTrivialString';
@@ -41,7 +45,9 @@ export default class DataURI extends UniformResourceIdentifier {
   }
 
   public get mediaType(): Exclude<DataURI['_mediaType'], null> {
-    if (this._mediaType === null) throw new Error('Media type either needs to be initialized or overridden');
+    if (
+      this._mediaType === null
+    ) throw new NonActionableError('Media type either needs to be initialized or overridden');
 
     return this._mediaType;
   }

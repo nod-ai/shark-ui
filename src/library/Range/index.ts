@@ -1,4 +1,8 @@
 import {
+  NonActionableError,
+} from '@/library/Attempt';
+
+import {
   arithmeticMeanOf,
 } from '@/library/math/aggregators.ts';
 
@@ -9,7 +13,9 @@ export default class Range {
     public readonly lowerBound: number,
     public readonly upperBound: number,
   ) {
-    if (upperBound < lowerBound) throw new RangeError('Upper bound must not be lower than lower bound');
+    if (
+      upperBound < lowerBound
+    ) throw new NonActionableError('Upper bound must not be lower than lower bound');
 
     this.lowerBound = lowerBound;
     this.upperBound = upperBound;
