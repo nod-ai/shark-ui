@@ -79,15 +79,20 @@ interface Failure<
   SomeActionableError extends ActionableError<string>,
 > extends SemanticallySugarfreeFailure<SomeActionableError> {
   /**
-   * Semantic sugar for `cause`; useful for juxtaposition against guard statements:
+   * Semantic sugar for `cause`; useful for juxtaposition against early exits:
    * ```ts
-   * ...
+   * function safelyGetProductWhileHandlingErrors(
+   *   givenOutcome: Attempt.Outcome<CustomProduct, CustomError>,
+   *   recoverFrom: (expectedError: CustomError) => void,
+   * ): CustomProduct {
+   *   if (
+   *     givenOutcome.isSuccess
+   *   ) return givenOutcome.unwrapped;
    *
-   * if (
-   *   someOutcome.isSuccess
-   * ) return;
+   *   ...
    *
-   * return NonActionableError.rethrow(someOutcome.causeOfFailure);
+   *   recoverFrom(givenOutcome.causeOfFailure);
+   * }
    * ```
    */
   readonly causeOfFailure: this['cause'];
