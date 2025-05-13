@@ -22,7 +22,8 @@ class NonActionableError
   }
 
   public throw(): never {
-    throw this;
+    // `throw` is allowed here since it's used within the construct designed to replace it.
+    throw this; // eslint-disable-line no-restricted-syntax
   }
 
   public static throw = (
