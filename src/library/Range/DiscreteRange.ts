@@ -17,13 +17,13 @@ export default class DiscreteRange extends Range implements Iterable<number> {
 
     if (
       stepSize < 0
-    ) throw new NonActionableError('Step size must be positive');
+    ) return NonActionableError.throw('Step size must be positive');
 
     const overstep = this.width % stepSize;
 
     if (
       overstep !== 0
-    ) throw new NonActionableError('Step size must fit evenly into the range');
+    ) return NonActionableError.throw('Step size must fit evenly into the range');
 
     this.stepSize = stepSize;
   }
@@ -60,7 +60,7 @@ export default class DiscreteRange extends Range implements Iterable<number> {
 
       if (
         this.upperBound < eachValue
-      ) throw new NonActionableError(`Unexpected overstep when iterating over ${this.inInclusiveNotation} with step size ${this.stepSize.toString()}`);
+      ) return NonActionableError.throw(`Unexpected overstep when iterating over ${this.inInclusiveNotation} with step size ${this.stepSize.toString()}`);
 
       if (this.upperBound === eachValue) {
         return {

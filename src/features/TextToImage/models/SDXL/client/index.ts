@@ -83,23 +83,23 @@ export const forciblyGenerateOutputFrom = async (
 
   if (
     !('artifacts' in textToImageResponse.result)
-  ) throw new NonActionableError('Expected response rather than readable stream');
+  ) return NonActionableError.throw('Expected response rather than readable stream');
 
   const generatedArtifacts = textToImageResponse.result.artifacts;
 
   if (
     generatedArtifacts === undefined
-  ) throw new NonActionableError('Expected artifacts in response result');
+  ) return NonActionableError.throw('Expected artifacts in response result');
 
   const [soleGeneratedArtifact] = generatedArtifacts;
 
   if (
     soleGeneratedArtifact === undefined
-  ) throw new NonActionableError('Expected at least one artifact in response');
+  ) return NonActionableError.throw('Expected at least one artifact in response');
 
   if (
     soleGeneratedArtifact.base64 === undefined
-  ) throw new NonActionableError('Expected image data from sole artifact');
+  ) return NonActionableError.throw('Expected image data from sole artifact');
 
   const base64DataOfNewImage = Base64CharacterEncodedByteSequence.forciblyParsedFrom(soleGeneratedArtifact.base64);
 

@@ -50,7 +50,7 @@ export default class UniformResourceIdentifier implements StaticStringParser<typ
   public get path(): Exclude<UniformResourceIdentifier['_path'], null> {
     if (
       this._path === null
-    ) throw new NonActionableError('`path` must either be a) provided via constructor or b) overridden via public getter');
+    ) return NonActionableError.throw('`path` must either be a) provided via constructor or b) overridden via public getter');
 
     return this._path;
   }
