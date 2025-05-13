@@ -20,6 +20,26 @@ class NonActionableError
     super(givenMessage, givenOptions);
     this.name = 'NonActionableError';
   }
+
+  public throw(): never {
+    throw this;
+  }
+
+  public static throw = (
+    givenMessage: NonActionableError['message'],
+    givenOptions?: ErrorOptions,
+  ): never => {
+    const newError = new NonActionableError(givenMessage, givenOptions);
+
+    if (
+      ('captureStackTrace' in Error)
+      && (Error.captureStackTrace instanceof Function)
+    ) {
+      Error.captureStackTrace.call(undefined, newError, NonActionableError.throw);
+    }
+
+    return newError.throw();
+  };
 }
 
 export default NonActionableError;
