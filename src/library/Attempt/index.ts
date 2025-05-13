@@ -11,6 +11,10 @@ import {
   ActionableError,
 } from './error';
 
+import {
+  assertPotentiallyActionable,
+} from './error/modifier';
+
 const outcomeOfFailedAttempt = <
   SomeProduct,
 >(
@@ -21,7 +25,8 @@ const outcomeOfFailedAttempt = <
   },
 ): Outcome<SomeProduct> => {
   const someError = asError(givenSubject);
-  return NonActionableError.rethrow(someError);
+  const potentiallyActionableError = assertPotentiallyActionable(someError);
+  return NonActionableError.rethrow(potentiallyActionableError);
 };
 
 const attemptTo = <
