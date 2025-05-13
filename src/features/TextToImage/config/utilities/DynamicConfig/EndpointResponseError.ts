@@ -1,8 +1,12 @@
+import {
+  ActionableError,
+} from '@/library/Attempt';
+
 import type {
   URLPath,
 } from '@/library/customTypes/URLComponent';
 
-class DynamicConfig_EndpointResponseError extends Error {
+class DynamicConfig_EndpointResponseError extends ActionableError<'DynamicConfig_EndpointResponseError'> {
   public constructor(given: {
     endpoint: URLPath;
     response: Response;

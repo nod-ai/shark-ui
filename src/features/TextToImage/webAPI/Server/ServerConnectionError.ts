@@ -1,4 +1,8 @@
-class TextToImage_Server_ConnectionError extends Error {
+import {
+  ActionableError,
+} from '@/library/Attempt';
+
+class TextToImage_Server_ConnectionError extends ActionableError<'TextToImage_ServerConnectionError'> {
   public constructor() {
     const message = [
       'Failed to reach the text-to-image server.',

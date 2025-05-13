@@ -1,8 +1,12 @@
+import {
+  ActionableError,
+} from '@/library/Attempt';
+
 import type {
   URLPath,
 } from '@/library/customTypes/URLComponent';
 
-class TextToImage_Server_SpecificationError extends Error {
+class TextToImage_Server_SpecificationError extends ActionableError<'TextToImage_Server_SpecificationError'> {
   public constructor(
     given: {
       environmentKey: string;
@@ -20,7 +24,7 @@ class TextToImage_Server_SpecificationError extends Error {
     ].join('\n');
 
     super(serverNotSpecifiedErrorMessage);
-    this.name = 'ServerSpecificationError';
+    this.name = 'TextToImage_Server_SpecificationError';
   }
 }
 

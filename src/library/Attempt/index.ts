@@ -8,6 +8,7 @@ import Outcome, {
 
 import {
   NonActionableError,
+  ActionableError,
 } from './error';
 
 const outcomeOfFailedAttempt = <
@@ -91,4 +92,5 @@ export default Attempt;
 
 export {
   NonActionableError,
+  ActionableError,
 };
