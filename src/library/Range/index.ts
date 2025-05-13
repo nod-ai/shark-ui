@@ -15,7 +15,7 @@ export default class Range {
   ) {
     if (
       upperBound < lowerBound
-    ) throw new NonActionableError('Upper bound must not be lower than lower bound');
+    ) return NonActionableError.throw('Upper bound must not be lower than lower bound');
 
     this.lowerBound = lowerBound;
     this.upperBound = upperBound;
