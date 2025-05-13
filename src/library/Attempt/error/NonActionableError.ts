@@ -40,6 +40,10 @@ class NonActionableError
 
     return newError.throw();
   };
+
+  public static rethrow = (givenError: Error): never => {
+    throw givenError;
+  };
 }
 
 export default NonActionableError;
