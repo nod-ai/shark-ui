@@ -3,7 +3,6 @@ import {
 } from '@/library/utilitiesByType/error';
 
 import Outcome, {
-  Failure,
   Success,
 } from './Outcome';
 
@@ -17,7 +16,7 @@ const outcomeOfFailedAttempt = <
   },
 ): Outcome<SomeProduct> => {
   const someError = asError(givenSubject);
-  return Failure.dueTo(someError);
+  throw someError;
 };
 
 const attemptTo = <

@@ -1,5 +1,6 @@
 import type {
   GenerateFromTextRequest,
+  GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
 import Attempt from '@/library/Attempt';
@@ -8,6 +9,10 @@ import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.t
 import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
 
 import ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image/index.ts';
+
+import {
+  asError,
+} from '@/library/utilitiesByType/error';
 
 import type {
   Output,
@@ -50,15 +55,25 @@ export const forciblyGenerateOutputFrom = async (
     },
   });
 
-  const outcomeOfSettlingTextToImageResponse = await Attempt.toSettle(promisedTextToImageResponse);
+  let textToImageResponse: GenerateFromTextResponse;
 
-  if (outcomeOfSettlingTextToImageResponse.isFailure) {
-    const errorThatPreventedResponse = outcomeOfSettlingTextToImageResponse.causeOfFailure;
-    const clientFailedToReachServer = errorThatPreventedResponse.message.includes('Failed to fetch');
+  // eslint-disable-next-line no-restricted-syntax
+  try {
+    const outcomeOfSettlingTextToImageResponse = await Attempt.toSettle(promisedTextToImageResponse);
+
+    if (
+      outcomeOfSettlingTextToImageResponse.isFailure
+    ) throw outcomeOfSettlingTextToImageResponse.causeOfFailure;
+
+    textToImageResponse = outcomeOfSettlingTextToImageResponse.productOfSuccess;
+  }
+  catch (whateverThatWasThrown) {
+    const someError = asError(whateverThatWasThrown);
+    const clientFailedToReachServer = someError.message.includes('Failed to fetch');
 
     if (
       !clientFailedToReachServer
-    ) throw errorThatPreventedResponse;
+    ) throw someError;
 
     const messageForServerConnectionError = [
       'Failed to reach the text-to-image server.',
@@ -67,8 +82,6 @@ export const forciblyGenerateOutputFrom = async (
 
     throw new Error(messageForServerConnectionError);
   }
-
-  const textToImageResponse = outcomeOfSettlingTextToImageResponse.productOfSuccess;
 
   if (
     !('artifacts' in textToImageResponse.result)
