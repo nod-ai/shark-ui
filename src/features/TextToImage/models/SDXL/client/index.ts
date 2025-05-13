@@ -66,7 +66,7 @@ export const forciblyGenerateOutputFrom = async (
 
     if (
       outcomeOfSettlingTextToImageResponse.isFailure
-    ) throw outcomeOfSettlingTextToImageResponse.causeOfFailure;
+    ) return NonActionableError.rethrow(outcomeOfSettlingTextToImageResponse.causeOfFailure);
 
     textToImageResponse = outcomeOfSettlingTextToImageResponse.productOfSuccess;
   }
@@ -76,7 +76,7 @@ export const forciblyGenerateOutputFrom = async (
 
     if (
       !clientFailedToReachServer
-    ) throw someError;
+    ) return NonActionableError.rethrow(someError);
 
     return new Server.ConnectionError().throwAnyway();
   }
