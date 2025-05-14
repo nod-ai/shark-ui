@@ -7,6 +7,7 @@ import {
   ConfigSchema,
 } from '../../types';
 
+import DynamicConfig_EndpointResponseError from './EndpointResponseError';
 import DynamicConfig_FetchingError from './FetchingError';
 
 const contentIsJSONIn = (givenResponse: Response): boolean => {
@@ -28,7 +29,10 @@ const forciblyFetchConfig = async (): Promise<Config> => {
 
   if (
     !contentIsJSONIn(endpointResponse)
-  ) throw new Error('Dynamic config: expected JSON response but received non-JSON content.');
+  ) throw new DynamicConfig_EndpointResponseError({
+    endpoint: configEndpoint,
+    response: endpointResponse,
+  });
 
   const unparsedSchema = await endpointResponse.json() as unknown;
   return ConfigSchema.parse(unparsedSchema);
@@ -38,4 +42,5 @@ export {
   configEndpoint as endpoint,
   forciblyFetchConfig as forciblyFetch,
   DynamicConfig_FetchingError as FetchingError,
+  DynamicConfig_EndpointResponseError as EndpointResponseError,
 };
