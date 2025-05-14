@@ -7,6 +7,8 @@ import {
   StaticConfig,
 } from '../../config';
 
+import TextToImage_Server_SpecificationError from './ServerSpecificationError';
+
 const environmentKeyForOriginOfTextToImageServer = 'VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN';
 
 const textToImageServerAccordingToEnvironment = ((): Server | null => {
@@ -22,15 +24,6 @@ const textToImageServerAccordingToEnvironment = ((): Server | null => {
 })();
 
 const forciblyRetrieveCurrentTextToImageServer = async (): Promise<Server> => {
-  const serverNotSpecifiedErrorMessage = [
-    'No text-to-image server was specified!',
-    'Either:',
-    `a) supply it's corresponding environment variable named \`${environmentKeyForOriginOfTextToImageServer}\` and rebuild`,
-    `b) specify it within ${StaticConfig.file.toString()}`,
-    'OR',
-    `c) specify it within the response from ${DynamicConfig.endpoint.toString()}`,
-  ].join('\n');
-
   // eslint-disable-next-line no-restricted-syntax
   try {
     if (
@@ -49,14 +42,23 @@ const forciblyRetrieveCurrentTextToImageServer = async (): Promise<Server> => {
       dynamicConfig.server !== null
     ) return dynamicConfig.server;
 
-    throw new Error(serverNotSpecifiedErrorMessage);
+    throw new TextToImage_Server_SpecificationError({
+      environmentKey: environmentKeyForOriginOfTextToImageServer,
+      file          : StaticConfig.file,
+      endpoint      : DynamicConfig.endpoint,
+    });
   }
   catch {
-    throw new Error(serverNotSpecifiedErrorMessage);
+    throw new TextToImage_Server_SpecificationError({
+      environmentKey: environmentKeyForOriginOfTextToImageServer,
+      file          : StaticConfig.file,
+      endpoint      : DynamicConfig.endpoint,
+    });
   }
 };
 
 export {
   textToImageServerAccordingToEnvironment as accordingToEnvironment,
   forciblyRetrieveCurrentTextToImageServer as forciblyRetrieveCurrent,
+  TextToImage_Server_SpecificationError as SpecificationError,
 };
