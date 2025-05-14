@@ -3,9 +3,21 @@ import {
 } from '@/library/utilitiesByType/error';
 
 import Outcome, {
-  Failure,
   Success,
 } from './Outcome';
+
+const outcomeOfFailedAttempt = <
+  SomeProduct,
+>(
+  {
+    basedOn: givenSubject,
+  }: {
+    basedOn: unknown;
+  },
+): Outcome<SomeProduct> => {
+  const someError = asError(givenSubject);
+  throw someError;
+};
 
 const attemptTo = <
   SomeProduct,
@@ -18,8 +30,9 @@ const attemptTo = <
     return Success.thatYielded(productFromSomeProcessThatDidNotThrow);
   }
   catch (whateverThatWasThrown) {
-    const someError = asError(whateverThatWasThrown);
-    return Failure.dueTo(someError);
+    return outcomeOfFailedAttempt<SomeProduct>({
+      basedOn: whateverThatWasThrown,
+    });
   }
 };
 
@@ -48,8 +61,9 @@ const attemptToEventually = async <
     return Success.thatYielded(productFromSomeSuccessfulAsyncProcess);
   }
   catch (whateverThatWasThrown) {
-    const someError = asError(whateverThatWasThrown);
-    return Failure.dueTo(someError);
+    return outcomeOfFailedAttempt<SomeProduct>({
+      basedOn: whateverThatWasThrown,
+    });
   }
 };
 
