@@ -6,6 +6,8 @@ import {
   isEmpty,
 } from '@/library/utilitiesByType/array.ts';
 
+import MediaTypeParsingError from './MediaTypeParsingError';
+
 const allFileTypes = [
   'application',
   'text',
@@ -101,11 +103,13 @@ export default class MediaType implements StaticStringParser<typeof MediaType> {
 
     if (
       !isEmpty(componentsFollowingUnexpectedFileTypeSuffix)
-    ) throw new Error(`Found component sets after extraneous file type suffix(es): ${componentsFollowingUnexpectedFileTypeSuffix.toString()}`);
+    ) throw new MediaTypeParsingError(`Found component sets after extraneous file type suffix(es): ${componentsFollowingUnexpectedFileTypeSuffix.toString()}`);
 
     const fileType = allFileTypes.find($0 => $0 === rawFileType);
 
-    if (fileType === undefined) throw new Error(`Expected file type as one of ${allFileTypes.toString()}`);
+    if (
+      fileType === undefined
+    ) throw new MediaTypeParsingError(`Expected file type as one of ${allFileTypes.toString()}`);
 
     const [
       remainderBeforeParameters,
@@ -121,15 +125,15 @@ export default class MediaType implements StaticStringParser<typeof MediaType> {
 
       if (
         !isEmpty(extraneousComponentsInEachParameter)
-      ) throw new Error(`Found extraneous components in parameter at index ${indexOfEachParameter.toString()}: ${extraneousComponentsInEachParameter.toString()}`);
+      ) throw new MediaTypeParsingError(`Found extraneous components in parameter at index ${indexOfEachParameter.toString()}: ${extraneousComponentsInEachParameter.toString()}`);
 
       if (
         keyOfEachParameter === undefined
-      ) throw new Error(`Expected key for parameter at index ${indexOfEachParameter.toString()}`);
+      ) throw new MediaTypeParsingError(`Expected key for parameter at index ${indexOfEachParameter.toString()}`);
 
       if (
         valueOfEachParameter === undefined
-      ) throw new Error(`Expected value for parameter at index ${indexOfEachParameter.toString()}`);
+      ) throw new MediaTypeParsingError(`Expected value for parameter at index ${indexOfEachParameter.toString()}`);
 
       return [
         keyOfEachParameter,
@@ -145,7 +149,7 @@ export default class MediaType implements StaticStringParser<typeof MediaType> {
 
     if (
       !isEmpty(extraComponentsWithStructureTypePrefix)
-    ) throw new Error(`Unexpected component sets after extraneous structure type prefix(es): ${extraComponentsWithStructureTypePrefix.toString()}`);
+    ) throw new MediaTypeParsingError(`Unexpected component sets after extraneous structure type prefix(es): ${extraComponentsWithStructureTypePrefix.toString()}`);
 
     const structureType = (() => {
       if (rawStructureType === undefined) return null;
@@ -154,20 +158,22 @@ export default class MediaType implements StaticStringParser<typeof MediaType> {
 
       if (
         potentialStructureType === undefined
-      ) throw new Error(`Expected structure type as one of ${allStructuredSyntaxNameSuffix.toString()}`);
+      ) throw new MediaTypeParsingError(`Expected structure type as one of ${allStructuredSyntaxNameSuffix.toString()}`);
 
       return potentialStructureType;
     })();
 
     if (
       serializedTreeBranchesEndingInFileSubtype === undefined
-    ) throw new Error('Expected file subtype');
+    ) throw new MediaTypeParsingError('Expected file subtype');
 
     const treeBranchesEndingInFileSubtype = serializedTreeBranchesEndingInFileSubtype.split(MediaType.treeBranchSuffix);
     const reversedTreeBranchesBeginningWithFileSubtype = treeBranchesEndingInFileSubtype.reverse();
     const fileSubtype = reversedTreeBranchesBeginningWithFileSubtype.shift();
 
-    if (fileSubtype === undefined) throw new Error('Expected file subtype');
+    if (
+      fileSubtype === undefined
+    ) throw new MediaTypeParsingError('Expected file subtype');
 
     const tree = reversedTreeBranchesBeginningWithFileSubtype.reverse();
 
