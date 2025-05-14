@@ -5,7 +5,9 @@ import {
 import {
   Config,
   ConfigSchema,
-} from '../types';
+} from '../../types';
+
+import StaticConfigReadingError from './StaticConfigReadingError';
 
 const configFile = URLPath.forciblyParsedFrom('/config/text-to-image.json');
 
@@ -14,7 +16,7 @@ const forciblyReadConfig = async (): Promise<Config> => {
 
   if (
     !fileResponse.ok
-  ) throw new Error(`Failed to read config: ${fileResponse.statusText}`);
+  ) throw new StaticConfigReadingError(configFile, fileResponse);
 
   const unparsedSchema = await fileResponse.json() as unknown;
   return ConfigSchema.parse(unparsedSchema);
@@ -23,4 +25,5 @@ const forciblyReadConfig = async (): Promise<Config> => {
 export {
   configFile as file,
   forciblyReadConfig as forciblyRead,
+  StaticConfigReadingError as ReadingError,
 };
