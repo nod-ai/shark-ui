@@ -5,7 +5,9 @@ import {
 import {
   Config,
   ConfigSchema,
-} from '../types';
+} from '../../types';
+
+import DynamicConfigFetchingError from './DynamicConfigFetchError';
 
 const contentIsJSONIn = (givenResponse: Response): boolean => {
   const contentType = givenResponse.headers.get('Content-Type');
@@ -22,7 +24,7 @@ const forciblyFetchConfig = async (): Promise<Config> => {
 
   if (
     !endpointResponse.ok
-  ) throw new Error('Dynamic config: failed to fetch config from endpoint');
+  ) throw new DynamicConfigFetchingError(configEndpoint);
 
   if (
     !contentIsJSONIn(endpointResponse)
@@ -35,4 +37,5 @@ const forciblyFetchConfig = async (): Promise<Config> => {
 export {
   configEndpoint as endpoint,
   forciblyFetchConfig as forciblyFetch,
+  DynamicConfigFetchingError as FetchingError,
 };
