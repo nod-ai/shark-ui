@@ -1,4 +1,4 @@
-import NonTrivialString from '@/library/customTypes/NonTrivialString.ts';
+import NonTrivialString from '@/library/customTypes/NonTrivialString';
 
 import type {
   StaticStringParser,

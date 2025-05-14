@@ -1,6 +1,6 @@
 import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
 
-import NonTrivialString from '@/library/customTypes/NonTrivialString.ts';
+import NonTrivialString from '@/library/customTypes/NonTrivialString';
 
 import {
   isEmpty,
