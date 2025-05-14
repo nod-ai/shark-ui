@@ -22,22 +22,6 @@ export const accordingToEnvironment = ((): Server | null => {
 })();
 
 export const forciblyRetrieveCurrent = async (): Promise<Server> => {
-  if (
-    accordingToEnvironment !== null
-  ) return accordingToEnvironment;
-
-  const staticConfig = await StaticConfig.forciblyRead();
-
-  if (
-    staticConfig.server !== null
-  ) return staticConfig.server;
-
-  const dynamicConfig = await DynamicConfig.forciblyFetch();
-
-  if (
-    dynamicConfig.server !== null
-  ) return dynamicConfig.server;
-
   const serverNotSpecifiedErrorMessage = [
     'No text-to-image server was specified!',
     'Either:',
@@ -47,5 +31,27 @@ export const forciblyRetrieveCurrent = async (): Promise<Server> => {
     `c) specify it within the response from ${DynamicConfig.endpoint.toString()}`,
   ].join('\n');
 
-  throw new Error(serverNotSpecifiedErrorMessage);
+  // eslint-disable-next-line no-restricted-syntax
+  try {
+    if (
+      accordingToEnvironment !== null
+    ) return accordingToEnvironment;
+
+    const staticConfig = await StaticConfig.forciblyRead();
+
+    if (
+      staticConfig.server !== null
+    ) return staticConfig.server;
+
+    const dynamicConfig = await DynamicConfig.forciblyFetch();
+
+    if (
+      dynamicConfig.server !== null
+    ) return dynamicConfig.server;
+
+    throw new Error(serverNotSpecifiedErrorMessage);
+  }
+  catch {
+    throw new Error(serverNotSpecifiedErrorMessage);
+  }
 };
