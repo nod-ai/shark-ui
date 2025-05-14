@@ -8,6 +8,8 @@ import {
   isEmpty,
 } from '@/library/utilitiesByType/array.ts';
 
+import URIParsingError from './URIParsingError';
+
 /**
  * Identifies an abstract or physical resource.
  * See [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986) for more information
@@ -110,9 +112,11 @@ export default class UniformResourceIdentifier implements StaticStringParser<typ
 
     if (
       !isEmpty(componentsFollowingUnexpectedSchemeSuffix)
-    ) throw new Error(`Found components with extra scheme suffix: ${componentsFollowingUnexpectedSchemeSuffix.join()}`);
+    ) throw new URIParsingError(`Found components with extra scheme suffix: ${componentsFollowingUnexpectedSchemeSuffix.join()}`);
 
-    if (scheme === undefined) throw new Error('Expected a scheme');
+    if (
+      scheme === undefined
+    ) throw new URIParsingError('Expected a scheme');
 
     const [
       componentsPrecedingFragment,
@@ -122,7 +126,7 @@ export default class UniformResourceIdentifier implements StaticStringParser<typ
 
     if (
       !isEmpty(unexpectedComponentsWithFragmentPrefix)
-    ) throw new Error(`Found extra components with fragment prefix: ${unexpectedComponentsWithFragmentPrefix.join()}`);
+    ) throw new URIParsingError(`Found extra components with fragment prefix: ${unexpectedComponentsWithFragmentPrefix.join()}`);
 
     const [
       componentsPrecedingQuery,
@@ -132,9 +136,11 @@ export default class UniformResourceIdentifier implements StaticStringParser<typ
 
     if (
       !isEmpty(unexpectedComponentsWithQueryPrefix)
-    ) throw new Error(`Found extra components with query prefix: ${unexpectedComponentsWithQueryPrefix.join()}`);
+    ) throw new URIParsingError(`Found extra components with query prefix: ${unexpectedComponentsWithQueryPrefix.join()}`);
 
-    if (componentsPrecedingQuery === undefined) throw new Error('Expected components preceding query');
+    if (
+      componentsPrecedingQuery === undefined
+    ) throw new URIParsingError('Expected components preceding query');
 
     const pathSegmentDelimiter = '/';
 
@@ -164,7 +170,9 @@ export default class UniformResourceIdentifier implements StaticStringParser<typ
         ...pathSegments
       ] = authorityAndPath.split(pathSegmentDelimiter);
 
-      if (authority === undefined) throw new Error('Expected to find authority between its prefix and the path segments');
+      if (
+        authority === undefined
+      ) throw new URIParsingError('Expected to find authority between its prefix and the path segments');
 
       return {
         authority,
