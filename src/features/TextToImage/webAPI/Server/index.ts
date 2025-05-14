@@ -5,12 +5,12 @@ import {
 import {
   DynamicConfig,
   StaticConfig,
-} from '../config';
+} from '../../config';
 
-const environmentKeyForOrigin = 'VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN';
+const environmentKeyForOriginOfTextToImageServer = 'VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN';
 
-export const accordingToEnvironment = ((): Server | null => {
-  const originAccordingToEnvironment = import.meta.env[environmentKeyForOrigin];
+const textToImageServerAccordingToEnvironment = ((): Server | null => {
+  const originAccordingToEnvironment = import.meta.env[environmentKeyForOriginOfTextToImageServer];
 
   if (
     originAccordingToEnvironment === undefined
@@ -21,11 +21,11 @@ export const accordingToEnvironment = ((): Server | null => {
   });
 })();
 
-export const forciblyRetrieveCurrent = async (): Promise<Server> => {
+const forciblyRetrieveCurrentTextToImageServer = async (): Promise<Server> => {
   const serverNotSpecifiedErrorMessage = [
     'No text-to-image server was specified!',
     'Either:',
-    `a) supply it's corresponding environment variable named \`${environmentKeyForOrigin}\` and rebuild`,
+    `a) supply it's corresponding environment variable named \`${environmentKeyForOriginOfTextToImageServer}\` and rebuild`,
     `b) specify it within ${StaticConfig.file.toString()}`,
     'OR',
     `c) specify it within the response from ${DynamicConfig.endpoint.toString()}`,
@@ -34,8 +34,8 @@ export const forciblyRetrieveCurrent = async (): Promise<Server> => {
   // eslint-disable-next-line no-restricted-syntax
   try {
     if (
-      accordingToEnvironment !== null
-    ) return accordingToEnvironment;
+      textToImageServerAccordingToEnvironment !== null
+    ) return textToImageServerAccordingToEnvironment;
 
     const staticConfig = await StaticConfig.forciblyRead();
 
@@ -54,4 +54,9 @@ export const forciblyRetrieveCurrent = async (): Promise<Server> => {
   catch {
     throw new Error(serverNotSpecifiedErrorMessage);
   }
+};
+
+export {
+  textToImageServerAccordingToEnvironment as accordingToEnvironment,
+  forciblyRetrieveCurrentTextToImageServer as forciblyRetrieveCurrent,
 };
