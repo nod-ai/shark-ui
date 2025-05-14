@@ -12,7 +12,7 @@ import {
 const TextToImage_ConfigSchema = z.object({
   server: WebAPI.ServerSchema
     .or(z.null())
-    .default(null),
+    .catch(null),
 }).transform($0 => new TextToImage_Config(
   $0.server,
 ));
