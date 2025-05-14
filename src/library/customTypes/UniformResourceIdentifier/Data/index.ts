@@ -13,6 +13,7 @@ import {
   type DataURIBinaryEncoding,
 } from './DataURIBinaryEncoding.ts';
 
+import DataURIParsingError from './DataURIParsingError.ts';
 import MediaType from './MediaType.ts';
 
 /** See [RFC 2397](https://datatracker.ietf.org/doc/rfc2397) for more info */
@@ -68,7 +69,9 @@ export default class DataURI extends UniformResourceIdentifier {
   public static override forciblyParsedFrom(givenSubject: string): DataURI {
     const proposedURI = super.forciblyParsedFrom(givenSubject);
 
-    if (!proposedURI.scheme.isEqualTo(DataURI.scheme)) throw new Error(`Expected scheme to be "${DataURI.scheme.toString()}"`);
+    if (
+      !proposedURI.scheme.isEqualTo(DataURI.scheme)
+    ) throw new DataURIParsingError(`Expected scheme to be "${DataURI.scheme.toString()}"`);
 
     const [
       mediaTypeAndEncoding,
@@ -78,9 +81,11 @@ export default class DataURI extends UniformResourceIdentifier {
 
     if (
       !isEmpty(extraComponentsWithDataPrefix)
-    ) throw new Error(`Unexpected components with data prefix: ${extraComponentsWithDataPrefix.toString()}`);
+    ) throw new DataURIParsingError(`Unexpected components with data prefix: ${extraComponentsWithDataPrefix.toString()}`);
 
-    if (rawData === undefined) throw new Error('Expected data portion to be defined');
+    if (
+      rawData === undefined
+    ) throw new DataURIParsingError('Expected data portion to be defined');
 
     const [
       rawMediaType,
@@ -90,13 +95,17 @@ export default class DataURI extends UniformResourceIdentifier {
 
     if (
       !isEmpty(extraComponentsWithEncodingPrefix)
-    ) throw new Error(`Unexpected components with encoding prefix: ${extraComponentsWithEncodingPrefix.toString()}`);
+    ) throw new DataURIParsingError(`Unexpected components with encoding prefix: ${extraComponentsWithEncodingPrefix.toString()}`);
 
-    if (rawMediaType === undefined) throw new Error('Expected `mediaType` portion to be defined');
+    if (
+      rawMediaType === undefined
+    ) throw new DataURIParsingError('Expected `mediaType` portion to be defined');
 
     const coercedEncoding = allDataURIBinaryEncodings.find($0 => $0 === rawEncoding);
 
-    if (coercedEncoding === undefined) throw new Error(`Expected encoding portion to be defined as one of: ${allDataURIBinaryEncodings.toString()}`);
+    if (
+      coercedEncoding === undefined
+    ) throw new DataURIParsingError(`Expected encoding portion to be defined as one of: ${allDataURIBinaryEncodings.toString()}`);
 
     return new DataURI(
       MediaType.forciblyParsedFrom(rawMediaType),
