@@ -1,6 +1,4 @@
-import {
-  cofactor,
-} from '@/library/math/operators.ts';
+import * as Byte from '@/library/Byte';
 
 import type {
   StaticStringParser,
@@ -12,10 +10,6 @@ import {
 } from '@/library/utilitiesByType/string.ts';
 
 import StringSubset from './StringSubset.ts';
-
-const Byte = {
-  bitCount: 8 as const,
-};
 
 const Base64 = {
   Character: {
@@ -32,19 +26,10 @@ export default class Base64CharacterEncodedByteSequence
   implements StaticStringParser<typeof Base64CharacterEncodedByteSequence> {
   public static paddingCharacter = '=';
 
-  private static readonly byteCofactor = cofactor({
-    to        : Base64.bitCount,
-    forLCMWith: Byte.bitCount,
-  });
+  private static readonly byteCofactor = Byte.cofactorTo(Base64.bitCount);
 
   private static readonly minNumberOf6BitSegments = 2; // lowest number of 6-bit segments (12 bits) to exceed an 8-bit segment
   private static readonly maxNumberOfPaddingCharacters = this.byteCofactor - this.minNumberOf6BitSegments;
-
-  private static assertIsByteEncodable(givenCharacters: string): string {
-    if (givenCharacters.length % this.byteCofactor === 0) return givenCharacters;
-
-    throw new Error(`Character count for sequence must be a multiple of ${this.byteCofactor.toString()} to be byte encodable`);
-  }
 
   private static withPaddingDecoupled(givenSequence: string): [string, string] {
     let remainingSequence = givenSequence;
@@ -72,7 +57,10 @@ export default class Base64CharacterEncodedByteSequence
   public static forciblyParsedFrom(
     givenCharacters: string,
   ): Base64CharacterEncodedByteSequence {
-    const paddedByteEncodableCharacters = this.assertIsByteEncodable(givenCharacters);
+    const paddedByteEncodableCharacters = Byte.Sequence.assertEncodable(givenCharacters, {
+      assuming: Base64.bitCount,
+    });
+
     const [byteEncodableCharacters, padding] = this.withPaddingDecoupled(paddedByteEncodableCharacters);
     const base64ByteEncodableCharacters = this.assertConsistsOfBase64Alphabet(byteEncodableCharacters);
     const base64CharacterEncodedByteSequence = base64ByteEncodableCharacters + padding;
