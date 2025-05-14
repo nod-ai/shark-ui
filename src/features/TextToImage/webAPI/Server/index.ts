@@ -7,6 +7,10 @@ import {
   StaticConfig,
 } from '../../config';
 
+export {
+  default as ConnectionError,
+} from './ServerConnectionError';
+
 import TextToImage_Server_SpecificationError from './ServerSpecificationError';
 
 const environmentKeyForOriginOfTextToImageServer = 'VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN';
