@@ -75,12 +75,7 @@ export const forciblyGenerateOutputFrom = async (
       !clientFailedToReachServer
     ) throw someError;
 
-    const messageForServerConnectionError = [
-      'Failed to reach the text-to-image server.',
-      `Are you sure it's running?`,
-    ].join('\n');
-
-    throw new Error(messageForServerConnectionError);
+    throw new Server.ConnectionError();
   }
 
   if (

@@ -8,15 +8,19 @@ import {
   isEmpty,
 } from '@/library/utilitiesByType/string.ts';
 
-import StringSubset from './StringSubset.ts';
+import StringSubset from '../StringSubset.ts';
 
-export default class NonTrivialString
+import NonTrivialStringParsingError from './NonTrivialStringParsingError.ts';
+
+class NonTrivialString
   extends StringSubset<'NonTrivialString'>
   implements StaticStringParser<typeof NonTrivialString> {
   public static forciblyParsedFrom(givenSubject: string): NonTrivialString {
     const trimmedSubject = givenSubject.trim();
 
-    if (isEmpty(trimmedSubject)) throw new Error('Expected a non-trivial string');
+    if (
+      isEmpty(trimmedSubject)
+    ) throw new NonTrivialStringParsingError(givenSubject);
 
     return new NonTrivialString(givenSubject);
   }
@@ -31,3 +35,5 @@ export default class NonTrivialString
     return this.toString() === that.toString();
   }
 }
+
+export default NonTrivialString;

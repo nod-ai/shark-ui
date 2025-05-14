@@ -4,6 +4,16 @@ import type {
   StaticStringParser,
 } from '@/library/typeUtilities/StaticStringParser.ts';
 
+export class URLOriginParsingError extends Error {
+  public constructor(given: {
+    expectation: string;
+    reality: string;
+  }) {
+    super(`Expected pure origin "${given.expectation}", got "${given.reality}"`);
+    this.name = 'URLOriginParsingError';
+  }
+}
+
 export class URLOrigin
   extends StringSubset<'URLOrigin'>
   implements StaticStringParser<typeof URLOrigin> {
@@ -12,7 +22,10 @@ export class URLOrigin
 
     if (
       derived.origin !== givenSubject
-    ) throw new Error(`Expected pure origin: ${derived.origin}, got: ${givenSubject}`);
+    ) throw new URLOriginParsingError({
+      expectation: derived.origin,
+      reality    : givenSubject,
+    });
 
     return new URLOrigin(derived.origin);
   }
