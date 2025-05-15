@@ -1,10 +1,14 @@
+import {
+  ActionableError,
+} from '@/library/Attempt';
+
 import StringSubset from '@/library/customTypes/StringSubset.ts';
 
 import type {
   StaticStringParser,
 } from '@/library/typeUtilities/StaticStringParser.ts';
 
-export class URLPathParsingError extends Error {
+export class URLPathParsingError extends ActionableError<'URLPathParsingError'> {
   public constructor(given: {
     expectation: string;
     reality: string;

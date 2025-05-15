@@ -1,4 +1,8 @@
-class MediaTypeParsingError extends Error {
+import {
+  ActionableError,
+} from '@/library/Attempt';
+
+class MediaTypeParsingError extends ActionableError<'MediaTypeParsingError'> {
   public constructor(givenMessage: string) {
     super(givenMessage);
     this.name = 'MediaTypeParsingError';

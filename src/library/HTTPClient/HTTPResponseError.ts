@@ -1,10 +1,15 @@
+import {
+  ActionableError,
+} from '@/library/Attempt';
+
 import * as HTTPResponse from './HTTPResponse';
 
-export default class HTTPResponseError extends Error {
+export default class HTTPResponseError extends ActionableError<'HTTPResponseError'> {
   public readonly status: HTTPResponse.ErrorStatusCode;
 
   public constructor(givenMessage: string, givenStatus: HTTPResponse.ErrorStatusCode) {
     super(givenMessage);
+    this.name = 'HTTPResponseError';
     this.status = givenStatus;
   }
 }
