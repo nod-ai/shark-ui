@@ -99,6 +99,10 @@ const configWithVueTS = defineConfigWithVueTs(
           selector: 'TryStatement',
           message : 'Prefer `Attempt` over `try`/`catch` for error handling.',
         },
+        {
+          selector: 'ThrowStatement',
+          message : 'Must choose a path: `NonActionableError.throw(...)`, `NonActionableError.rethrow(...)`, or `someActionableError.throwAnyway()`',
+        },
       ],
       '@typescript-eslint/explicit-member-accessibility': [
         'error', // Easier to see dead code in situations where a member is marked `private`
