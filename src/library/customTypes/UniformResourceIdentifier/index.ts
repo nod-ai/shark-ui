@@ -1,3 +1,7 @@
+import {
+  NonActionableError,
+} from '@/library/Attempt';
+
 import NonTrivialString from '@/library/customTypes/NonTrivialString';
 
 import type {
@@ -44,7 +48,9 @@ export default class UniformResourceIdentifier implements StaticStringParser<typ
   }
 
   public get path(): Exclude<UniformResourceIdentifier['_path'], null> {
-    if (this._path === null) throw new Error('`path` must either be a) provided via constructor or b) overridden via public getter');
+    if (
+      this._path === null
+    ) throw new NonActionableError('`path` must either be a) provided via constructor or b) overridden via public getter');
 
     return this._path;
   }

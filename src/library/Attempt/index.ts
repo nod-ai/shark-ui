@@ -6,6 +6,10 @@ import Outcome, {
   Success,
 } from './Outcome';
 
+import {
+  NonActionableError,
+} from './error';
+
 const outcomeOfFailedAttempt = <
   SomeProduct,
 >(
@@ -84,3 +88,7 @@ const Attempt = {
 };
 
 export default Attempt;
+
+export {
+  NonActionableError,
+};
