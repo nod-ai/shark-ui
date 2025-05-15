@@ -78,7 +78,7 @@ export const forciblyGenerateOutputFrom = async (
       !clientFailedToReachServer
     ) throw someError;
 
-    throw new Server.ConnectionError();
+    return new Server.ConnectionError().throwAnyway();
   }
 
   if (

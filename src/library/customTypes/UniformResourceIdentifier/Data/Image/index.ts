@@ -52,13 +52,13 @@ export default class ImageURI extends DataURI {
 
     if (
       proposedURI.mediaType.fileType !== ImageURI.mediaType
-    ) throw new ImageURIParsingError(`Expected media type starting with ${ImageURI.mediaType}`);
+    ) return new ImageURIParsingError(`Expected media type starting with ${ImageURI.mediaType}`).throwAnyway();
 
     const format = allImageURIFormats.find($0 => $0 === proposedURI.mediaType.fileSubtype);
 
     if (
       format === undefined
-    ) throw new ImageURIParsingError(`Expected format to be one of ${allImageURIFormats.toString()}`);
+    ) return new ImageURIParsingError(`Expected format to be one of ${allImageURIFormats.toString()}`).throwAnyway();
 
     return new ImageURI(
       format,

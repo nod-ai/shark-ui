@@ -26,10 +26,10 @@ export class URLPath
 
     if (
       exampleURL.pathname !== givenSubject
-    ) throw new URLPathParsingError({
+    ) return new URLPathParsingError({
       expectation: exampleURL.pathname,
       reality    : givenSubject,
-    });
+    }).throwAnyway();
 
     return new URLPath(exampleURL.pathname);
   }

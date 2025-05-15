@@ -45,7 +45,7 @@ export default class HTTPClient {
       body   : JSON.stringify(givenRequestBody),
     });
 
-    if (!response.ok) throw new HTTPResponseError(response.statusText, response.status);
+    if (!response.ok) return new HTTPResponseError(response.statusText, response.status).throwAnyway();
 
     return await response.json();
   }

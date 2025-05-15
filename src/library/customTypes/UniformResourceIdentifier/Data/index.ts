@@ -77,7 +77,7 @@ export default class DataURI extends UniformResourceIdentifier {
 
     if (
       !proposedURI.scheme.isEqualTo(DataURI.scheme)
-    ) throw new DataURIParsingError(`Expected scheme to be "${DataURI.scheme.toString()}"`);
+    ) return new DataURIParsingError(`Expected scheme to be "${DataURI.scheme.toString()}"`).throwAnyway();
 
     const [
       mediaTypeAndEncoding,
@@ -87,11 +87,11 @@ export default class DataURI extends UniformResourceIdentifier {
 
     if (
       !isEmpty(extraComponentsWithDataPrefix)
-    ) throw new DataURIParsingError(`Unexpected components with data prefix: ${extraComponentsWithDataPrefix.toString()}`);
+    ) return new DataURIParsingError(`Unexpected components with data prefix: ${extraComponentsWithDataPrefix.toString()}`).throwAnyway();
 
     if (
       rawData === undefined
-    ) throw new DataURIParsingError('Expected data portion to be defined');
+    ) return new DataURIParsingError('Expected data portion to be defined').throwAnyway();
 
     const [
       rawMediaType,
@@ -101,17 +101,17 @@ export default class DataURI extends UniformResourceIdentifier {
 
     if (
       !isEmpty(extraComponentsWithEncodingPrefix)
-    ) throw new DataURIParsingError(`Unexpected components with encoding prefix: ${extraComponentsWithEncodingPrefix.toString()}`);
+    ) return new DataURIParsingError(`Unexpected components with encoding prefix: ${extraComponentsWithEncodingPrefix.toString()}`).throwAnyway();
 
     if (
       rawMediaType === undefined
-    ) throw new DataURIParsingError('Expected `mediaType` portion to be defined');
+    ) return new DataURIParsingError('Expected `mediaType` portion to be defined').throwAnyway();
 
     const coercedEncoding = allDataURIBinaryEncodings.find($0 => $0 === rawEncoding);
 
     if (
       coercedEncoding === undefined
-    ) throw new DataURIParsingError(`Expected encoding portion to be defined as one of: ${allDataURIBinaryEncodings.toString()}`);
+    ) return new DataURIParsingError(`Expected encoding portion to be defined as one of: ${allDataURIBinaryEncodings.toString()}`).throwAnyway();
 
     return new DataURI(
       MediaType.forciblyParsedFrom(rawMediaType),

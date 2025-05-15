@@ -20,7 +20,7 @@ class NonTrivialString
 
     if (
       isEmpty(trimmedSubject)
-    ) throw new NonTrivialStringParsingError(givenSubject);
+    ) return new NonTrivialStringParsingError(givenSubject).throwAnyway();
 
     return new NonTrivialString(givenSubject);
   }

@@ -16,7 +16,7 @@ const Byte_Sequence_assertEncodable = (
 
   if (
     givenSequence.length % byteCofactor !== 0
-  ) throw new Byte_Sequence_EncodingCompatibilityError(givenBitWidth);
+  ) return new Byte_Sequence_EncodingCompatibilityError(givenBitWidth).throwAnyway();
 
   return givenSequence;
 };

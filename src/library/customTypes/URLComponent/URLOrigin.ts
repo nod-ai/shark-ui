@@ -26,10 +26,10 @@ export class URLOrigin
 
     if (
       derived.origin !== givenSubject
-    ) throw new URLOriginParsingError({
+    ) return new URLOriginParsingError({
       expectation: derived.origin,
       reality    : givenSubject,
-    });
+    }).throwAnyway();
 
     return new URLOrigin(derived.origin);
   }
