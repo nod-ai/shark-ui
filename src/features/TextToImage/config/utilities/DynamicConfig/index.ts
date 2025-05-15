@@ -25,14 +25,14 @@ const forciblyFetchConfig = async (): Promise<Config> => {
 
   if (
     !endpointResponse.ok
-  ) throw new DynamicConfig_FetchingError(configEndpoint);
+  ) return new DynamicConfig_FetchingError(configEndpoint).throwAnyway();
 
   if (
     !contentIsJSONIn(endpointResponse)
-  ) throw new DynamicConfig_EndpointResponseError({
+  ) return new DynamicConfig_EndpointResponseError({
     endpoint: configEndpoint,
     response: endpointResponse,
-  });
+  }).throwAnyway();
 
   const unparsedSchema = await endpointResponse.json() as unknown;
   return ConfigSchema.parse(unparsedSchema);

@@ -16,7 +16,7 @@ const forciblyReadConfig = async (): Promise<Config> => {
 
   if (
     !fileResponse.ok
-  ) throw new StaticConfigReadingError(configFile, fileResponse);
+  ) return new StaticConfigReadingError(configFile, fileResponse).throwAnyway();
 
   const unparsedSchema = await fileResponse.json() as unknown;
   return ConfigSchema.parse(unparsedSchema);

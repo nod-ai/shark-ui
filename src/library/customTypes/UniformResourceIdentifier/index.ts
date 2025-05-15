@@ -118,11 +118,11 @@ export default class UniformResourceIdentifier implements StaticStringParser<typ
 
     if (
       !isEmpty(componentsFollowingUnexpectedSchemeSuffix)
-    ) throw new URIParsingError(`Found components with extra scheme suffix: ${componentsFollowingUnexpectedSchemeSuffix.join()}`);
+    ) return new URIParsingError(`Found components with extra scheme suffix: ${componentsFollowingUnexpectedSchemeSuffix.join()}`).throwAnyway();
 
     if (
       scheme === undefined
-    ) throw new URIParsingError('Expected a scheme');
+    ) return new URIParsingError('Expected a scheme').throwAnyway();
 
     const [
       componentsPrecedingFragment,
@@ -132,7 +132,7 @@ export default class UniformResourceIdentifier implements StaticStringParser<typ
 
     if (
       !isEmpty(unexpectedComponentsWithFragmentPrefix)
-    ) throw new URIParsingError(`Found extra components with fragment prefix: ${unexpectedComponentsWithFragmentPrefix.join()}`);
+    ) return new URIParsingError(`Found extra components with fragment prefix: ${unexpectedComponentsWithFragmentPrefix.join()}`).throwAnyway();
 
     const [
       componentsPrecedingQuery,
@@ -142,11 +142,11 @@ export default class UniformResourceIdentifier implements StaticStringParser<typ
 
     if (
       !isEmpty(unexpectedComponentsWithQueryPrefix)
-    ) throw new URIParsingError(`Found extra components with query prefix: ${unexpectedComponentsWithQueryPrefix.join()}`);
+    ) return new URIParsingError(`Found extra components with query prefix: ${unexpectedComponentsWithQueryPrefix.join()}`).throwAnyway();
 
     if (
       componentsPrecedingQuery === undefined
-    ) throw new URIParsingError('Expected components preceding query');
+    ) return new URIParsingError('Expected components preceding query').throwAnyway();
 
     const pathSegmentDelimiter = '/';
 
@@ -178,7 +178,7 @@ export default class UniformResourceIdentifier implements StaticStringParser<typ
 
       if (
         authority === undefined
-      ) throw new URIParsingError('Expected to find authority between its prefix and the path segments');
+      ) return new URIParsingError('Expected to find authority between its prefix and the path segments').throwAnyway();
 
       return {
         authority,

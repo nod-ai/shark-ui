@@ -46,18 +46,18 @@ const forciblyRetrieveCurrentTextToImageServer = async (): Promise<Server> => {
       dynamicConfig.server !== null
     ) return dynamicConfig.server;
 
-    throw new TextToImage_Server_SpecificationError({
+    return new TextToImage_Server_SpecificationError({
       environmentKey: environmentKeyForOriginOfTextToImageServer,
       file          : StaticConfig.file,
       endpoint      : DynamicConfig.endpoint,
-    });
+    }).throwAnyway();
   }
   catch {
-    throw new TextToImage_Server_SpecificationError({
+    return new TextToImage_Server_SpecificationError({
       environmentKey: environmentKeyForOriginOfTextToImageServer,
       file          : StaticConfig.file,
       endpoint      : DynamicConfig.endpoint,
-    });
+    }).throwAnyway();
   }
 };
 
