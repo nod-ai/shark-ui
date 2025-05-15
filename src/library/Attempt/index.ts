@@ -13,6 +13,7 @@ import {
 
 import {
   assertPotentiallyActionable,
+  assertSafelyPropagated,
 } from './error/modifier';
 
 const outcomeOfFailedAttempt = <
@@ -26,7 +27,8 @@ const outcomeOfFailedAttempt = <
 ): Outcome<SomeProduct> => {
   const someError = asError(givenSubject);
   const potentiallyActionableError = assertPotentiallyActionable(someError);
-  return NonActionableError.rethrow(potentiallyActionableError);
+  const safelyPropagatedError = assertSafelyPropagated(potentiallyActionableError);
+  return NonActionableError.rethrow(safelyPropagatedError);
 };
 
 const attemptTo = <
