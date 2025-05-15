@@ -2,11 +2,11 @@ import type {
   URLPath,
 } from '@/library/customTypes/URLComponent';
 
-class DynamicConfigFetchingError extends Error {
+class DynamicConfig_FetchingError extends Error {
   public constructor(givenEndpoint: URLPath) {
     super(`Failed to fetch text-to-image config from endpoint: ${givenEndpoint.toString()}`);
-    this.name = 'DynamicConfigFetchError';
+    this.name = 'DynamicConfig_FetchingError';
   }
 }
 
-export default DynamicConfigFetchingError;
+export default DynamicConfig_FetchingError;
