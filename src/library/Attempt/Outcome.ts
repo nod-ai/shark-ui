@@ -52,7 +52,7 @@ interface Failure extends SemanticallySugarfreeFailure {
    *   someOutcome.isSuccess
    * ) return;
    *
-   * throw someOutcome.causeOfFailure;
+   * return NonActionableError.rethrow(someOutcome.causeOfFailure);
    * ```
    */
   readonly causeOfFailure: this['cause'];

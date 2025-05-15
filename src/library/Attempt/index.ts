@@ -21,7 +21,7 @@ const outcomeOfFailedAttempt = <
   },
 ): Outcome<SomeProduct> => {
   const someError = asError(givenSubject);
-  throw someError;
+  return NonActionableError.rethrow(someError);
 };
 
 const attemptTo = <

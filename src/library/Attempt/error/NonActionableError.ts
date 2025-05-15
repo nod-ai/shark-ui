@@ -20,6 +20,35 @@ class NonActionableError
     super(givenMessage, givenOptions);
     this.name = 'NonActionableError';
   }
+
+  public throw(): never {
+    throw this;
+  }
+
+  public static throw = (
+    givenMessage: NonActionableError['message'],
+    givenOptions?: ErrorOptions,
+  ): never => {
+    const newError = new NonActionableError(givenMessage, givenOptions);
+
+    if (
+      ('captureStackTrace' in Error)
+      && (Error.captureStackTrace instanceof Function)
+    ) {
+      Error.captureStackTrace.call(undefined, newError, NonActionableError.throw);
+    }
+
+    return newError.throw();
+  };
+
+  public static rethrow = (givenError: Error): never => {
+    return this.throw(
+      'Expected error to be either re-interpreted or handled altogether',
+      {
+        cause: givenError,
+      },
+    );
+  };
 }
 
 export default NonActionableError;
