@@ -7,7 +7,7 @@ import {
   ConfigSchema,
 } from '../../types';
 
-import DynamicConfigFetchingError from './DynamicConfigFetchError';
+import DynamicConfig_FetchingError from './FetchingError';
 
 const contentIsJSONIn = (givenResponse: Response): boolean => {
   const contentType = givenResponse.headers.get('Content-Type');
@@ -24,7 +24,7 @@ const forciblyFetchConfig = async (): Promise<Config> => {
 
   if (
     !endpointResponse.ok
-  ) throw new DynamicConfigFetchingError(configEndpoint);
+  ) throw new DynamicConfig_FetchingError(configEndpoint);
 
   if (
     !contentIsJSONIn(endpointResponse)
@@ -37,5 +37,5 @@ const forciblyFetchConfig = async (): Promise<Config> => {
 export {
   configEndpoint as endpoint,
   forciblyFetchConfig as forciblyFetch,
-  DynamicConfigFetchingError as FetchingError,
+  DynamicConfig_FetchingError as FetchingError,
 };
