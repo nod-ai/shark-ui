@@ -34,7 +34,7 @@ const forciblyRetrieveCurrentTextToImageServer = async (): Promise<Server> => {
 
   // eslint-disable-next-line no-restricted-syntax
   try {
-    const staticConfig = await StaticConfig.forciblyRead();
+    const staticConfig = (await StaticConfig.read()).forciblyUnwrap();
 
     if (
       staticConfig.server !== null
