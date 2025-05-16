@@ -48,20 +48,6 @@ const attemptTo = <
   }
 };
 
-const attemptToOpaquely = <
-  SomeProduct,
->(
-  getProductFromSomeProcessThatCanThrow: () => SomeProduct,
-): SomeProduct | null => {
-  const outcomeOfProcess = attemptTo(getProductFromSomeProcessThatCanThrow);
-
-  if (
-    outcomeOfProcess.isFailure
-  ) return null;
-
-  return outcomeOfProcess.productOfSuccess;
-};
-
 const attemptToEventually = async <
   SomeProduct,
   SomeActionableError extends ActionableError<string>,
@@ -92,7 +78,6 @@ const attemptToSettle = async <
 
 const Attempt = {
   to          : attemptTo,
-  toOpaquely  : attemptToOpaquely,
   toEventually: attemptToEventually,
   toSettle    : attemptToSettle,
 };

@@ -1,5 +1,6 @@
 import type {
   Is,
+  If,
   Not,
 } from '@/library/typeUtilities/Boolean';
 import type {
@@ -15,19 +16,31 @@ interface SyntacticallySugarfreeDiscriminableOutcome {
   readonly case: 'success' | 'failure';
 }
 
-interface DiscriminableOutcome extends SyntacticallySugarfreeDiscriminableOutcome {
+interface DiscriminableOutcome<
+  SomeProduct,
+> extends SyntacticallySugarfreeDiscriminableOutcome {
   readonly isSuccess: Is<this['case'], 'success'>;
   readonly isFailure: Not<this['isSuccess']>;
+
+  optionallyUnwrap(): If<this['isSuccess'],
+    SomeProduct,
+    null
+  >;
+
+  forciblyUnwrap(): If<this['isSuccess'],
+    SomeProduct,
+    never
+  >;
 }
 
-interface SemanticallySugarfreeSuccess<SomeProduct> extends DiscriminableOutcome {
+interface SemanticallySugarfreeSuccess<SomeProduct> extends DiscriminableOutcome<SomeProduct> {
   readonly case: 'success';
   readonly product: SomeProduct;
 }
 
 interface SemanticallySugarfreeFailure<
   SomeActionableError extends ActionableError<string>,
-> extends DiscriminableOutcome {
+> extends DiscriminableOutcome<unknown> {
   readonly case: 'failure';
   readonly cause: SomeActionableError;
 }
@@ -112,13 +125,17 @@ const withSugar = <
       ...given,
       isSuccess       : true,
       isFailure       : false,
+      optionallyUnwrap: () => given.product,
+      forciblyUnwrap  : () => given.product,
       productOfSuccess: given.product,
     };
     case 'failure': return {
       ...given,
-      isSuccess     : false,
-      isFailure     : true,
-      causeOfFailure: given.cause,
+      isSuccess       : false,
+      isFailure       : true,
+      optionallyUnwrap: () => null,
+      forciblyUnwrap  : () => given.cause.throwAnyway(),
+      causeOfFailure  : given.cause,
     };
   }
 };

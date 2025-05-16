@@ -28,7 +28,8 @@ class NonTrivialString
   public static nullableParsedFrom(givenSubject: string | null): NonTrivialString | null {
     if (givenSubject === null) return givenSubject;
 
-    return Attempt.toOpaquely(() => this.forciblyParsedFrom(givenSubject));
+    const outcomeOfParsingSubject = Attempt.to(() => this.forciblyParsedFrom(givenSubject));
+    return outcomeOfParsingSubject.optionallyUnwrap();
   }
 
   public isEqualTo(that: NonTrivialString): boolean {
