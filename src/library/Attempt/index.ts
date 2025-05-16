@@ -2,9 +2,7 @@ import {
   asError,
 } from '@/library/utilitiesByType/error';
 
-import Outcome, {
-  Success,
-} from './Outcome';
+import Outcome from './Outcome';
 
 import {
   NonActionableError,
@@ -39,7 +37,7 @@ const attemptTo = <
   // eslint-disable-next-line no-restricted-syntax
   try {
     const productFromSomeProcessThatDidNotThrow = getProductFromSomeProcessThatCanThrow();
-    return Success.thatYielded(productFromSomeProcessThatDidNotThrow);
+    return Outcome.successThatYielded(productFromSomeProcessThatDidNotThrow);
   }
   catch (whateverThatWasThrown) {
     return outcomeOfFailedAttempt<SomeProduct>({
@@ -70,7 +68,7 @@ const attemptToEventually = async <
   // eslint-disable-next-line no-restricted-syntax
   try {
     const productFromSomeSuccessfulAsyncProcess: SomeProduct = await getProductFromSomeAsyncProcessThatCanThrow();
-    return Success.thatYielded(productFromSomeSuccessfulAsyncProcess);
+    return Outcome.successThatYielded(productFromSomeSuccessfulAsyncProcess);
   }
   catch (whateverThatWasThrown) {
     return outcomeOfFailedAttempt<SomeProduct>({
@@ -100,4 +98,5 @@ export default Attempt;
 export {
   NonActionableError,
   ActionableError,
+  Outcome,
 };

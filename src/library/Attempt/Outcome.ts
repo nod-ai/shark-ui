@@ -131,17 +131,9 @@ const successThatYielded = <
   );
 };
 
-export const Success = {
-  thatYielded: successThatYielded,
-};
-
-export const Failure = {
-  dueTo: failureDueTo,
-};
-
 const Outcome = {
-  Negative: Failure,
-  Positive: Success,
+  failureDueTo,
+  successThatYielded,
 };
 
 export default Outcome;
