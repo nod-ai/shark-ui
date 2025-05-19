@@ -11,7 +11,7 @@ import {
 
 import StaticConfigReadingError from './StaticConfigReadingError';
 
-const configFile = URLPath.forciblyParsedFrom('/config/text-to-image.json');
+const configFile = URLPath.parsedFrom('/config/text-to-image.json').forciblyUnwrap();
 
 type OutcomeOfReadingConfig = Attempt.Outcome<
   Config,

@@ -22,7 +22,7 @@ const contentIsJSONIn = (givenResponse: Response): boolean => {
   return contentType.includes('application/json');
 };
 
-const configEndpoint = URLPath.forciblyParsedFrom('/config/text-to-image');
+const configEndpoint = URLPath.parsedFrom('/config/text-to-image').forciblyUnwrap();
 
 type OutcomeOfFetchingConfig = Attempt.Outcome<Config,
   | DynamicConfig_FetchingError
