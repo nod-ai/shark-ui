@@ -150,7 +150,7 @@ class ShimmedStabilityAIClient extends HTTP.Client {
     serverURL: string;
   }) {
     super({
-      origin : URLOrigin.forciblyParsedFrom(given.serverURL),
+      origin : URLOrigin.parsedFrom(given.serverURL).forciblyUnwrap(),
       headers: {
         'Content-Type': 'application/json',
       },
