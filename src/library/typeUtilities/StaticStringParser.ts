@@ -1,12 +1,12 @@
+import type ForcibleStringParser from '@/library/typeUtilities/ForcibleStringParser';
 import type Static from '@/library/typeUtilities/Static.ts';
-import type StringParser from '@/library/typeUtilities/StringParser.ts';
 
 type StaticStringParser<
   SomeClassType extends
   & Static<
     SomeClassType['prototype']
   >
-  & StringParser<
+  & ForcibleStringParser<
     SomeClassType['prototype']
   >,
 > = SomeClassType['prototype'];
