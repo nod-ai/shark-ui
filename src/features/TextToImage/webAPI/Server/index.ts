@@ -28,12 +28,12 @@ const textToImageServerAccordingToEnvironment = ((): Server | null => {
 })();
 
 const forciblyRetrieveCurrentTextToImageServer = async (): Promise<Server> => {
+  if (
+    textToImageServerAccordingToEnvironment !== null
+  ) return textToImageServerAccordingToEnvironment;
+
   // eslint-disable-next-line no-restricted-syntax
   try {
-    if (
-      textToImageServerAccordingToEnvironment !== null
-    ) return textToImageServerAccordingToEnvironment;
-
     const staticConfig = await StaticConfig.forciblyRead();
 
     if (
