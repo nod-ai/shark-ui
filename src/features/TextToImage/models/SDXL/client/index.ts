@@ -5,6 +5,7 @@ import type {
 
 import Attempt, {
   NonActionableError,
+  Outcome,
 } from '@/library/Attempt';
 
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
@@ -24,12 +25,22 @@ import {
   Server,
 } from '@/features/TextToImage/webAPI';
 
-const forciblyInitializeShimmedStabilityAIClient = async (): Promise<ShimmedStabilityAIClient> => {
-  const textToImageServer = (await Server.retrieveCurrent()).forciblyUnwrap();
+const initializeShimmedStabilityAIClient = async (): Promise<
+  Outcome<ShimmedStabilityAIClient, Server.SpecificationError>
+> => {
+  const outcomeOfRetrievingCurrentServer = await Server.retrieveCurrent();
 
-  return new ShimmedStabilityAIClient({
+  if (
+    outcomeOfRetrievingCurrentServer.isFailure
+  ) return outcomeOfRetrievingCurrentServer;
+
+  const textToImageServer = outcomeOfRetrievingCurrentServer.unwrapped;
+
+  const newClient = new ShimmedStabilityAIClient({
     serverURL: textToImageServer.origin,
   });
+
+  return Outcome.successThatYielded(newClient);
 };
 
 export const forciblyGenerateOutputFrom = async (
@@ -44,7 +55,7 @@ export const forciblyGenerateOutputFrom = async (
     >;
   },
 ): Promise<Output> => {
-  const shimmedStabilityAIClient = await forciblyInitializeShimmedStabilityAIClient();
+  const shimmedStabilityAIClient = (await initializeShimmedStabilityAIClient()).forciblyUnwrap();
 
   const promisedTextToImageResponse = shimmedStabilityAIClient.version1.image.forciblyGenerateFromText({
     engineId              : 'stable-diffusion-xl-1024-v1-0',
