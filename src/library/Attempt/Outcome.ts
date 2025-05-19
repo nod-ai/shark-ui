@@ -47,18 +47,35 @@ interface SemanticallySugarfreeFailure<
 
 interface Success<SomeProduct> extends SemanticallySugarfreeSuccess<SomeProduct> {
   /**
-   * Semantic sugar for `product`; useful for juxtaposition against guard statements:
+   * Access the product nested within a successful outcome.
+   *
+   * Adds a final parallel to the `optionallyUnwrap` and `forciblyUnwrapped` methods:
    * ```ts
-   * ...
+   * function doRiskyThingUnsafely(
+   *   givenOutcome: Outcome<SomeProduct, SomeActionableError>,
+   * ): void {
+   *   console.log(givenOutcome.forciblyUnwrap());
+   * }
    *
-   * if (
-   *   someOutcome.isFailure
-   * ) return null;
+   * function doRiskyThingSafelyWhileIgnoringErrors(
+   *   givenOutcome: Outcome<SomeProduct, SomeActionableError>,
+   * ): void {
+   *   console.log(givenOutcome.optionallyUnwrap());
+   * }
    *
-   * return someOutcome.productOfSuccess;
+   * function doRiskyThingSafelyWhileHandlingErrors(
+   *   givenOutcome: Outcome<SomeProduct, SomeActionableError>,
+   *   recoverFrom: (someError: SomeActionableError) => void,
+   * ): void {
+   *   if (
+   *     givenOutcome.isFailure
+   *   ) recoverFrom(givenOutcome.causeOfFailure);
+   *
+   *   console.log(givenOutcome.unwrapped);
+   * }
    * ```
    */
-  readonly productOfSuccess: this['product'];
+  readonly unwrapped: this['product'];
 }
 
 interface Failure<
@@ -127,7 +144,7 @@ const withSugar = <
       isFailure       : false,
       optionallyUnwrap: () => given.product,
       forciblyUnwrap  : () => given.product,
-      productOfSuccess: given.product,
+      unwrapped       : given.product,
     };
     case 'failure': return {
       ...given,

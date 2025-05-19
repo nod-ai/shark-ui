@@ -68,7 +68,7 @@ export const forciblyGenerateOutputFrom = async (
       outcomeOfSettlingTextToImageResponse.isFailure
     ) return NonActionableError.rethrow(outcomeOfSettlingTextToImageResponse.causeOfFailure);
 
-    textToImageResponse = outcomeOfSettlingTextToImageResponse.productOfSuccess;
+    textToImageResponse = outcomeOfSettlingTextToImageResponse.unwrapped;
   }
   catch (whateverThatWasThrown) {
     const someError = asError(whateverThatWasThrown);
