@@ -10,24 +10,24 @@ import {
   type ActionableError,
 } from './error';
 
-// cspell:words sugarfree
-interface SyntacticallySugarfreeEmptyOutcome {
+// cspell:words sugarfree discriminable
+interface SyntacticallySugarfreeDiscriminableOutcome {
   readonly case: 'success' | 'failure';
 }
 
-interface EmptyOutcome extends SyntacticallySugarfreeEmptyOutcome {
+interface DiscriminableOutcome extends SyntacticallySugarfreeDiscriminableOutcome {
   readonly isSuccess: Is<this['case'], 'success'>;
   readonly isFailure: Not<this['isSuccess']>;
 }
 
-interface SemanticallySugarfreeSuccess<SomeProduct> extends EmptyOutcome {
+interface SemanticallySugarfreeSuccess<SomeProduct> extends DiscriminableOutcome {
   readonly case: 'success';
   readonly product: SomeProduct;
 }
 
 interface SemanticallySugarfreeFailure<
   SomeActionableError extends ActionableError<string>,
-> extends EmptyOutcome {
+> extends DiscriminableOutcome {
   readonly case: 'failure';
   readonly cause: SomeActionableError;
 }
