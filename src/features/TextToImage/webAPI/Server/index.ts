@@ -1,4 +1,8 @@
 import {
+  Outcome,
+} from '@/library/Attempt';
+
+import {
   Server,
 } from '@/library/WebAPI';
 
@@ -28,32 +32,36 @@ const textToImageServerAccordingToEnvironment = ((): Server | null => {
   });
 })();
 
-const forciblyRetrieveCurrentTextToImageServer = async (): Promise<Server> => {
+const retrieveCurrentTextToImageServer = async (): Promise<
+  Outcome<Server, TextToImage_Server_SpecificationError>
+> => {
   if (
     textToImageServerAccordingToEnvironment !== null
-  ) return textToImageServerAccordingToEnvironment;
+  ) return Outcome.successThatYielded(textToImageServerAccordingToEnvironment);
 
   const staticConfig = (await StaticConfig.read()).optionallyUnwrap() ?? emptyConfig;
 
   if (
     staticConfig.server !== null
-  ) return staticConfig.server;
+  ) return Outcome.successThatYielded(staticConfig.server);
 
   const dynamicConfig = (await DynamicConfig.fetch()).optionallyUnwrap() ?? emptyConfig;
 
   if (
     dynamicConfig.server !== null
-  ) return dynamicConfig.server;
+  ) return Outcome.successThatYielded(dynamicConfig.server);
 
-  return new TextToImage_Server_SpecificationError({
+  const newSpecificationError = new TextToImage_Server_SpecificationError({
     environmentKey: environmentKeyForOriginOfTextToImageServer,
     file          : StaticConfig.file,
     endpoint      : DynamicConfig.endpoint,
-  }).throwAnyway();
+  });
+
+  return Outcome.failureDueTo(newSpecificationError);
 };
 
 export {
   textToImageServerAccordingToEnvironment as accordingToEnvironment,
-  forciblyRetrieveCurrentTextToImageServer as forciblyRetrieveCurrent,
+  retrieveCurrentTextToImageServer as retrieveCurrent,
   TextToImage_Server_SpecificationError as SpecificationError,
 };
