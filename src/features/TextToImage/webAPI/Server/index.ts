@@ -5,6 +5,7 @@ import {
 import {
   DynamicConfig,
   StaticConfig,
+  emptyConfig,
 } from '../../config';
 
 export {
@@ -28,37 +29,27 @@ const textToImageServerAccordingToEnvironment = ((): Server | null => {
 })();
 
 const forciblyRetrieveCurrentTextToImageServer = async (): Promise<Server> => {
-  // eslint-disable-next-line no-restricted-syntax
-  try {
-    if (
-      textToImageServerAccordingToEnvironment !== null
-    ) return textToImageServerAccordingToEnvironment;
+  if (
+    textToImageServerAccordingToEnvironment !== null
+  ) return textToImageServerAccordingToEnvironment;
 
-    const staticConfig = await StaticConfig.forciblyRead();
+  const staticConfig = (await StaticConfig.read()).optionallyUnwrap() ?? emptyConfig;
 
-    if (
-      staticConfig.server !== null
-    ) return staticConfig.server;
+  if (
+    staticConfig.server !== null
+  ) return staticConfig.server;
 
-    const dynamicConfig = await DynamicConfig.forciblyFetch();
+  const dynamicConfig = (await DynamicConfig.fetch()).optionallyUnwrap() ?? emptyConfig;
 
-    if (
-      dynamicConfig.server !== null
-    ) return dynamicConfig.server;
+  if (
+    dynamicConfig.server !== null
+  ) return dynamicConfig.server;
 
-    return new TextToImage_Server_SpecificationError({
-      environmentKey: environmentKeyForOriginOfTextToImageServer,
-      file          : StaticConfig.file,
-      endpoint      : DynamicConfig.endpoint,
-    }).throwAnyway();
-  }
-  catch {
-    return new TextToImage_Server_SpecificationError({
-      environmentKey: environmentKeyForOriginOfTextToImageServer,
-      file          : StaticConfig.file,
-      endpoint      : DynamicConfig.endpoint,
-    }).throwAnyway();
-  }
+  return new TextToImage_Server_SpecificationError({
+    environmentKey: environmentKeyForOriginOfTextToImageServer,
+    file          : StaticConfig.file,
+    endpoint      : DynamicConfig.endpoint,
+  }).throwAnyway();
 };
 
 export {

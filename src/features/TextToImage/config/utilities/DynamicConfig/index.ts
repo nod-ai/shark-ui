@@ -1,4 +1,8 @@
 import {
+  Outcome,
+} from '@/library/Attempt';
+
+import {
   URLPath,
 } from '@/library/customTypes/URLComponent';
 
@@ -20,27 +24,36 @@ const contentIsJSONIn = (givenResponse: Response): boolean => {
 
 const configEndpoint = URLPath.forciblyParsedFrom('/config/text-to-image');
 
-const forciblyFetchConfig = async (): Promise<Config> => {
+type OutcomeOfFetchingConfig = Outcome<Config,
+  | DynamicConfig_FetchingError
+  | DynamicConfig_EndpointResponseError
+>;
+
+const fetchConfig = async (): Promise<OutcomeOfFetchingConfig> => {
   const endpointResponse = await fetch(configEndpoint.toString());
+  const fetchingError = new DynamicConfig_FetchingError(configEndpoint);
 
   if (
     !endpointResponse.ok
-  ) return new DynamicConfig_FetchingError(configEndpoint).throwAnyway();
+  ) return Outcome.failureDueTo(fetchingError);
+
+  const endpointResponseError = new DynamicConfig_EndpointResponseError({
+    endpoint: configEndpoint,
+    response: endpointResponse,
+  });
 
   if (
     !contentIsJSONIn(endpointResponse)
-  ) return new DynamicConfig_EndpointResponseError({
-    endpoint: configEndpoint,
-    response: endpointResponse,
-  }).throwAnyway();
+  ) return Outcome.failureDueTo(endpointResponseError);
 
   const unparsedSchema = await endpointResponse.json() as unknown;
-  return ConfigSchema.parse(unparsedSchema);
+  const fetchedConfig = ConfigSchema.parse(unparsedSchema);
+  return Outcome.successThatYielded(fetchedConfig);
 };
 
 export {
   configEndpoint as endpoint,
-  forciblyFetchConfig as forciblyFetch,
+  fetchConfig as fetch,
   DynamicConfig_FetchingError as FetchingError,
   DynamicConfig_EndpointResponseError as EndpointResponseError,
 };
