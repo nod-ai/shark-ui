@@ -5,6 +5,7 @@ import {
 import {
   DynamicConfig,
   StaticConfig,
+  emptyConfig,
 } from '../../config';
 
 export {
@@ -32,14 +33,14 @@ const forciblyRetrieveCurrentTextToImageServer = async (): Promise<Server> => {
     textToImageServerAccordingToEnvironment !== null
   ) return textToImageServerAccordingToEnvironment;
 
+  const staticConfig = (await StaticConfig.read()).optionallyUnwrap() ?? emptyConfig;
+
+  if (
+    staticConfig.server !== null
+  ) return staticConfig.server;
+
   // eslint-disable-next-line no-restricted-syntax
   try {
-    const staticConfig = (await StaticConfig.read()).forciblyUnwrap();
-
-    if (
-      staticConfig.server !== null
-    ) return staticConfig.server;
-
     const dynamicConfig = await DynamicConfig.forciblyFetch();
 
     if (
