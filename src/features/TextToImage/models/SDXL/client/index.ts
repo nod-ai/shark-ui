@@ -5,6 +5,7 @@ import type {
 
 import Attempt, {
   NonActionableError,
+  Outcome,
 } from '@/library/Attempt';
 
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
@@ -24,15 +25,29 @@ import {
   Server,
 } from '@/features/TextToImage/webAPI';
 
-const forciblyInitializeShimmedStabilityAIClient = async (): Promise<ShimmedStabilityAIClient> => {
-  const textToImageServer = await Server.forciblyRetrieveCurrent();
+const initializeShimmedStabilityAIClient = async (): Promise<
+  Outcome<ShimmedStabilityAIClient, Server.SpecificationError>
+> => {
+  const outcomeOfRetrievingCurrentServer = await Server.retrieveCurrent();
 
-  return new ShimmedStabilityAIClient({
+  if (
+    outcomeOfRetrievingCurrentServer.isFailure
+  ) return outcomeOfRetrievingCurrentServer;
+
+  const textToImageServer = outcomeOfRetrievingCurrentServer.unwrapped;
+
+  const newClient = new ShimmedStabilityAIClient({
     serverURL: textToImageServer.origin,
   });
+
+  return Outcome.successThatYielded(newClient);
 };
 
-export const forciblyGenerateOutputFrom = async (
+type OutcomeOfGeneratingTextToImageOutput = Outcome<Output,
+  | Server.ConnectionError
+>;
+
+export const generateOutputFrom = async (
   given: {
     textToImageRequestBody: Pick<GenerateFromTextRequest['textToImageRequestBody'],
     | 'textPrompts'
@@ -43,8 +58,8 @@ export const forciblyGenerateOutputFrom = async (
     | 'seed'
     >;
   },
-): Promise<Output> => {
-  const shimmedStabilityAIClient = await forciblyInitializeShimmedStabilityAIClient();
+): Promise<OutcomeOfGeneratingTextToImageOutput> => {
+  const shimmedStabilityAIClient = (await initializeShimmedStabilityAIClient()).forciblyUnwrap();
 
   const promisedTextToImageResponse = shimmedStabilityAIClient.version1.image.forciblyGenerateFromText({
     engineId              : 'stable-diffusion-xl-1024-v1-0',
@@ -80,7 +95,7 @@ export const forciblyGenerateOutputFrom = async (
       !clientFailedToReachServer
     ) return NonActionableError.rethrow(someError);
 
-    return new Server.ConnectionError().throwAnyway();
+    return Outcome.failureDueTo(new Server.ConnectionError());
   }
 
   if (
@@ -115,13 +130,13 @@ export const forciblyGenerateOutputFrom = async (
       .join(', '),
   };
 
-  return {
+  return Outcome.successThatYielded({
     image: newImage,
-  };
+  });
 };
 
 const SDXLTextToImageClient = {
-  forciblyGenerateOutputFrom,
+  generateOutputFrom,
 };
 
 export default SDXLTextToImageClient;

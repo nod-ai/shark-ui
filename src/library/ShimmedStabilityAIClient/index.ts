@@ -100,16 +100,20 @@ const z_imageGenerationResponseBody = z.object({
   images: z.tuple([z_image]).rest(z_image),
 });
 
+const generationEndpoint = URLPath.forciblyParsedFrom('/generate');
+
 class ImageClient extends HTTPClient {
   public async forciblyGenerateFromText(
     givenRequest: GenerateFromTextRequest,
   ): Promise<GenerateFromTextResponse> {
-    const newResource = await this.forciblySubmitResource({
+    const outcomeOfSubmittingResource = await this.submitResource({
       bySending: toBatchGenerationRequestBody([
         givenRequest.textToImageRequestBody,
       ]),
-      to: URLPath.forciblyParsedFrom('/generate'),
+      to: generationEndpoint,
     });
+
+    const newResource = outcomeOfSubmittingResource.forciblyUnwrap();
 
     const {
       images,

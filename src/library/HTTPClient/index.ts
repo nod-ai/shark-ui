@@ -1,3 +1,7 @@
+import {
+  Outcome,
+} from '@/library/Attempt';
+
 import type {
   URLOrigin,
   URLPath,
@@ -29,7 +33,7 @@ export default class HTTPClient {
     );
   }
 
-  public async forciblySend(
+  public async send(
     givenRequestBody: unknown,
     {
       to: givenPath,
@@ -38,32 +42,34 @@ export default class HTTPClient {
       to: URLPath;
       using: HTTPRequest.Method;
     },
-  ): Promise<unknown> {
+  ): Promise<Outcome<unknown, HTTPResponseError>> {
     const response = await fetch(this.originAt(givenPath), {
       method : givenMethod,
       headers: this.headers,
       body   : JSON.stringify(givenRequestBody),
     });
 
-    if (!response.ok) return new HTTPResponseError(response.statusText, response.status).throwAnyway();
+    if (
+      !response.ok
+    ) return Outcome.failureDueTo(new HTTPResponseError(response.statusText, response.status));
 
-    return await response.json();
+    return Outcome.successThatYielded(await response.json());
   }
 
-  public async forciblyFetchResource(
+  public async fetchResource(
     {
       from: givenPath,
     }: {
       from: URLPath;
     },
-  ): Promise<unknown> {
-    return await this.forciblySend(null, {
+  ): Promise<Outcome<unknown, HTTPResponseError>> {
+    return await this.send(null, {
       to   : givenPath,
       using: HTTPRequest.Method.FETCH,
     });
   }
 
-  public async forciblySubmitResource(
+  public async submitResource(
     {
       bySending: givenSubmission,
       to: givenPath,
@@ -71,14 +77,14 @@ export default class HTTPClient {
       bySending: unknown;
       to: URLPath;
     },
-  ): Promise<unknown> {
-    return await this.forciblySend(givenSubmission, {
+  ): Promise<Outcome<unknown, HTTPResponseError>> {
+    return await this.send(givenSubmission, {
       to   : givenPath,
       using: HTTPRequest.Method.SUBMIT,
     });
   }
 
-  public async forciblyCreateResource(
+  public async createResource(
     {
       bySending: givenProperties,
       to: givenPath,
@@ -86,14 +92,14 @@ export default class HTTPClient {
       bySending: unknown;
       to: URLPath;
     },
-  ): Promise<unknown> {
-    return await this.forciblySend(givenProperties, {
+  ): Promise<Outcome<unknown, HTTPResponseError>> {
+    return await this.send(givenProperties, {
       to   : givenPath,
       using: HTTPRequest.Method.CREATE,
     });
   }
 
-  public async forciblyUpdateResource(
+  public async updateResource(
     {
       bySending: givenChanges,
       to: givenPath,
@@ -101,15 +107,17 @@ export default class HTTPClient {
       bySending: unknown;
       to: URLPath;
     },
-  ): Promise<unknown> {
-    return await this.forciblySend(givenChanges, {
+  ): Promise<Outcome<unknown, HTTPResponseError>> {
+    return await this.send(givenChanges, {
       to   : givenPath,
       using: HTTPRequest.Method.UPDATE,
     });
   }
 
-  public async forciblyDeleteResourceAt(givenPath: URLPath): Promise<unknown> {
-    return await this.forciblySend(null, {
+  public async deleteResourceAt(
+    givenPath: URLPath,
+  ): Promise<Outcome<unknown, HTTPResponseError>> {
+    return await this.send(null, {
       to   : givenPath,
       using: HTTPRequest.Method.DELETE,
     });
