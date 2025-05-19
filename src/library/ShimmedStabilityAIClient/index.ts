@@ -106,12 +106,14 @@ class ImageClient extends HTTPClient {
   public async forciblyGenerateFromText(
     givenRequest: GenerateFromTextRequest,
   ): Promise<GenerateFromTextResponse> {
-    const newResource = await this.forciblySubmitResource({
+    const outcomeOfSubmittingResource = await this.submitResource({
       bySending: toBatchGenerationRequestBody([
         givenRequest.textToImageRequestBody,
       ]),
       to: generationEndpoint,
     });
+
+    const newResource = outcomeOfSubmittingResource.forciblyUnwrap();
 
     const {
       images,
