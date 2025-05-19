@@ -1,48 +1,86 @@
 import type {
   Is,
+  If,
   Not,
 } from '@/library/typeUtilities/Boolean';
 import type {
   Filter,
 } from '@/library/typeUtilities/Filter';
 
-// cspell:words sugarfree
-interface SyntacticallySugarfreeEmptyOutcome {
+import {
+  type ActionableError,
+} from './error';
+
+// cspell:words sugarfree discriminable
+interface SyntacticallySugarfreeDiscriminableOutcome {
   readonly case: 'success' | 'failure';
 }
 
-interface EmptyOutcome extends SyntacticallySugarfreeEmptyOutcome {
+interface DiscriminableOutcome<
+  SomeProduct,
+> extends SyntacticallySugarfreeDiscriminableOutcome {
   readonly isSuccess: Is<this['case'], 'success'>;
   readonly isFailure: Not<this['isSuccess']>;
+
+  optionallyUnwrap(): If<this['isSuccess'],
+    SomeProduct,
+    null
+  >;
+
+  forciblyUnwrap(): If<this['isSuccess'],
+    SomeProduct,
+    never
+  >;
 }
 
-interface SemanticallySugarfreeSuccess<SomeProduct> extends EmptyOutcome {
+interface SemanticallySugarfreeSuccess<SomeProduct> extends DiscriminableOutcome<SomeProduct> {
   readonly case: 'success';
   readonly product: SomeProduct;
 }
 
-interface SemanticallySugarfreeFailure extends EmptyOutcome {
+interface SemanticallySugarfreeFailure<
+  SomeActionableError extends ActionableError<string>,
+> extends DiscriminableOutcome<unknown> {
   readonly case: 'failure';
-  readonly cause: Error;
+  readonly cause: SomeActionableError;
 }
 
 interface Success<SomeProduct> extends SemanticallySugarfreeSuccess<SomeProduct> {
   /**
-   * Semantic sugar for `product`; useful for juxtaposition against guard statements:
+   * Access the product nested within a successful outcome.
+   *
+   * Adds a final parallel to the `optionallyUnwrap` and `forciblyUnwrapped` methods:
    * ```ts
-   * ...
+   * function doRiskyThingUnsafely(
+   *   givenOutcome: Outcome<SomeProduct, SomeActionableError>,
+   * ): void {
+   *   console.log(givenOutcome.forciblyUnwrap());
+   * }
    *
-   * if (
-   *   someOutcome.isFailure
-   * ) return null;
+   * function doRiskyThingSafelyWhileIgnoringErrors(
+   *   givenOutcome: Outcome<SomeProduct, SomeActionableError>,
+   * ): void {
+   *   console.log(givenOutcome.optionallyUnwrap());
+   * }
    *
-   * return someOutcome.productOfSuccess;
+   * function doRiskyThingSafelyWhileHandlingErrors(
+   *   givenOutcome: Outcome<SomeProduct, SomeActionableError>,
+   *   recoverFrom: (someError: SomeActionableError) => void,
+   * ): void {
+   *   if (
+   *     givenOutcome.isFailure
+   *   ) recoverFrom(givenOutcome.causeOfFailure);
+   *
+   *   console.log(givenOutcome.unwrapped);
+   * }
    * ```
    */
-  readonly productOfSuccess: this['product'];
+  readonly unwrapped: this['product'];
 }
 
-interface Failure extends SemanticallySugarfreeFailure {
+interface Failure<
+  SomeActionableError extends ActionableError<string>,
+> extends SemanticallySugarfreeFailure<SomeActionableError> {
   /**
    * Semantic sugar for `cause`; useful for juxtaposition against guard statements:
    * ```ts
@@ -60,12 +98,13 @@ interface Failure extends SemanticallySugarfreeFailure {
 
 type Outcome<
   SomeProduct,
+  SomeActionableError extends ActionableError<string>,
 > =
   | Success<SomeProduct>
-  | Failure;
+  | Failure<SomeActionableError>;
 
 type Sugarfree<
-  SomeOutcome extends Outcome<unknown>,
+  SomeOutcome extends Outcome<unknown, ActionableError<string>>,
 > = Filter<SomeOutcome,
 | 'case'
 | 'product'
@@ -74,74 +113,75 @@ type Sugarfree<
 
 const sugarfreeFailureDueTo = <
   SomeProduct,
+  SomeActionableError extends ActionableError<string>,
 >(
-  givenError: Error,
-): Sugarfree<Outcome<SomeProduct>> => ({
+  givenError: SomeActionableError,
+): Sugarfree<Outcome<SomeProduct, SomeActionableError>> => ({
   case : 'failure',
   cause: givenError,
 });
 
 const sugarfreeSuccessThatYielded = <
   SomeProduct,
+  SomeActionableError extends ActionableError<string>,
 >(
   givenProduct: SomeProduct,
-): Sugarfree<Outcome<SomeProduct>> => ({
+): Sugarfree<Outcome<SomeProduct, SomeActionableError>> => ({
   case   : 'success',
   product: givenProduct,
 });
 
 const withSugar = <
   SomeProduct,
+  SomeActionableError extends ActionableError<string>,
 >(
-  given: Sugarfree<Outcome<SomeProduct>>,
-): Outcome<SomeProduct> => {
+  given: Sugarfree<Outcome<SomeProduct, SomeActionableError>>,
+): Outcome<SomeProduct, SomeActionableError> => {
   switch (given.case) {
     case 'success': return {
       ...given,
       isSuccess       : true,
       isFailure       : false,
-      productOfSuccess: given.product,
+      optionallyUnwrap: () => given.product,
+      forciblyUnwrap  : () => given.product,
+      unwrapped       : given.product,
     };
     case 'failure': return {
       ...given,
-      isSuccess     : false,
-      isFailure     : true,
-      causeOfFailure: given.cause,
+      isSuccess       : false,
+      isFailure       : true,
+      optionallyUnwrap: () => null,
+      forciblyUnwrap  : () => given.cause.throwAnyway(),
+      causeOfFailure  : given.cause,
     };
   }
 };
 
 const failureDueTo = <
   SomeProduct,
+  SomeActionableError extends ActionableError<string>,
 >(
-  givenError: Error,
-): Outcome<SomeProduct> => {
-  return withSugar<SomeProduct>(
+  givenError: SomeActionableError,
+): Outcome<SomeProduct, SomeActionableError> => {
+  return withSugar(
     sugarfreeFailureDueTo(givenError),
   );
 };
 
 const successThatYielded = <
   SomeProduct,
+  SomeActionableError extends ActionableError<string>,
 >(
   givenProduct: SomeProduct,
-): Outcome<SomeProduct> => {
+): Outcome<SomeProduct, SomeActionableError> => {
   return withSugar(
     sugarfreeSuccessThatYielded(givenProduct),
   );
 };
 
-export const Success = {
-  thatYielded: successThatYielded,
-};
-
-export const Failure = {
-  dueTo: failureDueTo,
-};
-
 const Outcome = {
-  Negative: Failure,
-  Positive: Success,
+  failureDueTo,
+  successThatYielded,
 };
 
 export default Outcome;
