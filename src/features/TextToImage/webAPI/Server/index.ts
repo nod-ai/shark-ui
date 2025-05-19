@@ -39,27 +39,17 @@ const forciblyRetrieveCurrentTextToImageServer = async (): Promise<Server> => {
     staticConfig.server !== null
   ) return staticConfig.server;
 
-  // eslint-disable-next-line no-restricted-syntax
-  try {
-    const dynamicConfig = (await DynamicConfig.fetch()).forciblyUnwrap();
+  const dynamicConfig = (await DynamicConfig.fetch()).optionallyUnwrap() ?? emptyConfig;
 
-    if (
-      dynamicConfig.server !== null
-    ) return dynamicConfig.server;
+  if (
+    dynamicConfig.server !== null
+  ) return dynamicConfig.server;
 
-    return new TextToImage_Server_SpecificationError({
-      environmentKey: environmentKeyForOriginOfTextToImageServer,
-      file          : StaticConfig.file,
-      endpoint      : DynamicConfig.endpoint,
-    }).throwAnyway();
-  }
-  catch {
-    return new TextToImage_Server_SpecificationError({
-      environmentKey: environmentKeyForOriginOfTextToImageServer,
-      file          : StaticConfig.file,
-      endpoint      : DynamicConfig.endpoint,
-    }).throwAnyway();
-  }
+  return new TextToImage_Server_SpecificationError({
+    environmentKey: environmentKeyForOriginOfTextToImageServer,
+    file          : StaticConfig.file,
+    endpoint      : DynamicConfig.endpoint,
+  }).throwAnyway();
 };
 
 export {
