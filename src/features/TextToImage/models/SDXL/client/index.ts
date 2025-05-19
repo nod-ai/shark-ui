@@ -43,7 +43,11 @@ const initializeShimmedStabilityAIClient = async (): Promise<
   return Outcome.successThatYielded(newClient);
 };
 
-export const forciblyGenerateOutputFrom = async (
+type OutcomeOfGeneratingTextToImageOutput = Outcome<Output,
+  | Server.ConnectionError
+>;
+
+export const generateOutputFrom = async (
   given: {
     textToImageRequestBody: Pick<GenerateFromTextRequest['textToImageRequestBody'],
     | 'textPrompts'
@@ -54,7 +58,7 @@ export const forciblyGenerateOutputFrom = async (
     | 'seed'
     >;
   },
-): Promise<Output> => {
+): Promise<OutcomeOfGeneratingTextToImageOutput> => {
   const shimmedStabilityAIClient = (await initializeShimmedStabilityAIClient()).forciblyUnwrap();
 
   const promisedTextToImageResponse = shimmedStabilityAIClient.version1.image.forciblyGenerateFromText({
@@ -91,7 +95,7 @@ export const forciblyGenerateOutputFrom = async (
       !clientFailedToReachServer
     ) return NonActionableError.rethrow(someError);
 
-    return new Server.ConnectionError().throwAnyway();
+    return Outcome.failureDueTo(new Server.ConnectionError());
   }
 
   if (
@@ -126,13 +130,13 @@ export const forciblyGenerateOutputFrom = async (
       .join(', '),
   };
 
-  return {
+  return Outcome.successThatYielded({
     image: newImage,
-  };
+  });
 };
 
 const SDXLTextToImageClient = {
-  forciblyGenerateOutputFrom,
+  generateOutputFrom,
 };
 
 export default SDXLTextToImageClient;
