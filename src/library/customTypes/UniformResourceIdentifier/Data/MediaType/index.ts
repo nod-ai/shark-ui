@@ -1,6 +1,6 @@
 import type {
-  StaticStringParser,
-} from '@/library/typeUtilities/StaticStringParser';
+  StringForciblyParsable,
+} from '@/library/typeUtilities/StringForciblyParsable';
 
 import {
   isEmpty,
@@ -35,7 +35,7 @@ const allStructuredSyntaxNameSuffix = [
 type StructuredSyntaxNameSuffix = (typeof allStructuredSyntaxNameSuffix)[number];
 
 /** See [RFC 2045](https://datatracker.ietf.org/doc/html/rfc2045) for more information */
-class MediaType implements StaticStringParser<typeof MediaType> {
+class MediaType implements StringForciblyParsable<typeof MediaType> {
   public constructor(
     public fileType: FileType,
     public tree: string[] | null,

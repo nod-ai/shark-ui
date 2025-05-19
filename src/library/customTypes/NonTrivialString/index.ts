@@ -1,6 +1,6 @@
 import type {
-  StaticStringParser,
-} from '@/library/typeUtilities/StaticStringParser.ts';
+  StringForciblyParsable,
+} from '@/library/typeUtilities/StringForciblyParsable.ts';
 
 import {
   isEmpty,
@@ -12,7 +12,7 @@ import NonTrivialString_ParsingError from './ParsingError.ts';
 
 class NonTrivialString
   extends StringSubset<'NonTrivialString'>
-  implements StaticStringParser<typeof NonTrivialString> {
+  implements StringForciblyParsable<typeof NonTrivialString> {
   public static forciblyParsedFrom(givenSubject: string): NonTrivialString {
     const trimmedSubject = givenSubject.trim();
 
