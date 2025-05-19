@@ -1,6 +1,8 @@
+import Attempt from '@/library/Attempt';
+
 import type {
-  StringForciblyParsable,
-} from '@/library/typeUtilities/StringForciblyParsable.ts';
+  StringParsable,
+} from '@/library/Parser/string';
 
 import {
   isEmpty,
@@ -12,28 +14,28 @@ import NonTrivialString_ParsingError from './ParsingError.ts';
 
 class NonTrivialString
   extends StringSubset<'NonTrivialString'>
-  implements StringForciblyParsable<typeof NonTrivialString> {
-  public static forciblyParsedFrom = (
+  implements StringParsable<typeof NonTrivialString> {
+  public static parsedFrom = (
     givenSubject: string,
-  ): NonTrivialString => {
+  ): Attempt.Outcome<NonTrivialString, NonTrivialString_ParsingError> => Attempt.that((ends) => {
     const trimmedSubject = givenSubject.trim();
 
     if (
       isEmpty(trimmedSubject)
-    ) return new NonTrivialString_ParsingError(givenSubject).throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(new NonTrivialString_ParsingError(givenSubject));
 
-    return new NonTrivialString(givenSubject);
-  };
+    return ends.inSuccessWith(new NonTrivialString(givenSubject));
+  });
 
-  public static nullableForciblyParsedFrom = (
+  public static nullableParsedFrom = (
     givenSubject: string | null,
-  ): NonTrivialString | null => {
+  ): Attempt.Outcome<NonTrivialString | null, NonTrivialString_ParsingError> => Attempt.that((ends) => {
     if (
       givenSubject === null
-    ) return givenSubject;
+    ) return ends.inSuccessWith(givenSubject);
 
-    return this.forciblyParsedFrom(givenSubject);
-  };
+    return this.parsedFrom(givenSubject);
+  });
 
   public isEqualTo(that: NonTrivialString): boolean {
     return this.toString() === that.toString();
