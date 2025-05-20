@@ -1,3 +1,9 @@
+import {
+  attempt,
+} from './attempt';
+
+export const abandon = attempt.abandoned;
+
 export {
   default as Outcome,
 } from './Outcome';

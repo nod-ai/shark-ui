@@ -1,6 +1,4 @@
-import {
-  NonActionableError,
-} from '@/library/Attempt';
+import Attempt from '@/library/Attempt';
 
 import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
 
@@ -47,7 +45,7 @@ export default class DataURI extends UniformResourceIdentifier {
   public get mediaType(): Exclude<DataURI['_mediaType'], null> {
     if (
       this._mediaType === null
-    ) return NonActionableError.throw('Media type either needs to be initialized or overridden');
+    ) return Attempt.abandon('Media type either needs to be initialized or overridden');
 
     return this._mediaType;
   }

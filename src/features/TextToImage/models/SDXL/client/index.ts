@@ -4,7 +4,6 @@ import type {
 } from 'stabilityai-client-typescript/models/operations';
 
 import Attempt, {
-  NonActionableError,
   Outcome,
 } from '@/library/Attempt';
 
@@ -81,7 +80,7 @@ export const generateOutputFrom = async (
 
     if (
       outcomeOfSettlingTextToImageResponse.isFailure
-    ) return NonActionableError.rethrow(outcomeOfSettlingTextToImageResponse.causeOfFailure);
+    ) return Attempt.NonActionableError.rethrow(outcomeOfSettlingTextToImageResponse.causeOfFailure);
 
     textToImageResponse = outcomeOfSettlingTextToImageResponse.unwrapped;
   }
@@ -93,30 +92,30 @@ export const generateOutputFrom = async (
 
     if (
       !clientFailedToReachServer
-    ) return NonActionableError.rethrow(someError);
+    ) return Attempt.NonActionableError.rethrow(someError);
 
     return Outcome.failureDueTo(new Server.ConnectionError());
   }
 
   if (
     !('artifacts' in textToImageResponse.result)
-  ) return NonActionableError.throw('Expected response rather than readable stream');
+  ) return Attempt.abandon('Expected response rather than readable stream');
 
   const generatedArtifacts = textToImageResponse.result.artifacts;
 
   if (
     generatedArtifacts === undefined
-  ) return NonActionableError.throw('Expected artifacts in response result');
+  ) return Attempt.abandon('Expected artifacts in response result');
 
   const [soleGeneratedArtifact] = generatedArtifacts;
 
   if (
     soleGeneratedArtifact === undefined
-  ) return NonActionableError.throw('Expected at least one artifact in response');
+  ) return Attempt.abandon('Expected at least one artifact in response');
 
   if (
     soleGeneratedArtifact.base64 === undefined
-  ) return NonActionableError.throw('Expected image data from sole artifact');
+  ) return Attempt.abandon('Expected image data from sole artifact');
 
   const base64DataOfNewImage = Base64CharacterEncodedByteSequence.forciblyParsedFrom(soleGeneratedArtifact.base64);
 

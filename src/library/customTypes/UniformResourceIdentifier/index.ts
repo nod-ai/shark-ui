@@ -1,6 +1,4 @@
-import {
-  NonActionableError,
-} from '@/library/Attempt';
+import Attempt from '@/library/Attempt';
 
 import NonTrivialString from '@/library/customTypes/NonTrivialString';
 
@@ -50,7 +48,7 @@ export default class UniformResourceIdentifier implements StaticStringParser<typ
   public get path(): Exclude<UniformResourceIdentifier['_path'], null> {
     if (
       this._path === null
-    ) return NonActionableError.throw('`path` must either be a) provided via constructor or b) overridden via public getter');
+    ) return Attempt.abandon('`path` must either be a) provided via constructor or b) overridden via public getter');
 
     return this._path;
   }

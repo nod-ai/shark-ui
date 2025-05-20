@@ -1,6 +1,4 @@
-import {
-  NonActionableError,
-} from '@/library/Attempt';
+import Attempt from '@/library/Attempt';
 
 import {
   arithmeticMeanOf,
@@ -15,7 +13,7 @@ export default class Range {
   ) {
     if (
       upperBound < lowerBound
-    ) return NonActionableError.throw('Upper bound must not be lower than lower bound');
+    ) return Attempt.abandon('Upper bound must not be lower than lower bound');
 
     this.lowerBound = lowerBound;
     this.upperBound = upperBound;
