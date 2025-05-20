@@ -1,10 +1,8 @@
-import {
-  ActionableError,
-} from '@/library/Attempt';
+import Attempt from '@/library/Attempt';
 
 import * as HTTPResponse from './HTTPResponse';
 
-export default class HTTPResponseError extends ActionableError<'HTTPResponseError'> {
+export default class HTTPResponseError extends Attempt.ActionableError<'HTTPResponseError'> {
   public readonly status: HTTPResponse.ErrorStatusCode;
 
   public constructor(givenMessage: string, givenStatus: HTTPResponse.ErrorStatusCode) {
