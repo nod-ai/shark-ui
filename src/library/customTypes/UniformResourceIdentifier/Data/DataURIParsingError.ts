@@ -1,6 +1,6 @@
 import {
   ActionableError,
-} from '@/library/Attempt';
+} from '@/library/Attempt/error';
 
 class DataURIParsingError extends ActionableError<'DataURIParsingError'> {
   public constructor(givenMessage: string) {

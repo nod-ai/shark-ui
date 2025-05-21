@@ -1,6 +1,6 @@
 import {
   ActionableError,
-} from '@/library/Attempt';
+} from '@/library/Attempt/error';
 
 class NonTrivialStringParsingError extends ActionableError<'NonTrivialStringParsingError'> {
   public constructor(givenCulprit: string) {

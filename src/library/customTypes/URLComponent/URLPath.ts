@@ -1,6 +1,6 @@
 import {
   ActionableError,
-} from '@/library/Attempt';
+} from '@/library/Attempt/error';
 
 import StringSubset from '@/library/customTypes/StringSubset.ts';
 
