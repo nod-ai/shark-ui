@@ -1,6 +1,4 @@
-import {
-  Outcome,
-} from '@/library/Attempt';
+import Attempt from '@/library/Attempt';
 
 import {
   Server,
@@ -32,24 +30,24 @@ const textToImageServerAccordingToEnvironment = ((): Server | null => {
   });
 })();
 
-const retrieveCurrentTextToImageServer = async (): Promise<
-  Outcome<Server, TextToImage_Server_SpecificationError>
-> => {
+const retrieveCurrentTextToImageServer = (): Promise<
+  Attempt.Outcome<Server, TextToImage_Server_SpecificationError>
+> => Attempt.thatEventually(async (ends) => {
   if (
     textToImageServerAccordingToEnvironment !== null
-  ) return Outcome.successThatYielded(textToImageServerAccordingToEnvironment);
+  ) return ends.inSuccessWith(textToImageServerAccordingToEnvironment);
 
   const staticConfig = (await StaticConfig.read()).optionallyUnwrap() ?? emptyConfig;
 
   if (
     staticConfig.server !== null
-  ) return Outcome.successThatYielded(staticConfig.server);
+  ) return ends.inSuccessWith(staticConfig.server);
 
   const dynamicConfig = (await DynamicConfig.fetch()).optionallyUnwrap() ?? emptyConfig;
 
   if (
     dynamicConfig.server !== null
-  ) return Outcome.successThatYielded(dynamicConfig.server);
+  ) return ends.inSuccessWith(dynamicConfig.server);
 
   const newSpecificationError = new TextToImage_Server_SpecificationError({
     environmentKey: environmentKeyForOriginOfTextToImageServer,
@@ -57,8 +55,8 @@ const retrieveCurrentTextToImageServer = async (): Promise<
     endpoint      : DynamicConfig.endpoint,
   });
 
-  return Outcome.failureDueTo(newSpecificationError);
-};
+  return ends.inFailureDueTo(newSpecificationError);
+});
 
 export {
   textToImageServerAccordingToEnvironment as accordingToEnvironment,
