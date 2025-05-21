@@ -1,6 +1,6 @@
 export {
-  Attempt_sync,
+  Attempt_that as Attempt_that,
 } from './synchronous';
 export {
-  Attempt_async,
+  Attempt_thatEventually as Attempt_thatEventually,
 } from './asynchronous';

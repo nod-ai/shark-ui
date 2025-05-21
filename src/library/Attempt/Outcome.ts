@@ -134,3 +134,15 @@ type Outcome<
   | Failure<SomeActionableError>;
 
 export default Outcome;
+
+export type ProductOf<
+  SomeOutcome extends Outcome<unknown, ActionableError<string>>,
+> = SomeOutcome extends Success<infer NestedProduct>
+  ? NestedProduct
+  : never;
+
+export type CauseOf<
+  SomeOutcome extends Outcome<unknown, ActionableError<string>>,
+> = SomeOutcome extends Failure<infer NestedError>
+  ? NestedError
+  : never;
