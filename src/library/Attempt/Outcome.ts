@@ -3,9 +3,6 @@ import type {
   If,
   Not,
 } from '@/library/typeUtilities/Boolean';
-import type {
-  Filter,
-} from '@/library/typeUtilities/Filter';
 
 import {
   type ActionableError,
@@ -96,6 +93,39 @@ interface Failure<
   readonly causeOfFailure: this['cause'];
 }
 
+const successThatYielded = <
+  SomeProduct,
+>(
+  givenProduct: SomeProduct,
+): Success<SomeProduct> => ({
+  case            : 'success',
+  product         : givenProduct,
+  isSuccess       : true,
+  isFailure       : false,
+  optionallyUnwrap: () => givenProduct,
+  forciblyUnwrap  : () => givenProduct,
+  unwrapped       : givenProduct,
+});
+
+const failureDueTo = <
+  SomeActionableError extends ActionableError<string>,
+>(
+  givenCause: SomeActionableError,
+): Failure<SomeActionableError> => ({
+  case            : 'failure',
+  cause           : givenCause,
+  isSuccess       : false,
+  isFailure       : true,
+  optionallyUnwrap: () => null,
+  forciblyUnwrap  : () => givenCause.throwAnyway(),
+  causeOfFailure  : givenCause,
+});
+
+const Outcome = {
+  failureDueTo,
+  successThatYielded,
+};
+
 type Outcome<
   SomeProduct,
   SomeActionableError extends ActionableError<string>,
@@ -103,85 +133,16 @@ type Outcome<
   | Success<SomeProduct>
   | Failure<SomeActionableError>;
 
-type Sugarfree<
-  SomeOutcome extends Outcome<unknown, ActionableError<string>>,
-> = Filter<SomeOutcome,
-| 'case'
-| 'product'
-| 'cause'
->;
-
-const sugarfreeFailureDueTo = <
-  SomeProduct,
-  SomeActionableError extends ActionableError<string>,
->(
-  givenError: SomeActionableError,
-): Sugarfree<Outcome<SomeProduct, SomeActionableError>> => ({
-  case : 'failure',
-  cause: givenError,
-});
-
-const sugarfreeSuccessThatYielded = <
-  SomeProduct,
-  SomeActionableError extends ActionableError<string>,
->(
-  givenProduct: SomeProduct,
-): Sugarfree<Outcome<SomeProduct, SomeActionableError>> => ({
-  case   : 'success',
-  product: givenProduct,
-});
-
-const withSugar = <
-  SomeProduct,
-  SomeActionableError extends ActionableError<string>,
->(
-  given: Sugarfree<Outcome<SomeProduct, SomeActionableError>>,
-): Outcome<SomeProduct, SomeActionableError> => {
-  switch (given.case) {
-    case 'success': return {
-      ...given,
-      isSuccess       : true,
-      isFailure       : false,
-      optionallyUnwrap: () => given.product,
-      forciblyUnwrap  : () => given.product,
-      unwrapped       : given.product,
-    };
-    case 'failure': return {
-      ...given,
-      isSuccess       : false,
-      isFailure       : true,
-      optionallyUnwrap: () => null,
-      forciblyUnwrap  : () => given.cause.throwAnyway(),
-      causeOfFailure  : given.cause,
-    };
-  }
-};
-
-const failureDueTo = <
-  SomeProduct,
-  SomeActionableError extends ActionableError<string>,
->(
-  givenError: SomeActionableError,
-): Outcome<SomeProduct, SomeActionableError> => {
-  return withSugar(
-    sugarfreeFailureDueTo(givenError),
-  );
-};
-
-const successThatYielded = <
-  SomeProduct,
-  SomeActionableError extends ActionableError<string>,
->(
-  givenProduct: SomeProduct,
-): Outcome<SomeProduct, SomeActionableError> => {
-  return withSugar(
-    sugarfreeSuccessThatYielded(givenProduct),
-  );
-};
-
-const Outcome = {
-  failureDueTo,
-  successThatYielded,
-};
-
 export default Outcome;
+
+export type ProductOf<
+  SomeOutcome extends Outcome<unknown, ActionableError<string>>,
+> = SomeOutcome extends Success<infer NestedProduct>
+  ? NestedProduct
+  : never;
+
+export type CauseOf<
+  SomeOutcome extends Outcome<unknown, ActionableError<string>>,
+> = SomeOutcome extends Failure<infer NestedError>
+  ? NestedError
+  : never;

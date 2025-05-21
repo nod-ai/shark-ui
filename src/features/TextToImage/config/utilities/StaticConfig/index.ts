@@ -1,6 +1,5 @@
-import {
-  Outcome,
-} from '@/library/Attempt';
+import Attempt from '@/library/Attempt';
+
 import {
   URLPath,
 } from '@/library/customTypes/URLComponent';
@@ -14,22 +13,22 @@ import StaticConfigReadingError from './StaticConfigReadingError';
 
 const configFile = URLPath.forciblyParsedFrom('/config/text-to-image.json');
 
-type OutcomeOfReadingConfig = Outcome<
+type OutcomeOfReadingConfig = Attempt.Outcome<
   Config,
   StaticConfigReadingError
 >;
 
-const readConfig = async (): Promise<OutcomeOfReadingConfig> => {
+const readConfig = (): Promise<OutcomeOfReadingConfig> => Attempt.thatEventually(async (ends) => {
   const fileResponse = await fetch(configFile.toString());
 
   if (
     !fileResponse.ok
-  ) return Outcome.failureDueTo(new StaticConfigReadingError(configFile, fileResponse));
+  ) return ends.inFailureDueTo(new StaticConfigReadingError(configFile, fileResponse));
 
   const unparsedSchema = await fileResponse.json() as unknown;
   const parsedConfig = ConfigSchema.parse(unparsedSchema);
-  return Outcome.successThatYielded(parsedConfig);
-};
+  return ends.inSuccessWith(parsedConfig);
+});
 
 export {
   configFile as file,

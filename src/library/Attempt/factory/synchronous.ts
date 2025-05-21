@@ -1,23 +1,22 @@
-import Outcome from '../Outcome';
+import type {
+  CauseOf,
+  ProductOf,
+} from '../Outcome';
+
+import type Outcome from '../Outcome';
 
 import {
-  attempt,
-} from '../attempt';
-
+  Attempt_ended as handles,
+} from '../ended';
 import {
   ActionableError,
 } from '../error';
 
-export type Attempt_SynchronousImplementation<
-  SomeProduct,
-  SomeActionableError extends ActionableError<string>,
-> = (
-  given: typeof attempt,
-) => Outcome<SomeProduct, SomeActionableError>;
-
-export const Attempt_sync = <
-  SomeProduct,
-  SomeActionableError extends ActionableError<string>,
+export const Attempt_that = <
+  InferredOutcome extends Outcome<unknown, ActionableError<string>>,
 >(
-  getOutcomeFor: Attempt_SynchronousImplementation<SomeProduct, SomeActionableError>,
-) => getOutcomeFor(attempt);
+  endsAccordingTo: (givenHandles: typeof handles) => InferredOutcome,
+) => {
+  type EquivalentOutcome = Outcome<ProductOf<InferredOutcome>, CauseOf<InferredOutcome>>;
+  return endsAccordingTo(handles) as EquivalentOutcome;
+};

@@ -1,8 +1,8 @@
 import {
-  attempt,
-} from './attempt';
+  Attempt_ended,
+} from './ended';
 
-export const abandon = attempt.abandoned;
+export const abandon = Attempt_ended.inFlamesBecause;
 
 export {
   default as Outcome,
@@ -20,6 +20,6 @@ export {
 } from './error';
 
 export {
-  Attempt_sync as new,
-  Attempt_async as promised,
+  Attempt_that as that,
+  Attempt_thatEventually as thatEventually,
 } from './factory';

@@ -9,12 +9,12 @@ import {
  * - a usable product
  * - an error from which execution can be recovered
  * - an error from which execution cannot be recovered
- */
-export const attempt = {
+*/
+export const Attempt_ended = {
   /** Call this when the attempt has completed and was considered successful */
-  succeededWith: Outcome.successThatYielded,
+  inSuccessWith  : Outcome.successThatYielded,
   /** Call this when the attempt has completed and was considered a failure */
-  failedDueTo  : Outcome.failureDueTo,
+  inFailureDueTo : Outcome.failureDueTo,
   /** Call this when it's not possible to complete the attempt */
-  abandoned    : NonActionableError.throw,
+  inFlamesBecause: NonActionableError.throw,
 };

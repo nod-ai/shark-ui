@@ -3,9 +3,7 @@ import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
-import Attempt, {
-  Outcome,
-} from '@/library/Attempt';
+import Attempt from '@/library/Attempt';
 
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
 
@@ -24,9 +22,9 @@ import {
   Server,
 } from '@/features/TextToImage/webAPI';
 
-const initializeShimmedStabilityAIClient = async (): Promise<
-  Outcome<ShimmedStabilityAIClient, Server.SpecificationError>
-> => {
+const initializeShimmedStabilityAIClient = (): Promise<
+  Attempt.Outcome<ShimmedStabilityAIClient, Server.SpecificationError>
+> => Attempt.thatEventually(async (ends) => {
   const outcomeOfRetrievingCurrentServer = await Server.retrieveCurrent();
 
   if (
@@ -39,10 +37,10 @@ const initializeShimmedStabilityAIClient = async (): Promise<
     serverURL: textToImageServer.origin,
   });
 
-  return Outcome.successThatYielded(newClient);
-};
+  return ends.inSuccessWith(newClient);
+});
 
-type OutcomeOfGeneratingTextToImageOutput = Outcome<Output,
+type OutcomeOfGeneratingTextToImageOutput = Attempt.Outcome<Output,
   | Server.ConnectionError
 >;
 
@@ -57,7 +55,7 @@ export const generateOutputFrom = async (
     | 'seed'
     >;
   },
-): Promise<OutcomeOfGeneratingTextToImageOutput> => {
+): Promise<OutcomeOfGeneratingTextToImageOutput> => Attempt.thatEventually(async (ends) => {
   const shimmedStabilityAIClient = (await initializeShimmedStabilityAIClient()).forciblyUnwrap();
 
   const promisedTextToImageResponse = shimmedStabilityAIClient.version1.image.forciblyGenerateFromText({
@@ -94,28 +92,28 @@ export const generateOutputFrom = async (
       !clientFailedToReachServer
     ) return Attempt.NonActionableError.rethrow(someError);
 
-    return Outcome.failureDueTo(new Server.ConnectionError());
+    return ends.inFailureDueTo(new Server.ConnectionError());
   }
 
   if (
     !('artifacts' in textToImageResponse.result)
-  ) return Attempt.abandon('Expected response rather than readable stream');
+  ) return ends.inFlamesBecause('Expected response rather than readable stream');
 
   const generatedArtifacts = textToImageResponse.result.artifacts;
 
   if (
     generatedArtifacts === undefined
-  ) return Attempt.abandon('Expected artifacts in response result');
+  ) return ends.inFlamesBecause('Expected artifacts in response result');
 
   const [soleGeneratedArtifact] = generatedArtifacts;
 
   if (
     soleGeneratedArtifact === undefined
-  ) return Attempt.abandon('Expected at least one artifact in response');
+  ) return ends.inFlamesBecause('Expected at least one artifact in response');
 
   if (
     soleGeneratedArtifact.base64 === undefined
-  ) return Attempt.abandon('Expected image data from sole artifact');
+  ) return ends.inFlamesBecause('Expected image data from sole artifact');
 
   const base64DataOfNewImage = Base64CharacterEncodedByteSequence.forciblyParsedFrom(soleGeneratedArtifact.base64);
 
@@ -129,10 +127,10 @@ export const generateOutputFrom = async (
       .join(', '),
   };
 
-  return Outcome.successThatYielded({
+  return ends.inSuccessWith({
     image: newImage,
   });
-};
+});
 
 const SDXLTextToImageClient = {
   generateOutputFrom,

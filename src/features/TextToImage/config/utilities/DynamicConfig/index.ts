@@ -1,6 +1,4 @@
-import {
-  Outcome,
-} from '@/library/Attempt';
+import Attempt from '@/library/Attempt';
 
 import {
   URLPath,
@@ -24,18 +22,18 @@ const contentIsJSONIn = (givenResponse: Response): boolean => {
 
 const configEndpoint = URLPath.forciblyParsedFrom('/config/text-to-image');
 
-type OutcomeOfFetchingConfig = Outcome<Config,
+type OutcomeOfFetchingConfig = Attempt.Outcome<Config,
   | DynamicConfig_FetchingError
   | DynamicConfig_EndpointResponseError
 >;
 
-const fetchConfig = async (): Promise<OutcomeOfFetchingConfig> => {
+const fetchConfig = (): Promise<OutcomeOfFetchingConfig> => Attempt.thatEventually(async (ends) => {
   const endpointResponse = await fetch(configEndpoint.toString());
   const fetchingError = new DynamicConfig_FetchingError(configEndpoint);
 
   if (
     !endpointResponse.ok
-  ) return Outcome.failureDueTo(fetchingError);
+  ) return ends.inFailureDueTo(fetchingError);
 
   const endpointResponseError = new DynamicConfig_EndpointResponseError({
     endpoint: configEndpoint,
@@ -44,12 +42,12 @@ const fetchConfig = async (): Promise<OutcomeOfFetchingConfig> => {
 
   if (
     !contentIsJSONIn(endpointResponse)
-  ) return Outcome.failureDueTo(endpointResponseError);
+  ) return ends.inFailureDueTo(endpointResponseError);
 
   const unparsedSchema = await endpointResponse.json() as unknown;
   const fetchedConfig = ConfigSchema.parse(unparsedSchema);
-  return Outcome.successThatYielded(fetchedConfig);
-};
+  return ends.inSuccessWith(fetchedConfig);
+});
 
 export {
   configEndpoint as endpoint,
