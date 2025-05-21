@@ -1,6 +1,6 @@
 import {
   ActionableError,
-} from '@/library/Attempt';
+} from '@/library/Attempt/error';
 
 class MediaTypeParsingError extends ActionableError<'MediaTypeParsingError'> {
   public constructor(givenMessage: string) {

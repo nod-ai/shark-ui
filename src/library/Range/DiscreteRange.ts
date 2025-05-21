@@ -1,6 +1,4 @@
-import {
-  NonActionableError,
-} from '@/library/Attempt';
+import Attempt from '@/library/Attempt';
 
 import Range from './index.ts';
 
@@ -17,13 +15,13 @@ export default class DiscreteRange extends Range implements Iterable<number> {
 
     if (
       stepSize < 0
-    ) return NonActionableError.throw('Step size must be positive');
+    ) return Attempt.abandon('Step size must be positive');
 
     const overstep = this.width % stepSize;
 
     if (
       overstep !== 0
-    ) return NonActionableError.throw('Step size must fit evenly into the range');
+    ) return Attempt.abandon('Step size must fit evenly into the range');
 
     this.stepSize = stepSize;
   }
@@ -60,7 +58,7 @@ export default class DiscreteRange extends Range implements Iterable<number> {
 
       if (
         this.upperBound < eachValue
-      ) return NonActionableError.throw(`Unexpected overstep when iterating over ${this.inInclusiveNotation} with step size ${this.stepSize.toString()}`);
+      ) return Attempt.abandon(`Unexpected overstep when iterating over ${this.inInclusiveNotation} with step size ${this.stepSize.toString()}`);
 
       if (this.upperBound === eachValue) {
         return {

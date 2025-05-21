@@ -27,9 +27,7 @@ import {
   VSkeletonLoader,
 } from 'vuetify/components/VSkeletonLoader';
 
-import {
-  NonActionableError,
-} from '@/library/Attempt';
+import Attempt from '@/library/Attempt';
 
 import SDXLDiffusionStepCount from '@/library/ShimmedStabilityAIClient/models/SDXLDiffusionStepCount.ts';
 
@@ -52,7 +50,7 @@ const imageGeneration = useStatefulProcess(async () => {
 
   if (
     proposedPrompt === null
-  ) return NonActionableError.throw('Prompt was not set before submission');
+  ) return Attempt.abandon('Prompt was not set before submission');
 
   const outcomeOfGeneratingOutput = await TextToImage.Client.SDXL.generateOutputFrom({
     textToImageRequestBody: {

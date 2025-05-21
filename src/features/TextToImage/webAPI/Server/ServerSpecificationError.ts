@@ -1,12 +1,10 @@
-import {
-  ActionableError,
-} from '@/library/Attempt';
+import Attempt from '@/library/Attempt';
 
 import type {
   URLPath,
 } from '@/library/customTypes/URLComponent';
 
-class TextToImage_Server_SpecificationError extends ActionableError<'TextToImage_Server_SpecificationError'> {
+class TextToImage_Server_SpecificationError extends Attempt.ActionableError<'TextToImage_Server_SpecificationError'> {
   public constructor(
     given: {
       environmentKey: string;

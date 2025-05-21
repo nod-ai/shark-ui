@@ -1,6 +1,6 @@
 import {
   ActionableError,
-} from '@/library/Attempt';
+} from '@/library/Attempt/error';
 
 class ImageURIParsingError extends ActionableError<'ImageURIParsingError'> {
   public constructor(givenMessage: string) {
