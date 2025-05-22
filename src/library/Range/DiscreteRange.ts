@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 
 import Range from './index.ts';
 
-export default class DiscreteRange extends Range implements Iterable<number> {
+class DiscreteRange extends Range implements Iterable<number> {
   public constructor(
     lowerBound: Range['lowerBound'],
     upperBound: Range['upperBound'],
@@ -90,3 +90,7 @@ export default class DiscreteRange extends Range implements Iterable<number> {
     ];
   }
 }
+
+export {
+  DiscreteRange as default,
+};

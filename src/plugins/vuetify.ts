@@ -30,4 +30,6 @@ const vuetify = createVuetify({
   },
 });
 
-export default vuetify;
+export {
+  vuetify as default,
+};

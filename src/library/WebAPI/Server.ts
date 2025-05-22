@@ -3,7 +3,7 @@
  * - listens for requests
  * - responds to those requests
  */
-export default class Server {
+class Server {
   public constructor(
     /**
      * The web location of the server, which is the base URL of the API.
@@ -18,3 +18,7 @@ export default class Server {
     );
   }
 }
+
+export {
+  Server as default,
+};

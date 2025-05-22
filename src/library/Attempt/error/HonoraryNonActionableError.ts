@@ -65,4 +65,6 @@ const HonoraryNonActionableError = {
   },
 };
 
-export default HonoraryNonActionableError;
+export {
+  HonoraryNonActionableError as default,
+};

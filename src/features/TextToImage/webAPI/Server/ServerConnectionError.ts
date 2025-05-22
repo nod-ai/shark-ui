@@ -12,4 +12,6 @@ class TextToImage_Server_ConnectionError extends Attempt.ActionableError<'TextTo
   }
 }
 
-export default TextToImage_Server_ConnectionError;
+export {
+  TextToImage_Server_ConnectionError as default,
+};

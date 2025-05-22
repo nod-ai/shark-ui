@@ -133,7 +133,9 @@ type Outcome<
   | Success<SomeProduct>
   | Failure<SomeActionableError>;
 
-export default Outcome;
+export {
+  Outcome as default,
+};
 
 export type ProductOf<
   SomeOutcome extends Outcome<unknown, ActionableError<string>>,

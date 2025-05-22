@@ -26,4 +26,6 @@ class TextToImage_Server_SpecificationError extends Attempt.ActionableError<'Tex
   }
 }
 
-export default TextToImage_Server_SpecificationError;
+export {
+  TextToImage_Server_SpecificationError as default,
+};

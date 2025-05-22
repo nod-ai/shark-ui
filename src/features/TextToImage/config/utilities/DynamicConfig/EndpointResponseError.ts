@@ -14,4 +14,6 @@ class DynamicConfig_EndpointResponseError extends Attempt.ActionableError<'Dynam
   }
 }
 
-export default DynamicConfig_EndpointResponseError;
+export {
+  DynamicConfig_EndpointResponseError as default,
+};

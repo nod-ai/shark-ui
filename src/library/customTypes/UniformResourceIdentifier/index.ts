@@ -16,7 +16,7 @@ import URIParsingError from './URIParsingError';
  * Identifies an abstract or physical resource.
  * See [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986) for more information
  */
-export default class UniformResourceIdentifier implements StaticStringParser<typeof UniformResourceIdentifier> {
+class UniformResourceIdentifier implements StaticStringParser<typeof UniformResourceIdentifier> {
   private readonly _scheme: /*   */ NonTrivialString;
   private readonly _authority: /**/ NonTrivialString | null;
   private readonly _path: /*     */ NonTrivialString | null;
@@ -193,3 +193,7 @@ export default class UniformResourceIdentifier implements StaticStringParser<typ
     );
   }
 }
+
+export {
+  UniformResourceIdentifier as default,
+};

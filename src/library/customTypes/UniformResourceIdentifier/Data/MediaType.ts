@@ -35,7 +35,7 @@ const allStructuredSyntaxNameSuffix = [
 type StructuredSyntaxNameSuffix = (typeof allStructuredSyntaxNameSuffix)[number];
 
 /** See [RFC 2045](https://datatracker.ietf.org/doc/html/rfc2045) for more information */
-export default class MediaType implements StaticStringParser<typeof MediaType> {
+class MediaType implements StaticStringParser<typeof MediaType> {
   public constructor(
     public fileType: FileType,
     public tree: string[] | null,
@@ -186,3 +186,7 @@ export default class MediaType implements StaticStringParser<typeof MediaType> {
     );
   }
 }
+
+export {
+  MediaType as default,
+};

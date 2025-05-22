@@ -11,4 +11,6 @@ class DynamicConfig_FetchingError extends Attempt.ActionableError<'DynamicConfig
   }
 }
 
-export default DynamicConfig_FetchingError;
+export {
+  DynamicConfig_FetchingError as default,
+};

@@ -11,4 +11,6 @@ abstract class StringSubset<SomeBrand extends string>
   public readonly brand!: SomeBrand;
 }
 
-export default StringSubset;
+export {
+  StringSubset as default,
+};

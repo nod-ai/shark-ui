@@ -9,4 +9,6 @@ class NonTrivialStringParsingError extends ActionableError<'NonTrivialStringPars
   }
 }
 
-export default NonTrivialStringParsingError;
+export {
+  NonTrivialStringParsingError as default,
+};

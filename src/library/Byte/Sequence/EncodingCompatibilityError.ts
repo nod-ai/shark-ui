@@ -12,4 +12,6 @@ class Byte_Sequence_EncodingCompatibilityError extends Attempt.ActionableError<'
   }
 }
 
-export default Byte_Sequence_EncodingCompatibilityError;
+export {
+  Byte_Sequence_EncodingCompatibilityError as default,
+};

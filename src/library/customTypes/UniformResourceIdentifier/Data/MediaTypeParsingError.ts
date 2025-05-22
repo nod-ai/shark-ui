@@ -9,4 +9,6 @@ class MediaTypeParsingError extends ActionableError<'MediaTypeParsingError'> {
   }
 }
 
-export default MediaTypeParsingError;
+export {
+  MediaTypeParsingError as default,
+};
