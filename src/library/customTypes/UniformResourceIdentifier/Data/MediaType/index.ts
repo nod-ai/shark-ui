@@ -189,4 +189,5 @@ class MediaType implements StaticStringParser<typeof MediaType> {
 
 export {
   MediaType as default,
+  MediaType_ParsingError,
 };

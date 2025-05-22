@@ -196,4 +196,5 @@ class UniformResourceIdentifier implements StaticStringParser<typeof UniformReso
 
 export {
   UniformResourceIdentifier as default,
+  URI_ParsingError,
 };

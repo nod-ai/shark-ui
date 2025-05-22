@@ -70,4 +70,5 @@ class ImageURI extends DataURI {
 
 export {
   ImageURI as default,
+  ImageURI_ParsingError,
 };

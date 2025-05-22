@@ -8,7 +8,7 @@ import type {
   StaticStringParser,
 } from '@/library/typeUtilities/StaticStringParser.ts';
 
-export class URLPath_ParsingError extends ActionableError<'URLPath_ParsingError'> {
+class URLPath_ParsingError extends ActionableError<'URLPath_ParsingError'> {
   public constructor(given: {
     expectation: string;
     reality: string;
@@ -18,7 +18,7 @@ export class URLPath_ParsingError extends ActionableError<'URLPath_ParsingError'
   }
 }
 
-export class URLPath
+class URLPath
   extends StringSubset<'URLPath'>
   implements StaticStringParser<typeof URLPath> {
   public static forciblyParsedFrom(givenSubject: string): URLPath {
@@ -34,3 +34,8 @@ export class URLPath
     return new URLPath(exampleURL.pathname);
   }
 }
+
+export {
+  URLPath,
+  URLPath_ParsingError,
+};

@@ -39,4 +39,5 @@ class NonTrivialString
 
 export {
   NonTrivialString as default,
+  NonTrivialString_ParsingError,
 };

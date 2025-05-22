@@ -121,4 +121,5 @@ class DataURI extends UniformResourceIdentifier {
 
 export {
   DataURI as default,
+  DataURI_ParsingError,
 };
