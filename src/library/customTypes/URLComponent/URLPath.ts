@@ -26,12 +26,14 @@ class URLPath
   ): URLPath => {
     const exampleURL = new URL(`https://example.com${givenSubject}`);
 
-    if (
-      exampleURL.pathname !== givenSubject
-    ) return new URLPath_ParsingError({
+    const newParsingError = new URLPath_ParsingError({
       expectation: exampleURL.pathname,
       reality    : givenSubject,
-    }).throwAnyway('To be converted to `Attempt` failure');
+    });
+
+    if (
+      exampleURL.pathname !== givenSubject
+    ) return newParsingError.throwAnyway('To be converted to `Attempt` failure');
 
     return new URLPath(exampleURL.pathname);
   };
