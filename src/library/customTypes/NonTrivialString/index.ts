@@ -13,7 +13,9 @@ import NonTrivialString_ParsingError from './ParsingError.ts';
 class NonTrivialString
   extends StringSubset<'NonTrivialString'>
   implements StringForciblyParsable<typeof NonTrivialString> {
-  public static forciblyParsedFrom(givenSubject: string): NonTrivialString {
+  public static forciblyParsedFrom(
+    givenSubject: string,
+  ): NonTrivialString {
     const trimmedSubject = givenSubject.trim();
 
     if (
@@ -23,7 +25,9 @@ class NonTrivialString
     return new NonTrivialString(givenSubject);
   }
 
-  public static nullableForciblyParsedFrom(givenSubject: string | null): NonTrivialString | null {
+  public static nullableForciblyParsedFrom(
+    givenSubject: string | null,
+  ): NonTrivialString | null {
     if (givenSubject === null) return givenSubject;
 
     return this.forciblyParsedFrom(givenSubject);
