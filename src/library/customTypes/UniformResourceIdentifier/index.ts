@@ -186,10 +186,10 @@ class UniformResourceIdentifier implements StaticStringParser<typeof UniformReso
 
     return new UniformResourceIdentifier(
       NonTrivialString.forciblyParsedFrom(scheme),
-      NonTrivialString.nullableParsedFrom(authority),
+      NonTrivialString.nullableForciblyParsedFrom(authority),
       NonTrivialString.forciblyParsedFrom(path),
-      NonTrivialString.nullableParsedFrom(query),
-      NonTrivialString.nullableParsedFrom(fragment),
+      NonTrivialString.nullableForciblyParsedFrom(query),
+      NonTrivialString.nullableForciblyParsedFrom(fragment),
     );
   }
 }
