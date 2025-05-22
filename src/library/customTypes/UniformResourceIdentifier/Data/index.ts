@@ -15,8 +15,8 @@ import {
   type DataURIBinaryEncoding,
 } from './DataURIBinaryEncoding.ts';
 
-import DataURIParsingError from './DataURIParsingError.ts';
-import MediaType from './MediaType.ts';
+import MediaType from './MediaType';
+import DataURIParsingError from './ParsingError.ts';
 
 /** See [RFC 2397](https://datatracker.ietf.org/doc/rfc2397) for more info */
 class DataURI extends UniformResourceIdentifier {

@@ -10,7 +10,7 @@ import {
   isEmpty,
 } from '@/library/utilitiesByType/array.ts';
 
-import URIParsingError from './URIParsingError';
+import URIParsingError from './ParsingError';
 
 /**
  * Identifies an abstract or physical resource.

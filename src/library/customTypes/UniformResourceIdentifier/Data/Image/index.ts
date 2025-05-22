@@ -4,7 +4,7 @@ import type {
   DataURIBinaryEncoding,
 } from '../DataURIBinaryEncoding.ts';
 
-import MediaType from '../MediaType.ts';
+import MediaType from '../MediaType';
 
 import DataURI from '../index.ts';
 
@@ -13,7 +13,7 @@ import {
   type ImageURIFormat,
 } from './ImageURIFormat.ts';
 
-import ImageURIParsingError from './ImageURIParsingError.ts';
+import ImageURIParsingError from './ParsingError.ts';
 
 class ImageURI extends DataURI {
   public static readonly mediaType = 'image';

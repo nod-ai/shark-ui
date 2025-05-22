@@ -6,7 +6,7 @@ import {
   isEmpty,
 } from '@/library/utilitiesByType/array.ts';
 
-import MediaTypeParsingError from './MediaTypeParsingError';
+import MediaTypeParsingError from './ParsingError';
 
 const allFileTypes = [
   'application',
