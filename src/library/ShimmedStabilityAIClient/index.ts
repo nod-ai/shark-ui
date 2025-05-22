@@ -8,7 +8,7 @@ import type {
 
 import {
   z,
-} from 'zod';
+} from 'zod/v4';
 
 import HTTPClient from '@/library/HTTPClient/index.ts';
 
