@@ -2,13 +2,13 @@ import {
   ActionableError,
 } from '@/library/Attempt/error';
 
-class ImageURIParsingError extends ActionableError<'ImageURIParsingError'> {
+class DataURI_ParsingError extends ActionableError<'DataURI_ParsingError'> {
   public constructor(givenMessage: string) {
     super(givenMessage);
-    this.name = 'ImageURIParsingError';
+    this.name = 'DataURI_ParsingError';
   }
 }
 
 export {
-  ImageURIParsingError as default,
+  DataURI_ParsingError as default,
 };

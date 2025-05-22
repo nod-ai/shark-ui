@@ -2,13 +2,13 @@ import {
   ActionableError,
 } from '@/library/Attempt/error';
 
-class URIParsingError extends ActionableError<'URIParsingError'> {
+class URI_ParsingError extends ActionableError<'URI_ParsingError'> {
   public constructor(givenMessage: string) {
     super(givenMessage);
-    this.name = 'URIParsingError';
+    this.name = 'URI_ParsingError';
   }
 }
 
 export {
-  URIParsingError as default,
+  URI_ParsingError as default,
 };

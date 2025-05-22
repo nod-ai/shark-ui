@@ -8,17 +8,17 @@ import type {
   StaticStringParser,
 } from '@/library/typeUtilities/StaticStringParser.ts';
 
-export class URLOriginParsingError extends ActionableError<'URLOriginParsingError'> {
+class URLOrigin_ParsingError extends ActionableError<'URLOrigin_ParsingError'> {
   public constructor(given: {
     expectation: string;
     reality: string;
   }) {
     super(`Expected pure origin "${given.expectation}", got "${given.reality}"`);
-    this.name = 'URLOriginParsingError';
+    this.name = 'URLOrigin_ParsingError';
   }
 }
 
-export class URLOrigin
+class URLOrigin
   extends StringSubset<'URLOrigin'>
   implements StaticStringParser<typeof URLOrigin> {
   public static forciblyParsedFrom(givenSubject: string): URLOrigin {
@@ -26,7 +26,7 @@ export class URLOrigin
 
     if (
       derived.origin !== givenSubject
-    ) return new URLOriginParsingError({
+    ) return new URLOrigin_ParsingError({
       expectation: derived.origin,
       reality    : givenSubject,
     }).throwAnyway();
@@ -34,3 +34,8 @@ export class URLOrigin
     return new URLOrigin(derived.origin);
   }
 }
+
+export {
+  URLOrigin,
+  URLOrigin_ParsingError,
+};

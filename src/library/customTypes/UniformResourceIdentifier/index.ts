@@ -10,7 +10,7 @@ import {
   isEmpty,
 } from '@/library/utilitiesByType/array.ts';
 
-import URIParsingError from './URIParsingError';
+import URI_ParsingError from './ParsingError';
 
 /**
  * Identifies an abstract or physical resource.
@@ -116,11 +116,11 @@ class UniformResourceIdentifier implements StaticStringParser<typeof UniformReso
 
     if (
       !isEmpty(componentsFollowingUnexpectedSchemeSuffix)
-    ) return new URIParsingError(`Found components with extra scheme suffix: ${componentsFollowingUnexpectedSchemeSuffix.join()}`).throwAnyway();
+    ) return new URI_ParsingError(`Found components with extra scheme suffix: ${componentsFollowingUnexpectedSchemeSuffix.join()}`).throwAnyway();
 
     if (
       scheme === undefined
-    ) return new URIParsingError('Expected a scheme').throwAnyway();
+    ) return new URI_ParsingError('Expected a scheme').throwAnyway();
 
     const [
       componentsPrecedingFragment,
@@ -130,7 +130,7 @@ class UniformResourceIdentifier implements StaticStringParser<typeof UniformReso
 
     if (
       !isEmpty(unexpectedComponentsWithFragmentPrefix)
-    ) return new URIParsingError(`Found extra components with fragment prefix: ${unexpectedComponentsWithFragmentPrefix.join()}`).throwAnyway();
+    ) return new URI_ParsingError(`Found extra components with fragment prefix: ${unexpectedComponentsWithFragmentPrefix.join()}`).throwAnyway();
 
     const [
       componentsPrecedingQuery,
@@ -140,11 +140,11 @@ class UniformResourceIdentifier implements StaticStringParser<typeof UniformReso
 
     if (
       !isEmpty(unexpectedComponentsWithQueryPrefix)
-    ) return new URIParsingError(`Found extra components with query prefix: ${unexpectedComponentsWithQueryPrefix.join()}`).throwAnyway();
+    ) return new URI_ParsingError(`Found extra components with query prefix: ${unexpectedComponentsWithQueryPrefix.join()}`).throwAnyway();
 
     if (
       componentsPrecedingQuery === undefined
-    ) return new URIParsingError('Expected components preceding query').throwAnyway();
+    ) return new URI_ParsingError('Expected components preceding query').throwAnyway();
 
     const pathSegmentDelimiter = '/';
 
@@ -176,7 +176,7 @@ class UniformResourceIdentifier implements StaticStringParser<typeof UniformReso
 
       if (
         authority === undefined
-      ) return new URIParsingError('Expected to find authority between its prefix and the path segments').throwAnyway();
+      ) return new URI_ParsingError('Expected to find authority between its prefix and the path segments').throwAnyway();
 
       return {
         authority,
@@ -196,4 +196,5 @@ class UniformResourceIdentifier implements StaticStringParser<typeof UniformReso
 
 export {
   UniformResourceIdentifier as default,
+  URI_ParsingError,
 };
