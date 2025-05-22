@@ -6,7 +6,7 @@ import {
 
 type RangeBound = 'exclusive' | 'inclusive';
 
-export default class Range {
+class Range {
   public constructor(
     public readonly lowerBound: number,
     public readonly upperBound: number,
@@ -78,3 +78,7 @@ export default class Range {
     return `[${this.lowerBound.toString()}, ${this.upperBound.toString()}]`;
   }
 }
+
+export {
+  Range as default,
+};

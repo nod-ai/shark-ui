@@ -9,4 +9,6 @@ class ImageURIParsingError extends ActionableError<'ImageURIParsingError'> {
   }
 }
 
-export default ImageURIParsingError;
+export {
+  ImageURIParsingError as default,
+};

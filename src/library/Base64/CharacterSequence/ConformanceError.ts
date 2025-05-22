@@ -9,4 +9,6 @@ class Base64_CharacterSequence_ConformanceError extends Attempt.ActionableError<
   }
 }
 
-export default Base64_CharacterSequence_ConformanceError;
+export {
+  Base64_CharacterSequence_ConformanceError as default,
+};

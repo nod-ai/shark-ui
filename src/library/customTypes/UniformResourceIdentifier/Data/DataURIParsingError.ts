@@ -9,4 +9,6 @@ class DataURIParsingError extends ActionableError<'DataURIParsingError'> {
   }
 }
 
-export default DataURIParsingError;
+export {
+  DataURIParsingError as default,
+};

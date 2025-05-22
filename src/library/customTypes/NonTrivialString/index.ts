@@ -37,4 +37,6 @@ class NonTrivialString
   }
 }
 
-export default NonTrivialString;
+export {
+  NonTrivialString as default,
+};

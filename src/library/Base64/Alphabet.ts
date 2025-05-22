@@ -4,4 +4,6 @@ const Base64_Alphabet = {
   pattern: /A-Za-z\d\+\//,
 };
 
-export default Base64_Alphabet;
+export {
+  Base64_Alphabet as default,
+};

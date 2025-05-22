@@ -52,4 +52,6 @@ class NonActionableError
   };
 }
 
-export default NonActionableError;
+export {
+  NonActionableError as default,
+};

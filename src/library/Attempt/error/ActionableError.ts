@@ -22,4 +22,6 @@ abstract class ActionableError<SomeBrand extends string>
   }
 }
 
-export default ActionableError;
+export {
+  ActionableError as default,
+};

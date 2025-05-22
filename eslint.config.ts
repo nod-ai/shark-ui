@@ -32,6 +32,9 @@ const importPluginConfigs: ConfigWithExtends[] = [
       },
     },
     rules: {
+      'import/exports-last': [
+        'error', // Encourages decoupling the export of a module from its declaration, which leads to cleaner diffs
+      ],
       'import/order': [
         'error',
         {
@@ -93,6 +96,11 @@ const configWithVueTS = defineConfigWithVueTs(
       'no-implicit-coercion': [
         'error', // Using constructors, factories, and parsers for coercion rather than operators leads to less confusing behavior
       ],
+      'no-restricted-exports': ['error', {
+        restrictDefaultExports: {
+          direct: true, // Keeping the export of something separate from its declaration leads to cleaner diffs. Prefer using `export { Foo as default }`
+        },
+      }],
       'no-restricted-syntax': [
         'error',
         {
@@ -171,7 +179,7 @@ const configWithVueTS = defineConfigWithVueTs(
   },
 );
 
-export default tseslint.config([
+const completeConfig = tseslint.config([
   ...configWithVueTS,
   {
     name : 'shark-ui/safety-override',
@@ -187,3 +195,7 @@ export default tseslint.config([
     },
   },
 ]);
+
+export {
+  completeConfig as default,
+};

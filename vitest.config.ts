@@ -10,7 +10,7 @@ import {
 
 import viteConfig from './vite.config';
 
-export default mergeConfig(
+const vitestConfig = mergeConfig(
   viteConfig,
   defineConfig({
     test: {
@@ -20,3 +20,7 @@ export default mergeConfig(
     },
   }),
 );
+
+export {
+  vitestConfig as default,
+};

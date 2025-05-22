@@ -19,7 +19,7 @@ import DataURIParsingError from './DataURIParsingError.ts';
 import MediaType from './MediaType.ts';
 
 /** See [RFC 2397](https://datatracker.ietf.org/doc/rfc2397) for more info */
-export default class DataURI extends UniformResourceIdentifier {
+class DataURI extends UniformResourceIdentifier {
   public static readonly scheme = NonTrivialString.forciblyParsedFrom('data');
   public static readonly encodingPrefix = ';';
   public static readonly dataPrefix = ',';
@@ -118,3 +118,7 @@ export default class DataURI extends UniformResourceIdentifier {
     );
   }
 }
+
+export {
+  DataURI as default,
+};

@@ -11,4 +11,6 @@ class StaticConfigReadingError extends Attempt.ActionableError<'StaticConfigRead
   }
 }
 
-export default StaticConfigReadingError;
+export {
+  StaticConfigReadingError as default,
+};

@@ -13,7 +13,7 @@ import {
 import StringSubset from './StringSubset.ts';
 
 /** See [RFC 4648 Section 4](https://www.rfc-editor.org/rfc/rfc4648.html#section-4) for more information */
-export default class Base64CharacterEncodedByteSequence
+class Base64CharacterEncodedByteSequence
   extends StringSubset<'Base64CharacterEncodedByteSequence'>
   implements StaticStringParser<typeof Base64CharacterEncodedByteSequence> {
   public static paddingCharacter = '=';
@@ -51,3 +51,7 @@ export default class Base64CharacterEncodedByteSequence
     return new this(base64CharacterEncodedByteSequence);
   }
 }
+
+export {
+  Base64CharacterEncodedByteSequence as default,
+};

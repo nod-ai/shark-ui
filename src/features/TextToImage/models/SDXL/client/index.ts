@@ -44,7 +44,7 @@ type OutcomeOfGeneratingTextToImageOutput = Attempt.Outcome<Output,
   | Server.ConnectionError
 >;
 
-export const generateOutputFrom = async (
+const generateOutputFrom = async (
   given: {
     textToImageRequestBody: Pick<GenerateFromTextRequest['textToImageRequestBody'],
     | 'textPrompts'
@@ -136,4 +136,6 @@ const SDXLTextToImageClient = {
   generateOutputFrom,
 };
 
-export default SDXLTextToImageClient;
+export {
+  SDXLTextToImageClient as default,
+};

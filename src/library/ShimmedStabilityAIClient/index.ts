@@ -145,7 +145,7 @@ class Version1Client extends HTTPClient {
   }
 }
 
-export default class ShimmedStabilityAIClient extends HTTPClient {
+class ShimmedStabilityAIClient extends HTTPClient {
   public constructor(given: {
     serverURL: string;
   }) {
@@ -164,3 +164,7 @@ export default class ShimmedStabilityAIClient extends HTTPClient {
     return this._version1;
   }
 }
+
+export {
+  ShimmedStabilityAIClient as default,
+};

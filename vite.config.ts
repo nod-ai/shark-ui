@@ -13,7 +13,7 @@ import vueDevTools from 'vite-plugin-vue-devtools';
 import vuetify from 'vite-plugin-vuetify';
 
 // https://vite.dev/config/
-export default defineConfig({
+const viteConfig = defineConfig({
   plugins: [
     vue(),
     vueDevTools(),
@@ -31,3 +31,7 @@ export default defineConfig({
     },
   },
 });
+
+export {
+  viteConfig as default,
+};

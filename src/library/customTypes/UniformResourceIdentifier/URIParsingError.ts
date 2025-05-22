@@ -9,4 +9,6 @@ class URIParsingError extends ActionableError<'URIParsingError'> {
   }
 }
 
-export default URIParsingError;
+export {
+  URIParsingError as default,
+};
