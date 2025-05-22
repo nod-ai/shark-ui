@@ -1,6 +1,6 @@
 import {
   z,
-} from 'zod';
+} from 'zod/v4';
 
 import Server from './Server';
 
