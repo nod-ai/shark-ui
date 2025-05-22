@@ -1,8 +1,8 @@
 import {
-  ActionableError,
-} from '@/library/Attempt/error';
+  ParsingError,
+} from '@/library/Parser';
 
-class URI_ParsingError extends ActionableError<'URI_ParsingError'> {
+class URI_ParsingError extends ParsingError<'URI'> {
   public constructor(givenMessage: string) {
     super(givenMessage);
     this.name = 'URI_ParsingError';

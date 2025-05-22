@@ -1,6 +1,6 @@
 import {
-  ActionableError,
-} from '@/library/Attempt/error';
+  ParsingError,
+} from '@/library/Parser';
 
 import StringSubset from '@/library/customTypes/StringSubset.ts';
 
@@ -8,7 +8,7 @@ import type {
   StaticStringParser,
 } from '@/library/typeUtilities/StaticStringParser.ts';
 
-class URLOrigin_ParsingError extends ActionableError<'URLOrigin_ParsingError'> {
+class URLOrigin_ParsingError extends ParsingError<'URLOrigin'> {
   public constructor(given: {
     expectation: string;
     reality: string;
