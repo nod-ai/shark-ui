@@ -10,7 +10,7 @@ import {
 
 import StringSubset from '../StringSubset.ts';
 
-import NonTrivialStringParsingError from './ParsingError.ts';
+import NonTrivialString_ParsingError from './ParsingError.ts';
 
 class NonTrivialString
   extends StringSubset<'NonTrivialString'>
@@ -20,7 +20,7 @@ class NonTrivialString
 
     if (
       isEmpty(trimmedSubject)
-    ) return new NonTrivialStringParsingError(givenSubject).throwAnyway();
+    ) return new NonTrivialString_ParsingError(givenSubject).throwAnyway();
 
     return new NonTrivialString(givenSubject);
   }

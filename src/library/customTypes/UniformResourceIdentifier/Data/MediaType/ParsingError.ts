@@ -2,13 +2,13 @@ import {
   ActionableError,
 } from '@/library/Attempt/error';
 
-class MediaTypeParsingError extends ActionableError<'MediaTypeParsingError'> {
+class MediaType_ParsingError extends ActionableError<'MediaType_ParsingError'> {
   public constructor(givenMessage: string) {
     super(givenMessage);
-    this.name = 'MediaTypeParsingError';
+    this.name = 'MediaType_ParsingError';
   }
 }
 
 export {
-  MediaTypeParsingError as default,
+  MediaType_ParsingError as default,
 };

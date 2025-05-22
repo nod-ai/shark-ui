@@ -13,7 +13,7 @@ import {
   type ImageURIFormat,
 } from './ImageURIFormat.ts';
 
-import ImageURIParsingError from './ParsingError.ts';
+import ImageURI_ParsingError from './ParsingError.ts';
 
 class ImageURI extends DataURI {
   public static readonly mediaType = 'image';
@@ -52,13 +52,13 @@ class ImageURI extends DataURI {
 
     if (
       proposedURI.mediaType.fileType !== ImageURI.mediaType
-    ) return new ImageURIParsingError(`Expected media type starting with ${ImageURI.mediaType}`).throwAnyway();
+    ) return new ImageURI_ParsingError(`Expected media type starting with ${ImageURI.mediaType}`).throwAnyway();
 
     const format = allImageURIFormats.find($0 => $0 === proposedURI.mediaType.fileSubtype);
 
     if (
       format === undefined
-    ) return new ImageURIParsingError(`Expected format to be one of ${allImageURIFormats.toString()}`).throwAnyway();
+    ) return new ImageURI_ParsingError(`Expected format to be one of ${allImageURIFormats.toString()}`).throwAnyway();
 
     return new ImageURI(
       format,
