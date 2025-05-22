@@ -26,12 +26,14 @@ class URLOrigin
   ): URLOrigin => {
     const derived = new URL(givenSubject);
 
-    if (
-      derived.origin !== givenSubject
-    ) return new URLOrigin_ParsingError({
+    const newParsingError = new URLOrigin_ParsingError({
       expectation: derived.origin,
       reality    : givenSubject,
-    }).throwAnyway('To be converted to `Attempt` failure');
+    });
+
+    if (
+      derived.origin !== givenSubject
+    ) return newParsingError.throwAnyway('To be converted to `Attempt` failure');
 
     return new URLOrigin(derived.origin);
   };
