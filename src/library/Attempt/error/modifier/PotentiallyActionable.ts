@@ -16,7 +16,7 @@ export const assertPotentiallyActionable = <
 
   if (
     givenError instanceof HonoraryNonActionableError
-  ) return NonActionableError.rethrow(givenError);
+  ) throw givenError; // eslint-disable-line no-restricted-syntax
 
   return givenError as PotentiallyActionable<SomeError>;
 };
