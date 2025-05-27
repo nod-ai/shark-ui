@@ -105,11 +105,11 @@ const configWithVueTS = defineConfigWithVueTs(
         'error',
         {
           selector: 'TryStatement',
-          message : 'Prefer `Attempt` over `try`/`catch` for error handling.',
+          message : 'Prefer `Attempt.to` for error matching over `try`/`catch`.',
         },
         {
           selector: 'ThrowStatement',
-          message : 'Must choose a path: `NonActionableError.throw(...)`, `NonActionableError.rethrow(...)`, or `someActionableError.throwAnyway()`',
+          message : 'Prefer `Attempt.that` callback for error propagation over `throw`.',
         },
       ],
       '@typescript-eslint/explicit-member-accessibility': [

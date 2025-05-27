@@ -46,23 +46,23 @@ interface Success<SomeProduct> extends SemanticallySugarfreeSuccess<SomeProduct>
   /**
    * Access the product nested within a successful outcome.
    *
-   * Adds a final parallel to the `optionallyUnwrap` and `forciblyUnwrapped` methods:
+   * Adds a guarded parallel to the `optionallyUnwrap` and `forciblyUnwrapped` methods:
    * ```ts
    * function doRiskyThingUnsafely(
-   *   givenOutcome: Outcome<SomeProduct, SomeActionableError>,
+   *   givenOutcome: Attempt.Outcome<CustomProduct, CustomError>,
    * ): void {
    *   console.log(givenOutcome.forciblyUnwrap());
    * }
    *
    * function doRiskyThingSafelyWhileIgnoringErrors(
-   *   givenOutcome: Outcome<SomeProduct, SomeActionableError>,
+   *   givenOutcome: Attempt.Outcome<CustomProduct, CustomError>,
    * ): void {
    *   console.log(givenOutcome.optionallyUnwrap());
    * }
    *
    * function doRiskyThingSafelyWhileHandlingErrors(
-   *   givenOutcome: Outcome<SomeProduct, SomeActionableError>,
-   *   recoverFrom: (someError: SomeActionableError) => void,
+   *   givenOutcome: Attempt.Outcome<CustomProduct, CustomError>,
+   *   recoverFrom: (expectedError: CustomError) => void,
    * ): void {
    *   if (
    *     givenOutcome.isFailure
@@ -79,15 +79,20 @@ interface Failure<
   SomeActionableError extends ActionableError<string>,
 > extends SemanticallySugarfreeFailure<SomeActionableError> {
   /**
-   * Semantic sugar for `cause`; useful for juxtaposition against guard statements:
+   * Semantic sugar for `cause`; useful for juxtaposition against early exits:
    * ```ts
-   * ...
+   * function safelyGetProductWhileHandlingErrors(
+   *   givenOutcome: Attempt.Outcome<CustomProduct, CustomError>,
+   *   recoverFrom: (expectedError: CustomError) => void,
+   * ): CustomProduct {
+   *   if (
+   *     givenOutcome.isSuccess
+   *   ) return givenOutcome.unwrapped;
    *
-   * if (
-   *   someOutcome.isSuccess
-   * ) return;
+   *   ...
    *
-   * return NonActionableError.rethrow(someOutcome.causeOfFailure);
+   *   recoverFrom(givenOutcome.causeOfFailure);
+   * }
    * ```
    */
   readonly causeOfFailure: this['cause'];
