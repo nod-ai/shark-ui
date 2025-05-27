@@ -12,6 +12,8 @@ import {
   lastCharacterOf,
 } from '@/library/utilitiesByType/string.ts';
 
+import Base64CharacterEncodedByteSequence_ParsingError from './ParsingError.ts';
+
 /** See [RFC 4648 Section 4](https://www.rfc-editor.org/rfc/rfc4648.html#section-4) for more information */
 class Base64CharacterEncodedByteSequence
   extends StringSubset<
@@ -49,7 +51,10 @@ class Base64CharacterEncodedByteSequence
     });
 
     if (outcomeOfEnsuringEncodableCharacters.isFailure) {
-      const failureToEnsureEncodableCharacters = outcomeOfEnsuringEncodableCharacters;
+      const failureToEnsureEncodableCharacters = outcomeOfEnsuringEncodableCharacters.rewrappedWith({
+        cause: $0 => Base64CharacterEncodedByteSequence_ParsingError.thatEscorts($0),
+      });
+
       return failureToEnsureEncodableCharacters.forciblyUnwrap(/* TODO: enable safe error propagation */);
     }
 
@@ -59,6 +64,7 @@ class Base64CharacterEncodedByteSequence
 
     const outcomeOfParsingByteSequence = Attempt.Outcome.fromRewrapping(outcomeOfEnsuringConformantCharacters, {
       product: $0 => new this($0.concat(padding)),
+      cause  : $0 => Base64CharacterEncodedByteSequence_ParsingError.thatEscorts($0),
     });
 
     return outcomeOfParsingByteSequence.forciblyUnwrap(/* TODO: enable safe error propagation */);
@@ -67,4 +73,5 @@ class Base64CharacterEncodedByteSequence
 
 export {
   Base64CharacterEncodedByteSequence as default,
+  Base64CharacterEncodedByteSequence_ParsingError,
 };
