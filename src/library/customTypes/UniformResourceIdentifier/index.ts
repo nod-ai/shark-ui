@@ -124,7 +124,7 @@ class UniformResourceIdentifier implements StaticStringParser<typeof UniformReso
 
     const [
       componentsPrecedingFragment,
-      fragment,
+      fragment = null,
       ...unexpectedComponentsWithFragmentPrefix
     ] = componentsFollowingScheme?.split(fragmentPrefix) ?? [];
 
@@ -134,7 +134,7 @@ class UniformResourceIdentifier implements StaticStringParser<typeof UniformReso
 
     const [
       componentsPrecedingQuery,
-      query,
+      query = null,
       ...unexpectedComponentsWithQueryPrefix
     ] = componentsPrecedingFragment?.split(queryPrefix) ?? [];
 
@@ -186,10 +186,10 @@ class UniformResourceIdentifier implements StaticStringParser<typeof UniformReso
 
     return new UniformResourceIdentifier(
       NonTrivialString.forciblyParsedFrom(scheme),
-      NonTrivialString.nullableParsedFrom(authority),
+      NonTrivialString.nullableForciblyParsedFrom(authority),
       NonTrivialString.forciblyParsedFrom(path),
-      NonTrivialString.nullableParsedFrom(query ?? null),
-      NonTrivialString.nullableParsedFrom(fragment ?? null),
+      NonTrivialString.nullableForciblyParsedFrom(query),
+      NonTrivialString.nullableForciblyParsedFrom(fragment),
     );
   }
 }

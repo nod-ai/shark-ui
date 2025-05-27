@@ -1,5 +1,3 @@
-import Attempt from '@/library/Attempt';
-
 import type {
   StaticStringParser,
 } from '@/library/typeUtilities/StaticStringParser.ts';
@@ -25,11 +23,10 @@ class NonTrivialString
     return new NonTrivialString(givenSubject);
   }
 
-  public static nullableParsedFrom(givenSubject: string | null): NonTrivialString | null {
+  public static nullableForciblyParsedFrom(givenSubject: string | null): NonTrivialString | null {
     if (givenSubject === null) return givenSubject;
 
-    const outcomeOfParsingSubject = Attempt.to(() => this.forciblyParsedFrom(givenSubject));
-    return outcomeOfParsingSubject.optionallyUnwrap();
+    return this.forciblyParsedFrom(givenSubject);
   }
 
   public isEqualTo(that: NonTrivialString): boolean {
