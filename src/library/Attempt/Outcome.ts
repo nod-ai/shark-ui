@@ -46,7 +46,7 @@ interface Success<SomeProduct> extends SemanticallySugarfreeSuccess<SomeProduct>
   /**
    * Access the product nested within a successful outcome.
    *
-   * Adds a final parallel to the `optionallyUnwrap` and `forciblyUnwrapped` methods:
+   * Adds a guarded parallel to the `optionallyUnwrap` and `forciblyUnwrapped` methods:
    * ```ts
    * function doRiskyThingUnsafely(
    *   givenOutcome: Attempt.Outcome<CustomProduct, CustomError>,
