@@ -49,20 +49,20 @@ interface Success<SomeProduct> extends SemanticallySugarfreeSuccess<SomeProduct>
    * Adds a final parallel to the `optionallyUnwrap` and `forciblyUnwrapped` methods:
    * ```ts
    * function doRiskyThingUnsafely(
-   *   givenOutcome: Outcome<SomeProduct, SomeActionableError>,
+   *   givenOutcome: Outcome<CustomProduct, CustomError>,
    * ): void {
    *   console.log(givenOutcome.forciblyUnwrap());
    * }
    *
    * function doRiskyThingSafelyWhileIgnoringErrors(
-   *   givenOutcome: Outcome<SomeProduct, SomeActionableError>,
+   *   givenOutcome: Outcome<CustomProduct, CustomError>,
    * ): void {
    *   console.log(givenOutcome.optionallyUnwrap());
    * }
    *
    * function doRiskyThingSafelyWhileHandlingErrors(
-   *   givenOutcome: Outcome<SomeProduct, SomeActionableError>,
-   *   recoverFrom: (someError: SomeActionableError) => void,
+   *   givenOutcome: Outcome<CustomProduct, CustomError>,
+   *   recoverFrom: (expectedError: CustomError) => void,
    * ): void {
    *   if (
    *     givenOutcome.isFailure
