@@ -4,8 +4,11 @@ import {
 } from '..';
 
 import {
-  type AppropriatelyThrown,
   assertPotentiallyActionable,
+} from '../assertions';
+
+import type {
+  AppropriatelyThrown,
 } from '../modifier';
 
 const assertActionable = <
