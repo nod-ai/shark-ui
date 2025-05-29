@@ -1,3 +1,7 @@
+import {
+  asError,
+} from '@/library/utilitiesByType/error';
+
 import Outcome from '../Outcome';
 
 import type {
@@ -24,7 +28,7 @@ const attemptTo = <
   },
   catch(whateverThatWasThrown) {
     return outcomeOfFailedAttempt<SomeProduct, SomeActionableError>({
-      basedOn: whateverThatWasThrown,
+      basedOn: asError(whateverThatWasThrown),
     });
   },
 });
