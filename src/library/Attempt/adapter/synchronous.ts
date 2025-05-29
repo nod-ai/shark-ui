@@ -3,10 +3,9 @@ import Outcome from '../Outcome';
 import type {
   ActionableError,
 } from '../error';
-
 import {
-  outcomeOfFailedAttempt,
-} from '../utilities/outcomeOfFailedAttempt';
+  assertActionable,
+} from '../error/assertions';
 
 import {
   sanctioned,
@@ -23,9 +22,8 @@ const attemptTo = <
     return Outcome.successThatYielded(gottenProduct);
   },
   catch(someError) {
-    return outcomeOfFailedAttempt<SomeProduct, SomeActionableError>({
-      basedOn: someError,
-    });
+    const someActionableError = assertActionable<SomeActionableError>(someError);
+    return Outcome.failureDueTo(someActionableError);
   },
 });
 

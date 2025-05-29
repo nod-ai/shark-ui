@@ -1,25 +1,18 @@
-import type Outcome from '../Outcome';
-
 import {
   NonActionableError,
   type ActionableError,
-} from '../error';
+} from '..';
 
 import {
   assertPotentiallyActionable,
   assertSafelyPropagated,
-} from '../error/modifier';
+} from '../modifier';
 
-const outcomeOfFailedAttempt = <
-  SomeProduct,
-  SomeActionableError extends ActionableError<string>,
+const assertActionable = <
+  SomeActionableError extends ActionableError<string>, // eslint-disable-line @typescript-eslint/no-unnecessary-type-parameters
 >(
-  {
-    basedOn: givenError,
-  }: {
-    basedOn: Error;
-  },
-): Outcome<SomeProduct, SomeActionableError> => {
+  givenError: Error,
+): SomeActionableError => {
   const potentiallyActionableError = assertPotentiallyActionable(givenError);
   const safelyPropagatedError = assertSafelyPropagated(potentiallyActionableError);
 
@@ -29,5 +22,5 @@ const outcomeOfFailedAttempt = <
 };
 
 export {
-  outcomeOfFailedAttempt,
+  assertActionable,
 };
