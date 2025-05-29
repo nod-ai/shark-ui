@@ -8,6 +8,10 @@ import {
 } from '../error/assertions';
 
 import {
+  Attempt_thatEventually,
+} from '../factory';
+
+import {
   sanctionedAsync,
 } from '../utilities/sanctionedTryCatch';
 
@@ -16,16 +20,16 @@ const attemptToEventually = async <
   SomeActionableError extends ActionableError<string>,
 >(
   forciblyRetrieveProduct: () => Promise<SomeProduct>,
-): Promise<Outcome<SomeProduct, SomeActionableError>> => sanctionedAsync({
+): Promise<Outcome<SomeProduct, SomeActionableError>> => Attempt_thatEventually(async ends => sanctionedAsync({
   async try() {
     const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
-    return Outcome.successThatYielded(retrievedProduct);
+    return ends.inSuccessWith(retrievedProduct);
   },
   catch(someError) {
     const someActionableError = assertActionable<SomeActionableError>(someError);
-    return Outcome.failureDueTo(someActionableError);
+    return ends.inFailureDueTo(someActionableError);
   },
-});
+}));
 
 const attemptToSettle = async <
   SomeProduct,

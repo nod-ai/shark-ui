@@ -8,6 +8,10 @@ import {
 } from '../error/assertions';
 
 import {
+  Attempt_that,
+} from '../factory';
+
+import {
   sanctioned,
 } from '../utilities/sanctionedTryCatch';
 
@@ -16,16 +20,16 @@ const attemptTo = <
   SomeActionableError extends ActionableError<string>,
 >(
   forciblyGetProduct: () => SomeProduct,
-): Outcome<SomeProduct, SomeActionableError> => sanctioned({
+): Outcome<SomeProduct, SomeActionableError> => Attempt_that(ends => sanctioned({
   try() {
     const gottenProduct = forciblyGetProduct();
-    return Outcome.successThatYielded(gottenProduct);
+    return ends.inSuccessWith(gottenProduct);
   },
   catch(someError) {
     const someActionableError = assertActionable<SomeActionableError>(someError);
-    return Outcome.failureDueTo(someActionableError);
+    return ends.inFailureDueTo(someActionableError);
   },
-});
+}));
 
 export {
   attemptTo,
