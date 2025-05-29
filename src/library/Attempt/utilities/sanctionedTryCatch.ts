@@ -2,6 +2,13 @@ import {
   asError,
 } from '@/library/utilitiesByType/error';
 
+import {
+  assertAppropriatelyThrown,
+} from '../error/assertions';
+import type {
+  AppropriatelyThrown,
+} from '../error/modifier';
+
 const sanctioned = <
   TryBlockOutput,
   CatchBlockOutput,
@@ -11,7 +18,7 @@ const sanctioned = <
     catch: catchBlockOutputFor,
   }: {
     try: () => TryBlockOutput;
-    catch: ($0: Error) => CatchBlockOutput;
+    catch: ($0: AppropriatelyThrown<Error>) => CatchBlockOutput;
   },
 ): TryBlockOutput | CatchBlockOutput => {
   // eslint-disable-next-line no-restricted-syntax -- this is the implementation designed to help avoid use of raw try/catch
@@ -20,7 +27,8 @@ const sanctioned = <
   }
   catch (whateverThatWasThrown) {
     const someError = asError(whateverThatWasThrown);
-    return catchBlockOutputFor(someError);
+    const someAppropriatelyThrownError = assertAppropriatelyThrown(someError);
+    return catchBlockOutputFor(someAppropriatelyThrownError);
   }
 };
 
@@ -33,7 +41,7 @@ const sanctionedAsync = async <
     catch: catchBlockOutputFor,
   }: {
     try: () => Promise<TryBlockOutput>;
-    catch: ($0: Error) => CatchBlockOutput;
+    catch: ($0: AppropriatelyThrown<Error>) => CatchBlockOutput;
   },
 ): Promise<TryBlockOutput | CatchBlockOutput> => {
   // eslint-disable-next-line no-restricted-syntax -- this is the implementation designed to help avoid use of raw try/catch
@@ -42,7 +50,8 @@ const sanctionedAsync = async <
   }
   catch (whateverThatWasThrown) {
     const someError = asError(whateverThatWasThrown);
-    return catchBlockOutputFor(someError);
+    const someAppropriatelyThrownError = assertAppropriatelyThrown(someError);
+    return catchBlockOutputFor(someAppropriatelyThrownError);
   }
 };
 
