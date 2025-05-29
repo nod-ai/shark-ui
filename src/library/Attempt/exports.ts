@@ -9,7 +9,7 @@ export {
 };
 
 export {
-  default as Outcome,
+  Attempt_Outcome as Outcome,
 } from './Outcome';
 
 export {

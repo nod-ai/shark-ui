@@ -126,12 +126,12 @@ const failureDueTo = <
   causeOfFailure  : givenCause,
 });
 
-const Outcome = {
+const Attempt_Outcome = {
   failureDueTo,
   successThatYielded,
 };
 
-type Outcome<
+type Attempt_Outcome<
   SomeProduct,
   SomeActionableError extends ActionableError<string>,
 > =
@@ -139,19 +139,19 @@ type Outcome<
   | Failure<SomeActionableError>;
 
 type ProductOf<
-  SomeOutcome extends Outcome<unknown, ActionableError<string>>,
+  SomeOutcome extends Attempt_Outcome<unknown, ActionableError<string>>,
 > = SomeOutcome extends Success<infer NestedProduct>
   ? NestedProduct
   : never;
 
 type CauseOf<
-  SomeOutcome extends Outcome<unknown, ActionableError<string>>,
+  SomeOutcome extends Attempt_Outcome<unknown, ActionableError<string>>,
 > = SomeOutcome extends Failure<infer NestedError>
   ? NestedError
   : never;
 
 export {
-  Outcome as default,
+  Attempt_Outcome,
   type ProductOf,
   type CauseOf,
 };
