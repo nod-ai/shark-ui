@@ -75,7 +75,7 @@ class DataURI extends UniformResourceIdentifier {
 
     if (
       !proposedURI.scheme.isEqualTo(DataURI.scheme)
-    ) return new DataURI_ParsingError(`Expected scheme to be "${DataURI.scheme.toString()}"`).throwAnyway();
+    ) return new DataURI_ParsingError(`Expected scheme to be "${DataURI.scheme.toString()}"`).throwAnyway('To be converted to `Attempt` failure');
 
     const [
       mediaTypeAndEncoding,
@@ -85,11 +85,11 @@ class DataURI extends UniformResourceIdentifier {
 
     if (
       !isEmpty(extraComponentsWithDataPrefix)
-    ) return new DataURI_ParsingError(`Unexpected components with data prefix: ${extraComponentsWithDataPrefix.toString()}`).throwAnyway();
+    ) return new DataURI_ParsingError(`Unexpected components with data prefix: ${extraComponentsWithDataPrefix.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
     if (
       rawData === undefined
-    ) return new DataURI_ParsingError('Expected data portion to be defined').throwAnyway();
+    ) return new DataURI_ParsingError('Expected data portion to be defined').throwAnyway('To be converted to `Attempt` failure');
 
     const [
       rawMediaType,
@@ -99,17 +99,17 @@ class DataURI extends UniformResourceIdentifier {
 
     if (
       !isEmpty(extraComponentsWithEncodingPrefix)
-    ) return new DataURI_ParsingError(`Unexpected components with encoding prefix: ${extraComponentsWithEncodingPrefix.toString()}`).throwAnyway();
+    ) return new DataURI_ParsingError(`Unexpected components with encoding prefix: ${extraComponentsWithEncodingPrefix.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
     if (
       rawMediaType === undefined
-    ) return new DataURI_ParsingError('Expected `mediaType` portion to be defined').throwAnyway();
+    ) return new DataURI_ParsingError('Expected `mediaType` portion to be defined').throwAnyway('To be converted to `Attempt` failure');
 
     const coercedEncoding = allDataURIBinaryEncodings.find($0 => $0 === rawEncoding);
 
     if (
       coercedEncoding === undefined
-    ) return new DataURI_ParsingError(`Expected encoding portion to be defined as one of: ${allDataURIBinaryEncodings.toString()}`).throwAnyway();
+    ) return new DataURI_ParsingError(`Expected encoding portion to be defined as one of: ${allDataURIBinaryEncodings.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
     return new DataURI(
       MediaType.forciblyParsedFrom(rawMediaType),

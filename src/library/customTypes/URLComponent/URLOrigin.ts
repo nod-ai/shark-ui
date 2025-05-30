@@ -29,7 +29,7 @@ class URLOrigin
     ) return new URLOrigin_ParsingError({
       expectation: derived.origin,
       reality    : givenSubject,
-    }).throwAnyway();
+    }).throwAnyway('To be converted to `Attempt` failure');
 
     return new URLOrigin(derived.origin);
   }

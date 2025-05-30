@@ -29,7 +29,7 @@ class URLPath
     ) return new URLPath_ParsingError({
       expectation: exampleURL.pathname,
       reality    : givenSubject,
-    }).throwAnyway();
+    }).throwAnyway('To be converted to `Attempt` failure');
 
     return new URLPath(exampleURL.pathname);
   }
