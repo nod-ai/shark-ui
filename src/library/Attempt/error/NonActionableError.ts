@@ -43,7 +43,9 @@ class NonActionableError
     return newError.throw();
   };
 
-  public static rethrow = (givenError: Error): never => {
+  public static rethrow = (
+    givenError: Error,
+  ): never => {
     return this.throw(
       'Expected error to be either re-interpreted or handled altogether',
       {
