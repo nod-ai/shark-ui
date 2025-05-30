@@ -122,7 +122,7 @@ const failureDueTo = <
   isSuccess       : false,
   isFailure       : true,
   optionallyUnwrap: () => null,
-  forciblyUnwrap  : () => givenCause.throwAnyway(),
+  forciblyUnwrap  : () => givenCause.throwAnyway('Unexpected forceful unwrap of a failure'),
   causeOfFailure  : givenCause,
 });
 
