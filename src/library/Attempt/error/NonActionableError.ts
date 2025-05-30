@@ -2,7 +2,7 @@ import type {
   Branded,
 } from '@/library/typeUtilities/Branded';
 
-interface NonActionableError_Options {
+interface NonActionableError_Options extends ErrorOptions {
   /** A function that's acting as an alternative to raw `throw` */
   thrower?: (...parameters: any[]) => unknown; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
@@ -33,7 +33,7 @@ class NonActionableError
 
   public static throw = (
     givenMessage: NonActionableError['message'],
-    givenOptions?: ErrorOptions,
+    givenOptions?: Omit<NonActionableError_Options, 'thrower'>,
     givenCaller?: NonActionableError_Options['thrower'],
   ): never => {
     const newError = new NonActionableError(givenMessage, givenOptions);
