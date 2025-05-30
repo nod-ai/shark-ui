@@ -16,7 +16,7 @@ const Byte_Sequence_assertEncodable = (
 
   if (
     givenSequence.length % byteCofactor !== 0
-  ) return new Byte_Sequence_EncodingCompatibilityError(givenBitWidth).throwAnyway();
+  ) return new Byte_Sequence_EncodingCompatibilityError(givenBitWidth).throwAnyway('To be converted to `Attempt` failure');
 
   return givenSequence;
 };

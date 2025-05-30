@@ -18,7 +18,7 @@ class NonTrivialString
 
     if (
       isEmpty(trimmedSubject)
-    ) return new NonTrivialString_ParsingError(givenSubject).throwAnyway();
+    ) return new NonTrivialString_ParsingError(givenSubject).throwAnyway('To be converted to `Attempt` failure');
 
     return new NonTrivialString(givenSubject);
   }

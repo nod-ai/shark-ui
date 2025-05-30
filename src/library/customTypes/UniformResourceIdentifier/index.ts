@@ -116,11 +116,11 @@ class UniformResourceIdentifier implements StaticStringParser<typeof UniformReso
 
     if (
       !isEmpty(componentsFollowingUnexpectedSchemeSuffix)
-    ) return new URI_ParsingError(`Found components with extra scheme suffix: ${componentsFollowingUnexpectedSchemeSuffix.join()}`).throwAnyway();
+    ) return new URI_ParsingError(`Found components with extra scheme suffix: ${componentsFollowingUnexpectedSchemeSuffix.join()}`).throwAnyway('To be converted to `Attempt` failure');
 
     if (
       scheme === undefined
-    ) return new URI_ParsingError('Expected a scheme').throwAnyway();
+    ) return new URI_ParsingError('Expected a scheme').throwAnyway('To be converted to `Attempt` failure');
 
     const [
       componentsPrecedingFragment,
@@ -130,7 +130,7 @@ class UniformResourceIdentifier implements StaticStringParser<typeof UniformReso
 
     if (
       !isEmpty(unexpectedComponentsWithFragmentPrefix)
-    ) return new URI_ParsingError(`Found extra components with fragment prefix: ${unexpectedComponentsWithFragmentPrefix.join()}`).throwAnyway();
+    ) return new URI_ParsingError(`Found extra components with fragment prefix: ${unexpectedComponentsWithFragmentPrefix.join()}`).throwAnyway('To be converted to `Attempt` failure');
 
     const [
       componentsPrecedingQuery,
@@ -140,11 +140,11 @@ class UniformResourceIdentifier implements StaticStringParser<typeof UniformReso
 
     if (
       !isEmpty(unexpectedComponentsWithQueryPrefix)
-    ) return new URI_ParsingError(`Found extra components with query prefix: ${unexpectedComponentsWithQueryPrefix.join()}`).throwAnyway();
+    ) return new URI_ParsingError(`Found extra components with query prefix: ${unexpectedComponentsWithQueryPrefix.join()}`).throwAnyway('To be converted to `Attempt` failure');
 
     if (
       componentsPrecedingQuery === undefined
-    ) return new URI_ParsingError('Expected components preceding query').throwAnyway();
+    ) return new URI_ParsingError('Expected components preceding query').throwAnyway('To be converted to `Attempt` failure');
 
     const pathSegmentDelimiter = '/';
 
@@ -176,7 +176,7 @@ class UniformResourceIdentifier implements StaticStringParser<typeof UniformReso
 
       if (
         authority === undefined
-      ) return new URI_ParsingError('Expected to find authority between its prefix and the path segments').throwAnyway();
+      ) return new URI_ParsingError('Expected to find authority between its prefix and the path segments').throwAnyway('To be converted to `Attempt` failure');
 
       return {
         authority,

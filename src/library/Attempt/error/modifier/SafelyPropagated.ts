@@ -16,11 +16,9 @@ export const assertSafelyPropagated = <
 >(
   givenError: SomePotentiallyActionableError,
 ): SafelyPropagated<SomePotentiallyActionableError> => {
-  // Propagated beyond confines of type system
-  // i.e. with raw `throw` instead of `.throwAnyway()` method
   if (
     givenError instanceof ActionableError
-  ) return givenError.throwAnyway();
+  ) return givenError.throwAnyway('Unexpected raw `throw` of some `ActionableError`. If this was intentional, use `.throwAnyway(...)` on the instance instead.');
 
   return givenError as SafelyPropagated<SomePotentiallyActionableError>;
 };
