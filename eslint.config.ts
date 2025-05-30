@@ -5,7 +5,7 @@ import {
   vueTsConfigs,
 } from '@vue/eslint-config-typescript';
 // @ts-expect-error https://github.com/cypress-io/eslint-plugin-cypress/issues/232
-import pluginCypress from 'eslint-plugin-cypress/flat';
+import pluginCypress from 'eslint-plugin-cypress';
 // @ts-expect-error https://github.com/import-js/eslint-plugin-import/pull/3097
 import importPlugin from 'eslint-plugin-import';
 import pluginVue from 'eslint-plugin-vue';
