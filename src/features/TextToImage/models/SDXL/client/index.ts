@@ -78,9 +78,7 @@ const generateOutputFrom = async (
 
     if (
       outcomeOfSettlingTextToImageResponse.isFailure
-    ) return Attempt.NonActionableError.rethrow(outcomeOfSettlingTextToImageResponse.causeOfFailure, {
-      message: 'Unreachable since `Attempt.toSettle` still throws everything',
-    });
+    ) return outcomeOfSettlingTextToImageResponse.causeOfFailure.throwAnyway('Unreachable since `Attempt.toSettle` still throws everything');
 
     textToImageResponse = outcomeOfSettlingTextToImageResponse.unwrapped;
   }

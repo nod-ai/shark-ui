@@ -2,6 +2,11 @@ import type {
   Branded,
 } from '@/library/typeUtilities/Branded';
 
+interface NonActionableError_Options extends ErrorOptions {
+  /** A function that's acting as an alternative to raw `throw` */
+  thrower?: (...parameters: any[]) => unknown; // eslint-disable-line @typescript-eslint/no-explicit-any
+}
+
 /**
  * Errors from which normal execution cannot be recovered.
  *
@@ -28,8 +33,7 @@ class NonActionableError
 
   public static throw = (
     givenMessage: NonActionableError['message'],
-    givenOptions?: ErrorOptions,
-    givenCaller?: (...parameters: any[]) => unknown, // eslint-disable-line @typescript-eslint/no-explicit-any
+    givenOptions?: NonActionableError_Options,
   ): never => {
     const newError = new NonActionableError(givenMessage, givenOptions);
 
@@ -37,7 +41,7 @@ class NonActionableError
       ('captureStackTrace' in Error)
       && (Error.captureStackTrace instanceof Function)
     ) {
-      Error.captureStackTrace.call(undefined, newError, givenCaller ?? NonActionableError.throw);
+      Error.captureStackTrace.call(undefined, newError, givenOptions?.thrower ?? NonActionableError.throw);
     }
 
     return newError.throw();
@@ -49,13 +53,10 @@ class NonActionableError
       message: NonActionableError['message'];
     },
   ): never => {
-    return this.throw(
-      given.message,
-      {
-        cause: givenError,
-      },
-      NonActionableError.rethrow,
-    );
+    return this.throw(given.message, {
+      cause  : givenError,
+      thrower: NonActionableError.rethrow,
+    });
   };
 }
 
