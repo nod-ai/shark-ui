@@ -13,12 +13,9 @@ abstract class ActionableError<SomeBrand extends string>
   public readonly brand!: SomeBrand;
 
   public throwAnyway(): never {
-    return NonActionableError.throw(
-      'Implementation not specified for actionable error',
-      {
-        cause: this,
-      },
-    );
+    return NonActionableError.throw('Implementation not specified for actionable error', {
+      cause: this,
+    });
   }
 }
 
