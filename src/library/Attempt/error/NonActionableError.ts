@@ -54,13 +54,10 @@ class NonActionableError
       message: NonActionableError['message'];
     },
   ): never => {
-    return this.throw(
-      given.message,
-      {
-        cause  : givenError,
-        thrower: NonActionableError.rethrow,
-      },
-    );
+    return this.throw(given.message, {
+      cause  : givenError,
+      thrower: NonActionableError.rethrow,
+    });
   };
 }
 
