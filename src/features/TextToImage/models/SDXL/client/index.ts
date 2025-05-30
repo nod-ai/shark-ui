@@ -78,7 +78,9 @@ const generateOutputFrom = async (
 
     if (
       outcomeOfSettlingTextToImageResponse.isFailure
-    ) return Attempt.NonActionableError.rethrow(outcomeOfSettlingTextToImageResponse.causeOfFailure);
+    ) return Attempt.NonActionableError.rethrow(outcomeOfSettlingTextToImageResponse.causeOfFailure, {
+      message: 'Unreachable since `Attempt.toSettle` still throws everything',
+    });
 
     textToImageResponse = outcomeOfSettlingTextToImageResponse.unwrapped;
   }
@@ -90,7 +92,9 @@ const generateOutputFrom = async (
 
     if (
       !clientFailedToReachServer
-    ) return Attempt.NonActionableError.rethrow(someError);
+    ) return Attempt.NonActionableError.rethrow(someError, {
+      message: 'Text-to-image client failed to generate image due to an unexpected error',
+    });
 
     return ends.inFailureDueTo(new Server.ConnectionError());
   }

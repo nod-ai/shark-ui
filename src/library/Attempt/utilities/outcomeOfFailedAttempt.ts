@@ -27,5 +27,8 @@ export const outcomeOfFailedAttempt = <
   const someError = asError(givenSubject);
   const potentiallyActionableError = assertPotentiallyActionable(someError);
   const safelyPropagatedError = assertSafelyPropagated(potentiallyActionableError);
-  return NonActionableError.rethrow(safelyPropagatedError);
+
+  return NonActionableError.rethrow(safelyPropagatedError, {
+    message: 'Expected error to be either interpreted or prevented altogether',
+  });
 };
