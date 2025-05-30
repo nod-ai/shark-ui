@@ -29,6 +29,7 @@ class NonActionableError
   public static throw = (
     givenMessage: NonActionableError['message'],
     givenOptions?: ErrorOptions,
+    givenCaller?: (...parameters: any[]) => unknown, // eslint-disable-line @typescript-eslint/no-explicit-any
   ): never => {
     const newError = new NonActionableError(givenMessage, givenOptions);
 
@@ -36,7 +37,7 @@ class NonActionableError
       ('captureStackTrace' in Error)
       && (Error.captureStackTrace instanceof Function)
     ) {
-      Error.captureStackTrace.call(undefined, newError, NonActionableError.throw);
+      Error.captureStackTrace.call(undefined, newError, givenCaller ?? NonActionableError.throw);
     }
 
     return newError.throw();
@@ -48,6 +49,7 @@ class NonActionableError
       {
         cause: givenError,
       },
+      NonActionableError.rethrow,
     );
   };
 }
