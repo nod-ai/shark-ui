@@ -57,9 +57,9 @@ class NonActionableError
     return this.throw(
       given.message,
       {
-        cause: givenError,
+        cause  : givenError,
+        thrower: NonActionableError.rethrow,
       },
-      NonActionableError.rethrow,
     );
   };
 }
