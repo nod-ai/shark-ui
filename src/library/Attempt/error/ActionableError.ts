@@ -12,13 +12,13 @@ abstract class ActionableError<SomeBrand extends string>
   implements Branded<SomeBrand> {
   public readonly brand!: SomeBrand;
 
-  public throwAnyway(
+  public throwAnyway = (
     givenJustification: string,
-  ): never {
+  ): never => {
     return NonActionableError.throw(givenJustification, {
       cause: this,
     });
-  }
+  };
 }
 
 export {
