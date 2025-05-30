@@ -16,7 +16,8 @@ abstract class ActionableError<SomeBrand extends string>
     givenJustification: string,
   ): never => {
     return NonActionableError.throw(givenJustification, {
-      cause: this,
+      cause  : this,
+      thrower: this.throwAnyway,
     });
   };
 }
