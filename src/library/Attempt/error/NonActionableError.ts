@@ -49,6 +49,7 @@ class NonActionableError
       {
         cause: givenError,
       },
+      NonActionableError.rethrow,
     );
   };
 }
