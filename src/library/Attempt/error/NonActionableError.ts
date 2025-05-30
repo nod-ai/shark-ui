@@ -33,7 +33,7 @@ class NonActionableError
 
   public static throw = (
     givenMessage: NonActionableError['message'],
-    givenOptions?: Omit<NonActionableError_Options, 'thrower'>,
+    givenOptions?: NonActionableError_Options,
     givenCaller?: NonActionableError_Options['thrower'],
   ): never => {
     const newError = new NonActionableError(givenMessage, givenOptions);
@@ -42,7 +42,7 @@ class NonActionableError
       ('captureStackTrace' in Error)
       && (Error.captureStackTrace instanceof Function)
     ) {
-      Error.captureStackTrace.call(undefined, newError, givenCaller ?? NonActionableError.throw);
+      Error.captureStackTrace.call(undefined, newError, givenOptions?.thrower ?? givenCaller ?? NonActionableError.throw);
     }
 
     return newError.throw();
