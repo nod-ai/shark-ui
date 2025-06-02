@@ -1,6 +1,6 @@
 export type {
-  TextToImageInput as Input,
+  TextToImage_Input as Input,
 } from './Input.ts';
 export type {
-  TextToImageOutput as Output,
+  TextToImage_Output as Output,
 } from './Output.ts';
