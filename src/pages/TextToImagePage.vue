@@ -116,17 +116,17 @@ const imageGeneration = useStatefulProcess(async () => {
       max-width="100vh"
       class="fill-height"
     >
-      <TextToImageOutputImg
-        v-if="imageGeneration.result !== null"
-        :model-value="imageGeneration.result"
-      />
       <VSkeletonLoader
-        v-else
+        v-if="imageGeneration.result === null"
         :boilerplate="!imageGeneration.isInProgress"
         width="100vh"
         :style="{
           'aspect-ratio': 1,
         }"
+      />
+      <TextToImageOutputImg
+        v-else
+        :model-value="imageGeneration.result"
       />
     </VContainer>
   </VMain>
