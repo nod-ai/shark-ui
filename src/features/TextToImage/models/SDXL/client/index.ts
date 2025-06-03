@@ -84,9 +84,7 @@ const generateOutputFrom = async (
   }
   catch (whateverThatWasThrown) {
     const someError = asError(whateverThatWasThrown);
-
-    const clientFailedToReachServer = (someError.cause instanceof Error)
-      && someError.cause.message.includes('Failed to fetch');
+    const clientFailedToReachServer = someError.message.includes('Failed to fetch');
 
     if (
       !clientFailedToReachServer
