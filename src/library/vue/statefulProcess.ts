@@ -5,16 +5,20 @@ import {
   type Ref,
 } from '@/library/vue/reactivity.ts';
 
+interface StatefulProcess<
+  SomeResult,
+> {
+  initiate: () => Promise<void>;
+  isInProgress: boolean;
+  result: SomeResult | null;
+}
+
 /** Useful when state of UI is dependent on some async operation and its result */
 export const useStatefulProcess = <
   SomeResult,
 >(
   forciblyPerformFlaggableProcess: () => Promise<SomeResult>,
-): ({
-  initiate: () => Promise<void>;
-  isInProgress: boolean;
-  result: SomeResult | null;
-}) => {
+): StatefulProcess<SomeResult> => {
   const flagIsRaised = ref(false);
 
   const capturedResult: Ref<SomeResult | null> = ref(null);
