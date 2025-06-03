@@ -21,13 +21,14 @@ export const useStatefulProcess = <
 
   const forciblyPerformFlaggedProcess = async (): Promise<void> => {
     using cleanup = new DisposableStack();
+
+    set(capturedResult, null);
     set(flagIsRaised, true);
 
     cleanup.defer(() => {
       set(flagIsRaised, false);
     });
 
-    set(capturedResult, null);
     const resultOfProcess = await forciblyPerformFlaggableProcess();
     set(capturedResult, resultOfProcess);
   };
@@ -38,6 +39,10 @@ export const useStatefulProcess = <
       return get(flagIsRaised);
     },
     get result() {
+      if (
+        this.isInProgress
+      ) return null;
+
       return get(capturedResult);
     },
   };
