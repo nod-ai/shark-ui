@@ -31,8 +31,8 @@ import Attempt from '@/library/Attempt';
 
 import SDXLDiffusionStepCount from '@/library/ShimmedStabilityAIClient/models/SDXLDiffusionStepCount.ts';
 
-import DiscreteSlider from '@/components/DiscreteSlider.vue';
 import NavigationPanel from '@/components/NavigationPanel.vue';
+import TextToImageModelSettings from '@/components/TextToImageModelSettings.vue';
 
 import TextToImageInputSection from '@/features/TextToImage/components/TextToImageInputSection.vue';
 import * as TextToImage from '@/features/TextToImage/index.ts';
@@ -44,6 +44,21 @@ const {
 } = SDXLDiffusionStepCount;
 
 const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
+const currentGuidanceScale = ref<number>(7.50);
+
+const sliderProps = {
+  label   : 'Number of Diffusion Steps',
+  range   : range,
+  tickStep: 10,
+};
+
+const guidanceScaleProps = {
+  label    : 'Guidance scale for generation',
+  min      : 0.00,
+  max      : 20.00,
+  precision: 2,
+  step     : 0.5,
+};
 
 const imageGeneration = useStatefulProcess(async () => {
   const proposedPrompt = get(currentPrompt);
@@ -58,7 +73,7 @@ const imageGeneration = useStatefulProcess(async () => {
       height     : 1024,
       width      : 1024,
       steps      : get(currentNumberOfDiffusionSteps),
-      cfgScale   : 7.5,
+      cfgScale   : get(currentGuidanceScale),
       seed       : 0,
     },
   });
@@ -89,11 +104,12 @@ const imageGeneration = useStatefulProcess(async () => {
 
       <br>
 
-      <DiscreteSlider
-        v-model="currentNumberOfDiffusionSteps"
-        label="Number of Diffusion Steps"
-        :range="range"
-        :tick-step="10"
+      <TextToImageModelSettings
+        v-model:number-of-diffusion-steps="currentNumberOfDiffusionSteps"
+        v-model:guidance-scale="currentGuidanceScale"
+        label="Model Settings"
+        :slider-props="sliderProps"
+        :guidance-scale-props="guidanceScaleProps"
       />
 
       <br>
