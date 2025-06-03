@@ -22,4 +22,6 @@ export {
 export {
   Attempt_that as that,
   Attempt_thatEventually as thatEventually,
+  type Attempt_EndGetter as EndGetter,
+  type Attempt_EndRetriever as EndRetriever,
 } from './factory';
