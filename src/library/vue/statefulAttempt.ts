@@ -7,7 +7,7 @@ import {
 
 import Attempt from '@/library/Attempt';
 
-interface StatefulProcess<
+interface StatefulAttempt<
   SomeProduct,
   SomeActionableError extends Attempt.ActionableError<string>,
 > {
@@ -17,14 +17,14 @@ interface StatefulProcess<
 }
 
 /** Useful when state of UI is dependent on some async operation and the outcome upon completion */
-export const useStatefulProcess = <
+export const useStatefulAttemptThatEventually = <
   SomeProduct,
   SomeActionableError extends Attempt.ActionableError<string>,
 >(
   retrieveOutcome: Attempt.EndRetriever<
     Attempt.Outcome<SomeProduct, SomeActionableError>
   >,
-): StatefulProcess<SomeProduct, SomeActionableError> => {
+): StatefulAttempt<SomeProduct, SomeActionableError> => {
   const flagIsRaised = ref(false);
 
   type CapturedOutcome = Attempt.Outcome<SomeProduct, SomeActionableError>;

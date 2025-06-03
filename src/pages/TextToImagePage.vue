@@ -5,8 +5,8 @@ import {
   type Ref,
 } from '@/library/vue/reactivity.ts';
 import {
-  useStatefulProcess,
-} from '@/library/vue/statefulProcess.ts';
+  useStatefulAttemptThatEventually,
+} from '@/library/vue/statefulAttempt';
 
 import {
   VBtn,
@@ -41,7 +41,7 @@ const {
 
 const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
 
-const imageGeneration = useStatefulProcess(async (ends) => {
+const imageGeneration = useStatefulAttemptThatEventually(async (ends) => {
   const proposedPrompt = get(currentPrompt);
 
   if (
