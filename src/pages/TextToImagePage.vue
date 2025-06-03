@@ -51,7 +51,7 @@ const diffusionStepProps = {
 };
 
 const guidanceScaleProps = {
-  label    : 'Guidance scale for generation',
+  label    : 'Cfg Scale',
   min      : 0.00,
   max      : 20.00,
   precision: 2,
