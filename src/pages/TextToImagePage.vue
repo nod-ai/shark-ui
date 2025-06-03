@@ -127,9 +127,14 @@ const imageGeneration = useStatefulAttemptThatEventually(async (ends) => {
         }"
       />
       <TextToImageOutputImg
-        v-else
-        :model-value="imageGeneration.outcome.forciblyUnwrap()"
+        v-else-if="imageGeneration.outcome.isSuccess"
+        :model-value="imageGeneration.outcome.unwrapped"
       />
+      <template
+        v-else
+      >
+        {{ imageGeneration.outcome.causeOfFailure.throwAnyway('Failed to present alert for image generation error') }}
+      </template>
     </VContainer>
   </VMain>
 </template>
