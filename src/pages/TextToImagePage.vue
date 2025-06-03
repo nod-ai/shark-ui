@@ -59,7 +59,11 @@ const imageGeneration = useStatefulAttemptThatEventually(async (ends) => {
     },
   });
 
-  const generatedOutput = outcomeOfGeneratingOutput.forciblyUnwrap();
+  if (
+    outcomeOfGeneratingOutput.isFailure
+  ) return outcomeOfGeneratingOutput;
+
+  const generatedOutput = outcomeOfGeneratingOutput.unwrapped;
   return ends.inSuccessWith(generatedOutput.image);
 });
 </script>
