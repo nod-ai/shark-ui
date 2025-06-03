@@ -34,7 +34,7 @@ const guidanceScale = defineModel<number>('guidanceScale', {
 
 defineProps<{
   label: string;
-  sliderProps: DiffusionStepProps;
+  diffusionStepProps: DiffusionStepProps;
   guidanceScaleProps: GuidanceScaleProps;
 }>();
 </script>
@@ -46,9 +46,9 @@ defineProps<{
     <div class="px-4">
       <DiscreteSlider
         v-model="numberOfDiffusionSteps"
-        :label="sliderProps.label"
-        :range="sliderProps.range"
-        :tick-step="sliderProps.tickStep"
+        :label="diffusionStepProps.label"
+        :range="diffusionStepProps.range"
+        :tick-step="diffusionStepProps.tickStep"
       />
 
       <br>

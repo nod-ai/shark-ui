@@ -44,7 +44,7 @@ const {
 const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
 const currentGuidanceScale = ref<number>(7.50);
 
-const sliderProps = {
+const diffusionStepProps = {
   label   : 'Number of Diffusion Steps',
   range   : range,
   tickStep: 10,
@@ -106,7 +106,7 @@ const imageGeneration = useStatefulProcess(async () => {
         v-model:number-of-diffusion-steps="currentNumberOfDiffusionSteps"
         v-model:guidance-scale="currentGuidanceScale"
         label="Model Settings"
-        :slider-props="sliderProps"
+        :diffusion-step-props="diffusionStepProps"
         :guidance-scale-props="guidanceScaleProps"
       />
 
