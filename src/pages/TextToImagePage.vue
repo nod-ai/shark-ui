@@ -18,9 +18,6 @@ import {
   VContainer,
 } from 'vuetify/components/VGrid';
 import {
-  VImg,
-} from 'vuetify/components/VImg';
-import {
   VMain,
 } from 'vuetify/components/VMain';
 import {
@@ -35,6 +32,7 @@ import DiscreteSlider from '@/components/DiscreteSlider.vue';
 import NavigationPanel from '@/components/NavigationPanel.vue';
 
 import TextToImageInputSection from '@/features/TextToImage/components/TextToImageInputSection.vue';
+import TextToImageOutputImg from '@/features/TextToImage/components/TextToImageOutputImg.vue';
 import * as TextToImage from '@/features/TextToImage/index.ts';
 
 const currentPrompt: Ref<TextToImage.Input['text'] | null> = ref(null);
@@ -118,18 +116,17 @@ const imageGeneration = useStatefulProcess(async () => {
       max-width="100vh"
       class="fill-height"
     >
-      <VImg
-        v-if="imageGeneration.result !== null"
-        :src="imageGeneration.result.uri.serialized"
-        :alt="imageGeneration.result.description"
-      />
       <VSkeletonLoader
-        v-else
+        v-if="imageGeneration.result === null"
         :boilerplate="!imageGeneration.isInProgress"
         width="100vh"
         :style="{
           'aspect-ratio': 1,
         }"
+      />
+      <TextToImageOutputImg
+        v-else
+        :model-value="imageGeneration.result"
       />
     </VContainer>
   </VMain>
