@@ -8,12 +8,7 @@ class TextToImage_Server_ConnectionError extends Attempt.ActionableError<'TextTo
   public constructor(
     public readonly origin: URLOrigin,
   ) {
-    const message = [
-      `Failed to reach the text-to-image server at "${origin.toString()}".`,
-      `Are you sure it's running?`,
-    ].join('\n');
-
-    super(message);
+    super(`Failed to reach the text-to-image server at "${origin.toString()}".`);
     this.name = 'TextToImage_ServerConnectionError';
   }
 }
