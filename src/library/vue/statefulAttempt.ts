@@ -17,7 +17,7 @@ interface StatefulAttempt<
 }
 
 /** Useful when state of UI is dependent on some async operation and the outcome upon completion */
-export const useStatefulAttemptThatEventually = <
+const useStatefulAttemptThatEventually = <
   SomeProduct,
   SomeActionableError extends Attempt.ActionableError<string>,
 >(
@@ -57,4 +57,8 @@ export const useStatefulAttemptThatEventually = <
       return get(capturedOutcome);
     },
   };
+};
+
+export {
+  useStatefulAttemptThatEventually,
 };

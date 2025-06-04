@@ -11,7 +11,7 @@ type SafelyPropagated<
   ActionableError<string>
 >;
 
-export const assertSafelyPropagated = <
+const assertSafelyPropagated = <
   SomePotentiallyActionableError extends PotentiallyActionable<Error>,
 >(
   givenError: SomePotentiallyActionableError,
@@ -21,4 +21,8 @@ export const assertSafelyPropagated = <
   ) return givenError.throwAnyway('Unexpected raw `throw` of some `ActionableError`. If this was intentional, use `.throwAnyway(...)` on the instance instead.');
 
   return givenError as SafelyPropagated<SomePotentiallyActionableError>;
+};
+
+export {
+  assertSafelyPropagated,
 };

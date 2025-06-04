@@ -10,11 +10,15 @@ import {
  * - an error from which execution can be recovered
  * - an error from which execution cannot be recovered
 */
-export const Attempt_ended = {
+const Attempt_ended = {
   /** Call this when the attempt has completed and was considered successful */
   inSuccessWith  : Outcome.successThatYielded,
   /** Call this when the attempt has completed and was considered a failure */
   inFailureDueTo : Outcome.failureDueTo,
   /** Call this when it's not possible to complete the attempt */
   inFlamesBecause: NonActionableError.throw,
+};
+
+export {
+  Attempt_ended,
 };

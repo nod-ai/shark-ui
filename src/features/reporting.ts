@@ -1,6 +1,6 @@
 import * as Repository from '@/utilities/Repository.ts';
 
-export const promptUserToReport = (givenErrorMessage: string) => {
+const promptUserToReport = (givenErrorMessage: string) => {
   const userDidPermitDraftingNewIssue = window.confirm([
     'Unexpected Error:',
     '"""',
@@ -16,4 +16,8 @@ export const promptUserToReport = (givenErrorMessage: string) => {
 
   const draftOfNewIssue = Repository.draftIssueFor(givenErrorMessage);
   window.open(draftOfNewIssue);
+};
+
+export {
+  promptUserToReport,
 };

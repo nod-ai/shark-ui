@@ -5,9 +5,9 @@ import {
 } from 'vue';
 
 /** Wraps an instance to make it reactive */
-export const ref = _ref;
+const ref = _ref;
 
-export type Ref<
+type Ref<
   GetterResult,
   SetterParameter = GetterResult,
 > = _Ref<
@@ -16,9 +16,16 @@ export type Ref<
 >;
 
 /** Unwraps a reactive instance */
-export const get = unref;
+const get = unref;
 
 /** Updates the wrapped instance */
-export const set = <Any>(givenSubject: Ref<Any>, givenValue: Any): void => {
+const set = <Any>(givenSubject: Ref<Any>, givenValue: Any): void => {
   givenSubject.value = givenValue;
+};
+
+export {
+  ref,
+  type Ref,
+  get,
+  set,
 };
