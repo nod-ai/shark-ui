@@ -1,11 +1,11 @@
 import HonoraryNonActionableError from '../HonoraryNonActionableError';
 import NonActionableError from '../NonActionableError';
 
-export type PotentiallyActionable<
+type PotentiallyActionable<
   SomeError extends Error,
 > = Exclude<SomeError, NonActionableError | HonoraryNonActionableError>;
 
-export const assertPotentiallyActionable = <
+const assertPotentiallyActionable = <
   SomeError extends Error,
 >(
   givenError: SomeError,
@@ -19,4 +19,9 @@ export const assertPotentiallyActionable = <
   ) throw givenError; // eslint-disable-line no-restricted-syntax
 
   return givenError as PotentiallyActionable<SomeError>;
+};
+
+export {
+  type PotentiallyActionable,
+  assertPotentiallyActionable,
 };

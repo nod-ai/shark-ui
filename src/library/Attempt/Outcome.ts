@@ -138,18 +138,20 @@ type Outcome<
   | Success<SomeProduct>
   | Failure<SomeActionableError>;
 
-export {
-  Outcome as default,
-};
-
-export type ProductOf<
+type ProductOf<
   SomeOutcome extends Outcome<unknown, ActionableError<string>>,
 > = SomeOutcome extends Success<infer NestedProduct>
   ? NestedProduct
   : never;
 
-export type CauseOf<
+type CauseOf<
   SomeOutcome extends Outcome<unknown, ActionableError<string>>,
 > = SomeOutcome extends Failure<infer NestedError>
   ? NestedError
   : never;
+
+export {
+  Outcome as default,
+  type ProductOf,
+  type CauseOf,
+};

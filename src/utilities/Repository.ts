@@ -5,7 +5,7 @@ import {
 const emptyDraftOfNewIssue = new URL('https://github.com/nod-ai/shark-ui/issues/new');
 
 /** Creates a URL that drafts a new issue with pre-populated fields  */
-export const draftIssueFor = (givenErrorMessage: string): URL => {
+const draftIssueFor = (givenErrorMessage: string): URL => {
   const mutableDraft = cloneOf(emptyDraftOfNewIssue);
 
   const referencedParameters = mutableDraft.searchParams;
@@ -18,4 +18,8 @@ export const draftIssueFor = (givenErrorMessage: string): URL => {
   referencedParameters.set('type', 'Bug');
 
   return mutableDraft;
+};
+
+export {
+  draftIssueFor,
 };

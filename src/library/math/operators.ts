@@ -1,4 +1,4 @@
-export const greatestCommonFactor = (a: number, b: number): number => {
+const greatestCommonFactor = (a: number, b: number): number => {
   let nextDividend = a;
   let previousRemainder = b;
 
@@ -11,11 +11,11 @@ export const greatestCommonFactor = (a: number, b: number): number => {
   return nextDividend;
 };
 
-export const leastCommonMultiple = (a: number, b: number): number => {
+const leastCommonMultiple = (a: number, b: number): number => {
   return (a * b) / greatestCommonFactor(a, b);
 };
 
-export const cofactor = (
+const cofactor = (
   {
     to: givenCofactor,
     forLCMWith: givenValue,
@@ -25,4 +25,10 @@ export const cofactor = (
   },
 ): number => {
   return leastCommonMultiple(givenValue, givenCofactor) / givenCofactor;
+};
+
+export {
+  greatestCommonFactor,
+  leastCommonMultiple,
+  cofactor,
 };
