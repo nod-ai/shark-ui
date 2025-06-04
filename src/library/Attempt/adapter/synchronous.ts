@@ -8,7 +8,7 @@ import {
   outcomeOfFailedAttempt,
 } from '../utilities/outcomeOfFailedAttempt';
 
-export const attemptTo = <
+const attemptTo = <
   SomeProduct,
   SomeActionableError extends ActionableError<string>,
 >(
@@ -24,4 +24,8 @@ export const attemptTo = <
       basedOn: whateverThatWasThrown,
     });
   }
+};
+
+export {
+  attemptTo,
 };

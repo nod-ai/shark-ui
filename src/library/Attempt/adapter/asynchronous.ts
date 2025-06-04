@@ -8,7 +8,7 @@ import {
   outcomeOfFailedAttempt,
 } from '../utilities/outcomeOfFailedAttempt';
 
-export const attemptToEventually = async <
+const attemptToEventually = async <
   SomeProduct,
   SomeActionableError extends ActionableError<string>,
 >(
@@ -26,7 +26,7 @@ export const attemptToEventually = async <
   }
 };
 
-export const attemptToSettle = async <
+const attemptToSettle = async <
   SomeProduct,
   SomeActionableError extends ActionableError<string>,
 >(
@@ -34,4 +34,9 @@ export const attemptToSettle = async <
 ): Promise<Outcome<SomeProduct, SomeActionableError>> => {
   const getPromisedProduct = () => promisedProduct;
   return attemptToEventually(getPromisedProduct);
+};
+
+export {
+  attemptToEventually,
+  attemptToSettle,
 };

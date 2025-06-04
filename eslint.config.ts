@@ -35,6 +35,9 @@ const importPluginConfigs: ConfigWithExtends[] = [
       'import/exports-last': [
         'error', // Encourages decoupling the export of a module from its declaration, which leads to cleaner diffs
       ],
+      'import/group-exports': [
+        'error', // Encourages decoupling the export of a module from its declaration, which leads to cleaner diffs
+      ],
       'import/order': [
         'error',
         {

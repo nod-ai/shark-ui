@@ -13,17 +13,22 @@ import type {
   ActionableError,
 } from '../error';
 
-export type Attempt_EndRetriever<
+type Attempt_EndRetriever<
   InferredOutcome extends Outcome<unknown, ActionableError<string>>,
 > = (
   givenHandles: typeof handles
 ) => Promise<InferredOutcome>;
 
-export const Attempt_thatEventually = async <
+const Attempt_thatEventually = async <
   InferredOutcome extends Outcome<unknown, ActionableError<string>>,
 >(
   endsAccordingTo: Attempt_EndRetriever<InferredOutcome>,
 ) => {
   type EquivalentOutcome = Outcome<ProductOf<InferredOutcome>, CauseOf<InferredOutcome>>;
   return await endsAccordingTo(handles) as EquivalentOutcome;
+};
+
+export {
+  type Attempt_EndRetriever,
+  Attempt_thatEventually,
 };

@@ -2,7 +2,11 @@ import {
   Attempt_ended,
 } from './ended';
 
-export const abandon = Attempt_ended.inFlamesBecause;
+const abandon = Attempt_ended.inFlamesBecause;
+
+export {
+  abandon,
+};
 
 export {
   default as Outcome,

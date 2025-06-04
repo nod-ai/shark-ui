@@ -1,4 +1,4 @@
-export const shallowlyMerged = <
+const shallowlyMerged = <
   SomeRecord extends Record<string, unknown>,
 >(
   ...givenRecords: (SomeRecord | null)[]
@@ -9,4 +9,8 @@ export const shallowlyMerged = <
       ...eachRecord,
     };
   }, {} as SomeRecord);
+};
+
+export {
+  shallowlyMerged,
 };

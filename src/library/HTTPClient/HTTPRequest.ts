@@ -1,5 +1,5 @@
 /** [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) */
-export enum Method {
+enum Method {
   CREATE /**/ = 'PUT',
   FETCH /* */ = 'GET',
   UPDATE /**/ = 'PATCH',
@@ -7,4 +7,9 @@ export enum Method {
   SUBMIT /**/ = 'POST',
 }
 
-export type HeaderMap = Record<string, string>;
+type HeaderMap = Record<string, string>;
+
+export {
+  Method,
+  type HeaderMap,
+};

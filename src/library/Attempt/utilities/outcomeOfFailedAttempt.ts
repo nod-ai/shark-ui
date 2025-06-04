@@ -14,7 +14,7 @@ import {
   assertSafelyPropagated,
 } from '../error/modifier';
 
-export const outcomeOfFailedAttempt = <
+const outcomeOfFailedAttempt = <
   SomeProduct,
   SomeActionableError extends ActionableError<string>,
 >(
@@ -31,4 +31,8 @@ export const outcomeOfFailedAttempt = <
   return NonActionableError.rethrow(safelyPropagatedError, {
     message: 'Expected error to be either interpreted or prevented altogether',
   });
+};
+
+export {
+  outcomeOfFailedAttempt,
 };

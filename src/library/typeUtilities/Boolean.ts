@@ -1,4 +1,4 @@
-export type Is<
+type Is<
   LeftHandOperand,
   RightHandOperand,
 > =
@@ -8,7 +8,7 @@ export type Is<
       false :
     false;
 
-export type If<
+type If<
   Condition extends boolean,
   WhenTrue,
   WhenFalse,
@@ -17,8 +17,14 @@ export type If<
     ? WhenTrue
     : WhenFalse;
 
-export type Not<
+type Not<
   SomeBoolean extends boolean,
 > = SomeBoolean extends true
   ? false
   : true;
+
+export type {
+  Is,
+  If,
+  Not,
+};
