@@ -21,8 +21,8 @@ app.use(vuetify);
 app.mount('#app');
 
 window.onunhandledrejection = (someEvent) => {
-  const rejectionReason = String(someEvent.reason);
-  promptUserToReport(rejectionReason);
+  const rejectionReason = asError(someEvent.reason);
+  promptUserToReport(rejectionReason.message);
   someEvent.preventDefault();
 };
 
