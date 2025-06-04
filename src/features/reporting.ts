@@ -1,4 +1,4 @@
-import * as Repository from '@/utilities/Repository.ts';
+import Repository from '@/utilities/Repository.ts';
 
 const promptUserToReport = (givenErrorMessage: string) => {
   const userDidPermitDraftingNewIssue = window.confirm([
