@@ -2,12 +2,12 @@ import Repository from '@/utilities/Repository.ts';
 
 const formatted = (
   givenError: {
+    message: string;
     cause: Error;
   },
-  givenMessage: string,
 ): string => {
   return [
-    `${givenMessage}:`,
+    `${givenError.message}:`,
     '"""',
     givenError.cause.message,
     '"""',
@@ -20,7 +20,7 @@ const promptUserToReport = (givenError: Error) => {
     cause  : givenError,
   };
 
-  const formattedErrorDetails = formatted(unexpectedError, unexpectedError.message);
+  const formattedErrorDetails = formatted(unexpectedError);
 
   const userDidPermitDraftingNewIssue = window.confirm([
     formattedErrorDetails,
