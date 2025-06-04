@@ -1,12 +1,10 @@
-import {
-  cloneOf,
-} from '@/library/utilitiesByType/reference';
-
 const Repository = {
-  emptyDraftOfNewIssue: new URL('https://github.com/nod-ai/shark-ui/issues/new'),
+  get emptyDraftOfNewIssue(): URL {
+    return new URL('https://github.com/nod-ai/shark-ui/issues/new');
+  },
   /** Creates a URL that drafts a new issue with pre-populated fields  */
   draftIssueFor(givenErrorMessage: string): URL {
-    const mutableDraft = cloneOf(this.emptyDraftOfNewIssue);
+    const mutableDraft = this.emptyDraftOfNewIssue;
 
     const referencedParameters = mutableDraft.searchParams;
 
