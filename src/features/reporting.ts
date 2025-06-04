@@ -1,20 +1,19 @@
 import Repository from '@/utilities/Repository.ts';
 
+const formatted = (
+  givenError: Error,
+  givenMessage: string,
+): string => {
+  return [
+    `${givenMessage}:`,
+    '"""',
+    givenError.message,
+    '"""',
+  ].join('\n');
+};
+
 const promptUserToReport = (givenError: Error) => {
   const defaultMessage = 'Unexpected Error';
-
-  const formatted = (
-    givenError: Error,
-    givenMessage: string,
-  ): string => {
-    return [
-      `${givenMessage}:`,
-      '"""',
-      givenError.message,
-      '"""',
-    ].join('\n');
-  };
-
   const formattedErrorDetails = formatted(givenError, defaultMessage);
 
   const userDidPermitDraftingNewIssue = window.confirm([
