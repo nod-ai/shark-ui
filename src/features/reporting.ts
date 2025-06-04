@@ -16,7 +16,7 @@ const promptUserToReport = (givenErrorMessage: string) => {
 
   const draftOfNewIssue = Repository.draftIssue({
     title : `[Unexpected Error]: can't <some task> when <some context>`,
-    body  : `Error Message:\n${givenErrorMessage}`.replace('\n', '\n> '),
+    body  : `### Details\n${givenErrorMessage}`.replace('\n', '\n> '),
     labels: ['bug'],
     type  : 'Bug',
   });
