@@ -1,10 +1,10 @@
 import Repository from '@/utilities/Repository.ts';
 
-const promptUserToReport = (givenErrorMessage: string) => {
+const promptUserToReport = (givenError: Error) => {
   const formattedErrorDetails = [
     'Unexpected Error:',
     '"""',
-    givenErrorMessage,
+    givenError.message,
     '"""',
   ].join('\n');
 
