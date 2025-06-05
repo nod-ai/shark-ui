@@ -1,10 +1,9 @@
+import Contextualized from '@/library/modifiersByType/error/Contextualized';
+
 import Repository from '@/utilities/Repository.ts';
 
 const formatted = (
-  givenError: {
-    message: string;
-    cause: Error;
-  },
+  givenError: Contextualized<Error, Error>,
 ): string => {
   return [
     `${givenError.message}:`,
@@ -15,10 +14,11 @@ const formatted = (
 };
 
 const promptUserToReport = (givenError: Error) => {
-  const unexpectedError = {
-    message: 'Unexpected Error',
-    cause  : givenError,
-  };
+  const unexpectedError = Contextualized.assume(
+    new Error('Unexpected Error', {
+      cause: givenError,
+    }),
+  );
 
   const formattedErrorDetails = formatted(unexpectedError);
 
