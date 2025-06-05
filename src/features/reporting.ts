@@ -1,11 +1,15 @@
 import Repository from '@/utilities/Repository.ts';
 
 const promptUserToReport = (givenErrorMessage: string) => {
-  const userDidPermitDraftingNewIssue = window.confirm([
+  const formattedErrorDetails = [
     'Unexpected Error:',
     '"""',
     givenErrorMessage,
     '"""',
+  ].join('\n');
+
+  const userDidPermitDraftingNewIssue = window.confirm([
+    formattedErrorDetails,
     '',
     'Proceed to file an issue?',
   ].join('\n'));
@@ -16,7 +20,7 @@ const promptUserToReport = (givenErrorMessage: string) => {
 
   const draftOfNewIssue = Repository.draftIssue({
     title : `[Unexpected Error]: can't <some task> when <some context>`,
-    body  : `Error Message:\n${givenErrorMessage}`.replace('\n', '\n> '),
+    body  : `### Details\n${formattedErrorDetails}`.replaceAll('\n', '\n> '),
     labels: ['bug'],
     type  : 'Bug',
   });
