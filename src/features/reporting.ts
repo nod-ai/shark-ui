@@ -14,12 +14,7 @@ const formatted = (
 };
 
 const promptUserToReport = (givenError: Error) => {
-  const unexpectedError = Contextualized.assume(
-    new Error('Unexpected Error', {
-      cause: givenError,
-    }),
-  );
-
+  const unexpectedError = Contextualized.cast(givenError, 'Unexpected Error');
   const formattedErrorDetails = formatted(unexpectedError);
 
   const userDidPermitDraftingNewIssue = window.confirm([
