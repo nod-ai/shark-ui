@@ -20,7 +20,7 @@ const Repository = {
     return new URL('https://github.com/nod-ai/shark-ui/issues/new');
   },
   /** Creates a URL that drafts a new issue with pre-populated fields  */
-  draftIssueFor(
+  draftIssue(
     given: Repository_Issue,
   ): URL {
     const mutableDraft = this.emptyDraftOfNewIssue;
