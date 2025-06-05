@@ -1,3 +1,5 @@
+type Repository_Issue_body_ = string;
+
 const Repository = {
   get emptyDraftOfNewIssue(): URL {
     return new URL('https://github.com/nod-ai/shark-ui/issues/new');
@@ -9,10 +11,10 @@ const Repository = {
     const mutableDraft = this.emptyDraftOfNewIssue;
     const referencedParameters = mutableDraft.searchParams;
 
-    const quotedErrorMessage = `Error Message:\n${givenErrorMessage}`.replace('\n', '\n> ');
+    const errorIssue_body: Repository_Issue_body_ = `Error Message:\n${givenErrorMessage}`.replace('\n', '\n> ');
 
     referencedParameters.set('title', `[Unexpected Error]: can't <some task> when <some context>`);
-    referencedParameters.set('body', quotedErrorMessage);
+    referencedParameters.set('body', errorIssue_body);
     referencedParameters.set('labels', ['bug'].join());
     referencedParameters.set('type', 'Bug');
 
