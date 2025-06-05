@@ -1,12 +1,21 @@
+import Contextualized from '@/library/modifiersByType/error/Contextualized';
+
 import Repository from '@/utilities/Repository.ts';
 
-const promptUserToReport = (givenErrorMessage: string) => {
-  const formattedErrorDetails = [
-    'Unexpected Error:',
+const formatted = (
+  givenError: Contextualized<Error, Error>,
+): string => {
+  return [
+    `${givenError.message}:`,
     '"""',
-    givenErrorMessage,
+    givenError.cause.message,
     '"""',
   ].join('\n');
+};
+
+const promptUserToReport = (givenError: Error) => {
+  const unexpectedError = Contextualized.cast(givenError, 'Unexpected Error');
+  const formattedErrorDetails = formatted(unexpectedError);
 
   const userDidPermitDraftingNewIssue = window.confirm([
     formattedErrorDetails,
