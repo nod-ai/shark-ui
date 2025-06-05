@@ -9,9 +9,9 @@ const Repository = {
     const mutableDraft = this.emptyDraftOfNewIssue;
     const referencedParameters = mutableDraft.searchParams;
 
-    referencedParameters.set('title', `[Unexpected Error]: can't <some task> when <some context>`);
     const quotedErrorMessage = `Error Message:\n${givenErrorMessage}`.replace('\n', '\n> ');
 
+    referencedParameters.set('title', `[Unexpected Error]: can't <some task> when <some context>`);
     referencedParameters.set('body', quotedErrorMessage);
     referencedParameters.set('labels', ['bug'].join());
     referencedParameters.set('type', 'Bug');
