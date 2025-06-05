@@ -37,10 +37,30 @@ const assertContextualized = <
   return Attempt.abandon('Expected error to have a cause');
 };
 
+const asContextualized = <
+  SomeError extends Error,
+  SomeCause extends Error,
+>(
+  givenError: SomeError,
+  givenFallbackMessage: string,
+  GivenCause: Instantiable<SomeCause> | ErrorConstructor = Error,
+): Contextualized<SomeError, SomeCause> | Contextualized<Error, SomeError> => {
+  if (
+    isContextualized<SomeError, SomeCause>(givenError, GivenCause)
+  ) return givenError;
+
+  const contextualizedError = new Error(givenFallbackMessage, {
+    cause: givenError,
+  });
+
+  return assertContextualized<Error, SomeError>(contextualizedError, Error);
+};
+
 /** Utilities for identifying and casting `Error` instances as "contextualized" */
 const Contextualized = {
   describes: isContextualized,
   assume   : assertContextualized,
+  cast     : asContextualized,
 };
 
 export {
