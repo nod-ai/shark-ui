@@ -3,9 +3,10 @@ const Repository = {
     return new URL('https://github.com/nod-ai/shark-ui/issues/new');
   },
   /** Creates a URL that drafts a new issue with pre-populated fields  */
-  draftIssueFor(givenErrorMessage: string): URL {
+  draftIssueFor(
+    givenErrorMessage: string,
+  ): URL {
     const mutableDraft = this.emptyDraftOfNewIssue;
-
     const referencedParameters = mutableDraft.searchParams;
 
     referencedParameters.set('title', `[Unexpected Error]: can't <some task> when <some context>`);
