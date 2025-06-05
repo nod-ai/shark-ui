@@ -8,10 +8,12 @@ type Repository_Issue_Type =
   | 'Bug'
   | 'Task';
 
-type Repository_Issue_title_ = string;
-type Repository_Issue_body_ = string;
-type Repository_Issue_labels_ = Repository_Issue_Label[];
-type Repository_Issue_type_ = Repository_Issue_Type;
+interface Repository_Issue {
+  title: string;
+  body: string;
+  labels: Repository_Issue_Label[];
+  type: Repository_Issue_Type;
+}
 
 const Repository = {
   get emptyDraftOfNewIssue(): URL {
@@ -24,10 +26,10 @@ const Repository = {
     const mutableDraft = this.emptyDraftOfNewIssue;
     const referencedParameters = mutableDraft.searchParams;
 
-    const errorIssue_title: Repository_Issue_title_ = `[Unexpected Error]: can't <some task> when <some context>`;
-    const errorIssue_body: Repository_Issue_body_ = `Error Message:\n${givenErrorMessage}`.replace('\n', '\n> ');
-    const errorIssue_labels: Repository_Issue_labels_ = ['bug'];
-    const errorIssue_type: Repository_Issue_type_ = 'Bug';
+    const errorIssue_title: Repository_Issue['title'] = `[Unexpected Error]: can't <some task> when <some context>`;
+    const errorIssue_body: Repository_Issue['body'] = `Error Message:\n${givenErrorMessage}`.replace('\n', '\n> ');
+    const errorIssue_labels: Repository_Issue['labels'] = ['bug'];
+    const errorIssue_type: Repository_Issue['type'] = 'Bug';
 
     referencedParameters.set('title', errorIssue_title);
     referencedParameters.set('body', errorIssue_body);
