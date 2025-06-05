@@ -26,15 +26,17 @@ const Repository = {
     const mutableDraft = this.emptyDraftOfNewIssue;
     const referencedParameters = mutableDraft.searchParams;
 
-    const errorIssue_title: Repository_Issue['title'] = `[Unexpected Error]: can't <some task> when <some context>`;
-    const errorIssue_body: Repository_Issue['body'] = `Error Message:\n${givenErrorMessage}`.replace('\n', '\n> ');
-    const errorIssue_labels: Repository_Issue['labels'] = ['bug'];
-    const errorIssue_type: Repository_Issue['type'] = 'Bug';
+    const errorIssue: Repository_Issue = {
+      title : `[Unexpected Error]: can't <some task> when <some context>`,
+      body  : `Error Message:\n${givenErrorMessage}`.replace('\n', '\n> '),
+      labels: ['bug'],
+      type  : 'Bug',
+    };
 
-    referencedParameters.set('title', errorIssue_title);
-    referencedParameters.set('body', errorIssue_body);
-    referencedParameters.set('labels', errorIssue_labels.join());
-    referencedParameters.set('type', errorIssue_type);
+    referencedParameters.set('title', errorIssue.title);
+    referencedParameters.set('body', errorIssue.body);
+    referencedParameters.set('labels', errorIssue.labels.join());
+    referencedParameters.set('type', errorIssue.type);
 
     return mutableDraft;
   },
