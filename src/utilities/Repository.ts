@@ -21,22 +21,15 @@ const Repository = {
   },
   /** Creates a URL that drafts a new issue with pre-populated fields  */
   draftIssueFor(
-    givenErrorMessage: string,
+    given: Repository_Issue,
   ): URL {
     const mutableDraft = this.emptyDraftOfNewIssue;
     const referencedParameters = mutableDraft.searchParams;
 
-    const errorIssue: Repository_Issue = {
-      title : `[Unexpected Error]: can't <some task> when <some context>`,
-      body  : `Error Message:\n${givenErrorMessage}`.replace('\n', '\n> '),
-      labels: ['bug'],
-      type  : 'Bug',
-    };
-
-    referencedParameters.set('title', errorIssue.title);
-    referencedParameters.set('body', errorIssue.body);
-    referencedParameters.set('labels', errorIssue.labels.join());
-    referencedParameters.set('type', errorIssue.type);
+    referencedParameters.set('title', given.title);
+    referencedParameters.set('body', given.body);
+    referencedParameters.set('labels', given.labels.join());
+    referencedParameters.set('type', given.type);
 
     return mutableDraft;
   },

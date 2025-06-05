@@ -14,7 +14,13 @@ const promptUserToReport = (givenErrorMessage: string) => {
     !userDidPermitDraftingNewIssue
   ) return;
 
-  const draftOfNewIssue = Repository.draftIssueFor(givenErrorMessage);
+  const draftOfNewIssue = Repository.draftIssueFor({
+    title : `[Unexpected Error]: can't <some task> when <some context>`,
+    body  : `Error Message:\n${givenErrorMessage}`.replace('\n', '\n> '),
+    labels: ['bug'],
+    type  : 'Bug',
+  });
+
   window.open(draftOfNewIssue);
 };
 
