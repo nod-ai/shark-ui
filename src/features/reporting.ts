@@ -13,8 +13,8 @@ const formatted = (
 };
 
 const promptUserToReport = (givenError: Error) => {
-  const defaultMessage = 'Unexpected Error';
-  const formattedErrorDetails = formatted(givenError, defaultMessage);
+  const unexpectedError_message = 'Unexpected Error';
+  const formattedErrorDetails = formatted(givenError, unexpectedError_message);
 
   const userDidPermitDraftingNewIssue = window.confirm([
     formattedErrorDetails,
