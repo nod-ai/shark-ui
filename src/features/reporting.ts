@@ -5,14 +5,15 @@ const promptUserToReport = (givenError: Error) => {
 
   const formattedErrorDetails = ((
     givenError: Error,
+    givenMessage: string,
   ): string => {
     return [
-      `${defaultMessage}:`,
+      `${givenMessage}:`,
       '"""',
       givenError.message,
       '"""',
     ].join('\n');
-  })(givenError);
+  })(givenError, defaultMessage);
 
   const userDidPermitDraftingNewIssue = window.confirm([
     formattedErrorDetails,
