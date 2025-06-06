@@ -65,7 +65,22 @@ const imageGeneration = useStatefulAttemptThatEventually(async (ends) => {
   ) {
     if (
       outcomeOfGeneratingOutput.causeOfFailure instanceof TextToImage.Server.SpecificationError
-    ) return outcomeOfGeneratingOutput.causeOfFailure.throwAnyway('Neglected to handle server specification error');
+    ) {
+      const {
+        causeOfFailure,
+      } = outcomeOfGeneratingOutput;
+
+      const userFacingMessage = [
+        'No text-to-image server was specified!',
+        'Either:',
+        `a) supply it's corresponding environment variable named \`${causeOfFailure.environmentKey}\` and rebuild`,
+        `b) specify it within ${causeOfFailure.file.toString()}`,
+        'OR',
+        `c) specify it within the response from ${causeOfFailure.endpoint.toString()}`,
+      ].join('\n');
+
+      return causeOfFailure.throwAnyway(userFacingMessage);
+    }
 
     return ends.inFailureDueTo(outcomeOfGeneratingOutput.causeOfFailure);
   }
