@@ -62,7 +62,13 @@ const imageGeneration = useStatefulAttemptThatEventually(async (ends) => {
 
   if (
     outcomeOfGeneratingOutput.isFailure
-  ) return outcomeOfGeneratingOutput;
+  ) {
+    if (
+      outcomeOfGeneratingOutput.causeOfFailure instanceof TextToImage.Server.SpecificationError
+    ) return outcomeOfGeneratingOutput.causeOfFailure.throwAnyway('Neglected to handle server specification error');
+
+    return ends.inFailureDueTo(outcomeOfGeneratingOutput.causeOfFailure);
+  }
 
   const generatedOutput = outcomeOfGeneratingOutput.unwrapped;
   return ends.inSuccessWith(generatedOutput.image);

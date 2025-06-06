@@ -58,6 +58,7 @@ const initializeShimmedStabilityAIClient = (): Promise<
 
 type OutcomeOfGeneratingTextToImageOutput = Attempt.Outcome<Output,
   | Server.ConnectionError
+  | Server.SpecificationError
 >;
 
 const generateOutputFrom = async (
@@ -76,7 +77,7 @@ const generateOutputFrom = async (
 
   if (
     outcomeOfInitializingClient.isFailure
-  ) return outcomeOfInitializingClient.causeOfFailure.throwAnyway('Neglected to handle server specification error');
+  ) return outcomeOfInitializingClient;
 
   const shimmedStabilityAIClient = outcomeOfInitializingClient.unwrapped;
 
