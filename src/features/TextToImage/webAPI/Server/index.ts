@@ -45,11 +45,11 @@ const retrieveCurrentTextToImageServer = (): Promise<
     dynamicConfig.server !== null
   ) return ends.inSuccessWith(dynamicConfig.server);
 
-  const newSpecificationError = new TextToImage_Server_SpecificationError({
-    environmentKey: environmentKeyForOriginOfTextToImageServer,
-    file          : StaticConfig.file,
-    endpoint      : DynamicConfig.endpoint,
-  });
+  const newSpecificationError = new TextToImage_Server_SpecificationError(
+    environmentKeyForOriginOfTextToImageServer,
+    StaticConfig.file,
+    DynamicConfig.endpoint,
+  );
 
   return ends.inFailureDueTo(newSpecificationError);
 });
