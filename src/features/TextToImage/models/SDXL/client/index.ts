@@ -29,7 +29,23 @@ const initializeShimmedStabilityAIClient = (): Promise<
 
   if (
     outcomeOfRetrievingCurrentServer.isFailure
-  ) return outcomeOfRetrievingCurrentServer;
+  ) {
+    const {
+      causeOfFailure,
+    } = outcomeOfRetrievingCurrentServer;
+
+    const userFacingMessage = [
+      'No text-to-image server was specified!',
+      'Either:',
+      `a) supply it's corresponding environment variable named \`${causeOfFailure.environmentKey}\` and rebuild`,
+      `b) specify it within ${causeOfFailure.file.toString()}`,
+      'OR',
+      `c) specify it within the response from ${causeOfFailure.endpoint.toString()}`,
+    ].join('\n');
+
+    causeOfFailure.message = userFacingMessage;
+    return outcomeOfRetrievingCurrentServer;
+  }
 
   const textToImageServer = outcomeOfRetrievingCurrentServer.unwrapped;
 

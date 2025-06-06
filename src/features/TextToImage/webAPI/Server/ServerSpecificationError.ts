@@ -10,16 +10,7 @@ class TextToImage_Server_SpecificationError extends Attempt.ActionableError<'Tex
     public readonly file: URLPath,
     public readonly endpoint: URLPath,
   ) {
-    const userFacingMessage = [
-      'No text-to-image server was specified!',
-      'Either:',
-      `a) supply it's corresponding environment variable named \`${environmentKey}\` and rebuild`,
-      `b) specify it within ${file.toString()}`,
-      'OR',
-      `c) specify it within the response from ${endpoint.toString()}`,
-    ].join('\n');
-
-    super(userFacingMessage);
+    super('Failed to determine text-to-image server');
     this.name = 'TextToImage_Server_SpecificationError';
   }
 }
