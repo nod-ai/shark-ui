@@ -15,7 +15,7 @@ const assertPotentiallyActionable = <
   ) return givenError.throw();
 
   if (
-    givenError instanceof HonoraryNonActionableError
+    HonoraryNonActionableError.describes(givenError)
   ) throw givenError; // eslint-disable-line no-restricted-syntax
 
   return givenError as PotentiallyActionable<SomeError>;

@@ -2,10 +2,6 @@ import type {
   Branded,
 } from '@/library/typeUtilities/Branded';
 
-import {
-  isError,
-} from '@/library/utilitiesByType/error';
-
 // These augmentations allow TypeScript to distinguish these error types from `Error` at the annotation level.
 declare global {
   interface ReferenceError extends Branded<'ReferenceError'> {
@@ -61,14 +57,6 @@ const isHonoraryNonActionableError = (
 
 const HonoraryNonActionableError = {
   describes: isHonoraryNonActionableError,
-  [Symbol.hasInstance](givenSubject: unknown): givenSubject is HonoraryNonActionableError {
-    if (
-      !isError(givenSubject)
-    ) return false;
-
-    const givenError = givenSubject;
-    return this.describes(givenError);
-  },
 };
 
 export {
