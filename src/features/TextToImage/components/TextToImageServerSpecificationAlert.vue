@@ -9,12 +9,12 @@ defineProps<{
 <template>
   {{
     error.throwAnyway([
-      'No text-to-image server was specified!',
-      'Either:',
-      `a) supply it's corresponding environment variable named \`${error.environmentKey}\` and rebuild`,
-      `b) specify it within ${error.file.toString()}`,
-      'OR',
-      `c) specify it within the response from ${error.endpoint.toString()}`,
-    ].join('\n'))
+      'No text-to-image server was specified!\n',
+      'Either:\n',
+      `a) supply it's corresponding environment variable named \`${error.environmentKey}\` and rebuild\n`,
+      `b) specify it within ${error.file.toString()}\n`,
+      'OR\n',
+      `c) specify it within the response from ${error.endpoint.toString()}\n`,
+    ].join(''))
   }}
 </template>
