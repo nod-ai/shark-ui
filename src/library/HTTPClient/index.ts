@@ -1,3 +1,5 @@
+import Attempt from '@/library/Attempt';
+
 import type {
   URLOrigin,
   URLPath,
@@ -6,7 +8,7 @@ import type {
 import * as HTTPRequest from './HTTPRequest.ts';
 import HTTPResponseError from './HTTPResponseError.ts';
 
-export default class HTTPClient {
+class HTTPClient {
   public readonly origin: URLOrigin;
   public readonly headers: HTTPRequest.HeaderMap;
 
@@ -29,7 +31,7 @@ export default class HTTPClient {
     );
   }
 
-  public async tryToSend(
+  public send = async (
     givenRequestBody: unknown,
     {
       to: givenPath,
@@ -38,32 +40,35 @@ export default class HTTPClient {
       to: URLPath;
       using: HTTPRequest.Method;
     },
-  ): Promise<unknown> {
+  ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> => Attempt.thatEventually(async (ends) => {
     const response = await fetch(this.originAt(givenPath), {
       method : givenMethod,
       headers: this.headers,
       body   : JSON.stringify(givenRequestBody),
     });
 
-    if (!response.ok) throw new HTTPResponseError(response.statusText, response.status);
+    if (
+      !response.ok
+    ) return ends.inFailureDueTo(new HTTPResponseError(response.statusText, response.status));
 
-    return await response.json();
-  }
+    const responseBody: unknown = await response.json();
+    return ends.inSuccessWith(responseBody);
+  });
 
-  public async tryToFetchResource(
+  public async fetchResource(
     {
       from: givenPath,
     }: {
       from: URLPath;
     },
-  ): Promise<unknown> {
-    return await this.tryToSend(null, {
+  ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> {
+    return await this.send(null, {
       to   : givenPath,
       using: HTTPRequest.Method.FETCH,
     });
   }
 
-  public async tryToSubmitResource(
+  public async submitResource(
     {
       bySending: givenSubmission,
       to: givenPath,
@@ -71,14 +76,14 @@ export default class HTTPClient {
       bySending: unknown;
       to: URLPath;
     },
-  ): Promise<unknown> {
-    return await this.tryToSend(givenSubmission, {
+  ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> {
+    return await this.send(givenSubmission, {
       to   : givenPath,
       using: HTTPRequest.Method.SUBMIT,
     });
   }
 
-  public async tryToCreateResource(
+  public async createResource(
     {
       bySending: givenProperties,
       to: givenPath,
@@ -86,14 +91,14 @@ export default class HTTPClient {
       bySending: unknown;
       to: URLPath;
     },
-  ): Promise<unknown> {
-    return await this.tryToSend(givenProperties, {
+  ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> {
+    return await this.send(givenProperties, {
       to   : givenPath,
       using: HTTPRequest.Method.CREATE,
     });
   }
 
-  public async tryToUpdateResource(
+  public async updateResource(
     {
       bySending: givenChanges,
       to: givenPath,
@@ -101,17 +106,23 @@ export default class HTTPClient {
       bySending: unknown;
       to: URLPath;
     },
-  ): Promise<unknown> {
-    return await this.tryToSend(givenChanges, {
+  ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> {
+    return await this.send(givenChanges, {
       to   : givenPath,
       using: HTTPRequest.Method.UPDATE,
     });
   }
 
-  public async tryToDeleteResourceAt(givenPath: URLPath): Promise<unknown> {
-    return await this.tryToSend(null, {
+  public async deleteResourceAt(
+    givenPath: URLPath,
+  ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> {
+    return await this.send(null, {
       to   : givenPath,
       using: HTTPRequest.Method.DELETE,
     });
   }
 }
+
+export {
+  HTTPClient as default,
+};

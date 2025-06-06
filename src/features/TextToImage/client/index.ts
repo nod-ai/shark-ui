@@ -1,1 +1,3 @@
-export * as SDXL from '@/features/TextToImage/models/SDXL/client/index.ts';
+export {
+  default as SDXL,
+} from '@/features/TextToImage/models/SDXL/client/index.ts';

@@ -5,7 +5,7 @@ import {
   vueTsConfigs,
 } from '@vue/eslint-config-typescript';
 // @ts-expect-error https://github.com/cypress-io/eslint-plugin-cypress/issues/232
-import pluginCypress from 'eslint-plugin-cypress/flat';
+import pluginCypress from 'eslint-plugin-cypress';
 // @ts-expect-error https://github.com/import-js/eslint-plugin-import/pull/3097
 import importPlugin from 'eslint-plugin-import';
 import pluginVue from 'eslint-plugin-vue';
@@ -32,6 +32,12 @@ const importPluginConfigs: ConfigWithExtends[] = [
       },
     },
     rules: {
+      'import/exports-last': [
+        'error', // Encourages decoupling the export of a module from its declaration, which leads to cleaner diffs
+      ],
+      'import/group-exports': [
+        'error', // Encourages decoupling the export of a module from its declaration, which leads to cleaner diffs
+      ],
       'import/order': [
         'error',
         {
@@ -87,9 +93,31 @@ const configWithVueTS = defineConfigWithVueTs(
 
   {
     rules: {
-      'eqeqeq'                                          : 'error', // Avoids `==` and `!=`, which perform type coercions that follow the rather obscure Abstract Equality Comparison Algorithm: https://www.ecma-international.org/ecma-262/5.1/#sec-11.9.3
-      'no-implicit-coercion'                            : 'error', // Using constructors, factories, and parsers for coercion rather than operators leads to less confusing behavior
-      '@typescript-eslint/explicit-member-accessibility': 'error', // Easier to see dead code in situations where a member is marked `private`
+      'eqeqeq': [
+        'error', // Avoids `==` and `!=`, which perform type coercions that follow the rather obscure Abstract Equality Comparison Algorithm: https://www.ecma-international.org/ecma-262/5.1/#sec-11.9.3
+      ],
+      'no-implicit-coercion': [
+        'error', // Using constructors, factories, and parsers for coercion rather than operators leads to less confusing behavior
+      ],
+      'no-restricted-exports': ['error', {
+        restrictDefaultExports: {
+          direct: true, // Keeping the export of something separate from its declaration leads to cleaner diffs. Prefer using `export { Foo as default }`
+        },
+      }],
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'TryStatement',
+          message : 'Prefer `Attempt.to` for error matching over `try`/`catch`.',
+        },
+        {
+          selector: 'ThrowStatement',
+          message : 'Prefer `Attempt.that` callback for error propagation over `throw`.',
+        },
+      ],
+      '@typescript-eslint/explicit-member-accessibility': [
+        'error', // Easier to see dead code in situations where a member is marked `private`
+      ],
     },
   },
 
@@ -154,7 +182,7 @@ const configWithVueTS = defineConfigWithVueTs(
   },
 );
 
-export default tseslint.config([
+const completeConfig = tseslint.config([
   ...configWithVueTS,
   {
     name : 'shark-ui/safety-override',
@@ -170,3 +198,7 @@ export default tseslint.config([
     },
   },
 ]);
+
+export {
+  completeConfig as default,
+};

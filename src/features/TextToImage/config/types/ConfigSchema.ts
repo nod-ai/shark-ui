@@ -1,6 +1,6 @@
 import {
   z,
-} from 'zod';
+} from 'zod/v4';
 
 import * as WebAPI from '@/library/WebAPI';
 
@@ -10,14 +10,9 @@ import {
 
 /** Defines how to parse an instance of {@link TextToImage_Config} */
 const TextToImage_ConfigSchema = z.object({
-  server: z.unknown().transform((parsableSubject) => {
-    try {
-      return WebAPI.Server.tryToParseFrom(parsableSubject);
-    }
-    catch {
-      return null;
-    }
-  }),
+  server: WebAPI.ServerSchema
+    .nullable()
+    .catch(null),
 }).transform($0 => new TextToImage_Config(
   $0.server,
 ));

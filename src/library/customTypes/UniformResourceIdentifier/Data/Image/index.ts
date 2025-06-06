@@ -4,7 +4,7 @@ import type {
   DataURIBinaryEncoding,
 } from '../DataURIBinaryEncoding.ts';
 
-import MediaType from '../MediaType.ts';
+import MediaType from '../MediaType';
 
 import DataURI from '../index.ts';
 
@@ -13,7 +13,9 @@ import {
   type ImageURIFormat,
 } from './ImageURIFormat.ts';
 
-export default class ImageURI extends DataURI {
+import ImageURI_ParsingError from './ParsingError.ts';
+
+class ImageURI extends DataURI {
   public static readonly mediaType = 'image';
 
   private readonly _format: ImageURIFormat;
@@ -45,14 +47,18 @@ export default class ImageURI extends DataURI {
     );
   }
 
-  public static override tryToParse(givenSubject: string): ImageURI {
-    const proposedURI = super.tryToParse(givenSubject);
+  public static override forciblyParsedFrom(givenSubject: string): ImageURI {
+    const proposedURI = super.forciblyParsedFrom(givenSubject);
 
-    if (proposedURI.mediaType.fileType !== ImageURI.mediaType) throw new Error(`Expected media type starting with ${ImageURI.mediaType}`);
+    if (
+      proposedURI.mediaType.fileType !== ImageURI.mediaType
+    ) return new ImageURI_ParsingError(`Expected media type starting with ${ImageURI.mediaType}`).throwAnyway('To be converted to `Attempt` failure');
 
     const format = allImageURIFormats.find($0 => $0 === proposedURI.mediaType.fileSubtype);
 
-    if (format === undefined) throw new Error(`Expected format to be one of ${allImageURIFormats.toString()}`);
+    if (
+      format === undefined
+    ) return new ImageURI_ParsingError(`Expected format to be one of ${allImageURIFormats.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
     return new ImageURI(
       format,
@@ -61,3 +67,8 @@ export default class ImageURI extends DataURI {
     );
   }
 }
+
+export {
+  ImageURI as default,
+  ImageURI_ParsingError,
+};

@@ -1,21 +1,40 @@
-import {
-  cloneOf,
-} from '@/library/utilitiesByType/reference';
+type Repository_Issue_Label =
+  | 'bug'
+  | 'enhancement'
+  | 'documentation';
 
-const emptyDraftOfNewIssue = new URL('https://github.com/nod-ai/shark-ui/issues/new');
+type Repository_Issue_Type =
+  | 'Feature'
+  | 'Bug'
+  | 'Task';
 
-/** Creates a URL that drafts a new issue with pre-populated fields  */
-export const draftIssueFor = (givenErrorMessage: string): URL => {
-  const mutableDraft = cloneOf(emptyDraftOfNewIssue);
+interface Repository_Issue {
+  title: string;
+  body: string;
+  labels: Repository_Issue_Label[];
+  type: Repository_Issue_Type;
+}
 
-  const referencedParameters = mutableDraft.searchParams;
+const Repository = {
+  get emptyDraftOfNewIssue(): URL {
+    return new URL('https://github.com/nod-ai/shark-ui/issues/new');
+  },
+  /** Creates a URL that drafts a new issue with pre-populated fields  */
+  draftIssue(
+    given: Repository_Issue,
+  ): URL {
+    const mutableDraft = this.emptyDraftOfNewIssue;
+    const referencedParameters = mutableDraft.searchParams;
 
-  referencedParameters.set('title', `[Unexpected Error]: can't <some task> when <some context>`);
-  const quotedErrorMessage = `Error Message:\n${givenErrorMessage}`.replace('\n', '\n> ');
+    referencedParameters.set('title', given.title);
+    referencedParameters.set('body', given.body);
+    referencedParameters.set('labels', given.labels.join());
+    referencedParameters.set('type', given.type);
 
-  referencedParameters.set('body', quotedErrorMessage);
-  referencedParameters.set('labels', ['bug'].join());
-  referencedParameters.set('type', 'Bug');
+    return mutableDraft;
+  },
+};
 
-  return mutableDraft;
+export {
+  Repository as default,
 };

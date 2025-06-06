@@ -21,13 +21,13 @@ app.use(vuetify);
 app.mount('#app');
 
 window.onunhandledrejection = (someEvent) => {
-  const rejectionReason = String(someEvent.reason);
+  const rejectionReason = asError(someEvent.reason);
   promptUserToReport(rejectionReason);
   someEvent.preventDefault();
 };
 
 // In production version (post build/bundling), errors that originate from Vue components bypass the listeners on the current `Window` instance
-app.config.errorHandler = (someException) => {
-  const someError = asError(someException);
-  promptUserToReport(someError.message);
+app.config.errorHandler = (whateverThatWasThrown) => {
+  const someError = asError(whateverThatWasThrown);
+  promptUserToReport(someError);
 };

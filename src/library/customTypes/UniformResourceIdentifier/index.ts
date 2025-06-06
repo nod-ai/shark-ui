@@ -1,14 +1,22 @@
-import NonTrivialString from '@/library/customTypes/NonTrivialString.ts';
+import Attempt from '@/library/Attempt';
+
+import NonTrivialString from '@/library/customTypes/NonTrivialString';
+
+import type {
+  StaticStringParser,
+} from '@/library/typeUtilities/StaticStringParser';
 
 import {
   isEmpty,
 } from '@/library/utilitiesByType/array.ts';
 
+import URI_ParsingError from './ParsingError';
+
 /**
  * Identifies an abstract or physical resource.
  * See [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986) for more information
  */
-export default class UniformResourceIdentifier {
+class UniformResourceIdentifier implements StaticStringParser<typeof UniformResourceIdentifier> {
   private readonly _scheme: /*   */ NonTrivialString;
   private readonly _authority: /**/ NonTrivialString | null;
   private readonly _path: /*     */ NonTrivialString | null;
@@ -38,7 +46,9 @@ export default class UniformResourceIdentifier {
   }
 
   public get path(): Exclude<UniformResourceIdentifier['_path'], null> {
-    if (this._path === null) throw new Error('`path` must either be a) provided via constructor or b) overridden via public getter');
+    if (
+      this._path === null
+    ) return Attempt.abandon('`path` must either be a) provided via constructor or b) overridden via public getter');
 
     return this._path;
   }
@@ -90,7 +100,7 @@ export default class UniformResourceIdentifier {
     return components.map($0 => $0 ?? '').join('');
   }
 
-  public static tryToParse(givenSubject: string): UniformResourceIdentifier {
+  public static forciblyParsedFrom(givenSubject: string): UniformResourceIdentifier {
     const {
       schemeSuffix,
       authorityPrefix,
@@ -106,31 +116,35 @@ export default class UniformResourceIdentifier {
 
     if (
       !isEmpty(componentsFollowingUnexpectedSchemeSuffix)
-    ) throw new Error(`Found components with extra scheme suffix: ${componentsFollowingUnexpectedSchemeSuffix.join()}`);
+    ) return new URI_ParsingError(`Found components with extra scheme suffix: ${componentsFollowingUnexpectedSchemeSuffix.join()}`).throwAnyway('To be converted to `Attempt` failure');
 
-    if (scheme === undefined) throw new Error('Expected a scheme');
+    if (
+      scheme === undefined
+    ) return new URI_ParsingError('Expected a scheme').throwAnyway('To be converted to `Attempt` failure');
 
     const [
       componentsPrecedingFragment,
-      fragment,
+      fragment = null,
       ...unexpectedComponentsWithFragmentPrefix
     ] = componentsFollowingScheme?.split(fragmentPrefix) ?? [];
 
     if (
       !isEmpty(unexpectedComponentsWithFragmentPrefix)
-    ) throw new Error(`Found extra components with fragment prefix: ${unexpectedComponentsWithFragmentPrefix.join()}`);
+    ) return new URI_ParsingError(`Found extra components with fragment prefix: ${unexpectedComponentsWithFragmentPrefix.join()}`).throwAnyway('To be converted to `Attempt` failure');
 
     const [
       componentsPrecedingQuery,
-      query,
+      query = null,
       ...unexpectedComponentsWithQueryPrefix
     ] = componentsPrecedingFragment?.split(queryPrefix) ?? [];
 
     if (
       !isEmpty(unexpectedComponentsWithQueryPrefix)
-    ) throw new Error(`Found extra components with query prefix: ${unexpectedComponentsWithQueryPrefix.join()}`);
+    ) return new URI_ParsingError(`Found extra components with query prefix: ${unexpectedComponentsWithQueryPrefix.join()}`).throwAnyway('To be converted to `Attempt` failure');
 
-    if (componentsPrecedingQuery === undefined) throw new Error('Expected components preceding query');
+    if (
+      componentsPrecedingQuery === undefined
+    ) return new URI_ParsingError('Expected components preceding query').throwAnyway('To be converted to `Attempt` failure');
 
     const pathSegmentDelimiter = '/';
 
@@ -160,7 +174,9 @@ export default class UniformResourceIdentifier {
         ...pathSegments
       ] = authorityAndPath.split(pathSegmentDelimiter);
 
-      if (authority === undefined) throw new Error('Expected to find authority between its prefix and the path segments');
+      if (
+        authority === undefined
+      ) return new URI_ParsingError('Expected to find authority between its prefix and the path segments').throwAnyway('To be converted to `Attempt` failure');
 
       return {
         authority,
@@ -169,11 +185,16 @@ export default class UniformResourceIdentifier {
     })();
 
     return new UniformResourceIdentifier(
-      NonTrivialString.tryToParseFrom(scheme),
-      NonTrivialString.nullableParsedFrom(authority),
-      NonTrivialString.tryToParseFrom(path),
-      NonTrivialString.nullableParsedFrom(query ?? null),
-      NonTrivialString.nullableParsedFrom(fragment ?? null),
+      NonTrivialString.forciblyParsedFrom(scheme),
+      NonTrivialString.nullableForciblyParsedFrom(authority),
+      NonTrivialString.forciblyParsedFrom(path),
+      NonTrivialString.nullableForciblyParsedFrom(query),
+      NonTrivialString.nullableForciblyParsedFrom(fragment),
     );
   }
 }
+
+export {
+  UniformResourceIdentifier as default,
+  URI_ParsingError,
+};

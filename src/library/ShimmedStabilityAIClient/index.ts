@@ -8,7 +8,7 @@ import type {
 
 import {
   z,
-} from 'zod';
+} from 'zod/v4';
 
 import HTTPClient from '@/library/HTTPClient/index.ts';
 
@@ -93,23 +93,27 @@ const toBatchGenerationRequestBody = (givenRequests: GenerateFromTextRequest['te
 };
 
 const z_image = z.string().transform((someSubject) => {
-  return Base64CharacterEncodedByteSequence.tryToParseFrom(someSubject);
+  return Base64CharacterEncodedByteSequence.forciblyParsedFrom(someSubject);
 });
 
 const z_imageGenerationResponseBody = z.object({
   images: z.tuple([z_image]).rest(z_image),
 });
 
+const generationEndpoint = URLPath.forciblyParsedFrom('/generate');
+
 class ImageClient extends HTTPClient {
-  public async tryToGenerateFromText(
+  public async forciblyGenerateFromText(
     givenRequest: GenerateFromTextRequest,
   ): Promise<GenerateFromTextResponse> {
-    const newResource = await this.tryToSubmitResource({
+    const outcomeOfSubmittingResource = await this.submitResource({
       bySending: toBatchGenerationRequestBody([
         givenRequest.textToImageRequestBody,
       ]),
-      to: URLPath.tryToParseFrom('/generate'),
+      to: generationEndpoint,
     });
+
+    const newResource = outcomeOfSubmittingResource.forciblyUnwrap();
 
     const {
       images,
@@ -141,12 +145,12 @@ class Version1Client extends HTTPClient {
   }
 }
 
-export default class ShimmedStabilityAIClient extends HTTPClient {
+class ShimmedStabilityAIClient extends HTTPClient {
   public constructor(given: {
     serverURL: string;
   }) {
     super({
-      origin : URLOrigin.tryToParseFrom(given.serverURL),
+      origin : URLOrigin.forciblyParsedFrom(given.serverURL),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -160,3 +164,7 @@ export default class ShimmedStabilityAIClient extends HTTPClient {
     return this._version1;
   }
 }
+
+export {
+  ShimmedStabilityAIClient as default,
+};

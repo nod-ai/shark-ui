@@ -3,6 +3,8 @@ import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
+import Attempt from '@/library/Attempt';
+
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
 
 import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
@@ -13,10 +15,6 @@ import {
   asError,
 } from '@/library/utilitiesByType/error';
 
-import {
-  DynamicConfig,
-  StaticConfig,
-} from '@/features/TextToImage/config';
 import type {
   Output,
 } from '@/features/TextToImage/types';
@@ -24,27 +22,30 @@ import {
   Server,
 } from '@/features/TextToImage/webAPI';
 
-const tryToInitializeShimmedStabilityAIClient = async (): Promise<ShimmedStabilityAIClient> => {
-  try {
-    const textToImageServer = await Server.tryToGetFrom();
+const initializeShimmedStabilityAIClient = (): Promise<
+  Attempt.Outcome<ShimmedStabilityAIClient, Server.SpecificationError>
+> => Attempt.thatEventually(async (ends) => {
+  const outcomeOfRetrievingCurrentServer = await Server.retrieveCurrent();
 
-    return new ShimmedStabilityAIClient({
-      serverURL: textToImageServer.origin,
-    });
-  }
-  catch {
-    throw new Error([
-      'No text-to-image server was specified!',
-      'Either:',
-      `a) supply it's corresponding environment variable named \`${Server.environmentKeyForOrigin}\` and rebuild`,
-      `b) specify it within ${StaticConfig.file.toString()}`,
-      'OR',
-      `c) specify it within the response from ${DynamicConfig.endpoint.toString()}`,
-    ].join('\n'));
-  }
-};
+  if (
+    outcomeOfRetrievingCurrentServer.isFailure
+  ) return outcomeOfRetrievingCurrentServer;
 
-export const tryToGenerateOutputFrom = async (
+  const textToImageServer = outcomeOfRetrievingCurrentServer.unwrapped;
+
+  const newClient = new ShimmedStabilityAIClient({
+    serverURL: textToImageServer.origin,
+  });
+
+  return ends.inSuccessWith(newClient);
+});
+
+type OutcomeOfGeneratingTextToImageOutput = Attempt.Outcome<Output,
+  | Server.ConnectionError
+  | Server.SpecificationError
+>;
+
+const generateOutputFrom = async (
   given: {
     textToImageRequestBody: Pick<GenerateFromTextRequest['textToImageRequestBody'],
     | 'textPrompts'
@@ -55,61 +56,73 @@ export const tryToGenerateOutputFrom = async (
     | 'seed'
     >;
   },
-): Promise<Output> => {
-  const shimmedStabilityAIClient = await tryToInitializeShimmedStabilityAIClient();
+): Promise<OutcomeOfGeneratingTextToImageOutput> => Attempt.thatEventually(async (ends) => {
+  const outcomeOfInitializingClient = await initializeShimmedStabilityAIClient();
+
+  if (
+    outcomeOfInitializingClient.isFailure
+  ) return outcomeOfInitializingClient;
+
+  const shimmedStabilityAIClient = outcomeOfInitializingClient.unwrapped;
+
+  const promisedTextToImageResponse = shimmedStabilityAIClient.version1.image.forciblyGenerateFromText({
+    engineId              : 'stable-diffusion-xl-1024-v1-0',
+    textToImageRequestBody: {
+      textPrompts: given.textToImageRequestBody.textPrompts,
+      height     : given.textToImageRequestBody.height,
+      width      : given.textToImageRequestBody.width,
+      seed       : given.textToImageRequestBody.seed,
+      steps      : given.textToImageRequestBody.steps,
+      cfgScale   : given.textToImageRequestBody.cfgScale,
+    },
+  });
 
   let textToImageResponse: GenerateFromTextResponse;
 
+  // eslint-disable-next-line no-restricted-syntax
   try {
-    textToImageResponse = await shimmedStabilityAIClient.version1.image.tryToGenerateFromText({
-      engineId              : 'stable-diffusion-xl-1024-v1-0',
-      textToImageRequestBody: {
-        textPrompts: given.textToImageRequestBody.textPrompts,
-        height     : given.textToImageRequestBody.height,
-        width      : given.textToImageRequestBody.width,
-        seed       : given.textToImageRequestBody.seed,
-        steps      : given.textToImageRequestBody.steps,
-        cfgScale   : given.textToImageRequestBody.cfgScale,
-      },
-    });
+    const outcomeOfSettlingTextToImageResponse = await Attempt.toSettle(promisedTextToImageResponse);
+
+    if (
+      outcomeOfSettlingTextToImageResponse.isFailure
+    ) return outcomeOfSettlingTextToImageResponse.causeOfFailure.throwAnyway('Unreachable since `Attempt.toSettle` still throws everything');
+
+    textToImageResponse = outcomeOfSettlingTextToImageResponse.unwrapped;
   }
-  catch (someException) {
-    const someError = asError(someException);
+  catch (whateverThatWasThrown) {
+    const someError = asError(whateverThatWasThrown);
     const clientFailedToReachServer = someError.message.includes('Failed to fetch');
 
     if (
       !clientFailedToReachServer
-    ) throw someError;
+    ) return Attempt.NonActionableError.rethrow(someError, {
+      message: 'Text-to-image client failed to generate image due to an unexpected error',
+    });
 
-    const serverConnectionException = [
-      'Failed to reach the text-to-image server.',
-      `Are you sure it's running?`,
-    ].join('\n');
-
-    throw new Error(serverConnectionException);
+    return ends.inFailureDueTo(new Server.ConnectionError(shimmedStabilityAIClient.origin));
   }
 
   if (
     !('artifacts' in textToImageResponse.result)
-  ) throw new Error('Expected response rather than readable stream');
+  ) return ends.inFlamesBecause('Expected response rather than readable stream');
 
   const generatedArtifacts = textToImageResponse.result.artifacts;
 
   if (
     generatedArtifacts === undefined
-  ) throw new Error('Expected artifacts in response result');
+  ) return ends.inFlamesBecause('Expected artifacts in response result');
 
   const [soleGeneratedArtifact] = generatedArtifacts;
 
   if (
     soleGeneratedArtifact === undefined
-  ) throw new Error('Expected at least one artifact in response');
+  ) return ends.inFlamesBecause('Expected at least one artifact in response');
 
   if (
     soleGeneratedArtifact.base64 === undefined
-  ) throw new Error('Expected image data from sole artifact');
+  ) return ends.inFlamesBecause('Expected image data from sole artifact');
 
-  const base64DataOfNewImage = Base64CharacterEncodedByteSequence.tryToParseFrom(soleGeneratedArtifact.base64);
+  const base64DataOfNewImage = Base64CharacterEncodedByteSequence.forciblyParsedFrom(soleGeneratedArtifact.base64);
 
   const newImage = {
     uri        : new ImageURI('png', 'base64', base64DataOfNewImage),
@@ -121,13 +134,15 @@ export const tryToGenerateOutputFrom = async (
       .join(', '),
   };
 
-  return {
+  return ends.inSuccessWith({
     image: newImage,
-  };
-};
+  });
+});
 
 const SDXLTextToImageClient = {
-  tryToGenerateOutputFrom,
+  generateOutputFrom,
 };
 
-export default SDXLTextToImageClient;
+export {
+  SDXLTextToImageClient as default,
+};

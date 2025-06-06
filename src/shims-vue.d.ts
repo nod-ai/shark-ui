@@ -4,5 +4,8 @@ declare module '*.vue' {
   } from 'vue';
 
   const component: DefineComponent;
-  export default component;
+
+  export {
+    component as default,
+  };
 }

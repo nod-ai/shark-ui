@@ -5,8 +5,8 @@ import {
   type Ref,
 } from '@/library/vue/reactivity.ts';
 import {
-  useStatefulProcess,
-} from '@/library/vue/statefulProcess.ts';
+  useStatefulAttemptThatEventually,
+} from '@/library/vue/statefulAttempt';
 
 import {
   VBtn,
@@ -17,9 +17,6 @@ import {
 import {
   VContainer,
 } from 'vuetify/components/VGrid';
-import {
-  VImg,
-} from 'vuetify/components/VImg';
 import {
   VMain,
 } from 'vuetify/components/VMain';
@@ -33,6 +30,8 @@ import DiscreteSlider from '@/components/DiscreteSlider.vue';
 import NavigationPanel from '@/components/NavigationPanel.vue';
 
 import TextToImageInputSection from '@/features/TextToImage/components/TextToImageInputSection.vue';
+import TextToImageOutputAlert from '@/features/TextToImage/components/TextToImageOutputAlert.vue';
+import TextToImageOutputImg from '@/features/TextToImage/components/TextToImageOutputImg.vue';
 import * as TextToImage from '@/features/TextToImage/index.ts';
 
 const currentPrompt: Ref<TextToImage.Input['text'] | null> = ref(null);
@@ -43,12 +42,14 @@ const {
 
 const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
 
-const imageGeneration = useStatefulProcess(async () => {
+const imageGeneration = useStatefulAttemptThatEventually(async (ends) => {
   const proposedPrompt = get(currentPrompt);
 
-  if (proposedPrompt === null) throw new Error('Prompt was not set before submission');
+  if (
+    proposedPrompt === null
+  ) return ends.inFlamesBecause('Prompt was not set before submission');
 
-  const generatedOutput = await TextToImage.Client.SDXL.tryToGenerateOutputFrom({
+  const outcomeOfGeneratingOutput = await TextToImage.Client.SDXL.generateOutputFrom({
     textToImageRequestBody: {
       textPrompts: proposedPrompt,
       height     : 1024,
@@ -59,7 +60,12 @@ const imageGeneration = useStatefulProcess(async () => {
     },
   });
 
-  return generatedOutput.image;
+  if (
+    outcomeOfGeneratingOutput.isFailure
+  ) return outcomeOfGeneratingOutput;
+
+  const generatedOutput = outcomeOfGeneratingOutput.unwrapped;
+  return ends.inSuccessWith(generatedOutput.image);
 });
 </script>
 
@@ -67,7 +73,7 @@ const imageGeneration = useStatefulProcess(async () => {
   <NavigationPanel>
     <VForm
       :disabled="imageGeneration.isInProgress"
-      @submit.prevent="imageGeneration.try"
+      @submit.prevent="imageGeneration.initiate"
     >
       <TextToImageInputSection
         v-model="currentPrompt"
@@ -113,18 +119,21 @@ const imageGeneration = useStatefulProcess(async () => {
       max-width="100vh"
       class="fill-height"
     >
-      <VImg
-        v-if="imageGeneration.result !== null"
-        :src="imageGeneration.result.uri.serialized"
-        :alt="imageGeneration.result.description"
-      />
       <VSkeletonLoader
-        v-else
+        v-if="imageGeneration.outcome === null"
         :boilerplate="!imageGeneration.isInProgress"
         width="100vh"
         :style="{
           'aspect-ratio': 1,
         }"
+      />
+      <TextToImageOutputImg
+        v-else-if="imageGeneration.outcome.isSuccess"
+        :model-value="imageGeneration.outcome.unwrapped"
+      />
+      <TextToImageOutputAlert
+        v-else
+        :error="imageGeneration.outcome.causeOfFailure"
       />
     </VContainer>
   </VMain>

@@ -1,11 +1,24 @@
-import * as Repository from '@/utilities/Repository.ts';
+import Contextualized from '@/library/modifiersByType/error/Contextualized';
 
-export const promptUserToReport = (givenErrorMessage: string) => {
+import Repository from '@/utilities/Repository.ts';
+
+const formatted = (
+  givenError: Contextualized<Error, Error>,
+): string => {
+  return [
+    `${givenError.message}:`,
+    '"""',
+    givenError.cause.message,
+    '"""',
+  ].join('\n');
+};
+
+const promptUserToReport = (givenError: Error) => {
+  const unexpectedError = Contextualized.cast(givenError, 'Unexpected Error');
+  const formattedErrorDetails = formatted(unexpectedError);
+
   const userDidPermitDraftingNewIssue = window.confirm([
-    'Unexpected Error:',
-    '"""',
-    givenErrorMessage,
-    '"""',
+    formattedErrorDetails,
     '',
     'Proceed to file an issue?',
   ].join('\n'));
@@ -14,6 +27,16 @@ export const promptUserToReport = (givenErrorMessage: string) => {
     !userDidPermitDraftingNewIssue
   ) return;
 
-  const draftOfNewIssue = Repository.draftIssueFor(givenErrorMessage);
+  const draftOfNewIssue = Repository.draftIssue({
+    title : `[Unexpected Error]: can't <some task> when <some context>`,
+    body  : `### Details\n${formattedErrorDetails}`.replaceAll('\n', '\n> '),
+    labels: ['bug'],
+    type  : 'Bug',
+  });
+
   window.open(draftOfNewIssue);
+};
+
+export {
+  promptUserToReport,
 };

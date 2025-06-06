@@ -1,15 +1,19 @@
+import Attempt from '@/library/Attempt';
+
 import {
   arithmeticMeanOf,
 } from '@/library/math/aggregators.ts';
 
 type RangeBound = 'exclusive' | 'inclusive';
 
-export default class Range {
+class Range {
   public constructor(
     public readonly lowerBound: number,
     public readonly upperBound: number,
   ) {
-    if (upperBound < lowerBound) throw new RangeError('Upper bound must not be lower than lower bound');
+    if (
+      upperBound < lowerBound
+    ) return Attempt.abandon('Upper bound must not be lower than lower bound');
 
     this.lowerBound = lowerBound;
     this.upperBound = upperBound;
@@ -74,3 +78,7 @@ export default class Range {
     return `[${this.lowerBound.toString()}, ${this.upperBound.toString()}]`;
   }
 }
+
+export {
+  Range as default,
+};

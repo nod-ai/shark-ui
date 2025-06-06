@@ -1,6 +1,12 @@
+import type {
+  StaticStringParser,
+} from '@/library/typeUtilities/StaticStringParser';
+
 import {
   isEmpty,
 } from '@/library/utilitiesByType/array.ts';
+
+import MediaType_ParsingError from './ParsingError';
 
 const allFileTypes = [
   'application',
@@ -29,7 +35,7 @@ const allStructuredSyntaxNameSuffix = [
 type StructuredSyntaxNameSuffix = (typeof allStructuredSyntaxNameSuffix)[number];
 
 /** See [RFC 2045](https://datatracker.ietf.org/doc/html/rfc2045) for more information */
-export default class MediaType {
+class MediaType implements StaticStringParser<typeof MediaType> {
   public constructor(
     public fileType: FileType,
     public tree: string[] | null,
@@ -88,7 +94,7 @@ export default class MediaType {
     return components.map($0 => $0 ?? '').join('');
   }
 
-  public static tryToParse(givenSubject: string): MediaType {
+  public static forciblyParsedFrom(givenSubject: string): MediaType {
     const [
       rawFileType,
       remainderAfterFileType,
@@ -97,11 +103,13 @@ export default class MediaType {
 
     if (
       !isEmpty(componentsFollowingUnexpectedFileTypeSuffix)
-    ) throw new Error(`Found component sets after extraneous file type suffix(es): ${componentsFollowingUnexpectedFileTypeSuffix.toString()}`);
+    ) return new MediaType_ParsingError(`Found component sets after extraneous file type suffix(es): ${componentsFollowingUnexpectedFileTypeSuffix.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
     const fileType = allFileTypes.find($0 => $0 === rawFileType);
 
-    if (fileType === undefined) throw new Error(`Expected file type as one of ${allFileTypes.toString()}`);
+    if (
+      fileType === undefined
+    ) return new MediaType_ParsingError(`Expected file type as one of ${allFileTypes.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
     const [
       remainderBeforeParameters,
@@ -117,15 +125,15 @@ export default class MediaType {
 
       if (
         !isEmpty(extraneousComponentsInEachParameter)
-      ) throw new Error(`Found extraneous components in parameter at index ${indexOfEachParameter.toString()}: ${extraneousComponentsInEachParameter.toString()}`);
+      ) return new MediaType_ParsingError(`Found extraneous components in parameter at index ${indexOfEachParameter.toString()}: ${extraneousComponentsInEachParameter.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
       if (
         keyOfEachParameter === undefined
-      ) throw new Error(`Expected key for parameter at index ${indexOfEachParameter.toString()}`);
+      ) return new MediaType_ParsingError(`Expected key for parameter at index ${indexOfEachParameter.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
       if (
         valueOfEachParameter === undefined
-      ) throw new Error(`Expected value for parameter at index ${indexOfEachParameter.toString()}`);
+      ) return new MediaType_ParsingError(`Expected value for parameter at index ${indexOfEachParameter.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
       return [
         keyOfEachParameter,
@@ -141,7 +149,7 @@ export default class MediaType {
 
     if (
       !isEmpty(extraComponentsWithStructureTypePrefix)
-    ) throw new Error(`Unexpected component sets after extraneous structure type prefix(es): ${extraComponentsWithStructureTypePrefix.toString()}`);
+    ) return new MediaType_ParsingError(`Unexpected component sets after extraneous structure type prefix(es): ${extraComponentsWithStructureTypePrefix.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
     const structureType = (() => {
       if (rawStructureType === undefined) return null;
@@ -150,20 +158,22 @@ export default class MediaType {
 
       if (
         potentialStructureType === undefined
-      ) throw new Error(`Expected structure type as one of ${allStructuredSyntaxNameSuffix.toString()}`);
+      ) return new MediaType_ParsingError(`Expected structure type as one of ${allStructuredSyntaxNameSuffix.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
       return potentialStructureType;
     })();
 
     if (
       serializedTreeBranchesEndingInFileSubtype === undefined
-    ) throw new Error('Expected file subtype');
+    ) return new MediaType_ParsingError('Expected file subtype').throwAnyway('To be converted to `Attempt` failure');
 
     const treeBranchesEndingInFileSubtype = serializedTreeBranchesEndingInFileSubtype.split(MediaType.treeBranchSuffix);
     const reversedTreeBranchesBeginningWithFileSubtype = treeBranchesEndingInFileSubtype.reverse();
     const fileSubtype = reversedTreeBranchesBeginningWithFileSubtype.shift();
 
-    if (fileSubtype === undefined) throw new Error('Expected file subtype');
+    if (
+      fileSubtype === undefined
+    ) return new MediaType_ParsingError('Expected file subtype').throwAnyway('To be converted to `Attempt` failure');
 
     const tree = reversedTreeBranchesBeginningWithFileSubtype.reverse();
 
@@ -176,3 +186,8 @@ export default class MediaType {
     );
   }
 }
+
+export {
+  MediaType as default,
+  MediaType_ParsingError,
+};

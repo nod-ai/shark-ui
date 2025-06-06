@@ -1,3 +1,7 @@
-export default interface StringParser<ParsedOutput> {
-  tryToParseFrom(givenSubject: string): ParsedOutput;
+interface StringParser<ParsedOutput> {
+  forciblyParsedFrom(givenSubject: string): ParsedOutput;
 }
+
+export {
+  type StringParser as default,
+};

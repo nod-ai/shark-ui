@@ -1,19 +1,41 @@
+import {
+  ParsingError,
+} from '@/library/Parser';
+
 import StringSubset from '@/library/customTypes/StringSubset.ts';
 
 import type {
   StaticStringParser,
 } from '@/library/typeUtilities/StaticStringParser.ts';
 
-export class URLOrigin
+class URLOrigin_ParsingError extends ParsingError<'URLOrigin'> {
+  public constructor(given: {
+    expectation: string;
+    reality: string;
+  }) {
+    super(`Expected pure origin "${given.expectation}", got "${given.reality}"`);
+    this.name = 'URLOrigin_ParsingError';
+  }
+}
+
+class URLOrigin
   extends StringSubset<'URLOrigin'>
   implements StaticStringParser<typeof URLOrigin> {
-  public static tryToParseFrom(givenSubject: string): URLOrigin {
+  public static forciblyParsedFrom(givenSubject: string): URLOrigin {
     const derived = new URL(givenSubject);
 
     if (
       derived.origin !== givenSubject
-    ) throw new Error(`Expected pure origin: ${derived.origin}, got: ${givenSubject}`);
+    ) return new URLOrigin_ParsingError({
+      expectation: derived.origin,
+      reality    : givenSubject,
+    }).throwAnyway('To be converted to `Attempt` failure');
 
     return new URLOrigin(derived.origin);
   }
 }
+
+export {
+  URLOrigin,
+  URLOrigin_ParsingError,
+};
