@@ -12,7 +12,7 @@ class TextToImage_Server_SpecificationError extends Attempt.ActionableError<'Tex
       endpoint: URLPath;
     },
   ) {
-    const serverNotSpecifiedErrorMessage = [
+    const userFacingMessage = [
       'No text-to-image server was specified!',
       'Either:',
       `a) supply it's corresponding environment variable named \`${given.environmentKey}\` and rebuild`,
@@ -21,7 +21,7 @@ class TextToImage_Server_SpecificationError extends Attempt.ActionableError<'Tex
       `c) specify it within the response from ${given.endpoint.toString()}`,
     ].join('\n');
 
-    super(serverNotSpecifiedErrorMessage);
+    super(userFacingMessage);
     this.name = 'TextToImage_Server_SpecificationError';
   }
 }
