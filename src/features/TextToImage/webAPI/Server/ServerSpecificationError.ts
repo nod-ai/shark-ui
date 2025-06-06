@@ -6,19 +6,17 @@ import type {
 
 class TextToImage_Server_SpecificationError extends Attempt.ActionableError<'TextToImage_Server_SpecificationError'> {
   public constructor(
-    given: {
-      environmentKey: string;
-      file: URLPath;
-      endpoint: URLPath;
-    },
+    public readonly environmentKey: string,
+    public readonly file: URLPath,
+    public readonly endpoint: URLPath,
   ) {
     const userFacingMessage = [
       'No text-to-image server was specified!',
       'Either:',
-      `a) supply it's corresponding environment variable named \`${given.environmentKey}\` and rebuild`,
-      `b) specify it within ${given.file.toString()}`,
+      `a) supply it's corresponding environment variable named \`${environmentKey}\` and rebuild`,
+      `b) specify it within ${file.toString()}`,
       'OR',
-      `c) specify it within the response from ${given.endpoint.toString()}`,
+      `c) specify it within the response from ${endpoint.toString()}`,
     ].join('\n');
 
     super(userFacingMessage);
