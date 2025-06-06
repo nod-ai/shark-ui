@@ -60,13 +60,14 @@ const isHonoraryNonActionableError = (
 };
 
 const HonoraryNonActionableError = {
-  [Symbol.hasInstance]: (givenSubject: unknown): givenSubject is HonoraryNonActionableError => {
+  describes: isHonoraryNonActionableError,
+  [Symbol.hasInstance](givenSubject: unknown): givenSubject is HonoraryNonActionableError {
     if (
       !isError(givenSubject)
     ) return false;
 
     const givenError = givenSubject;
-    return isHonoraryNonActionableError(givenError);
+    return this.describes(givenError);
   },
 };
 
