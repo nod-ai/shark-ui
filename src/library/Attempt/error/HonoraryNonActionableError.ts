@@ -46,6 +46,19 @@ type HonoraryNonActionableError =
   | EvalError // Something illegal was done with `eval` or `Function` constructor.
   | SyntaxError; // The JS engine couldn't even parse the code.
 
+const isHonoraryNonActionableError = (
+  givenError: Error,
+): givenError is HonoraryNonActionableError => {
+  return (
+    (givenError instanceof ReferenceError)
+    || (givenError instanceof TypeError)
+    || (givenError instanceof RangeError)
+    || (givenError instanceof URIError)
+    || (givenError instanceof EvalError)
+    || (givenError instanceof SyntaxError)
+  );
+};
+
 const HonoraryNonActionableError = {
   [Symbol.hasInstance]: (givenSubject: unknown): givenSubject is HonoraryNonActionableError => {
     if (
@@ -53,15 +66,7 @@ const HonoraryNonActionableError = {
     ) return false;
 
     const givenError = givenSubject;
-
-    return (
-      (givenError instanceof ReferenceError)
-      || (givenError instanceof TypeError)
-      || (givenError instanceof RangeError)
-      || (givenError instanceof URIError)
-      || (givenError instanceof EvalError)
-      || (givenError instanceof SyntaxError)
-    );
+    return isHonoraryNonActionableError(givenError);
   },
 };
 
