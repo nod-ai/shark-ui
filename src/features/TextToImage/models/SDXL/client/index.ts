@@ -73,7 +73,12 @@ const generateOutputFrom = async (
   },
 ): Promise<OutcomeOfGeneratingTextToImageOutput> => Attempt.thatEventually(async (ends) => {
   const outcomeOfInitializingClient = await initializeShimmedStabilityAIClient();
-  const shimmedStabilityAIClient = outcomeOfInitializingClient.forciblyUnwrap();
+
+  if (
+    outcomeOfInitializingClient.isFailure
+  ) return outcomeOfInitializingClient.causeOfFailure.throwAnyway('Neglected to handle server specification error');
+
+  const shimmedStabilityAIClient = outcomeOfInitializingClient.unwrapped;
 
   const promisedTextToImageResponse = shimmedStabilityAIClient.version1.image.forciblyGenerateFromText({
     engineId              : 'stable-diffusion-xl-1024-v1-0',
