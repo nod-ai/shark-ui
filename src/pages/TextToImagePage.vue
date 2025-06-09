@@ -30,8 +30,8 @@ import NavigationPanel from '@/components/NavigationPanel.vue';
 import TextToImageModelSettings from '@/components/TextToImageModelSettings.vue';
 
 import TextToImageInputSection from '@/features/TextToImage/components/TextToImageInputSection.vue';
+import TextToImageOutputAlert from '@/features/TextToImage/components/TextToImageOutputAlert.vue';
 import TextToImageOutputImg from '@/features/TextToImage/components/TextToImageOutputImg.vue';
-import TextToImageServerConnectionAlert from '@/features/TextToImage/components/TextToImageServerConnectionAlert.vue';
 import * as TextToImage from '@/features/TextToImage/index.ts';
 
 const currentPrompt: Ref<TextToImage.Input['text'] | null> = ref(null);
@@ -147,7 +147,7 @@ const imageGeneration = useStatefulAttemptThatEventually(async (ends) => {
         v-else-if="imageGeneration.outcome.isSuccess"
         :model-value="imageGeneration.outcome.unwrapped"
       />
-      <TextToImageServerConnectionAlert
+      <TextToImageOutputAlert
         v-else
         :error="imageGeneration.outcome.causeOfFailure"
       />

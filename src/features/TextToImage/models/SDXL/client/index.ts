@@ -42,6 +42,7 @@ const initializeShimmedStabilityAIClient = (): Promise<
 
 type OutcomeOfGeneratingTextToImageOutput = Attempt.Outcome<Output,
   | Server.ConnectionError
+  | Server.SpecificationError
 >;
 
 const generateOutputFrom = async (
@@ -56,7 +57,13 @@ const generateOutputFrom = async (
     >;
   },
 ): Promise<OutcomeOfGeneratingTextToImageOutput> => Attempt.thatEventually(async (ends) => {
-  const shimmedStabilityAIClient = (await initializeShimmedStabilityAIClient()).forciblyUnwrap();
+  const outcomeOfInitializingClient = await initializeShimmedStabilityAIClient();
+
+  if (
+    outcomeOfInitializingClient.isFailure
+  ) return outcomeOfInitializingClient;
+
+  const shimmedStabilityAIClient = outcomeOfInitializingClient.unwrapped;
 
   const promisedTextToImageResponse = shimmedStabilityAIClient.version1.image.forciblyGenerateFromText({
     engineId              : 'stable-diffusion-xl-1024-v1-0',
