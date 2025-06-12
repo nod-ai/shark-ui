@@ -100,8 +100,11 @@ const generateOutputFrom = async (
     });
 
     outcomeOfSettlingTextToImageResponse = ends.inFailureDueTo(new Server.ConnectionError(shimmedStabilityAIClient.origin));
-    return outcomeOfSettlingTextToImageResponse;
   }
+
+  if (
+    outcomeOfSettlingTextToImageResponse.isFailure
+  ) return outcomeOfSettlingTextToImageResponse;
 
   const textToImageResponse = outcomeOfSettlingTextToImageResponse.unwrapped;
 
