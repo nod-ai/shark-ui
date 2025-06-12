@@ -87,18 +87,16 @@ const generateOutputFrom = async (
       return intermediateOutcome;
     },
     catch(someError) {
-      let interpretedError: Server.ConnectionError | null;
-
-      (() => {
+      const interpretedError: Server.ConnectionError | null = (() => {
         const clientFailedToReachServer = someError.message.includes('Failed to fetch');
 
         if (
           !clientFailedToReachServer
         ) {
-          interpretedError = null;
+          return null;
         }
         else {
-          interpretedError = new Server.ConnectionError(shimmedStabilityAIClient.origin);
+          return new Server.ConnectionError(shimmedStabilityAIClient.origin);
         }
       })();
 
