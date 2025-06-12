@@ -87,15 +87,25 @@ const generateOutputFrom = async (
       return intermediateOutcome;
     },
     catch(someError) {
-      const clientFailedToReachServer = someError.message.includes('Failed to fetch');
+      const interpretationOf = (caughtError: Error) => {
+        const clientFailedToReachServer = caughtError.message.includes('Failed to fetch');
+
+        if (
+          !clientFailedToReachServer
+        ) return null;
+
+        return new Server.ConnectionError(shimmedStabilityAIClient.origin);
+      };
+
+      const interpretedError = interpretationOf(someError);
 
       if (
-        !clientFailedToReachServer
-      ) return Attempt.NonActionableError.rethrow(someError, {
+        interpretedError !== null
+      ) return ends.inFailureDueTo(interpretedError);
+
+      return Attempt.NonActionableError.rethrow(someError, {
         message: 'Text-to-image client failed to generate image due to an unexpected error',
       });
-
-      return ends.inFailureDueTo(new Server.ConnectionError(shimmedStabilityAIClient.origin));
     },
   });
 
