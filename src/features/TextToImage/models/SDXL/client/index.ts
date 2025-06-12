@@ -87,7 +87,7 @@ const generateOutputFrom = async (
       return intermediateOutcome;
     },
     catch(someError) {
-      const interpretedError = ((caughtError: Error) => {
+      const interpretationOf = (caughtError: Error) => {
         const clientFailedToReachServer = caughtError.message.includes('Failed to fetch');
 
         if (
@@ -95,7 +95,9 @@ const generateOutputFrom = async (
         ) return null;
 
         return new Server.ConnectionError(shimmedStabilityAIClient.origin);
-      })(someError);
+      };
+
+      const interpretedError = interpretationOf(someError);
 
       if (
         interpretedError !== null
