@@ -22,9 +22,9 @@ const attemptTo = <
     const gottenProduct = forciblyGetProduct();
     return Outcome.successThatYielded(gottenProduct);
   },
-  catch(whateverThatWasThrown) {
+  catch(someError) {
     return outcomeOfFailedAttempt<SomeProduct, SomeActionableError>({
-      basedOn: whateverThatWasThrown,
+      basedOn: someError,
     });
   },
 });

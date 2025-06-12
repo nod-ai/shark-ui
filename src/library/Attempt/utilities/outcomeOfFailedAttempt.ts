@@ -1,7 +1,3 @@
-import {
-  asError,
-} from '@/library/utilitiesByType/error';
-
 import type Outcome from '../Outcome';
 
 import {
@@ -19,13 +15,12 @@ const outcomeOfFailedAttempt = <
   SomeActionableError extends ActionableError<string>,
 >(
   {
-    basedOn: givenSubject,
+    basedOn: givenError,
   }: {
-    basedOn: unknown;
+    basedOn: Error;
   },
 ): Outcome<SomeProduct, SomeActionableError> => {
-  const someError = asError(givenSubject);
-  const potentiallyActionableError = assertPotentiallyActionable(someError);
+  const potentiallyActionableError = assertPotentiallyActionable(givenError);
   const safelyPropagatedError = assertSafelyPropagated(potentiallyActionableError);
 
   return NonActionableError.rethrow(safelyPropagatedError, {

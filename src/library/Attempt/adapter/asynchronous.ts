@@ -22,9 +22,9 @@ const attemptToEventually = async <
     const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
     return Outcome.successThatYielded(retrievedProduct);
   },
-  catch(whateverThatWasThrown) {
+  catch(someError) {
     return outcomeOfFailedAttempt<SomeProduct, SomeActionableError>({
-      basedOn: whateverThatWasThrown,
+      basedOn: someError,
     });
   },
 });

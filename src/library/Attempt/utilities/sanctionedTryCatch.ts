@@ -1,3 +1,7 @@
+import {
+  asError,
+} from '@/library/utilitiesByType/error';
+
 const sanctioned = <
   TryBlockOutput,
   CatchBlockOutput,
@@ -7,7 +11,7 @@ const sanctioned = <
     catch: getCatchBlockOutputFor,
   }: {
     try: () => TryBlockOutput;
-    catch: ($0: unknown) => CatchBlockOutput;
+    catch: ($0: Error) => CatchBlockOutput;
   },
 ): TryBlockOutput | CatchBlockOutput => {
   // eslint-disable-next-line no-restricted-syntax -- this is the implementation designed to help avoid use of raw try/catch
@@ -15,7 +19,7 @@ const sanctioned = <
     return getTryBlockOutput();
   }
   catch (whateverThatWasThrown) {
-    return getCatchBlockOutputFor(whateverThatWasThrown);
+    return getCatchBlockOutputFor(asError(whateverThatWasThrown));
   }
 };
 
@@ -28,7 +32,7 @@ const sanctionedAsync = async <
     catch: getCatchBlockOutputFor,
   }: {
     try: () => Promise<TryBlockOutput>;
-    catch: ($0: unknown) => CatchBlockOutput;
+    catch: ($0: Error) => CatchBlockOutput;
   },
 ): Promise<TryBlockOutput | CatchBlockOutput> => {
   // eslint-disable-next-line no-restricted-syntax -- this is the implementation designed to help avoid use of raw try/catch
@@ -36,7 +40,7 @@ const sanctionedAsync = async <
     return await retrieveTryBlockOutput();
   }
   catch (whateverThatWasThrown) {
-    return getCatchBlockOutputFor(whateverThatWasThrown);
+    return getCatchBlockOutputFor(asError(whateverThatWasThrown));
   }
 };
 
