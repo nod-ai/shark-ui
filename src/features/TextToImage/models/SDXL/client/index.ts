@@ -88,7 +88,8 @@ const generateOutputFrom = async (
       intermediateOutcome.isFailure
     ) return intermediateOutcome.causeOfFailure.throwAnyway('Unreachable since `Attempt.toSettle` still throws everything');
 
-    textToImageResponse = intermediateOutcome.unwrapped;
+    outcomeOfSettlingTextToImageResponse = intermediateOutcome;
+    textToImageResponse = outcomeOfSettlingTextToImageResponse.unwrapped;
   }
   catch (whateverThatWasThrown) {
     const someError = asError(whateverThatWasThrown);
