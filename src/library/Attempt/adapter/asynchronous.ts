@@ -8,23 +8,26 @@ import {
   outcomeOfFailedAttempt,
 } from '../utilities/outcomeOfFailedAttempt';
 
+import {
+  sanctionedAsync,
+} from '../utilities/sanctionedTryCatch';
+
 const attemptToEventually = async <
   SomeProduct,
   SomeActionableError extends ActionableError<string>,
 >(
   forciblyRetrieveProduct: () => Promise<SomeProduct>,
-): Promise<Outcome<SomeProduct, SomeActionableError>> => {
-  // eslint-disable-next-line no-restricted-syntax
-  try {
+): Promise<Outcome<SomeProduct, SomeActionableError>> => sanctionedAsync({
+  async try() {
     const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
     return Outcome.successThatYielded(retrievedProduct);
-  }
-  catch (whateverThatWasThrown) {
+  },
+  catch(whateverThatWasThrown) {
     return outcomeOfFailedAttempt<SomeProduct, SomeActionableError>({
       basedOn: whateverThatWasThrown,
     });
-  }
-};
+  },
+});
 
 const attemptToSettle = async <
   SomeProduct,
