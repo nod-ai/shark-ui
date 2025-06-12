@@ -14,10 +14,6 @@ import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64Char
 
 import ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image/index.ts';
 
-import {
-  asError,
-} from '@/library/utilitiesByType/error';
-
 import type {
   Output,
 } from '@/features/TextToImage/types';
@@ -90,8 +86,7 @@ const generateOutputFrom = async (
 
       return intermediateOutcome;
     },
-    catch(whateverThatWasThrown) {
-      const someError = asError(whateverThatWasThrown);
+    catch(someError) {
       const clientFailedToReachServer = someError.message.includes('Failed to fetch');
 
       if (
