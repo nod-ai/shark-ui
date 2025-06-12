@@ -92,12 +92,9 @@ const generateOutputFrom = async (
 
         if (
           !clientFailedToReachServer
-        ) {
-          return null;
-        }
-        else {
-          return new Server.ConnectionError(shimmedStabilityAIClient.origin);
-        }
+        ) return null;
+
+        return new Server.ConnectionError(shimmedStabilityAIClient.origin);
       })();
 
       if (
