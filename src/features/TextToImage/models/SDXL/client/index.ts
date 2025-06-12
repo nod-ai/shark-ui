@@ -87,17 +87,19 @@ const generateOutputFrom = async (
       return intermediateOutcome;
     },
     catch(someError) {
+      let interpretedError: Server.ConnectionError | null;
       const clientFailedToReachServer = someError.message.includes('Failed to fetch');
 
       if (
         !clientFailedToReachServer
       ) {
+        interpretedError = null;
         return Attempt.NonActionableError.rethrow(someError, {
           message: 'Text-to-image client failed to generate image due to an unexpected error',
         });
       }
 
-      const interpretedError = new Server.ConnectionError(shimmedStabilityAIClient.origin);
+      interpretedError = new Server.ConnectionError(shimmedStabilityAIClient.origin);
       return ends.inFailureDueTo(interpretedError);
     },
   });
