@@ -87,7 +87,7 @@ const generateOutputFrom = async (
       return intermediateOutcome;
     },
     catch(someError) {
-      const interpretedError: Server.ConnectionError | null = ((caughtError: Error) => {
+      const interpretedError = ((caughtError: Error) => {
         const clientFailedToReachServer = caughtError.message.includes('Failed to fetch');
 
         if (
