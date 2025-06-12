@@ -78,7 +78,6 @@ const generateOutputFrom = async (
   });
 
   let outcomeOfSettlingTextToImageResponse: Attempt.Outcome<GenerateFromTextResponse, Server.ConnectionError>;
-  let textToImageResponse: GenerateFromTextResponse;
 
   // eslint-disable-next-line no-restricted-syntax
   try {
@@ -89,7 +88,6 @@ const generateOutputFrom = async (
     ) return intermediateOutcome.causeOfFailure.throwAnyway('Unreachable since `Attempt.toSettle` still throws everything');
 
     outcomeOfSettlingTextToImageResponse = intermediateOutcome;
-    textToImageResponse = outcomeOfSettlingTextToImageResponse.unwrapped;
   }
   catch (whateverThatWasThrown) {
     const someError = asError(whateverThatWasThrown);
@@ -104,6 +102,8 @@ const generateOutputFrom = async (
     outcomeOfSettlingTextToImageResponse = ends.inFailureDueTo(new Server.ConnectionError(shimmedStabilityAIClient.origin));
     return outcomeOfSettlingTextToImageResponse;
   }
+
+  const textToImageResponse = outcomeOfSettlingTextToImageResponse.unwrapped;
 
   if (
     !('artifacts' in textToImageResponse.result)
