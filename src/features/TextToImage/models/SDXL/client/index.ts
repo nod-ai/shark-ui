@@ -1,6 +1,5 @@
 import type {
   GenerateFromTextRequest,
-  GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
 import Attempt from '@/library/Attempt';
@@ -77,7 +76,7 @@ const generateOutputFrom = async (
     },
   });
 
-  const outcomeOfSettlingTextToImageResponse: Attempt.Outcome<GenerateFromTextResponse, Server.ConnectionError> = await (async () => {
+  const outcomeOfSettlingTextToImageResponse = await (async () => {
     // eslint-disable-next-line no-restricted-syntax
     try {
       const intermediateOutcome = await Attempt.toSettle(promisedTextToImageResponse);
