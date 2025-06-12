@@ -19,7 +19,8 @@ const sanctioned = <
     return getTryBlockOutput();
   }
   catch (whateverThatWasThrown) {
-    return getCatchBlockOutputFor(asError(whateverThatWasThrown));
+    const someError = asError(whateverThatWasThrown);
+    return getCatchBlockOutputFor(someError);
   }
 };
 
@@ -40,7 +41,8 @@ const sanctionedAsync = async <
     return await retrieveTryBlockOutput();
   }
   catch (whateverThatWasThrown) {
-    return getCatchBlockOutputFor(asError(whateverThatWasThrown));
+    const someError = asError(whateverThatWasThrown);
+    return getCatchBlockOutputFor(someError);
   }
 };
 
