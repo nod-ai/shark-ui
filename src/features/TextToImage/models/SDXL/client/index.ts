@@ -77,6 +77,7 @@ const generateOutputFrom = async (
     },
   });
 
+  let outcomeOfSettlingTextToImageResponse: Attempt.Outcome<GenerateFromTextResponse, Server.ConnectionError>;
   let textToImageResponse: GenerateFromTextResponse;
 
   // eslint-disable-next-line no-restricted-syntax
@@ -99,7 +100,7 @@ const generateOutputFrom = async (
       message: 'Text-to-image client failed to generate image due to an unexpected error',
     });
 
-    const outcomeOfSettlingTextToImageResponse = ends.inFailureDueTo(new Server.ConnectionError(shimmedStabilityAIClient.origin));
+    outcomeOfSettlingTextToImageResponse = ends.inFailureDueTo(new Server.ConnectionError(shimmedStabilityAIClient.origin));
     return outcomeOfSettlingTextToImageResponse;
   }
 
