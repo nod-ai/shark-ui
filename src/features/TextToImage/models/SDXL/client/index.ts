@@ -4,6 +4,10 @@ import type {
 
 import Attempt from '@/library/Attempt';
 
+import {
+  sanctionedAsync,
+} from '@/library/Attempt/utilities/sanctionedTryCatch';
+
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
 
 import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
@@ -76,9 +80,8 @@ const generateOutputFrom = async (
     },
   });
 
-  const outcomeOfSettlingTextToImageResponse = await (async () => {
-    // eslint-disable-next-line no-restricted-syntax
-    try {
+  const outcomeOfSettlingTextToImageResponse = await sanctionedAsync({
+    async try() {
       const intermediateOutcome = await Attempt.toSettle(promisedTextToImageResponse);
 
       if (
@@ -86,8 +89,8 @@ const generateOutputFrom = async (
       ) return intermediateOutcome.causeOfFailure.throwAnyway('Unreachable since `Attempt.toSettle` still throws everything');
 
       return intermediateOutcome;
-    }
-    catch (whateverThatWasThrown) {
+    },
+    catch(whateverThatWasThrown) {
       const someError = asError(whateverThatWasThrown);
       const clientFailedToReachServer = someError.message.includes('Failed to fetch');
 
@@ -98,8 +101,8 @@ const generateOutputFrom = async (
       });
 
       return ends.inFailureDueTo(new Server.ConnectionError(shimmedStabilityAIClient.origin));
-    }
-  })();
+    },
+  });
 
   if (
     outcomeOfSettlingTextToImageResponse.isFailure
