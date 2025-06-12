@@ -81,13 +81,13 @@ const generateOutputFrom = async (
 
   // eslint-disable-next-line no-restricted-syntax
   try {
-    const outcomeOfSettlingTextToImageResponse = await Attempt.toSettle(promisedTextToImageResponse);
+    const intermediateOutcome = await Attempt.toSettle(promisedTextToImageResponse);
 
     if (
-      outcomeOfSettlingTextToImageResponse.isFailure
-    ) return outcomeOfSettlingTextToImageResponse.causeOfFailure.throwAnyway('Unreachable since `Attempt.toSettle` still throws everything');
+      intermediateOutcome.isFailure
+    ) return intermediateOutcome.causeOfFailure.throwAnyway('Unreachable since `Attempt.toSettle` still throws everything');
 
-    textToImageResponse = outcomeOfSettlingTextToImageResponse.unwrapped;
+    textToImageResponse = intermediateOutcome.unwrapped;
   }
   catch (whateverThatWasThrown) {
     const someError = asError(whateverThatWasThrown);
