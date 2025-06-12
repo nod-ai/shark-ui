@@ -77,30 +77,30 @@ const generateOutputFrom = async (
     },
   });
 
-  let outcomeOfSettlingTextToImageResponse: Attempt.Outcome<GenerateFromTextResponse, Server.ConnectionError>;
+  const outcomeOfSettlingTextToImageResponse: Attempt.Outcome<GenerateFromTextResponse, Server.ConnectionError> = await (async () => {
+    // eslint-disable-next-line no-restricted-syntax
+    try {
+      const intermediateOutcome = await Attempt.toSettle(promisedTextToImageResponse);
 
-  // eslint-disable-next-line no-restricted-syntax
-  try {
-    const intermediateOutcome = await Attempt.toSettle(promisedTextToImageResponse);
+      if (
+        intermediateOutcome.isFailure
+      ) return intermediateOutcome.causeOfFailure.throwAnyway('Unreachable since `Attempt.toSettle` still throws everything');
 
-    if (
-      intermediateOutcome.isFailure
-    ) return intermediateOutcome.causeOfFailure.throwAnyway('Unreachable since `Attempt.toSettle` still throws everything');
+      return intermediateOutcome;
+    }
+    catch (whateverThatWasThrown) {
+      const someError = asError(whateverThatWasThrown);
+      const clientFailedToReachServer = someError.message.includes('Failed to fetch');
 
-    outcomeOfSettlingTextToImageResponse = intermediateOutcome;
-  }
-  catch (whateverThatWasThrown) {
-    const someError = asError(whateverThatWasThrown);
-    const clientFailedToReachServer = someError.message.includes('Failed to fetch');
+      if (
+        !clientFailedToReachServer
+      ) return Attempt.NonActionableError.rethrow(someError, {
+        message: 'Text-to-image client failed to generate image due to an unexpected error',
+      });
 
-    if (
-      !clientFailedToReachServer
-    ) return Attempt.NonActionableError.rethrow(someError, {
-      message: 'Text-to-image client failed to generate image due to an unexpected error',
-    });
-
-    outcomeOfSettlingTextToImageResponse = ends.inFailureDueTo(new Server.ConnectionError(shimmedStabilityAIClient.origin));
-  }
+      return ends.inFailureDueTo(new Server.ConnectionError(shimmedStabilityAIClient.origin));
+    }
+  })();
 
   if (
     outcomeOfSettlingTextToImageResponse.isFailure
