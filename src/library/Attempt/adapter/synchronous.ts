@@ -3,10 +3,13 @@ import Outcome from '../Outcome';
 import type {
   ActionableError,
 } from '../error';
+import {
+  assertActionable,
+} from '../error/assertions';
 
 import {
-  outcomeOfFailedAttempt,
-} from '../utilities/outcomeOfFailedAttempt';
+  Attempt_that,
+} from '../factory';
 
 import {
   sanctioned,
@@ -17,17 +20,16 @@ const attemptTo = <
   SomeActionableError extends ActionableError<string>,
 >(
   forciblyGetProduct: () => SomeProduct,
-): Outcome<SomeProduct, SomeActionableError> => sanctioned({
+): Outcome<SomeProduct, SomeActionableError> => Attempt_that(ends => sanctioned({
   try() {
     const gottenProduct = forciblyGetProduct();
-    return Outcome.successThatYielded(gottenProduct);
+    return ends.inSuccessWith(gottenProduct);
   },
   catch(someError) {
-    return outcomeOfFailedAttempt<SomeProduct, SomeActionableError>({
-      basedOn: someError,
-    });
+    const someActionableError = assertActionable<SomeActionableError>(someError);
+    return ends.inFailureDueTo(someActionableError);
   },
-});
+}));
 
 export {
   attemptTo,

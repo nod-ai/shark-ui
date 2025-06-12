@@ -3,10 +3,13 @@ import Outcome from '../Outcome';
 import type {
   ActionableError,
 } from '../error';
+import {
+  assertActionable,
+} from '../error/assertions';
 
 import {
-  outcomeOfFailedAttempt,
-} from '../utilities/outcomeOfFailedAttempt';
+  Attempt_thatEventually,
+} from '../factory';
 
 import {
   sanctionedAsync,
@@ -17,17 +20,16 @@ const attemptToEventually = async <
   SomeActionableError extends ActionableError<string>,
 >(
   forciblyRetrieveProduct: () => Promise<SomeProduct>,
-): Promise<Outcome<SomeProduct, SomeActionableError>> => sanctionedAsync({
+): Promise<Outcome<SomeProduct, SomeActionableError>> => Attempt_thatEventually(async ends => sanctionedAsync({
   async try() {
     const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
-    return Outcome.successThatYielded(retrievedProduct);
+    return ends.inSuccessWith(retrievedProduct);
   },
   catch(someError) {
-    return outcomeOfFailedAttempt<SomeProduct, SomeActionableError>({
-      basedOn: someError,
-    });
+    const someActionableError = assertActionable<SomeActionableError>(someError);
+    return ends.inFailureDueTo(someActionableError);
   },
-});
+}));
 
 const attemptToSettle = async <
   SomeProduct,
