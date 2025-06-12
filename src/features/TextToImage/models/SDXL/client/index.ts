@@ -94,14 +94,15 @@ const generateOutputFrom = async (
         !clientFailedToReachServer
       ) {
         interpretedError = null;
-        return Attempt.NonActionableError.rethrow(someError, {
-          message: 'Text-to-image client failed to generate image due to an unexpected error',
-        });
       }
       else {
         interpretedError = new Server.ConnectionError(shimmedStabilityAIClient.origin);
         return ends.inFailureDueTo(interpretedError);
       }
+
+      return Attempt.NonActionableError.rethrow(someError, {
+        message: 'Text-to-image client failed to generate image due to an unexpected error',
+      });
     },
   });
 
