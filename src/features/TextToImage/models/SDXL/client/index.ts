@@ -98,9 +98,10 @@ const generateOutputFrom = async (
           message: 'Text-to-image client failed to generate image due to an unexpected error',
         });
       }
-
-      interpretedError = new Server.ConnectionError(shimmedStabilityAIClient.origin);
-      return ends.inFailureDueTo(interpretedError);
+      else {
+        interpretedError = new Server.ConnectionError(shimmedStabilityAIClient.origin);
+        return ends.inFailureDueTo(interpretedError);
+      }
     },
   });
 
