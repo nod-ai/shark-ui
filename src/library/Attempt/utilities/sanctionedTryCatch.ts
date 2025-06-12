@@ -8,7 +8,7 @@ const sanctioned = <
 >(
   {
     try: getTryBlockOutput,
-    catch: getCatchBlockOutputFor,
+    catch: catchBlockOutputFor,
   }: {
     try: () => TryBlockOutput;
     catch: ($0: Error) => CatchBlockOutput;
@@ -20,7 +20,7 @@ const sanctioned = <
   }
   catch (whateverThatWasThrown) {
     const someError = asError(whateverThatWasThrown);
-    return getCatchBlockOutputFor(someError);
+    return catchBlockOutputFor(someError);
   }
 };
 
@@ -30,7 +30,7 @@ const sanctionedAsync = async <
 >(
   {
     try: retrieveTryBlockOutput,
-    catch: getCatchBlockOutputFor,
+    catch: catchBlockOutputFor,
   }: {
     try: () => Promise<TryBlockOutput>;
     catch: ($0: Error) => CatchBlockOutput;
@@ -42,7 +42,7 @@ const sanctionedAsync = async <
   }
   catch (whateverThatWasThrown) {
     const someError = asError(whateverThatWasThrown);
-    return getCatchBlockOutputFor(someError);
+    return catchBlockOutputFor(someError);
   }
 };
 
