@@ -23,31 +23,20 @@ const attemptToEventually = async <
   SomeActionableError extends ActionableError<string>,
 >(
   forciblyRetrieveProduct: () => Promise<SomeProduct>,
-): Promise<Outcome<SomeProduct, SomeActionableError>> => {
-  return Attempt_thatEventually(ends => sanctionedAsync({
-    async try() {
-      const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
-      return ends.inSuccessWith(retrievedProduct);
-    },
-    catch(someError) {
-      const someActionableError = assertActionable<SomeActionableError>(someError);
-      return ends.inFailureDueTo(someActionableError);
-    },
-  }));
-};
-
-const attemptToSettle = async <
-  SomeProduct,
-  SomeActionableError extends ActionableError<string>,
->(
-  promisedProduct: Promise<SomeProduct>,
   given: Attempt_AdapterConfig<SomeActionableError>,
 ): Promise<Outcome<SomeProduct, SomeActionableError>> => {
-  const getPromisedProduct = () => promisedProduct;
-
   return Attempt_thatEventually(ends => sanctionedAsync({
     async try() {
-      const intermediateOutcome = await attemptToEventually(getPromisedProduct);
+      const intermediateOutcome = await Attempt_thatEventually(ends => sanctionedAsync({
+        async try() {
+          const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
+          return ends.inSuccessWith(retrievedProduct);
+        },
+        catch(someError) {
+          const someActionableError = assertActionable<SomeActionableError>(someError);
+          return ends.inFailureDueTo(someActionableError);
+        },
+      }));
 
       if (
         intermediateOutcome.isFailure
@@ -63,10 +52,21 @@ const attemptToSettle = async <
       ) return ends.inFailureDueTo(interpretedError);
 
       return NonActionableError.rethrow(someError, {
-        message: 'Failed to settle promise due to an unexpected error',
+        message: 'Failed to end async attempt due to an unexpected error',
       });
     },
   }));
+};
+
+const attemptToSettle = async <
+  SomeProduct,
+  SomeActionableError extends ActionableError<string>,
+>(
+  promisedProduct: Promise<SomeProduct>,
+  given: Attempt_AdapterConfig<SomeActionableError>,
+): Promise<Outcome<SomeProduct, SomeActionableError>> => {
+  const getPromisedProduct = () => promisedProduct;
+  return attemptToEventually(getPromisedProduct, given);
 };
 
 export {
