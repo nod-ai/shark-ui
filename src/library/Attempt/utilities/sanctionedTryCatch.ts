@@ -33,26 +33,25 @@ const sanctioned = <
 };
 
 const sanctionedAsync = async <
-  TryBlockOutput,
-  CatchBlockOutput,
+  OutputOfResolvedPromise,
+  OutputOfRejectedPromise,
 >(
   {
     try: retrieveTryBlockOutput,
     catch: catchBlockOutputFor,
   }: {
-    try: () => Promise<TryBlockOutput>;
-    catch: ($0: AppropriatelyThrown<Error>) => CatchBlockOutput;
+    try: () => Promise<OutputOfResolvedPromise>;
+    catch: ($0: AppropriatelyThrown<Error>) => OutputOfRejectedPromise;
   },
-): Promise<TryBlockOutput | CatchBlockOutput> => {
-  // eslint-disable-next-line no-restricted-syntax -- this is the implementation designed to help avoid use of raw try/catch
-  try {
-    return await retrieveTryBlockOutput();
-  }
-  catch (whateverThatWasThrown) {
-    const someError = asError(whateverThatWasThrown);
-    const someAppropriatelyThrownError = assertAppropriatelyThrown(someError);
-    return catchBlockOutputFor(someAppropriatelyThrownError);
-  }
+): Promise<OutputOfResolvedPromise | OutputOfRejectedPromise> => {
+  const sanction = (whateverThatWasThrown: unknown) => sanctioned({
+    try: () => {
+      throw whateverThatWasThrown; // eslint-disable-line no-restricted-syntax -- puts the error back through the sanctioned catch
+    },
+    catch: catchBlockOutputFor,
+  });
+
+  return retrieveTryBlockOutput().catch(sanction);
 };
 
 export {
