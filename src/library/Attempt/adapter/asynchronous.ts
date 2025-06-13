@@ -56,6 +56,10 @@ const attemptToEventually = async <
         interpretedError !== null
       ) return interpretedError;
 
+      if (
+        HonoraryNonActionableError.describes(potentiallyActionableError)
+      ) throw potentiallyActionableError; // eslint-disable-line no-restricted-syntax
+
       return NonActionableError.rethrow(potentiallyActionableError, {
         message: 'Failed to end async attempt due to an unexpected error',
       });
