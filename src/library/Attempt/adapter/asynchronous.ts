@@ -33,10 +33,6 @@ const attemptToEventually = async <
         return ends.inSuccessWith(retrievedProduct);
       },
       catch(someError) {
-        if (
-          someError instanceof NonActionableError
-        ) throw someError; // eslint-disable-line no-restricted-syntax
-
         throw someError; // eslint-disable-line no-restricted-syntax
       },
     });
