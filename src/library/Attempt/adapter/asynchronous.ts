@@ -47,7 +47,7 @@ const attemptToEventually = async <
           !(givenError instanceof NonActionableError)
         ) return givenError;
 
-        return givenError;
+        return givenError.rethrownError ?? givenError;
       })(someError);
 
       const interpretedError = given.interpretationOf(potentiallyActionableError);
