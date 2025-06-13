@@ -76,7 +76,7 @@ const generateOutputFrom = async (
     },
   });
 
-  const outcomeOfSettlingTextToImageResponse = await sanctionedAsync({
+  const outcomeOfSettlingTextToImageResponse = await Attempt.thatEventually(ends => sanctionedAsync({
     async try() {
       const intermediateOutcome = await Attempt.toSettle(promisedTextToImageResponse);
 
@@ -107,7 +107,7 @@ const generateOutputFrom = async (
         message: 'Text-to-image client failed to generate image due to an unexpected error',
       });
     },
-  });
+  }));
 
   if (
     outcomeOfSettlingTextToImageResponse.isFailure
