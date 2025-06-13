@@ -37,9 +37,7 @@ const attemptToEventually = async <
           someError instanceof NonActionableError
         ) return someError.throw();
 
-        return NonActionableError.rethrow(someError, {
-          message: 'Expected error to be either interpreted or prevented altogether',
-        });
+        throw someError; // eslint-disable-line no-restricted-syntax
       },
     });
   },
