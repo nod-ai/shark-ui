@@ -42,29 +42,31 @@ const attemptToSettle = async <
 >(
   promisedProduct: Promise<SomeProduct>,
   given: Attempt_AdapterConfig<SomeActionableError>,
-): Promise<Outcome<SomeProduct, SomeActionableError>> => Attempt_thatEventually(ends => sanctionedAsync({
-  async try() {
-    const getPromisedProduct = () => promisedProduct;
-    const intermediateOutcome = await attemptToEventually(getPromisedProduct);
+): Promise<Outcome<SomeProduct, SomeActionableError>> => {
+  return Attempt_thatEventually(ends => sanctionedAsync({
+    async try() {
+      const getPromisedProduct = () => promisedProduct;
+      const intermediateOutcome = await attemptToEventually(getPromisedProduct);
 
-    if (
-      intermediateOutcome.isFailure
-    ) return intermediateOutcome.causeOfFailure.throwAnyway('Unreachable since `attemptToEventually` still throws everything');
+      if (
+        intermediateOutcome.isFailure
+      ) return intermediateOutcome.causeOfFailure.throwAnyway('Unreachable since `attemptToEventually` still throws everything');
 
-    return intermediateOutcome;
-  },
-  catch(someError) {
-    const interpretedError = given.interpretationOf(someError);
+      return intermediateOutcome;
+    },
+    catch(someError) {
+      const interpretedError = given.interpretationOf(someError);
 
-    if (
-      interpretedError !== null
-    ) return ends.inFailureDueTo(interpretedError);
+      if (
+        interpretedError !== null
+      ) return ends.inFailureDueTo(interpretedError);
 
-    return NonActionableError.rethrow(someError, {
-      message: 'Failed to settle promise due to an unexpected error',
-    });
-  },
-}));
+      return NonActionableError.rethrow(someError, {
+        message: 'Failed to settle promise due to an unexpected error',
+      });
+    },
+  }));
+};
 
 export {
   attemptToEventually,
