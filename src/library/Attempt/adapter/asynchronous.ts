@@ -44,15 +44,19 @@ const attemptToEventually = async <
     return intermediateOutcome;
   },
   catch(someError) {
-    const interpretedError = given.interpretationOf(someError);
+    const someActionableError = (() => {
+      const interpretedError = given.interpretationOf(someError);
 
-    if (
-      interpretedError !== null
-    ) return ends.inFailureDueTo(interpretedError);
+      if (
+        interpretedError !== null
+      ) return interpretedError;
 
-    return NonActionableError.rethrow(someError, {
-      message: 'Failed to end async attempt due to an unexpected error',
-    });
+      return NonActionableError.rethrow(someError, {
+        message: 'Failed to end async attempt due to an unexpected error',
+      });
+    })();
+
+    return ends.inFailureDueTo(someActionableError);
   },
 }));
 
