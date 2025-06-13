@@ -27,15 +27,8 @@ const attemptToEventually = async <
   given: Attempt_AdapterConfig<SomeActionableError>,
 ): Promise<Outcome<SomeProduct, SomeActionableError>> => Attempt_thatEventually(ends => sanctionedAsync({
   async try() {
-    return await sanctionedAsync({
-      async try() {
-        const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
-        return ends.inSuccessWith(retrievedProduct);
-      },
-      catch(someError) {
-        throw someError; // eslint-disable-line no-restricted-syntax
-      },
-    });
+    const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
+    return ends.inSuccessWith(retrievedProduct);
   },
   catch(someError) {
     const someActionableError = (() => {
