@@ -32,13 +32,13 @@ const attemptToEventually = async <
         return ends.inSuccessWith(retrievedProduct);
       },
       catch(someError) {
-        const someActionableError = ((givenError: typeof someError): SomeActionableError => {
-          const potentiallyActionableError = assertPotentiallyActionable(givenError);
+        const someActionableError = ((): SomeActionableError => {
+          const potentiallyActionableError = assertPotentiallyActionable(someError);
 
           return NonActionableError.rethrow(potentiallyActionableError, {
             message: 'Expected error to be either interpreted or prevented altogether',
           });
-        })(someError);
+        })();
 
         return ends.inFailureDueTo(someActionableError);
       },
