@@ -27,7 +27,7 @@ const attemptToEventually = async <
 ): Promise<Outcome<SomeProduct, SomeActionableError>> => {
   return Attempt_thatEventually(ends => sanctionedAsync({
     async try() {
-      const intermediateOutcome = await Attempt_thatEventually(ends => sanctionedAsync({
+      const intermediateOutcome = await sanctionedAsync({
         async try() {
           const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
           return ends.inSuccessWith(retrievedProduct);
@@ -36,7 +36,7 @@ const attemptToEventually = async <
           const someActionableError = assertActionable<SomeActionableError>(someError);
           return ends.inFailureDueTo(someActionableError);
         },
-      }));
+      });
 
       if (
         intermediateOutcome.isFailure
