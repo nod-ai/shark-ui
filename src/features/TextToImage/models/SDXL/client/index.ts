@@ -76,38 +76,40 @@ const generateOutputFrom = async (
     },
   });
 
-  const outcomeOfSettlingTextToImageResponse = await Attempt.thatEventually(ends => sanctionedAsync({
-    async try() {
-      const intermediateOutcome = await Attempt.toSettle(promisedTextToImageResponse);
-
-      if (
-        intermediateOutcome.isFailure
-      ) return intermediateOutcome.causeOfFailure.throwAnyway('Unreachable since `Attempt.toSettle` still throws everything');
-
-      return intermediateOutcome;
-    },
-    catch(someError) {
-      const interpretationOf = (caughtError: Error) => {
-        const clientFailedToReachServer = caughtError.message.includes('Failed to fetch');
+  const outcomeOfSettlingTextToImageResponse = await Attempt.thatEventually((ends) => {
+    return sanctionedAsync({
+      async try() {
+        const intermediateOutcome = await Attempt.toSettle(promisedTextToImageResponse);
 
         if (
-          !clientFailedToReachServer
-        ) return null;
+          intermediateOutcome.isFailure
+        ) return intermediateOutcome.causeOfFailure.throwAnyway('Unreachable since `Attempt.toSettle` still throws everything');
 
-        return new Server.ConnectionError(shimmedStabilityAIClient.origin);
-      };
+        return intermediateOutcome;
+      },
+      catch(someError) {
+        const interpretationOf = (caughtError: Error) => {
+          const clientFailedToReachServer = caughtError.message.includes('Failed to fetch');
 
-      const interpretedError = interpretationOf(someError);
+          if (
+            !clientFailedToReachServer
+          ) return null;
 
-      if (
-        interpretedError !== null
-      ) return ends.inFailureDueTo(interpretedError);
+          return new Server.ConnectionError(shimmedStabilityAIClient.origin);
+        };
 
-      return Attempt.NonActionableError.rethrow(someError, {
-        message: 'Text-to-image client failed to generate image due to an unexpected error',
-      });
-    },
-  }));
+        const interpretedError = interpretationOf(someError);
+
+        if (
+          interpretedError !== null
+        ) return ends.inFailureDueTo(interpretedError);
+
+        return Attempt.NonActionableError.rethrow(someError, {
+          message: 'Text-to-image client failed to generate image due to an unexpected error',
+        });
+      },
+    });
+  });
 
   if (
     outcomeOfSettlingTextToImageResponse.isFailure
