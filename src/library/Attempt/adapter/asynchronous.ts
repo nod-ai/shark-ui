@@ -61,10 +61,10 @@ const attemptToSettle = async <
   SomeActionableError extends ActionableError<string>,
 >(
   promisedProduct: Promise<SomeProduct>,
-  given: Attempt_AdapterConfig<SomeActionableError>,
+  givenConfig: Attempt_AdapterConfig<SomeActionableError>,
 ): Promise<Outcome<SomeProduct, SomeActionableError>> => {
   const getPromisedProduct = () => promisedProduct;
-  return attemptToEventually(getPromisedProduct, given);
+  return attemptToEventually(getPromisedProduct, givenConfig);
 };
 
 export {
