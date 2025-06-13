@@ -1,7 +1,8 @@
 import Outcome from '../Outcome';
 
-import type {
-  ActionableError,
+import {
+  NonActionableError,
+  type ActionableError,
 } from '../error';
 import {
   assertActionable,
@@ -36,10 +37,32 @@ const attemptToSettle = async <
   SomeActionableError extends ActionableError<string>,
 >(
   promisedProduct: Promise<SomeProduct>,
-): Promise<Outcome<SomeProduct, SomeActionableError>> => {
-  const getPromisedProduct = () => promisedProduct;
-  return attemptToEventually(getPromisedProduct);
-};
+  given: {
+    interpretationOf: (caughtError: Error) => SomeActionableError | null;
+  },
+): Promise<Outcome<SomeProduct, SomeActionableError>> => Attempt_thatEventually(ends => sanctionedAsync({
+  async try() {
+    const getPromisedProduct = () => promisedProduct;
+    const intermediateOutcome = await attemptToEventually(getPromisedProduct);
+
+    if (
+      intermediateOutcome.isFailure
+    ) return intermediateOutcome.causeOfFailure.throwAnyway('Unreachable since `attemptToEventually` still throws everything');
+
+    return intermediateOutcome;
+  },
+  catch(someError) {
+    const interpretedError = given.interpretationOf(someError);
+
+    if (
+      interpretedError !== null
+    ) return ends.inFailureDueTo(interpretedError);
+
+    return NonActionableError.rethrow(someError, {
+      message: 'Failed to settle promise due to an unexpected error',
+    });
+  },
+}));
 
 export {
   attemptToEventually,
