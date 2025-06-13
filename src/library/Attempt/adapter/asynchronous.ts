@@ -43,6 +43,10 @@ const attemptToEventually = async <
   catch(someError) {
     const someActionableError = (() => {
       const potentiallyActionableError = ((givenError) => {
+        if (
+          !(givenError instanceof NonActionableError)
+        ) return givenError;
+
         return givenError;
       })(someError);
 
