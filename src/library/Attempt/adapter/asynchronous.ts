@@ -5,8 +5,8 @@ import {
   type ActionableError,
 } from '../error';
 import {
-  assertActionable,
-} from '../error/assertions';
+  assertPotentiallyActionable,
+} from '../error/modifier';
 
 import {
   Attempt_thatEventually,
@@ -32,7 +32,14 @@ const attemptToEventually = async <
         return ends.inSuccessWith(retrievedProduct);
       },
       catch(someError) {
-        const someActionableError = assertActionable<SomeActionableError>(someError);
+        const someActionableError = ((givenError: typeof someError): SomeActionableError => {
+          const potentiallyActionableError = assertPotentiallyActionable(givenError);
+
+          return NonActionableError.rethrow(potentiallyActionableError, {
+            message: 'Expected error to be either interpreted or prevented altogether',
+          });
+        })(someError);
+
         return ends.inFailureDueTo(someActionableError);
       },
     });
