@@ -35,7 +35,7 @@ const attemptToEventually = async <
       catch(someError) {
         if (
           someError instanceof NonActionableError
-        ) return someError.throw();
+        ) throw someError; // eslint-disable-line no-restricted-syntax
 
         throw someError; // eslint-disable-line no-restricted-syntax
       },
