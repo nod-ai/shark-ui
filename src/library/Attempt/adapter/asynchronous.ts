@@ -43,9 +43,10 @@ const attemptToSettle = async <
   promisedProduct: Promise<SomeProduct>,
   given: Attempt_AdapterConfig<SomeActionableError>,
 ): Promise<Outcome<SomeProduct, SomeActionableError>> => {
+  const getPromisedProduct = () => promisedProduct;
+
   return Attempt_thatEventually(ends => sanctionedAsync({
     async try() {
-      const getPromisedProduct = () => promisedProduct;
       const intermediateOutcome = await attemptToEventually(getPromisedProduct);
 
       if (
