@@ -42,7 +42,10 @@ const attemptToEventually = async <
   },
   catch(someError) {
     const someActionableError = (() => {
-      const potentiallyActionableError = someError;
+      const potentiallyActionableError = ((givenError) => {
+        return givenError;
+      })(someError);
+
       const interpretedError = given.interpretationOf(potentiallyActionableError);
 
       if (
