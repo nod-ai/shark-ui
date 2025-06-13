@@ -21,6 +21,7 @@ export {
 export {
   NonActionableError,
   ActionableError,
+  type ErrorInterpreter,
 } from './error';
 
 export {
