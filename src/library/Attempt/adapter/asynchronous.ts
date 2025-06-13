@@ -16,6 +16,8 @@ import {
   sanctionedAsync,
 } from '../utilities/sanctionedTryCatch';
 
+import type Attempt_AdapterConfig from './Config';
+
 const attemptToEventually = async <
   SomeProduct,
   SomeActionableError extends ActionableError<string>,
@@ -37,9 +39,7 @@ const attemptToSettle = async <
   SomeActionableError extends ActionableError<string>,
 >(
   promisedProduct: Promise<SomeProduct>,
-  given: {
-    interpretationOf: (caughtError: Error) => SomeActionableError | null;
-  },
+  given: Attempt_AdapterConfig<SomeActionableError>,
 ): Promise<Outcome<SomeProduct, SomeActionableError>> => Attempt_thatEventually(ends => sanctionedAsync({
   async try() {
     const getPromisedProduct = () => promisedProduct;
