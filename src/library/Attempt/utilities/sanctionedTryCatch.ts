@@ -51,13 +51,7 @@ const sanctionedAsync = async <
     catch: catchBlockOutputFor,
   });
 
-  // eslint-disable-next-line no-restricted-syntax -- this is the implementation designed to help avoid use of raw try/catch
-  try {
-    return await retrieveTryBlockOutput();
-  }
-  catch (whateverThatWasThrown) {
-    return sanction(whateverThatWasThrown);
-  }
+  return retrieveTryBlockOutput().catch(sanction);
 };
 
 export {
