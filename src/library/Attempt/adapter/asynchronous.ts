@@ -23,16 +23,18 @@ const attemptToEventually = async <
   SomeActionableError extends ActionableError<string>,
 >(
   forciblyRetrieveProduct: () => Promise<SomeProduct>,
-): Promise<Outcome<SomeProduct, SomeActionableError>> => Attempt_thatEventually(ends => sanctionedAsync({
-  async try() {
-    const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
-    return ends.inSuccessWith(retrievedProduct);
-  },
-  catch(someError) {
-    const someActionableError = assertActionable<SomeActionableError>(someError);
-    return ends.inFailureDueTo(someActionableError);
-  },
-}));
+): Promise<Outcome<SomeProduct, SomeActionableError>> => {
+  return Attempt_thatEventually(ends => sanctionedAsync({
+    async try() {
+      const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
+      return ends.inSuccessWith(retrievedProduct);
+    },
+    catch(someError) {
+      const someActionableError = assertActionable<SomeActionableError>(someError);
+      return ends.inFailureDueTo(someActionableError);
+    },
+  }));
+};
 
 const attemptToSettle = async <
   SomeProduct,
