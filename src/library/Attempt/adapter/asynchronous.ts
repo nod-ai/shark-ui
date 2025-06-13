@@ -24,39 +24,37 @@ const attemptToEventually = async <
 >(
   forciblyRetrieveProduct: () => Promise<SomeProduct>,
   given: Attempt_AdapterConfig<SomeActionableError>,
-): Promise<Outcome<SomeProduct, SomeActionableError>> => {
-  return Attempt_thatEventually(ends => sanctionedAsync({
-    async try() {
-      const intermediateOutcome = await sanctionedAsync({
-        async try() {
-          const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
-          return ends.inSuccessWith(retrievedProduct);
-        },
-        catch(someError) {
-          const someActionableError = assertActionable<SomeActionableError>(someError);
-          return ends.inFailureDueTo(someActionableError);
-        },
-      });
+): Promise<Outcome<SomeProduct, SomeActionableError>> => Attempt_thatEventually(ends => sanctionedAsync({
+  async try() {
+    const intermediateOutcome = await sanctionedAsync({
+      async try() {
+        const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
+        return ends.inSuccessWith(retrievedProduct);
+      },
+      catch(someError) {
+        const someActionableError = assertActionable<SomeActionableError>(someError);
+        return ends.inFailureDueTo(someActionableError);
+      },
+    });
 
-      if (
-        intermediateOutcome.isFailure
-      ) return intermediateOutcome.causeOfFailure.throwAnyway('Unreachable since `attemptToEventually` still throws everything');
+    if (
+      intermediateOutcome.isFailure
+    ) return intermediateOutcome.causeOfFailure.throwAnyway('Unreachable since `attemptToEventually` still throws everything');
 
-      return intermediateOutcome;
-    },
-    catch(someError) {
-      const interpretedError = given.interpretationOf(someError);
+    return intermediateOutcome;
+  },
+  catch(someError) {
+    const interpretedError = given.interpretationOf(someError);
 
-      if (
-        interpretedError !== null
-      ) return ends.inFailureDueTo(interpretedError);
+    if (
+      interpretedError !== null
+    ) return ends.inFailureDueTo(interpretedError);
 
-      return NonActionableError.rethrow(someError, {
-        message: 'Failed to end async attempt due to an unexpected error',
-      });
-    },
-  }));
-};
+    return NonActionableError.rethrow(someError, {
+      message: 'Failed to end async attempt due to an unexpected error',
+    });
+  },
+}));
 
 const attemptToSettle = async <
   SomeProduct,
