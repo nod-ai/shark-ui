@@ -77,7 +77,7 @@ const generateOutputFrom = async (
   });
 
   const outcomeOfSettlingTextToImageResponse = await Attempt.thatEventually((ends) => {
-    const interpretationOf = (caughtError: Error) => {
+    const interpretationOf: ((caughtError: Error) => Server.ConnectionError | null) = (caughtError: Error) => {
       const clientFailedToReachServer = caughtError.message.includes('Failed to fetch');
 
       if (
