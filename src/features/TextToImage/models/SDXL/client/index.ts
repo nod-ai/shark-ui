@@ -77,6 +77,16 @@ const generateOutputFrom = async (
   });
 
   const outcomeOfSettlingTextToImageResponse = await Attempt.thatEventually((ends) => {
+    const interpretationOf = (caughtError: Error) => {
+      const clientFailedToReachServer = caughtError.message.includes('Failed to fetch');
+
+      if (
+        !clientFailedToReachServer
+      ) return null;
+
+      return new Server.ConnectionError(shimmedStabilityAIClient.origin);
+    };
+
     return sanctionedAsync({
       async try() {
         const intermediateOutcome = await Attempt.toSettle(promisedTextToImageResponse);
@@ -88,16 +98,6 @@ const generateOutputFrom = async (
         return intermediateOutcome;
       },
       catch(someError) {
-        const interpretationOf = (caughtError: Error) => {
-          const clientFailedToReachServer = caughtError.message.includes('Failed to fetch');
-
-          if (
-            !clientFailedToReachServer
-          ) return null;
-
-          return new Server.ConnectionError(shimmedStabilityAIClient.origin);
-        };
-
         const interpretedError = interpretationOf(someError);
 
         if (
