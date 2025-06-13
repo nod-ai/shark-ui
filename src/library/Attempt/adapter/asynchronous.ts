@@ -34,19 +34,11 @@ const attemptToEventually = async <
       catch(someError) {
         const potentiallyActionableError = assertPotentiallyActionable(someError);
 
-        const someActionableError = ((): SomeActionableError => {
-          return NonActionableError.rethrow(potentiallyActionableError, {
-            message: 'Expected error to be either interpreted or prevented altogether',
-          });
-        })();
-
-        return ends.inFailureDueTo(someActionableError);
+        return NonActionableError.rethrow(potentiallyActionableError, {
+          message: 'Expected error to be either interpreted or prevented altogether',
+        });
       },
     });
-
-    if (
-      intermediateOutcome.isFailure
-    ) return intermediateOutcome.causeOfFailure.throwAnyway('Unreachable since `attemptToEventually` still throws everything');
 
     return intermediateOutcome;
   },
