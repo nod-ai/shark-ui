@@ -5,8 +5,8 @@ import {
   type ActionableError,
 } from '../error';
 import {
-  assertActionable,
-} from '../error/assertions';
+  assertPotentiallyActionable,
+} from '../error/modifier';
 
 import {
   Attempt_thatEventually,
@@ -26,22 +26,19 @@ const attemptToEventually = async <
   given: Attempt_AdapterConfig<SomeActionableError>,
 ): Promise<Outcome<SomeProduct, SomeActionableError>> => Attempt_thatEventually(ends => sanctionedAsync({
   async try() {
-    const intermediateOutcome = await sanctionedAsync({
+    return await sanctionedAsync({
       async try() {
         const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
         return ends.inSuccessWith(retrievedProduct);
       },
       catch(someError) {
-        const someActionableError = assertActionable<SomeActionableError>(someError);
-        return ends.inFailureDueTo(someActionableError);
+        const potentiallyActionableError = assertPotentiallyActionable(someError);
+
+        return NonActionableError.rethrow(potentiallyActionableError, {
+          message: 'Expected error to be either interpreted or prevented altogether',
+        });
       },
     });
-
-    if (
-      intermediateOutcome.isFailure
-    ) return intermediateOutcome.causeOfFailure.throwAnyway('Unreachable since `attemptToEventually` still throws everything');
-
-    return intermediateOutcome;
   },
   catch(someError) {
     const someActionableError = (() => {
