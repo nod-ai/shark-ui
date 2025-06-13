@@ -4,9 +4,6 @@ import {
   NonActionableError,
   type ActionableError,
 } from '../error';
-
-import type Attempt_ErrorInterpreter from '../error/Interpreter';
-
 import {
   assertActionable,
 } from '../error/assertions';
@@ -18,6 +15,8 @@ import {
 import {
   sanctionedAsync,
 } from '../utilities/sanctionedTryCatch';
+
+import type Attempt_AdapterConfig from './Config';
 
 const attemptToEventually = async <
   SomeProduct,
@@ -40,9 +39,7 @@ const attemptToSettle = async <
   SomeActionableError extends ActionableError<string>,
 >(
   promisedProduct: Promise<SomeProduct>,
-  given: {
-    interpretationOf: Attempt_ErrorInterpreter<SomeActionableError>;
-  },
+  given: Attempt_AdapterConfig<SomeActionableError>,
 ): Promise<Outcome<SomeProduct, SomeActionableError>> => Attempt_thatEventually(ends => sanctionedAsync({
   async try() {
     const getPromisedProduct = () => promisedProduct;

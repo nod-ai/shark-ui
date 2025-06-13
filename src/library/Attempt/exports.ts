@@ -16,6 +16,7 @@ export {
   attemptTo as to,
   attemptToEventually as toEventually,
   attemptToSettle as toSettle,
+  type AdapterConfig,
 } from './adapter';
 
 export {
