@@ -4,10 +4,6 @@ import type {
 
 import Attempt from '@/library/Attempt';
 
-import {
-  sanctionedAsync,
-} from '@/library/Attempt/utilities/sanctionedTryCatch';
-
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
 
 import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
@@ -76,8 +72,8 @@ const generateOutputFrom = async (
     },
   });
 
-  const outcomeOfSettlingTextToImageResponse = await Attempt.thatEventually((ends) => {
-    const interpretationOf: ((caughtError: Error) => Server.ConnectionError | null) = (caughtError) => {
+  const outcomeOfSettlingTextToImageResponse = await Attempt.toSettle(promisedTextToImageResponse, {
+    interpretationOf: (caughtError) => {
       const clientFailedToReachServer = caughtError.message.includes('Failed to fetch');
 
       if (
@@ -85,30 +81,7 @@ const generateOutputFrom = async (
       ) return null;
 
       return new Server.ConnectionError(shimmedStabilityAIClient.origin);
-    };
-
-    return sanctionedAsync({
-      async try() {
-        const intermediateOutcome = await Attempt.toSettle(promisedTextToImageResponse);
-
-        if (
-          intermediateOutcome.isFailure
-        ) return intermediateOutcome.causeOfFailure.throwAnyway('Unreachable since `Attempt.toSettle` still throws everything');
-
-        return intermediateOutcome;
-      },
-      catch(someError) {
-        const interpretedError = interpretationOf(someError);
-
-        if (
-          interpretedError !== null
-        ) return ends.inFailureDueTo(interpretedError);
-
-        return Attempt.NonActionableError.rethrow(someError, {
-          message: 'Text-to-image client failed to generate image due to an unexpected error',
-        });
-      },
-    });
+    },
   });
 
   if (
