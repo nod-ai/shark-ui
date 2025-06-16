@@ -7,7 +7,7 @@ import {
 
 import {
   assertPotentiallyActionable,
-} from '../error/modifier';
+} from '../error/assertions';
 
 import {
   Attempt_thatEventually,

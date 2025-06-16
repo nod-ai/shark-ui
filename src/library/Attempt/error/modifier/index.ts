@@ -2,7 +2,6 @@ export type {
   default as AppropriatelyThrown,
 } from './AppropriatelyThrown';
 
-export {
-  type PotentiallyActionable,
-  assertPotentiallyActionable,
+export type {
+  default as PotentiallyActionable,
 } from './PotentiallyActionable';
