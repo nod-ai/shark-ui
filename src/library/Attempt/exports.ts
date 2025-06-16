@@ -10,6 +10,8 @@ export {
 
 export {
   Attempt_Outcome as Outcome,
+  type Attempt_Success as Success,
+  type Attempt_Failure as Failure,
 } from './Outcome';
 
 export {

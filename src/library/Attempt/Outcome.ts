@@ -152,6 +152,8 @@ type CauseOf<
 
 export {
   Attempt_Outcome,
+  type Attempt_Success,
+  type Attempt_Failure,
   type ProductOf,
   type CauseOf,
 };
