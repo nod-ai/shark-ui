@@ -37,7 +37,7 @@ const attemptToEventually = async <
           someError instanceof NonActionableError
         ) return someError.throw();
 
-        const potentiallyActionableError = ((): PotentiallyActionable<typeof someError> => {
+        const potentiallyActionableError = (() => {
           return someError;
         })();
 
