@@ -4,6 +4,9 @@ import {
   NonActionableError,
   type ActionableError,
 } from '../error';
+
+import HonoraryNonActionableError from '../error/HonoraryNonActionableError';
+
 import {
   assertPotentiallyActionable,
 } from '../error/modifier';
@@ -33,6 +36,10 @@ const attemptToEventually = async <
       },
       catch(someError) {
         const potentiallyActionableError = assertPotentiallyActionable(someError);
+
+        if (
+          HonoraryNonActionableError.describes(potentiallyActionableError)
+        ) throw potentiallyActionableError; // eslint-disable-line no-restricted-syntax
 
         return NonActionableError.rethrow(potentiallyActionableError, {
           message: 'Expected error to be either interpreted or prevented altogether',
