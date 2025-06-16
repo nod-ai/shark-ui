@@ -2,6 +2,8 @@ import type {
   Branded,
 } from '@/library/typeUtilities/Branded';
 
+import HonoraryNonActionableError from './HonoraryNonActionableError';
+
 interface NonActionableError_Options extends ErrorOptions {
   /** A function that's acting as an alternative to raw `throw` */
   thrower?: (...parameters: any[]) => unknown; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -56,6 +58,10 @@ class NonActionableError
     if (
       givenError instanceof this
     ) return givenError.throw();
+
+    if (
+      HonoraryNonActionableError.describes(givenError)
+    ) throw givenError; // eslint-disable-line no-restricted-syntax -- avoids wrapping built-in errors that are already non-actionable
 
     return this.throw(given.message, {
       cause  : givenError,
