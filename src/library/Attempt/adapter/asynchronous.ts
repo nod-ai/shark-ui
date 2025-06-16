@@ -37,9 +37,7 @@ const attemptToEventually = async <
           someError instanceof NonActionableError
         ) return someError.throw();
 
-        const potentiallyActionableError = (() => {
-          return someError;
-        })();
+        const potentiallyActionableError = someError;
 
         return NonActionableError.rethrow(potentiallyActionableError, {
           message: 'Expected error to be either interpreted or prevented altogether',
