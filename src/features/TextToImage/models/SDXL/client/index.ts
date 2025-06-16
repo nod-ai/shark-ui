@@ -1,6 +1,5 @@
 import type {
   GenerateFromTextRequest,
-  GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
 import Attempt from '@/library/Attempt';
@@ -10,10 +9,6 @@ import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.t
 import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
 
 import ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image/index.ts';
-
-import {
-  asError,
-} from '@/library/utilitiesByType/error';
 
 import type {
   Output,
@@ -77,30 +72,23 @@ const generateOutputFrom = async (
     },
   });
 
-  let textToImageResponse: GenerateFromTextResponse;
+  const outcomeOfSettlingTextToImageResponse = await Attempt.toSettle(promisedTextToImageResponse, {
+    interpretationOf: (caughtError) => {
+      const clientFailedToReachServer = caughtError.message.includes('Failed to fetch');
 
-  // eslint-disable-next-line no-restricted-syntax
-  try {
-    const outcomeOfSettlingTextToImageResponse = await Attempt.toSettle(promisedTextToImageResponse);
+      if (
+        !clientFailedToReachServer
+      ) return null;
 
-    if (
-      outcomeOfSettlingTextToImageResponse.isFailure
-    ) return outcomeOfSettlingTextToImageResponse.causeOfFailure.throwAnyway('Unreachable since `Attempt.toSettle` still throws everything');
+      return new Server.ConnectionError(shimmedStabilityAIClient.origin);
+    },
+  });
 
-    textToImageResponse = outcomeOfSettlingTextToImageResponse.unwrapped;
-  }
-  catch (whateverThatWasThrown) {
-    const someError = asError(whateverThatWasThrown);
-    const clientFailedToReachServer = someError.message.includes('Failed to fetch');
+  if (
+    outcomeOfSettlingTextToImageResponse.isFailure
+  ) return outcomeOfSettlingTextToImageResponse;
 
-    if (
-      !clientFailedToReachServer
-    ) return Attempt.NonActionableError.rethrow(someError, {
-      message: 'Text-to-image client failed to generate image due to an unexpected error',
-    });
-
-    return ends.inFailureDueTo(new Server.ConnectionError(shimmedStabilityAIClient.origin));
-  }
+  const textToImageResponse = outcomeOfSettlingTextToImageResponse.unwrapped;
 
   if (
     !('artifacts' in textToImageResponse.result)

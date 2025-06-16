@@ -53,6 +53,10 @@ class NonActionableError
       message: NonActionableError['message'];
     },
   ): never => {
+    if (
+      givenError instanceof this
+    ) return givenError.throw();
+
     return this.throw(given.message, {
       cause  : givenError,
       thrower: NonActionableError.rethrow,

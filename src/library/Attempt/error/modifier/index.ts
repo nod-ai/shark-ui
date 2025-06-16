@@ -1,7 +1,7 @@
 export {
-  assertPotentiallyActionable,
-} from './PotentiallyActionable';
+  type default as AppropriatelyThrown,
+} from './AppropriatelyThrown';
 
 export {
-  assertSafelyPropagated,
-} from './SafelyPropagated';
+  assertPotentiallyActionable,
+} from './PotentiallyActionable';

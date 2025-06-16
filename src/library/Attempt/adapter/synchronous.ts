@@ -3,28 +3,33 @@ import Outcome from '../Outcome';
 import type {
   ActionableError,
 } from '../error';
+import {
+  assertActionable,
+} from '../error/assertions';
 
 import {
-  outcomeOfFailedAttempt,
-} from '../utilities/outcomeOfFailedAttempt';
+  Attempt_that,
+} from '../factory';
+
+import {
+  sanctioned,
+} from '../utilities/sanctionedTryCatch';
 
 const attemptTo = <
   SomeProduct,
   SomeActionableError extends ActionableError<string>,
 >(
   forciblyGetProduct: () => SomeProduct,
-): Outcome<SomeProduct, SomeActionableError> => {
-  // eslint-disable-next-line no-restricted-syntax
-  try {
+): Outcome<SomeProduct, SomeActionableError> => Attempt_that(ends => sanctioned({
+  try() {
     const gottenProduct = forciblyGetProduct();
-    return Outcome.successThatYielded(gottenProduct);
-  }
-  catch (whateverThatWasThrown) {
-    return outcomeOfFailedAttempt<SomeProduct, SomeActionableError>({
-      basedOn: whateverThatWasThrown,
-    });
-  }
-};
+    return ends.inSuccessWith(gottenProduct);
+  },
+  catch(someError) {
+    const someActionableError = assertActionable<SomeActionableError>(someError);
+    return ends.inFailureDueTo(someActionableError);
+  },
+}));
 
 export {
   attemptTo,
