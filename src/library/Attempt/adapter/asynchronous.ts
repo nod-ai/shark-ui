@@ -1,12 +1,11 @@
 import type Outcome from '../Outcome';
 
-import {
-  NonActionableError,
-  type ActionableError,
+import type {
+  ActionableError,
 } from '../error';
 
 import {
-  assertPotentiallyActionable,
+  assertActionable,
 } from '../error/assertions';
 
 import {
@@ -31,18 +30,9 @@ const attemptToEventually = async <
     return ends.inSuccessWith(retrievedProduct);
   },
   catch(someError) {
-    const someActionableError = (() => {
-      const potentiallyActionableError = assertPotentiallyActionable(someError);
-      const interpretedError = given.interpretationOf(potentiallyActionableError);
-
-      if (
-        interpretedError !== null
-      ) return interpretedError;
-
-      return NonActionableError.rethrow(potentiallyActionableError, {
-        message: 'Failed to end async attempt due to an unexpected error',
-      });
-    })();
+    const someActionableError = assertActionable(someError, {
+      using: given.interpretationOf,
+    });
 
     return ends.inFailureDueTo(someActionableError);
   },
