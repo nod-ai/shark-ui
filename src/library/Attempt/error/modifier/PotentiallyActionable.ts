@@ -13,6 +13,10 @@ const assertPotentiallyActionable = <
     !(givenError instanceof NonActionableError)
   ) return givenError as PotentiallyActionable<SomeError>;
 
+  if (
+    givenError.rethrownError !== null
+  ) return givenError.rethrownError as PotentiallyActionable<SomeError>;
+
   return givenError.throw();
 };
 
