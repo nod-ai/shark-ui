@@ -1,4 +1,4 @@
-import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
+import type Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
 
 import type {
   DataURIBinaryEncoding,

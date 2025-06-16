@@ -10,6 +10,6 @@ interface Attempt_AdapterConfig<
   interpretationOf: Attempt_ErrorInterpreter<SomeActionableError>;
 }
 
-export {
-  type Attempt_AdapterConfig as default,
+export type {
+  Attempt_AdapterConfig as default,
 };

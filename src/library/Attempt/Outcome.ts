@@ -4,8 +4,8 @@ import type {
   Not,
 } from '@/library/typeUtilities/Boolean';
 
-import {
-  type ActionableError,
+import type {
+  ActionableError,
 } from './error';
 
 // cspell:words sugarfree discriminable

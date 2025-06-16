@@ -1,4 +1,4 @@
-import ActionableError from '../ActionableError';
+import type ActionableError from '../ActionableError';
 
 type AppropriatelyThrown<
   SomeError extends Error,
@@ -7,6 +7,6 @@ type AppropriatelyThrown<
   ActionableError<string>
 >;
 
-export {
-  type AppropriatelyThrown as default,
+export type {
+  AppropriatelyThrown as default,
 };

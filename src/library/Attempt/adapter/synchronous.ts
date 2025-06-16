@@ -1,4 +1,4 @@
-import Outcome from '../Outcome';
+import type Outcome from '../Outcome';
 
 import type {
   ActionableError,

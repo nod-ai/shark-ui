@@ -1,6 +1,6 @@
 import Attempt from '@/library/Attempt';
 
-import * as HTTPResponse from './HTTPResponse';
+import type * as HTTPResponse from './HTTPResponse';
 
 class HTTPResponseError extends Attempt.ActionableError<'HTTPResponseError'> {
   public readonly status: HTTPResponse.ErrorStatusCode;

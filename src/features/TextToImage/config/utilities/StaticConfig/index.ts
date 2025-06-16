@@ -5,7 +5,7 @@ import {
 } from '@/library/customTypes/URLComponent';
 
 import {
-  Config,
+  type Config,
   ConfigSchema,
 } from '../../types';
 

@@ -11,6 +11,6 @@ interface Branded<SomeBrand extends string> {
   readonly brand: SomeBrand;
 }
 
-export {
-  type Branded,
+export type {
+  Branded,
 };
