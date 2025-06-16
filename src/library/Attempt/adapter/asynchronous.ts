@@ -32,16 +32,18 @@ const attemptToEventually = async <
   },
   catch(someError) {
     const someActionableError = (() => {
-      const assertPotentiallyActionable = (
-        givenError: typeof someError,
-      ): PotentiallyActionable<typeof someError> => {
+      const assertPotentiallyActionable = <
+        SomeError extends Error,
+      >(
+        givenError: SomeError,
+      ): PotentiallyActionable<SomeError> => {
         if (
           !(givenError instanceof NonActionableError)
-        ) return givenError;
+        ) return givenError as PotentiallyActionable<SomeError>;
 
         if (
           givenError.rethrownError !== null
-        ) return givenError.rethrownError;
+        ) return givenError.rethrownError as PotentiallyActionable<SomeError>;
 
         return givenError.throw();
       };
