@@ -115,6 +115,9 @@ const configWithVueTS = defineConfigWithVueTs(
           message : 'Prefer `Attempt.that` callback for error propagation over `throw`.',
         },
       ],
+      '@typescript-eslint/consistent-type-exports': [
+        'error',
+      ],
       '@typescript-eslint/consistent-type-imports': [
         'error',
         {
