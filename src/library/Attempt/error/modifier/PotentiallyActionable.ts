@@ -10,10 +10,10 @@ const assertPotentiallyActionable = <
   givenError: SomeError,
 ): PotentiallyActionable<SomeError> => {
   if (
-    givenError instanceof NonActionableError
-  ) return givenError.throw();
+    !(givenError instanceof NonActionableError)
+  ) return givenError as PotentiallyActionable<SomeError>;
 
-  return givenError as PotentiallyActionable<SomeError>;
+  return givenError.throw();
 };
 
 export {
