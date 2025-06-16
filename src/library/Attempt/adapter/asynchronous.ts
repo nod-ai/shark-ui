@@ -1,4 +1,6 @@
-import type Outcome from '../Outcome';
+import type {
+  Attempt_Outcome,
+} from '../Outcome';
 
 import type {
   ActionableError,
@@ -23,7 +25,7 @@ const attemptToEventually = async <
 >(
   forciblyRetrieveProduct: () => Promise<SomeProduct>,
   given: Attempt_AdapterConfig<SomeActionableError>,
-): Promise<Outcome<SomeProduct, SomeActionableError>> => Attempt_thatEventually(ends => sanctionedAsync({
+): Promise<Attempt_Outcome<SomeProduct, SomeActionableError>> => Attempt_thatEventually(ends => sanctionedAsync({
   async try() {
     const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
     return ends.inSuccessWith(retrievedProduct);
@@ -43,7 +45,7 @@ const attemptToSettle = async <
 >(
   promisedProduct: Promise<SomeProduct>,
   givenConfig: Attempt_AdapterConfig<SomeActionableError>,
-): Promise<Outcome<SomeProduct, SomeActionableError>> => {
+): Promise<Attempt_Outcome<SomeProduct, SomeActionableError>> => {
   const getPromisedProduct = () => promisedProduct;
   return attemptToEventually(getPromisedProduct, givenConfig);
 };

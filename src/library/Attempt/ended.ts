@@ -1,4 +1,6 @@
-import Outcome from './Outcome';
+import {
+  Attempt_Outcome,
+} from './Outcome';
 
 import {
   NonActionableError,
@@ -12,9 +14,9 @@ import {
 */
 const Attempt_ended = {
   /** Call this when the attempt has completed and was considered successful */
-  inSuccessWith  : Outcome.successThatYielded,
+  inSuccessWith  : Attempt_Outcome.successThatYielded,
   /** Call this when the attempt has completed and was considered a failure */
-  inFailureDueTo : Outcome.failureDueTo,
+  inFailureDueTo : Attempt_Outcome.failureDueTo,
   /** Call this when it's not possible to complete the attempt */
   inFlamesBecause: NonActionableError.throw,
 };

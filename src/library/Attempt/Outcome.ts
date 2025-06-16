@@ -42,7 +42,7 @@ interface SemanticallySugarfreeFailure<
   readonly cause: SomeActionableError;
 }
 
-interface Success<SomeProduct> extends SemanticallySugarfreeSuccess<SomeProduct> {
+interface Attempt_Success<SomeProduct> extends SemanticallySugarfreeSuccess<SomeProduct> {
   /**
    * Access the product nested within a successful outcome.
    *
@@ -75,7 +75,7 @@ interface Success<SomeProduct> extends SemanticallySugarfreeSuccess<SomeProduct>
   readonly unwrapped: this['product'];
 }
 
-interface Failure<
+interface Attempt_Failure<
   SomeActionableError extends ActionableError<string>,
 > extends SemanticallySugarfreeFailure<SomeActionableError> {
   /**
@@ -102,7 +102,7 @@ const successThatYielded = <
   SomeProduct,
 >(
   givenProduct: SomeProduct,
-): Success<SomeProduct> => ({
+): Attempt_Success<SomeProduct> => ({
   case            : 'success',
   product         : givenProduct,
   isSuccess       : true,
@@ -116,7 +116,7 @@ const failureDueTo = <
   SomeActionableError extends ActionableError<string>,
 >(
   givenCause: SomeActionableError,
-): Failure<SomeActionableError> => ({
+): Attempt_Failure<SomeActionableError> => ({
   case            : 'failure',
   cause           : givenCause,
   isSuccess       : false,
@@ -126,32 +126,34 @@ const failureDueTo = <
   causeOfFailure  : givenCause,
 });
 
-const Outcome = {
+const Attempt_Outcome = {
   failureDueTo,
   successThatYielded,
 };
 
-type Outcome<
+type Attempt_Outcome<
   SomeProduct,
   SomeActionableError extends ActionableError<string>,
 > =
-  | Success<SomeProduct>
-  | Failure<SomeActionableError>;
+  | Attempt_Success<SomeProduct>
+  | Attempt_Failure<SomeActionableError>;
 
 type ProductOf<
-  SomeOutcome extends Outcome<unknown, ActionableError<string>>,
-> = SomeOutcome extends Success<infer NestedProduct>
+  SomeOutcome extends Attempt_Outcome<unknown, ActionableError<string>>,
+> = SomeOutcome extends Attempt_Success<infer NestedProduct>
   ? NestedProduct
   : never;
 
 type CauseOf<
-  SomeOutcome extends Outcome<unknown, ActionableError<string>>,
-> = SomeOutcome extends Failure<infer NestedError>
+  SomeOutcome extends Attempt_Outcome<unknown, ActionableError<string>>,
+> = SomeOutcome extends Attempt_Failure<infer NestedError>
   ? NestedError
   : never;
 
 export {
-  Outcome as default,
+  Attempt_Outcome,
+  type Attempt_Success,
+  type Attempt_Failure,
   type ProductOf,
   type CauseOf,
 };

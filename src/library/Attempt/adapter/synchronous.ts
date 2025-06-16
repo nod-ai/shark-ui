@@ -1,4 +1,6 @@
-import type Outcome from '../Outcome';
+import type {
+  Attempt_Outcome,
+} from '../Outcome';
 
 import type {
   ActionableError,
@@ -23,7 +25,7 @@ const attemptTo = <
 >(
   forciblyGetProduct: () => SomeProduct,
   given: Attempt_AdapterConfig<SomeActionableError>,
-): Outcome<SomeProduct, SomeActionableError> => Attempt_that(ends => sanctioned({
+): Attempt_Outcome<SomeProduct, SomeActionableError> => Attempt_that(ends => sanctioned({
   try() {
     const gottenProduct = forciblyGetProduct();
     return ends.inSuccessWith(gottenProduct);
