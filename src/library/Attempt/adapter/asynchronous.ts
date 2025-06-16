@@ -5,8 +5,8 @@ import {
   type ActionableError,
 } from '../error';
 
-import type {
-  PotentiallyActionable,
+import {
+  assertPotentiallyActionable,
 } from '../error/modifier';
 
 import {
@@ -32,14 +32,7 @@ const attemptToEventually = async <
   },
   catch(someError) {
     const someActionableError = (() => {
-      const potentiallyActionableError = ((givenError): PotentiallyActionable<typeof someError> => {
-        if (
-          !(givenError instanceof NonActionableError)
-        ) return givenError;
-
-        return givenError.rethrownError ?? givenError.throw();
-      })(someError);
-
+      const potentiallyActionableError = assertPotentiallyActionable(someError);
       const interpretedError = given.interpretationOf(potentiallyActionableError);
 
       if (
