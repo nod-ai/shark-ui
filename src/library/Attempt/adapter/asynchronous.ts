@@ -39,7 +39,11 @@ const attemptToEventually = async <
           !(givenError instanceof NonActionableError)
         ) return givenError;
 
-        return givenError.rethrownError ?? givenError.throw();
+        if (
+          givenError.rethrownError !== null
+        ) return givenError.rethrownError;
+
+        return givenError.throw();
       };
 
       const potentiallyActionableError = assertPotentiallyActionable(someError);
