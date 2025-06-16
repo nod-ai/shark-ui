@@ -2,8 +2,8 @@ import {
   ActionableError,
 } from '..';
 
-import {
-  type AppropriatelyThrown,
+import type {
+  AppropriatelyThrown,
 } from '../modifier';
 
 /**
