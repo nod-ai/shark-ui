@@ -62,6 +62,14 @@ class NonActionableError
       thrower: NonActionableError.rethrow,
     });
   };
+
+  public get rethrownError(): Error | null {
+    if (
+      this.cause instanceof Error
+    ) return this.cause;
+
+    return null;
+  }
 }
 
 export {
