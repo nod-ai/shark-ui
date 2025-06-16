@@ -32,7 +32,9 @@ const attemptToEventually = async <
   },
   catch(someError) {
     const someActionableError = (() => {
-      const potentiallyActionableError = ((givenError): PotentiallyActionable<typeof someError> => {
+      const potentiallyActionableError = ((
+        givenError,
+      ): PotentiallyActionable<typeof someError> => {
         if (
           !(givenError instanceof NonActionableError)
         ) return givenError;
