@@ -15,7 +15,7 @@ import {
 } from 'vuetify/components/VSlider';
 
 import DiscreteRange from '@/library/Range/DiscreteRange.ts';
-import Range from '@/library/Range/index.ts';
+import type Range from '@/library/Range/index.ts';
 
 import {
   shallowlyMerged,

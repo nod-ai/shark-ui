@@ -1,4 +1,4 @@
-import ActionableError from '../ActionableError';
+import type ActionableError from '../ActionableError';
 
 type AppropriatelyThrown<
   SomeError extends Error,

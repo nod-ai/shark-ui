@@ -1,4 +1,4 @@
-import Attempt from '@/library/Attempt';
+import type Attempt from '@/library/Attempt';
 
 import ParsingError from './ParsingError';
 

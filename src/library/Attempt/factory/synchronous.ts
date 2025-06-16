@@ -8,7 +8,7 @@ import type Outcome from '../Outcome';
 import {
   Attempt_ended as handles,
 } from '../ended';
-import {
+import type {
   ActionableError,
 } from '../error';
 
