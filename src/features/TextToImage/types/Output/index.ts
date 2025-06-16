@@ -5,6 +5,6 @@ interface TextToImage_Output {
   image: TextToImage_Output_Image;
 }
 
-export {
-  type TextToImage_Output,
+export type {
+  TextToImage_Output,
 };

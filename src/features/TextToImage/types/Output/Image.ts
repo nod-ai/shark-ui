@@ -5,6 +5,6 @@ interface TextToImage_Output_Image {
   description: string;
 }
 
-export {
-  type TextToImage_Output_Image as default,
+export type {
+  TextToImage_Output_Image as default,
 };

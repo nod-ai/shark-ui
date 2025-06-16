@@ -7,6 +7,6 @@ type AppropriatelyThrown<
   ActionableError<string>
 >;
 
-export {
-  type AppropriatelyThrown as default,
+export type {
+  AppropriatelyThrown as default,
 };

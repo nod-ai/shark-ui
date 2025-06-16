@@ -1,5 +1,5 @@
-export {
-  type default as AppropriatelyThrown,
+export type {
+  default as AppropriatelyThrown,
 } from './AppropriatelyThrown';
 
 export {

@@ -3,6 +3,6 @@ interface Static<Any> {
   prototype: Any;
 }
 
-export {
-  type Static as default,
+export type {
+  Static as default,
 };

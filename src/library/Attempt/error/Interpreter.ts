@@ -10,6 +10,6 @@ type Attempt_ErrorInterpreter<
   caughtError: PotentiallyActionable<Error>
 ) => SomeActionableError | null;
 
-export {
-  type Attempt_ErrorInterpreter as default,
+export type {
+  Attempt_ErrorInterpreter as default,
 };
