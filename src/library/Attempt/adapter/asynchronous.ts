@@ -3,7 +3,6 @@ import type Outcome from '../Outcome';
 import type {
   ActionableError,
 } from '../error';
-
 import {
   assertActionable,
 } from '../error/assertions';
