@@ -5,6 +5,8 @@ import {
 
 import type Attempt_ErrorInterpreter from '../Interpreter';
 
+import NonActionableBuiltInError from '../NonActionableBuiltInError';
+
 import {
   assertPotentiallyActionable,
 } from '../assertions';
@@ -29,6 +31,10 @@ const assertActionable = <
   if (
     definitelyActionableError !== null
   ) return definitelyActionableError;
+
+  if (
+    NonActionableBuiltInError.describes(givenError)
+  ) throw givenError; // eslint-disable-line no-restricted-syntax -- avoids wrapping built-in errors that are already non-actionable
 
   return NonActionableError.rethrow(potentiallyActionableError, {
     message: 'Expected error to be either interpreted or prevented altogether',
