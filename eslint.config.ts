@@ -121,6 +121,8 @@ const configWithVueTS = defineConfigWithVueTs(
     },
   },
 
+  // TODO: Remove the @ts-expect-error comment once @typescript-eslint adds support of ES17/ES2026 (after v8.34.0)
+  // @ts-expect-error -- ESLint v9.29.0 broke `FlatConfig.LanguageOptions` compatibility with @typescript-eslint v8.34.0
   stylistic.configs.customize({
     commaDangle: 'always-multiline',
     quotes     : 'single',
