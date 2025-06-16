@@ -67,7 +67,8 @@ class NonActionableError
     });
   };
 
-  public get rethrownError(): Error | null {
+  /** The error being "escorted" across the call stack by this instance, if any */
+  public get charge(): Error | null {
     if (
       this.cause instanceof Error
     ) return this.cause;

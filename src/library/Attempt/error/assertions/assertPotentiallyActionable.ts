@@ -16,8 +16,8 @@ const assertPotentiallyActionable = <
   ) return givenError as PotentiallyActionable<SomeError>;
 
   if (
-    givenError.rethrownError !== null
-  ) return givenError.rethrownError as PotentiallyActionable<SomeError>;
+    givenError.charge !== null
+  ) return givenError.charge as PotentiallyActionable<SomeError>;
 
   return givenError.throw();
 };
