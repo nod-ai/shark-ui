@@ -32,7 +32,7 @@ const attemptToEventually = async <
   },
   catch(someError) {
     const someActionableError = (() => {
-      const potentiallyActionableError = ((
+      const assertPotentiallyActionable = (
         givenError: typeof someError,
       ): PotentiallyActionable<typeof someError> => {
         if (
@@ -40,8 +40,9 @@ const attemptToEventually = async <
         ) return givenError;
 
         return givenError.rethrownError ?? givenError.throw();
-      })(someError);
+      };
 
+      const potentiallyActionableError = assertPotentiallyActionable(someError);
       const interpretedError = given.interpretationOf(potentiallyActionableError);
 
       if (
