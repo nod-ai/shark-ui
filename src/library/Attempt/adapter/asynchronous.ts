@@ -33,11 +33,11 @@ const attemptToEventually = async <
         return ends.inSuccessWith(retrievedProduct);
       },
       catch(someError) {
-        const potentiallyActionableError = ((): PotentiallyActionable<typeof someError> => {
-          if (
-            someError instanceof NonActionableError
-          ) return someError.throw();
+        if (
+          someError instanceof NonActionableError
+        ) return someError.throw();
 
+        const potentiallyActionableError = ((): PotentiallyActionable<typeof someError> => {
           return someError;
         })();
 
