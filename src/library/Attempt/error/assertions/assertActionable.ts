@@ -21,8 +21,6 @@ const assertActionable = <
     using: interpretationOf,
   }: {
     using: Attempt_ErrorInterpreter<SomeActionableError>;
-  } = {
-    using: () => null,
   },
 ): SomeActionableError => {
   const potentiallyActionableError = assertPotentiallyActionable(givenError);
