@@ -33,7 +33,7 @@ const attemptToEventually = async <
         return ends.inSuccessWith(retrievedProduct);
       },
       catch(someError) {
-        const assertPotentiallyActionable = (
+        const potentiallyActionableError = ((
           givenError: typeof someError,
         ): PotentiallyActionable<typeof someError> => {
           if (
@@ -41,9 +41,7 @@ const attemptToEventually = async <
           ) return givenError.throw();
 
           return givenError;
-        };
-
-        const potentiallyActionableError = assertPotentiallyActionable(someError);
+        })(someError);
 
         return NonActionableError.rethrow(potentiallyActionableError, {
           message: 'Expected error to be either interpreted or prevented altogether',
