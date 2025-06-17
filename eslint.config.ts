@@ -13,6 +13,37 @@ import tseslint, {
 import pluginImport from './eslint.import';
 import pluginStylistic from './eslint.stylistic';
 
+const extraConfigForESLint: ConfigWithExtends = {
+  name : 'shark-ui/eslint',
+  rules: {
+    'eqeqeq': [
+      'error', // Avoids `==` and `!=`, which perform type coercions that follow the rather obscure Abstract Equality Comparison Algorithm: https://www.ecma-international.org/ecma-262/5.1/#sec-11.9.3
+    ],
+    'no-implicit-coercion': [
+      'error', // Using constructors, factories, and parsers for coercion rather than operators leads to less confusing behavior
+    ],
+    'no-restricted-exports': [
+      'error',
+      {
+        restrictDefaultExports: {
+          direct: true, // Keeping the export of something separate from its declaration leads to cleaner diffs. Prefer using `export { Foo as default }`
+        },
+      },
+    ],
+    'no-restricted-syntax': [
+      'error',
+      {
+        selector: 'TryStatement',
+        message : 'Prefer `Attempt.to` for error matching over `try`/`catch`.',
+      },
+      {
+        selector: 'ThrowStatement',
+        message : 'Prefer `Attempt.that` callback for error propagation over `throw`.',
+      },
+    ],
+  },
+};
+
 const extraConfigForTypeScriptESLint: ConfigWithExtends = {
   name : 'shark-ui/@typescript-eslint',
   rules: {
@@ -50,32 +81,7 @@ const configWithVueTS = defineConfigWithVueTs(
     ],
   },
 
-  {
-    rules: {
-      'eqeqeq': [
-        'error', // Avoids `==` and `!=`, which perform type coercions that follow the rather obscure Abstract Equality Comparison Algorithm: https://www.ecma-international.org/ecma-262/5.1/#sec-11.9.3
-      ],
-      'no-implicit-coercion': [
-        'error', // Using constructors, factories, and parsers for coercion rather than operators leads to less confusing behavior
-      ],
-      'no-restricted-exports': ['error', {
-        restrictDefaultExports: {
-          direct: true, // Keeping the export of something separate from its declaration leads to cleaner diffs. Prefer using `export { Foo as default }`
-        },
-      }],
-      'no-restricted-syntax': [
-        'error',
-        {
-          selector: 'TryStatement',
-          message : 'Prefer `Attempt.to` for error matching over `try`/`catch`.',
-        },
-        {
-          selector: 'ThrowStatement',
-          message : 'Prefer `Attempt.that` callback for error propagation over `throw`.',
-        },
-      ],
-    },
-  },
+  extraConfigForESLint,
   extraConfigForTypeScriptESLint,
   ...pluginStylistic,
   ...pluginImport,
