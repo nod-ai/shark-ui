@@ -50,13 +50,17 @@ class DiscreteRange extends Range implements Iterable<number> {
     return (overstep === 0) && super.exclusivelyContains(givenValue);
   }
 
-  public* [Symbol.iterator](): Iterator<number> {
+  private* generateExclusiveSteps() {
     let eachExclusiveStep = this.lowerBound + this.stepSize;
 
     while (eachExclusiveStep < this.upperBound) {
       yield eachExclusiveStep;
       eachExclusiveStep += this.stepSize;
     }
+  }
+
+  public [Symbol.iterator](): Iterator<number> {
+    return this.generateExclusiveSteps();
   }
 
   public get exclusiveSteps(): number[] {
