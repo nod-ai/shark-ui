@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 
 import Range from './index.ts';
 
-class DiscreteRange extends Range implements Iterable<number> {
+class DiscreteRange extends Range {
   public constructor(
     lowerBound: Range['lowerBound'],
     upperBound: Range['upperBound'],
@@ -59,12 +59,9 @@ class DiscreteRange extends Range implements Iterable<number> {
     }
   }
 
-  public [Symbol.iterator](): Iterator<number> {
-    return this.generateExclusiveSteps();
-  }
-
   public get exclusiveSteps(): number[] {
-    return Array.from(this);
+    const generatedSteps = this.generateExclusiveSteps();
+    return Array.from(generatedSteps);
   }
 
   public get inclusiveSteps(): number[] {
