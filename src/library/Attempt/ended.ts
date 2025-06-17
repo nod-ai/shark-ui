@@ -18,7 +18,7 @@ const Attempt_ended = {
   /** Call this when the attempt has completed and was considered a failure */
   inFailureDueTo : Attempt_Outcome.failureDueTo,
   /** Call this when it's not possible to complete the attempt */
-  inFlamesBecause: NonActionableError.throw,
+  inFlamesBecause: NonActionableError.throw.bind(NonActionableError),
 };
 
 export {
