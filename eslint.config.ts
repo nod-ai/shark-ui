@@ -13,6 +13,28 @@ import tseslint, {
 import pluginImport from './eslint.import';
 import pluginStylistic from './eslint.stylistic';
 
+const extraConfigForTypeScriptESLint: ConfigWithExtends = {
+  name : 'shark-ui/@typescript-eslint',
+  rules: {
+    '@typescript-eslint/consistent-type-exports': [
+      'error',
+    ],
+    '@typescript-eslint/consistent-type-imports': [
+      'error',
+      {
+        prefer  : 'type-imports', // makes it easier to see which imports might have side effects
+        fixStyle: 'inline-type-imports', // allows for more compact imports and tees up problematic imports to '@typescript-eslint/no-import-type-side-effects'
+      },
+    ],
+    '@typescript-eslint/explicit-member-accessibility': [
+      'error', // Easier to see dead code in situations where a member is marked `private`
+    ],
+    '@typescript-eslint/no-import-type-side-effects': [
+      'error', // Avoids unexpected behavior, trims down the size of the bundle
+    ],
+  },
+};
+
 const configWithVueTS = defineConfigWithVueTs(
   {
     name : 'app/files-to-lint',
@@ -52,24 +74,9 @@ const configWithVueTS = defineConfigWithVueTs(
           message : 'Prefer `Attempt.that` callback for error propagation over `throw`.',
         },
       ],
-      '@typescript-eslint/consistent-type-exports': [
-        'error',
-      ],
-      '@typescript-eslint/consistent-type-imports': [
-        'error',
-        {
-          prefer  : 'type-imports', // makes it easier to see which imports might have side effects
-          fixStyle: 'inline-type-imports', // allows for more compact imports and tees up problematic imports to '@typescript-eslint/no-import-type-side-effects'
-        },
-      ],
-      '@typescript-eslint/explicit-member-accessibility': [
-        'error', // Easier to see dead code in situations where a member is marked `private`
-      ],
-      '@typescript-eslint/no-import-type-side-effects': [
-        'error', // Avoids unexpected behavior, trims down the size of the bundle
-      ],
     },
   },
+  extraConfigForTypeScriptESLint,
   ...pluginStylistic,
   ...pluginImport,
 
