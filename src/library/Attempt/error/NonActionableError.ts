@@ -52,7 +52,7 @@ class NonActionableError
     },
   ): never => {
     if (
-      givenError instanceof this
+      givenError instanceof NonActionableError
     ) return givenError.throw();
 
     return this.throw(given.message, {
