@@ -16,8 +16,15 @@ import pluginStylistic from './eslint.stylistic';
 const extraConfigForESLint: ConfigWithExtends = {
   name : 'shark-ui/eslint',
   rules: {
+    'curly': [
+      'error',
+      'multi', // Encourages consistent formatting for guard statements, which are often used to prevent unnecessary nesting
+    ],
     'eqeqeq': [
       'error', // Avoids `==` and `!=`, which perform type coercions that follow the rather obscure Abstract Equality Comparison Algorithm: https://www.ecma-international.org/ecma-262/5.1/#sec-11.9.3
+    ],
+    'no-else-return': [
+      'error', // Helps highlight the primary path of a scope, avoids unnecessary nesting
     ],
     'no-implicit-coercion': [
       'error', // Using constructors, factories, and parsers for coercion rather than operators leads to less confusing behavior

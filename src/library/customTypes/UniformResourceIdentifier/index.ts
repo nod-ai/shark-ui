@@ -161,12 +161,10 @@ class UniformResourceIdentifier implements StaticStringParser<typeof UniformReso
         path: `${typeof pathSegmentDelimiter}${string}`;
       }
     ) => {
-      if (!componentsPrecedingQuery.startsWith(authorityPrefix)) {
-        return ({
-          authority: null,
-          path     : componentsPrecedingQuery,
-        });
-      }
+      if (!componentsPrecedingQuery.startsWith(authorityPrefix)) return ({
+        authority: null,
+        path     : componentsPrecedingQuery,
+      });
 
       const authorityAndPath = componentsPrecedingQuery.replace(authorityPrefix, '');
       const [
