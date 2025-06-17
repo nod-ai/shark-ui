@@ -61,6 +61,11 @@ class DiscreteRange extends Range {
 
   private* generateInclusiveSteps() {
     yield this.lowerBound;
+
+    if (
+      this.lowerBound === this.upperBound
+    ) return;
+
     yield* this.generateExclusiveSteps();
     yield this.upperBound;
   }
