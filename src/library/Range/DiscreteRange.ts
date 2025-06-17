@@ -78,14 +78,14 @@ class DiscreteRange extends Range implements Iterable<number> {
     };
   }
 
-  public get exclusiveValues(): number[] {
+  public get exclusiveSteps(): number[] {
     return Array.from(this);
   }
 
-  public get inclusiveValues(): number[] {
+  public get inclusiveSteps(): number[] {
     return [
       this.lowerBound,
-      ...this.exclusiveValues,
+      ...this.exclusiveSteps,
       this.upperBound,
     ];
   }

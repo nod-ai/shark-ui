@@ -99,7 +99,7 @@ const tickLabelsAlong = (
     by  : givenStepSize,
   });
 
-  const labelSets = tickRange.inclusiveValues.map((eachPosition) => {
+  const labelSets = tickRange.inclusiveSteps.map((eachPosition) => {
     return tickLabels({
       by: eachPosition,
       in: tickRange,
