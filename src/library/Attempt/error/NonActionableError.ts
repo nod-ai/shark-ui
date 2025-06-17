@@ -42,9 +42,7 @@ class NonActionableError
     if (
       ('captureStackTrace' in Error)
       && (Error.captureStackTrace instanceof Function)
-    ) {
-      Error.captureStackTrace.call(undefined, newError, givenOptions?.thrower ?? NonActionableError.throw);
-    }
+    ) Error.captureStackTrace.call(undefined, newError, givenOptions?.thrower ?? NonActionableError.throw);
 
     return newError.throw();
   };
