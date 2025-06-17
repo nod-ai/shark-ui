@@ -2,7 +2,7 @@ import type {
   Branded,
 } from '@/library/typeUtilities/Branded';
 
-import HonoraryNonActionableError from './HonoraryNonActionableError';
+import NonActionableBuiltInError from './NonActionableBuiltInError';
 
 interface NonActionableError_Options extends ErrorOptions {
   /** A function that's acting as an alternative to raw `throw` */
@@ -58,7 +58,7 @@ class NonActionableError
     ) return givenError.throw();
 
     if (
-      HonoraryNonActionableError.describes(givenError)
+      NonActionableBuiltInError.describes(givenError)
     ) throw givenError; // eslint-disable-line no-restricted-syntax -- avoids wrapping built-in errors that are already non-actionable
 
     return this.throw(given.message, {
