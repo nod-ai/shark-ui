@@ -6,77 +6,14 @@ import {
 } from '@vue/eslint-config-typescript';
 // @ts-expect-error https://github.com/cypress-io/eslint-plugin-cypress/issues/232
 import pluginCypress from 'eslint-plugin-cypress';
-// @ts-expect-error https://github.com/import-js/eslint-plugin-import/pull/3097
-import importPlugin from 'eslint-plugin-import';
 import pluginVue from 'eslint-plugin-vue';
 import tseslint, {
   type ConfigWithExtends,
 } from 'typescript-eslint';
 
-const importPluginConfigs: ConfigWithExtends[] = [
-  importPlugin.flatConfigs.recommended,
-  importPlugin.flatConfigs.typescript,
-  {
-    name    : 'shark-ui/import',
-    files   : ['**/*.{ts,vue}'],
-    settings: {
-      'import/resolver': {
-        'typescript'                         : true,
-        'node'                               : true,
-        'eslint-import-resolver-custom-alias': {
-          alias: {
-            '@': './src',
-          },
-          extensions: ['.ts', '.vue'],
-        },
-      },
-    },
-    rules: {
-      'import/exports-last': [
-        'error', // Encourages decoupling the export of a module from its declaration, which leads to cleaner diffs
-      ],
-      'import/group-exports': [
-        'error', // Encourages decoupling the export of a module from its declaration, which leads to cleaner diffs
-      ],
-      'import/order': [
-        'error',
-        {
-          'groups': [
-            'builtin',
-            'external',
-            'parent',
-            'sibling',
-            'index',
-          ],
-          'pathGroups': [
-            {
-              pattern : '@/library/vue/**', // Allows Vue utilities to bubble to the very top of the <script setup> tag
-              group   : 'builtin',
-              position: 'before',
-            },
-            {
-              pattern : '@/library/**', // Treats our "internal dependencies" as somewhere between an external dependencies and internal business logic"
-              group   : 'external',
-              position: 'after',
-            },
-            {
-              pattern : '@/**', // Alias for "src/**"
-              group   : 'internal',
-              position: 'after',
-            },
-          ],
-          'newlines-between': 'always-and-inside-groups',
-          'alphabetize'     : {
-            order: 'asc',
-          },
-        },
-      ],
-    },
-  },
-];
+import pluginImport from './eslint.import';
 
 const configWithVueTS = defineConfigWithVueTs(
-  ...importPluginConfigs,
   {
     name : 'app/files-to-lint',
     files: ['**/*.{ts,mts,tsx,vue}'],
@@ -176,6 +113,7 @@ const configWithVueTS = defineConfigWithVueTs(
       ],
     },
   },
+  ...pluginImport,
 
   pluginVue.configs['flat/recommended'],
   vueTsConfigs.strictTypeChecked,
