@@ -22,11 +22,14 @@ const extraConfigForESLint: ConfigWithExtends = {
     'no-implicit-coercion': [
       'error', // Using constructors, factories, and parsers for coercion rather than operators leads to less confusing behavior
     ],
-    'no-restricted-exports': ['error', {
-      restrictDefaultExports: {
-        direct: true, // Keeping the export of something separate from its declaration leads to cleaner diffs. Prefer using `export { Foo as default }`
+    'no-restricted-exports': [
+      'error',
+      {
+        restrictDefaultExports: {
+          direct: true, // Keeping the export of something separate from its declaration leads to cleaner diffs. Prefer using `export { Foo as default }`
+        },
       },
-    }],
+    ],
     'no-restricted-syntax': [
       'error',
       {
