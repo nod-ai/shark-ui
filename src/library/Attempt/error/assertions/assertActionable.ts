@@ -37,7 +37,7 @@ const assertActionable = <
   ) throw givenError; // eslint-disable-line no-restricted-syntax -- avoids wrapping built-in errors that are already non-actionable
 
   return NonActionableError.rethrow(potentiallyActionableError, {
-    message: 'Expected error to be either interpreted or prevented altogether',
+    message: 'Neglected to interpret or prevent potentially actionable error',
   });
 };
 
