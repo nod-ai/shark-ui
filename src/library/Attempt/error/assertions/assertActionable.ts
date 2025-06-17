@@ -32,12 +32,10 @@ const assertActionable = <
     definitelyActionableError !== null
   ) return definitelyActionableError;
 
-  if (
-    NonActionableBuiltInError.describes(givenError)
-  ) throw givenError; // eslint-disable-line no-restricted-syntax -- avoids wrapping built-in errors that are already non-actionable
-
   return NonActionableError.rethrow(potentiallyActionableError, {
-    message: 'Neglected to interpret or prevent potentially actionable error',
+    message: NonActionableBuiltInError.describes(givenError)
+      ? 'Neglected to prevent built-in error'
+      : 'Neglected to interpret or prevent potentially actionable error',
   });
 };
 
