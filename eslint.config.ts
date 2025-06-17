@@ -14,6 +14,7 @@ import pluginImport from './eslint.import';
 import pluginStylistic from './eslint.stylistic';
 
 const extraConfigForTypeScriptESLint: ConfigWithExtends = {
+  name : 'shark-ui/@typescript-eslint',
   rules: {
     '@typescript-eslint/consistent-type-exports': [
       'error',
