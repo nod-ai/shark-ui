@@ -59,17 +59,25 @@ class DiscreteRange extends Range {
     }
   }
 
+  private* generateInclusiveSteps() {
+    yield this.lowerBound;
+
+    if (
+      this.lowerBound === this.upperBound
+    ) return;
+
+    yield* this.generateExclusiveSteps();
+    yield this.upperBound;
+  }
+
   public get exclusiveSteps(): number[] {
     const generatedSteps = this.generateExclusiveSteps();
     return Array.from(generatedSteps);
   }
 
   public get inclusiveSteps(): number[] {
-    return [
-      this.lowerBound,
-      ...this.exclusiveSteps,
-      this.upperBound,
-    ];
+    const generatedSteps = this.generateInclusiveSteps();
+    return Array.from(generatedSteps);
   }
 }
 
