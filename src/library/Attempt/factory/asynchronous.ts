@@ -12,6 +12,12 @@ import type {
   ActionableError,
 } from '../error';
 
+import {
+  sanctionedAsync,
+} from '../utilities/sanctionedTryCatch';
+
+import AttemptCreationError from './AttemptCreationError';
+
 type Attempt_EndRetriever<
   InferredOutcome extends Attempt_Outcome<unknown, ActionableError<string>>,
 > = (
@@ -24,7 +30,15 @@ const Attempt_thatEventually = async <
   endsAccordingTo: Attempt_EndRetriever<InferredOutcome>,
 ) => {
   type EquivalentOutcome = Attempt_Outcome<ProductOf<InferredOutcome>, CauseOf<InferredOutcome>>;
-  return await endsAccordingTo(handles) as EquivalentOutcome;
+
+  return sanctionedAsync({
+    async try() {
+      return await endsAccordingTo(handles) as EquivalentOutcome;
+    },
+    catch(someError) {
+      return AttemptCreationError.rethrow(someError);
+    },
+  });
 };
 
 export {
