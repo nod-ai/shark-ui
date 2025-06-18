@@ -5,16 +5,21 @@ import type {
   URLPath,
 } from '@/library/customTypes/URLComponent';
 
-import * as HTTPRequest from './HTTPRequest.ts';
-import HTTPResponseError from './HTTPResponseError.ts';
+import {
+  HTTP_Endpoint,
+} from './Endpoint';
 
-class HTTPClient {
+import {
+  HTTP_Request,
+} from './Request';
+
+class HTTP_Client {
   public readonly origin: URLOrigin;
-  public readonly headers: HTTPRequest.HeaderMap;
+  public readonly headers: HTTP_Request.HeaderMap;
 
   public constructor(given: {
     origin: URLOrigin;
-    headers: HTTPRequest.HeaderMap;
+    headers: HTTP_Request.HeaderMap;
   }) {
     this.origin = given.origin;
     this.headers = given.headers;
@@ -38,9 +43,9 @@ class HTTPClient {
       using: givenMethod,
     }: {
       to: URLPath;
-      using: HTTPRequest.Method;
+      using: HTTP_Request.Method;
     },
-  ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> => Attempt.thatEventually(async (ends) => {
+  ): Promise<HTTP_Endpoint.Outcome> => Attempt.thatEventually(async (ends) => {
     const response = await fetch(this.originAt(givenPath), {
       method : givenMethod,
       headers: this.headers,
@@ -49,7 +54,7 @@ class HTTPClient {
 
     if (
       !response.ok
-    ) return ends.inFailureDueTo(new HTTPResponseError(response.statusText, response.status));
+    ) return ends.inFailureDueTo(new HTTP_Endpoint.ResponseError(response.statusText, response.status));
 
     const responseBody: unknown = await response.json();
     return ends.inSuccessWith(responseBody);
@@ -61,10 +66,10 @@ class HTTPClient {
     }: {
       from: URLPath;
     },
-  ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> {
+  ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(null, {
       to   : givenPath,
-      using: HTTPRequest.Method.FETCH,
+      using: HTTP_Request.Method.FETCH,
     });
   }
 
@@ -76,10 +81,10 @@ class HTTPClient {
       bySending: unknown;
       to: URLPath;
     },
-  ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> {
+  ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(givenSubmission, {
       to   : givenPath,
-      using: HTTPRequest.Method.SUBMIT,
+      using: HTTP_Request.Method.SUBMIT,
     });
   }
 
@@ -91,10 +96,10 @@ class HTTPClient {
       bySending: unknown;
       to: URLPath;
     },
-  ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> {
+  ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(givenProperties, {
       to   : givenPath,
-      using: HTTPRequest.Method.CREATE,
+      using: HTTP_Request.Method.CREATE,
     });
   }
 
@@ -106,23 +111,23 @@ class HTTPClient {
       bySending: unknown;
       to: URLPath;
     },
-  ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> {
+  ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(givenChanges, {
       to   : givenPath,
-      using: HTTPRequest.Method.UPDATE,
+      using: HTTP_Request.Method.UPDATE,
     });
   }
 
   public async deleteResourceAt(
     givenPath: URLPath,
-  ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> {
+  ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(null, {
       to   : givenPath,
-      using: HTTPRequest.Method.DELETE,
+      using: HTTP_Request.Method.DELETE,
     });
   }
 }
 
 export {
-  HTTPClient as default,
+  HTTP_Client,
 };
