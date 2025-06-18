@@ -5,6 +5,10 @@ import type {
   URLPath,
 } from '@/library/customTypes/URLComponent';
 
+import type {
+  HTTP_Endpoint,
+} from './Endpoint';
+
 import HTTPResponseError from './HTTPResponseError.ts';
 
 import {
@@ -43,7 +47,7 @@ class HTTP_Client {
       to: URLPath;
       using: HTTP_Request.Method;
     },
-  ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> => Attempt.thatEventually(async (ends) => {
+  ): Promise<HTTP_Endpoint.Outcome> => Attempt.thatEventually(async (ends) => {
     const response = await fetch(this.originAt(givenPath), {
       method : givenMethod,
       headers: this.headers,
@@ -64,7 +68,7 @@ class HTTP_Client {
     }: {
       from: URLPath;
     },
-  ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> {
+  ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(null, {
       to   : givenPath,
       using: HTTP_Request.Method.FETCH,
@@ -79,7 +83,7 @@ class HTTP_Client {
       bySending: unknown;
       to: URLPath;
     },
-  ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> {
+  ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(givenSubmission, {
       to   : givenPath,
       using: HTTP_Request.Method.SUBMIT,
@@ -94,7 +98,7 @@ class HTTP_Client {
       bySending: unknown;
       to: URLPath;
     },
-  ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> {
+  ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(givenProperties, {
       to   : givenPath,
       using: HTTP_Request.Method.CREATE,
@@ -109,7 +113,7 @@ class HTTP_Client {
       bySending: unknown;
       to: URLPath;
     },
-  ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> {
+  ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(givenChanges, {
       to   : givenPath,
       using: HTTP_Request.Method.UPDATE,
@@ -118,7 +122,7 @@ class HTTP_Client {
 
   public async deleteResourceAt(
     givenPath: URLPath,
-  ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> {
+  ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(null, {
       to   : givenPath,
       using: HTTP_Request.Method.DELETE,

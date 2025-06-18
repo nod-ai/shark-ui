@@ -7,5 +7,9 @@ export {
 } from './Response';
 
 export {
+  HTTP_Endpoint as Endpoint,
+} from './Endpoint';
+
+export {
   HTTP_Client as Client,
 } from './Client';
