@@ -54,7 +54,13 @@ class HTTP_Client {
       body   : JSON.stringify(givenRequestBody),
     });
 
-    const response = await promisedResponse;
+    const outcomeOfSettlingResponse = await Attempt.toSettle(promisedResponse, {
+      interpretationOf: () => {
+        return null;
+      },
+    });
+
+    const response = outcomeOfSettlingResponse.forciblyUnwrap();
 
     if (
       !response.ok
