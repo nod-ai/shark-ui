@@ -5,11 +5,9 @@ import type {
   URLPath,
 } from '@/library/customTypes/URLComponent';
 
-import type {
+import {
   HTTP_Endpoint,
 } from './Endpoint';
-
-import HTTPResponseError from './HTTPResponseError.ts';
 
 import {
   HTTP_Request,
@@ -56,7 +54,7 @@ class HTTP_Client {
 
     if (
       !response.ok
-    ) return ends.inFailureDueTo(new HTTPResponseError(response.statusText, response.status));
+    ) return ends.inFailureDueTo(new HTTP_Endpoint.ResponseError(response.statusText, response.status));
 
     const responseBody: unknown = await response.json();
     return ends.inSuccessWith(responseBody);

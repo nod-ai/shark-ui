@@ -1,10 +1,12 @@
 import type Attempt from '@/library/Attempt';
 
-import type HTTPResponseError from '../HTTPResponseError';
+import type {
+  HTTP_Endpoint_ResponseError,
+} from './ResponseError';
 
 type HTTP_Endpoint_Outcome = Attempt.Outcome<
   unknown,
-  HTTPResponseError
+  HTTP_Endpoint_ResponseError
 >;
 
 export type {
