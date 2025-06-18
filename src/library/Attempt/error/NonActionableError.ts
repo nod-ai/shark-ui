@@ -18,7 +18,7 @@ class NonActionableError
   implements Branded<'NonActionableError'> {
   public readonly brand!: 'NonActionableError';
 
-  private constructor(
+  protected constructor(
     givenMessage: NonActionableError['message'],
     givenOptions?: ErrorOptions,
   ) {
