@@ -34,7 +34,7 @@ declare global {
  *
  * These errors are not expected to be caught or handled in any way.
  */
-type HonoraryNonActionableError =
+type NonActionableBuiltInError =
   | ReferenceError // Something was referenced that doesn't exist in scope.
   | TypeError // Something was called/iterated/assigned that can’t possibly support that operation.
   | RangeError // Runtime was asked to create an impossible value.
@@ -42,9 +42,9 @@ type HonoraryNonActionableError =
   | EvalError // Something illegal was done with `eval` or `Function` constructor.
   | SyntaxError; // The JS engine couldn't even parse the code.
 
-const isHonoraryNonActionableError = (
+const isNonActionableBuiltInError = (
   givenError: Error,
-): givenError is HonoraryNonActionableError => {
+): givenError is NonActionableBuiltInError => {
   return (
     (givenError instanceof ReferenceError)
     || (givenError instanceof TypeError)
@@ -55,10 +55,10 @@ const isHonoraryNonActionableError = (
   );
 };
 
-const HonoraryNonActionableError = {
-  describes: isHonoraryNonActionableError,
+const NonActionableBuiltInError = {
+  describes: isNonActionableBuiltInError,
 };
 
 export {
-  HonoraryNonActionableError as default,
+  NonActionableBuiltInError as default,
 };

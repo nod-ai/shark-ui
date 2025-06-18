@@ -5,6 +5,8 @@ import {
 
 import type Attempt_ErrorInterpreter from '../Interpreter';
 
+import NonActionableBuiltInError from '../NonActionableBuiltInError';
+
 import {
   assertPotentiallyActionable,
 } from '../assertions';
@@ -31,7 +33,9 @@ const assertActionable = <
   ) return definitelyActionableError;
 
   return NonActionableError.rethrow(potentiallyActionableError, {
-    message: 'Expected error to be either interpreted or prevented altogether',
+    message: NonActionableBuiltInError.describes(givenError)
+      ? 'Neglected to prevent built-in error'
+      : 'Neglected to interpret or prevent potentially actionable error',
   });
 };
 
