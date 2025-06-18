@@ -46,11 +46,31 @@ class HTTP_Client {
       using: HTTP_Request.Method;
     },
   ): Promise<HTTP_Endpoint.Outcome> => Attempt.thatEventually(async (ends) => {
-    const response = await fetch(this.originAt(givenPath), {
+    const endpointURL = this.originAt(givenPath);
+
+    const promisedResponse = fetch(endpointURL, {
       method : givenMethod,
       headers: this.headers,
       body   : JSON.stringify(givenRequestBody),
     });
+
+    const outcomeOfSettlingResponse = await Attempt.toSettle(promisedResponse, {
+      interpretationOf: (caughtError) => {
+        const clientFailedToReachServer = caughtError.message.includes('Failed to fetch');
+
+        if (
+          !clientFailedToReachServer
+        ) return null;
+
+        return new HTTP_Endpoint.RequestError(endpointURL);
+      },
+    });
+
+    if (
+      outcomeOfSettlingResponse.isFailure
+    ) return outcomeOfSettlingResponse;
+
+    const response = outcomeOfSettlingResponse.unwrapped;
 
     if (
       !response.ok

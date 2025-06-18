@@ -1,4 +1,8 @@
 export {
+  HTTP_Endpoint_RequestError as RequestError,
+} from './RequestError';
+
+export {
   HTTP_Endpoint_ResponseError as ResponseError,
 } from './ResponseError';
 
