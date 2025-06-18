@@ -46,11 +46,13 @@ class HTTP_Client {
       using: HTTP_Request.Method;
     },
   ): Promise<HTTP_Endpoint.Outcome> => Attempt.thatEventually(async (ends) => {
-    const response = await fetch(this.originAt(givenPath), {
+    const promisedResponse = fetch(this.originAt(givenPath), {
       method : givenMethod,
       headers: this.headers,
       body   : JSON.stringify(givenRequestBody),
     });
+
+    const response = await promisedResponse;
 
     if (
       !response.ok
