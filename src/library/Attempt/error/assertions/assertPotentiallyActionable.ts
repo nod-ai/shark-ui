@@ -2,6 +2,8 @@ import {
   NonActionableError,
 } from '..';
 
+import AttemptCreationError from '../../factory/AttemptCreationError';
+
 import type {
   PotentiallyActionable,
 } from '../modifier';
@@ -16,7 +18,8 @@ const assertPotentiallyActionable = <
   ) return givenError as PotentiallyActionable<SomeError>;
 
   if (
-    givenError.charge !== null
+    !(givenError instanceof AttemptCreationError)
+    && (givenError.charge !== null)
   ) return givenError.charge as PotentiallyActionable<SomeError>;
 
   return givenError.throw();
