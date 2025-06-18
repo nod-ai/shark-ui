@@ -10,7 +10,7 @@ import {
   z,
 } from 'zod/v4';
 
-import HTTPClient from '@/library/HTTPClient/index.ts';
+import HTTP from '@/library/HTTP';
 
 import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
 
@@ -102,7 +102,7 @@ const z_imageGenerationResponseBody = z.object({
 
 const generationEndpoint = URLPath.forciblyParsedFrom('/generate');
 
-class ImageClient extends HTTPClient {
+class ImageClient extends HTTP.Client {
   public async forciblyGenerateFromText(
     givenRequest: GenerateFromTextRequest,
   ): Promise<GenerateFromTextResponse> {
@@ -136,7 +136,7 @@ class ImageClient extends HTTPClient {
   }
 }
 
-class Version1Client extends HTTPClient {
+class Version1Client extends HTTP.Client {
   private _image?: ImageClient;
 
   public get image(): ImageClient {
@@ -145,7 +145,7 @@ class Version1Client extends HTTPClient {
   }
 }
 
-class ShimmedStabilityAIClient extends HTTPClient {
+class ShimmedStabilityAIClient extends HTTP.Client {
   public constructor(given: {
     serverURL: string;
   }) {
