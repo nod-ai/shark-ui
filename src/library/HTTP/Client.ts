@@ -8,7 +8,7 @@ import type {
 import * as HTTPRequest from './HTTPRequest.ts';
 import HTTPResponseError from './HTTPResponseError.ts';
 
-class HTTPClient {
+class HTTP_Client {
   public readonly origin: URLOrigin;
   public readonly headers: HTTPRequest.HeaderMap;
 
@@ -124,5 +124,5 @@ class HTTPClient {
 }
 
 export {
-  HTTPClient as default,
+  HTTP_Client,
 };
