@@ -55,12 +55,22 @@ class HTTP_Client {
     });
 
     const outcomeOfSettlingResponse = await Attempt.toSettle(promisedResponse, {
-      interpretationOf: () => {
-        return null;
+      interpretationOf: (caughtError) => {
+        const clientFailedToReachServer = caughtError.message.includes('Failed to fetch');
+
+        if (
+          !clientFailedToReachServer
+        ) return null;
+
+        return new HTTP_Endpoint.RequestError(endpointURL);
       },
     });
 
-    const response = outcomeOfSettlingResponse.forciblyUnwrap();
+    if (
+      outcomeOfSettlingResponse.isFailure
+    ) return outcomeOfSettlingResponse;
+
+    const response = outcomeOfSettlingResponse.unwrapped;
 
     if (
       !response.ok

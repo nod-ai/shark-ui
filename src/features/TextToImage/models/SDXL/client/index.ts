@@ -4,6 +4,7 @@ import type {
 
 import Attempt from '@/library/Attempt';
 
+import HTTP from '@/library/HTTP';
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
 
 import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
@@ -74,13 +75,11 @@ const generateOutputFrom = async (
 
   const outcomeOfSettlingTextToImageResponse = await Attempt.toSettle(promisedTextToImageResponse, {
     interpretationOf: (caughtError) => {
-      const clientFailedToReachServer = caughtError.message.includes('Failed to fetch');
-
       if (
-        !clientFailedToReachServer
+        !(caughtError instanceof HTTP.Endpoint.RequestError)
       ) return null;
 
-      return new Server.ConnectionError(shimmedStabilityAIClient.origin);
+      return new Server.ConnectionError(caughtError.endpoint);
     },
   });
 
