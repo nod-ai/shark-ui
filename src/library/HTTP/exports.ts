@@ -1,3 +1,3 @@
 export {
   default as Client,
-} from '../HTTPClient';
+} from './Client';
