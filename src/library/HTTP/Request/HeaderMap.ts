@@ -1,6 +1,4 @@
-import type {
-  HeaderMap as HTTP_Request_HeaderMap,
-} from '../HTTPRequest';
+type HTTP_Request_HeaderMap = Record<string, string>;
 
 export type {
   HTTP_Request_HeaderMap,
