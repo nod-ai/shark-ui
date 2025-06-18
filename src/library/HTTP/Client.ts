@@ -46,7 +46,9 @@ class HTTP_Client {
       using: HTTP_Request.Method;
     },
   ): Promise<HTTP_Endpoint.Outcome> => Attempt.thatEventually(async (ends) => {
-    const promisedResponse = fetch(this.originAt(givenPath), {
+    const endpointURL = this.originAt(givenPath);
+
+    const promisedResponse = fetch(endpointURL, {
       method : givenMethod,
       headers: this.headers,
       body   : JSON.stringify(givenRequestBody),
