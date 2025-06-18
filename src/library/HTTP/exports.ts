@@ -3,5 +3,9 @@ export {
 } from './Request';
 
 export {
+  HTTP_Response as Response,
+} from './Response';
+
+export {
   HTTP_Client as Client,
 } from './Client';
