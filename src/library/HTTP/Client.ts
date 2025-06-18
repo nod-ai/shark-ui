@@ -5,16 +5,19 @@ import type {
   URLPath,
 } from '@/library/customTypes/URLComponent';
 
-import * as HTTPRequest from './HTTPRequest.ts';
 import HTTPResponseError from './HTTPResponseError.ts';
+
+import {
+  HTTP_Request,
+} from './Request';
 
 class HTTP_Client {
   public readonly origin: URLOrigin;
-  public readonly headers: HTTPRequest.HeaderMap;
+  public readonly headers: HTTP_Request.HeaderMap;
 
   public constructor(given: {
     origin: URLOrigin;
-    headers: HTTPRequest.HeaderMap;
+    headers: HTTP_Request.HeaderMap;
   }) {
     this.origin = given.origin;
     this.headers = given.headers;
@@ -38,7 +41,7 @@ class HTTP_Client {
       using: givenMethod,
     }: {
       to: URLPath;
-      using: HTTPRequest.Method;
+      using: HTTP_Request.Method;
     },
   ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> => Attempt.thatEventually(async (ends) => {
     const response = await fetch(this.originAt(givenPath), {
@@ -64,7 +67,7 @@ class HTTP_Client {
   ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> {
     return await this.send(null, {
       to   : givenPath,
-      using: HTTPRequest.Method.FETCH,
+      using: HTTP_Request.Method.FETCH,
     });
   }
 
@@ -79,7 +82,7 @@ class HTTP_Client {
   ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> {
     return await this.send(givenSubmission, {
       to   : givenPath,
-      using: HTTPRequest.Method.SUBMIT,
+      using: HTTP_Request.Method.SUBMIT,
     });
   }
 
@@ -94,7 +97,7 @@ class HTTP_Client {
   ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> {
     return await this.send(givenProperties, {
       to   : givenPath,
-      using: HTTPRequest.Method.CREATE,
+      using: HTTP_Request.Method.CREATE,
     });
   }
 
@@ -109,7 +112,7 @@ class HTTP_Client {
   ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> {
     return await this.send(givenChanges, {
       to   : givenPath,
-      using: HTTPRequest.Method.UPDATE,
+      using: HTTP_Request.Method.UPDATE,
     });
   }
 
@@ -118,7 +121,7 @@ class HTTP_Client {
   ): Promise<Attempt.Outcome<unknown, HTTPResponseError>> {
     return await this.send(null, {
       to   : givenPath,
-      using: HTTPRequest.Method.DELETE,
+      using: HTTP_Request.Method.DELETE,
     });
   }
 }
