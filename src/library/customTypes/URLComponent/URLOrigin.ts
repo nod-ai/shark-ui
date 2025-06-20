@@ -1,12 +1,14 @@
+import Attempt from '@/library/Attempt';
+
 import {
   ParsingError,
 } from '@/library/Parser';
 
-import StringSubset from '@/library/customTypes/StringSubset.ts';
-
 import type {
-  StringForciblyParsable,
-} from '@/library/typeUtilities/StringForciblyParsable';
+  StringParsable,
+} from '@/library/Parser/string';
+
+import StringSubset from '@/library/customTypes/StringSubset.ts';
 
 class URLOrigin_ParsingError extends ParsingError<'URLOrigin'> {
   public constructor(given: {
@@ -20,21 +22,24 @@ class URLOrigin_ParsingError extends ParsingError<'URLOrigin'> {
 
 class URLOrigin
   extends StringSubset<'URLOrigin'>
-  implements StringForciblyParsable<typeof URLOrigin> {
-  public static forciblyParsedFrom = (
+  implements StringParsable<typeof URLOrigin> {
+  public static parsedFrom = (
     givenSubject: string,
-  ): URLOrigin => {
+  ): Attempt.Outcome<URLOrigin, URLOrigin_ParsingError> => Attempt.that((ends) => {
     const derived = new URL(givenSubject);
+
+    const newParsingError = new URLOrigin_ParsingError({
+      expectation: derived.origin,
+      reality    : givenSubject,
+    });
 
     if (
       derived.origin !== givenSubject
-    ) return new URLOrigin_ParsingError({
-      expectation: derived.origin,
-      reality    : givenSubject,
-    }).throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(newParsingError);
 
-    return new URLOrigin(derived.origin);
-  };
+    const parsedURLOrigin = new URLOrigin(derived.origin);
+    return ends.inSuccessWith(parsedURLOrigin);
+  });
 }
 
 export {
