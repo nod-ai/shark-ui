@@ -55,7 +55,9 @@ class MediaType implements StringForciblyParsable<typeof MediaType> {
   public static readonly treeBranchSuffix = '.';
 
   private get suffixedTree(): string | null {
-    if (this.tree === null) return null;
+    if (
+      this.tree === null
+    ) return null;
 
     return this.tree
       .map($0 => $0 + MediaType.treeBranchSuffix)
@@ -65,7 +67,9 @@ class MediaType implements StringForciblyParsable<typeof MediaType> {
   public static readonly structureTypePrefix = '+';
 
   private get prefixedStructureType(): string | null {
-    if (this.structureType === null) return null;
+    if (
+      this.structureType === null
+    ) return null;
 
     return MediaType.structureTypePrefix + this.structureType;
   }
@@ -74,7 +78,9 @@ class MediaType implements StringForciblyParsable<typeof MediaType> {
   public static readonly parameterKeyValueDelimiter = '=';
 
   private get prefixedParameters(): string | null {
-    if (this.parameters === null) return null;
+    if (
+      this.parameters === null
+    ) return null;
 
     return Object.entries(this.parameters)
       .map($0 => MediaType.parameterPrefix + $0.join(MediaType.parameterKeyValueDelimiter))
@@ -154,7 +160,9 @@ class MediaType implements StringForciblyParsable<typeof MediaType> {
     ) return new MediaType_ParsingError(`Unexpected component sets after extraneous structure type prefix(es): ${extraComponentsWithStructureTypePrefix.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
     const structureType = (() => {
-      if (rawStructureType === undefined) return null;
+      if (
+        rawStructureType === undefined
+      ) return null;
 
       const potentialStructureType = allStructuredSyntaxNameSuffix.find($0 => $0 === rawStructureType);
 

@@ -54,10 +54,11 @@ const stylisticOffset = (
   const leftwardOffset = -endpointOffset;
   const rightwardOffset = endpointOffset;
 
-  if (givenPosition === givenRange.lowerBound) return leftwardOffset;
-  if (givenPosition === givenRange.upperBound) return rightwardOffset;
-
-  return defaultOffset;
+  switch (givenPosition) {
+    case givenRange.lowerBound: return leftwardOffset;
+    case givenRange.upperBound: return rightwardOffset;
+    default /*             */ : return defaultOffset;
+  }
 };
 
 type SliderTickLabel = string;

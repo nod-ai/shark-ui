@@ -66,7 +66,9 @@ class UniformResourceIdentifier implements StringForciblyParsable<typeof Uniform
   public static readonly authorityPrefix = '//';
 
   private get prefixedAuthority(): string | null {
-    if (this.authority === null) return null;
+    if (
+      this.authority === null
+    ) return null;
 
     return UniformResourceIdentifier.authorityPrefix + this.authority.toString();
   }
@@ -74,7 +76,9 @@ class UniformResourceIdentifier implements StringForciblyParsable<typeof Uniform
   public static readonly queryPrefix = '?';
 
   private get prefixedQuery(): string | null {
-    if (this.query === null) return null;
+    if (
+      this.query === null
+    ) return null;
 
     return UniformResourceIdentifier.queryPrefix + this.query.toString();
   }
@@ -82,7 +86,9 @@ class UniformResourceIdentifier implements StringForciblyParsable<typeof Uniform
   public static readonly fragmentPrefix = '#';
 
   private get prefixedFragment(): string | null {
-    if (this.fragment === null) return null;
+    if (
+      this.fragment === null
+    ) return null;
 
     return UniformResourceIdentifier.fragmentPrefix + this.fragment.toString();
   }
@@ -163,7 +169,9 @@ class UniformResourceIdentifier implements StringForciblyParsable<typeof Uniform
         path: `${typeof pathSegmentDelimiter}${string}`;
       }
     ) => {
-      if (!componentsPrecedingQuery.startsWith(authorityPrefix)) return ({
+      if (
+        !componentsPrecedingQuery.startsWith(authorityPrefix)
+      ) return ({
         authority: null,
         path     : componentsPrecedingQuery,
       });

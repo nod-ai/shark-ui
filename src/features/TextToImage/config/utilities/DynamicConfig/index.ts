@@ -15,7 +15,9 @@ import DynamicConfig_FetchingError from './FetchingError';
 const contentIsJSONIn = (givenResponse: Response): boolean => {
   const contentType = givenResponse.headers.get('Content-Type');
 
-  if (contentType === null) return false;
+  if (
+    contentType === null
+  ) return false;
 
   return contentType.includes('application/json');
 };
