@@ -7,10 +7,7 @@ import {
 } from '@/library/utilitiesByType/array.ts';
 
 import MediaType_ParsingError from './ParsingError';
-
-import StructuredSyntaxNameSuffix, {
-  StructuredSyntaxNameSuffix_ParsingError,
-} from './StructuredSyntaxNameSuffix';
+import StructuredSyntaxNameSuffix from './StructuredSyntaxNameSuffix';
 
 const allFileTypes = [
   'application',
@@ -20,8 +17,6 @@ const allFileTypes = [
 ] as const;
 
 type FileType = (typeof allFileTypes)[number];
-
-const StructuredSyntaxNameSuffix_allCases = StructuredSyntaxNameSuffix.allCases;
 
 /** See [RFC 2045](https://datatracker.ietf.org/doc/html/rfc2045) for more information */
 class MediaType implements StringForciblyParsable<typeof MediaType> {
@@ -148,19 +143,7 @@ class MediaType implements StringForciblyParsable<typeof MediaType> {
       !isEmpty(extraComponentsWithStructureTypePrefix)
     ) return new MediaType_ParsingError(`Unexpected component sets after extraneous structure type prefix(es): ${extraComponentsWithStructureTypePrefix.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
-    const structureType = (() => {
-      if (
-        rawStructureType === null
-      ) return null;
-
-      const potentialStructureType = StructuredSyntaxNameSuffix_allCases.find($0 => $0 === rawStructureType);
-
-      if (
-        potentialStructureType === undefined
-      ) return new StructuredSyntaxNameSuffix_ParsingError(StructuredSyntaxNameSuffix_allCases).throwAnyway('To be converted to `Attempt` failure');
-
-      return potentialStructureType;
-    })();
+    const structureType = StructuredSyntaxNameSuffix.Nullable.parsedFrom(rawStructureType).forciblyUnwrap();
 
     if (
       serializedTreeBranchesEndingInFileSubtype === undefined

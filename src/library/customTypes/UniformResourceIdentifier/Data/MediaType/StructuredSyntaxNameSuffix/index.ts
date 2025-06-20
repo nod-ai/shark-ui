@@ -19,8 +19,31 @@ const StructuredSyntaxNameSuffix_allCases = [
 
 type StructuredSyntaxNameSuffix = (typeof StructuredSyntaxNameSuffix_allCases)[number];
 
+const StructuredSyntaxNameSuffix_Nullable_parsedFrom = (
+  givenSubject: string | null,
+) => {
+  return {
+    forciblyUnwrap: () => {
+      if (
+        givenSubject === null
+      ) return null;
+
+      const potentialStructureType = StructuredSyntaxNameSuffix_allCases.find($0 => $0 === givenSubject);
+
+      if (
+        potentialStructureType === undefined
+      ) return new StructuredSyntaxNameSuffix_ParsingError(StructuredSyntaxNameSuffix_allCases).throwAnyway('To be converted to `Attempt` failure');
+
+      return potentialStructureType;
+    },
+  };
+};
+
 const StructuredSyntaxNameSuffix = {
   allCases: StructuredSyntaxNameSuffix_allCases,
+  Nullable: {
+    parsedFrom: StructuredSyntaxNameSuffix_Nullable_parsedFrom,
+  },
 };
 
 export {
