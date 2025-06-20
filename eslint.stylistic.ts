@@ -10,6 +10,10 @@ const extraConfig: ConfigWithExtends = {
     '@stylistic': stylistic,
   },
   rules: {
+    '@stylistic/function-call-argument-newline': [
+      'error',
+      'consistent', // Helps minimize diffs and mitigate merge conflicts.
+    ],
     '@stylistic/key-spacing': [
       'error',
       {
