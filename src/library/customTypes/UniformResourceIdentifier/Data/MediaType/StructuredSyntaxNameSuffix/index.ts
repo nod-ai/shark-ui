@@ -1,5 +1,9 @@
 import Attempt from '@/library/Attempt';
 
+import type {
+  StringParser,
+} from '@/library/Parser/string/StringParser';
+
 import {
   StructuredSyntaxNameSuffix_ParsingError,
 } from './ParsingError';
@@ -49,10 +53,10 @@ const StructuredSyntaxNameSuffix = {
   allCases: StructuredSyntaxNameSuffix_allCases,
   ...{
     parsedFrom: StructuredSyntaxNameSuffix_parsedFrom,
-  },
+  } satisfies StringParser<StructuredSyntaxNameSuffix, StructuredSyntaxNameSuffix_ParsingError>,
   Nullable: {
     parsedFrom: StructuredSyntaxNameSuffix_Nullable_parsedFrom,
-  },
+  } satisfies StringParser<StructuredSyntaxNameSuffix | null, StructuredSyntaxNameSuffix_ParsingError>,
 };
 
 export {
