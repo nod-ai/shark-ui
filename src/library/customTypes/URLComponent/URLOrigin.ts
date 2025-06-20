@@ -35,7 +35,8 @@ class URLOrigin
       derived.origin !== givenSubject
     ) return newParsingError.throwAnyway('To be converted to `Attempt` failure');
 
-    return new URLOrigin(derived.origin);
+    const parsedURLOrigin = new URLOrigin(derived.origin);
+    return parsedURLOrigin;
   };
 }
 
