@@ -1,12 +1,14 @@
+import Attempt from '@/library/Attempt';
+
 import {
   ParsingError,
 } from '@/library/Parser';
 
-import StringSubset from '@/library/customTypes/StringSubset.ts';
-
 import type {
-  StringForciblyParsable,
-} from '@/library/typeUtilities/StringForciblyParsable';
+  StringParsable,
+} from '@/library/Parser/string';
+
+import StringSubset from '@/library/customTypes/StringSubset.ts';
 
 class URLPath_ParsingError extends ParsingError<'URLPath'> {
   public constructor(given: {
@@ -20,21 +22,24 @@ class URLPath_ParsingError extends ParsingError<'URLPath'> {
 
 class URLPath
   extends StringSubset<'URLPath'>
-  implements StringForciblyParsable<typeof URLPath> {
-  public static forciblyParsedFrom = (
+  implements StringParsable<typeof URLPath> {
+  public static parsedFrom = (
     givenSubject: string,
-  ): URLPath => {
+  ): Attempt.Outcome<URLPath, URLPath_ParsingError> => Attempt.that((ends) => {
     const exampleURL = new URL(`https://example.com${givenSubject}`);
+
+    const newParsingError = new URLPath_ParsingError({
+      expectation: exampleURL.pathname,
+      reality    : givenSubject,
+    });
 
     if (
       exampleURL.pathname !== givenSubject
-    ) return new URLPath_ParsingError({
-      expectation: exampleURL.pathname,
-      reality    : givenSubject,
-    }).throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(newParsingError);
 
-    return new URLPath(exampleURL.pathname);
-  };
+    const parsedURLPath = new URLPath(exampleURL.pathname);
+    return ends.inSuccessWith(parsedURLPath);
+  });
 }
 
 export {
