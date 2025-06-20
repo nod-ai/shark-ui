@@ -46,7 +46,7 @@ class Base64CharacterEncodedByteSequence
     }).forciblyUnwrap();
 
     const [byteEncodableCharacters, padding] = this.withPaddingDecoupled(paddedByteEncodableCharacters);
-    const base64ByteEncodableCharacters = Base64.CharacterSequence.assertConformanceOf(byteEncodableCharacters);
+    const base64ByteEncodableCharacters = Base64.CharacterSequence.ensureConformanceOf(byteEncodableCharacters).forciblyUnwrap();
     const base64CharacterEncodedByteSequence = base64ByteEncodableCharacters + padding;
     return new this(base64CharacterEncodedByteSequence);
   };
