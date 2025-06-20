@@ -1,3 +1,5 @@
+import Attempt from '@/library/Attempt';
+
 import {
   StructuredSyntaxNameSuffix_ParsingError,
 } from './ParsingError';
@@ -21,21 +23,17 @@ type StructuredSyntaxNameSuffix = (typeof StructuredSyntaxNameSuffix_allCases)[n
 
 const StructuredSyntaxNameSuffix_parsedFrom = (
   givenSubject: string,
-) => {
-  return {
-    forciblyUnwrap: () => {
-      const potentialStructuredSyntaxNameSuffix = StructuredSyntaxNameSuffix_allCases.find($0 => $0 === givenSubject);
+): Attempt.Outcome<StructuredSyntaxNameSuffix, StructuredSyntaxNameSuffix_ParsingError> => Attempt.that((ends) => {
+  const potentialStructuredSyntaxNameSuffix = StructuredSyntaxNameSuffix_allCases.find($0 => $0 === givenSubject);
 
-      const newParsingError = new StructuredSyntaxNameSuffix_ParsingError(StructuredSyntaxNameSuffix_allCases);
+  const newParsingError = new StructuredSyntaxNameSuffix_ParsingError(StructuredSyntaxNameSuffix_allCases);
 
-      if (
-        potentialStructuredSyntaxNameSuffix === undefined
-      ) return newParsingError.throwAnyway('To be converted to `Attempt` failure');
+  if (
+    potentialStructuredSyntaxNameSuffix === undefined
+  ) return ends.inFailureDueTo(newParsingError);
 
-      return potentialStructuredSyntaxNameSuffix;
-    },
-  };
-};
+  return ends.inSuccessWith(potentialStructuredSyntaxNameSuffix);
+});
 
 const StructuredSyntaxNameSuffix_Nullable_parsedFrom = (
   givenSubject: string | null,
