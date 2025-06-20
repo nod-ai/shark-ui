@@ -151,7 +151,7 @@ class MediaType implements StringForciblyParsable<typeof MediaType> {
 
     const [
       serializedTreeBranchesEndingInFileSubtype,
-      rawStructureType,
+      rawStructureType = null,
       ...extraComponentsWithStructureTypePrefix
     ] = remainderBeforeParameters?.split(MediaType.structureTypePrefix) ?? [];
 
@@ -161,7 +161,7 @@ class MediaType implements StringForciblyParsable<typeof MediaType> {
 
     const structureType = (() => {
       if (
-        rawStructureType === undefined
+        rawStructureType === null
       ) return null;
 
       const potentialStructureType = allStructuredSyntaxNameSuffix.find($0 => $0 === rawStructureType);
