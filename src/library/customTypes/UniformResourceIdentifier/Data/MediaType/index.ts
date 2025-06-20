@@ -8,6 +8,10 @@ import {
 
 import MediaType_ParsingError from './ParsingError';
 
+import {
+  StructuredSyntaxNameSuffix_ParsingError,
+} from './StructuredSyntaxNameSuffix';
+
 const allFileTypes = [
   'application',
   'text',
@@ -168,7 +172,7 @@ class MediaType implements StringForciblyParsable<typeof MediaType> {
 
       if (
         potentialStructureType === undefined
-      ) return new MediaType_ParsingError(`Expected structure type as one of ${allStructuredSyntaxNameSuffix.toString()}`).throwAnyway('To be converted to `Attempt` failure');
+      ) return new StructuredSyntaxNameSuffix_ParsingError(allStructuredSyntaxNameSuffix).throwAnyway('To be converted to `Attempt` failure');
 
       return potentialStructureType;
     })();
