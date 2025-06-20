@@ -35,7 +35,8 @@ class URLPath
       exampleURL.pathname !== givenSubject
     ) return newParsingError.throwAnyway('To be converted to `Attempt` failure');
 
-    return new URLPath(exampleURL.pathname);
+    const parsedURLPath = new URLPath(exampleURL.pathname);
+    return parsedURLPath;
   };
 }
 
