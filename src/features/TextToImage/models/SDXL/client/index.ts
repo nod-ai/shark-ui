@@ -11,6 +11,10 @@ import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64Char
 
 import ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image/index.ts';
 
+import {
+  allSerialized,
+} from '@/features/TextToImage/models/SDXL/client/conversions/TextPrompt';
+
 import type {
   Output,
 } from '@/features/TextToImage/types';
@@ -113,12 +117,7 @@ const generateOutputFrom = async (
 
   const newImage = {
     uri        : new ImageURI('png', 'base64', base64DataOfNewImage),
-    description: given.textToImageRequestBody.textPrompts
-      .map($0 => (($0.weight === undefined) || ($0.weight === 1))
-        ? $0.text
-        : `(${$0.text}: ${$0.weight.toString()})`,
-      )
-      .join(', '),
+    description: allSerialized(given.textToImageRequestBody.textPrompts),
   };
 
   return ends.inSuccessWith({
