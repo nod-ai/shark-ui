@@ -24,13 +24,13 @@ const StructuredSyntaxNameSuffix_parsedFrom = (
 ) => {
   return {
     forciblyUnwrap: () => {
-      const potentialStructureType = StructuredSyntaxNameSuffix_allCases.find($0 => $0 === givenSubject);
+      const potentialStructuredSyntaxNameSuffix = StructuredSyntaxNameSuffix_allCases.find($0 => $0 === givenSubject);
 
       if (
-        potentialStructureType === undefined
+        potentialStructuredSyntaxNameSuffix === undefined
       ) return new StructuredSyntaxNameSuffix_ParsingError(StructuredSyntaxNameSuffix_allCases).throwAnyway('To be converted to `Attempt` failure');
 
-      return potentialStructureType;
+      return potentialStructuredSyntaxNameSuffix;
     },
   };
 };
