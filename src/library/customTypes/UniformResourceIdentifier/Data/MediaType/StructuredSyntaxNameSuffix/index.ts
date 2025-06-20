@@ -26,9 +26,11 @@ const StructuredSyntaxNameSuffix_parsedFrom = (
     forciblyUnwrap: () => {
       const potentialStructuredSyntaxNameSuffix = StructuredSyntaxNameSuffix_allCases.find($0 => $0 === givenSubject);
 
+      const newParsingError = new StructuredSyntaxNameSuffix_ParsingError(StructuredSyntaxNameSuffix_allCases);
+
       if (
         potentialStructuredSyntaxNameSuffix === undefined
-      ) return new StructuredSyntaxNameSuffix_ParsingError(StructuredSyntaxNameSuffix_allCases).throwAnyway('To be converted to `Attempt` failure');
+      ) return newParsingError.throwAnyway('To be converted to `Attempt` failure');
 
       return potentialStructuredSyntaxNameSuffix;
     },
