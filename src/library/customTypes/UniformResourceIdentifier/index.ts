@@ -3,8 +3,8 @@ import Attempt from '@/library/Attempt';
 import NonTrivialString from '@/library/customTypes/NonTrivialString';
 
 import type {
-  StaticStringParser,
-} from '@/library/typeUtilities/StaticStringParser';
+  StringForciblyParsable,
+} from '@/library/typeUtilities/StringForciblyParsable';
 
 import {
   isEmpty,
@@ -16,7 +16,7 @@ import URI_ParsingError from './ParsingError';
  * Identifies an abstract or physical resource.
  * See [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986) for more information
  */
-class UniformResourceIdentifier implements StaticStringParser<typeof UniformResourceIdentifier> {
+class UniformResourceIdentifier implements StringForciblyParsable<typeof UniformResourceIdentifier> {
   private readonly _scheme: /*   */ NonTrivialString;
   private readonly _authority: /**/ NonTrivialString | null;
   private readonly _path: /*     */ NonTrivialString | null;

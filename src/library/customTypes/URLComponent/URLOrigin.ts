@@ -5,8 +5,8 @@ import {
 import StringSubset from '@/library/customTypes/StringSubset.ts';
 
 import type {
-  StaticStringParser,
-} from '@/library/typeUtilities/StaticStringParser.ts';
+  StringForciblyParsable,
+} from '@/library/typeUtilities/StringForciblyParsable';
 
 class URLOrigin_ParsingError extends ParsingError<'URLOrigin'> {
   public constructor(given: {
@@ -20,7 +20,7 @@ class URLOrigin_ParsingError extends ParsingError<'URLOrigin'> {
 
 class URLOrigin
   extends StringSubset<'URLOrigin'>
-  implements StaticStringParser<typeof URLOrigin> {
+  implements StringForciblyParsable<typeof URLOrigin> {
   public static forciblyParsedFrom(givenSubject: string): URLOrigin {
     const derived = new URL(givenSubject);
 
