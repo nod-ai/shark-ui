@@ -26,11 +26,12 @@ const PanelWidth = {
       xl,
     } = given.thresholds;
 
-    /**/ if (given.width <= md) return 1.00;
-    else if (given.width <= lg) return 1.50;
-    else if (given.width <= xl) return 2.00;
-
-    return 2.50;
+    switch (true) {
+      case (given.width <= md): return 1.00;
+      case (given.width <= lg): return 1.50;
+      case (given.width <= xl): return 2.00;
+      default /*           */ : return 2.50;
+    }
   },
   for(
     givenDisplay: Display,
