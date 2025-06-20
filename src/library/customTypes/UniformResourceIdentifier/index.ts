@@ -100,7 +100,9 @@ class UniformResourceIdentifier implements StringForciblyParsable<typeof Uniform
     return components.map($0 => $0 ?? '').join('');
   }
 
-  public static forciblyParsedFrom(givenSubject: string): UniformResourceIdentifier {
+  public static forciblyParsedFrom = (
+    givenSubject: string,
+  ): UniformResourceIdentifier => {
     const {
       schemeSuffix,
       authorityPrefix,
@@ -189,7 +191,7 @@ class UniformResourceIdentifier implements StringForciblyParsable<typeof Uniform
       NonTrivialString.nullableForciblyParsedFrom(query),
       NonTrivialString.nullableForciblyParsedFrom(fragment),
     );
-  }
+  };
 }
 
 export {

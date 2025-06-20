@@ -94,7 +94,9 @@ class MediaType implements StringForciblyParsable<typeof MediaType> {
     return components.map($0 => $0 ?? '').join('');
   }
 
-  public static forciblyParsedFrom(givenSubject: string): MediaType {
+  public static forciblyParsedFrom = (
+    givenSubject: string,
+  ): MediaType => {
     const [
       rawFileType,
       remainderAfterFileType,
@@ -184,7 +186,7 @@ class MediaType implements StringForciblyParsable<typeof MediaType> {
       structureType,
       Object.fromEntries(parameterEntries),
     );
-  }
+  };
 }
 
 export {

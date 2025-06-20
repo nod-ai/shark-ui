@@ -21,7 +21,9 @@ class URLOrigin_ParsingError extends ParsingError<'URLOrigin'> {
 class URLOrigin
   extends StringSubset<'URLOrigin'>
   implements StringForciblyParsable<typeof URLOrigin> {
-  public static forciblyParsedFrom(givenSubject: string): URLOrigin {
+  public static forciblyParsedFrom = (
+    givenSubject: string,
+  ): URLOrigin => {
     const derived = new URL(givenSubject);
 
     if (
@@ -32,7 +34,7 @@ class URLOrigin
     }).throwAnyway('To be converted to `Attempt` failure');
 
     return new URLOrigin(derived.origin);
-  }
+  };
 }
 
 export {

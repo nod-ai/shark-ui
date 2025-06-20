@@ -38,9 +38,9 @@ class Base64CharacterEncodedByteSequence
     return [remainingSequence, accumulatedPadding];
   }
 
-  public static forciblyParsedFrom(
+  public static forciblyParsedFrom = (
     givenCharacters: string,
-  ): Base64CharacterEncodedByteSequence {
+  ): Base64CharacterEncodedByteSequence => {
     const paddedByteEncodableCharacters = Byte.Sequence.assertEncodable(givenCharacters, {
       assuming: Base64.bitWidth,
     });
@@ -49,7 +49,7 @@ class Base64CharacterEncodedByteSequence
     const base64ByteEncodableCharacters = Base64.CharacterSequence.assertConformanceOf(byteEncodableCharacters);
     const base64CharacterEncodedByteSequence = base64ByteEncodableCharacters + padding;
     return new this(base64CharacterEncodedByteSequence);
-  }
+  };
 }
 
 export {

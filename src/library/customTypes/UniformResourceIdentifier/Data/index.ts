@@ -70,7 +70,9 @@ class DataURI extends UniformResourceIdentifier {
     return NonTrivialString.forciblyParsedFrom(components.join(''));
   }
 
-  public static override forciblyParsedFrom(givenSubject: string): DataURI {
+  public static override forciblyParsedFrom = (
+    givenSubject: string,
+  ): DataURI => {
     const proposedURI = super.forciblyParsedFrom(givenSubject);
 
     if (
@@ -116,7 +118,7 @@ class DataURI extends UniformResourceIdentifier {
       coercedEncoding,
       Base64CharacterEncodedByteSequence.forciblyParsedFrom(rawData),
     );
-  }
+  };
 }
 
 export {
