@@ -193,11 +193,11 @@ class UniformResourceIdentifier implements StringForciblyParsable<typeof Uniform
     })();
 
     return new UniformResourceIdentifier(
-      NonTrivialString.forciblyParsedFrom(scheme),
-      NonTrivialString.nullableForciblyParsedFrom(authority),
-      NonTrivialString.forciblyParsedFrom(path),
-      NonTrivialString.nullableForciblyParsedFrom(query),
-      NonTrivialString.nullableForciblyParsedFrom(fragment),
+      NonTrivialString.parsedFrom(scheme).forciblyUnwrap(),
+      NonTrivialString.nullableParsedFrom(authority).forciblyUnwrap(),
+      NonTrivialString.parsedFrom(path).forciblyUnwrap(),
+      NonTrivialString.nullableParsedFrom(query).forciblyUnwrap(),
+      NonTrivialString.nullableParsedFrom(fragment).forciblyUnwrap(),
     );
   };
 }
