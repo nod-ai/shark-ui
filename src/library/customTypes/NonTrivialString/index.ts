@@ -28,7 +28,9 @@ class NonTrivialString
   public static nullableForciblyParsedFrom = (
     givenSubject: string | null,
   ): NonTrivialString | null => {
-    if (givenSubject === null) return givenSubject;
+    if (
+      givenSubject === null
+    ) return givenSubject;
 
     return this.forciblyParsedFrom(givenSubject);
   };
