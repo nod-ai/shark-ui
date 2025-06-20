@@ -8,7 +8,7 @@ import {
 
 import MediaType_ParsingError from './ParsingError';
 
-import {
+import StructuredSyntaxNameSuffix, {
   StructuredSyntaxNameSuffix_ParsingError,
 } from './StructuredSyntaxNameSuffix';
 
@@ -21,22 +21,7 @@ const allFileTypes = [
 
 type FileType = (typeof allFileTypes)[number];
 
-/** See [RFC 6838 Section 4.2.8](https://www.rfc-editor.org/rfc/rfc6838.html#section-4.2.8) for more information */
-const allStructuredSyntaxNameSuffix = [
-  'xml',
-  'json',
-  'ber',
-  'der',
-  'fastinfoset',
-  'wbxml',
-  'zip',
-  'gzip',
-  'cbor',
-  'json-seq',
-  'cbor-seq',
-] as const;
-
-type StructuredSyntaxNameSuffix = (typeof allStructuredSyntaxNameSuffix)[number];
+const StructuredSyntaxNameSuffix_allCases = StructuredSyntaxNameSuffix.allCases;
 
 /** See [RFC 2045](https://datatracker.ietf.org/doc/html/rfc2045) for more information */
 class MediaType implements StringForciblyParsable<typeof MediaType> {
@@ -168,11 +153,11 @@ class MediaType implements StringForciblyParsable<typeof MediaType> {
         rawStructureType === null
       ) return null;
 
-      const potentialStructureType = allStructuredSyntaxNameSuffix.find($0 => $0 === rawStructureType);
+      const potentialStructureType = StructuredSyntaxNameSuffix_allCases.find($0 => $0 === rawStructureType);
 
       if (
         potentialStructureType === undefined
-      ) return new StructuredSyntaxNameSuffix_ParsingError(allStructuredSyntaxNameSuffix).throwAnyway('To be converted to `Attempt` failure');
+      ) return new StructuredSyntaxNameSuffix_ParsingError(StructuredSyntaxNameSuffix_allCases).throwAnyway('To be converted to `Attempt` failure');
 
       return potentialStructureType;
     })();
