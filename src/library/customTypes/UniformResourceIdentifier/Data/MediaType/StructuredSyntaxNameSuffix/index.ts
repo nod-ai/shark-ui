@@ -19,15 +19,11 @@ const StructuredSyntaxNameSuffix_allCases = [
 
 type StructuredSyntaxNameSuffix = (typeof StructuredSyntaxNameSuffix_allCases)[number];
 
-const StructuredSyntaxNameSuffix_Nullable_parsedFrom = (
-  givenSubject: string | null,
+const StructuredSyntaxNameSuffix_parsedFrom = (
+  givenSubject: string,
 ) => {
   return {
     forciblyUnwrap: () => {
-      if (
-        givenSubject === null
-      ) return null;
-
       const potentialStructureType = StructuredSyntaxNameSuffix_allCases.find($0 => $0 === givenSubject);
 
       if (
@@ -39,8 +35,25 @@ const StructuredSyntaxNameSuffix_Nullable_parsedFrom = (
   };
 };
 
+const StructuredSyntaxNameSuffix_Nullable_parsedFrom = (
+  givenSubject: string | null,
+) => {
+  return {
+    forciblyUnwrap: () => {
+      if (
+        givenSubject === null
+      ) return null;
+
+      return StructuredSyntaxNameSuffix_parsedFrom(givenSubject).forciblyUnwrap();
+    },
+  };
+};
+
 const StructuredSyntaxNameSuffix = {
   allCases: StructuredSyntaxNameSuffix_allCases,
+  ...{
+    parsedFrom: StructuredSyntaxNameSuffix_parsedFrom,
+  },
   Nullable: {
     parsedFrom: StructuredSyntaxNameSuffix_Nullable_parsedFrom,
   },
