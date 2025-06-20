@@ -37,17 +37,13 @@ const StructuredSyntaxNameSuffix_parsedFrom = (
 
 const StructuredSyntaxNameSuffix_Nullable_parsedFrom = (
   givenSubject: string | null,
-) => {
-  return {
-    forciblyUnwrap: () => {
-      if (
-        givenSubject === null
-      ) return null;
+): Attempt.Outcome<StructuredSyntaxNameSuffix | null, StructuredSyntaxNameSuffix_ParsingError> => Attempt.that((ends) => {
+  if (
+    givenSubject === null
+  ) return ends.inSuccessWith(null);
 
-      return StructuredSyntaxNameSuffix_parsedFrom(givenSubject).forciblyUnwrap();
-    },
-  };
-};
+  return StructuredSyntaxNameSuffix_parsedFrom(givenSubject);
+});
 
 const StructuredSyntaxNameSuffix = {
   allCases: StructuredSyntaxNameSuffix_allCases,
