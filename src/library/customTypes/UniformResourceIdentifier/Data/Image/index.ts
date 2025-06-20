@@ -47,9 +47,9 @@ class ImageURI extends DataURI {
     );
   }
 
-  public static override forciblyParsedFrom(
+  public static override forciblyParsedFrom = (
     givenSubject: string,
-  ): ImageURI {
+  ): ImageURI => {
     const proposedURI = super.forciblyParsedFrom(givenSubject);
 
     if (
@@ -67,7 +67,7 @@ class ImageURI extends DataURI {
       proposedURI.encoding,
       proposedURI.data,
     );
-  }
+  };
 }
 
 export {

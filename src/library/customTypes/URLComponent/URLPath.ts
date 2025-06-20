@@ -21,9 +21,9 @@ class URLPath_ParsingError extends ParsingError<'URLPath'> {
 class URLPath
   extends StringSubset<'URLPath'>
   implements StringForciblyParsable<typeof URLPath> {
-  public static forciblyParsedFrom(
+  public static forciblyParsedFrom = (
     givenSubject: string,
-  ): URLPath {
+  ): URLPath => {
     const exampleURL = new URL(`https://example.com${givenSubject}`);
 
     if (
@@ -34,7 +34,7 @@ class URLPath
     }).throwAnyway('To be converted to `Attempt` failure');
 
     return new URLPath(exampleURL.pathname);
-  }
+  };
 }
 
 export {
