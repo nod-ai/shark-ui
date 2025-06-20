@@ -7,6 +7,7 @@ import {
 } from '@/library/utilitiesByType/array.ts';
 
 import MediaType_ParsingError from './ParsingError';
+import StructuredSyntaxNameSuffix from './StructuredSyntaxNameSuffix';
 
 const allFileTypes = [
   'application',
@@ -16,23 +17,6 @@ const allFileTypes = [
 ] as const;
 
 type FileType = (typeof allFileTypes)[number];
-
-/** See [RFC 6838 Section 4.2.8](https://www.rfc-editor.org/rfc/rfc6838.html#section-4.2.8) for more information */
-const allStructuredSyntaxNameSuffix = [
-  'xml',
-  'json',
-  'ber',
-  'der',
-  'fastinfoset',
-  'wbxml',
-  'zip',
-  'gzip',
-  'cbor',
-  'json-seq',
-  'cbor-seq',
-] as const;
-
-type StructuredSyntaxNameSuffix = (typeof allStructuredSyntaxNameSuffix)[number];
 
 /** See [RFC 2045](https://datatracker.ietf.org/doc/html/rfc2045) for more information */
 class MediaType implements StringForciblyParsable<typeof MediaType> {
@@ -151,7 +135,7 @@ class MediaType implements StringForciblyParsable<typeof MediaType> {
 
     const [
       serializedTreeBranchesEndingInFileSubtype,
-      rawStructureType,
+      rawStructureType = null,
       ...extraComponentsWithStructureTypePrefix
     ] = remainderBeforeParameters?.split(MediaType.structureTypePrefix) ?? [];
 
@@ -159,19 +143,7 @@ class MediaType implements StringForciblyParsable<typeof MediaType> {
       !isEmpty(extraComponentsWithStructureTypePrefix)
     ) return new MediaType_ParsingError(`Unexpected component sets after extraneous structure type prefix(es): ${extraComponentsWithStructureTypePrefix.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
-    const structureType = (() => {
-      if (
-        rawStructureType === undefined
-      ) return null;
-
-      const potentialStructureType = allStructuredSyntaxNameSuffix.find($0 => $0 === rawStructureType);
-
-      if (
-        potentialStructureType === undefined
-      ) return new MediaType_ParsingError(`Expected structure type as one of ${allStructuredSyntaxNameSuffix.toString()}`).throwAnyway('To be converted to `Attempt` failure');
-
-      return potentialStructureType;
-    })();
+    const structureType = StructuredSyntaxNameSuffix.Nullable.parsedFrom(rawStructureType).forciblyUnwrap();
 
     if (
       serializedTreeBranchesEndingInFileSubtype === undefined
