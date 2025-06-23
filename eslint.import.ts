@@ -4,7 +4,7 @@ import type {
   ConfigWithExtends,
 } from 'typescript-eslint';
 
-const extraConfig = {
+const extraConfig: ConfigWithExtends = {
   name    : 'shark-ui/import',
   files   : ['**/*.{ts,vue}'],
   settings: {
