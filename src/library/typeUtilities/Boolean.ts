@@ -4,9 +4,9 @@ type Is<
 > =
   LeftHandOperand extends RightHandOperand
     ? RightHandOperand extends LeftHandOperand
-      ? true :
-      false :
-    false;
+      ? true
+      : false
+    : false;
 
 type If<
   Condition extends boolean,
