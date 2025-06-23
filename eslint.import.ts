@@ -1,4 +1,3 @@
-// @ts-expect-error https://github.com/import-js/eslint-plugin-import/pull/3097
 import importPlugin from 'eslint-plugin-import';
 
 import type {
