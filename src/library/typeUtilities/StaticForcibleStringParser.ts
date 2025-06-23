@@ -9,7 +9,8 @@ type StaticForcibleStringParser<
   >
   & ForcibleStringParser<
     Any
-  >;
+  >
+;
 
 export type {
   StaticForcibleStringParser,

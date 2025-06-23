@@ -15,7 +15,8 @@ type StaticStringParser<
   & StringParser<
     Any,
     ParsingError<string>
-  >;
+  >
+;
 
 export type {
   StaticStringParser,
