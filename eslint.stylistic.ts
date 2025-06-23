@@ -49,6 +49,15 @@ const extraConfig: ConfigWithExtends = {
         allowAllPropertiesOnSameLine: false,
       },
     ],
+    '@stylistic/operator-linebreak': [
+      'error',
+      'before',
+      {
+        overrides: {
+          '=': 'after', // Prevents misalignment of `|` and `&` in union and intersection types
+        },
+      },
+    ],
   },
 };
 
