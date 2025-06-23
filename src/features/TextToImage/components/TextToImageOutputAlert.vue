@@ -6,7 +6,8 @@ import * as TextToImage from '@/features/TextToImage';
 
 type OutputError =
   | TextToImage.Server.ConnectionError
-  | TextToImage.Server.SpecificationError;
+  | TextToImage.Server.SpecificationError
+;
 
 defineProps<{
   error: OutputError;

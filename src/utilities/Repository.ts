@@ -1,12 +1,14 @@
 type Repository_Issue_Label =
   | 'bug'
   | 'enhancement'
-  | 'documentation';
+  | 'documentation'
+;
 
 type Repository_Issue_Type =
   | 'Feature'
   | 'Bug'
-  | 'Task';
+  | 'Task'
+;
 
 interface Repository_Issue {
   title: string;

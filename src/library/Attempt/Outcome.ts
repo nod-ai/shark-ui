@@ -136,7 +136,8 @@ type Attempt_Outcome<
   SomeActionableError extends ActionableError<string>,
 > =
   | Attempt_Success<SomeProduct>
-  | Attempt_Failure<SomeActionableError>;
+  | Attempt_Failure<SomeActionableError>
+;
 
 type ProductOf<
   SomeOutcome extends Attempt_Outcome<unknown, ActionableError<string>>,

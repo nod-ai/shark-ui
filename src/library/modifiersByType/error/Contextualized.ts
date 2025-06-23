@@ -7,7 +7,8 @@ type Contextualized<
   & SomeError
   & {
     cause: SomeCause;
-  };
+  }
+;
 
 interface Instantiable<Any> {
   [Symbol.hasInstance]: (value: unknown) => value is Any;
