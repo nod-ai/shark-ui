@@ -5,6 +5,7 @@ import type {
 import type {
   ActionableError,
 } from '../error';
+
 import {
   assertActionable,
 } from '../error/assertions';

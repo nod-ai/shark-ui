@@ -48,13 +48,19 @@ const extraConfig: ConfigWithExtends = {
             position: 'after',
           },
           {
-            pattern : '@/**', // Alias for "src/**"
+            pattern : '@/!{features}/**', // Alias for "src/**"
+            group   : 'internal',
+            position: 'after',
+          },
+          {
+            pattern : '@/features/**', // Highlights the business logic of the application
             group   : 'internal',
             position: 'after',
           },
         ],
-        'newlines-between': 'always-and-inside-groups',
-        'alphabetize'     : {
+        'newlines-between'  : 'always-and-inside-groups',
+        'consolidateIslands': 'inside-groups',
+        'alphabetize'       : {
           order: 'asc',
         },
       },

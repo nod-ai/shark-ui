@@ -1,6 +1,7 @@
 import type {
   TextToImageRequestBody,
 } from 'stabilityai-client-typescript/models/components';
+
 import type {
   GenerateFromTextRequest,
   GenerateFromTextResponse,
@@ -11,7 +12,6 @@ import {
 } from 'zod/v4';
 
 import HTTP from '@/library/HTTP';
-
 import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
 
 import {

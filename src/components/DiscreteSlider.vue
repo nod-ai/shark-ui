@@ -7,9 +7,11 @@ import {
 import {
   VBtn,
 } from 'vuetify/components/VBtn';
+
 import {
   VCard,
 } from 'vuetify/components/VCard';
+
 import {
   VSlider,
 } from 'vuetify/components/VSlider';

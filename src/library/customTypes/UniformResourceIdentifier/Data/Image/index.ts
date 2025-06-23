@@ -5,7 +5,6 @@ import type {
 } from '../DataURIBinaryEncoding.ts';
 
 import MediaType from '../MediaType';
-
 import DataURI from '../index.ts';
 
 import {
