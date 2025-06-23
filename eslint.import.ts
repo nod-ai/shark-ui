@@ -1,11 +1,10 @@
-// @ts-expect-error https://github.com/import-js/eslint-plugin-import/pull/3097
 import importPlugin from 'eslint-plugin-import';
 
 import type {
   ConfigWithExtends,
 } from 'typescript-eslint';
 
-const extraConfig = {
+const extraConfig: ConfigWithExtends = {
   name    : 'shark-ui/import',
   files   : ['**/*.{ts,vue}'],
   settings: {
