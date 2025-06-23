@@ -58,8 +58,9 @@ const extraConfig: ConfigWithExtends = {
             position: 'after',
           },
         ],
-        'newlines-between': 'always-and-inside-groups',
-        'alphabetize'     : {
+        'newlines-between'  : 'always-and-inside-groups',
+        'consolidateIslands': 'inside-groups',
+        'alphabetize'       : {
           order: 'asc',
         },
       },

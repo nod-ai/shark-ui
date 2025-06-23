@@ -1,5 +1,4 @@
 import Attempt from '@/library/Attempt';
-
 import NonTrivialString from '@/library/customTypes/NonTrivialString';
 
 import type {

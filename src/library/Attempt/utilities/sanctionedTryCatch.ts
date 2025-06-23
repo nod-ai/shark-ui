@@ -5,6 +5,7 @@ import {
 import {
   assertAppropriatelyThrown,
 } from '../error/assertions';
+
 import type {
   AppropriatelyThrown,
 } from '../error/modifier';

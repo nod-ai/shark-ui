@@ -3,12 +3,9 @@ import type {
 } from 'stabilityai-client-typescript/models/operations';
 
 import Attempt from '@/library/Attempt';
-
 import HTTP from '@/library/HTTP';
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
-
 import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
-
 import ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image/index.ts';
 
 import {
@@ -18,6 +15,7 @@ import {
 import type {
   Output,
 } from '@/features/TextToImage/types';
+
 import {
   Server,
 } from '@/features/TextToImage/webAPI';

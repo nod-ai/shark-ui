@@ -1,11 +1,14 @@
 import pluginVitest from '@vitest/eslint-plugin';
+
 import {
   defineConfigWithVueTs,
   vueTsConfigs,
 } from '@vue/eslint-config-typescript';
+
 // @ts-expect-error https://github.com/cypress-io/eslint-plugin-cypress/issues/232
 import pluginCypress from 'eslint-plugin-cypress';
 import pluginVue from 'eslint-plugin-vue';
+
 import tseslint, {
   type ConfigWithExtends,
 } from 'typescript-eslint';
