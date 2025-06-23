@@ -6,7 +6,7 @@ import type {
 
 import type {
   ActionableError,
-} from './error';
+} from '../error';
 
 // cspell:words sugarfree discriminable
 interface SyntacticallySugarfreeDiscriminableOutcome {
