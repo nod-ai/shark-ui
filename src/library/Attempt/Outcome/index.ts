@@ -1,35 +1,12 @@
 // cspell:words sugarfree discriminable
 
 import type {
-  Is,
-  If,
-  Not,
-} from '@/library/typeUtilities/Boolean';
-
-import type {
   ActionableError,
 } from '../error';
 
-interface SyntacticallySugarfreeDiscriminableOutcome {
-  readonly case: 'success' | 'failure';
-}
-
-interface DiscriminableOutcome<
-  SomeProduct,
-> extends SyntacticallySugarfreeDiscriminableOutcome {
-  readonly isSuccess: Is<this['case'], 'success'>;
-  readonly isFailure: Not<this['isSuccess']>;
-
-  optionallyUnwrap(): If<this['isSuccess'],
-    SomeProduct,
-    null
-  >;
-
-  forciblyUnwrap(): If<this['isSuccess'],
-    SomeProduct,
-    never
-  >;
-}
+import type {
+  DiscriminableOutcome,
+} from './Discriminable';
 
 interface SemanticallySugarfreeSuccess<SomeProduct> extends DiscriminableOutcome<SomeProduct> {
   readonly case: 'success';
