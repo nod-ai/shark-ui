@@ -3,8 +3,10 @@ import type {
 } from 'stabilityai-client-typescript/models/operations';
 
 import Attempt from '@/library/Attempt';
-import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence';
-import ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image';
+
+import {
+  toOutputImage,
+} from './StabilityAI_Client_Image';
 
 import {
   allSerialized,
@@ -40,16 +42,13 @@ const firstTextToImageOutput = (
     firstInferredRawImage === undefined
   ) return Attempt.abandon('Expected at least one raw image in response');
 
-  if (
-    firstInferredRawImage.base64 === undefined
-  ) return Attempt.abandon('Expected image data from first raw image');
-
-  const base64DataOfNewImage = Base64CharacterEncodedByteSequence.forciblyParsedFrom(firstInferredRawImage.base64);
-
-  const firstInferredOutputImage = {
-    uri        : new ImageURI('png', 'base64', base64DataOfNewImage),
+  const firstInferredOutputImage = toOutputImage(firstInferredRawImage, {
     description: allSerialized(givenInputText),
-  };
+  });
+
+  if (
+    firstInferredOutputImage === null
+  ) return Attempt.abandon('Expected at least one well-formed image in response');
 
   const firstInferredOutput = {
     image: firstInferredOutputImage,
