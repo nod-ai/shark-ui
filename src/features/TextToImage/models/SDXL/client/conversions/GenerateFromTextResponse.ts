@@ -48,15 +48,15 @@ const firstTextToImageOutput = (
 
   const inferredRawImages = givenResponse.result.artifacts;
 
-  if (
-    inferredRawImages === undefined
-  ) return Attempt.abandon('Expected raw image in response result');
-
   const inferredOutputs = inferredRawImages
-    .map($0 => toOutputImage($0, {
+    ?.map($0 => toOutputImage($0, {
       description: allSerialized(givenInputText),
     }))
     .map(toNullableOutput);
+
+  if (
+    inferredOutputs === undefined
+  ) return Attempt.abandon('Expected text-to-image output in response result');
 
   if (
     !hasAtLeastOne(inferredOutputs)
