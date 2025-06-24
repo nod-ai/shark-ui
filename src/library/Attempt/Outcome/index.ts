@@ -1,3 +1,5 @@
+// cspell:words sugarfree discriminable
+
 import type {
   Is,
   If,
@@ -8,7 +10,6 @@ import type {
   ActionableError,
 } from '../error';
 
-// cspell:words sugarfree discriminable
 interface SyntacticallySugarfreeDiscriminableOutcome {
   readonly case: 'success' | 'failure';
 }
