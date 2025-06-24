@@ -33,6 +33,34 @@ const toNullableOutput = (
   };
 };
 
+const textToImageOutputs = (
+  {
+    in: givenResponse,
+    inferredFrom: givenInputText,
+  }: {
+    in: GenerateFromTextResponse;
+    inferredFrom: Input['text'];
+  },
+): (Output | null)[] | null => {
+  if (
+    !('artifacts' in givenResponse.result)
+  ) return Attempt.abandon('Expected response body rather than readable stream');
+
+  const inferredRawImages = givenResponse.result.artifacts;
+
+  if (
+    inferredRawImages === undefined
+  ) return null;
+
+  const inferredOutputs = inferredRawImages
+    .map($0 => toOutputImage($0, {
+      description: allSerialized(givenInputText),
+    }))
+    .map(toNullableOutput);
+
+  return inferredOutputs;
+};
+
 const firstTextToImageOutput = (
   {
     in: givenResponse,
@@ -42,34 +70,6 @@ const firstTextToImageOutput = (
     inferredFrom: Input['text'];
   },
 ): Output => {
-  const textToImageOutputs = (
-    {
-      in: givenResponse,
-      inferredFrom: givenInputText,
-    }: {
-      in: GenerateFromTextResponse;
-      inferredFrom: Input['text'];
-    },
-  ): (Output | null)[] | null => {
-    if (
-      !('artifacts' in givenResponse.result)
-    ) return Attempt.abandon('Expected response body rather than readable stream');
-
-    const inferredRawImages = givenResponse.result.artifacts;
-
-    if (
-      inferredRawImages === undefined
-    ) return null;
-
-    const inferredOutputs = inferredRawImages
-      .map($0 => toOutputImage($0, {
-        description: allSerialized(givenInputText),
-      }))
-      .map(toNullableOutput);
-
-    return inferredOutputs;
-  };
-
   const inferredOutputs = textToImageOutputs({
     in          : givenResponse,
     inferredFrom: givenInputText,
