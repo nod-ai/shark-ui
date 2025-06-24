@@ -34,28 +34,28 @@ const firstTextToImageOutput = (
     inferredRawImages === undefined
   ) return Attempt.abandon('Expected raw image in response result');
 
-  const [soleInferredRawImage] = inferredRawImages;
+  const [firstInferredRawImage] = inferredRawImages;
 
   if (
-    soleInferredRawImage === undefined
+    firstInferredRawImage === undefined
   ) return Attempt.abandon('Expected at least one raw image in response');
 
   if (
-    soleInferredRawImage.base64 === undefined
-  ) return Attempt.abandon('Expected image data from sole raw image');
+    firstInferredRawImage.base64 === undefined
+  ) return Attempt.abandon('Expected image data from first raw image');
 
-  const base64DataOfNewImage = Base64CharacterEncodedByteSequence.forciblyParsedFrom(soleInferredRawImage.base64);
+  const base64DataOfNewImage = Base64CharacterEncodedByteSequence.forciblyParsedFrom(firstInferredRawImage.base64);
 
-  const soleInferredOutputImage = {
+  const firstInferredOutputImage = {
     uri        : new ImageURI('png', 'base64', base64DataOfNewImage),
     description: allSerialized(givenInputText),
   };
 
-  const soleInferredOutput = {
-    image: soleInferredOutputImage,
+  const firstInferredOutput = {
+    image: firstInferredOutputImage,
   };
 
-  return soleInferredOutput;
+  return firstInferredOutput;
 };
 
 export {
