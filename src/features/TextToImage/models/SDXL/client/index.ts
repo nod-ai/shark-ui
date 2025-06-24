@@ -118,9 +118,11 @@ const generateOutputFrom = async (
     description: allSerialized(given.textToImageRequestBody.textPrompts),
   };
 
-  return ends.inSuccessWith({
+  const soleGeneratedOutput = {
     image: newImage,
-  });
+  };
+
+  return ends.inSuccessWith(soleGeneratedOutput);
 });
 
 const SDXLTextToImageClient = {
