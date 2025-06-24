@@ -93,7 +93,7 @@ const generateOutputFrom = async (
 
   if (
     !('artifacts' in textToImageResponse.result)
-  ) return ends.inFlamesBecause('Expected response rather than readable stream');
+  ) return ends.inFlamesBecause('Expected response body rather than readable stream');
 
   const generatedArtifacts = textToImageResponse.result.artifacts;
 
