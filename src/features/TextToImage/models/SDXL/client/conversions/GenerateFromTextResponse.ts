@@ -5,6 +5,10 @@ import type {
 import Attempt from '@/library/Attempt';
 
 import {
+  hasAtLeastOne,
+} from '@/library/utilitiesByType/array';
+
+import {
   toOutputImage,
 } from './StabilityAI_Client_Image';
 
@@ -48,11 +52,11 @@ const firstTextToImageOutput = (
     inferredRawImages === undefined
   ) return Attempt.abandon('Expected raw image in response result');
 
-  const [firstInferredRawImage] = inferredRawImages;
-
   if (
-    firstInferredRawImage === undefined
+    !hasAtLeastOne(inferredRawImages)
   ) return Attempt.abandon('Expected at least one raw image in response');
+
+  const [firstInferredRawImage] = inferredRawImages;
 
   const firstInferredOutputImage = toOutputImage(firstInferredRawImage, {
     description: allSerialized(givenInputText),
