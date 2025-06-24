@@ -28,34 +28,34 @@ const firstTextToImageOutput = (
     !('artifacts' in givenResponse.result)
   ) return Attempt.abandon('Expected response body rather than readable stream');
 
-  const generatedRawImages = givenResponse.result.artifacts;
+  const inferredRawImages = givenResponse.result.artifacts;
 
   if (
-    generatedRawImages === undefined
+    inferredRawImages === undefined
   ) return Attempt.abandon('Expected raw image in response result');
 
-  const [soleGeneratedRawImage] = generatedRawImages;
+  const [soleInferredRawImage] = inferredRawImages;
 
   if (
-    soleGeneratedRawImage === undefined
+    soleInferredRawImage === undefined
   ) return Attempt.abandon('Expected at least one raw image in response');
 
   if (
-    soleGeneratedRawImage.base64 === undefined
+    soleInferredRawImage.base64 === undefined
   ) return Attempt.abandon('Expected image data from sole raw image');
 
-  const base64DataOfNewImage = Base64CharacterEncodedByteSequence.forciblyParsedFrom(soleGeneratedRawImage.base64);
+  const base64DataOfNewImage = Base64CharacterEncodedByteSequence.forciblyParsedFrom(soleInferredRawImage.base64);
 
-  const soleGeneratedOutputImage = {
+  const soleInferredOutputImage = {
     uri        : new ImageURI('png', 'base64', base64DataOfNewImage),
     description: allSerialized(givenInputText),
   };
 
-  const soleGeneratedOutput = {
-    image: soleGeneratedOutputImage,
+  const soleInferredOutput = {
+    image: soleInferredOutputImage,
   };
 
-  return soleGeneratedOutput;
+  return soleInferredOutput;
 };
 
 export {
