@@ -5,12 +5,10 @@ import type {
 import Attempt from '@/library/Attempt';
 import HTTP from '@/library/HTTP';
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
-import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
-import ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image/index.ts';
 
 import {
-  allSerialized,
-} from '@/features/TextToImage/models/SDXL/client/conversions/TextPrompt';
+  firstTextToImageOutput,
+} from './conversions/GenerateFromTextResponse';
 
 import type {
   Output,
@@ -91,36 +89,10 @@ const generateOutputFrom = async (
 
   const textToImageResponse = outcomeOfSettlingTextToImageResponse.unwrapped;
 
-  if (
-    !('artifacts' in textToImageResponse.result)
-  ) return ends.inFlamesBecause('Expected response body rather than readable stream');
-
-  const generatedArtifacts = textToImageResponse.result.artifacts;
-
-  if (
-    generatedArtifacts === undefined
-  ) return ends.inFlamesBecause('Expected artifacts in response result');
-
-  const [soleGeneratedArtifact] = generatedArtifacts;
-
-  if (
-    soleGeneratedArtifact === undefined
-  ) return ends.inFlamesBecause('Expected at least one artifact in response');
-
-  if (
-    soleGeneratedArtifact.base64 === undefined
-  ) return ends.inFlamesBecause('Expected image data from sole artifact');
-
-  const base64DataOfNewImage = Base64CharacterEncodedByteSequence.forciblyParsedFrom(soleGeneratedArtifact.base64);
-
-  const newImage = {
-    uri        : new ImageURI('png', 'base64', base64DataOfNewImage),
-    description: allSerialized(given.textToImageRequestBody.textPrompts),
-  };
-
-  const soleGeneratedOutput = {
-    image: newImage,
-  };
+  const soleGeneratedOutput = firstTextToImageOutput({
+    in          : textToImageResponse,
+    inferredFrom: given.textToImageRequestBody.textPrompts,
+  });
 
   return ends.inSuccessWith(soleGeneratedOutput);
 });
