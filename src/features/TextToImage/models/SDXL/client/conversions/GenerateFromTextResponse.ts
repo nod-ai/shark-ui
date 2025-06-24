@@ -42,7 +42,15 @@ const firstTextToImageOutput = (
     inferredFrom: Input['text'];
   },
 ): Output => {
-  const inferredOutputs = ((): (Output | null)[] | null => {
+  const inferredOutputs = ((
+    {
+      in: givenResponse,
+      inferredFrom: givenInputText,
+    }: {
+      in: GenerateFromTextResponse;
+      inferredFrom: Input['text'];
+    },
+  ): (Output | null)[] | null => {
     if (
       !('artifacts' in givenResponse.result)
     ) return Attempt.abandon('Expected response body rather than readable stream');
@@ -57,7 +65,10 @@ const firstTextToImageOutput = (
       ?? null;
 
     return inferredOutputs;
-  })();
+  })({
+    in          : givenResponse,
+    inferredFrom: givenInputText,
+  });
 
   if (
     inferredOutputs === null
