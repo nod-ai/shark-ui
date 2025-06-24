@@ -42,18 +42,22 @@ const firstTextToImageOutput = (
     inferredFrom: Input['text'];
   },
 ): Output => {
-  if (
-    !('artifacts' in givenResponse.result)
-  ) return Attempt.abandon('Expected response body rather than readable stream');
+  const inferredOutputs = ((): (Output | null)[] | null => {
+    if (
+      !('artifacts' in givenResponse.result)
+    ) return Attempt.abandon('Expected response body rather than readable stream');
 
-  const inferredRawImages = givenResponse.result.artifacts;
+    const inferredRawImages = givenResponse.result.artifacts;
 
-  const inferredOutputs = inferredRawImages
-    ?.map($0 => toOutputImage($0, {
-      description: allSerialized(givenInputText),
-    }))
-    .map(toNullableOutput)
-    ?? null;
+    const inferredOutputs = inferredRawImages
+      ?.map($0 => toOutputImage($0, {
+        description: allSerialized(givenInputText),
+      }))
+      .map(toNullableOutput)
+      ?? null;
+
+    return inferredOutputs;
+  })();
 
   if (
     inferredOutputs === null
