@@ -57,12 +57,15 @@ const firstTextToImageOutput = (
 
     const inferredRawImages = givenResponse.result.artifacts;
 
+    if (
+      inferredRawImages === undefined
+    ) return null;
+
     const inferredOutputs = inferredRawImages
-      ?.map($0 => toOutputImage($0, {
+      .map($0 => toOutputImage($0, {
         description: allSerialized(givenInputText),
       }))
-      .map(toNullableOutput)
-      ?? null;
+      .map(toNullableOutput);
 
     return inferredOutputs;
   })({
