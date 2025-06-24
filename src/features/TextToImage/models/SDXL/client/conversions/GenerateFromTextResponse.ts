@@ -52,10 +52,11 @@ const firstTextToImageOutput = (
     ?.map($0 => toOutputImage($0, {
       description: allSerialized(givenInputText),
     }))
-    .map(toNullableOutput);
+    .map(toNullableOutput)
+    ?? null;
 
   if (
-    inferredOutputs === undefined
+    inferredOutputs === null
   ) return Attempt.abandon('Expected text-to-image output in response result');
 
   if (
