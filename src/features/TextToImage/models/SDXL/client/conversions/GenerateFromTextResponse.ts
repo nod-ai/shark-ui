@@ -52,16 +52,16 @@ const firstTextToImageOutput = (
     inferredRawImages === undefined
   ) return Attempt.abandon('Expected raw image in response result');
 
+  const inferredOutputImages = inferredRawImages
+    .map($0 => toOutputImage($0, {
+      description: allSerialized(givenInputText),
+    }));
+
   if (
-    !hasAtLeastOne(inferredRawImages)
-  ) return Attempt.abandon('Expected at least one raw image in response');
+    !hasAtLeastOne(inferredOutputImages)
+  ) return Attempt.abandon('Expected at least one output image in response');
 
-  const [firstInferredRawImage] = inferredRawImages;
-
-  const firstInferredOutputImage = toOutputImage(firstInferredRawImage, {
-    description: allSerialized(givenInputText),
-  });
-
+  const [firstInferredOutputImage] = inferredOutputImages;
   const firstInferredOutput = toNullableOutput(firstInferredOutputImage);
 
   if (
