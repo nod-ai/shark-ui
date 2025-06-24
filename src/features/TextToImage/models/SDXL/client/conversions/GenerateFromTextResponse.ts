@@ -42,7 +42,7 @@ const firstTextToImageOutput = (
     inferredFrom: Input['text'];
   },
 ): Output => {
-  const inferredOutputs = ((
+  const textToImageOutputs = (
     {
       in: givenResponse,
       inferredFrom: givenInputText,
@@ -68,7 +68,9 @@ const firstTextToImageOutput = (
       .map(toNullableOutput);
 
     return inferredOutputs;
-  })({
+  };
+
+  const inferredOutputs = textToImageOutputs({
     in          : givenResponse,
     inferredFrom: givenInputText,
   });
