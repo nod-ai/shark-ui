@@ -17,6 +17,18 @@ import type {
   Output,
 } from '@/features/TextToImage/types';
 
+const toNullableOutput = (
+  givenImage: Output['image'] | null,
+): Output | null => {
+  if (
+    givenImage === null
+  ) return null;
+
+  return {
+    image: givenImage,
+  };
+};
+
 const firstTextToImageOutput = (
   {
     in: givenResponse,
@@ -46,13 +58,11 @@ const firstTextToImageOutput = (
     description: allSerialized(givenInputText),
   });
 
-  if (
-    firstInferredOutputImage === null
-  ) return Attempt.abandon('Expected at least one well-formed image in response');
+  const firstInferredOutput = toNullableOutput(firstInferredOutputImage);
 
-  const firstInferredOutput = {
-    image: firstInferredOutputImage,
-  };
+  if (
+    firstInferredOutput === null
+  ) return Attempt.abandon('Expected at least one well-formed text-to-image output in response');
 
   return firstInferredOutput;
 };
