@@ -30,7 +30,7 @@
     "@types/jsdom": "^21.1.7",
     "@types/lodash.clonedeep": "^4.5.9",
     "@types/node": "^24.0.3",
-    "@vitejs/plugin-vue": "^5.2.4",
+    "@vitejs/plugin-vue": "^6.0.0",
     "@vitest/eslint-plugin": "^1.2.7",
     "@vue/eslint-config-typescript": "^14.5.1",
     "@vue/test-utils": "^2.4.6",
