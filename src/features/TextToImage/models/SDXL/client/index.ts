@@ -23,11 +23,7 @@ const initializeShimmedStabilityAIClient = async (): Promise<
 > => {
   const outcomeOfRetrievingCurrentServer = await Server.retrieveCurrent();
 
-  if (
-    outcomeOfRetrievingCurrentServer.isFailure
-  ) return outcomeOfRetrievingCurrentServer;
-
-  const outcomeOfInitializingClient = outcomeOfRetrievingCurrentServer.rewrappedWith({
+  const outcomeOfInitializingClient = Attempt.Outcome.fromRewrapping(outcomeOfRetrievingCurrentServer, {
     product: textToImageServer => new ShimmedStabilityAIClient({
       serverURL: textToImageServer.origin,
     }),
