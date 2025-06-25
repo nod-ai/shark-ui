@@ -8,14 +8,16 @@ type Attempt_Outcome_Discriminant = 'success' | 'failure';
 
 // cspell:words sugarfree discriminable
 interface SyntacticallySugarfreeDiscriminableOutcome<
-  SomeDiscriminant extends Attempt_Outcome_Discriminant = Attempt_Outcome_Discriminant,
+  SomeDiscriminant extends Attempt_Outcome_Discriminant,
 > {
   readonly discriminant: SomeDiscriminant;
 }
 
 interface DiscriminableOutcome<
   SomeProduct,
-> extends SyntacticallySugarfreeDiscriminableOutcome {
+> extends SyntacticallySugarfreeDiscriminableOutcome<
+  Attempt_Outcome_Discriminant
+> {
   readonly isSuccess: Is<this['discriminant'], 'success'>;
   readonly isFailure: Not<this['isSuccess']>;
 
