@@ -14,8 +14,8 @@ interface SyntacticallySugarfreeDiscriminableOutcome<
 }
 
 interface DiscriminableOutcome<
-  SomePayload,
   SomeDiscriminant extends Attempt_Outcome_Discriminant,
+  SomePayload,
 > extends SyntacticallySugarfreeDiscriminableOutcome<
   SomeDiscriminant
 > {

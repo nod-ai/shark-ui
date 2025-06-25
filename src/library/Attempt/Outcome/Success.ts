@@ -7,8 +7,8 @@ import type {
 interface SemanticallySugarfreeSuccess<
   SomeProduct,
 > extends DiscriminableOutcome<
-  SomeProduct,
-  'success'
+  'success',
+  SomeProduct
 > {
   readonly product: SomeProduct;
 }
