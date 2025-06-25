@@ -46,13 +46,13 @@ const firstTextToImageOutput = (
 
   const base64DataOfNewImage = Base64CharacterEncodedByteSequence.forciblyParsedFrom(soleGeneratedArtifact.base64);
 
-  const newImage = {
+  const soleGeneratedOutputImage = {
     uri        : new ImageURI('png', 'base64', base64DataOfNewImage),
     description: allSerialized(givenInputText),
   };
 
   const soleGeneratedOutput = {
-    image: newImage,
+    image: soleGeneratedOutputImage,
   };
 
   return soleGeneratedOutput;
