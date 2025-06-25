@@ -12,11 +12,6 @@ import {
   successThatYielded,
 } from './Success';
 
-const Attempt_Outcome = {
-  failureDueTo,
-  successThatYielded,
-};
-
 type Attempt_Outcome<
   SomeProduct,
   SomeActionableError extends ActionableError<string>,
@@ -24,6 +19,11 @@ type Attempt_Outcome<
   | Attempt_Success<SomeProduct>
   | Attempt_Failure<SomeActionableError>
 ;
+
+const Attempt_Outcome = {
+  failureDueTo,
+  successThatYielded,
+};
 
 type ProductOf<
   SomeOutcome extends Attempt_Outcome<unknown, ActionableError<string>>,
