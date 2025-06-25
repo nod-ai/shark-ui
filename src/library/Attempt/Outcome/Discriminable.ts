@@ -15,8 +15,9 @@ interface SyntacticallySugarfreeDiscriminableOutcome<
 
 interface DiscriminableOutcome<
   SomePayload,
+  SomeDiscriminant extends Attempt_Outcome_Discriminant = Attempt_Outcome_Discriminant,
 > extends SyntacticallySugarfreeDiscriminableOutcome<
-  Attempt_Outcome_Discriminant
+  SomeDiscriminant
 > {
   readonly isSuccess: Is<this['discriminant'], 'success'>;
   readonly isFailure: Not<this['isSuccess']>;
