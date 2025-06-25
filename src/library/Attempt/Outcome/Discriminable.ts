@@ -14,7 +14,7 @@ interface SyntacticallySugarfreeDiscriminableOutcome<
 }
 
 interface DiscriminableOutcome<
-  SomeProduct,
+  SomePayload,
 > extends SyntacticallySugarfreeDiscriminableOutcome<
   Attempt_Outcome_Discriminant
 > {
@@ -22,12 +22,12 @@ interface DiscriminableOutcome<
   readonly isFailure: Not<this['isSuccess']>;
 
   optionallyUnwrap(): If<this['isSuccess'],
-    SomeProduct,
+    SomePayload,
     null
   >;
 
   forciblyUnwrap(): If<this['isSuccess'],
-    SomeProduct,
+    SomePayload,
     never
   >;
 }
