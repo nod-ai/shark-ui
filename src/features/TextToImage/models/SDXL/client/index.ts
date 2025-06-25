@@ -79,11 +79,7 @@ const generateOutputFrom = async (
     },
   });
 
-  if (
-    outcomeOfSettlingTextToImageResponse.isFailure
-  ) return outcomeOfSettlingTextToImageResponse;
-
-  const outcomeOfSettlingSoleTextToImageOutput = outcomeOfSettlingTextToImageResponse.rewrappedWith({
+  const outcomeOfSettlingSoleTextToImageOutput = Attempt.Outcome.fromRewrapping(outcomeOfSettlingTextToImageResponse, {
     product: textToImageResponse => firstTextToImageOutput({
       in          : textToImageResponse,
       inferredFrom: given.textToImageRequestBody.textPrompts,
