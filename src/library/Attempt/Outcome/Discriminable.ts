@@ -4,9 +4,11 @@ import type {
   Not,
 } from '@/library/typeUtilities/Boolean';
 
+type Attempt_Outcome_Discriminant = 'success' | 'failure';
+
 // cspell:words sugarfree discriminable
 interface SyntacticallySugarfreeDiscriminableOutcome {
-  readonly discriminant: 'success' | 'failure';
+  readonly discriminant: Attempt_Outcome_Discriminant;
 }
 
 interface DiscriminableOutcome<
