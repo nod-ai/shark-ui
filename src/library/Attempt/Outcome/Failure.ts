@@ -13,7 +13,7 @@ interface SemanticallySugarfreeFailure<
 > extends DiscriminableOutcome<
   unknown
 > {
-  readonly case: 'failure';
+  readonly discriminant: 'failure';
   readonly cause: SomeActionableError;
 }
 
@@ -47,7 +47,7 @@ const failureDueTo = <
 >(
   givenCause: SomeActionableError,
 ): Attempt_Failure<SomeActionableError> => ({
-  case            : 'failure',
+  discriminant    : 'failure',
   cause           : givenCause,
   isSuccess       : false,
   isFailure       : true,

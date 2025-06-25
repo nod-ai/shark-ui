@@ -9,7 +9,7 @@ interface SemanticallySugarfreeSuccess<
 > extends DiscriminableOutcome<
   SomeProduct
 > {
-  readonly case: 'success';
+  readonly discriminant: 'success';
   readonly product: SomeProduct;
 }
 
@@ -55,7 +55,7 @@ const successThatYielded = <
 >(
   givenProduct: SomeProduct,
 ): Attempt_Success<SomeProduct> => ({
-  case            : 'success',
+  discriminant    : 'success',
   product         : givenProduct,
   isSuccess       : true,
   isFailure       : false,

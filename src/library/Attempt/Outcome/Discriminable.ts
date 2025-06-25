@@ -6,13 +6,13 @@ import type {
 
 // cspell:words sugarfree discriminable
 interface SyntacticallySugarfreeDiscriminableOutcome {
-  readonly case: 'success' | 'failure';
+  readonly discriminant: 'success' | 'failure';
 }
 
 interface DiscriminableOutcome<
   SomeProduct,
 > extends SyntacticallySugarfreeDiscriminableOutcome {
-  readonly isSuccess: Is<this['case'], 'success'>;
+  readonly isSuccess: Is<this['discriminant'], 'success'>;
   readonly isFailure: Not<this['isSuccess']>;
 
   optionallyUnwrap(): If<this['isSuccess'],
