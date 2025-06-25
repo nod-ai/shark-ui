@@ -57,12 +57,13 @@ const firstTextToImageOutput = (
       description: allSerialized(givenInputText),
     }));
 
-  if (
-    !hasAtLeastOne(inferredOutputImages)
-  ) return Attempt.abandon('Expected at least one output image in response');
+  const inferredOutputs = inferredOutputImages.map(toNullableOutput);
 
-  const [firstInferredOutputImage] = inferredOutputImages;
-  const firstInferredOutput = toNullableOutput(firstInferredOutputImage);
+  if (
+    !hasAtLeastOne(inferredOutputs)
+  ) return Attempt.abandon('Expected at least one text-to-image output in response');
+
+  const [firstInferredOutput] = inferredOutputs;
 
   if (
     firstInferredOutput === null
