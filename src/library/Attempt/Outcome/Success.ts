@@ -4,12 +4,16 @@ import type {
   DiscriminableOutcome,
 } from './Discriminable';
 
-interface SemanticallySugarfreeSuccess<SomeProduct> extends DiscriminableOutcome<SomeProduct> {
+interface SemanticallySugarfreeSuccess<
+  SomeProduct,
+> extends DiscriminableOutcome<SomeProduct> {
   readonly case: 'success';
   readonly product: SomeProduct;
 }
 
-interface Attempt_Success<SomeProduct> extends SemanticallySugarfreeSuccess<SomeProduct> {
+interface Attempt_Success<
+  SomeProduct,
+> extends SemanticallySugarfreeSuccess<SomeProduct> {
   /**
    * Access the product nested within a successful outcome.
    *
