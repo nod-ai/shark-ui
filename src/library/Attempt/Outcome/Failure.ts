@@ -11,9 +11,9 @@ import type {
 interface SemanticallySugarfreeFailure<
   SomeActionableError extends ActionableError<string>,
 > extends DiscriminableOutcome<
-  unknown
+  unknown,
+  'failure'
 > {
-  readonly discriminant: 'failure';
   readonly cause: SomeActionableError;
 }
 
