@@ -12,7 +12,7 @@ interface SemanticallySugarfreeFailure<
   SomeActionableError extends ActionableError<string>,
 > extends DiscriminableOutcome<
   'failure',
-  unknown
+  SomeActionableError
 > {
   readonly cause: SomeActionableError;
 }
