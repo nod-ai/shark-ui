@@ -1,6 +1,7 @@
 import Attempt from '@/library/Attempt';
 
-class TextToImage_Server_ConnectionError extends Attempt.ActionableError<'TextToImage_ServerConnectionError'> {
+class TextToImage_Server_ConnectionError
+  extends Attempt.ActionableError<'TextToImage_ServerConnectionError'> {
   public constructor(
     public readonly endpoint: URL,
   ) {

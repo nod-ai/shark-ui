@@ -17,7 +17,8 @@ import MediaType from './MediaType';
 import DataURI_ParsingError from './ParsingError.ts';
 
 /** See [RFC 2397](https://datatracker.ietf.org/doc/rfc2397) for more info */
-class DataURI extends UniformResourceIdentifier {
+class DataURI
+  extends UniformResourceIdentifier {
   public static readonly scheme = NonTrivialString.parsedFrom('data').forciblyUnwrap();
   public static readonly encodingPrefix = ';';
   public static readonly dataPrefix = ',';

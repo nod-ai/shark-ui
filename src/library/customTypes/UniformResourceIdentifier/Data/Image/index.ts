@@ -14,7 +14,8 @@ import {
 
 import ImageURI_ParsingError from './ParsingError.ts';
 
-class ImageURI extends DataURI {
+class ImageURI
+  extends DataURI {
   public static readonly mediaType = 'image';
 
   private readonly _format: ImageURIFormat;

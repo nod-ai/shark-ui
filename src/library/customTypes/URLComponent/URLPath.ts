@@ -10,7 +10,8 @@ import type {
 
 import StringSubset from '@/library/customTypes/StringSubset.ts';
 
-class URLPath_ParsingError extends ParsingError<'URLPath'> {
+class URLPath_ParsingError
+  extends ParsingError<'URLPath'> {
   public constructor(given: {
     expectation: string;
     reality: string;
