@@ -7,8 +7,10 @@ import type {
 type Attempt_Outcome_Discriminant = 'success' | 'failure';
 
 // cspell:words sugarfree discriminable
-interface SyntacticallySugarfreeDiscriminableOutcome {
-  readonly discriminant: Attempt_Outcome_Discriminant;
+interface SyntacticallySugarfreeDiscriminableOutcome<
+  SomeDiscriminant extends Attempt_Outcome_Discriminant = Attempt_Outcome_Discriminant,
+> {
+  readonly discriminant: SomeDiscriminant;
 }
 
 interface DiscriminableOutcome<
