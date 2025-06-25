@@ -8,7 +8,9 @@ import type {
 abstract class StringSubset<
   SomeBrand extends string,
 > extends String
-  implements Branded<SomeBrand> {
+  implements Branded<
+  SomeBrand
+> {
   public readonly brand!: SomeBrand;
 }
 

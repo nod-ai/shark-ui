@@ -20,7 +20,9 @@ type FileType = (typeof allFileTypes)[number];
 
 /** See [RFC 2045](https://datatracker.ietf.org/doc/html/rfc2045) for more information */
 class MediaType
-implements StringForciblyParsable<typeof MediaType> {
+implements StringForciblyParsable<
+  typeof MediaType
+> {
   public constructor(
     public fileType: FileType,
     public tree: string[] | null,

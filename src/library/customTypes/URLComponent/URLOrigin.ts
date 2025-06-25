@@ -26,7 +26,9 @@ class URLOrigin_ParsingError
 class URLOrigin
   extends StringSubset<
   'URLOrigin'
-> implements StringParsable<typeof URLOrigin> {
+> implements StringParsable<
+  typeof URLOrigin
+> {
   public static parsedFrom = (
     givenSubject: string,
   ): Attempt.Outcome<URLOrigin, URLOrigin_ParsingError> => Attempt.that((ends) => {

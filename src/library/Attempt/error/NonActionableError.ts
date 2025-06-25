@@ -16,7 +16,9 @@ interface NonActionableError_Options
  */
 class NonActionableError
   extends Error
-  implements Branded<'NonActionableError'> {
+  implements Branded<
+  'NonActionableError'
+> {
   public readonly brand!: 'NonActionableError';
 
   protected constructor(

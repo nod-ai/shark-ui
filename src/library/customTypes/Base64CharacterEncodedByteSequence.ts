@@ -16,7 +16,9 @@ import StringSubset from './StringSubset.ts';
 class Base64CharacterEncodedByteSequence
   extends StringSubset<
   'Base64CharacterEncodedByteSequence'
-> implements StringForciblyParsable<typeof Base64CharacterEncodedByteSequence> {
+> implements StringForciblyParsable<
+  typeof Base64CharacterEncodedByteSequence
+> {
   public static paddingCharacter = '=';
 
   private static readonly byteCofactor = Byte.cofactorTo(Base64.bitWidth);

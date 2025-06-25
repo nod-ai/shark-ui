@@ -26,7 +26,9 @@ class URLPath_ParsingError
 class URLPath
   extends StringSubset<
   'URLPath'
-> implements StringParsable<typeof URLPath> {
+> implements StringParsable<
+  typeof URLPath
+> {
   public static parsedFrom = (
     givenSubject: string,
   ): Attempt.Outcome<URLPath, URLPath_ParsingError> => Attempt.that((ends) => {

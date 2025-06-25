@@ -10,7 +10,9 @@ import {
 abstract class ActionableError<
   SomeBrand extends string,
 > extends Error
-  implements Branded<SomeBrand> {
+  implements Branded<
+  SomeBrand
+> {
   public readonly brand!: SomeBrand;
 
   public throwAnyway = (
