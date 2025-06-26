@@ -2,11 +2,16 @@
 
 import type {
   ActionableError,
-} from '../error';
+} from '../../error';
 
 import type {
   DiscriminableOutcome,
-} from './Discriminable';
+} from '../Discriminable';
+
+import {
+  type Attempt_Failure_Transformer,
+  causeIdentity,
+} from './Transformer';
 
 interface SemanticallySugarfreeFailure<
   SomeActionableError extends ActionableError<string>,
@@ -40,6 +45,15 @@ interface Attempt_Failure<
    * ```
    */
   readonly causeOfFailure: this['cause'];
+
+  rewrappedWith<
+    TransformedActionableError extends ActionableError<string> = SomeActionableError,
+  >(
+    given?: Attempt_Failure_Transformer<
+      SomeActionableError,
+      TransformedActionableError
+    >
+  ): Attempt_Failure<TransformedActionableError>;
 }
 
 const failureDueTo = <
@@ -54,9 +68,24 @@ const failureDueTo = <
   optionallyUnwrap: () => null,
   forciblyUnwrap  : () => givenCause.throwAnyway('Unexpected forceful unwrap of a failure'),
   causeOfFailure  : givenCause,
+  rewrappedWith   : <
+    TransformedActionableError extends ActionableError<string>,
+  >(
+    {
+      cause: transformed,
+    } = {
+      cause: causeIdentity<SomeActionableError, TransformedActionableError>,
+    },
+  ) => {
+    const transformedCause = transformed(givenCause);
+    const transformedFailure = failureDueTo(transformedCause);
+    return transformedFailure;
+  },
 });
 
 export {
   type Attempt_Failure,
+  type Attempt_Failure_Transformer,
   failureDueTo,
+  causeIdentity,
 };

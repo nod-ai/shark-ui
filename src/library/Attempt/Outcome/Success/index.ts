@@ -2,7 +2,12 @@
 
 import type {
   DiscriminableOutcome,
-} from './Discriminable';
+} from '../Discriminable';
+
+import {
+  type Attempt_Success_Transformer,
+  productIdentity,
+} from './Transformer';
 
 interface SemanticallySugarfreeSuccess<
   SomeProduct,
@@ -48,6 +53,15 @@ interface Attempt_Success<
    * ```
    */
   readonly unwrapped: this['product'];
+
+  rewrappedWith<
+    TransformedProduct = SomeProduct,
+  >(
+    given?: Attempt_Success_Transformer<
+      SomeProduct,
+      TransformedProduct
+    >
+  ): Attempt_Success<TransformedProduct>;
 }
 
 const successThatYielded = <
@@ -62,9 +76,24 @@ const successThatYielded = <
   optionallyUnwrap: () => givenProduct,
   forciblyUnwrap  : () => givenProduct,
   unwrapped       : givenProduct,
+  rewrappedWith   : <
+    TransformedProduct,
+  >(
+    {
+      product: transformed,
+    } = {
+      product: productIdentity<SomeProduct, TransformedProduct>,
+    },
+  ) => {
+    const transformedProduct = transformed(givenProduct);
+    const transformedSuccess = successThatYielded(transformedProduct);
+    return transformedSuccess;
+  },
 });
 
 export {
   type Attempt_Success,
+  type Attempt_Success_Transformer,
   successThatYielded,
+  productIdentity,
 };
