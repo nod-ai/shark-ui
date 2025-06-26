@@ -4,6 +4,11 @@ import type {
   DiscriminableOutcome,
 } from '../Discriminable';
 
+import {
+  type Attempt_Success_Transformer,
+  productIdentity,
+} from './Transformer';
+
 interface SemanticallySugarfreeSuccess<
   SomeProduct,
 > extends DiscriminableOutcome<
@@ -66,5 +71,7 @@ const successThatYielded = <
 
 export {
   type Attempt_Success,
+  type Attempt_Success_Transformer,
   successThatYielded,
+  productIdentity,
 };

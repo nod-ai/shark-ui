@@ -8,6 +8,11 @@ import type {
   DiscriminableOutcome,
 } from '../Discriminable';
 
+import {
+  type Attempt_Failure_Transformer,
+  causeIdentity,
+} from './Transformer';
+
 interface SemanticallySugarfreeFailure<
   SomeActionableError extends ActionableError<string>,
 > extends DiscriminableOutcome<
@@ -58,5 +63,7 @@ const failureDueTo = <
 
 export {
   type Attempt_Failure,
+  type Attempt_Failure_Transformer,
   failureDueTo,
+  causeIdentity,
 };
