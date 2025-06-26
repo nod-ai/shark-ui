@@ -1,5 +1,5 @@
 import Attempt from '@/library/Attempt';
-import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
+import Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
 import NonTrivialString from '@/library/customTypes/NonTrivialString';
 
 import {
