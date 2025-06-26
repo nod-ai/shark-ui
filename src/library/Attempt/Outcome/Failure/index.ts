@@ -2,11 +2,11 @@
 
 import type {
   ActionableError,
-} from '../error';
+} from '../../error';
 
 import type {
   DiscriminableOutcome,
-} from './Discriminable';
+} from '../Discriminable';
 
 interface SemanticallySugarfreeFailure<
   SomeActionableError extends ActionableError<string>,
