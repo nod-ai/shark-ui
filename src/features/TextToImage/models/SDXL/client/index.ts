@@ -18,24 +18,23 @@ import {
   Server,
 } from '@/features/TextToImage/webAPI';
 
-const initializeShimmedStabilityAIClient = (): Promise<
+const initializeShimmedStabilityAIClient = async (): Promise<
   Attempt.Outcome<ShimmedStabilityAIClient, Server.SpecificationError>
-> => Attempt.thatEventually(async (ends) => {
+> => {
   const outcomeOfRetrievingCurrentServer = await Server.retrieveCurrent();
 
   if (
     outcomeOfRetrievingCurrentServer.isFailure
   ) return outcomeOfRetrievingCurrentServer;
 
-  const textToImageServer = outcomeOfRetrievingCurrentServer.unwrapped;
-
-  const newClient = new ShimmedStabilityAIClient({
-    serverURL: textToImageServer.origin,
+  const outcomeOfInitializingClient = outcomeOfRetrievingCurrentServer.rewrappedWith({
+    product: textToImageServer => new ShimmedStabilityAIClient({
+      serverURL: textToImageServer.origin,
+    }),
   });
 
-  const outcomeOfInitializingClient = ends.inSuccessWith(newClient);
   return outcomeOfInitializingClient;
-});
+};
 
 type OutcomeOfGeneratingTextToImageOutput = Attempt.Outcome<Output,
   | Server.ConnectionError
