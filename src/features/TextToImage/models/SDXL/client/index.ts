@@ -33,7 +33,8 @@ const initializeShimmedStabilityAIClient = (): Promise<
     serverURL: textToImageServer.origin,
   });
 
-  return ends.inSuccessWith(newClient);
+  const outcomeOfInitializingClient = ends.inSuccessWith(newClient);
+  return outcomeOfInitializingClient;
 });
 
 type OutcomeOfGeneratingTextToImageOutput = Attempt.Outcome<Output,
