@@ -55,7 +55,7 @@ class Base64CharacterEncodedByteSequence
       product: $0 => new this($0 + padding),
     });
 
-    return outcomeOfParsingByteSequence.forciblyUnwrap();
+    return outcomeOfParsingByteSequence.forciblyUnwrap(/* TODO: enable safe error propagation */);
   };
 }
 
