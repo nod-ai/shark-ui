@@ -195,11 +195,11 @@ implements StringForciblyParsable<
     })();
 
     return new UniformResourceIdentifier(
-      NonTrivialString.parsedFrom(scheme).forciblyUnwrap(),
-      NonTrivialString.nullableParsedFrom(authority).forciblyUnwrap(),
-      NonTrivialString.parsedFrom(path).forciblyUnwrap(),
-      NonTrivialString.nullableParsedFrom(query).forciblyUnwrap(),
-      NonTrivialString.nullableParsedFrom(fragment).forciblyUnwrap(),
+      NonTrivialString.parsedFrom(scheme).forciblyUnwrap(/* TODO: move closer to declaration */),
+      NonTrivialString.nullableParsedFrom(authority).forciblyUnwrap(/* TODO: move closer to declaration */),
+      NonTrivialString.parsedFrom(path).forciblyUnwrap(/* TODO: move closer to declaration */),
+      NonTrivialString.nullableParsedFrom(query).forciblyUnwrap(/* TODO: move closer to declaration */),
+      NonTrivialString.nullableParsedFrom(fragment).forciblyUnwrap(/* TODO: move closer to declaration */),
     );
   };
 }
