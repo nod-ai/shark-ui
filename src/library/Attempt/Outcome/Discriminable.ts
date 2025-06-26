@@ -4,6 +4,10 @@ import type {
   Not,
 } from '@/library/typeUtilities/Boolean';
 
+import type {
+  ActionableError,
+} from '../error';
+
 type Attempt_Outcome_Discriminant = 'success' | 'failure';
 
 // cspell:words sugarfree discriminable
@@ -15,7 +19,11 @@ interface SyntacticallySugarfreeDiscriminableOutcome<
 
 interface DiscriminableOutcome<
   SomeDiscriminant extends Attempt_Outcome_Discriminant,
-  SomePayload,
+  SomePayload extends (
+    SomeDiscriminant extends 'success'
+      ? unknown
+      : ActionableError<string>
+  ),
 > extends SyntacticallySugarfreeDiscriminableOutcome<
   SomeDiscriminant
 > {
