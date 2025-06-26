@@ -1,3 +1,4 @@
+import Attempt from '@/library/Attempt';
 import * as Base64 from '@/library/Base64';
 import * as Byte from '@/library/Byte';
 import StringSubset from '@/library/customTypes/StringSubset';
@@ -48,9 +49,13 @@ class Base64CharacterEncodedByteSequence
     }).forciblyUnwrap();
 
     const [byteEncodableCharacters, padding] = this.withPaddingDecoupled(paddedByteEncodableCharacters);
-    const base64ByteEncodableCharacters = Base64.CharacterSequence.ensureConformanceOf(byteEncodableCharacters).forciblyUnwrap();
-    const base64CharacterEncodedByteSequence = base64ByteEncodableCharacters + padding;
-    return new this(base64CharacterEncodedByteSequence);
+    const outcomeOfEnsuringConformantCharacters = Base64.CharacterSequence.ensureConformanceOf(byteEncodableCharacters);
+
+    const outcomeOfParsingByteSequence = Attempt.Outcome.fromRewrapping(outcomeOfEnsuringConformantCharacters, {
+      product: $0 => new this($0 + padding),
+    });
+
+    return outcomeOfParsingByteSequence.forciblyUnwrap();
   };
 }
 
