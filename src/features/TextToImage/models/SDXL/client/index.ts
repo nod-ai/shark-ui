@@ -94,7 +94,8 @@ const generateOutputFrom = async (
     inferredFrom: given.textToImageRequestBody.textPrompts,
   });
 
-  return ends.inSuccessWith(soleGeneratedOutput);
+  const outcomeOfSettlingSoleTextToImageOutput = ends.inSuccessWith(soleGeneratedOutput);
+  return outcomeOfSettlingSoleTextToImageOutput;
 });
 
 const SDXLTextToImageClient = {
