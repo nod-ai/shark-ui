@@ -4,24 +4,31 @@ import type {
   Not,
 } from '@/library/typeUtilities/Boolean';
 
+type Attempt_Outcome_Discriminant = 'success' | 'failure';
+
 // cspell:words sugarfree discriminable
-interface SyntacticallySugarfreeDiscriminableOutcome {
-  readonly case: 'success' | 'failure';
+interface SyntacticallySugarfreeDiscriminableOutcome<
+  SomeDiscriminant extends Attempt_Outcome_Discriminant,
+> {
+  readonly discriminant: SomeDiscriminant;
 }
 
 interface DiscriminableOutcome<
-  SomeProduct,
-> extends SyntacticallySugarfreeDiscriminableOutcome {
-  readonly isSuccess: Is<this['case'], 'success'>;
+  SomeDiscriminant extends Attempt_Outcome_Discriminant,
+  SomePayload,
+> extends SyntacticallySugarfreeDiscriminableOutcome<
+  SomeDiscriminant
+> {
+  readonly isSuccess: Is<this['discriminant'], 'success'>;
   readonly isFailure: Not<this['isSuccess']>;
 
   optionallyUnwrap(): If<this['isSuccess'],
-    SomeProduct,
+    SomePayload,
     null
   >;
 
   forciblyUnwrap(): If<this['isSuccess'],
-    SomeProduct,
+    SomePayload,
     never
   >;
 }

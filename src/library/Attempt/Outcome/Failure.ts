@@ -11,9 +11,9 @@ import type {
 interface SemanticallySugarfreeFailure<
   SomeActionableError extends ActionableError<string>,
 > extends DiscriminableOutcome<
+  'failure',
   unknown
 > {
-  readonly case: 'failure';
   readonly cause: SomeActionableError;
 }
 
@@ -47,7 +47,7 @@ const failureDueTo = <
 >(
   givenCause: SomeActionableError,
 ): Attempt_Failure<SomeActionableError> => ({
-  case            : 'failure',
+  discriminant    : 'failure',
   cause           : givenCause,
   isSuccess       : false,
   isFailure       : true,
