@@ -2,7 +2,7 @@
 
 import type {
   DiscriminableOutcome,
-} from './Discriminable';
+} from '../Discriminable';
 
 interface SemanticallySugarfreeSuccess<
   SomeProduct,
