@@ -23,11 +23,7 @@ const initializeShimmedStabilityAIClient = async (): Promise<
 > => {
   const outcomeOfRetrievingCurrentServer = await Server.retrieveCurrent();
 
-  if (
-    outcomeOfRetrievingCurrentServer.isFailure
-  ) return outcomeOfRetrievingCurrentServer;
-
-  const outcomeOfInitializingClient = outcomeOfRetrievingCurrentServer.rewrappedWith({
+  const outcomeOfInitializingClient = Attempt.Outcome.fromRewrapping(outcomeOfRetrievingCurrentServer, {
     product: textToImageServer => new ShimmedStabilityAIClient({
       serverURL: textToImageServer.origin,
     }),
@@ -83,11 +79,7 @@ const generateOutputFrom = async (
     },
   });
 
-  if (
-    outcomeOfSettlingTextToImageResponse.isFailure
-  ) return outcomeOfSettlingTextToImageResponse;
-
-  const outcomeOfSettlingSoleTextToImageOutput = outcomeOfSettlingTextToImageResponse.rewrappedWith({
+  const outcomeOfSettlingSoleTextToImageOutput = Attempt.Outcome.fromRewrapping(outcomeOfSettlingTextToImageResponse, {
     product: textToImageResponse => firstTextToImageOutput({
       in          : textToImageResponse,
       inferredFrom: given.textToImageRequestBody.textPrompts,
