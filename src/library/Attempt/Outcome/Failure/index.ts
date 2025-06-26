@@ -45,6 +45,15 @@ interface Attempt_Failure<
    * ```
    */
   readonly causeOfFailure: this['cause'];
+
+  rewrappedWith<
+    TransformedActionableError extends ActionableError<string> = SomeActionableError,
+  >(
+    given?: Attempt_Failure_Transformer<
+      SomeActionableError,
+      TransformedActionableError
+    >
+  ): Attempt_Failure<TransformedActionableError>;
 }
 
 const failureDueTo = <
@@ -59,6 +68,19 @@ const failureDueTo = <
   optionallyUnwrap: () => null,
   forciblyUnwrap  : () => givenCause.throwAnyway('Unexpected forceful unwrap of a failure'),
   causeOfFailure  : givenCause,
+  rewrappedWith   : <
+    TransformedActionableError extends ActionableError<string>,
+  >(
+    {
+      cause: transformed,
+    } = {
+      cause: causeIdentity<SomeActionableError, TransformedActionableError>,
+    },
+  ) => {
+    const transformedCause = transformed(givenCause);
+    const transformedFailure = failureDueTo(transformedCause);
+    return transformedFailure;
+  },
 });
 
 export {

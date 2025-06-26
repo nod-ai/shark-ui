@@ -39,6 +39,14 @@ interface DiscriminableOutcome<
     SomePayload,
     never
   >;
+
+  rewrappedWith<
+    TransformedPayload extends (
+      SomeDiscriminant extends 'success'
+        ? unknown
+        : ActionableError<string>
+    ) = SomePayload,
+  >(): DiscriminableOutcome<SomeDiscriminant, TransformedPayload>;
 }
 
 export type {
