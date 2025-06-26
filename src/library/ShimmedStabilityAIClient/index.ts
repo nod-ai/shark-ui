@@ -11,8 +11,8 @@ import {
   z,
 } from 'zod/v4';
 
+import Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
 import HTTP from '@/library/HTTP';
-import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
 
 import {
   URLOrigin,

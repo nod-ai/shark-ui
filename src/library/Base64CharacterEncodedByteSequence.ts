@@ -1,5 +1,6 @@
 import * as Base64 from '@/library/Base64';
 import * as Byte from '@/library/Byte';
+import StringSubset from '@/library/customTypes/StringSubset';
 
 import type {
   StringForciblyParsable,
@@ -9,8 +10,6 @@ import {
   droppingLastCharacter,
   lastCharacterOf,
 } from '@/library/utilitiesByType/string.ts';
-
-import StringSubset from './StringSubset.ts';
 
 /** See [RFC 4648 Section 4](https://www.rfc-editor.org/rfc/rfc4648.html#section-4) for more information */
 class Base64CharacterEncodedByteSequence
