@@ -29,7 +29,6 @@ import {
   VSkeletonLoader,
 } from 'vuetify/components/VSkeletonLoader';
 
-import Attempt from '@/library/Attempt';
 import SDXLDiffusionStepCount from '@/library/ShimmedStabilityAIClient/models/SDXLDiffusionStepCount.ts';
 
 import DiscreteSlider from '@/components/DiscreteSlider.vue';
@@ -66,7 +65,7 @@ const imageGeneration = useStatefulAttemptThatEventually(async (ends) => {
     },
   });
 
-  const outcomeOfGeneratingImage = Attempt.Outcome.fromRewrapping(outcomeOfGeneratingOutput, {
+  const outcomeOfGeneratingImage = ends.inTermsOf(outcomeOfGeneratingOutput, {
     product: $0 => $0.image,
   });
 
