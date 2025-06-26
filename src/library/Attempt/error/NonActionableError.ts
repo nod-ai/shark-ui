@@ -2,7 +2,8 @@ import type {
   Branded,
 } from '@/library/typeUtilities/Branded';
 
-interface NonActionableError_Options extends ErrorOptions {
+interface NonActionableError_Options
+  extends ErrorOptions {
   /** A function that's acting as an alternative to raw `throw` */
   thrower?: (...parameters: any[]) => unknown; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
@@ -15,7 +16,9 @@ interface NonActionableError_Options extends ErrorOptions {
  */
 class NonActionableError
   extends Error
-  implements Branded<'NonActionableError'> {
+  implements Branded<
+  'NonActionableError'
+> {
   public readonly brand!: 'NonActionableError';
 
   protected constructor(

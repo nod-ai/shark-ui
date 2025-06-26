@@ -10,7 +10,10 @@ import type {
 
 import StringSubset from '@/library/customTypes/StringSubset.ts';
 
-class URLOrigin_ParsingError extends ParsingError<'URLOrigin'> {
+class URLOrigin_ParsingError
+  extends ParsingError<
+  'URLOrigin'
+> {
   public constructor(given: {
     expectation: string;
     reality: string;
@@ -21,8 +24,11 @@ class URLOrigin_ParsingError extends ParsingError<'URLOrigin'> {
 }
 
 class URLOrigin
-  extends StringSubset<'URLOrigin'>
-  implements StringParsable<typeof URLOrigin> {
+  extends StringSubset<
+  'URLOrigin'
+> implements StringParsable<
+  typeof URLOrigin
+> {
   public static parsedFrom = (
     givenSubject: string,
   ): Attempt.Outcome<URLOrigin, URLOrigin_ParsingError> => Attempt.that((ends) => {

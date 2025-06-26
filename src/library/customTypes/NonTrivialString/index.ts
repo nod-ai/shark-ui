@@ -13,8 +13,11 @@ import StringSubset from '../StringSubset.ts';
 import NonTrivialString_ParsingError from './ParsingError.ts';
 
 class NonTrivialString
-  extends StringSubset<'NonTrivialString'>
-  implements StringParsable<typeof NonTrivialString> {
+  extends StringSubset<
+  'NonTrivialString'
+> implements StringParsable<
+  typeof NonTrivialString
+> {
   public static parsedFrom = (
     givenSubject: string,
   ): Attempt.Outcome<NonTrivialString, NonTrivialString_ParsingError> => Attempt.that((ends) => {

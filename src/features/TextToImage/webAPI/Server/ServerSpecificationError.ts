@@ -4,7 +4,10 @@ import type {
   URLPath,
 } from '@/library/customTypes/URLComponent';
 
-class TextToImage_Server_SpecificationError extends Attempt.ActionableError<'TextToImage_Server_SpecificationError'> {
+class TextToImage_Server_SpecificationError
+  extends Attempt.ActionableError<
+  'TextToImage_Server_SpecificationError'
+> {
   public constructor(
     public readonly environmentKey: string,
     public readonly file: URLPath,

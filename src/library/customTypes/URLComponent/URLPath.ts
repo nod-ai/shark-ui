@@ -10,7 +10,10 @@ import type {
 
 import StringSubset from '@/library/customTypes/StringSubset.ts';
 
-class URLPath_ParsingError extends ParsingError<'URLPath'> {
+class URLPath_ParsingError
+  extends ParsingError<
+  'URLPath'
+> {
   public constructor(given: {
     expectation: string;
     reality: string;
@@ -21,8 +24,11 @@ class URLPath_ParsingError extends ParsingError<'URLPath'> {
 }
 
 class URLPath
-  extends StringSubset<'URLPath'>
-  implements StringParsable<typeof URLPath> {
+  extends StringSubset<
+  'URLPath'
+> implements StringParsable<
+  typeof URLPath
+> {
   public static parsedFrom = (
     givenSubject: string,
   ): Attempt.Outcome<URLPath, URLPath_ParsingError> => Attempt.that((ends) => {

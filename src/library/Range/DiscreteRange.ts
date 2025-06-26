@@ -2,7 +2,8 @@ import Attempt from '@/library/Attempt';
 
 import Range from './index.ts';
 
-class DiscreteRange extends Range {
+class DiscreteRange
+  extends Range {
   public constructor(
     lowerBound: Range['lowerBound'],
     upperBound: Range['upperBound'],

@@ -1,6 +1,7 @@
 import NonActionableError from '../error/NonActionableError';
 
-class AttemptCreationError extends NonActionableError {
+class AttemptCreationError
+  extends NonActionableError {
   public override readonly cause: Error;
 
   private constructor(

@@ -10,14 +10,18 @@ import type {
 
 interface SemanticallySugarfreeFailure<
   SomeActionableError extends ActionableError<string>,
-> extends DiscriminableOutcome<unknown> {
+> extends DiscriminableOutcome<
+  unknown
+> {
   readonly case: 'failure';
   readonly cause: SomeActionableError;
 }
 
 interface Attempt_Failure<
   SomeActionableError extends ActionableError<string>,
-> extends SemanticallySugarfreeFailure<SomeActionableError> {
+> extends SemanticallySugarfreeFailure<
+  SomeActionableError
+> {
   /**
    * Semantic sugar for `cause`; useful for juxtaposition against early exits:
    * ```ts

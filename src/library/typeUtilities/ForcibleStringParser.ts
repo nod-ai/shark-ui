@@ -1,4 +1,6 @@
-interface ForcibleStringParser<ParsedOutput> {
+interface ForcibleStringParser<
+  ParsedOutput,
+> {
   forciblyParsedFrom(givenSubject: string): ParsedOutput;
 }
 

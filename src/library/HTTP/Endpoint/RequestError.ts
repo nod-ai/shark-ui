@@ -1,6 +1,9 @@
 import Attempt from '@/library/Attempt';
 
-class HTTP_Endpoint_RequestError extends Attempt.ActionableError<'HTTP_Endpoint_RequestError'> {
+class HTTP_Endpoint_RequestError
+  extends Attempt.ActionableError<
+  'HTTP_Endpoint_RequestError'
+> {
   public constructor(
     public readonly endpoint: URL,
   ) {

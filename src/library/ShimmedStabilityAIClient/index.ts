@@ -102,7 +102,8 @@ const z_imageGenerationResponseBody = z.object({
 
 const generationEndpoint = URLPath.parsedFrom('/generate').forciblyUnwrap();
 
-class ImageClient extends HTTP.Client {
+class ImageClient
+  extends HTTP.Client {
   public async forciblyGenerateFromText(
     givenRequest: GenerateFromTextRequest,
   ): Promise<GenerateFromTextResponse> {
@@ -136,7 +137,8 @@ class ImageClient extends HTTP.Client {
   }
 }
 
-class Version1Client extends HTTP.Client {
+class Version1Client
+  extends HTTP.Client {
   private _image?: ImageClient;
 
   public get image(): ImageClient {
@@ -145,7 +147,8 @@ class Version1Client extends HTTP.Client {
   }
 }
 
-class ShimmedStabilityAIClient extends HTTP.Client {
+class ShimmedStabilityAIClient
+  extends HTTP.Client {
   public constructor(given: {
     serverURL: string;
   }) {
