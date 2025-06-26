@@ -52,7 +52,7 @@ const generateOutputFrom = async (
     | 'seed'
     >;
   },
-): Promise<OutcomeOfGeneratingTextToImageOutput> => Attempt.thatEventually(async (ends) => {
+): Promise<OutcomeOfGeneratingTextToImageOutput> => {
   const outcomeOfInitializingClient = await initializeShimmedStabilityAIClient();
 
   if (
@@ -87,16 +87,15 @@ const generateOutputFrom = async (
     outcomeOfSettlingTextToImageResponse.isFailure
   ) return outcomeOfSettlingTextToImageResponse;
 
-  const textToImageResponse = outcomeOfSettlingTextToImageResponse.unwrapped;
-
-  const soleGeneratedOutput = firstTextToImageOutput({
-    in          : textToImageResponse,
-    inferredFrom: given.textToImageRequestBody.textPrompts,
+  const outcomeOfSettlingSoleTextToImageOutput = outcomeOfSettlingTextToImageResponse.rewrappedWith({
+    product: textToImageResponse => firstTextToImageOutput({
+      in          : textToImageResponse,
+      inferredFrom: given.textToImageRequestBody.textPrompts,
+    }),
   });
 
-  const outcomeOfSettlingSoleTextToImageOutput = ends.inSuccessWith(soleGeneratedOutput);
   return outcomeOfSettlingSoleTextToImageOutput;
-});
+};
 
 const SDXLTextToImageClient = {
   generateOutputFrom,
