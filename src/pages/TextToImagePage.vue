@@ -70,7 +70,8 @@ const imageGeneration = useStatefulAttemptThatEventually(async (ends) => {
   ) return outcomeOfGeneratingOutput;
 
   const generatedOutput = outcomeOfGeneratingOutput.unwrapped;
-  return ends.inSuccessWith(generatedOutput.image);
+  const outcomeOfGeneratingImage = ends.inSuccessWith(generatedOutput.image);
+  return outcomeOfGeneratingImage;
 });
 </script>
 
