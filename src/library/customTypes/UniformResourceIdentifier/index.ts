@@ -161,7 +161,7 @@ implements StringParsable<
 
     if (
       outcomeOfParsingScheme.isFailure
-    ) return outcomeOfParsingScheme.forciblyUnwrap(/* TODO: enable safe error propagation */);
+    ) return outcomeOfParsingScheme.forciblyUnwrap();
 
     const parsedScheme = outcomeOfParsingScheme.unwrapped;
 
@@ -179,7 +179,7 @@ implements StringParsable<
 
     if (
       outcomeOfParsingFragment.isFailure
-    ) return outcomeOfParsingFragment.forciblyUnwrap(/* TODO: enable safe error propagation */);
+    ) return outcomeOfParsingFragment.forciblyUnwrap();
 
     const parsedFragment = outcomeOfParsingFragment.unwrapped;
 
@@ -197,7 +197,7 @@ implements StringParsable<
 
     if (
       outcomeOfParsingQuery.isFailure
-    ) return outcomeOfParsingQuery.forciblyUnwrap(/* TODO: enable safe error propagation */);
+    ) return outcomeOfParsingQuery.forciblyUnwrap();
 
     const parsedQuery = outcomeOfParsingQuery.unwrapped;
 
@@ -254,7 +254,7 @@ implements StringParsable<
 
     if (
       outcomeOfParsingAuthority.isFailure
-    ) return outcomeOfParsingAuthority.forciblyUnwrap(/* TODO: enable safe error propagation */);
+    ) return outcomeOfParsingAuthority.forciblyUnwrap();
 
     const parsedAuthority = outcomeOfParsingAuthority.unwrapped;
 
@@ -262,7 +262,7 @@ implements StringParsable<
 
     if (
       outcomeOfParsingPath.isFailure
-    ) return outcomeOfParsingPath.forciblyUnwrap(/* TODO: enable safe error propagation */);
+    ) return outcomeOfParsingPath.forciblyUnwrap();
 
     const parsedPath = outcomeOfParsingPath.unwrapped;
 
