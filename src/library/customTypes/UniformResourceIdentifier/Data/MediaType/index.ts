@@ -146,7 +146,7 @@ implements StringForciblyParsable<
       !isEmpty(extraComponentsWithStructureTypePrefix)
     ) return new MediaType_ParsingError(`Unexpected component sets after extraneous structure type prefix(es): ${extraComponentsWithStructureTypePrefix.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
-    const structureType = StructuredSyntaxNameSuffix.Nullable.parsedFrom(rawStructureType).forciblyUnwrap();
+    const structureType = StructuredSyntaxNameSuffix.Nullable.parsedFrom(rawStructureType).forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
 
     if (
       serializedTreeBranchesEndingInFileSubtype === undefined

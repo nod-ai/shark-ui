@@ -66,7 +66,7 @@ class DataURI
       this.data.toString(),
     ];
 
-    return NonTrivialString.parsedFrom(components.join('')).forciblyUnwrap();
+    return NonTrivialString.parsedFrom(components.join('')).forciblyUnwrap(/* TODO: prove to compiler that this forcible unwrap will never fail */);
   }
 
   public static override forciblyParsedFrom = (

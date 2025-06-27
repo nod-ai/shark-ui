@@ -114,7 +114,7 @@ class ImageClient
       to: generationEndpoint,
     });
 
-    const newResource = outcomeOfSubmittingResource.forciblyUnwrap();
+    const newResource = outcomeOfSubmittingResource.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
 
     const {
       images,
@@ -153,7 +153,7 @@ class ShimmedStabilityAIClient
     serverURL: string;
   }) {
     super({
-      origin : URLOrigin.parsedFrom(given.serverURL).forciblyUnwrap(),
+      origin : URLOrigin.parsedFrom(given.serverURL).forciblyUnwrap(/* matches error propagation of actual StabilityAI client */),
       headers: {
         'Content-Type': 'application/json',
       },
