@@ -72,7 +72,8 @@ implements StringForciblyParsable<
     ) return null;
 
     const serializedKeyValuePairs = Object.entries(this.parameters)
-      .map($0 => MediaType.parameterPrefix + $0.join(MediaType.parameterKeyValueDelimiter))
+      .map($0 => $0.join(MediaType.parameterKeyValueDelimiter))
+      .map($0 => MediaType.parameterPrefix + $0)
       .join('');
 
     return serializedKeyValuePairs;
