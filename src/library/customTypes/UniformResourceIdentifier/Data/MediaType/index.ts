@@ -41,7 +41,7 @@ implements StringForciblyParsable<
 
   public static readonly treeBranchSuffix = '.';
 
-  private get suffixedTree(): string | null {
+  private get serializedTree(): string | null {
     if (
       this.tree === null
     ) return null;
@@ -82,7 +82,7 @@ implements StringForciblyParsable<
     const components = [
       this.fileType,
       MediaType.fileTypeSuffix,
-      this.suffixedTree,
+      this.serializedTree,
       this.fileSubtype,
       this.prefixedStructureType,
       this.prefixedParameters,
