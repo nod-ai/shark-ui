@@ -46,9 +46,11 @@ implements StringForciblyParsable<
       this.tree === null
     ) return null;
 
-    return this.tree
+    const serializedTreeBranches = this.tree
       .map($0 => $0 + MediaType.treeBranchSuffix)
       .join('');
+
+    return serializedTreeBranches;
   }
 
   public static readonly structureTypePrefix = '+';
