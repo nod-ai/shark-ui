@@ -69,11 +69,11 @@ implements StringForciblyParsable<
       this.parameters === null
     ) return null;
 
-    const serializedKeyValuePairs = Object.entries(this.parameters)
+    const prefixedKeyValuePairs = Object.entries(this.parameters)
       .map($0 => $0.join(MediaType.parameterKeyValueDelimiter))
-      .map($0 => MediaType.parameterPrefix.concat($0))
-      .join('');
+      .map($0 => MediaType.parameterPrefix.concat($0));
 
+    const serializedKeyValuePairs = prefixedKeyValuePairs.join('');
     return serializedKeyValuePairs;
   }
 
