@@ -52,7 +52,7 @@ class Base64CharacterEncodedByteSequence
     const outcomeOfEnsuringConformantCharacters = Base64.CharacterSequence.ensureConformanceOf(byteEncodableCharacters);
 
     const outcomeOfParsingByteSequence = Attempt.Outcome.fromRewrapping(outcomeOfEnsuringConformantCharacters, {
-      product: $0 => new this($0 + padding),
+      product: $0 => new this($0.concat(padding)),
     });
 
     return outcomeOfParsingByteSequence.forciblyUnwrap(/* TODO: enable safe error propagation */);
