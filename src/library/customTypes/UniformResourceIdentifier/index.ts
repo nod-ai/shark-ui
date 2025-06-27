@@ -105,7 +105,8 @@ implements StringForciblyParsable<
       this.prefixedFragment,
     ];
 
-    return components.map($0 => $0 ?? '').join('');
+    const serializedComponents = components.map($0 => $0 ?? '').join('');
+    return serializedComponents;
   }
 
   public static forciblyParsedFrom = (

@@ -41,19 +41,21 @@ implements StringForciblyParsable<
 
   public static readonly treeBranchSuffix = '.';
 
-  private get suffixedTree(): string | null {
+  private get serializedTree(): string | null {
     if (
       this.tree === null
     ) return null;
 
-    return this.tree
+    const serializedTreeBranches = this.tree
       .map($0 => $0 + MediaType.treeBranchSuffix)
       .join('');
+
+    return serializedTreeBranches;
   }
 
   public static readonly structureTypePrefix = '+';
 
-  private get prefixedStructureType(): string | null {
+  private get serializedStructureType(): string | null {
     if (
       this.structureType === null
     ) return null;
@@ -64,27 +66,30 @@ implements StringForciblyParsable<
   public static readonly parameterPrefix = ';';
   public static readonly parameterKeyValueDelimiter = '=';
 
-  private get prefixedParameters(): string | null {
+  private get serializedParameters(): string | null {
     if (
       this.parameters === null
     ) return null;
 
-    return Object.entries(this.parameters)
+    const serializedKeyValuePairs = Object.entries(this.parameters)
       .map($0 => MediaType.parameterPrefix + $0.join(MediaType.parameterKeyValueDelimiter))
       .join('');
+
+    return serializedKeyValuePairs;
   }
 
   public toString(): string {
     const components = [
       this.fileType,
       MediaType.fileTypeSuffix,
-      this.suffixedTree,
+      this.serializedTree,
       this.fileSubtype,
-      this.prefixedStructureType,
-      this.prefixedParameters,
+      this.serializedStructureType,
+      this.serializedParameters,
     ];
 
-    return components.map($0 => $0 ?? '').join('');
+    const serializedComponents = components.map($0 => $0 ?? '').join('');
+    return serializedComponents;
   }
 
   public static forciblyParsedFrom = (
