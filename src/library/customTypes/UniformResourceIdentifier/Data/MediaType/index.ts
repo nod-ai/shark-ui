@@ -89,6 +89,10 @@ implements StringForciblyParsable<
   }
 
   public toString(): string {
+    return this.serialized.toString();
+  }
+
+  public get serialized(): NonTrivialString {
     const orderedComponents = [
       this.serializableFileType,
       this.serializableTree,
@@ -97,7 +101,7 @@ implements StringForciblyParsable<
       this.serializableParameters,
     ] as const;
 
-    const serializedComponents = NonTrivialString.fromConcatenating(...orderedComponents).toString();
+    const serializedComponents = NonTrivialString.fromConcatenating(...orderedComponents);
     return serializedComponents;
   }
 
