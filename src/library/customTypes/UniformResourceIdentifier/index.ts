@@ -112,7 +112,7 @@ implements StringForciblyParsable<
       this.serializableFragment,
     ];
 
-    const serializedComponents = concatenated(...orderedComponents.map($0 => $0 ?? ''));
+    const serializedComponents = concatenated(...orderedComponents);
     return serializedComponents;
   }
 
