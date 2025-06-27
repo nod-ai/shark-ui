@@ -104,7 +104,7 @@ implements StringForciblyParsable<
   }
 
   public get serialized(): string {
-    const orderedComponents: (string | null | undefined)[] = [
+    const orderedComponents: (string | null)[] = [
       this.serializableScheme,
       this.serializableAuthority,
       this.path.toString(),
