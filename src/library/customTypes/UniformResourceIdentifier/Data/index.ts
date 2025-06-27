@@ -68,13 +68,13 @@ class DataURI
   }
 
   public override get path(): NonTrivialString {
-    const components: string[] = [
+    const orderedPathComponents: string[] = [
       this.mediaType.toString(),
       this.serializableEncoding,
       this.serializableData,
     ];
 
-    const serializedPathComponents = components.join('');
+    const serializedPathComponents = orderedPathComponents.join('');
     return NonTrivialString.parsedFrom(serializedPathComponents).forciblyUnwrap(/* TODO: prove to compiler that this forcible unwrap will never fail */);
   }
 
