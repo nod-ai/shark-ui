@@ -26,13 +26,7 @@ class HTTP_Client {
   }
 
   public originAt(givenPath: URLPath): URL {
-    const serializedURLComponents = [
-      this.origin,
-      givenPath,
-    ]
-      .map($0 => $0.toString())
-      .join('');
-
+    const serializedURLComponents = this.origin.concat(givenPath.toString());
     return new URL(serializedURLComponents);
   }
 
