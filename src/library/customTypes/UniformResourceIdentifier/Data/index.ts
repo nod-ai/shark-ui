@@ -74,8 +74,8 @@ class DataURI
       this.serializableData,
     ] as const;
 
-    const serializedPathComponents = NonTrivialString.fromConcatenating(...orderedPathComponents).toString();
-    return NonTrivialString.parsedFrom(serializedPathComponents).forciblyUnwrap(/* TODO: prove to compiler that this forcible unwrap will never fail */);
+    const serializedPathComponents = NonTrivialString.fromConcatenating(...orderedPathComponents);
+    return serializedPathComponents;
   }
 
   public static override forciblyParsedFrom = (
