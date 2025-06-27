@@ -46,10 +46,8 @@ implements StringForciblyParsable<
       this.tree === null
     ) return null;
 
-    const serializedTreeBranches = this.tree
-      .map($0 => $0.concat(MediaType.treeBranchSuffix))
-      .join('');
-
+    const suffixedTreeBranches = this.tree.map($0 => $0.concat(MediaType.treeBranchSuffix));
+    const serializedTreeBranches = suffixedTreeBranches.join('');
     return serializedTreeBranches;
   }
 
