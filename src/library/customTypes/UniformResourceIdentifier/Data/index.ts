@@ -73,7 +73,7 @@ class DataURI
 
   public override get path(): NonTrivialString {
     const orderedPathComponents: string[] = [
-      this.mediaType.toString(),
+      this.mediaType.serialized.toString(),
       this.serializableEncoding,
       this.serializableData,
     ];

@@ -88,10 +88,6 @@ implements StringForciblyParsable<
     return serializedKeyValuePairs;
   }
 
-  public toString(): string {
-    return this.serialized.toString();
-  }
-
   public get serialized(): NonTrivialString {
     const orderedComponents = [
       this.serializableFileType,
