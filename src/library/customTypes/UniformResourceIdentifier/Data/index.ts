@@ -66,7 +66,8 @@ class DataURI
       this.data.toString(),
     ];
 
-    return NonTrivialString.parsedFrom(components.join('')).forciblyUnwrap(/* TODO: prove to compiler that this forcible unwrap will never fail */);
+    const serializedPathComponents = components.join('');
+    return NonTrivialString.parsedFrom(serializedPathComponents).forciblyUnwrap(/* TODO: prove to compiler that this forcible unwrap will never fail */);
   }
 
   public static override forciblyParsedFrom = (
