@@ -26,14 +26,14 @@ class HTTP_Client {
   }
 
   public originAt(givenPath: URLPath): URL {
-    return new URL(
-      [
-        this.origin,
-        givenPath,
-      ]
-        .map($0 => $0.toString())
-        .join(''),
-    );
+    const serializedURLComponents = [
+      this.origin,
+      givenPath,
+    ]
+      .map($0 => $0.toString())
+      .join('');
+
+    return new URL(serializedURLComponents);
   }
 
   public send = async (
