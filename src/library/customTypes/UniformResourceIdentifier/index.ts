@@ -140,6 +140,8 @@ implements StringForciblyParsable<
       rawScheme === undefined
     ) return new URI_ParsingError('Expected a scheme').throwAnyway('To be converted to `Attempt` failure');
 
+    const parsedScheme = NonTrivialString.parsedFrom(rawScheme).forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
+
     const [
       componentsPrecedingFragment,
       rawFragment = null,
@@ -202,7 +204,6 @@ implements StringForciblyParsable<
       };
     })();
 
-    const parsedScheme = NonTrivialString.parsedFrom(rawScheme).forciblyUnwrap(/* TODO: move closer to declaration */);
     const parsedAuthority = NonTrivialString.nullableParsedFrom(rawAuthority).forciblyUnwrap(/* TODO: move closer to declaration */);
     const parsedPath = NonTrivialString.parsedFrom(rawPath).forciblyUnwrap(/* TODO: move closer to declaration */);
     const parsedQuery = NonTrivialString.nullableParsedFrom(rawQuery).forciblyUnwrap(/* TODO: move closer to declaration */);
