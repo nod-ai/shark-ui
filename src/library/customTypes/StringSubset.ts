@@ -17,6 +17,12 @@ abstract class StringSubset<
 > {
   public readonly brand!: SomeBrand;
 
+  public appendedWith(
+    givenSuffix: StringLike,
+  ): string {
+    return this.concat(givenSuffix.toString());
+  }
+
   public prependedWith(
     givenPrefix: StringLike,
   ): string {
