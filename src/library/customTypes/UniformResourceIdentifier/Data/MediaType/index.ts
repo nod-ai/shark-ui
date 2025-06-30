@@ -95,7 +95,7 @@ implements StringForciblyParsable<
       this.fileSubtype,
       this.serializableStructureType,
       this.serializableParameters,
-    ];
+    ] as const;
 
     const serializedComponents = concatenated(...orderedComponents);
     return serializedComponents;
