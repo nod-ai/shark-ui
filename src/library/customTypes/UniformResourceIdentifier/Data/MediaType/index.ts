@@ -53,7 +53,7 @@ implements StringForciblyParsable<
 
   public static readonly structureTypePrefix = '+';
 
-  private get serializedStructureType(): string | null {
+  private get serializableStructureType(): string | null {
     if (
       this.structureType === null
     ) return null;
@@ -83,7 +83,7 @@ implements StringForciblyParsable<
       MediaType.fileTypeSuffix,
       this.serializableTree,
       this.fileSubtype,
-      this.serializedStructureType,
+      this.serializableStructureType,
       this.serializedParameters,
     ];
 
