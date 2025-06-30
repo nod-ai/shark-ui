@@ -51,7 +51,7 @@ implements StringForciblyParsable<
     return this._authority;
   }
 
-  private get prefixedAuthority(): string | null {
+  private get serializableAuthority(): string | null {
     if (
       this.authority === null
     ) return null;
@@ -99,7 +99,7 @@ implements StringForciblyParsable<
     const components: (string | null | undefined)[] = [
       this.scheme.toString(),
       UniformResourceIdentifier.schemeSuffix,
-      this.prefixedAuthority,
+      this.serializableAuthority,
       this.path.toString(),
       this.prefixedQuery,
       this.prefixedFragment,
