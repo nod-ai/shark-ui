@@ -203,10 +203,11 @@ implements StringForciblyParsable<
     })();
 
     const parsedScheme = NonTrivialString.parsedFrom(rawScheme).forciblyUnwrap(/* TODO: move closer to declaration */);
+    const parsedAuthority = NonTrivialString.nullableParsedFrom(rawAuthority).forciblyUnwrap(/* TODO: move closer to declaration */);
 
     return new UniformResourceIdentifier(
       parsedScheme,
-      NonTrivialString.nullableParsedFrom(rawAuthority).forciblyUnwrap(/* TODO: move closer to declaration */),
+      parsedAuthority,
       NonTrivialString.parsedFrom(rawPath).forciblyUnwrap(/* TODO: move closer to declaration */),
       NonTrivialString.nullableParsedFrom(rawQuery).forciblyUnwrap(/* TODO: move closer to declaration */),
       NonTrivialString.nullableParsedFrom(rawFragment).forciblyUnwrap(/* TODO: move closer to declaration */),
