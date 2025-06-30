@@ -47,14 +47,6 @@ implements StringForciblyParsable<
     return this._authority;
   }
 
-  public get path(): Exclude<UniformResourceIdentifier['_path'], null> {
-    if (
-      this._path === null
-    ) return Attempt.abandon('`path` must either be a) provided via constructor or b) overridden via public getter');
-
-    return this._path;
-  }
-
   public static readonly schemeSuffix = ':';
 
   public static readonly authorityPrefix = '//';
@@ -65,6 +57,14 @@ implements StringForciblyParsable<
     ) return null;
 
     return this.authority.prependedWith(UniformResourceIdentifier.authorityPrefix);
+  }
+
+  public get path(): Exclude<UniformResourceIdentifier['_path'], null> {
+    if (
+      this._path === null
+    ) return Attempt.abandon('`path` must either be a) provided via constructor or b) overridden via public getter');
+
+    return this._path;
   }
 
   public static readonly queryPrefix = '?';
