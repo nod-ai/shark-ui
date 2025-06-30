@@ -9,6 +9,10 @@ import {
   isEmpty,
 } from '@/library/utilitiesByType/array.ts';
 
+import {
+  concatenated,
+} from '@/library/utilitiesByType/string';
+
 import URI_ParsingError from './ParsingError';
 
 /**
@@ -108,7 +112,7 @@ implements StringForciblyParsable<
       this.serializableFragment,
     ];
 
-    const serializedComponents = orderedComponents.map($0 => $0 ?? '').join('');
+    const serializedComponents = concatenated(...orderedComponents.map($0 => $0 ?? ''));
     return serializedComponents;
   }
 

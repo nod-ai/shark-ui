@@ -6,6 +6,10 @@ import {
   isEmpty,
 } from '@/library/utilitiesByType/array.ts';
 
+import {
+  concatenated,
+} from '@/library/utilitiesByType/string';
+
 import MediaType_ParsingError from './ParsingError';
 import StructuredSyntaxNameSuffix from './StructuredSyntaxNameSuffix';
 
@@ -51,7 +55,7 @@ implements StringForciblyParsable<
     ) return null;
 
     const suffixedTreeBranches = this.tree.map($0 => $0.concat(MediaType.treeBranchSuffix));
-    const serializedTreeBranches = suffixedTreeBranches.join('');
+    const serializedTreeBranches = concatenated(...suffixedTreeBranches);
     return serializedTreeBranches;
   }
 
@@ -77,7 +81,7 @@ implements StringForciblyParsable<
       .map($0 => $0.join(MediaType.parameterKeyValueDelimiter))
       .map($0 => MediaType.parameterPrefix.concat($0));
 
-    const serializedKeyValuePairs = prefixedKeyValuePairs.join('');
+    const serializedKeyValuePairs = concatenated(...prefixedKeyValuePairs);
     return serializedKeyValuePairs;
   }
 
@@ -90,7 +94,7 @@ implements StringForciblyParsable<
       this.serializableParameters,
     ];
 
-    const serializedComponents = orderedComponents.map($0 => $0 ?? '').join('');
+    const serializedComponents = concatenated(...orderedComponents.map($0 => $0 ?? ''));
     return serializedComponents;
   }
 
