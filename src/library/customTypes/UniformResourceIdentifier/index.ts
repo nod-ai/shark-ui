@@ -55,10 +55,6 @@ implements StringForciblyParsable<
     return this._path;
   }
 
-  public get query(): UniformResourceIdentifier['_query'] {
-    return this._query;
-  }
-
   public static readonly schemeSuffix = ':';
 
   public static readonly authorityPrefix = '//';
@@ -72,6 +68,10 @@ implements StringForciblyParsable<
   }
 
   public static readonly queryPrefix = '?';
+
+  public get query(): UniformResourceIdentifier['_query'] {
+    return this._query;
+  }
 
   private get prefixedQuery(): string | null {
     if (
