@@ -51,7 +51,7 @@ implements StringForciblyParsable<
     return this._authority;
   }
 
-  private get prefixedAuthority(): string | null {
+  private get serializableAuthority(): string | null {
     if (
       this.authority === null
     ) return null;
@@ -73,7 +73,7 @@ implements StringForciblyParsable<
     return this._query;
   }
 
-  private get prefixedQuery(): string | null {
+  private get serializableQuery(): string | null {
     if (
       this.query === null
     ) return null;
@@ -87,7 +87,7 @@ implements StringForciblyParsable<
     return this._fragment;
   }
 
-  private get prefixedFragment(): string | null {
+  private get serializableFragment(): string | null {
     if (
       this.fragment === null
     ) return null;
@@ -99,10 +99,10 @@ implements StringForciblyParsable<
     const components: (string | null | undefined)[] = [
       this.scheme.toString(),
       UniformResourceIdentifier.schemeSuffix,
-      this.prefixedAuthority,
+      this.serializableAuthority,
       this.path.toString(),
-      this.prefixedQuery,
-      this.prefixedFragment,
+      this.serializableQuery,
+      this.serializableFragment,
     ];
 
     const serializedComponents = components.map($0 => $0 ?? '').join('');

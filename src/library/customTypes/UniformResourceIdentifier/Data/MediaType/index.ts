@@ -41,7 +41,7 @@ implements StringForciblyParsable<
 
   public static readonly treeBranchSuffix = '.';
 
-  private get serializedTree(): string | null {
+  private get serializableTree(): string | null {
     if (
       this.tree === null
     ) return null;
@@ -53,7 +53,7 @@ implements StringForciblyParsable<
 
   public static readonly structureTypePrefix = '+';
 
-  private get serializedStructureType(): string | null {
+  private get serializableStructureType(): string | null {
     if (
       this.structureType === null
     ) return null;
@@ -64,7 +64,7 @@ implements StringForciblyParsable<
   public static readonly parameterPrefix = ';';
   public static readonly parameterKeyValueDelimiter = '=';
 
-  private get serializedParameters(): string | null {
+  private get serializableParameters(): string | null {
     if (
       this.parameters === null
     ) return null;
@@ -81,10 +81,10 @@ implements StringForciblyParsable<
     const components = [
       this.fileType,
       MediaType.fileTypeSuffix,
-      this.serializedTree,
+      this.serializableTree,
       this.fileSubtype,
-      this.serializedStructureType,
-      this.serializedParameters,
+      this.serializableStructureType,
+      this.serializableParameters,
     ];
 
     const serializedComponents = components.map($0 => $0 ?? '').join('');
