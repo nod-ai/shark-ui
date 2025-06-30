@@ -87,7 +87,7 @@ implements StringForciblyParsable<
     return this._fragment;
   }
 
-  private get prefixedFragment(): string | null {
+  private get serializableFragment(): string | null {
     if (
       this.fragment === null
     ) return null;
@@ -102,7 +102,7 @@ implements StringForciblyParsable<
       this.serializableAuthority,
       this.path.toString(),
       this.serializableQuery,
-      this.prefixedFragment,
+      this.serializableFragment,
     ];
 
     const serializedComponents = components.map($0 => $0 ?? '').join('');
