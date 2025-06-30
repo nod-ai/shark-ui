@@ -53,6 +53,10 @@ class DataURI
     return this._encoding;
   }
 
+  public get serializableEncoding(): string {
+    return DataURI.encodingPrefix.concat(this.encoding);
+  }
+
   public static readonly dataPrefix = ',';
 
   public get data(): DataURI['_data'] {
@@ -62,8 +66,7 @@ class DataURI
   public override get path(): NonTrivialString {
     const components: string[] = [
       this.mediaType.toString(),
-      DataURI.encodingPrefix,
-      this.encoding,
+      this.serializableEncoding,
       DataURI.dataPrefix,
       this.data.toString(),
     ];
