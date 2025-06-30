@@ -5,7 +5,9 @@ import type {
 } from '@/library/Parser/string';
 
 import {
+  concatenated,
   isEmpty,
+  type StringLike,
 } from '@/library/utilitiesByType/string.ts';
 
 import StringSubset from '../StringSubset.ts';
@@ -42,6 +44,28 @@ class NonTrivialString
 
   public isEqualTo(that: NonTrivialString): boolean {
     return this.toString() === that.toString();
+  }
+
+  public concatenatedWith(
+    ...givenOperands: (StringLike | null)[]
+  ): NonTrivialString {
+    const concatenatedOperands = concatenated(this, ...givenOperands);
+    const outcomeOfParsingConcatenatedOperands = NonTrivialString.parsedFrom(concatenatedOperands);
+    return outcomeOfParsingConcatenatedOperands.forciblyUnwrap(/* Safe to call since the leading string is always non-trivial and concatenation is purely additive */);
+  }
+
+  public static fromConcatenating(
+    ...givenOperands: [
+      NonTrivialString,
+      ...(StringLike | null)[],
+    ]
+  ): NonTrivialString {
+    const [
+      firstOperand,
+      ...remainingOperands
+    ] = givenOperands;
+
+    return firstOperand.concatenatedWith(...remainingOperands);
   }
 }
 

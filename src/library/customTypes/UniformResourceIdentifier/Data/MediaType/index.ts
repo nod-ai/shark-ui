@@ -1,3 +1,5 @@
+import NonTrivialString from '@/library/customTypes/NonTrivialString';
+
 import type {
   StringForciblyParsable,
 } from '@/library/typeUtilities/StringForciblyParsable';
@@ -43,8 +45,9 @@ implements StringForciblyParsable<
 
   public static readonly fileTypeSuffix = '/';
 
-  public get serializableFileType(): string {
-    return this.fileType.concat(MediaType.fileTypeSuffix);
+  public get serializableFileType(): NonTrivialString {
+    const suffixedFileType = this.fileType.concat(MediaType.fileTypeSuffix);
+    return NonTrivialString.parsedFrom(suffixedFileType).forciblyUnwrap(/* Proven safe by inspecting intellisense of `fileType` */);
   }
 
   public static readonly treeBranchSuffix = '.';
@@ -85,16 +88,16 @@ implements StringForciblyParsable<
     return serializedKeyValuePairs;
   }
 
-  public toString(): string {
+  public get serialized(): NonTrivialString {
     const orderedComponents = [
       this.serializableFileType,
       this.serializableTree,
       this.fileSubtype,
       this.serializableStructureType,
       this.serializableParameters,
-    ];
+    ] as const;
 
-    const serializedComponents = concatenated(...orderedComponents);
+    const serializedComponents = NonTrivialString.fromConcatenating(...orderedComponents);
     return serializedComponents;
   }
 
