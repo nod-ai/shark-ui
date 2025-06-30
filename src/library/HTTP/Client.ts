@@ -26,7 +26,7 @@ class HTTP_Client {
   }
 
   public originAt(givenPath: URLPath): URL {
-    const serializedURLComponents = this.origin.concat(givenPath.toString());
+    const serializedURLComponents = this.origin.appendedWith(givenPath);
     return new URL(serializedURLComponents);
   }
 
