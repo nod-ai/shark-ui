@@ -72,7 +72,7 @@ implements StringForciblyParsable<
       this.authority === null
     ) return null;
 
-    return UniformResourceIdentifier.authorityPrefix.concat(this.authority.toString());
+    return this.authority.prependedWith(UniformResourceIdentifier.authorityPrefix);
   }
 
   public static readonly queryPrefix = '?';
@@ -82,7 +82,7 @@ implements StringForciblyParsable<
       this.query === null
     ) return null;
 
-    return UniformResourceIdentifier.queryPrefix.concat(this.query.toString());
+    return this.query.prependedWith(UniformResourceIdentifier.queryPrefix);
   }
 
   public static readonly fragmentPrefix = '#';
@@ -92,7 +92,7 @@ implements StringForciblyParsable<
       this.fragment === null
     ) return null;
 
-    return UniformResourceIdentifier.fragmentPrefix.concat(this.fragment.toString());
+    return this.fragment.prependedWith(UniformResourceIdentifier.fragmentPrefix);
   }
 
   public get serialized(): string {
