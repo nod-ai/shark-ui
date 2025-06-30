@@ -63,12 +63,15 @@ class DataURI
     return this._data;
   }
 
+  public get serializableData(): string {
+    return this.data.prependedWith(DataURI.dataPrefix);
+  }
+
   public override get path(): NonTrivialString {
     const components: string[] = [
       this.mediaType.toString(),
       this.serializableEncoding,
-      DataURI.dataPrefix,
-      this.data.toString(),
+      this.serializableData,
     ];
 
     const serializedPathComponents = components.join('');
