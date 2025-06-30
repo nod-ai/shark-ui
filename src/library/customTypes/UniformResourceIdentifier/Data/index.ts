@@ -6,10 +6,6 @@ import {
   isEmpty,
 } from '@/library/utilitiesByType/array.ts';
 
-import {
-  concatenated,
-} from '@/library/utilitiesByType/string.ts';
-
 import UniformResourceIdentifier from '../index.ts';
 
 import {
@@ -72,14 +68,14 @@ class DataURI
   }
 
   public override get path(): NonTrivialString {
-    const orderedPathComponents: string[] = [
-      this.mediaType.serialized.toString(),
+    const orderedPathComponents = [
+      this.mediaType.serialized,
       this.serializableEncoding,
       this.serializableData,
-    ];
+    ] as const;
 
-    const serializedPathComponents = concatenated(...orderedPathComponents);
-    return NonTrivialString.parsedFrom(serializedPathComponents).forciblyUnwrap(/* TODO: prove to compiler that this forcible unwrap will never fail */);
+    const serializedPathComponents = NonTrivialString.fromConcatenating(...orderedPathComponents);
+    return serializedPathComponents;
   }
 
   public static override forciblyParsedFrom = (
