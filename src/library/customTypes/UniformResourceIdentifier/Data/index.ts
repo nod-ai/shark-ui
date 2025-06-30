@@ -53,19 +53,25 @@ class DataURI
     return this._encoding;
   }
 
+  public get serializableEncoding(): string {
+    return DataURI.encodingPrefix.concat(this.encoding);
+  }
+
   public static readonly dataPrefix = ',';
 
   public get data(): DataURI['_data'] {
     return this._data;
   }
 
+  public get serializableData(): string {
+    return this.data.prependedWith(DataURI.dataPrefix);
+  }
+
   public override get path(): NonTrivialString {
     const components: string[] = [
       this.mediaType.toString(),
-      DataURI.encodingPrefix,
-      this.encoding,
-      DataURI.dataPrefix,
-      this.data.toString(),
+      this.serializableEncoding,
+      this.serializableData,
     ];
 
     const serializedPathComponents = components.join('');
