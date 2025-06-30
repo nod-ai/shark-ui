@@ -12,6 +12,12 @@ abstract class StringSubset<
   SomeBrand
 > {
   public readonly brand!: SomeBrand;
+
+  public prependedWith(
+    givenPrefix: string,
+  ): string {
+    return givenPrefix.concat(this.toString());
+  }
 }
 
 export {
