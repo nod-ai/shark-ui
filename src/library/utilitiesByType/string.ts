@@ -29,9 +29,9 @@ const droppingLastCharacter = (givenCharacters: string): string => {
 type StringLike = string | String; // eslint-disable-line @typescript-eslint/no-wrapper-object-types -- means "both the auto-boxed and primitive types"
 
 const concatenated = (
-  ...givenOperands: StringLike[]
+  ...givenOperands: (StringLike | null)[]
 ): string => {
-  const concatenatableOperands = givenOperands.map($0 => $0.toString());
+  const concatenatableOperands = givenOperands.map($0 => $0?.toString() ?? '');
   const concatenatedOperands = concatenatableOperands.join('');
   return concatenatedOperands;
 };

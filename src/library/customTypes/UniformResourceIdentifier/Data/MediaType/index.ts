@@ -94,7 +94,7 @@ implements StringForciblyParsable<
       this.serializableParameters,
     ];
 
-    const serializedComponents = concatenated(...orderedComponents.map($0 => $0 ?? ''));
+    const serializedComponents = concatenated(...orderedComponents);
     return serializedComponents;
   }
 
