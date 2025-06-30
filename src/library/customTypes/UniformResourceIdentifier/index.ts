@@ -152,7 +152,7 @@ implements StringForciblyParsable<
 
     const [
       componentsPrecedingQuery,
-      query = null,
+      rawQuery = null,
       ...unexpectedComponentsWithQueryPrefix
     ] = componentsPrecedingFragment?.split(queryPrefix) ?? [];
 
@@ -206,7 +206,7 @@ implements StringForciblyParsable<
       NonTrivialString.parsedFrom(rawScheme).forciblyUnwrap(/* TODO: move closer to declaration */),
       NonTrivialString.nullableParsedFrom(authority).forciblyUnwrap(/* TODO: move closer to declaration */),
       NonTrivialString.parsedFrom(path).forciblyUnwrap(/* TODO: move closer to declaration */),
-      NonTrivialString.nullableParsedFrom(query).forciblyUnwrap(/* TODO: move closer to declaration */),
+      NonTrivialString.nullableParsedFrom(rawQuery).forciblyUnwrap(/* TODO: move closer to declaration */),
       NonTrivialString.nullableParsedFrom(rawFragment).forciblyUnwrap(/* TODO: move closer to declaration */),
     );
   };
