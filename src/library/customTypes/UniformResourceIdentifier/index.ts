@@ -73,7 +73,7 @@ implements StringForciblyParsable<
     return this._query;
   }
 
-  private get prefixedQuery(): string | null {
+  private get serializableQuery(): string | null {
     if (
       this.query === null
     ) return null;
@@ -101,7 +101,7 @@ implements StringForciblyParsable<
       UniformResourceIdentifier.schemeSuffix,
       this.serializableAuthority,
       this.path.toString(),
-      this.prefixedQuery,
+      this.serializableQuery,
       this.prefixedFragment,
     ];
 
