@@ -45,6 +45,10 @@ implements StringForciblyParsable<
 
   public static readonly schemeSuffix = ':';
 
+  public get serializableScheme(): string {
+    return this.scheme.concat(UniformResourceIdentifier.schemeSuffix);
+  }
+
   public static readonly authorityPrefix = '//';
 
   public get authority(): UniformResourceIdentifier['_authority'] {
@@ -97,8 +101,7 @@ implements StringForciblyParsable<
 
   public get serialized(): string {
     const components: (string | null | undefined)[] = [
-      this.scheme.toString(),
-      UniformResourceIdentifier.schemeSuffix,
+      this.serializableScheme,
       this.serializableAuthority,
       this.path.toString(),
       this.serializableQuery,
