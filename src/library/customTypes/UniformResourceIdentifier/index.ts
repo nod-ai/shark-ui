@@ -59,10 +59,6 @@ implements StringForciblyParsable<
     return this._query;
   }
 
-  public get fragment(): UniformResourceIdentifier['_fragment'] {
-    return this._fragment;
-  }
-
   public static readonly schemeSuffix = ':';
 
   public static readonly authorityPrefix = '//';
@@ -86,6 +82,10 @@ implements StringForciblyParsable<
   }
 
   public static readonly fragmentPrefix = '#';
+
+  public get fragment(): UniformResourceIdentifier['_fragment'] {
+    return this._fragment;
+  }
 
   private get prefixedFragment(): string | null {
     if (
