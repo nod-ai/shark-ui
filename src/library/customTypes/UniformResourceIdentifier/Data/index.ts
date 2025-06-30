@@ -76,7 +76,7 @@ class DataURI
       this.mediaType.serialized,
       this.serializableEncoding,
       this.serializableData,
-    ];
+    ] as const;
 
     const serializedPathComponents = concatenated(...orderedPathComponents);
     return NonTrivialString.parsedFrom(serializedPathComponents).forciblyUnwrap(/* TODO: prove to compiler that this forcible unwrap will never fail */);
