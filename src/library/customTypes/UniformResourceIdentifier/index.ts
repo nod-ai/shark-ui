@@ -164,6 +164,8 @@ implements StringForciblyParsable<
       !isEmpty(unexpectedComponentsWithQueryPrefix)
     ) return new URI_ParsingError(`Found extra components with query prefix: ${unexpectedComponentsWithQueryPrefix.join()}`).throwAnyway('To be converted to `Attempt` failure');
 
+    const parsedQuery = NonTrivialString.nullableParsedFrom(rawQuery).forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
+
     if (
       componentsPrecedingQuery === undefined
     ) return new URI_ParsingError('Expected components preceding query').throwAnyway('To be converted to `Attempt` failure');
@@ -208,7 +210,6 @@ implements StringForciblyParsable<
 
     const parsedAuthority = NonTrivialString.nullableParsedFrom(rawAuthority).forciblyUnwrap(/* TODO: move closer to declaration */);
     const parsedPath = NonTrivialString.parsedFrom(rawPath).forciblyUnwrap(/* TODO: move closer to declaration */);
-    const parsedQuery = NonTrivialString.nullableParsedFrom(rawQuery).forciblyUnwrap(/* TODO: move closer to declaration */);
 
     return new UniformResourceIdentifier(
       parsedScheme,
