@@ -104,10 +104,10 @@ implements StringForciblyParsable<
   }
 
   public get serialized(): string {
-    const orderedComponents: (string | null)[] = [
+    const orderedComponents = [
       this.serializableScheme,
       this.serializableAuthority,
-      this.path.toString(),
+      this.path,
       this.serializableQuery,
       this.serializableFragment,
     ];

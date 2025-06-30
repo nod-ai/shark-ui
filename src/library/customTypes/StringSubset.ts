@@ -2,8 +2,9 @@ import type {
   Branded,
 } from '@/library/typeUtilities/Branded';
 
-import type {
-  StringLike,
+import {
+  type StringLike,
+  concatenated,
 } from '../utilitiesByType/string';
 
 /**
@@ -20,13 +21,13 @@ abstract class StringSubset<
   public appendedWith(
     givenSuffix: StringLike,
   ): string {
-    return this.concat(givenSuffix.toString());
+    return concatenated(this, givenSuffix);
   }
 
   public prependedWith(
     givenPrefix: StringLike,
   ): string {
-    return givenPrefix.concat(this.toString());
+    return concatenated(givenPrefix, this);
   }
 }
 
