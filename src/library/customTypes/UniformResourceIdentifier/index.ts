@@ -142,7 +142,7 @@ implements StringForciblyParsable<
 
     const [
       componentsPrecedingFragment,
-      fragment = null,
+      rawFragment = null,
       ...unexpectedComponentsWithFragmentPrefix
     ] = componentsFollowingScheme?.split(fragmentPrefix) ?? [];
 
@@ -207,7 +207,7 @@ implements StringForciblyParsable<
       NonTrivialString.nullableParsedFrom(authority).forciblyUnwrap(/* TODO: move closer to declaration */),
       NonTrivialString.parsedFrom(path).forciblyUnwrap(/* TODO: move closer to declaration */),
       NonTrivialString.nullableParsedFrom(query).forciblyUnwrap(/* TODO: move closer to declaration */),
-      NonTrivialString.nullableParsedFrom(fragment).forciblyUnwrap(/* TODO: move closer to declaration */),
+      NonTrivialString.nullableParsedFrom(rawFragment).forciblyUnwrap(/* TODO: move closer to declaration */),
     );
   };
 }
