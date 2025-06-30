@@ -82,7 +82,7 @@ implements StringForciblyParsable<
   }
 
   public toString(): string {
-    const components = [
+    const orderedComponents = [
       this.serializableFileType,
       this.serializableTree,
       this.fileSubtype,
@@ -90,7 +90,7 @@ implements StringForciblyParsable<
       this.serializableParameters,
     ];
 
-    const serializedComponents = components.map($0 => $0 ?? '').join('');
+    const serializedComponents = orderedComponents.map($0 => $0 ?? '').join('');
     return serializedComponents;
   }
 

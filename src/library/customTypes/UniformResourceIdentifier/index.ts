@@ -100,7 +100,7 @@ implements StringForciblyParsable<
   }
 
   public get serialized(): string {
-    const components: (string | null | undefined)[] = [
+    const orderedComponents: (string | null | undefined)[] = [
       this.serializableScheme,
       this.serializableAuthority,
       this.path.toString(),
@@ -108,7 +108,7 @@ implements StringForciblyParsable<
       this.serializableFragment,
     ];
 
-    const serializedComponents = components.map($0 => $0 ?? '').join('');
+    const serializedComponents = orderedComponents.map($0 => $0 ?? '').join('');
     return serializedComponents;
   }
 
