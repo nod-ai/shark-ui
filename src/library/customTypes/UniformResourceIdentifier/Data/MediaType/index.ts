@@ -39,6 +39,10 @@ implements StringForciblyParsable<
 
   public static readonly fileTypeSuffix = '/';
 
+  public get serializableFileType(): string {
+    return this.fileType.concat(MediaType.fileTypeSuffix);
+  }
+
   public static readonly treeBranchSuffix = '.';
 
   private get serializableTree(): string | null {
@@ -79,8 +83,7 @@ implements StringForciblyParsable<
 
   public toString(): string {
     const components = [
-      this.fileType,
-      MediaType.fileTypeSuffix,
+      this.serializableFileType,
       this.serializableTree,
       this.fileSubtype,
       this.serializableStructureType,
