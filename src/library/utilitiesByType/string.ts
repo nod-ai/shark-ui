@@ -26,6 +26,13 @@ const droppingLastCharacter = (givenCharacters: string): string => {
   return givenCharacters.substring(0, givenCharacters.length - 1);
 };
 
+const concatenated = (
+  ...givenOperands: string[]
+): string => {
+  const concatenatedOperands = givenOperands.join('');
+  return concatenatedOperands;
+};
+
 export {
   isString,
   asString,
@@ -34,4 +41,5 @@ export {
   isEmpty,
   lastCharacterOf,
   droppingLastCharacter,
+  concatenated,
 };
