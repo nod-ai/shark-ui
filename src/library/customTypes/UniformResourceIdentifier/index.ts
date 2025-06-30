@@ -43,8 +43,20 @@ implements StringForciblyParsable<
     return this._scheme;
   }
 
+  public static readonly schemeSuffix = ':';
+
+  public static readonly authorityPrefix = '//';
+
   public get authority(): UniformResourceIdentifier['_authority'] {
     return this._authority;
+  }
+
+  private get prefixedAuthority(): string | null {
+    if (
+      this.authority === null
+    ) return null;
+
+    return this.authority.prependedWith(UniformResourceIdentifier.authorityPrefix);
   }
 
   public get path(): Exclude<UniformResourceIdentifier['_path'], null> {
@@ -55,27 +67,11 @@ implements StringForciblyParsable<
     return this._path;
   }
 
+  public static readonly queryPrefix = '?';
+
   public get query(): UniformResourceIdentifier['_query'] {
     return this._query;
   }
-
-  public get fragment(): UniformResourceIdentifier['_fragment'] {
-    return this._fragment;
-  }
-
-  public static readonly schemeSuffix = ':';
-
-  public static readonly authorityPrefix = '//';
-
-  private get prefixedAuthority(): string | null {
-    if (
-      this.authority === null
-    ) return null;
-
-    return this.authority.prependedWith(UniformResourceIdentifier.authorityPrefix);
-  }
-
-  public static readonly queryPrefix = '?';
 
   private get prefixedQuery(): string | null {
     if (
@@ -86,6 +82,10 @@ implements StringForciblyParsable<
   }
 
   public static readonly fragmentPrefix = '#';
+
+  public get fragment(): UniformResourceIdentifier['_fragment'] {
+    return this._fragment;
+  }
 
   private get prefixedFragment(): string | null {
     if (

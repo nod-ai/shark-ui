@@ -20,8 +20,6 @@ import DataURI_ParsingError from './ParsingError.ts';
 class DataURI
   extends UniformResourceIdentifier {
   public static readonly scheme = NonTrivialString.parsedFrom('data').forciblyUnwrap();
-  public static readonly encodingPrefix = ';';
-  public static readonly dataPrefix = ',';
 
   private readonly _mediaType: MediaType | null;
   private readonly _encoding: DataURIBinaryEncoding;
@@ -49,9 +47,13 @@ class DataURI
     return this._mediaType;
   }
 
+  public static readonly encodingPrefix = ';';
+
   public get encoding(): DataURI['_encoding'] {
     return this._encoding;
   }
+
+  public static readonly dataPrefix = ',';
 
   public get data(): DataURI['_data'] {
     return this._data;
