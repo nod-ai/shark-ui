@@ -64,7 +64,7 @@ implements StringForciblyParsable<
   public static readonly parameterPrefix = ';';
   public static readonly parameterKeyValueDelimiter = '=';
 
-  private get serializedParameters(): string | null {
+  private get serializableParameters(): string | null {
     if (
       this.parameters === null
     ) return null;
@@ -84,7 +84,7 @@ implements StringForciblyParsable<
       this.serializableTree,
       this.fileSubtype,
       this.serializableStructureType,
-      this.serializedParameters,
+      this.serializableParameters,
     ];
 
     const serializedComponents = components.map($0 => $0 ?? '').join('');
