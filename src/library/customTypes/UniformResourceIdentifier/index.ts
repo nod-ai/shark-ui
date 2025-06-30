@@ -167,7 +167,7 @@ implements StringForciblyParsable<
     const pathSegmentDelimiter = '/';
 
     const {
-      authority,
+      authority: rawAuthority,
       path,
     } = ((): (
       | {
@@ -204,7 +204,7 @@ implements StringForciblyParsable<
 
     return new UniformResourceIdentifier(
       NonTrivialString.parsedFrom(rawScheme).forciblyUnwrap(/* TODO: move closer to declaration */),
-      NonTrivialString.nullableParsedFrom(authority).forciblyUnwrap(/* TODO: move closer to declaration */),
+      NonTrivialString.nullableParsedFrom(rawAuthority).forciblyUnwrap(/* TODO: move closer to declaration */),
       NonTrivialString.parsedFrom(path).forciblyUnwrap(/* TODO: move closer to declaration */),
       NonTrivialString.nullableParsedFrom(rawQuery).forciblyUnwrap(/* TODO: move closer to declaration */),
       NonTrivialString.nullableParsedFrom(rawFragment).forciblyUnwrap(/* TODO: move closer to declaration */),
