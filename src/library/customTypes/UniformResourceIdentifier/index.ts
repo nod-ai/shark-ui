@@ -43,13 +43,13 @@ implements StringForciblyParsable<
     return this._scheme;
   }
 
-  public get authority(): UniformResourceIdentifier['_authority'] {
-    return this._authority;
-  }
-
   public static readonly schemeSuffix = ':';
 
   public static readonly authorityPrefix = '//';
+
+  public get authority(): UniformResourceIdentifier['_authority'] {
+    return this._authority;
+  }
 
   private get prefixedAuthority(): string | null {
     if (
