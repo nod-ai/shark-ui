@@ -97,7 +97,7 @@ implements StringForciblyParsable<
       this.serializableParameters,
     ] as const;
 
-    const serializedComponents = concatenated(...orderedComponents);
+    const serializedComponents = NonTrivialString.fromConcatenating(...orderedComponents).toString();
     return serializedComponents;
   }
 
