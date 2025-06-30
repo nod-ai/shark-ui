@@ -6,10 +6,6 @@ import {
   isEmpty,
 } from '@/library/utilitiesByType/array.ts';
 
-import {
-  concatenated,
-} from '@/library/utilitiesByType/string.ts';
-
 import UniformResourceIdentifier from '../index.ts';
 
 import {
@@ -78,7 +74,7 @@ class DataURI
       this.serializableData,
     ] as const;
 
-    const serializedPathComponents = concatenated(...orderedPathComponents);
+    const serializedPathComponents = NonTrivialString.fromConcatenating(...orderedPathComponents).toString();
     return NonTrivialString.parsedFrom(serializedPathComponents).forciblyUnwrap(/* TODO: prove to compiler that this forcible unwrap will never fail */);
   }
 
