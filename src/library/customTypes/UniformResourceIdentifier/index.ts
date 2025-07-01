@@ -227,7 +227,12 @@ implements StringForciblyParsable<
     })();
 
     const outcomeOfParsingAuthority = NonTrivialString.nullableParsedFrom(rawAuthority);
-    const parsedAuthority = outcomeOfParsingAuthority.forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
+
+    if (
+      outcomeOfParsingAuthority.isFailure
+    ) return outcomeOfParsingAuthority.forciblyUnwrap(/* TODO: enable safe error propagation */);
+
+    const parsedAuthority = outcomeOfParsingAuthority.unwrapped;
 
     const outcomeOfParsingPath = NonTrivialString.parsedFrom(rawPath);
     const parsedPath = outcomeOfParsingPath.forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
