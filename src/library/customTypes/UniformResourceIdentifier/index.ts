@@ -140,6 +140,8 @@ implements StringForciblyParsable<
       rawScheme === undefined
     ) return new URI_ParsingError('Expected a scheme').throwAnyway('To be converted to `Attempt` failure');
 
+    const parsedScheme = NonTrivialString.parsedFrom(rawScheme).forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
+
     const [
       componentsPrecedingFragment,
       rawFragment = null,
@@ -150,6 +152,8 @@ implements StringForciblyParsable<
       !isEmpty(unexpectedComponentsWithFragmentPrefix)
     ) return new URI_ParsingError(`Found extra components with fragment prefix: ${unexpectedComponentsWithFragmentPrefix.join()}`).throwAnyway('To be converted to `Attempt` failure');
 
+    const parsedFragment = NonTrivialString.nullableParsedFrom(rawFragment).forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
+
     const [
       componentsPrecedingQuery,
       rawQuery = null,
@@ -159,6 +163,8 @@ implements StringForciblyParsable<
     if (
       !isEmpty(unexpectedComponentsWithQueryPrefix)
     ) return new URI_ParsingError(`Found extra components with query prefix: ${unexpectedComponentsWithQueryPrefix.join()}`).throwAnyway('To be converted to `Attempt` failure');
+
+    const parsedQuery = NonTrivialString.nullableParsedFrom(rawQuery).forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
 
     if (
       componentsPrecedingQuery === undefined
@@ -202,11 +208,8 @@ implements StringForciblyParsable<
       };
     })();
 
-    const parsedScheme = NonTrivialString.parsedFrom(rawScheme).forciblyUnwrap(/* TODO: move closer to declaration */);
-    const parsedAuthority = NonTrivialString.nullableParsedFrom(rawAuthority).forciblyUnwrap(/* TODO: move closer to declaration */);
-    const parsedPath = NonTrivialString.parsedFrom(rawPath).forciblyUnwrap(/* TODO: move closer to declaration */);
-    const parsedQuery = NonTrivialString.nullableParsedFrom(rawQuery).forciblyUnwrap(/* TODO: move closer to declaration */);
-    const parsedFragment = NonTrivialString.nullableParsedFrom(rawFragment).forciblyUnwrap(/* TODO: move closer to declaration */);
+    const parsedAuthority = NonTrivialString.nullableParsedFrom(rawAuthority).forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
+    const parsedPath = NonTrivialString.parsedFrom(rawPath).forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
 
     return new UniformResourceIdentifier(
       parsedScheme,
