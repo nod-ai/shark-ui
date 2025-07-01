@@ -101,6 +101,8 @@ class DataURI
       rawData === undefined
     ) return new DataURI_ParsingError('Expected data portion to be defined').throwAnyway('To be converted to `Attempt` failure');
 
+    const parsedData = Base64CharacterEncodedByteSequence.forciblyParsedFrom(rawData);
+
     const [
       rawMediaType,
       rawEncoding,
@@ -122,7 +124,6 @@ class DataURI
     ) return new DataURI_ParsingError(`Expected encoding portion to be defined as one of: ${allDataURIBinaryEncodings.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
     const parsedMediaType = MediaType.forciblyParsedFrom(rawMediaType);
-    const parsedData = Base64CharacterEncodedByteSequence.forciblyParsedFrom(rawData);
 
     const parsedDataURI = new DataURI(
       parsedMediaType,
