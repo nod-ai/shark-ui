@@ -48,7 +48,11 @@ class Base64CharacterEncodedByteSequence
       assuming: Base64.bitWidth,
     });
 
-    const paddedByteEncodableCharacters = outcomeOfEnsuringEncodableCharacters.forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
+    if (
+      outcomeOfEnsuringEncodableCharacters.isFailure
+    ) return outcomeOfEnsuringEncodableCharacters.forciblyUnwrap(/* TODO: enable safe error propagation */);
+
+    const paddedByteEncodableCharacters = outcomeOfEnsuringEncodableCharacters.unwrapped;
     const [byteEncodableCharacters, padding] = this.withPaddingDecoupled(paddedByteEncodableCharacters);
     const outcomeOfEnsuringConformantCharacters = Base64.CharacterSequence.ensureConformanceOf(byteEncodableCharacters);
 

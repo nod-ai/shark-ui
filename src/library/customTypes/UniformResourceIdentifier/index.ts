@@ -141,7 +141,12 @@ implements StringForciblyParsable<
     ) return new URI_ParsingError('Expected a scheme').throwAnyway('To be converted to `Attempt` failure');
 
     const outcomeOfParsingScheme = NonTrivialString.parsedFrom(rawScheme);
-    const parsedScheme = outcomeOfParsingScheme.forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
+
+    if (
+      outcomeOfParsingScheme.isFailure
+    ) return outcomeOfParsingScheme.forciblyUnwrap(/* TODO: enable safe error propagation */);
+
+    const parsedScheme = outcomeOfParsingScheme.unwrapped;
 
     const [
       componentsPrecedingFragment,
@@ -154,7 +159,12 @@ implements StringForciblyParsable<
     ) return new URI_ParsingError(`Found extra components with fragment prefix: ${unexpectedComponentsWithFragmentPrefix.join()}`).throwAnyway('To be converted to `Attempt` failure');
 
     const outcomeOfParsingFragment = NonTrivialString.nullableParsedFrom(rawFragment);
-    const parsedFragment = outcomeOfParsingFragment.forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
+
+    if (
+      outcomeOfParsingFragment.isFailure
+    ) return outcomeOfParsingFragment.forciblyUnwrap(/* TODO: enable safe error propagation */);
+
+    const parsedFragment = outcomeOfParsingFragment;
 
     const [
       componentsPrecedingQuery,
@@ -167,7 +177,12 @@ implements StringForciblyParsable<
     ) return new URI_ParsingError(`Found extra components with query prefix: ${unexpectedComponentsWithQueryPrefix.join()}`).throwAnyway('To be converted to `Attempt` failure');
 
     const outcomeOfParsingQuery = NonTrivialString.nullableParsedFrom(rawQuery);
-    const parsedQuery = outcomeOfParsingQuery.forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
+
+    if (
+      outcomeOfParsingQuery.isFailure
+    ) return outcomeOfParsingQuery.forciblyUnwrap(/* TODO: enable safe error propagation */);
+
+    const parsedQuery = outcomeOfParsingQuery.unwrapped;
 
     if (
       componentsPrecedingQuery === undefined
@@ -212,10 +227,20 @@ implements StringForciblyParsable<
     })();
 
     const outcomeOfParsingAuthority = NonTrivialString.nullableParsedFrom(rawAuthority);
-    const parsedAuthority = outcomeOfParsingAuthority.forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
+
+    if (
+      outcomeOfParsingAuthority.isFailure
+    ) return outcomeOfParsingAuthority.forciblyUnwrap(/* TODO: enable safe error propagation */);
+
+    const parsedAuthority = outcomeOfParsingAuthority.unwrapped;
 
     const outcomeOfParsingPath = NonTrivialString.parsedFrom(rawPath);
-    const parsedPath = outcomeOfParsingPath.forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
+
+    if (
+      outcomeOfParsingPath.isFailure
+    ) return outcomeOfParsingPath.forciblyUnwrap(/* TODO: enable safe error propagation */);
+
+    const parsedPath = outcomeOfParsingPath.unwrapped;
 
     return new UniformResourceIdentifier(
       parsedScheme,
