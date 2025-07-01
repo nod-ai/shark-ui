@@ -141,7 +141,12 @@ implements StringForciblyParsable<
     ) return new URI_ParsingError('Expected a scheme').throwAnyway('To be converted to `Attempt` failure');
 
     const outcomeOfParsingScheme = NonTrivialString.parsedFrom(rawScheme);
-    const parsedScheme = outcomeOfParsingScheme.forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
+
+    if (
+      outcomeOfParsingScheme.isFailure
+    ) return outcomeOfParsingScheme.forciblyUnwrap(/* TODO: enable safe error propagation */);
+
+    const parsedScheme = outcomeOfParsingScheme.unwrapped;
 
     const [
       componentsPrecedingFragment,
