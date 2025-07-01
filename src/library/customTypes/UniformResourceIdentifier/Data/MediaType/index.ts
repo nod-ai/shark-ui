@@ -184,13 +184,15 @@ implements StringForciblyParsable<
 
     const parsedTree = reversedTreeBranchesBeginningWithFileSubtype.reverse();
 
-    return new MediaType(
+    const parsedMediaType = new MediaType(
       parsedFileType,
       parsedTree,
       parsedFileSubtype,
       parsedStructureType,
       parsedParametersByKey,
     );
+
+    return parsedMediaType;
   };
 }
 
