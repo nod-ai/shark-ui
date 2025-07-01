@@ -44,10 +44,11 @@ class Base64CharacterEncodedByteSequence
   public static forciblyParsedFrom = (
     givenCharacters: string,
   ): Base64CharacterEncodedByteSequence => {
-    const paddedByteEncodableCharacters = Byte.Sequence.ensureEncodable(givenCharacters, {
+    const outcomeOfEnsuringEncodableCharacters = Byte.Sequence.ensureEncodable(givenCharacters, {
       assuming: Base64.bitWidth,
-    }).forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
+    });
 
+    const paddedByteEncodableCharacters = outcomeOfEnsuringEncodableCharacters.forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
     const [byteEncodableCharacters, padding] = this.withPaddingDecoupled(paddedByteEncodableCharacters);
     const outcomeOfEnsuringConformantCharacters = Base64.CharacterSequence.ensureConformanceOf(byteEncodableCharacters);
 
