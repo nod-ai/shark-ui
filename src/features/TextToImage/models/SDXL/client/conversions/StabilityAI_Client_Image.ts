@@ -17,7 +17,7 @@ const toOutputImage = (
     givenImage.base64 === undefined
   ) return null;
 
-  const base64DataOfRawImage = Base64CharacterEncodedByteSequence.forciblyParsedFrom(givenImage.base64);
+  const base64DataOfRawImage = Base64CharacterEncodedByteSequence.parsedFrom(givenImage.base64).forciblyUnwrap(/* Broken web contracts require intervention */);
 
   const derivedImage = {
     uri        : new ImageURI('png', 'base64', base64DataOfRawImage),
