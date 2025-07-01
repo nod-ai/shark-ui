@@ -211,7 +211,8 @@ implements StringForciblyParsable<
       };
     })();
 
-    const parsedAuthority = NonTrivialString.nullableParsedFrom(rawAuthority).forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
+    const outcomeOfParsingAuthority = NonTrivialString.nullableParsedFrom(rawAuthority);
+    const parsedAuthority = outcomeOfParsingAuthority.forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
     const parsedPath = NonTrivialString.parsedFrom(rawPath).forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
 
     return new UniformResourceIdentifier(
