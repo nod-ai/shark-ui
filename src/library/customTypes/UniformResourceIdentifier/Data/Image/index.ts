@@ -38,13 +38,15 @@ class ImageURI
   }
 
   public override get mediaType(): DataURI['mediaType'] {
-    return new MediaType(
+    const computedMediaType = new MediaType(
       ImageURI.fileType,
       null,
       this.format,
       null,
       null,
     );
+
+    return computedMediaType;
   }
 
   public static override forciblyParsedFrom = (
@@ -62,11 +64,13 @@ class ImageURI
       format === undefined
     ) return new ImageURI_ParsingError(`Expected format to be one of ${allImageURIFormats.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
-    return new ImageURI(
+    const parsedImageURI = new ImageURI(
       format,
       proposedURI.encoding,
       proposedURI.data,
     );
+
+    return parsedImageURI;
   };
 }
 

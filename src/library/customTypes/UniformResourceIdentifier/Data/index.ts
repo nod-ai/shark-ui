@@ -121,11 +121,13 @@ class DataURI
       coercedEncoding === undefined
     ) return new DataURI_ParsingError(`Expected encoding portion to be defined as one of: ${allDataURIBinaryEncodings.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
-    return new DataURI(
+    const parsedDataURI = new DataURI(
       MediaType.forciblyParsedFrom(rawMediaType),
       coercedEncoding,
       Base64CharacterEncodedByteSequence.forciblyParsedFrom(rawData),
     );
+
+    return parsedDataURI;
   };
 }
 

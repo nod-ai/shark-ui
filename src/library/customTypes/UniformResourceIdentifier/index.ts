@@ -242,13 +242,15 @@ implements StringForciblyParsable<
 
     const parsedPath = outcomeOfParsingPath.unwrapped;
 
-    return new UniformResourceIdentifier(
+    const parsedURI = new UniformResourceIdentifier(
       parsedScheme,
       parsedAuthority,
       parsedPath,
       parsedQuery,
       parsedFragment,
     );
+
+    return parsedURI;
   };
 }
 
