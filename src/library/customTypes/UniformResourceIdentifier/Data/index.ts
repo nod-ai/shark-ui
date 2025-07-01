@@ -1,12 +1,19 @@
 import Attempt from '@/library/Attempt';
 import Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
+
+import type {
+  ParsingError,
+} from '@/library/Parser';
+
 import NonTrivialString from '@/library/customTypes/NonTrivialString';
 
 import {
   isEmpty,
 } from '@/library/utilitiesByType/array.ts';
 
-import UniformResourceIdentifier from '../index.ts';
+import UniformResourceIdentifier, {
+  type URI_ParsingError,
+} from '../index.ts';
 
 import {
   allDataURIBinaryEncodings,
@@ -15,6 +22,11 @@ import {
 
 import MediaType from './MediaType';
 import DataURI_ParsingError from './ParsingError.ts';
+
+type DataURI_EffectiveParsingError =
+  | DataURI_ParsingError
+  | URI_ParsingError
+  | ParsingError<string>;
 
 /** See [RFC 2397](https://datatracker.ietf.org/doc/rfc2397) for more info */
 class DataURI
@@ -78,14 +90,20 @@ class DataURI
     return serializedPathComponents;
   }
 
-  public static override forciblyParsedFrom = (
+  public static override parsedFrom = (
     givenSubject: string,
-  ): DataURI => {
-    const proposedURI = super.forciblyParsedFrom(givenSubject);
+  ): Attempt.Outcome<DataURI, DataURI_EffectiveParsingError> => Attempt.that((ends) => {
+    const outcomeOfParsingSubject = super.parsedFrom(givenSubject);
+
+    if (
+      outcomeOfParsingSubject.isFailure
+    ) return outcomeOfParsingSubject;
+
+    const proposedURI = outcomeOfParsingSubject.unwrapped;
 
     if (
       !proposedURI.scheme.isEqualTo(DataURI.scheme)
-    ) return new DataURI_ParsingError(`Expected scheme to be "${DataURI.scheme.toString()}"`).throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(new DataURI_ParsingError(`Expected scheme to be "${DataURI.scheme.toString()}"`));
 
     const [
       mediaTypeAndEncoding,
@@ -95,11 +113,11 @@ class DataURI
 
     if (
       !isEmpty(extraComponentsWithDataPrefix)
-    ) return new DataURI_ParsingError(`Unexpected components with data prefix: ${extraComponentsWithDataPrefix.toString()}`).throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(new DataURI_ParsingError(`Unexpected components with data prefix: ${extraComponentsWithDataPrefix.toString()}`));
 
     if (
       rawData === undefined
-    ) return new DataURI_ParsingError('Expected data portion to be defined').throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(new DataURI_ParsingError('Expected data portion to be defined'));
 
     const outcomeOfParsingData = Base64CharacterEncodedByteSequence.parsedFrom(rawData);
 
@@ -117,11 +135,11 @@ class DataURI
 
     if (
       !isEmpty(extraComponentsWithEncodingPrefix)
-    ) return new DataURI_ParsingError(`Unexpected components with encoding prefix: ${extraComponentsWithEncodingPrefix.toString()}`).throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(new DataURI_ParsingError(`Unexpected components with encoding prefix: ${extraComponentsWithEncodingPrefix.toString()}`));
 
     if (
       rawMediaType === undefined
-    ) return new DataURI_ParsingError('Expected `mediaType` portion to be defined').throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(new DataURI_ParsingError('Expected `mediaType` portion to be defined'));
 
     const outcomeOfParsingMediaType = MediaType.parsedFrom(rawMediaType);
 
@@ -134,7 +152,7 @@ class DataURI
 
     if (
       parsedEncoding === undefined
-    ) return new DataURI_ParsingError(`Expected encoding portion to be defined as one of: ${allDataURIBinaryEncodings.toString()}`).throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(new DataURI_ParsingError(`Expected encoding portion to be defined as one of: ${allDataURIBinaryEncodings.toString()}`));
 
     const parsedDataURI = new DataURI(
       parsedMediaType,
@@ -142,8 +160,8 @@ class DataURI
       parsedData,
     );
 
-    return parsedDataURI;
-  };
+    return ends.inSuccessWith(parsedDataURI);
+  });
 }
 
 export {
