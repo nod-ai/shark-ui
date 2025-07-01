@@ -114,10 +114,10 @@ implements StringForciblyParsable<
       !isEmpty(componentsFollowingUnexpectedFileTypeSuffix)
     ) return new MediaType_ParsingError(`Found component sets after extraneous file type suffix(es): ${componentsFollowingUnexpectedFileTypeSuffix.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
-    const fileType = allFileTypes.find($0 => $0 === rawFileType);
+    const parsedFileType = allFileTypes.find($0 => $0 === rawFileType);
 
     if (
-      fileType === undefined
+      parsedFileType === undefined
     ) return new MediaType_ParsingError(`Expected file type as one of ${allFileTypes.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
     const [
@@ -150,6 +150,8 @@ implements StringForciblyParsable<
       ] as const;
     });
 
+    const parsedParametersByKey = Object.fromEntries(parameterEntries);
+
     const [
       serializedTreeBranchesEndingInFileSubtype,
       rawStructureType = null,
@@ -160,7 +162,7 @@ implements StringForciblyParsable<
       !isEmpty(extraComponentsWithStructureTypePrefix)
     ) return new MediaType_ParsingError(`Unexpected component sets after extraneous structure type prefix(es): ${extraComponentsWithStructureTypePrefix.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
-    const structureType = StructuredSyntaxNameSuffix.Nullable.parsedFrom(rawStructureType).forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
+    const parsedStructureType = StructuredSyntaxNameSuffix.Nullable.parsedFrom(rawStructureType).forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
 
     if (
       serializedTreeBranchesEndingInFileSubtype === undefined
@@ -168,20 +170,20 @@ implements StringForciblyParsable<
 
     const treeBranchesEndingInFileSubtype = serializedTreeBranchesEndingInFileSubtype.split(MediaType.treeBranchSuffix);
     const reversedTreeBranchesBeginningWithFileSubtype = treeBranchesEndingInFileSubtype.reverse();
-    const fileSubtype = reversedTreeBranchesBeginningWithFileSubtype.shift();
+    const parsedFileSubtype = reversedTreeBranchesBeginningWithFileSubtype.shift();
 
     if (
-      fileSubtype === undefined
+      parsedFileSubtype === undefined
     ) return new MediaType_ParsingError('Expected file subtype').throwAnyway('To be converted to `Attempt` failure');
 
-    const tree = reversedTreeBranchesBeginningWithFileSubtype.reverse();
+    const parsedTree = reversedTreeBranchesBeginningWithFileSubtype.reverse();
 
     return new MediaType(
-      fileType,
-      tree,
-      fileSubtype,
-      structureType,
-      Object.fromEntries(parameterEntries),
+      parsedFileType,
+      parsedTree,
+      parsedFileSubtype,
+      parsedStructureType,
+      parsedParametersByKey,
     );
   };
 }
