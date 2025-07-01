@@ -127,7 +127,7 @@ implements StringForciblyParsable<
     } = UniformResourceIdentifier;
 
     const [
-      scheme,
+      rawScheme,
       componentsFollowingScheme,
       ...componentsFollowingUnexpectedSchemeSuffix
     ] = givenSubject.split(schemeSuffix);
@@ -137,12 +137,12 @@ implements StringForciblyParsable<
     ) return new URI_ParsingError(`Found components with extra scheme suffix: ${componentsFollowingUnexpectedSchemeSuffix.join()}`).throwAnyway('To be converted to `Attempt` failure');
 
     if (
-      scheme === undefined
+      rawScheme === undefined
     ) return new URI_ParsingError('Expected a scheme').throwAnyway('To be converted to `Attempt` failure');
 
     const [
       componentsPrecedingFragment,
-      fragment = null,
+      rawFragment = null,
       ...unexpectedComponentsWithFragmentPrefix
     ] = componentsFollowingScheme?.split(fragmentPrefix) ?? [];
 
@@ -152,7 +152,7 @@ implements StringForciblyParsable<
 
     const [
       componentsPrecedingQuery,
-      query = null,
+      rawQuery = null,
       ...unexpectedComponentsWithQueryPrefix
     ] = componentsPrecedingFragment?.split(queryPrefix) ?? [];
 
@@ -167,8 +167,8 @@ implements StringForciblyParsable<
     const pathSegmentDelimiter = '/';
 
     const {
-      authority,
-      path,
+      authority: rawAuthority,
+      path: rawPath,
     } = ((): (
       | {
         authority: null;
@@ -203,11 +203,11 @@ implements StringForciblyParsable<
     })();
 
     return new UniformResourceIdentifier(
-      NonTrivialString.parsedFrom(scheme).forciblyUnwrap(/* TODO: move closer to declaration */),
-      NonTrivialString.nullableParsedFrom(authority).forciblyUnwrap(/* TODO: move closer to declaration */),
-      NonTrivialString.parsedFrom(path).forciblyUnwrap(/* TODO: move closer to declaration */),
-      NonTrivialString.nullableParsedFrom(query).forciblyUnwrap(/* TODO: move closer to declaration */),
-      NonTrivialString.nullableParsedFrom(fragment).forciblyUnwrap(/* TODO: move closer to declaration */),
+      NonTrivialString.parsedFrom(rawScheme).forciblyUnwrap(/* TODO: move closer to declaration */),
+      NonTrivialString.nullableParsedFrom(rawAuthority).forciblyUnwrap(/* TODO: move closer to declaration */),
+      NonTrivialString.parsedFrom(rawPath).forciblyUnwrap(/* TODO: move closer to declaration */),
+      NonTrivialString.nullableParsedFrom(rawQuery).forciblyUnwrap(/* TODO: move closer to declaration */),
+      NonTrivialString.nullableParsedFrom(rawFragment).forciblyUnwrap(/* TODO: move closer to declaration */),
     );
   };
 }
