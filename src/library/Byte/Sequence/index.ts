@@ -1,8 +1,8 @@
 import Attempt from '@/library/Attempt';
 
 import {
-  cofactorTo as Byte_cofactorTo,
-} from '..';
+  Byte_cofactorTo,
+} from '../utilities/cofactorTo';
 
 import Byte_Sequence_EncodingCompatibilityError from './EncodingCompatibilityError';
 
