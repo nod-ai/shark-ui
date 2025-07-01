@@ -38,13 +38,15 @@ class ImageURI
   }
 
   public override get mediaType(): DataURI['mediaType'] {
-    return new MediaType(
+    const computedMediaType = new MediaType(
       ImageURI.fileType,
       null,
       this.format,
       null,
       null,
     );
+
+    return computedMediaType;
   }
 
   public static override forciblyParsedFrom = (
