@@ -8,10 +8,6 @@ import type {
 
 import StringSubset from '@/library/customTypes/StringSubset';
 
-import type {
-  StringForciblyParsable,
-} from '@/library/typeUtilities/StringForciblyParsable';
-
 import {
   droppingLastCharacter,
   lastCharacterOf,
@@ -24,8 +20,6 @@ class Base64CharacterEncodedByteSequence
   extends StringSubset<
   'Base64CharacterEncodedByteSequence'
 > implements StringParsable<
-  typeof Base64CharacterEncodedByteSequence
->, StringForciblyParsable<
   typeof Base64CharacterEncodedByteSequence
 > {
   public static paddingCharacter = '=';
@@ -49,12 +43,6 @@ class Base64CharacterEncodedByteSequence
 
     return [remainingSequence, accumulatedPadding];
   }
-
-  public static forciblyParsedFrom = (
-    givenCharacters: string,
-  ): Base64CharacterEncodedByteSequence => {
-    return this.parsedFrom(givenCharacters).forciblyUnwrap(/* TODO: distribute to callers */);
-  };
 
   public static parsedFrom = (
     givenCharacters: string,
