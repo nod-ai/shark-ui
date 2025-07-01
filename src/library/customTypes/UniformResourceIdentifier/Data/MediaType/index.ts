@@ -150,6 +150,8 @@ implements StringForciblyParsable<
       ] as const;
     });
 
+    const parsedParametersByKey = Object.fromEntries(parameterEntries);
+
     const [
       serializedTreeBranchesEndingInFileSubtype,
       rawStructureType = null,
@@ -181,7 +183,7 @@ implements StringForciblyParsable<
       tree,
       fileSubtype,
       parsedStructureType,
-      Object.fromEntries(parameterEntries),
+      parsedParametersByKey,
     );
   };
 }
