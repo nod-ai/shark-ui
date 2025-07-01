@@ -1,5 +1,5 @@
 import Attempt from '@/library/Attempt';
-import * as Base64 from '@/library/Base64';
+import Base64 from '@/library/Base64';
 import Byte from '@/library/Byte';
 import StringSubset from '@/library/customTypes/StringSubset';
 
