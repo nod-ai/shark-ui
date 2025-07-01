@@ -6,10 +6,6 @@ import type {
 
 import NonTrivialString from '@/library/customTypes/NonTrivialString';
 
-import type {
-  StringForciblyParsable,
-} from '@/library/typeUtilities/StringForciblyParsable';
-
 import {
   isEmpty,
 } from '@/library/utilitiesByType/array.ts';
@@ -40,8 +36,6 @@ type MediaType_EffectiveParsingError =
 /** See [RFC 2045](https://datatracker.ietf.org/doc/html/rfc2045) for more information */
 class MediaType
 implements StringParsable<
-  typeof MediaType
->, StringForciblyParsable<
   typeof MediaType
 > {
   public constructor(
@@ -115,12 +109,6 @@ implements StringParsable<
     const serializedComponents = NonTrivialString.fromConcatenating(...orderedComponents);
     return serializedComponents;
   }
-
-  public static forciblyParsedFrom = (
-    givenSubject: string,
-  ): MediaType => {
-    return this.parsedFrom(givenSubject).forciblyUnwrap(/* TODO: distribute to callers */);
-  };
 
   public static parsedFrom = (
     givenSubject: string,
