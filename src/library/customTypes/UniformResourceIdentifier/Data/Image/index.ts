@@ -16,7 +16,7 @@ import ImageURI_ParsingError from './ParsingError.ts';
 
 class ImageURI
   extends DataURI {
-  public static readonly mediaType = 'image';
+  public static readonly fileType = 'image';
 
   private readonly _format: ImageURIFormat;
 
@@ -39,7 +39,7 @@ class ImageURI
 
   public override get mediaType(): DataURI['mediaType'] {
     return new MediaType(
-      ImageURI.mediaType,
+      ImageURI.fileType,
       null,
       this.format,
       null,
@@ -53,8 +53,8 @@ class ImageURI
     const proposedURI = super.forciblyParsedFrom(givenSubject);
 
     if (
-      proposedURI.mediaType.fileType !== ImageURI.mediaType
-    ) return new ImageURI_ParsingError(`Expected media type starting with ${ImageURI.mediaType}`).throwAnyway('To be converted to `Attempt` failure');
+      proposedURI.mediaType.fileType !== ImageURI.fileType
+    ) return new ImageURI_ParsingError(`Expected media type starting with ${ImageURI.fileType}`).throwAnyway('To be converted to `Attempt` failure');
 
     const format = allImageURIFormats.find($0 => $0 === proposedURI.mediaType.fileSubtype);
 
