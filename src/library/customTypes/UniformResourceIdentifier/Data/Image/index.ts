@@ -52,22 +52,22 @@ class ImageURI
   public static override forciblyParsedFrom = (
     givenSubject: string,
   ): ImageURI => {
-    const proposedURI = super.forciblyParsedFrom(givenSubject);
+    const parsedURI = super.forciblyParsedFrom(givenSubject);
 
     if (
-      proposedURI.mediaType.fileType !== ImageURI.fileType
+      parsedURI.mediaType.fileType !== ImageURI.fileType
     ) return new ImageURI_ParsingError(`Expected media type starting with ${ImageURI.fileType}`).throwAnyway('To be converted to `Attempt` failure');
 
-    const format = allImageURIFormats.find($0 => $0 === proposedURI.mediaType.fileSubtype);
+    const parsedFormat = allImageURIFormats.find($0 => $0 === parsedURI.mediaType.fileSubtype);
 
     if (
-      format === undefined
+      parsedFormat === undefined
     ) return new ImageURI_ParsingError(`Expected format to be one of ${allImageURIFormats.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
     const parsedImageURI = new ImageURI(
-      format,
-      proposedURI.encoding,
-      proposedURI.data,
+      parsedFormat,
+      parsedURI.encoding,
+      parsedURI.data,
     );
 
     return parsedImageURI;
