@@ -159,7 +159,12 @@ implements StringForciblyParsable<
     ) return new URI_ParsingError(`Found extra components with fragment prefix: ${unexpectedComponentsWithFragmentPrefix.join()}`).throwAnyway('To be converted to `Attempt` failure');
 
     const outcomeOfParsingFragment = NonTrivialString.nullableParsedFrom(rawFragment);
-    const parsedFragment = outcomeOfParsingFragment.forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
+
+    if (
+      outcomeOfParsingFragment.isFailure
+    ) return outcomeOfParsingFragment.forciblyUnwrap(/* TODO: enable safe error propagation */);
+
+    const parsedFragment = outcomeOfParsingFragment;
 
     const [
       componentsPrecedingQuery,
