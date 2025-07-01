@@ -105,7 +105,7 @@ class DataURI
 
     if (
       outcomeOfParsingData.isFailure
-    ) return outcomeOfParsingData.forciblyUnwrap(/* TODO: enable safe error propagation */);
+    ) return outcomeOfParsingData;
 
     const parsedData = outcomeOfParsingData.unwrapped;
 
