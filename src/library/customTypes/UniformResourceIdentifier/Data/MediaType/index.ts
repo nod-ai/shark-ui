@@ -114,10 +114,10 @@ implements StringForciblyParsable<
       !isEmpty(componentsFollowingUnexpectedFileTypeSuffix)
     ) return new MediaType_ParsingError(`Found component sets after extraneous file type suffix(es): ${componentsFollowingUnexpectedFileTypeSuffix.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
-    const fileType = allFileTypes.find($0 => $0 === rawFileType);
+    const parsedFileType = allFileTypes.find($0 => $0 === rawFileType);
 
     if (
-      fileType === undefined
+      parsedFileType === undefined
     ) return new MediaType_ParsingError(`Expected file type as one of ${allFileTypes.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
     const [
@@ -179,7 +179,7 @@ implements StringForciblyParsable<
     const tree = reversedTreeBranchesBeginningWithFileSubtype.reverse();
 
     return new MediaType(
-      fileType,
+      parsedFileType,
       tree,
       fileSubtype,
       parsedStructureType,
