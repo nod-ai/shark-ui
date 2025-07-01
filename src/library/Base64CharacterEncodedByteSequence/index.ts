@@ -1,11 +1,12 @@
 import Attempt from '@/library/Attempt';
 import Base64 from '@/library/Base64';
 import Byte from '@/library/Byte';
-import StringSubset from '@/library/customTypes/StringSubset';
 
 import type {
-  StringForciblyParsable,
-} from '@/library/typeUtilities/StringForciblyParsable';
+  StringParsable,
+} from '@/library/Parser/string';
+
+import StringSubset from '@/library/customTypes/StringSubset';
 
 import {
   droppingLastCharacter,
@@ -18,7 +19,7 @@ import Base64CharacterEncodedByteSequence_ParsingError from './ParsingError.ts';
 class Base64CharacterEncodedByteSequence
   extends StringSubset<
   'Base64CharacterEncodedByteSequence'
-> implements StringForciblyParsable<
+> implements StringParsable<
   typeof Base64CharacterEncodedByteSequence
 > {
   public static paddingCharacter = '=';
@@ -43,9 +44,9 @@ class Base64CharacterEncodedByteSequence
     return [remainingSequence, accumulatedPadding];
   }
 
-  public static forciblyParsedFrom = (
+  public static parsedFrom = (
     givenCharacters: string,
-  ): Base64CharacterEncodedByteSequence => {
+  ): Attempt.Outcome<Base64CharacterEncodedByteSequence, Base64CharacterEncodedByteSequence_ParsingError> => {
     const outcomeOfEnsuringEncodableCharacters = Byte.Sequence.ensureEncodable(givenCharacters, {
       assuming: Base64.bitWidth,
     });
@@ -55,7 +56,7 @@ class Base64CharacterEncodedByteSequence
         cause: $0 => Base64CharacterEncodedByteSequence_ParsingError.thatEscorts($0),
       });
 
-      return failureToEnsureEncodableCharacters.forciblyUnwrap(/* TODO: enable safe error propagation */);
+      return failureToEnsureEncodableCharacters;
     }
 
     const paddedByteEncodableCharacters = outcomeOfEnsuringEncodableCharacters.unwrapped;
@@ -67,7 +68,7 @@ class Base64CharacterEncodedByteSequence
       cause  : $0 => Base64CharacterEncodedByteSequence_ParsingError.thatEscorts($0),
     });
 
-    return outcomeOfParsingByteSequence.forciblyUnwrap(/* TODO: enable safe error propagation */);
+    return outcomeOfParsingByteSequence;
   };
 }
 

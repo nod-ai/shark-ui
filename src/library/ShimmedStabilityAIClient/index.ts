@@ -93,7 +93,7 @@ const toBatchGenerationRequestBody = (givenRequests: GenerateFromTextRequest['te
 };
 
 const z_image = z.string().transform((someSubject) => {
-  return Base64CharacterEncodedByteSequence.forciblyParsedFrom(someSubject);
+  return Base64CharacterEncodedByteSequence.parsedFrom(someSubject).forciblyUnwrap(/* Zod can safely propagate errors */);
 });
 
 const z_imageGenerationResponseBody = z.object({
