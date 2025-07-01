@@ -1,3 +1,9 @@
+import Attempt from '@/library/Attempt';
+
+import type {
+  StringParsable,
+} from '@/library/Parser/string';
+
 import NonTrivialString from '@/library/customTypes/NonTrivialString';
 
 import type {
@@ -13,7 +19,10 @@ import {
 } from '@/library/utilitiesByType/string';
 
 import MediaType_ParsingError from './ParsingError';
-import StructuredSyntaxNameSuffix from './StructuredSyntaxNameSuffix';
+
+import StructuredSyntaxNameSuffix, {
+  type StructuredSyntaxNameSuffix_ParsingError,
+} from './StructuredSyntaxNameSuffix';
 
 const allFileTypes = [
   'application',
@@ -24,9 +33,15 @@ const allFileTypes = [
 
 type FileType = (typeof allFileTypes)[number];
 
+type MediaType_EffectiveParsingError =
+  | MediaType_ParsingError
+  | StructuredSyntaxNameSuffix_ParsingError;
+
 /** See [RFC 2045](https://datatracker.ietf.org/doc/html/rfc2045) for more information */
 class MediaType
-implements StringForciblyParsable<
+implements StringParsable<
+  typeof MediaType
+>, StringForciblyParsable<
   typeof MediaType
 > {
   public constructor(
@@ -104,6 +119,12 @@ implements StringForciblyParsable<
   public static forciblyParsedFrom = (
     givenSubject: string,
   ): MediaType => {
+    return this.parsedFrom(givenSubject).forciblyUnwrap(/* TODO: distribute to callers */);
+  };
+
+  public static parsedFrom = (
+    givenSubject: string,
+  ): Attempt.Outcome<MediaType, MediaType_EffectiveParsingError> => Attempt.that((ends) => {
     const [
       rawFileType,
       remainderAfterFileType,
@@ -112,20 +133,22 @@ implements StringForciblyParsable<
 
     if (
       !isEmpty(componentsFollowingUnexpectedFileTypeSuffix)
-    ) return new MediaType_ParsingError(`Found component sets after extraneous file type suffix(es): ${componentsFollowingUnexpectedFileTypeSuffix.toString()}`).throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(new MediaType_ParsingError(`Found component sets after extraneous file type suffix(es): ${componentsFollowingUnexpectedFileTypeSuffix.toString()}`));
 
     const parsedFileType = allFileTypes.find($0 => $0 === rawFileType);
 
     if (
       parsedFileType === undefined
-    ) return new MediaType_ParsingError(`Expected file type as one of ${allFileTypes.toString()}`).throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(new MediaType_ParsingError(`Expected file type as one of ${allFileTypes.toString()}`));
 
     const [
       remainderBeforeParameters,
       ...serializedParameters
     ] = remainderAfterFileType?.split(MediaType.parameterPrefix) ?? [];
 
-    const parameterEntries = serializedParameters.map((eachParameter, indexOfEachParameter) => {
+    type MediaType_ParameterEntry = [string, string];
+
+    const outcomesOfSerializingParameters = serializedParameters.map((eachParameter, indexOfEachParameter): Attempt.Outcome<MediaType_ParameterEntry, MediaType_ParsingError> => Attempt.that((ends) => {
       const [
         keyOfEachParameter,
         valueOfEachParameter,
@@ -134,21 +157,33 @@ implements StringForciblyParsable<
 
       if (
         !isEmpty(extraneousComponentsInEachParameter)
-      ) return new MediaType_ParsingError(`Found extraneous components in parameter at index ${indexOfEachParameter.toString()}: ${extraneousComponentsInEachParameter.toString()}`).throwAnyway('To be converted to `Attempt` failure');
+      ) return ends.inFailureDueTo(new MediaType_ParsingError(`Found extraneous components in parameter at index ${indexOfEachParameter.toString()}: ${extraneousComponentsInEachParameter.toString()}`));
 
       if (
         keyOfEachParameter === undefined
-      ) return new MediaType_ParsingError(`Expected key for parameter at index ${indexOfEachParameter.toString()}`).throwAnyway('To be converted to `Attempt` failure');
+      ) return ends.inFailureDueTo(new MediaType_ParsingError(`Expected key for parameter at index ${indexOfEachParameter.toString()}`));
 
       if (
         valueOfEachParameter === undefined
-      ) return new MediaType_ParsingError(`Expected value for parameter at index ${indexOfEachParameter.toString()}`).throwAnyway('To be converted to `Attempt` failure');
+      ) return ends.inFailureDueTo(new MediaType_ParsingError(`Expected value for parameter at index ${indexOfEachParameter.toString()}`));
 
-      return [
+      const entryForEachParameter: MediaType_ParameterEntry = [
         keyOfEachParameter,
         valueOfEachParameter,
-      ] as const;
-    });
+      ];
+
+      return ends.inSuccessWith(entryForEachParameter);
+    }));
+
+    const parameterEntries: MediaType_ParameterEntry[] = [];
+
+    for (const eachOutcome of outcomesOfSerializingParameters) {
+      if (
+        eachOutcome.isFailure
+      ) return eachOutcome;
+
+      parameterEntries.push(eachOutcome.unwrapped);
+    }
 
     const parsedParametersByKey = Object.fromEntries(parameterEntries);
 
@@ -160,19 +195,19 @@ implements StringForciblyParsable<
 
     if (
       !isEmpty(extraComponentsWithStructureTypePrefix)
-    ) return new MediaType_ParsingError(`Unexpected component sets after extraneous structure type prefix(es): ${extraComponentsWithStructureTypePrefix.toString()}`).throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(new MediaType_ParsingError(`Unexpected component sets after extraneous structure type prefix(es): ${extraComponentsWithStructureTypePrefix.toString()}`));
 
     const outcomeOfParsingStructureType = StructuredSyntaxNameSuffix.Nullable.parsedFrom(rawStructureType);
 
     if (
       outcomeOfParsingStructureType.isFailure
-    ) return outcomeOfParsingStructureType.forciblyUnwrap(/* TODO: enable safe error propagation */);
+    ) return outcomeOfParsingStructureType;
 
     const parsedStructureType = outcomeOfParsingStructureType.unwrapped;
 
     if (
       serializedTreeBranchesEndingInFileSubtype === undefined
-    ) return new MediaType_ParsingError('Expected file subtype').throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(new MediaType_ParsingError('Expected file subtype'));
 
     const treeBranchesEndingInFileSubtype = serializedTreeBranchesEndingInFileSubtype.split(MediaType.treeBranchSuffix);
     const reversedTreeBranchesBeginningWithFileSubtype = treeBranchesEndingInFileSubtype.reverse();
@@ -180,7 +215,7 @@ implements StringForciblyParsable<
 
     if (
       parsedFileSubtype === undefined
-    ) return new MediaType_ParsingError('Expected file subtype').throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(new MediaType_ParsingError('Expected file subtype'));
 
     const parsedTree = reversedTreeBranchesBeginningWithFileSubtype.reverse();
 
@@ -192,8 +227,8 @@ implements StringForciblyParsable<
       parsedParametersByKey,
     );
 
-    return parsedMediaType;
-  };
+    return ends.inSuccessWith(parsedMediaType);
+  });
 }
 
 export {
