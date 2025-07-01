@@ -1,6 +1,6 @@
 import Attempt from '@/library/Attempt';
 import * as Base64 from '@/library/Base64';
-import * as Byte from '@/library/Byte';
+import Byte from '@/library/Byte';
 import StringSubset from '@/library/customTypes/StringSubset';
 
 import type {

@@ -1,5 +1,5 @@
-export * as Sequence from './Sequence';
+import * as Byte from './exports';
 
 export {
-  Byte_cofactorTo as cofactorTo,
-} from './utilities/cofactorTo';
+  Byte as default,
+};
