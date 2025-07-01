@@ -62,11 +62,13 @@ class ImageURI
       format === undefined
     ) return new ImageURI_ParsingError(`Expected format to be one of ${allImageURIFormats.toString()}`).throwAnyway('To be converted to `Attempt` failure');
 
-    return new ImageURI(
+    const parsedImageURI = new ImageURI(
       format,
       proposedURI.encoding,
       proposedURI.data,
     );
+
+    return parsedImageURI;
   };
 }
 
