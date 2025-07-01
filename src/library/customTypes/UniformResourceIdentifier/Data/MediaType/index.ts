@@ -170,10 +170,10 @@ implements StringForciblyParsable<
 
     const treeBranchesEndingInFileSubtype = serializedTreeBranchesEndingInFileSubtype.split(MediaType.treeBranchSuffix);
     const reversedTreeBranchesBeginningWithFileSubtype = treeBranchesEndingInFileSubtype.reverse();
-    const fileSubtype = reversedTreeBranchesBeginningWithFileSubtype.shift();
+    const parsedFileSubtype = reversedTreeBranchesBeginningWithFileSubtype.shift();
 
     if (
-      fileSubtype === undefined
+      parsedFileSubtype === undefined
     ) return new MediaType_ParsingError('Expected file subtype').throwAnyway('To be converted to `Attempt` failure');
 
     const parsedTree = reversedTreeBranchesBeginningWithFileSubtype.reverse();
@@ -181,7 +181,7 @@ implements StringForciblyParsable<
     return new MediaType(
       parsedFileType,
       parsedTree,
-      fileSubtype,
+      parsedFileSubtype,
       parsedStructureType,
       parsedParametersByKey,
     );
