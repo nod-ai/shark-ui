@@ -1,4 +1,13 @@
 import Attempt from '@/library/Attempt';
+
+import type {
+  ParsingError,
+} from '@/library/Parser';
+
+import type {
+  StringParsable,
+} from '@/library/Parser/string';
+
 import NonTrivialString from '@/library/customTypes/NonTrivialString';
 
 import type {
@@ -20,7 +29,9 @@ import URI_ParsingError from './ParsingError';
  * See [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986) for more information
  */
 class UniformResourceIdentifier
-implements StringForciblyParsable<
+implements StringParsable<
+  typeof UniformResourceIdentifier
+>, StringForciblyParsable<
   typeof UniformResourceIdentifier
 > {
   private readonly _scheme: /*   */ NonTrivialString;
@@ -119,6 +130,12 @@ implements StringForciblyParsable<
   public static forciblyParsedFrom = (
     givenSubject: string,
   ): UniformResourceIdentifier => {
+    return this.parsedFrom(givenSubject).forciblyUnwrap(/* TODO: distribute to callers */);
+  };
+
+  public static parsedFrom = (
+    givenSubject: string,
+  ): Attempt.Outcome<UniformResourceIdentifier, URI_ParsingError | ParsingError<string>> => Attempt.that((ends) => {
     const {
       schemeSuffix,
       authorityPrefix,
@@ -134,11 +151,11 @@ implements StringForciblyParsable<
 
     if (
       !isEmpty(componentsFollowingUnexpectedSchemeSuffix)
-    ) return new URI_ParsingError(`Found components with extra scheme suffix: ${componentsFollowingUnexpectedSchemeSuffix.join()}`).throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(new URI_ParsingError(`Found components with extra scheme suffix: ${componentsFollowingUnexpectedSchemeSuffix.join()}`));
 
     if (
       rawScheme === undefined
-    ) return new URI_ParsingError('Expected a scheme').throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(new URI_ParsingError('Expected a scheme'));
 
     const outcomeOfParsingScheme = NonTrivialString.parsedFrom(rawScheme);
 
@@ -156,7 +173,7 @@ implements StringForciblyParsable<
 
     if (
       !isEmpty(unexpectedComponentsWithFragmentPrefix)
-    ) return new URI_ParsingError(`Found extra components with fragment prefix: ${unexpectedComponentsWithFragmentPrefix.join()}`).throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(new URI_ParsingError(`Found extra components with fragment prefix: ${unexpectedComponentsWithFragmentPrefix.join()}`));
 
     const outcomeOfParsingFragment = NonTrivialString.nullableParsedFrom(rawFragment);
 
@@ -174,7 +191,7 @@ implements StringForciblyParsable<
 
     if (
       !isEmpty(unexpectedComponentsWithQueryPrefix)
-    ) return new URI_ParsingError(`Found extra components with query prefix: ${unexpectedComponentsWithQueryPrefix.join()}`).throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(new URI_ParsingError(`Found extra components with query prefix: ${unexpectedComponentsWithQueryPrefix.join()}`));
 
     const outcomeOfParsingQuery = NonTrivialString.nullableParsedFrom(rawQuery);
 
@@ -186,14 +203,11 @@ implements StringForciblyParsable<
 
     if (
       componentsPrecedingQuery === undefined
-    ) return new URI_ParsingError('Expected components preceding query').throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(new URI_ParsingError('Expected components preceding query'));
 
     const pathSegmentDelimiter = '/';
 
-    const {
-      authority: rawAuthority,
-      path: rawPath,
-    } = ((): (
+    type AuthorityAndPath =
       | {
         authority: null;
         path: string;
@@ -201,11 +215,12 @@ implements StringForciblyParsable<
       | {
         authority: string;
         path: `${typeof pathSegmentDelimiter}${string}`;
-      }
-    ) => {
+      };
+
+    const outcomeOfSplittingAuthorityAndPath: Attempt.Outcome<AuthorityAndPath, URI_ParsingError> = Attempt.that((ends) => {
       if (
         !componentsPrecedingQuery.startsWith(authorityPrefix)
-      ) return ({
+      ) return ends.inSuccessWith({
         authority: null,
         path     : componentsPrecedingQuery,
       });
@@ -218,13 +233,22 @@ implements StringForciblyParsable<
 
       if (
         authority === undefined
-      ) return new URI_ParsingError('Expected to find authority between its prefix and the path segments').throwAnyway('To be converted to `Attempt` failure');
+      ) return ends.inFailureDueTo(new URI_ParsingError('Expected to find authority between its prefix and the path segments'));
 
-      return {
+      return ends.inSuccessWith({
         authority,
-        path: `${pathSegmentDelimiter}${pathSegments.join(pathSegmentDelimiter)}`,
-      };
-    })();
+        path: `${pathSegmentDelimiter}${pathSegments.join(pathSegmentDelimiter)}` as const,
+      });
+    });
+
+    if (
+      outcomeOfSplittingAuthorityAndPath.isFailure
+    ) return outcomeOfSplittingAuthorityAndPath;
+
+    const {
+      authority: rawAuthority,
+      path: rawPath,
+    } = outcomeOfSplittingAuthorityAndPath.unwrapped;
 
     const outcomeOfParsingAuthority = NonTrivialString.nullableParsedFrom(rawAuthority);
 
@@ -250,8 +274,8 @@ implements StringForciblyParsable<
       parsedFragment,
     );
 
-    return parsedURI;
-  };
+    return ends.inSuccessWith(parsedURI);
+  });
 }
 
 export {
