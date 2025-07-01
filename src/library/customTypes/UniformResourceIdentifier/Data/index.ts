@@ -101,7 +101,8 @@ class DataURI
       rawData === undefined
     ) return new DataURI_ParsingError('Expected data portion to be defined').throwAnyway('To be converted to `Attempt` failure');
 
-    const parsedData = Base64CharacterEncodedByteSequence.parsedFrom(rawData).forciblyUnwrap(/* TODO: move to guard statement */);
+    const outcomeOfParsingData = Base64CharacterEncodedByteSequence.parsedFrom(rawData);
+    const parsedData = outcomeOfParsingData.forciblyUnwrap(/* TODO: move to guard statement */);
 
     const [
       rawMediaType,
