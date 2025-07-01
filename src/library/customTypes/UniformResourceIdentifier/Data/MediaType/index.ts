@@ -176,11 +176,11 @@ implements StringForciblyParsable<
       fileSubtype === undefined
     ) return new MediaType_ParsingError('Expected file subtype').throwAnyway('To be converted to `Attempt` failure');
 
-    const tree = reversedTreeBranchesBeginningWithFileSubtype.reverse();
+    const parsedTree = reversedTreeBranchesBeginningWithFileSubtype.reverse();
 
     return new MediaType(
       parsedFileType,
-      tree,
+      parsedTree,
       fileSubtype,
       parsedStructureType,
       parsedParametersByKey,
