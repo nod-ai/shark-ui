@@ -19,7 +19,8 @@ interface Repository_Issue {
 
 const Repository = {
   get emptyDraftOfNewIssue(): URL {
-    return new URL('https://github.com/nod-ai/shark-ui/issues/new');
+    const mutableURLForNewIssue = new URL('https://github.com/nod-ai/shark-ui/issues/new');
+    return mutableURLForNewIssue;
   },
   /** Creates a URL that drafts a new issue with pre-populated fields  */
   draftIssue(
