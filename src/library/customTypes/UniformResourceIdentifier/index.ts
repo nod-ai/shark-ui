@@ -166,7 +166,8 @@ implements StringForciblyParsable<
       !isEmpty(unexpectedComponentsWithQueryPrefix)
     ) return new URI_ParsingError(`Found extra components with query prefix: ${unexpectedComponentsWithQueryPrefix.join()}`).throwAnyway('To be converted to `Attempt` failure');
 
-    const parsedQuery = NonTrivialString.nullableParsedFrom(rawQuery).forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
+    const outcomeOfParsingQuery = NonTrivialString.nullableParsedFrom(rawQuery);
+    const parsedQuery = outcomeOfParsingQuery.forciblyUnwrap(/* TODO: make adjacent to `return` statement */);
 
     if (
       componentsPrecedingQuery === undefined
