@@ -1,11 +1,23 @@
+import Attempt from '@/library/Attempt';
 import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
+
+import type {
+  ParsingError,
+} from '@/library/Parser';
+
+import type {
+  URI_ParsingError,
+} from '../..';
 
 import type {
   DataURIBinaryEncoding,
 } from '../DataURIBinaryEncoding.ts';
 
 import MediaType from '../MediaType';
-import DataURI from '../index.ts';
+
+import DataURI, {
+  type DataURI_ParsingError,
+} from '../index.ts';
 
 import {
   allImageURIFormats,
@@ -13,6 +25,12 @@ import {
 } from './ImageURIFormat.ts';
 
 import ImageURI_ParsingError from './ParsingError.ts';
+
+type ImageURI_EffectiveParsingError =
+  | ImageURI_ParsingError
+  | DataURI_ParsingError
+  | URI_ParsingError
+  | ParsingError<string>;
 
 class ImageURI
   extends DataURI {
@@ -49,20 +67,26 @@ class ImageURI
     return computedMediaType;
   }
 
-  public static override forciblyParsedFrom = (
+  public static override parsedFrom = (
     givenSubject: string,
-  ): ImageURI => {
-    const parsedURI = super.forciblyParsedFrom(givenSubject);
+  ): Attempt.Outcome<ImageURI, ImageURI_EffectiveParsingError> => Attempt.that((ends) => {
+    const outcomeOfParsingSubject = super.parsedFrom(givenSubject);
+
+    if (
+      outcomeOfParsingSubject.isFailure
+    ) return outcomeOfParsingSubject;
+
+    const parsedURI = outcomeOfParsingSubject.unwrapped;
 
     if (
       parsedURI.mediaType.fileType !== ImageURI.fileType
-    ) return new ImageURI_ParsingError(`Expected media type starting with ${ImageURI.fileType}`).throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(new ImageURI_ParsingError(`Expected media type starting with ${ImageURI.fileType}`));
 
     const parsedFormat = allImageURIFormats.find($0 => $0 === parsedURI.mediaType.fileSubtype);
 
     if (
       parsedFormat === undefined
-    ) return new ImageURI_ParsingError(`Expected format to be one of ${allImageURIFormats.toString()}`).throwAnyway('To be converted to `Attempt` failure');
+    ) return ends.inFailureDueTo(new ImageURI_ParsingError(`Expected format to be one of ${allImageURIFormats.toString()}`));
 
     const parsedImageURI = new ImageURI(
       parsedFormat,
@@ -70,8 +94,8 @@ class ImageURI
       parsedURI.data,
     );
 
-    return parsedImageURI;
-  };
+    return ends.inSuccessWith(parsedImageURI);
+  });
 }
 
 export {
