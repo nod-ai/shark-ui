@@ -164,7 +164,7 @@ implements StringForciblyParsable<
       outcomeOfParsingFragment.isFailure
     ) return outcomeOfParsingFragment.forciblyUnwrap(/* TODO: enable safe error propagation */);
 
-    const parsedFragment = outcomeOfParsingFragment;
+    const parsedFragment = outcomeOfParsingFragment.unwrapped;
 
     const [
       componentsPrecedingQuery,
