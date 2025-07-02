@@ -5,7 +5,6 @@ import {
   vueTsConfigs,
 } from '@vue/eslint-config-typescript';
 
-// @ts-expect-error https://github.com/cypress-io/eslint-plugin-cypress/issues/232
 import pluginCypress from 'eslint-plugin-cypress';
 import pluginVue from 'eslint-plugin-vue';
 
@@ -106,7 +105,7 @@ const configWithVueTS = defineConfigWithVueTs(
   },
 
   {
-    ...pluginCypress.configs.recommended as ConfigWithExtends,
+    ...pluginCypress.configs.recommended,
     files: [
       'cypress/e2e/**/*.{cy,spec}.{js,ts,jsx,tsx}',
       'cypress/support/**/*.{js,ts,jsx,tsx}',
