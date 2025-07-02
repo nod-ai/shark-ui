@@ -1,6 +1,7 @@
 import pluginVitest from '@vitest/eslint-plugin';
 
 import {
+  configureVueProject,
   defineConfigWithVueTs,
   vueTsConfigs,
 } from '@vue/eslint-config-typescript';
@@ -74,6 +75,10 @@ const extraConfigForTypeScriptESLint: ConfigWithExtends = {
     ],
   },
 };
+
+configureVueProject({
+  allowComponentTypeUnsafety: false, // Takes advantage of strict type checking
+});
 
 const configWithVueTS = defineConfigWithVueTs(
   {
