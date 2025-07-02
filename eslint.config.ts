@@ -1,14 +1,15 @@
 import pluginVitest from '@vitest/eslint-plugin';
 
 import {
+  configureVueProject,
   defineConfigWithVueTs,
   vueTsConfigs,
 } from '@vue/eslint-config-typescript';
 
 import pluginVue from 'eslint-plugin-vue';
 
-import tseslint, {
-  type ConfigWithExtends,
+import type {
+  ConfigWithExtends,
 } from 'typescript-eslint';
 
 import pluginCypress from './cypress/eslint.config';
@@ -75,6 +76,10 @@ const extraConfigForTypeScriptESLint: ConfigWithExtends = {
   },
 };
 
+configureVueProject({
+  allowComponentTypeUnsafety: false, // Takes advantage of strict type checking
+});
+
 const configWithVueTS = defineConfigWithVueTs(
   {
     name : 'app/files-to-lint',
@@ -107,23 +112,6 @@ const configWithVueTS = defineConfigWithVueTs(
   ...pluginCypress,
 );
 
-const completeConfig = tseslint.config([
-  ...configWithVueTS,
-  {
-    name : 'shark-ui/safety-override',
-    files: [
-      '*/**/*.ts',
-    ],
-    rules: {
-      '@typescript-eslint/no-unsafe-argument'     : 'error',
-      '@typescript-eslint/no-unsafe-assignment'   : 'error',
-      '@typescript-eslint/no-unsafe-call'         : 'error',
-      '@typescript-eslint/no-unsafe-member-access': 'error',
-      '@typescript-eslint/no-unsafe-return'       : 'error',
-    },
-  },
-]);
-
 export {
-  completeConfig as default,
+  configWithVueTS as default,
 };
