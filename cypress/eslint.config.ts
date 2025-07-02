@@ -1,0 +1,19 @@
+import pluginCypress from 'eslint-plugin-cypress';
+
+import type {
+  ConfigWithExtends,
+} from 'typescript-eslint';
+
+const overriddenCypressPlugin: ConfigWithExtends[] = [
+  {
+    ...pluginCypress.configs.recommended,
+    files: [
+      'cypress/e2e/**/*.{cy,spec}.{js,ts,jsx,tsx}',
+      'cypress/support/**/*.{js,ts,jsx,tsx}',
+    ],
+  },
+];
+
+export {
+  overriddenCypressPlugin as default,
+};
