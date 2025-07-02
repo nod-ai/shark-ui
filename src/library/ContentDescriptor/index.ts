@@ -63,8 +63,7 @@ class ContentDescriptor {
       .map($0 => $0.join(ContentDescriptor.parameterKeyValueDelimiter))
       .map($0 => ContentDescriptor.parameterPrefix.concat($0));
 
-    const serializedKeyValuePairs = concatenated(...serializableParameterEntries);
-    return serializedKeyValuePairs;
+    return concatenated(...serializableParameterEntries);
   }
 
   public get serialized(): NonTrivialString {
