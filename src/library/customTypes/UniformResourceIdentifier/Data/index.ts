@@ -127,7 +127,7 @@ class DataURI
 
     if (
       outcomeOfParsingMediaType.isFailure
-    ) return outcomeOfParsingMediaType.forciblyUnwrap(/* TODO: enable safe error propagation */);
+    ) return outcomeOfParsingMediaType;
 
     const parsedMediaType = outcomeOfParsingMediaType.unwrapped;
     const parsedEncoding = allDataURIBinaryEncodings.find($0 => $0 === rawEncoding);
