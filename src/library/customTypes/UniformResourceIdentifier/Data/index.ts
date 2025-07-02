@@ -118,7 +118,8 @@ class DataURI
       rawMediaType === undefined
     ) return new DataURI_ParsingError('Expected `mediaType` portion to be defined').throwAnyway('To be converted to `Attempt` failure');
 
-    const parsedMediaType = MediaType.parsedFrom(rawMediaType).forciblyUnwrap(/* TODO: move to guard statement */);
+    const outcomeOfParsingMediaType = MediaType.parsedFrom(rawMediaType);
+    const parsedMediaType = outcomeOfParsingMediaType.forciblyUnwrap(/* TODO: move to guard statement */);
     const parsedEncoding = allDataURIBinaryEncodings.find($0 => $0 === rawEncoding);
 
     if (
