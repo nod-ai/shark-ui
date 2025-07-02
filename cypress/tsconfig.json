@@ -1,6 +1,7 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "include": [
+    "./eslint.config.ts",
     "./package.d.ts",
     "./e2e/**/*",
     "./support/**/*"

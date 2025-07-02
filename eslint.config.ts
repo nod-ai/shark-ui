@@ -5,13 +5,13 @@ import {
   vueTsConfigs,
 } from '@vue/eslint-config-typescript';
 
-import pluginCypress from 'eslint-plugin-cypress';
 import pluginVue from 'eslint-plugin-vue';
 
 import tseslint, {
   type ConfigWithExtends,
 } from 'typescript-eslint';
 
+import pluginCypress from './cypress/eslint.config';
 import pluginImport from './eslint.import';
 import pluginStylistic from './eslint.stylistic';
 
@@ -104,13 +104,7 @@ const configWithVueTS = defineConfigWithVueTs(
     files: ['src/**/__tests__/*'],
   },
 
-  {
-    ...pluginCypress.configs.recommended,
-    files: [
-      'cypress/e2e/**/*.{cy,spec}.{js,ts,jsx,tsx}',
-      'cypress/support/**/*.{js,ts,jsx,tsx}',
-    ],
-  },
+  ...pluginCypress,
 );
 
 const completeConfig = tseslint.config([
