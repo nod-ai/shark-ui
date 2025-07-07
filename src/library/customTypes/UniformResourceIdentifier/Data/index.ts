@@ -1,10 +1,6 @@
 import Attempt from '@/library/Attempt';
 import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
-
-import type {
-  MediaType,
-} from '@/library/ContentDescriptor';
-
+import type ContentDescriptor from '@/library/ContentDescriptor';
 import NonTrivialString from '@/library/customTypes/NonTrivialString';
 
 import UniformResourceIdentifier from '../index.ts';
@@ -19,7 +15,7 @@ class DataURI
   public static readonly scheme = NonTrivialString.parsedFrom('data').forciblyUnwrap();
 
   public constructor(
-    private readonly overridableMediaType: MediaType | null,
+    private readonly overridableMediaType: ContentDescriptor | null,
     public readonly encoding: DataURI_EncodingIdentifier.Any,
     public readonly data: Base64CharacterEncodedByteSequence,
   ) {
