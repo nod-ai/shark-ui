@@ -8,17 +8,17 @@ import MediaType from '../MediaType';
 import DataURI from '../index.ts';
 
 import type {
-  ImageURIFormat,
-} from './ImageURIFormat.ts';
+  ImageURI_Format,
+} from './Format';
 
 class ImageURI
   extends DataURI {
   public static readonly fileType = 'image';
 
-  private readonly _format: ImageURIFormat;
+  private readonly _format: ImageURI_Format.Any;
 
   public constructor(
-    givenFormat: ImageURIFormat,
+    givenFormat: ImageURI_Format.Any,
     givenEncoding: DataURIBinaryEncoding,
     givenData: Base64CharacterEncodedByteSequence,
   ) {
