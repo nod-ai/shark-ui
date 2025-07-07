@@ -7,12 +7,9 @@ import type {
 import MediaType from '../MediaType';
 import DataURI from '../index.ts';
 
-import {
-  allImageURIFormats,
-  type ImageURIFormat,
+import type {
+  ImageURIFormat,
 } from './ImageURIFormat.ts';
-
-import ImageURI_ParsingError from './ParsingError.ts';
 
 class ImageURI
   extends DataURI {
@@ -48,33 +45,8 @@ class ImageURI
 
     return computedMediaType;
   }
-
-  public static override forciblyParsedFrom = (
-    givenSubject: string,
-  ): ImageURI => {
-    const parsedURI = super.forciblyParsedFrom(givenSubject);
-
-    if (
-      parsedURI.mediaType.fileType !== ImageURI.fileType
-    ) return new ImageURI_ParsingError(`Expected media type starting with ${ImageURI.fileType}`).throwAnyway('To be converted to `Attempt` failure');
-
-    const parsedFormat = allImageURIFormats.find($0 => $0 === parsedURI.mediaType.fileSubtype);
-
-    if (
-      parsedFormat === undefined
-    ) return new ImageURI_ParsingError(`Expected format to be one of ${allImageURIFormats.toString()}`).throwAnyway('To be converted to `Attempt` failure');
-
-    const parsedImageURI = new ImageURI(
-      parsedFormat,
-      parsedURI.encoding,
-      parsedURI.data,
-    );
-
-    return parsedImageURI;
-  };
 }
 
 export {
   ImageURI as default,
-  ImageURI_ParsingError,
 };
