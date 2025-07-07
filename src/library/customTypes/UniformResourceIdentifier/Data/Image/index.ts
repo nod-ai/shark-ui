@@ -1,8 +1,8 @@
 import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
 
 import type {
-  DataURIBinaryEncoding,
-} from '../DataURIBinaryEncoding.ts';
+  DataURI_EncodingIdentifier,
+} from '../EncodingIdentifier';
 
 import MediaType from '../MediaType';
 import DataURI from '../index.ts';
@@ -19,7 +19,7 @@ class ImageURI
 
   public constructor(
     givenFormat: ImageURI_Format.Any,
-    givenEncoding: DataURIBinaryEncoding,
+    givenEncoding: DataURI_EncodingIdentifier.Any,
     givenData: Base64CharacterEncodedByteSequence,
   ) {
     super(
