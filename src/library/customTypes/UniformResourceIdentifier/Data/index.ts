@@ -1,5 +1,6 @@
 import Attempt from '@/library/Attempt';
 import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
+import type MediaType from '@/library/MediaType';
 import NonTrivialString from '@/library/customTypes/NonTrivialString';
 
 import UniformResourceIdentifier from '../index.ts';
@@ -7,8 +8,6 @@ import UniformResourceIdentifier from '../index.ts';
 import type {
   DataURI_EncodingIdentifier,
 } from './EncodingIdentifier';
-
-import type MediaType from './MediaType';
 
 /** See [RFC 2397](https://datatracker.ietf.org/doc/rfc2397) for more info */
 class DataURI
