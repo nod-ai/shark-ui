@@ -1,19 +1,14 @@
 import Attempt from '@/library/Attempt';
-import Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
+import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
 import NonTrivialString from '@/library/customTypes/NonTrivialString';
-
-import {
-  isEmpty,
-} from '@/library/utilitiesByType/array.ts';
 
 import UniformResourceIdentifier from '../index.ts';
 
-import {
-  allDataURIBinaryEncodings,
-  type DataURIBinaryEncoding,
+import type {
+  DataURIBinaryEncoding,
 } from './DataURIBinaryEncoding.ts';
 
-import MediaType from './MediaType';
+import type MediaType from './MediaType';
 import DataURI_ParsingError from './ParsingError.ts';
 
 /** See [RFC 2397](https://datatracker.ietf.org/doc/rfc2397) for more info */
@@ -77,61 +72,6 @@ class DataURI
     const serializedPathComponents = NonTrivialString.fromConcatenating(...orderedPathComponents);
     return serializedPathComponents;
   }
-
-  public static override forciblyParsedFrom = (
-    givenSubject: string,
-  ): DataURI => {
-    const proposedURI = super.forciblyParsedFrom(givenSubject);
-
-    if (
-      !proposedURI.scheme.isEqualTo(DataURI.scheme)
-    ) return new DataURI_ParsingError(`Expected scheme to be "${DataURI.scheme.toString()}"`).throwAnyway('To be converted to `Attempt` failure');
-
-    const [
-      mediaTypeAndEncoding,
-      rawData,
-      ...extraComponentsWithDataPrefix
-    ] = proposedURI.path.split(DataURI.dataPrefix);
-
-    if (
-      !isEmpty(extraComponentsWithDataPrefix)
-    ) return new DataURI_ParsingError(`Unexpected components with data prefix: ${extraComponentsWithDataPrefix.toString()}`).throwAnyway('To be converted to `Attempt` failure');
-
-    if (
-      rawData === undefined
-    ) return new DataURI_ParsingError('Expected data portion to be defined').throwAnyway('To be converted to `Attempt` failure');
-
-    const parsedData = Base64CharacterEncodedByteSequence.parsedFrom(rawData).forciblyUnwrap(/* TODO: move to guard statement */);
-
-    const [
-      rawMediaType,
-      rawEncoding,
-      ...extraComponentsWithEncodingPrefix
-    ] = mediaTypeAndEncoding?.split(DataURI.encodingPrefix) ?? [];
-
-    if (
-      !isEmpty(extraComponentsWithEncodingPrefix)
-    ) return new DataURI_ParsingError(`Unexpected components with encoding prefix: ${extraComponentsWithEncodingPrefix.toString()}`).throwAnyway('To be converted to `Attempt` failure');
-
-    if (
-      rawMediaType === undefined
-    ) return new DataURI_ParsingError('Expected `mediaType` portion to be defined').throwAnyway('To be converted to `Attempt` failure');
-
-    const parsedMediaType = MediaType.forciblyParsedFrom(rawMediaType);
-    const parsedEncoding = allDataURIBinaryEncodings.find($0 => $0 === rawEncoding);
-
-    if (
-      parsedEncoding === undefined
-    ) return new DataURI_ParsingError(`Expected encoding portion to be defined as one of: ${allDataURIBinaryEncodings.toString()}`).throwAnyway('To be converted to `Attempt` failure');
-
-    const parsedDataURI = new DataURI(
-      parsedMediaType,
-      parsedEncoding,
-      parsedData,
-    );
-
-    return parsedDataURI;
-  };
 }
 
 export {
