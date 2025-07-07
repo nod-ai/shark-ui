@@ -5,8 +5,6 @@ import {
   concatenated,
 } from '@/library/utilitiesByType/string';
 
-import URI_ParsingError from './ParsingError';
-
 /**
  * Identifies an abstract or physical resource.
  * See [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986) for more information
@@ -108,5 +106,4 @@ class UniformResourceIdentifier {
 
 export {
   UniformResourceIdentifier as default,
-  URI_ParsingError,
 };
