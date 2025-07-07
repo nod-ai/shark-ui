@@ -24,10 +24,10 @@ class DataURI
     );
   }
 
-  public get mediaType(): Exclude<DataURI['overridableDescriptor'], null> {
+  public get descriptor(): Exclude<DataURI['overridableDescriptor'], null> {
     if (
       this.overridableDescriptor === null
-    ) return Attempt.abandon('Media type either needs to be initialized or overridden');
+    ) return Attempt.abandon('Descriptor either needs to be initialized or overridden');
 
     return this.overridableDescriptor;
   }
@@ -50,7 +50,7 @@ class DataURI
 
   public override get path(): NonTrivialString {
     const orderedPathComponents = [
-      this.mediaType.serialized,
+      this.descriptor.serialized,
       this.serializableEncoding,
       this.serializableData,
     ] as const;
