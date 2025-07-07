@@ -15,7 +15,7 @@ class DataURI
   public static readonly scheme = NonTrivialString.parsedFrom('data').forciblyUnwrap();
 
   public constructor(
-    private readonly overridableMediaType: ContentDescriptor | null,
+    private readonly overridableDescriptor: ContentDescriptor | null,
     public readonly encoding: DataURI_EncodingIdentifier.Any,
     public readonly data: Base64CharacterEncodedByteSequence,
   ) {
@@ -24,12 +24,12 @@ class DataURI
     );
   }
 
-  public get mediaType(): Exclude<DataURI['overridableMediaType'], null> {
+  public get mediaType(): Exclude<DataURI['overridableDescriptor'], null> {
     if (
-      this.overridableMediaType === null
+      this.overridableDescriptor === null
     ) return Attempt.abandon('Media type either needs to be initialized or overridden');
 
-    return this.overridableMediaType;
+    return this.overridableDescriptor;
   }
 
   public static readonly encodingPrefix = ';';
