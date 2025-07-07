@@ -4,7 +4,6 @@ import {
   concatenated,
 } from '@/library/utilitiesByType/string';
 
-import MediaType_ParsingError from './ParsingError';
 import type StructuredSyntaxNameSuffix from './StructuredSyntaxNameSuffix';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -94,5 +93,4 @@ class MediaType {
 
 export {
   MediaType as default,
-  MediaType_ParsingError,
 };
