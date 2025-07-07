@@ -47,7 +47,11 @@ class DataURI
     return this._encoding;
   }
 
-  public get serializableEncoding(): string {
+  public get serializableEncoding(): string | null {
+    if (
+      this.encoding !== 'base64'
+    ) return null;
+
     return DataURI.encodingPrefix.concat(this.encoding);
   }
 
