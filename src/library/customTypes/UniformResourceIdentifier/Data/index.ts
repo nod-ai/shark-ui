@@ -9,7 +9,6 @@ import type {
 } from './DataURIBinaryEncoding.ts';
 
 import type MediaType from './MediaType';
-import DataURI_ParsingError from './ParsingError.ts';
 
 /** See [RFC 2397](https://datatracker.ietf.org/doc/rfc2397) for more info */
 class DataURI
@@ -76,5 +75,4 @@ class DataURI
 
 export {
   DataURI as default,
-  DataURI_ParsingError,
 };
