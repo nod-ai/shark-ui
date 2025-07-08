@@ -160,11 +160,11 @@ class ShimmedStabilityAIClient
     });
   }
 
-  private _version1?: Version1Client;
+  private cachedClient?: Version1Client;
 
   public get version1(): Version1Client {
-    this._version1 ??= new Version1Client(this);
-    return this._version1;
+    this.cachedClient ??= new Version1Client(this);
+    return this.cachedClient;
   }
 }
 
