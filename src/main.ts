@@ -1,6 +1,6 @@
 import {
   createApp,
-} from 'vue';
+} from '@/library/vue';
 
 import App from './App.vue';
 

@@ -4,11 +4,8 @@ import {
   ref,
   set,
   type Ref,
-} from '@/library/vue/reactivity.ts';
-
-import {
   watch,
-} from 'vue';
+} from '@/library/vue';
 
 import {
   VCard,

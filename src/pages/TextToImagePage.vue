@@ -3,11 +3,8 @@ import {
   get,
   ref,
   type Ref,
-} from '@/library/vue/reactivity.ts';
-
-import {
   useStatefulAttemptThatEventually,
-} from '@/library/vue/statefulAttempt';
+} from '@/library/vue';
 
 import {
   VBtn,
