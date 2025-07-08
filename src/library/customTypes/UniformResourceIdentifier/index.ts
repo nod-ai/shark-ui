@@ -11,20 +11,20 @@ import {
  */
 class UniformResourceIdentifier {
   public readonly scheme: /*     */ NonTrivialString;
-  private readonly _authority: /**/ NonTrivialString | null;
+  public readonly authority: /*  */ NonTrivialString | null;
   private readonly overridablePath: NonTrivialString | null;
   private readonly _query: /*    */ NonTrivialString | null;
   private readonly _fragment: /* */ NonTrivialString | null;
 
   public constructor(
     givenScheme: /*   */ UniformResourceIdentifier['scheme'],
-    givenAuthority: /**/ UniformResourceIdentifier['_authority'] = null,
+    givenAuthority: /**/ UniformResourceIdentifier['authority'] = null,
     givenPath: /*     */ UniformResourceIdentifier['overridablePath'] = null,
     givenQuery: /*    */ UniformResourceIdentifier['_query'] = null,
     givenFragment: /* */ UniformResourceIdentifier['_fragment'] = null,
   ) {
     this.scheme /*    */ = givenScheme;
-    this._authority /**/ = givenAuthority;
+    this.authority /* */ = givenAuthority;
     this.overridablePath = givenPath;
     this._query /*    */ = givenQuery;
     this._fragment /* */ = givenFragment;
@@ -37,10 +37,6 @@ class UniformResourceIdentifier {
   }
 
   public static readonly authorityPrefix = '//';
-
-  public get authority(): UniformResourceIdentifier['_authority'] {
-    return this._authority;
-  }
 
   private get serializableAuthority(): string | null {
     if (
