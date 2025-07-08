@@ -12,20 +12,20 @@ import {
 class UniformResourceIdentifier {
   private readonly _scheme: /*   */ NonTrivialString;
   private readonly _authority: /**/ NonTrivialString | null;
-  private readonly _path: /*     */ NonTrivialString | null;
+  private readonly overridablePath: NonTrivialString | null;
   private readonly _query: /*    */ NonTrivialString | null;
   private readonly _fragment: /* */ NonTrivialString | null;
 
   public constructor(
     givenScheme: /*   */ UniformResourceIdentifier['_scheme'],
     givenAuthority: /**/ UniformResourceIdentifier['_authority'] = null,
-    givenPath: /*     */ UniformResourceIdentifier['_path'] = null,
+    givenPath: /*     */ UniformResourceIdentifier['overridablePath'] = null,
     givenQuery: /*    */ UniformResourceIdentifier['_query'] = null,
     givenFragment: /* */ UniformResourceIdentifier['_fragment'] = null,
   ) {
     this._scheme /*   */ = givenScheme;
     this._authority /**/ = givenAuthority;
-    this._path /*     */ = givenPath;
+    this.overridablePath = givenPath;
     this._query /*    */ = givenQuery;
     this._fragment /* */ = givenFragment;
   }
@@ -54,12 +54,12 @@ class UniformResourceIdentifier {
     return this.authority.prependedWith(UniformResourceIdentifier.authorityPrefix);
   }
 
-  public get path(): Exclude<UniformResourceIdentifier['_path'], null> {
+  public get path(): Exclude<UniformResourceIdentifier['overridablePath'], null> {
     if (
-      this._path === null
+      this.overridablePath === null
     ) return Attempt.abandon('`path` must either be a) provided via constructor or b) overridden via public getter');
 
-    return this._path;
+    return this.overridablePath;
   }
 
   public static readonly queryPrefix = '?';
