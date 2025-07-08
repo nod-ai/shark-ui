@@ -14,16 +14,10 @@ import {
 } from './Request';
 
 class HTTP_Client {
-  public readonly origin: URLOrigin;
-  public readonly headers: HTTP_Request.HeaderMap;
-
   public constructor(
-    givenOrigin: URLOrigin,
-    givenHeaders: HTTP_Request.HeaderMap,
-  ) {
-    this.origin = givenOrigin;
-    this.headers = givenHeaders;
-  }
+    public readonly origin: URLOrigin,
+    public readonly headers: HTTP_Request.HeaderMap,
+  ) {}
 
   public originAt(givenPath: URLPath): URL {
     const serializedURLComponents = this.origin.appendedWith(givenPath);
