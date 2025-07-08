@@ -152,8 +152,10 @@ class ShimmedStabilityAIClient
   public constructor(given: {
     serverURL: string;
   }) {
+    const serverOrigin = URLOrigin.parsedFrom(given.serverURL).forciblyUnwrap(/* matches error propagation of actual StabilityAI client */);
+
     super({
-      origin : URLOrigin.parsedFrom(given.serverURL).forciblyUnwrap(/* matches error propagation of actual StabilityAI client */),
+      origin : serverOrigin,
       headers: {
         'Content-Type': 'application/json',
       },
