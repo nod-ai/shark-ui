@@ -14,16 +14,6 @@ class DiscreteRange
       upperBound,
     );
 
-    if (
-      stepSize < 0
-    ) return Attempt.abandon('Step size must be positive');
-
-    const overstep = this.width % stepSize;
-
-    if (
-      overstep !== 0
-    ) return Attempt.abandon('Step size must fit evenly into the range');
-
     this.stepSize = stepSize;
   }
 
@@ -42,6 +32,16 @@ class DiscreteRange
       from: givenLowerBound,
       to  : givenUpperBound,
     });
+
+    if (
+      givenStepSize < 0
+    ) return Attempt.abandon('Step size must be positive');
+
+    const overstep = validRange.width % givenStepSize;
+
+    if (
+      overstep !== 0
+    ) return Attempt.abandon('Step size must fit evenly into the range');
 
     const validDiscreteRange = new this(
       validRange.lowerBound,
