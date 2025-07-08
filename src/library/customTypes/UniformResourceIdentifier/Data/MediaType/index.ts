@@ -4,7 +4,9 @@ import {
   concatenated,
 } from '@/library/utilitiesByType/string';
 
-import type StructuredSyntaxNameSuffix from './StructuredSyntaxNameSuffix';
+import type {
+  MediaType_StructuredSyntaxNameSuffix,
+} from './StructuredSyntaxNameSuffix';
 
 import type {
   MediaType_TopLevel,
@@ -16,7 +18,7 @@ class MediaType {
     public fileType: MediaType_TopLevel.Any,
     public tree: string[] | null,
     public fileSubtype: string,
-    public structureType: StructuredSyntaxNameSuffix | null,
+    public structureType: MediaType_StructuredSyntaxNameSuffix.Any | null,
     public parameters: Record<string, string> | null,
   ) {
     this.fileType = fileType;
