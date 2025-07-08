@@ -1,19 +1,8 @@
 import {
-  ref as _ref,
+  ref,
   unref,
-  type Ref as _Ref,
+  type Ref,
 } from 'vue';
-
-/** Wraps an instance to make it reactive */
-const ref = _ref;
-
-type Ref<
-  GetterResult,
-  SetterParameter = GetterResult,
-> = _Ref<
-  GetterResult,
-  SetterParameter
->;
 
 /** Updates the wrapped instance */
 const updateRef = <Any>(givenSubject: Ref<Any>, givenValue: Any): void => {
