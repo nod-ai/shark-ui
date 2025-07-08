@@ -1,10 +1,10 @@
 import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
+import MediaType from '@/library/MediaType';
 
 import type {
   DataURI_EncodingIdentifier,
 } from '../EncodingIdentifier';
 
-import MediaType from '../MediaType';
 import DataURI from '../index.ts';
 
 import type {
