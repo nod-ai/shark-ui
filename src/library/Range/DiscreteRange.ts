@@ -38,11 +38,13 @@ class DiscreteRange
       by: DiscreteRange['stepSize'];
     },
   ): DiscreteRange {
-    return new this(
+    const validDiscreteRange = new this(
       givenLowerBound,
       givenUpperBound,
       givenStepSize,
     );
+
+    return validDiscreteRange;
   }
 
   public override exclusivelyContains(givenValue: number): boolean {

@@ -28,10 +28,12 @@ class Range {
       to: Range['upperBound'];
     },
   ): Range {
-    return new this(
+    const validRange = new this(
       givenLowerBound,
       givenUpperBound,
     );
+
+    return validRange;
   }
 
   public get width(): number {
