@@ -39,7 +39,7 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    name: ESLint via package.json
+    name: Lint via package.json
     steps:
       - uses: actions/checkout@v4
       - name: Set up Node.js
