@@ -38,9 +38,14 @@ class DiscreteRange
       by: DiscreteRange['stepSize'];
     },
   ): DiscreteRange {
+    const validRange = super.spanning({
+      from: givenLowerBound,
+      to  : givenUpperBound,
+    });
+
     const validDiscreteRange = new this(
-      givenLowerBound,
-      givenUpperBound,
+      validRange.lowerBound,
+      validRange.upperBound,
       givenStepSize,
     );
 
