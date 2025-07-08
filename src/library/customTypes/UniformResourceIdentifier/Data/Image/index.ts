@@ -15,7 +15,7 @@ class ImageURI
   extends DataURI {
   public static readonly fileType = 'image';
 
-  private readonly _format: ImageURI_Format.Any;
+  public readonly format: ImageURI_Format.Any;
 
   public constructor(
     givenFormat: ImageURI_Format.Any,
@@ -27,11 +27,7 @@ class ImageURI
       givenEncoding,
       givenData,
     );
-    this._format = givenFormat;
-  }
-
-  public get format(): ImageURI['_format'] {
-    return this._format;
+    this.format = givenFormat;
   }
 
   public override get mediaType(): DataURI['mediaType'] {
