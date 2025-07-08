@@ -4,25 +4,21 @@ import {
   concatenated,
 } from '@/library/utilitiesByType/string';
 
-import type StructuredSyntaxNameSuffix from './StructuredSyntaxNameSuffix';
+import type {
+  MediaType_StructuredSyntaxNameSuffix,
+} from './StructuredSyntaxNameSuffix';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const allFileTypes = [
-  'application',
-  'text',
-  'image',
-  'audio',
-] as const;
-
-type FileType = (typeof allFileTypes)[number];
+import type {
+  MediaType_TopLevel,
+} from './TopLevel';
 
 /** See [RFC 2045](https://datatracker.ietf.org/doc/html/rfc2045) for more information */
 class MediaType {
   public constructor(
-    public fileType: FileType,
+    public fileType: MediaType_TopLevel.Any,
     public tree: string[] | null,
     public fileSubtype: string,
-    public structureType: StructuredSyntaxNameSuffix | null,
+    public structureType: MediaType_StructuredSyntaxNameSuffix.Any | null,
     public parameters: Record<string, string> | null,
   ) {
     this.fileType = fileType;

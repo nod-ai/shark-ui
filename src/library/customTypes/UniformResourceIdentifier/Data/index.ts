@@ -5,8 +5,8 @@ import NonTrivialString from '@/library/customTypes/NonTrivialString';
 import UniformResourceIdentifier from '../index.ts';
 
 import type {
-  DataURIBinaryEncoding,
-} from './DataURIBinaryEncoding.ts';
+  DataURI_EncodingIdentifier,
+} from './EncodingIdentifier';
 
 import type MediaType from './MediaType';
 
@@ -16,7 +16,7 @@ class DataURI
   public static readonly scheme = NonTrivialString.parsedFrom('data').forciblyUnwrap();
 
   private readonly _mediaType: MediaType | null;
-  private readonly _encoding: DataURIBinaryEncoding;
+  private readonly _encoding: DataURI_EncodingIdentifier.Any;
   private readonly _data: Base64CharacterEncodedByteSequence;
 
   public constructor(
