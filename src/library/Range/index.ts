@@ -11,10 +11,6 @@ class Range {
     public readonly lowerBound: number,
     public readonly upperBound: number,
   ) {
-    if (
-      upperBound < lowerBound
-    ) return Attempt.abandon('Upper bound must not be lower than lower bound');
-
     this.lowerBound = lowerBound;
     this.upperBound = upperBound;
   }
@@ -28,6 +24,10 @@ class Range {
       to: Range['upperBound'];
     },
   ): Range {
+    if (
+      givenUpperBound < givenLowerBound
+    ) return Attempt.abandon('Upper bound must not be lower than lower bound');
+
     const validRange = new this(
       givenLowerBound,
       givenUpperBound,
