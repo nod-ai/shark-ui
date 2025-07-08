@@ -51,9 +51,7 @@ const StructuredSyntaxNameSuffix_Nullable_parsedFrom = (
 
 const StructuredSyntaxNameSuffix = {
   allCases: StructuredSyntaxNameSuffix_allCases,
-  ...{
-    parsedFrom: StructuredSyntaxNameSuffix_parsedFrom,
-  } satisfies StringParser<StructuredSyntaxNameSuffix, StructuredSyntaxNameSuffix_ParsingError>,
+  ...{} satisfies StringParser<StructuredSyntaxNameSuffix, StructuredSyntaxNameSuffix_ParsingError>,
   Nullable: {
     parsedFrom: StructuredSyntaxNameSuffix_Nullable_parsedFrom,
   } satisfies StringParser<StructuredSyntaxNameSuffix | null, StructuredSyntaxNameSuffix_ParsingError>,
