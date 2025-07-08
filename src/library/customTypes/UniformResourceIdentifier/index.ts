@@ -11,11 +11,11 @@ import {
  */
 class UniformResourceIdentifier {
   public constructor(
-    public readonly scheme: /*     */ NonTrivialString,
-    public readonly authority: /*  */ NonTrivialString | null = null,
+    public readonly scheme/*      */: NonTrivialString,
+    public readonly authority/*   */: NonTrivialString | null = null,
     private readonly overridablePath: NonTrivialString | null = null,
-    public readonly query: /*      */ NonTrivialString | null = null,
-    public readonly fragment: /*   */ NonTrivialString | null = null,
+    public readonly query/*       */: NonTrivialString | null = null,
+    public readonly fragment/*    */: NonTrivialString | null = null,
   ) {}
 
   public static readonly schemeSuffix = ':';
