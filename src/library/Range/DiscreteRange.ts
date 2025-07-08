@@ -4,7 +4,7 @@ import Range from './index.ts';
 
 class DiscreteRange
   extends Range {
-  public constructor(
+  protected constructor(
     lowerBound: Range['lowerBound'],
     upperBound: Range['upperBound'],
     public readonly stepSize: number,
@@ -13,16 +13,6 @@ class DiscreteRange
       lowerBound,
       upperBound,
     );
-
-    if (
-      stepSize < 0
-    ) return Attempt.abandon('Step size must be positive');
-
-    const overstep = this.width % stepSize;
-
-    if (
-      overstep !== 0
-    ) return Attempt.abandon('Step size must fit evenly into the range');
 
     this.stepSize = stepSize;
   }
@@ -38,11 +28,28 @@ class DiscreteRange
       by: DiscreteRange['stepSize'];
     },
   ): DiscreteRange {
-    return new this(
-      givenLowerBound,
-      givenUpperBound,
+    const validRange = super.spanning({
+      from: givenLowerBound,
+      to  : givenUpperBound,
+    });
+
+    if (
+      givenStepSize < 0
+    ) return Attempt.abandon('Step size must be positive');
+
+    const overstep = validRange.width % givenStepSize;
+
+    if (
+      overstep !== 0
+    ) return Attempt.abandon('Step size must fit evenly into the range');
+
+    const validDiscreteRange = new this(
+      validRange.lowerBound,
+      validRange.upperBound,
       givenStepSize,
     );
+
+    return validDiscreteRange;
   }
 
   public override exclusivelyContains(givenValue: number): boolean {
