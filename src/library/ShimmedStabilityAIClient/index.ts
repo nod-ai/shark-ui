@@ -142,7 +142,7 @@ class Version1Client
   private cachedClient?: ImageClient;
 
   public get image(): ImageClient {
-    this.cachedClient ??= new ImageClient(this);
+    this.cachedClient ??= new ImageClient(this.origin, this.headers);
     return this.cachedClient;
   }
 }
@@ -158,16 +158,16 @@ class ShimmedStabilityAIClient
       'Content-Type': 'application/json',
     };
 
-    super({
-      origin : serverOrigin,
-      headers: defaultHeaders,
-    });
+    super(
+      serverOrigin,
+      defaultHeaders,
+    );
   }
 
   private cachedClient?: Version1Client;
 
   public get version1(): Version1Client {
-    this.cachedClient ??= new Version1Client(this);
+    this.cachedClient ??= new Version1Client(this.origin, this.headers);
     return this.cachedClient;
   }
 }

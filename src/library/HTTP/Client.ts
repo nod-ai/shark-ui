@@ -17,12 +17,12 @@ class HTTP_Client {
   public readonly origin: URLOrigin;
   public readonly headers: HTTP_Request.HeaderMap;
 
-  public constructor(given: {
-    origin: URLOrigin;
-    headers: HTTP_Request.HeaderMap;
-  }) {
-    this.origin = given.origin;
-    this.headers = given.headers;
+  public constructor(
+    givenOrigin: URLOrigin,
+    givenHeaders: HTTP_Request.HeaderMap,
+  ) {
+    this.origin = givenOrigin;
+    this.headers = givenHeaders;
   }
 
   public originAt(givenPath: URLPath): URL {
