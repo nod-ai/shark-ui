@@ -15,9 +15,6 @@ type Ref<
   SetterParameter
 >;
 
-/** Unwraps a reactive instance */
-const get = unref;
-
 /** Updates the wrapped instance */
 const updateRef = <Any>(givenSubject: Ref<Any>, givenValue: Any): void => {
   givenSubject.value = givenValue;
@@ -26,6 +23,6 @@ const updateRef = <Any>(givenSubject: Ref<Any>, givenValue: Any): void => {
 export {
   ref,
   type Ref,
-  get,
+  unref as get,
   updateRef as set,
 };
