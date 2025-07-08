@@ -37,9 +37,9 @@ on:
       - '!docs/**'                   # Ignore docs folder
 
 jobs:
-  lint:
+  analyze:
     runs-on: ubuntu-latest
-    name: ESLint via package.json
+    name: Lint and compile via package.json
     steps:
       - uses: actions/checkout@v4
       - name: Set up Node.js
@@ -57,4 +57,13 @@ jobs:
         run: |
           echo "::notice::Enable lint-on-save in your editor for automatic fixes"
           echo "::notice::Run \`npm run lint\` in your dev environment for details about issues that aren't automatically fixable"
+          exit 1
+      - name: Run the compiler
+        id: compile
+        run: npx vue-tsc --build
+        continue-on-error: true
+      - name: If compilation fails, highlight debug tools
+        if: steps.compile.outcome == 'failure'
+        run: |
+          echo "::notice::Run \`npx vue-tsc --build\` in your dev environment for details about compiler issues"
           exit 1
