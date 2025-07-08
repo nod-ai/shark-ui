@@ -139,11 +139,11 @@ class ImageClient
 
 class Version1Client
   extends HTTP.Client {
-  private _image?: ImageClient;
+  private cachedClient?: ImageClient;
 
   public get image(): ImageClient {
-    this._image ??= new ImageClient(this);
-    return this._image;
+    this.cachedClient ??= new ImageClient(this);
+    return this.cachedClient;
   }
 }
 
@@ -160,11 +160,11 @@ class ShimmedStabilityAIClient
     });
   }
 
-  private _version1?: Version1Client;
+  private cachedClient?: Version1Client;
 
   public get version1(): Version1Client {
-    this._version1 ??= new Version1Client(this);
-    return this._version1;
+    this.cachedClient ??= new Version1Client(this);
+    return this.cachedClient;
   }
 }
 

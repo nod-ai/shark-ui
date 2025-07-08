@@ -14,12 +14,12 @@ class DataURI
   extends UniformResourceIdentifier {
   public static readonly scheme = NonTrivialString.parsedFrom('data').forciblyUnwrap();
 
-  private readonly _mediaType: MediaType | null;
+  private readonly overridableMediaType: MediaType | null;
   private readonly _encoding: DataURI_EncodingIdentifier.Any;
   private readonly _data: Base64CharacterEncodedByteSequence;
 
   public constructor(
-    givenMediaType: DataURI['_mediaType'],
+    givenMediaType: DataURI['overridableMediaType'],
     givenEncoding: DataURI['_encoding'],
     givenData: DataURI['_data'],
   ) {
@@ -27,17 +27,17 @@ class DataURI
       DataURI.scheme,
     );
 
-    this._mediaType = givenMediaType;
+    this.overridableMediaType = givenMediaType;
     this._encoding = givenEncoding;
     this._data = givenData;
   }
 
-  public get mediaType(): Exclude<DataURI['_mediaType'], null> {
+  public get mediaType(): Exclude<DataURI['overridableMediaType'], null> {
     if (
-      this._mediaType === null
+      this.overridableMediaType === null
     ) return Attempt.abandon('Media type either needs to be initialized or overridden');
 
-    return this._mediaType;
+    return this.overridableMediaType;
   }
 
   public static readonly encodingPrefix = ';';
