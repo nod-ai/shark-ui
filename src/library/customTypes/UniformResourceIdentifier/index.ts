@@ -13,20 +13,20 @@ class UniformResourceIdentifier {
   public readonly scheme: /*     */ NonTrivialString;
   public readonly authority: /*  */ NonTrivialString | null;
   private readonly overridablePath: NonTrivialString | null;
-  private readonly _query: /*    */ NonTrivialString | null;
+  public readonly query: /*      */ NonTrivialString | null;
   private readonly _fragment: /* */ NonTrivialString | null;
 
   public constructor(
     givenScheme: /*   */ UniformResourceIdentifier['scheme'],
     givenAuthority: /**/ UniformResourceIdentifier['authority'] = null,
     givenPath: /*     */ UniformResourceIdentifier['overridablePath'] = null,
-    givenQuery: /*    */ UniformResourceIdentifier['_query'] = null,
+    givenQuery: /*    */ UniformResourceIdentifier['query'] = null,
     givenFragment: /* */ UniformResourceIdentifier['_fragment'] = null,
   ) {
     this.scheme /*    */ = givenScheme;
     this.authority /* */ = givenAuthority;
     this.overridablePath = givenPath;
-    this._query /*    */ = givenQuery;
+    this.query /*     */ = givenQuery;
     this._fragment /* */ = givenFragment;
   }
 
@@ -55,10 +55,6 @@ class UniformResourceIdentifier {
   }
 
   public static readonly queryPrefix = '?';
-
-  public get query(): UniformResourceIdentifier['_query'] {
-    return this._query;
-  }
 
   private get serializableQuery(): string | null {
     if (
