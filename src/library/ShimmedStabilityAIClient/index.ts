@@ -154,11 +154,13 @@ class ShimmedStabilityAIClient
   }) {
     const serverOrigin = URLOrigin.parsedFrom(given.serverURL).forciblyUnwrap(/* matches error propagation of actual StabilityAI client */);
 
+    const defaultHeaders = {
+      'Content-Type': 'application/json',
+    };
+
     super({
       origin : serverOrigin,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: defaultHeaders,
     });
   }
 
