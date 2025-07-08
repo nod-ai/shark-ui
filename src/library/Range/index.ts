@@ -10,10 +10,7 @@ class Range {
   protected constructor(
     public readonly lowerBound: number,
     public readonly upperBound: number,
-  ) {
-    this.lowerBound = lowerBound;
-    this.upperBound = upperBound;
-  }
+  ) {}
 
   public static spanning(
     {
