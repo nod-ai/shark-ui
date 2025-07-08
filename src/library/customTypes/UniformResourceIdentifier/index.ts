@@ -14,20 +14,20 @@ class UniformResourceIdentifier {
   public readonly authority: /*  */ NonTrivialString | null;
   private readonly overridablePath: NonTrivialString | null;
   public readonly query: /*      */ NonTrivialString | null;
-  private readonly _fragment: /* */ NonTrivialString | null;
+  public readonly fragment: /*   */ NonTrivialString | null;
 
   public constructor(
     givenScheme: /*   */ UniformResourceIdentifier['scheme'],
     givenAuthority: /**/ UniformResourceIdentifier['authority'] = null,
     givenPath: /*     */ UniformResourceIdentifier['overridablePath'] = null,
     givenQuery: /*    */ UniformResourceIdentifier['query'] = null,
-    givenFragment: /* */ UniformResourceIdentifier['_fragment'] = null,
+    givenFragment: /* */ UniformResourceIdentifier['fragment'] = null,
   ) {
     this.scheme /*    */ = givenScheme;
     this.authority /* */ = givenAuthority;
     this.overridablePath = givenPath;
     this.query /*     */ = givenQuery;
-    this._fragment /* */ = givenFragment;
+    this.fragment /*  */ = givenFragment;
   }
 
   public static readonly schemeSuffix = ':';
@@ -65,10 +65,6 @@ class UniformResourceIdentifier {
   }
 
   public static readonly fragmentPrefix = '#';
-
-  public get fragment(): UniformResourceIdentifier['_fragment'] {
-    return this._fragment;
-  }
 
   private get serializableFragment(): string | null {
     if (
