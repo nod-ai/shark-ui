@@ -19,7 +19,7 @@ type Ref<
 const get = unref;
 
 /** Updates the wrapped instance */
-const set = <Any>(givenSubject: Ref<Any>, givenValue: Any): void => {
+const updateRef = <Any>(givenSubject: Ref<Any>, givenValue: Any): void => {
   givenSubject.value = givenValue;
 };
 
@@ -27,5 +27,5 @@ export {
   ref,
   type Ref,
   get,
-  set,
+  updateRef as set,
 };
