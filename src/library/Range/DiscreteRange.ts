@@ -13,8 +13,6 @@ class DiscreteRange
       lowerBound,
       upperBound,
     );
-
-    this.stepSize = stepSize;
   }
 
   public static override spanning(

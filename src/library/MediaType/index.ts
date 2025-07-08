@@ -20,13 +20,7 @@ class MediaType {
     public fileSubtype: string,
     public structureType: MediaType_StructuredSyntaxNameSuffix.Any | null,
     public parameters: Record<string, string> | null,
-  ) {
-    this.fileType = fileType;
-    this.tree = tree;
-    this.fileSubtype = fileSubtype;
-    this.structureType = structureType;
-    this.parameters = parameters;
-  }
+  ) {}
 
   public static readonly fileTypeSuffix = '/';
 

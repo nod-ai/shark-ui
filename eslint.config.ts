@@ -73,6 +73,9 @@ const extraConfigForTypeScriptESLint: ConfigWithExtends = {
     '@typescript-eslint/no-import-type-side-effects': [
       'error', // Avoids unexpected behavior, trims down the size of the bundle
     ],
+    '@typescript-eslint/no-unnecessary-parameter-property-assignment': [
+      'error', // See https://www.typescriptlang.org/docs/handbook/2/classes.html#parameter-properties for more information
+    ],
   },
 };
 
