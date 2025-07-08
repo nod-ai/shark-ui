@@ -10,28 +10,24 @@ import {
  * See [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986) for more information
  */
 class UniformResourceIdentifier {
-  private readonly _scheme: /*   */ NonTrivialString;
-  private readonly _authority: /**/ NonTrivialString | null;
+  public readonly scheme: /*     */ NonTrivialString;
+  public readonly authority: /*  */ NonTrivialString | null;
   private readonly overridablePath: NonTrivialString | null;
-  private readonly _query: /*    */ NonTrivialString | null;
-  private readonly _fragment: /* */ NonTrivialString | null;
+  public readonly query: /*      */ NonTrivialString | null;
+  public readonly fragment: /*   */ NonTrivialString | null;
 
   public constructor(
-    givenScheme: /*   */ UniformResourceIdentifier['_scheme'],
-    givenAuthority: /**/ UniformResourceIdentifier['_authority'] = null,
+    givenScheme: /*   */ UniformResourceIdentifier['scheme'],
+    givenAuthority: /**/ UniformResourceIdentifier['authority'] = null,
     givenPath: /*     */ UniformResourceIdentifier['overridablePath'] = null,
-    givenQuery: /*    */ UniformResourceIdentifier['_query'] = null,
-    givenFragment: /* */ UniformResourceIdentifier['_fragment'] = null,
+    givenQuery: /*    */ UniformResourceIdentifier['query'] = null,
+    givenFragment: /* */ UniformResourceIdentifier['fragment'] = null,
   ) {
-    this._scheme /*   */ = givenScheme;
-    this._authority /**/ = givenAuthority;
+    this.scheme /*    */ = givenScheme;
+    this.authority /* */ = givenAuthority;
     this.overridablePath = givenPath;
-    this._query /*    */ = givenQuery;
-    this._fragment /* */ = givenFragment;
-  }
-
-  public get scheme(): UniformResourceIdentifier['_scheme'] {
-    return this._scheme;
+    this.query /*     */ = givenQuery;
+    this.fragment /*  */ = givenFragment;
   }
 
   public static readonly schemeSuffix = ':';
@@ -41,10 +37,6 @@ class UniformResourceIdentifier {
   }
 
   public static readonly authorityPrefix = '//';
-
-  public get authority(): UniformResourceIdentifier['_authority'] {
-    return this._authority;
-  }
 
   private get serializableAuthority(): string | null {
     if (
@@ -64,10 +56,6 @@ class UniformResourceIdentifier {
 
   public static readonly queryPrefix = '?';
 
-  public get query(): UniformResourceIdentifier['_query'] {
-    return this._query;
-  }
-
   private get serializableQuery(): string | null {
     if (
       this.query === null
@@ -77,10 +65,6 @@ class UniformResourceIdentifier {
   }
 
   public static readonly fragmentPrefix = '#';
-
-  public get fragment(): UniformResourceIdentifier['_fragment'] {
-    return this._fragment;
-  }
 
   private get serializableFragment(): string | null {
     if (

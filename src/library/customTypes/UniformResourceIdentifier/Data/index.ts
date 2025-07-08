@@ -15,21 +15,21 @@ class DataURI
   public static readonly scheme = NonTrivialString.parsedFrom('data').forciblyUnwrap();
 
   private readonly overridableMediaType: MediaType | null;
-  private readonly _encoding: DataURI_EncodingIdentifier.Any;
-  private readonly _data: Base64CharacterEncodedByteSequence;
+  public readonly encoding: DataURI_EncodingIdentifier.Any;
+  public readonly data: Base64CharacterEncodedByteSequence;
 
   public constructor(
     givenMediaType: DataURI['overridableMediaType'],
-    givenEncoding: DataURI['_encoding'],
-    givenData: DataURI['_data'],
+    givenEncoding: DataURI['encoding'],
+    givenData: DataURI['data'],
   ) {
     super(
       DataURI.scheme,
     );
 
     this.overridableMediaType = givenMediaType;
-    this._encoding = givenEncoding;
-    this._data = givenData;
+    this.encoding = givenEncoding;
+    this.data = givenData;
   }
 
   public get mediaType(): Exclude<DataURI['overridableMediaType'], null> {
@@ -42,10 +42,6 @@ class DataURI
 
   public static readonly encodingPrefix = ';';
 
-  public get encoding(): DataURI['_encoding'] {
-    return this._encoding;
-  }
-
   public get serializableEncoding(): string | null {
     if (
       this.encoding !== 'base64'
@@ -55,10 +51,6 @@ class DataURI
   }
 
   public static readonly dataPrefix = ',';
-
-  public get data(): DataURI['_data'] {
-    return this._data;
-  }
 
   public get serializableData(): string {
     return this.data.prependedWith(DataURI.dataPrefix);
