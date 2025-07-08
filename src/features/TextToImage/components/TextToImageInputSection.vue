@@ -4,7 +4,7 @@ import {
   ref,
   set,
   type Ref,
-} from '@/library/vue/reactivity.ts';
+} from '@/library/vue';
 
 import {
   watch,

@@ -2,7 +2,7 @@
 import {
   get,
   set,
-} from '@/library/vue/reactivity.ts';
+} from '@/library/vue';
 
 import {
   VBtn,
