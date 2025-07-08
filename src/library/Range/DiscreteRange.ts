@@ -4,7 +4,7 @@ import Range from './index.ts';
 
 class DiscreteRange
   extends Range {
-  public constructor(
+  protected constructor(
     lowerBound: Range['lowerBound'],
     upperBound: Range['upperBound'],
     public readonly stepSize: number,

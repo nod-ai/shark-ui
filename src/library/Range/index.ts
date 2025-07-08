@@ -7,7 +7,7 @@ import {
 type RangeBound = 'exclusive' | 'inclusive';
 
 class Range {
-  public constructor(
+  protected constructor(
     public readonly lowerBound: number,
     public readonly upperBound: number,
   ) {
