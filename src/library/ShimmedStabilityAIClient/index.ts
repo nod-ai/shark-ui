@@ -139,11 +139,11 @@ class ImageClient
 
 class Version1Client
   extends HTTP.Client {
-  private _image?: ImageClient;
+  private cachedClient?: ImageClient;
 
   public get image(): ImageClient {
-    this._image ??= new ImageClient(this);
-    return this._image;
+    this.cachedClient ??= new ImageClient(this);
+    return this.cachedClient;
   }
 }
 
