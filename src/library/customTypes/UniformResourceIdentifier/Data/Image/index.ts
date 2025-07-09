@@ -1,5 +1,8 @@
 import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
-import MediaType from '@/library/MediaType';
+
+import {
+  MediaType,
+} from '@/library/MediaType';
 
 import type {
   DataURI_EncodingIdentifier,

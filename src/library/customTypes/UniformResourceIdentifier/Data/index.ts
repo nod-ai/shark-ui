@@ -1,6 +1,10 @@
 import Attempt from '@/library/Attempt';
 import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
-import type MediaType from '@/library/MediaType';
+
+import type {
+  MediaType,
+} from '@/library/MediaType';
+
 import NonTrivialString from '@/library/customTypes/NonTrivialString';
 
 import UniformResourceIdentifier from '../index.ts';
