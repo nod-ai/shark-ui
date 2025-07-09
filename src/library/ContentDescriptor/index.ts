@@ -59,12 +59,11 @@ class ContentDescriptor {
       this.parameters === null
     ) return null;
 
-    const prefixedKeyValuePairs = Object.entries(this.parameters)
+    const serializableParameterEntries = Object.entries(this.parameters)
       .map($0 => $0.join(ContentDescriptor.parameterKeyValueDelimiter))
       .map($0 => ContentDescriptor.parameterPrefix.concat($0));
 
-    const serializedKeyValuePairs = concatenated(...prefixedKeyValuePairs);
-    return serializedKeyValuePairs;
+    return concatenated(...serializableParameterEntries);
   }
 
   public get serialized(): NonTrivialString {
