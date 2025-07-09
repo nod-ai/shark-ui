@@ -81,6 +81,15 @@ class MediaType {
   }
 }
 
+/**
+ * A misnomer for {@link MediaType}.
+ *
+ * "MIME" means "Multipurpose Internet Mail Extension", but that's no longer the only use-case for this standard.
+ */
+const MIMEType = MediaType;
+type MIMEType = MediaType;
+
 export {
   MediaType as default,
+  MIMEType,
 };
