@@ -1,6 +1,6 @@
 import Attempt from '@/library/Attempt';
 import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
-import type MediaType from '@/library/MediaType';
+import type ContentDescriptor from '@/library/ContentDescriptor';
 import NonTrivialString from '@/library/customTypes/NonTrivialString';
 
 import UniformResourceIdentifier from '../index.ts';
@@ -15,7 +15,7 @@ class DataURI
   public static readonly scheme = NonTrivialString.parsedFrom('data').forciblyUnwrap();
 
   public constructor(
-    private readonly overridableMediaType: MediaType | null,
+    private readonly overridableDescriptor: ContentDescriptor | null,
     public readonly encoding: DataURI_EncodingIdentifier.Any,
     public readonly data: Base64CharacterEncodedByteSequence,
   ) {
@@ -24,12 +24,12 @@ class DataURI
     );
   }
 
-  public get mediaType(): Exclude<DataURI['overridableMediaType'], null> {
+  public get descriptor(): Exclude<DataURI['overridableDescriptor'], null> {
     if (
-      this.overridableMediaType === null
-    ) return Attempt.abandon('Media type either needs to be initialized or overridden');
+      this.overridableDescriptor === null
+    ) return Attempt.abandon('Descriptor either needs to be initialized or overridden');
 
-    return this.overridableMediaType;
+    return this.overridableDescriptor;
   }
 
   public static readonly encodingPrefix = ';';
@@ -50,7 +50,7 @@ class DataURI
 
   public override get path(): NonTrivialString {
     const orderedPathComponents = [
-      this.mediaType.serialized,
+      this.descriptor.serialized,
       this.serializableEncoding,
       this.serializableData,
     ] as const;

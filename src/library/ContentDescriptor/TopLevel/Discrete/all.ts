@@ -1,5 +1,5 @@
 /** See [RFC 2046 Section 4](https://datatracker.ietf.org/doc/html/rfc2046#section-4) for more details  */
-const MediaType_TopLevel_Discrete_all = [
+const ContentDescriptor_TopLevel_Discrete_all = [
   'text',
   'image',
   'audio',
@@ -8,5 +8,5 @@ const MediaType_TopLevel_Discrete_all = [
 ] as const;
 
 export {
-  MediaType_TopLevel_Discrete_all,
+  ContentDescriptor_TopLevel_Discrete_all,
 };

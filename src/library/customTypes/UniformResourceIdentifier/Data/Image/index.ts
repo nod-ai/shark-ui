@@ -1,5 +1,5 @@
 import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
-import MediaType from '@/library/MediaType';
+import ContentDescriptor from '@/library/ContentDescriptor';
 
 import type {
   DataURI_EncodingIdentifier,
@@ -27,8 +27,8 @@ class ImageURI
     );
   }
 
-  public override get mediaType(): DataURI['mediaType'] {
-    const computedMediaType = new MediaType(
+  public override get descriptor(): DataURI['descriptor'] {
+    const computedDescriptor = new ContentDescriptor(
       ImageURI.fileType,
       null,
       this.format,
@@ -36,7 +36,7 @@ class ImageURI
       null,
     );
 
-    return computedMediaType;
+    return computedDescriptor;
   }
 }
 
