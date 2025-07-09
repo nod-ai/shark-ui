@@ -11,11 +11,6 @@ const greatestCommonDivisor = (a: number, b: number): number => {
   return nextDividend;
 };
 
-const leastCommonMultiple = (a: number, b: number): number => {
-  return (a * b) / greatestCommonDivisor(a, b);
-};
-
 export {
   greatestCommonDivisor,
-  leastCommonMultiple,
 };
