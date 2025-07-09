@@ -10,25 +10,13 @@ import {
  * See [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986) for more information
  */
 class UniformResourceIdentifier {
-  public readonly scheme: /*     */ NonTrivialString;
-  public readonly authority: /*  */ NonTrivialString | null;
-  private readonly overridablePath: NonTrivialString | null;
-  public readonly query: /*      */ NonTrivialString | null;
-  public readonly fragment: /*   */ NonTrivialString | null;
-
   public constructor(
-    givenScheme: /*   */ UniformResourceIdentifier['scheme'],
-    givenAuthority: /**/ UniformResourceIdentifier['authority'] = null,
-    givenPath: /*     */ UniformResourceIdentifier['overridablePath'] = null,
-    givenQuery: /*    */ UniformResourceIdentifier['query'] = null,
-    givenFragment: /* */ UniformResourceIdentifier['fragment'] = null,
-  ) {
-    this.scheme /*    */ = givenScheme;
-    this.authority /* */ = givenAuthority;
-    this.overridablePath = givenPath;
-    this.query /*     */ = givenQuery;
-    this.fragment /*  */ = givenFragment;
-  }
+    public readonly scheme/*      */: NonTrivialString,
+    public readonly authority/*   */: NonTrivialString | null = null,
+    private readonly overridablePath: NonTrivialString | null = null,
+    public readonly query/*       */: NonTrivialString | null = null,
+    public readonly fragment/*    */: NonTrivialString | null = null,
+  ) {}
 
   public static readonly schemeSuffix = ':';
 

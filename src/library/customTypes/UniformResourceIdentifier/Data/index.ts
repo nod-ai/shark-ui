@@ -14,22 +14,14 @@ class DataURI
   extends UniformResourceIdentifier {
   public static readonly scheme = NonTrivialString.parsedFrom('data').forciblyUnwrap();
 
-  private readonly overridableMediaType: MediaType | null;
-  public readonly encoding: DataURI_EncodingIdentifier.Any;
-  public readonly data: Base64CharacterEncodedByteSequence;
-
   public constructor(
-    givenMediaType: DataURI['overridableMediaType'],
-    givenEncoding: DataURI['encoding'],
-    givenData: DataURI['data'],
+    private readonly overridableMediaType: MediaType | null,
+    public readonly encoding: DataURI_EncodingIdentifier.Any,
+    public readonly data: Base64CharacterEncodedByteSequence,
   ) {
     super(
       DataURI.scheme,
     );
-
-    this.overridableMediaType = givenMediaType;
-    this.encoding = givenEncoding;
-    this.data = givenData;
   }
 
   public get mediaType(): Exclude<DataURI['overridableMediaType'], null> {
