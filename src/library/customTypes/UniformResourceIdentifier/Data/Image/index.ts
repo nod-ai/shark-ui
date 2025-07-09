@@ -28,7 +28,7 @@ class ImageURI
   }
 
   public override get descriptor(): DataURI['descriptor'] {
-    const computedMediaType = new ContentDescriptor(
+    const computedDescriptor = new ContentDescriptor(
       ImageURI.fileType,
       null,
       this.format,
@@ -36,7 +36,7 @@ class ImageURI
       null,
     );
 
-    return computedMediaType;
+    return computedDescriptor;
   }
 }
 
