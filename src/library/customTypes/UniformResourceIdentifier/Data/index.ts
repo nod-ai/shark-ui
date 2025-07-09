@@ -3,7 +3,7 @@ import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEn
 
 import type {
   MediaType,
-} from '@/library/MediaType';
+} from '@/library/ContentDescriptor';
 
 import NonTrivialString from '@/library/customTypes/NonTrivialString';
 

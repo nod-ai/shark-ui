@@ -2,7 +2,7 @@ import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEn
 
 import {
   MediaType,
-} from '@/library/MediaType';
+} from '@/library/ContentDescriptor';
 
 import type {
   DataURI_EncodingIdentifier,
