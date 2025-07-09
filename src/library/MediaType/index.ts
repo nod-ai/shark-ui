@@ -13,7 +13,7 @@ import type {
 } from './TopLevel';
 
 /** See [RFC 2045](https://datatracker.ietf.org/doc/html/rfc2045) for more information */
-class MediaType {
+class ContentDescriptor {
   public constructor(
     public fileType: MediaType_TopLevel.Any,
     public tree: string[] | null,
@@ -25,7 +25,7 @@ class MediaType {
   public static readonly fileTypeSuffix = '/';
 
   public get serializableFileType(): NonTrivialString {
-    const suffixedFileType = this.fileType.concat(MediaType.fileTypeSuffix);
+    const suffixedFileType = this.fileType.concat(ContentDescriptor.fileTypeSuffix);
     return NonTrivialString.parsedFrom(suffixedFileType).forciblyUnwrap(/* Proven safe by inspecting intellisense of `fileType` */);
   }
 
@@ -36,7 +36,7 @@ class MediaType {
       this.tree === null
     ) return null;
 
-    const suffixedTreeBranches = this.tree.map($0 => $0.concat(MediaType.treeBranchSuffix));
+    const suffixedTreeBranches = this.tree.map($0 => $0.concat(ContentDescriptor.treeBranchSuffix));
     const serializedTreeBranches = concatenated(...suffixedTreeBranches);
     return serializedTreeBranches;
   }
@@ -48,7 +48,7 @@ class MediaType {
       this.structureType === null
     ) return null;
 
-    return MediaType.structureTypePrefix.concat(this.structureType);
+    return ContentDescriptor.structureTypePrefix.concat(this.structureType);
   }
 
   public static readonly parameterPrefix = ';';
@@ -60,8 +60,8 @@ class MediaType {
     ) return null;
 
     const prefixedKeyValuePairs = Object.entries(this.parameters)
-      .map($0 => $0.join(MediaType.parameterKeyValueDelimiter))
-      .map($0 => MediaType.parameterPrefix.concat($0));
+      .map($0 => $0.join(ContentDescriptor.parameterKeyValueDelimiter))
+      .map($0 => ContentDescriptor.parameterPrefix.concat($0));
 
     const serializedKeyValuePairs = concatenated(...prefixedKeyValuePairs);
     return serializedKeyValuePairs;
@@ -82,14 +82,14 @@ class MediaType {
 }
 
 /**
- * A misnomer for {@link MediaType}.
+ * A misnomer for {@link ContentDescriptor}.
  *
  * "MIME" means "Multipurpose Internet Mail Extension", but that's no longer the only use-case for this standard.
  */
-const MIMEType = MediaType;
-type MIMEType = MediaType;
+const MIMEType = ContentDescriptor;
+type MIMEType = ContentDescriptor;
 
 export {
-  MediaType as default,
+  ContentDescriptor as default,
   MIMEType,
 };
