@@ -142,7 +142,7 @@ class Version1Client
   private cachedClient?: ImageClient;
 
   public get image(): ImageClient {
-    this.cachedClient ??= new ImageClient(this);
+    this.cachedClient ??= new ImageClient(this.origin, this.headers);
     return this.cachedClient;
   }
 }
@@ -152,18 +152,22 @@ class ShimmedStabilityAIClient
   public constructor(given: {
     serverURL: string;
   }) {
-    super({
-      origin : URLOrigin.parsedFrom(given.serverURL).forciblyUnwrap(/* matches error propagation of actual StabilityAI client */),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const serverOrigin = URLOrigin.parsedFrom(given.serverURL).forciblyUnwrap(/* matches error propagation of actual StabilityAI client */);
+
+    const defaultHeaders = {
+      'Content-Type': 'application/json',
+    };
+
+    super(
+      serverOrigin,
+      defaultHeaders,
+    );
   }
 
   private cachedClient?: Version1Client;
 
   public get version1(): Version1Client {
-    this.cachedClient ??= new Version1Client(this);
+    this.cachedClient ??= new Version1Client(this.origin, this.headers);
     return this.cachedClient;
   }
 }
