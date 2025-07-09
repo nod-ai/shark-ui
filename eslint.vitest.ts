@@ -6,7 +6,12 @@ import type {
 
 const pluginVitest: ConfigWithExtends[] = [
   {
-    ...vitest.configs.recommended,
+    ...vitest.configs.all,
+    settings: {
+      vitest: {
+        typecheck: true,
+      },
+    },
     files: [
       'src/**/*.test.*',
     ],
