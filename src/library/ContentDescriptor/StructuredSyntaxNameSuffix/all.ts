@@ -1,5 +1,5 @@
 /** See [RFC 6838 Section 4.2.8](https://www.rfc-editor.org/rfc/rfc6838.html#section-4.2.8) for more information */
-const MediaType_StructuredSyntaxNameSuffix_all = [
+const ContentDescriptor_StructuredSyntaxNameSuffix_all = [
   'xml',
   'json',
   'ber',
@@ -14,5 +14,5 @@ const MediaType_StructuredSyntaxNameSuffix_all = [
 ] as const;
 
 export {
-  MediaType_StructuredSyntaxNameSuffix_all,
+  ContentDescriptor_StructuredSyntaxNameSuffix_all,
 };

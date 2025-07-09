@@ -1,9 +1,9 @@
 import type {
-  MediaType_StructuredSyntaxNameSuffix_all,
+  ContentDescriptor_StructuredSyntaxNameSuffix_all,
 } from './all';
 
-type MediaType_StructuredSyntaxNameSuffix_Any = (typeof MediaType_StructuredSyntaxNameSuffix_all)[number];
+type ContentDescriptor_StructuredSyntaxNameSuffix_Any = (typeof ContentDescriptor_StructuredSyntaxNameSuffix_all)[number];
 
 export type {
-  MediaType_StructuredSyntaxNameSuffix_Any,
+  ContentDescriptor_StructuredSyntaxNameSuffix_Any,
 };

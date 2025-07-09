@@ -5,20 +5,20 @@ import {
 } from '@/library/utilitiesByType/string';
 
 import type {
-  MediaType_StructuredSyntaxNameSuffix,
+  ContentDescriptor_StructuredSyntaxNameSuffix,
 } from './StructuredSyntaxNameSuffix';
 
 import type {
-  MediaType_TopLevel,
+  ContentDescriptor_TopLevel,
 } from './TopLevel';
 
 /** See [RFC 2045](https://datatracker.ietf.org/doc/html/rfc2045) for more information */
 class ContentDescriptor {
   public constructor(
-    public fileType: MediaType_TopLevel.Any,
+    public fileType: ContentDescriptor_TopLevel.Any,
     public tree: string[] | null,
     public fileSubtype: string,
-    public structureType: MediaType_StructuredSyntaxNameSuffix.Any | null,
+    public structureType: ContentDescriptor_StructuredSyntaxNameSuffix.Any | null,
     public parameters: Record<string, string> | null,
   ) {}
 

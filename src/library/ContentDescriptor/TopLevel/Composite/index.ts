@@ -1,5 +1,5 @@
-import * as MediaType_TopLevel_Composite from './exports';
+import * as ContentDescriptor_TopLevel_Composite from './exports';
 
 export {
-  MediaType_TopLevel_Composite,
+  ContentDescriptor_TopLevel_Composite,
 };

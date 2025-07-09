@@ -1,16 +1,16 @@
 import type {
-  MediaType_TopLevel_Composite,
+  ContentDescriptor_TopLevel_Composite,
 } from './Composite';
 
 import type {
-  MediaType_TopLevel_Discrete,
+  ContentDescriptor_TopLevel_Discrete,
 } from './Discrete';
 
-type MediaType_TopLevel_Any =
-  | MediaType_TopLevel_Composite.Any
-  | MediaType_TopLevel_Discrete.Any
+type ContentDescriptor_TopLevel_Any =
+  | ContentDescriptor_TopLevel_Composite.Any
+  | ContentDescriptor_TopLevel_Discrete.Any
 ;
 
 export type {
-  MediaType_TopLevel_Any,
+  ContentDescriptor_TopLevel_Any,
 };

@@ -1,11 +1,11 @@
 export {
-  MediaType_TopLevel_Discrete as Discrete,
+  ContentDescriptor_TopLevel_Discrete as Discrete,
 } from './Discrete';
 
 export {
-  MediaType_TopLevel_Composite as Composite,
+  ContentDescriptor_TopLevel_Composite as Composite,
 } from './Composite';
 
 export type {
-  MediaType_TopLevel_Any as Any,
+  ContentDescriptor_TopLevel_Any as Any,
 } from './Any';

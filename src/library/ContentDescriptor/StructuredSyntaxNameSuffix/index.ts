@@ -1,5 +1,5 @@
-import * as MediaType_StructuredSyntaxNameSuffix from './exports';
+import * as ContentDescriptor_StructuredSyntaxNameSuffix from './exports';
 
 export {
-  MediaType_StructuredSyntaxNameSuffix,
+  ContentDescriptor_StructuredSyntaxNameSuffix,
 };

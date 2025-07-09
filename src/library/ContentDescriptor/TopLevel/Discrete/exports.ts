@@ -1,7 +1,7 @@
 export {
-  MediaType_TopLevel_Discrete_all,
+  ContentDescriptor_TopLevel_Discrete_all,
 } from './all';
 
 export {
-  type MediaType_TopLevel_Discrete_Any as Any,
+  type ContentDescriptor_TopLevel_Discrete_Any as Any,
 } from './Any';
