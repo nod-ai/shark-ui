@@ -18,4 +18,4 @@ jobs:
         uses:  ytanikin/pr-conventional-commits@1.4.0
         with:
           ## cspell:words prefeature
-          task_types: '["feature","prefeature","fix","docs","tests","build","ci","refactor","chore","revert","linter","types"]'
+          task_types: '["feature","prefeature","fix","docs","tests","build","ci","refactor","chore","revert","linter","types","style"]'
