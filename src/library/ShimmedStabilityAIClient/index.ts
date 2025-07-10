@@ -92,13 +92,11 @@ const toBatchGenerationRequestBody = (givenRequests: GenerateFromTextRequest['te
   }, cloneOf(emptyBatchGenerationRequest));
 };
 
-const Shortfin_TextToImage_Response_Body_SchemaMember_image = z.string().transform((someSubject) => {
-  return Base64CharacterEncodedByteSequence.parsedFrom(someSubject).forciblyUnwrap(/* Zod can safely propagate errors */);
-});
-
 const Shortfin_TextToImage_Response_Body = {
   SchemaMember: {
-    image: Shortfin_TextToImage_Response_Body_SchemaMember_image,
+    image: z.string().transform((someSubject) => {
+      return Base64CharacterEncodedByteSequence.parsedFrom(someSubject).forciblyUnwrap(/* Zod can safely propagate errors */);
+    }),
   },
   get Schema() {
     return z.object({
