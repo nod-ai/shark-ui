@@ -1,5 +1,3 @@
-import pluginVitest from '@vitest/eslint-plugin';
-
 import {
   configureVueProject,
   defineConfigWithVueTs,
@@ -15,6 +13,7 @@ import type {
 import pluginCypress from './cypress/eslint.config';
 import pluginImport from './eslint.import';
 import pluginStylistic from './eslint.stylistic';
+import pluginVitest from './eslint.vitest';
 
 const extraConfigForESLint: ConfigWithExtends = {
   name : 'shark-ui/eslint',
@@ -107,11 +106,7 @@ const configWithVueTS = defineConfigWithVueTs(
   vueTsConfigs.strictTypeChecked,
   vueTsConfigs.stylisticTypeChecked,
 
-  {
-    ...pluginVitest.configs.recommended,
-    files: ['src/**/__tests__/*'],
-  },
-
+  ...pluginVitest,
   ...pluginCypress,
 );
 
