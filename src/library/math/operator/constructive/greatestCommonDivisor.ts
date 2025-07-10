@@ -26,17 +26,11 @@ const greatestCommonDivisor = (
   if (
     rightHandMagnitude > leftHandMagnitude
   ) return greatestCommonDivisor(rightHandMagnitude, leftHandMagnitude);
+  else if (
+    rightHandMagnitude !== 0
+  ) return greatestCommonDivisor(rightHandMagnitude, leftHandMagnitude % rightHandMagnitude);
 
-  let nextDividend = leftHandMagnitude;
-  let previousRemainder = rightHandMagnitude;
-
-  while (previousRemainder !== 0) {
-    const eachDivisor = previousRemainder;
-    previousRemainder = nextDividend % eachDivisor;
-    nextDividend = eachDivisor;
-  }
-
-  return nextDividend;
+  return leftHandMagnitude;
 };
 
 export {
