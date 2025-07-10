@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 
 import {
   arithmeticMeanOf,
-} from '@/library/math/aggregators.ts';
+} from '@/library/math';
 
 type RangeBound = 'exclusive' | 'inclusive';
 
