@@ -8,7 +8,7 @@ import type {
   StringParsable,
 } from '@/library/Parser/string';
 
-import StringSubset from '@/library/customTypes/StringSubset.ts';
+import StringSubset from '@/library/customTypes/StringSubset';
 
 class URLOrigin_ParsingError
   extends ParsingError<

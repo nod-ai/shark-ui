@@ -4,13 +4,13 @@ import type {
   StringParsable,
 } from '@/library/Parser/string';
 
+import StringSubset from '@/library/customTypes/StringSubset';
+
 import {
   concatenated,
   isEmpty,
   type StringLike,
 } from '@/library/utilitiesByType/string.ts';
-
-import StringSubset from '../StringSubset.ts';
 
 import NonTrivialString_ParsingError from './ParsingError.ts';
 
