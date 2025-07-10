@@ -1,4 +1,4 @@
-const greatestCommonFactor = (a: number, b: number): number => {
+const greatestCommonDivisor = (a: number, b: number): number => {
   let nextDividend = a;
   let previousRemainder = b;
 
@@ -12,7 +12,7 @@ const greatestCommonFactor = (a: number, b: number): number => {
 };
 
 const leastCommonMultiple = (a: number, b: number): number => {
-  return (a * b) / greatestCommonFactor(a, b);
+  return (a * b) / greatestCommonDivisor(a, b);
 };
 
 const cofactor = (
@@ -28,7 +28,7 @@ const cofactor = (
 };
 
 export {
-  greatestCommonFactor,
+  greatestCommonDivisor,
   leastCommonMultiple,
   cofactor,
 };
