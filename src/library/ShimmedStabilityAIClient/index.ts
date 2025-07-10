@@ -97,9 +97,11 @@ const Shortfin_TextToImage_Response_Body_SchemaMember_image = z.string().transfo
 });
 
 const Shortfin_TextToImage_Response_Body = {
-  Schema: z.object({
-    images: z.tuple([Shortfin_TextToImage_Response_Body_SchemaMember_image]).rest(Shortfin_TextToImage_Response_Body_SchemaMember_image),
-  }),
+  get Schema() {
+    return z.object({
+      images: z.tuple([Shortfin_TextToImage_Response_Body_SchemaMember_image]).rest(Shortfin_TextToImage_Response_Body_SchemaMember_image),
+    });
+  },
 };
 
 const generationEndpoint = URLPath.parsedFrom('/generate').forciblyUnwrap();
