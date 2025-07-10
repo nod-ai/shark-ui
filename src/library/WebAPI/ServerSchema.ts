@@ -1,12 +1,10 @@
-import {
-  z,
-} from 'zod/v4';
+import Schema from '@/library/Schema';
 
 import Server from './Server';
 
 /** Defines how to parse into an instance of {@link Server} */
-const ServerSchema = z.object({
-  origin: z.string(),
+const ServerSchema = Schema.object({
+  origin: Schema.string(),
 }).transform($0 => Server.from($0));
 
 export {

@@ -7,12 +7,9 @@ import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
-import {
-  z,
-} from 'zod/v4';
-
 import Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
 import HTTP from '@/library/HTTP';
+import Schema from '@/library/Schema';
 
 import {
   URLOrigin,
@@ -94,15 +91,15 @@ const toBatchGenerationRequestBody = (givenRequests: GenerateFromTextRequest['te
 
 const Shortfin_TextToImage_Response_Body = {
   SchemaMember: {
-    image: z.string().transform((someSubject) => {
+    image: Schema.string().transform((someSubject) => {
       return Base64CharacterEncodedByteSequence.parsedFrom(someSubject).forciblyUnwrap(/* Zod can safely propagate errors */);
     }),
     get images() {
-      return z.tuple([this.image]).rest(this.image);
+      return Schema.tuple([this.image]).rest(this.image);
     },
   },
   get Schema() {
-    return z.object({
+    return Schema.object({
       images: this.SchemaMember.images,
     });
   },
