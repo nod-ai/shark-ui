@@ -97,10 +97,13 @@ const Shortfin_TextToImage_Response_Body = {
     image: z.string().transform((someSubject) => {
       return Base64CharacterEncodedByteSequence.parsedFrom(someSubject).forciblyUnwrap(/* Zod can safely propagate errors */);
     }),
+    get images() {
+      return z.tuple([this.image]).rest(this.image);
+    },
   },
   get Schema() {
     return z.object({
-      images: z.tuple([this.SchemaMember.image]).rest(this.SchemaMember.image),
+      images: this.SchemaMember.images,
     });
   },
 };
