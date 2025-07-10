@@ -1,7 +1,7 @@
 import Attempt from '@/library/Attempt';
 import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
 import type ContentDescriptor from '@/library/ContentDescriptor';
-import NonTrivialString from '@/library/customTypes/NonTrivialString';
+import NonTrivialString from '@/library/NonTrivialString';
 
 import UniformResourceIdentifier from '../index.ts';
 

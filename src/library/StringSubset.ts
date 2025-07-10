@@ -5,7 +5,7 @@ import type {
 import {
   type StringLike,
   concatenated,
-} from '../utilitiesByType/string';
+} from '@/library/utilitiesByType/string';
 
 /**
  * When an open-ended `string` is too permissive, extend this class and provide a means to instantiate some subset
