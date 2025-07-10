@@ -92,13 +92,21 @@ const toBatchGenerationRequestBody = (givenRequests: GenerateFromTextRequest['te
   }, cloneOf(emptyBatchGenerationRequest));
 };
 
-const z_image = z.string().transform((someSubject) => {
-  return Base64CharacterEncodedByteSequence.parsedFrom(someSubject).forciblyUnwrap(/* Zod can safely propagate errors */);
-});
-
-const z_imageGenerationResponseBody = z.object({
-  images: z.tuple([z_image]).rest(z_image),
-});
+const Shortfin_TextToImage_Response_Body = {
+  SchemaMember: {
+    image: z.string().transform((someSubject) => {
+      return Base64CharacterEncodedByteSequence.parsedFrom(someSubject).forciblyUnwrap(/* Zod can safely propagate errors */);
+    }),
+    get images() {
+      return z.tuple([this.image]).rest(this.image);
+    },
+  },
+  get Schema() {
+    return z.object({
+      images: this.SchemaMember.images,
+    });
+  },
+};
 
 const generationEndpoint = URLPath.parsedFrom('/generate').forciblyUnwrap();
 
@@ -118,7 +126,7 @@ class ImageClient
 
     const {
       images,
-    } = z_imageGenerationResponseBody.parse(newResource);
+    } = Shortfin_TextToImage_Response_Body.Schema.parse(newResource);
 
     const [soleGeneratedImage] = images;
 
