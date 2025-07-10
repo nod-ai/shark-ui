@@ -8,7 +8,7 @@ import type {
   StringParsable,
 } from '@/library/Parser/string';
 
-import StringSubset from '@/library/customTypes/StringSubset';
+import StringSubset from '@/library/StringSubset';
 
 class URLPath_ParsingError
   extends ParsingError<
