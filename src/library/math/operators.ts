@@ -15,20 +15,7 @@ const leastCommonMultiple = (a: number, b: number): number => {
   return (a * b) / greatestCommonDivisor(a, b);
 };
 
-const cofactor = (
-  {
-    to: givenCofactor,
-    forLCMWith: givenValue,
-  }: {
-    to: number;
-    forLCMWith: number;
-  },
-): number => {
-  return leastCommonMultiple(givenValue, givenCofactor) / givenCofactor;
-};
-
 export {
   greatestCommonDivisor,
   leastCommonMultiple,
-  cofactor,
 };
