@@ -96,9 +96,11 @@ const Shortfin_TextToImage_Response_Body_SchemaMember_image = z.string().transfo
   return Base64CharacterEncodedByteSequence.parsedFrom(someSubject).forciblyUnwrap(/* Zod can safely propagate errors */);
 });
 
-const Shortfin_TextToImage_Response_Body_Schema = z.object({
-  images: z.tuple([Shortfin_TextToImage_Response_Body_SchemaMember_image]).rest(Shortfin_TextToImage_Response_Body_SchemaMember_image),
-});
+const Shortfin_TextToImage_Response_Body = {
+  Schema: z.object({
+    images: z.tuple([Shortfin_TextToImage_Response_Body_SchemaMember_image]).rest(Shortfin_TextToImage_Response_Body_SchemaMember_image),
+  }),
+};
 
 const generationEndpoint = URLPath.parsedFrom('/generate').forciblyUnwrap();
 
@@ -118,7 +120,7 @@ class ImageClient
 
     const {
       images,
-    } = Shortfin_TextToImage_Response_Body_Schema.parse(newResource);
+    } = Shortfin_TextToImage_Response_Body.Schema.parse(newResource);
 
     const [soleGeneratedImage] = images;
 
