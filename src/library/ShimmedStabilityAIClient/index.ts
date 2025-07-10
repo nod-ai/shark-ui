@@ -14,7 +14,7 @@ import Schema from '@/library/Schema';
 import {
   URLOrigin,
   URLPath,
-} from '@/library/customTypes/URLComponent';
+} from '@/library/URLComponent';
 
 import {
   cloneOf,

@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 
 import type {
   URLPath,
-} from '@/library/customTypes/URLComponent';
+} from '@/library/URLComponent';
 
 class StaticConfigReadingError
   extends Attempt.ActionableError<
