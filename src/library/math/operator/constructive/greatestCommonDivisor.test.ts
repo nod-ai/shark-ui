@@ -21,7 +21,15 @@ describe(greatestCommonDivisor, () => {
         expect(() => greatestCommonDivisor(operandA, operandB)).toThrow(Error);
       });
 
-      it.todo('should reject infinite operands');
+      it.each([
+        [Infinity, 10000000],
+        [Infinity, Infinity],
+        [10000000, Infinity],
+      ])('should reject infinite operands', (operandA, operandB) => {
+        expect.assertions(1);
+
+        expect(() => greatestCommonDivisor(operandA, operandB)).toThrow(Error);
+      });
     });
 
     describe('when generated', () => {
