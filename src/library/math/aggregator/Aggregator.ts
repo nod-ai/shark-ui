@@ -1,6 +1,9 @@
-import type {
-  Aggregator,
-} from '../aggregators';
+type Aggregator = (
+  ...givenValues: [
+    number,
+    ...number[],
+  ]
+) => number;
 
 export type {
   Aggregator,
