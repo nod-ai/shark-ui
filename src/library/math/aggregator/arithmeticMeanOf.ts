@@ -1,6 +1,14 @@
+import type {
+  Aggregator,
+} from './Aggregator';
+
 import {
-  arithmeticMeanOf,
-} from '../aggregators';
+  sumOf,
+} from './sumOf';
+
+const arithmeticMeanOf: Aggregator = (
+  ...givenValues
+) => sumOf(...givenValues) / givenValues.length;
 
 export {
   arithmeticMeanOf,
