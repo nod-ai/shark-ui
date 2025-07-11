@@ -1,7 +1,7 @@
 import Attempt from '@/library/Attempt';
 
 import {
-  isFinite,
+  isWhole,
 } from '../predicate';
 
 const greatestCommonDivisor = (
@@ -9,12 +9,12 @@ const greatestCommonDivisor = (
   rightHandOperand: number,
 ): number => {
   if (
-    !isFinite(leftHandOperand)
-  ) return Attempt.abandon('Left operand must be finite.');
+    !isWhole(leftHandOperand)
+  ) return Attempt.abandon('Left operand must be whole.');
 
   if (
-    !isFinite(rightHandOperand)
-  ) return Attempt.abandon('Right operand must be finite.');
+    !isWhole(rightHandOperand)
+  ) return Attempt.abandon('Right operand must be whole.');
 
   let nextDividend = leftHandOperand;
   let previousRemainder = rightHandOperand;
