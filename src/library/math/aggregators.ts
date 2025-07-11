@@ -9,6 +9,7 @@ const arithmeticMeanOf: Aggregator = (
 ) => sumOf(...givenValues) / givenValues.length;
 
 export {
+  type Aggregator,
   sumOf,
   arithmeticMeanOf,
 };
