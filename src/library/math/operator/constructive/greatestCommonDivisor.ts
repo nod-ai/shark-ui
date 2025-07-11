@@ -23,6 +23,10 @@ const greatestCommonDivisor = (
   const leftHandMagnitude = absoluteValueOf(leftHandOperand);
   const rightHandMagnitude = absoluteValueOf(rightHandOperand);
 
+  if (
+    rightHandMagnitude > leftHandMagnitude
+  ) return greatestCommonDivisor(rightHandMagnitude, leftHandMagnitude);
+
   let nextDividend = leftHandMagnitude;
   let previousRemainder = rightHandMagnitude;
 
