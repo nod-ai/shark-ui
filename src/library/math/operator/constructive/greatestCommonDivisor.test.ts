@@ -129,7 +129,20 @@ describe(greatestCommonDivisor, () => {
       expect(() => greatestCommonDivisor(primeA, primeB)).not.toThrow();
     });
 
-    it.todo('should return the same answer regardless of the sign of each operand');
+    const combosOfSignedIdentityFactors = symmetricPairCombos({
+      of    : numberTaxonomy.signed.negative,
+      filler: numberTaxonomy.signed.positive,
+    });
+
+    it.each(combosOfSignedIdentityFactors)('should return the same answer regardless of the sign of each operand', (...eachComboOfSignedIdentityFactors) => {
+      expect.assertions(1);
+
+      const signedA = eachComboOfSignedIdentityFactors[0] * primeA;
+      const signedB = eachComboOfSignedIdentityFactors[1] * primeB;
+
+      expect(/* */greatestCommonDivisor(/**/signedA, /**/signedB))
+        .toBe(/**/greatestCommonDivisor(/* */primeA, /* */primeB));
+    });
 
     it.todo('should be commutative');
 
