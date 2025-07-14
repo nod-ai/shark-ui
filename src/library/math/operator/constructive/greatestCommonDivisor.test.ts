@@ -46,7 +46,7 @@ const symmetricPairCombos = <
   filler: given.filler,
 });
 
-const aliasKeys = ['default'] as const;
+const aliasKeys = Object.keys(GCDAlias) as (keyof typeof GCDAlias)[];
 
 describe.each(aliasKeys)(`${GCDAlias.default.name} alias: "%s"`, (eachAliasKey) => {
   const eachAliasedGCD = GCDAlias[eachAliasKey]; // eslint-disable-line import/namespace
