@@ -6,4 +6,12 @@ import {
   greatestCommonDivisor,
 } from './greatestCommonDivisor';
 
-describe.todo(greatestCommonDivisor);
+describe(greatestCommonDivisor, () => {
+  describe('the sad outcomes', () => {
+    describe.todo('when delegated');
+
+    describe.todo('when generated');
+  });
+
+  describe.todo('the happy outcomes');
+});
