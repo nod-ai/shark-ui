@@ -14,9 +14,7 @@ import {
   squared,
 } from '../hyper';
 
-import {
-  greatestCommonDivisor,
-} from './greatestCommonDivisor';
+import greatestCommonDivisor from './greatestCommonDivisor';
 
 const pairCombos = <
   LeftElement extends number,

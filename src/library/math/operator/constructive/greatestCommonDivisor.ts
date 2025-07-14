@@ -34,5 +34,6 @@ const greatestCommonDivisor = (
 };
 
 export {
+  greatestCommonDivisor as default,
   greatestCommonDivisor,
 };
