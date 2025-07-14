@@ -144,7 +144,12 @@ describe(greatestCommonDivisor, () => {
         .toBe(/**/greatestCommonDivisor(/* */primeA, /* */primeB));
     });
 
-    it.todo('should be commutative');
+    it('should be commutative', () => {
+      expect.assertions(1);
+
+      expect(/* */greatestCommonDivisor(primeA, primeB))
+        .toBe(/**/greatestCommonDivisor(primeB, primeA));
+    });
 
     it.todo('should be associative');
 
