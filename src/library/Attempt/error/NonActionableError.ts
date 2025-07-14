@@ -22,7 +22,7 @@ class NonActionableError
   public override name = 'NonActionableError';
   public readonly brand!: 'NonActionableError';
 
-  protected constructor(
+  public constructor(
     givenMessage: NonActionableError['message'],
     givenOptions?: ErrorOptions,
   ) {
