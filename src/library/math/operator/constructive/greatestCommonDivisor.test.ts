@@ -178,7 +178,11 @@ describe(greatestCommonDivisor, () => {
       );
     });
 
-    it.todo('should preserve the identity of matching operands');
+    it('should preserve the identity of matching operands', () => {
+      expect.assertions(1);
+
+      expect(greatestCommonDivisor(primeA, primeA)).toBe(primeA);
+    });
 
     it.todo('should return identity factor for co-prime operands');
 
