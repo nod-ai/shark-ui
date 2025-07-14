@@ -48,7 +48,7 @@ const symmetricPairCombos = <
   filler: given.filler,
 });
 
-describe(greatestCommonDivisor, () => {
+describe(GCDAlias.default, () => {
   const singleDigitPrimes = [2, 3, 5, 7] as const;
 
   const [
