@@ -16,8 +16,6 @@ import {
 
 import * as GCDAlias from './greatestCommonDivisor';
 
-const greatestCommonDivisor = GCDAlias.default;
-
 const pairCombos = <
   LeftElement extends number,
   RightElement extends number,
@@ -49,6 +47,8 @@ const symmetricPairCombos = <
 });
 
 describe(GCDAlias.default, () => {
+  const greatestCommonDivisor = GCDAlias.default;
+
   const singleDigitPrimes = [2, 3, 5, 7] as const;
 
   const [
