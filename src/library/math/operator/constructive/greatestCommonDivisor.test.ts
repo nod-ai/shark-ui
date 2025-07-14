@@ -4,6 +4,8 @@ import {
   expect,
 } from 'vitest';
 
+import Attempt from '@/library/Attempt';
+
 import {
   numberTaxonomy,
 } from '../../numberTaxonomy';
@@ -83,7 +85,11 @@ describe(greatestCommonDivisor, () => {
           expect(() => greatestCommonDivisor(...$0)).toThrow(Error);
         });
 
-        it.todo('should safely propagate the error');
+        it.each(combosOfFractionalNumbers)('should safely propagate the error', (...$0) => {
+          expect.assertions(1);
+
+          expect(() => greatestCommonDivisor(...$0)).toThrow(Attempt.NonActionableError);
+        });
 
         it.todo('should communicate clearly with developers');
       });
