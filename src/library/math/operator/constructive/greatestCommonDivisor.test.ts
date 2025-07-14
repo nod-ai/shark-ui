@@ -45,9 +45,14 @@ const symmetricPairCombos = <
 });
 
 describe(greatestCommonDivisor, () => {
-  describe('the sad outcomes', () => {
-    const primeA = 2;
+  const singleDigitPrimes = [2, 3, 5, 7] as const;
 
+  const [
+    primeA,
+    primeB,
+  ] = singleDigitPrimes;
+
+  describe('the sad outcomes', () => {
     describe('when delegated', () => {
       const combosOfInoperableNumbers = symmetricPairCombos({
         of    : numberTaxonomy.undefined,
@@ -118,7 +123,11 @@ describe(greatestCommonDivisor, () => {
   });
 
   describe('the happy outcomes', () => {
-    it.todo('should accept valid operands');
+    it('should accept valid operands', () => {
+      expect.assertions(1);
+
+      expect(() => greatestCommonDivisor(primeA, primeB)).not.toThrow();
+    });
 
     it.todo('should return the same answer regardless of the sign of each operand');
 
