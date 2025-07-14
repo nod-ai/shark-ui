@@ -47,7 +47,8 @@ const symmetricPairCombos = <
 });
 
 describe(GCDAlias.default, () => {
-  const eachAliasedGCD = GCDAlias.default;
+  const eachAliasKey = 'default';
+  const eachAliasedGCD = GCDAlias[eachAliasKey]; // eslint-disable-line import/namespace
 
   const singleDigitPrimes = [2, 3, 5, 7] as const;
 
