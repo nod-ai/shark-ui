@@ -14,7 +14,9 @@ import {
   squared,
 } from '../hyper';
 
-import greatestCommonDivisor from './greatestCommonDivisor';
+import * as GCDAlias from './greatestCommonDivisor';
+
+const greatestCommonDivisor = GCDAlias.default;
 
 const pairCombos = <
   LeftElement extends number,
