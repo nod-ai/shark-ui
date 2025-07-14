@@ -74,8 +74,10 @@ describe(greatestCommonDivisor, () => {
 
     describe('when generated', () => {
       describe('due to fractional operands', () => {
+        const eulers = numberTaxonomy.fractional.transcendental; // c-spell:words eulers
+
         const combosOfFractionalNumbers = symmetricPairCombos({
-          of    : numberTaxonomy.fractional.transcendental,
+          of    : eulers,
           filler: primeA,
         });
 
@@ -91,7 +93,26 @@ describe(greatestCommonDivisor, () => {
           expect(() => greatestCommonDivisor(...$0)).toThrow(Attempt.NonActionableError);
         });
 
-        it.todo('should communicate clearly with developers');
+        const fractionalCombosWithMessage = [
+          {
+            numbers: [eulers, primeA] as const,
+            message: 'Left operand must be whole.',
+          },
+          {
+            numbers: [eulers, eulers] as const,
+            message: 'Left operand must be whole.',
+          },
+          {
+            numbers: [primeA, eulers] as const,
+            message: 'Right operand must be whole.',
+          },
+        ];
+
+        it.each(fractionalCombosWithMessage)('should communicate clearly with developers', ($0) => {
+          expect.assertions(1);
+
+          expect(() => greatestCommonDivisor(...$0.numbers)).toThrow($0.message);
+        });
       });
     });
   });
