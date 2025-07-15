@@ -8,13 +8,14 @@ class TextToImage_Server_SpecificationError
   extends Attempt.ActionableError<
   'TextToImage_Server_SpecificationError'
 > {
+  public override name = 'TextToImage_Server_SpecificationError' as const;
+
   public constructor(
     public readonly environmentKey: string,
     public readonly file: URLPath,
     public readonly endpoint: URLPath,
   ) {
     super('Failed to determine text-to-image server');
-    this.name = 'TextToImage_Server_SpecificationError';
   }
 }
 

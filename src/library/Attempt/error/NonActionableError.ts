@@ -19,6 +19,7 @@ class NonActionableError
   implements Branded<
   'NonActionableError'
 > {
+  public override name = 'NonActionableError';
   public readonly brand!: 'NonActionableError';
 
   protected constructor(
@@ -26,7 +27,6 @@ class NonActionableError
     givenOptions?: ErrorOptions,
   ) {
     super(givenMessage, givenOptions);
-    this.name = 'NonActionableError';
   }
 
   public throw(): never {

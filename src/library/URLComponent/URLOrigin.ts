@@ -14,12 +14,13 @@ class URLOrigin_ParsingError
   extends ParsingError<
   'URLOrigin'
 > {
+  public override name = 'URLOrigin_ParsingError' as const;
+
   public constructor(given: {
     expectation: string;
     reality: string;
   }) {
     super(`Expected pure origin "${given.expectation}", got "${given.reality}"`);
-    this.name = 'URLOrigin_ParsingError';
   }
 }
 

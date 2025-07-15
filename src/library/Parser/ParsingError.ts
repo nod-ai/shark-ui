@@ -10,7 +10,6 @@ abstract class ParsingError<
     givenCause?: Error,
   ) {
     super(givenMessage, givenCause);
-    this.name = 'ParsingError';
   }
 }
 

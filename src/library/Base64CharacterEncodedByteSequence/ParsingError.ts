@@ -10,12 +10,13 @@ class Base64CharacterEncodedByteSequence_ParsingError
   extends ParsingError<
   'Base64CharacterEncodedByteSequence'
 > {
+  public override name = 'Base64CharacterEncodedByteSequence_ParsingError' as const;
+
   public constructor(
     givenMessage: string,
     givenCause?: Error,
   ) {
     super(givenMessage, givenCause);
-    this.name = 'Base64CharacterEncodedByteSequence_ParsingError';
   }
 
   public static thatEscorts(
