@@ -2,6 +2,7 @@ import NonActionableError from '../error/NonActionableError';
 
 class AttemptCreationError
   extends NonActionableError {
+  public override name = 'AttemptCreationError' as const;
   public override readonly cause: Error;
 
   private constructor(
@@ -11,7 +12,6 @@ class AttemptCreationError
     },
   ) {
     super(givenMessage, givenOptions);
-    this.name = 'AttemptCreationError';
     this.cause = givenOptions.cause;
   }
 

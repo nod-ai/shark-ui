@@ -14,12 +14,13 @@ class URLPath_ParsingError
   extends ParsingError<
   'URLPath'
 > {
+  public override name = 'URLPath_ParsingError' as const;
+
   public constructor(given: {
     expectation: string;
     reality: string;
   }) {
     super(`Expected pure path: "${given.expectation}", got "${given.reality}"`);
-    this.name = 'URLPath_ParsingError';
   }
 }
 
