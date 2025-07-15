@@ -1,5 +1,6 @@
 import {
   describe,
+  it,
 } from 'vitest';
 
 import {
@@ -11,7 +12,13 @@ describe(greatestCommonDivisor, () => {
     describe.todo('when delegated');
 
     describe('when generated', () => {
-      describe.todo('due to fractional operands');
+      describe('due to fractional operands', () => {
+        it.todo('should reject them');
+
+        it.todo('should safely propagate the error');
+
+        it.todo('should communicate clearly with developers');
+      });
     });
   });
 
