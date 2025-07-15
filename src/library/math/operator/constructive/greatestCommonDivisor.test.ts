@@ -9,7 +9,11 @@ import {
 
 describe(greatestCommonDivisor, () => {
   describe('the sad outcomes', () => {
-    describe.todo('when delegated');
+    describe('when delegated', () => {
+      it.todo('should reject inoperable operands');
+
+      it.todo('should reject infinite operands');
+    });
 
     describe('when generated', () => {
       describe('due to fractional operands', () => {
