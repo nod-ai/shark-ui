@@ -184,7 +184,28 @@ describe(greatestCommonDivisor, () => {
       expect(greatestCommonDivisor(primeA, primeA)).toBe(primeA);
     });
 
-    it.todo('should return identity factor for co-prime operands');
+    const identityFactor = 1;
+
+    const neighboringPrimes = [
+      primeA,
+      primeB,
+    ] as const;
+
+    const coPrimePairs = [
+      neighboringPrimes,
+      neighboringPrimes.map($0 => $0 * $0) as [number, number],
+    ];
+
+    it.each(coPrimePairs)('should return identity factor for co-prime operands', (...eachCoPrimePair) => {
+      expect.assertions(1);
+
+      expect(
+        greatestCommonDivisor(
+          identityFactor * eachCoPrimePair[0],
+          identityFactor * eachCoPrimePair[1],
+        ),
+      ).toBe(identityFactor);
+    });
 
     it.todo('should extract a common factor applied to two distinct prime numbers');
   });
