@@ -63,11 +63,7 @@ where:
     npm run lint
     ```
 
-1. Run Unit Tests with [Vitest](https://vitest.dev/):
-
-    ```shell
-    npm run test:unit
-    ```
+1. Run [unit tests](../testing/unit/development.md):
 
 1. Run End-to-End Tests against the development server with [Cypress](https://www.cypress.io/):
 
