@@ -1,6 +1,7 @@
 import {
   describe,
   it,
+  expect,
 } from 'vitest';
 
 import {
@@ -10,7 +11,15 @@ import {
 describe(greatestCommonDivisor, () => {
   describe('the sad outcomes', () => {
     describe('when delegated', () => {
-      it.todo('should reject inoperable operands');
+      it.each([
+        [NaN, 100],
+        [NaN, NaN],
+        [100, NaN],
+      ])('should reject inoperable operands', (operandA, operandB) => {
+        expect.assertions(1);
+
+        expect(() => greatestCommonDivisor(operandA, operandB)).toThrow(Error);
+      });
 
       it.todo('should reject infinite operands');
     });

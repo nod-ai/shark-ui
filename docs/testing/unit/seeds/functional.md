@@ -32,6 +32,29 @@ describe(doSomething, () => {
 });
 ```
 
+or, for units that guarantee "happy outcomes" only:
+
+```typescript
+import {
+  describe,
+  it,
+} from 'vitest';
+
+import {
+  doSomething,
+} from './doSomething';
+
+describe(doSomething, () => {
+  describe('the guaranteed behavior', () => {
+    it.todo('should never fail');
+  });
+
+  describe.todo('the expected classifications');
+});
+```
+
+These are general templates that can then be form-fitted to the needs of the specific unit being test.
+
 ## Rationale
 
 1. Follows guidance given by linter
