@@ -10,7 +10,9 @@ describe(greatestCommonDivisor, () => {
   describe('the sad outcomes', () => {
     describe.todo('when delegated');
 
-    describe.todo('when generated');
+    describe('when generated', () => {
+      describe.todo('due to fractional operands');
+    });
   });
 
   describe.todo('the happy outcomes');
