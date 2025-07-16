@@ -7,7 +7,7 @@ type Is<
       ? true
       : false
     : false
-;
+  ;
 
 type If<
   Condition extends boolean,
@@ -17,7 +17,7 @@ type If<
   Condition extends true
     ? WhenTrue
     : WhenFalse
-;
+  ;
 
 type Not<
   SomeBoolean extends boolean,
