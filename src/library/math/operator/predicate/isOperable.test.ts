@@ -8,7 +8,7 @@ import {
   isOperable,
 } from './isOperable';
 
-const numericCategory = {
+const numberTaxonomy = {
   signed: {
     negative: /**/-1,
     positive: /**/+1,
@@ -31,19 +31,19 @@ const numericCategory = {
 } as const;
 
 describe(isOperable, () => {
-  const theSoleInoperableNumber = numericCategory.undefined;
+  const theSoleInoperableNumber = numberTaxonomy.undefined;
 
   const operableNumbers = [
-    numericCategory.origin,
-    numericCategory.signed.negative,
-    numericCategory.signed.positive,
-    numericCategory.fractional.rational,
-    numericCategory.fractional.irrational,
-    numericCategory.fractional.transcendental,
-    numericCategory.infinite.positive,
-    numericCategory.infinite.negative,
-    numericCategory.runtime.min,
-    numericCategory.runtime.max,
+    numberTaxonomy.origin,
+    numberTaxonomy.signed.negative,
+    numberTaxonomy.signed.positive,
+    numberTaxonomy.fractional.rational,
+    numberTaxonomy.fractional.irrational,
+    numberTaxonomy.fractional.transcendental,
+    numberTaxonomy.infinite.positive,
+    numberTaxonomy.infinite.negative,
+    numberTaxonomy.runtime.min,
+    numberTaxonomy.runtime.max,
   ];
 
   describe('the guaranteed behavior', () => {
