@@ -76,13 +76,13 @@ import {
 describe(doSomething, () => {
   describe('the sad outcomes', () => {
     describe('when delegated', () => {
-      it.todo('should reject <sadAdjectiveA> inputs');
+      it.todo('should reject <sadAdjectiveA> <pluralInputNoun>');
 
-      it.todo('should reject <sadAdjectiveB> inputs');
+      it.todo('should reject <sadAdjectiveB> <pluralInputNoun>');
     });
 
     describe('when generated', () => {
-      describe('due to <sadAdjectiveC> inputs', () => {
+      describe('due to <sadAdjectiveC> <pluralInputNoun>', () => {
         it.todo('should reject them');
 
         it.todo('should conform to <some protocol or convention>');
@@ -93,17 +93,17 @@ describe(doSomething, () => {
   });
 
   describe('the happy outcomes', () => {
-    it.todo('should accept <happyAdjective> inputs');
+    it.todo('should accept <happyAdjective> <pluralInputNoun>');
 
     it.todo('should exhibit <propertyA>');
 
     it.todo('should exhibit <propertyB>');
 
-    it.todo('should handle <specialAdjectiveA> inputs');
+    it.todo('should handle <specialAdjectiveA> <pluralInputNoun>');
 
-    it.todo('should handle <specialAdjectiveB> inputs');
+    it.todo('should handle <specialAdjectiveB> <pluralInputNoun>');
 
-    it.todo('should return <correctAnswer> for <commonalityAdjective> inputs');
+    it.todo('should return <correctAnswer> for <commonalityAdjective> <pluralInputNoun>');
   });
 });
 ```
