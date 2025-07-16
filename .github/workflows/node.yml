@@ -39,7 +39,7 @@ on:
 jobs:
   analyze:
     runs-on: ubuntu-latest
-    name: Lint and compile via package.json
+    name: Lint, Compile, and Test
     steps:
       - uses: actions/checkout@v4
       - name: Set up Node.js
@@ -66,4 +66,13 @@ jobs:
         if: steps.compile.outcome == 'failure'
         run: |
           echo "::notice::Run \`npx vue-tsc --build\` in your dev environment for details about compiler issues"
+          exit 1
+      - name: Run the unit tests
+        id: test_units
+        run: npm run test:unit
+        continue-on-error: true
+      - name: If unit tests fail, highlight debug tools
+        if: steps.test_units.outcome == 'failure'
+        run: |
+          echo "::notice::Run \`npm run test:unit\` in your dev environment for a detailed report about failed unit tests"
           exit 1
