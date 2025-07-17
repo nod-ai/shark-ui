@@ -11,24 +11,28 @@ import {
 describe(greatestCommonDivisor, () => {
   describe('the sad outcomes', () => {
     describe('when delegated', () => {
-      it.each([
+      const combosOfInoperableNumbers = [
         [NaN, 100],
         [NaN, NaN],
         [100, NaN],
-      ])('should reject inoperable operands', (operandA, operandB) => {
+      ] as const;
+
+      it.each(combosOfInoperableNumbers)('should reject inoperable operands', (...$0) => {
         expect.assertions(1);
 
-        expect(() => greatestCommonDivisor(operandA, operandB)).toThrow(Error);
+        expect(() => greatestCommonDivisor(...$0)).toThrow(Error);
       });
 
-      it.each([
+      const combosOfInfiniteNumbers = [
         [Infinity, 10000000],
         [Infinity, Infinity],
         [10000000, Infinity],
-      ])('should reject infinite operands', (operandA, operandB) => {
+      ] as const;
+
+      it.each(combosOfInfiniteNumbers)('should reject infinite operands', (...$0) => {
         expect.assertions(1);
 
-        expect(() => greatestCommonDivisor(operandA, operandB)).toThrow(Error);
+        expect(() => greatestCommonDivisor(...$0)).toThrow(Error);
       });
     });
 
