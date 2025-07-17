@@ -44,9 +44,9 @@ const symmetricPairCombos = <
 
 describe(greatestCommonDivisor, () => {
   describe('the sad outcomes', () => {
-    describe('when delegated', () => {
-      const primeA = 2;
+    const primeA = 2;
 
+    describe('when delegated', () => {
       const combosOfInoperableNumbers = symmetricPairCombos({
         of    : numberTaxonomy.undefined,
         filler: primeA,
@@ -72,7 +72,16 @@ describe(greatestCommonDivisor, () => {
 
     describe('when generated', () => {
       describe('due to fractional operands', () => {
-        it.todo('should reject them');
+        const combosOfFractionalNumbers = symmetricPairCombos({
+          of    : numberTaxonomy.fractional.transcendental,
+          filler: primeA,
+        });
+
+        it.each(combosOfFractionalNumbers)('should reject them', (...$0) => {
+          expect.assertions(1);
+
+          expect(() => greatestCommonDivisor(...$0)).toThrow(Error);
+        });
 
         it.todo('should safely propagate the error');
 
