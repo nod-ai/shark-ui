@@ -41,9 +41,11 @@ const symmetricPairCombos = <
 describe(greatestCommonDivisor, () => {
   describe('the sad outcomes', () => {
     describe('when delegated', () => {
+      const primeA = 2;
+
       const combosOfInoperableNumbers = symmetricPairCombos({
         of    : NaN,
-        filler: 100,
+        filler: primeA,
       });
 
       it.each(combosOfInoperableNumbers)('should reject inoperable operands', (...$0) => {
@@ -54,7 +56,7 @@ describe(greatestCommonDivisor, () => {
 
       const combosOfInfiniteNumbers = symmetricPairCombos({
         of    : Infinity,
-        filler: 10000000,
+        filler: primeA,
       });
 
       it.each(combosOfInfiniteNumbers)('should reject infinite operands', (...$0) => {
