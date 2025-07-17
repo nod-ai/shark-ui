@@ -5,17 +5,52 @@ import {
 } from 'vitest';
 
 import {
+  numberTaxonomy,
+} from '../../numberTaxonomy';
+
+import {
   greatestCommonDivisor,
 } from './greatestCommonDivisor';
+
+const pairCombos = <
+  LeftElement extends number,
+  RightElement extends number,
+  FillerElement extends number,
+>(
+  given: {
+    left: LeftElement;
+    right: RightElement;
+    filler: FillerElement;
+  },
+) => [
+  [given.left/*  */, given.filler/**/],
+  [given.left/*  */, given.right/* */],
+  [given.filler/**/, given.right/* */],
+] as const;
+
+const symmetricPairCombos = <
+  SymmetricElement extends number,
+  FillerElement extends number,
+>(
+  given: {
+    of: SymmetricElement;
+    filler: FillerElement;
+  },
+) => pairCombos({
+  left  : given.of,
+  right : given.of,
+  filler: given.filler,
+});
 
 describe(greatestCommonDivisor, () => {
   describe('the sad outcomes', () => {
     describe('when delegated', () => {
-      const combosOfInoperableNumbers = [
-        [NaN, 100],
-        [NaN, NaN],
-        [100, NaN],
-      ] as const;
+      const primeA = 2;
+
+      const combosOfInoperableNumbers = symmetricPairCombos({
+        of    : numberTaxonomy.undefined,
+        filler: primeA,
+      });
 
       it.each(combosOfInoperableNumbers)('should reject inoperable operands', (...$0) => {
         expect.assertions(1);
@@ -23,11 +58,10 @@ describe(greatestCommonDivisor, () => {
         expect(() => greatestCommonDivisor(...$0)).toThrow(Error);
       });
 
-      const combosOfInfiniteNumbers = [
-        [Infinity, 10000000],
-        [Infinity, Infinity],
-        [10000000, Infinity],
-      ] as const;
+      const combosOfInfiniteNumbers = symmetricPairCombos({
+        of    : numberTaxonomy.infinite.positive,
+        filler: primeA,
+      });
 
       it.each(combosOfInfiniteNumbers)('should reject infinite operands', (...$0) => {
         expect.assertions(1);
