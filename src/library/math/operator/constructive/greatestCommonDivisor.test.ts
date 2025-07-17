@@ -23,11 +23,13 @@ describe(greatestCommonDivisor, () => {
         expect(() => greatestCommonDivisor(operandA, operandB)).toThrow(Error);
       });
 
-      it.each([
+      const combosOfInfiniteNumbers = [
         [Infinity, 10000000],
         [Infinity, Infinity],
         [10000000, Infinity],
-      ])('should reject infinite operands', (operandA, operandB) => {
+      ] as const;
+
+      it.each(combosOfInfiniteNumbers)('should reject infinite operands', (operandA, operandB) => {
         expect.assertions(1);
 
         expect(() => greatestCommonDivisor(operandA, operandB)).toThrow(Error);
