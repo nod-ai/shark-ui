@@ -5,6 +5,10 @@ import {
 } from 'vitest';
 
 import {
+  numberTaxonomy,
+} from '../../numberTaxonomy';
+
+import {
   greatestCommonDivisor,
 } from './greatestCommonDivisor';
 
@@ -44,7 +48,7 @@ describe(greatestCommonDivisor, () => {
       const primeA = 2;
 
       const combosOfInoperableNumbers = symmetricPairCombos({
-        of    : NaN,
+        of    : numberTaxonomy.undefined,
         filler: primeA,
       });
 
@@ -55,7 +59,7 @@ describe(greatestCommonDivisor, () => {
       });
 
       const combosOfInfiniteNumbers = symmetricPairCombos({
-        of    : Infinity,
+        of    : numberTaxonomy.infinite.positive,
         filler: primeA,
       });
 
