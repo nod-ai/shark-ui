@@ -17,10 +17,10 @@ describe(greatestCommonDivisor, () => {
         [100, NaN],
       ] as const;
 
-      it.each(combosOfInoperableNumbers)('should reject inoperable operands', (operandA, operandB) => {
+      it.each(combosOfInoperableNumbers)('should reject inoperable operands', (...$0) => {
         expect.assertions(1);
 
-        expect(() => greatestCommonDivisor(operandA, operandB)).toThrow(Error);
+        expect(() => greatestCommonDivisor(...$0)).toThrow(Error);
       });
 
       const combosOfInfiniteNumbers = [
@@ -29,10 +29,10 @@ describe(greatestCommonDivisor, () => {
         [10000000, Infinity],
       ] as const;
 
-      it.each(combosOfInfiniteNumbers)('should reject infinite operands', (operandA, operandB) => {
+      it.each(combosOfInfiniteNumbers)('should reject infinite operands', (...$0) => {
         expect.assertions(1);
 
-        expect(() => greatestCommonDivisor(operandA, operandB)).toThrow(Error);
+        expect(() => greatestCommonDivisor(...$0)).toThrow(Error);
       });
     });
 
