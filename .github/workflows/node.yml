@@ -4,39 +4,9 @@ on:
   push:
     branches:
       - integration
-    paths:
-      - '.github/workflows/node.yml' # Trigger workflow when it's modified
-      - 'package.json'               # For dependency changes
-      - 'package-lock.json'          # For nested dependency changes, like security updates
-      - '**/*.js'                    # For scripts
-      - '**/*.ts'                    # For scripts
-      - '**/*.cjs'                   # For scripts
-      - '**/*.cts'                   # For scripts
-      - '**/*.mjs'                   # For scripts
-      - '**/*.mts'                   # For scripts
-      - '**/*.jsx'                   # For scripts
-      - '**/*.tsx'                   # For scripts
-      - '**/*.vue'                   # For single-file components that contain a script block
-      - '!**/*.md'                   # Ignore markdown files (and their constituent fenced code blocks)
-      - '!docs/**'                   # Ignore docs folder
   pull_request:
     branches:
       - integration
-    paths:
-      - '.github/workflows/node.yml' # Trigger workflow when it's modified
-      - 'package.json'               # For dependency changes
-      - 'package-lock.json'          # For nested dependency changes, like security updates
-      - '**/*.js'                    # For scripts
-      - '**/*.ts'                    # For scripts
-      - '**/*.cjs'                   # For scripts
-      - '**/*.cts'                   # For scripts
-      - '**/*.mjs'                   # For scripts
-      - '**/*.mts'                   # For scripts
-      - '**/*.jsx'                   # For scripts
-      - '**/*.tsx'                   # For scripts
-      - '**/*.vue'                   # For single-file components that contain a script block
-      - '!**/*.md'                   # Ignore markdown files (and their constituent fenced code blocks)
-      - '!docs/**'                   # Ignore docs folder
 
 jobs:
   analyze:
@@ -44,6 +14,28 @@ jobs:
     name: Lint, Compile, and Test
     steps:
       - uses: actions/checkout@v4
+      - name: Check for changes to this workflow, dependencies, scripts, and single-file components
+        uses: tj-actions/changed-files@v46
+        id: changed-files
+        with:
+          files: |
+            .github/workflows/node.yml
+            package.json
+            package-lock.json
+            **/*.js
+            **/*.ts
+            **/*.cjs
+            **/*.cts
+            **/*.mjs
+            **/*.mts
+            **/*.jsx
+            **/*.tsx
+            **/*.vue
+      - name: If the workflow can be skipped, succeed early
+        if: steps.changed-files.outputs.any_changed != 'true'
+        run: |
+          echo "No relevant files have changed, workflow can be safely skipped"
+          exit 0
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
