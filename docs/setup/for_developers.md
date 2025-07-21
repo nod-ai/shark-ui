@@ -49,8 +49,14 @@ where:
 1. In [VSCode](https://code.visualstudio.com/), [add the extensions recommended by the project](https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_extension-recommendations).
 1. Serve the project with [Hot Module Replacement](https://vite.dev/guide/features.html#hot-module-replacement) by running:
 
+    Default port: 5173
     ```shell
     npm run dev
+    ```
+
+    To specify your own port number
+    ```shell
+    npm run dev -- --port 8080
     ```
 
     NOTE: Shows [Vue Dev Tools](https://devtools.vuejs.org/getting-started/features) for debugging UI
