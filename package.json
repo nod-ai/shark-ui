@@ -13,7 +13,8 @@
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
-    "lint": "eslint . --cache --fix"
+    "lint": "eslint . --cache --fix",
+    "lint:docs": "markdownlint-cli2 --fix '**/*.md'"
   },
   "dependencies": {
     "lodash.clonedeep": "^4.5.0",
@@ -48,6 +49,7 @@
     "jiti": "^2.4.2",
     "jsdom": "^26.1.0",
     "lint-staged": "^16.1.2",
+    "markdownlint-cli2": "^0.18.1",
     "npm-run-all2": "^8.0.4",
     "start-server-and-test": "^2.0.12",
     "typescript": "^5.8.3",
