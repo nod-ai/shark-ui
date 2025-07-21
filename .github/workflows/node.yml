@@ -7,6 +7,7 @@ on:
     paths:
       - '.github/workflows/node.yml' # Trigger workflow when it's modified
       - 'package.json'               # For dependency changes
+      - 'package-lock.json'          # For nested dependency changes, like security updates
       - '**/*.js'                    # For scripts
       - '**/*.ts'                    # For scripts
       - '**/*.cjs'                   # For scripts
@@ -24,6 +25,7 @@ on:
     paths:
       - '.github/workflows/node.yml' # Trigger workflow when it's modified
       - 'package.json'               # For dependency changes
+      - 'package-lock.json'          # For nested dependency changes, like security updates
       - '**/*.js'                    # For scripts
       - '**/*.ts'                    # For scripts
       - '**/*.cjs'                   # For scripts
