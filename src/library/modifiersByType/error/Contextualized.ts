@@ -8,7 +8,7 @@ type Contextualized<
   & {
     cause: SomeCause;
   }
-  ;
+;
 
 interface Instantiable<
   Any,

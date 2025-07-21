@@ -59,7 +59,7 @@ type NonActionableBuiltInError =
   | URIError // An illegal escape sequence was passed to decodeURI/encodeURI.
   | EvalError // Something illegal was done with `eval` or `Function` constructor.
   | SyntaxError // The JS engine couldn't even parse the code.
-  ;
+;
 
 const isNonActionableBuiltInError = (
   givenError: Error,

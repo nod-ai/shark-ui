@@ -26,7 +26,7 @@ type Attempt_Outcome<
 > =
   | Attempt_Success<SomeProduct>
   | Attempt_Failure<SomeActionableError>
-  ;
+;
 
 /**
  * Convenience method for:
