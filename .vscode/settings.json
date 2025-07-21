@@ -1,15 +1,13 @@
 {
     "cSpell.words": [
-        "cbor",
         "cofactor",
-        "fastinfoset",
+        "concatenatable",
         "Flaggable",
         "SDXL",
         "Shortfin",
         "stabilityai",
         "vite",
-        "vuetify",
-        "wbxml"
+        "vuetify"
     ],
     "editor.codeActionsOnSave": {
         "source.fixAll": "explicit",

@@ -6,7 +6,9 @@
     "cypress.config.*",
     "nightwatch.conf.*",
     "playwright.config.*",
-    "eslint.config.*",
+    "eslint.*",
+    "cypress/eslint.config.*",
+    "cypress/package.d.ts",
     "lint-staged.config.*"
   ],
   "compilerOptions": {

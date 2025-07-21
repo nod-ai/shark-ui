@@ -1,44 +1,36 @@
 import type {
   GenerateFromTextRequest,
-  GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
 import Attempt from '@/library/Attempt';
-
+import HTTP from '@/library/HTTP';
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
 
-import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
-
-import ImageURI from '@/library/customTypes/UniformResourceIdentifier/Data/Image/index.ts';
-
 import {
-  asError,
-} from '@/library/utilitiesByType/error';
+  firstTextToImageOutput,
+} from './conversions/GenerateFromTextResponse';
 
 import type {
   Output,
 } from '@/features/TextToImage/types';
+
 import {
   Server,
 } from '@/features/TextToImage/webAPI';
 
-const initializeShimmedStabilityAIClient = (): Promise<
+const initializeShimmedStabilityAIClient = async (): Promise<
   Attempt.Outcome<ShimmedStabilityAIClient, Server.SpecificationError>
-> => Attempt.thatEventually(async (ends) => {
+> => {
   const outcomeOfRetrievingCurrentServer = await Server.retrieveCurrent();
 
-  if (
-    outcomeOfRetrievingCurrentServer.isFailure
-  ) return outcomeOfRetrievingCurrentServer;
-
-  const textToImageServer = outcomeOfRetrievingCurrentServer.unwrapped;
-
-  const newClient = new ShimmedStabilityAIClient({
-    serverURL: textToImageServer.origin,
+  const outcomeOfInitializingClient = Attempt.Outcome.fromRewrapping(outcomeOfRetrievingCurrentServer, {
+    product: textToImageServer => new ShimmedStabilityAIClient({
+      serverURL: textToImageServer.origin,
+    }),
   });
 
-  return ends.inSuccessWith(newClient);
-});
+  return outcomeOfInitializingClient;
+};
 
 type OutcomeOfGeneratingTextToImageOutput = Attempt.Outcome<Output,
   | Server.ConnectionError
@@ -56,7 +48,7 @@ const generateOutputFrom = async (
     | 'seed'
     >;
   },
-): Promise<OutcomeOfGeneratingTextToImageOutput> => Attempt.thatEventually(async (ends) => {
+): Promise<OutcomeOfGeneratingTextToImageOutput> => {
   const outcomeOfInitializingClient = await initializeShimmedStabilityAIClient();
 
   if (
@@ -77,67 +69,25 @@ const generateOutputFrom = async (
     },
   });
 
-  let textToImageResponse: GenerateFromTextResponse;
+  const outcomeOfSettlingTextToImageResponse = await Attempt.toSettle(promisedTextToImageResponse, {
+    interpretationOf: (caughtError) => {
+      if (
+        !(caughtError instanceof HTTP.Endpoint.RequestError)
+      ) return null;
 
-  // eslint-disable-next-line no-restricted-syntax
-  try {
-    const outcomeOfSettlingTextToImageResponse = await Attempt.toSettle(promisedTextToImageResponse);
-
-    if (
-      outcomeOfSettlingTextToImageResponse.isFailure
-    ) return outcomeOfSettlingTextToImageResponse.causeOfFailure.throwAnyway('Unreachable since `Attempt.toSettle` still throws everything');
-
-    textToImageResponse = outcomeOfSettlingTextToImageResponse.unwrapped;
-  }
-  catch (whateverThatWasThrown) {
-    const someError = asError(whateverThatWasThrown);
-    const clientFailedToReachServer = someError.message.includes('Failed to fetch');
-
-    if (
-      !clientFailedToReachServer
-    ) return Attempt.NonActionableError.rethrow(someError, {
-      message: 'Text-to-image client failed to generate image due to an unexpected error',
-    });
-
-    return ends.inFailureDueTo(new Server.ConnectionError(shimmedStabilityAIClient.origin));
-  }
-
-  if (
-    !('artifacts' in textToImageResponse.result)
-  ) return ends.inFlamesBecause('Expected response rather than readable stream');
-
-  const generatedArtifacts = textToImageResponse.result.artifacts;
-
-  if (
-    generatedArtifacts === undefined
-  ) return ends.inFlamesBecause('Expected artifacts in response result');
-
-  const [soleGeneratedArtifact] = generatedArtifacts;
-
-  if (
-    soleGeneratedArtifact === undefined
-  ) return ends.inFlamesBecause('Expected at least one artifact in response');
-
-  if (
-    soleGeneratedArtifact.base64 === undefined
-  ) return ends.inFlamesBecause('Expected image data from sole artifact');
-
-  const base64DataOfNewImage = Base64CharacterEncodedByteSequence.forciblyParsedFrom(soleGeneratedArtifact.base64);
-
-  const newImage = {
-    uri        : new ImageURI('png', 'base64', base64DataOfNewImage),
-    description: given.textToImageRequestBody.textPrompts
-      .map($0 => (($0.weight === undefined) || ($0.weight === 1))
-        ? $0.text
-        : `(${$0.text}: ${$0.weight.toString()})`,
-      )
-      .join(', '),
-  };
-
-  return ends.inSuccessWith({
-    image: newImage,
+      return new Server.ConnectionError(caughtError.endpoint);
+    },
   });
-});
+
+  const outcomeOfSettlingSoleTextToImageOutput = Attempt.Outcome.fromRewrapping(outcomeOfSettlingTextToImageResponse, {
+    product: textToImageResponse => firstTextToImageOutput({
+      in          : textToImageResponse,
+      inferredFrom: given.textToImageRequestBody.textPrompts,
+    }),
+  });
+
+  return outcomeOfSettlingSoleTextToImageOutput;
+};
 
 const SDXLTextToImageClient = {
   generateOutputFrom,

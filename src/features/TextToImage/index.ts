@@ -4,4 +4,4 @@ export {
   Server,
 } from './webAPI';
 
-export * from './types';
+export type * from './types';

@@ -2,7 +2,8 @@ import type {
   Branded,
 } from '@/library/typeUtilities/Branded';
 
-interface NonActionableError_Options extends ErrorOptions {
+interface NonActionableError_Options
+  extends ErrorOptions {
   /** A function that's acting as an alternative to raw `throw` */
   thrower?: (...parameters: any[]) => unknown; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
@@ -15,10 +16,12 @@ interface NonActionableError_Options extends ErrorOptions {
  */
 class NonActionableError
   extends Error
-  implements Branded<'NonActionableError'> {
+  implements Branded<
+  'NonActionableError'
+> {
   public readonly brand!: 'NonActionableError';
 
-  private constructor(
+  protected constructor(
     givenMessage: NonActionableError['message'],
     givenOptions?: ErrorOptions,
   ) {
@@ -31,33 +34,44 @@ class NonActionableError
     throw this; // eslint-disable-line no-restricted-syntax
   }
 
-  public static throw = (
+  public static throw(
     givenMessage: NonActionableError['message'],
     givenOptions?: NonActionableError_Options,
-  ): never => {
-    const newError = new NonActionableError(givenMessage, givenOptions);
+  ): never {
+    const newError = new this(givenMessage, givenOptions);
 
     if (
       ('captureStackTrace' in Error)
       && (Error.captureStackTrace instanceof Function)
-    ) {
-      Error.captureStackTrace.call(undefined, newError, givenOptions?.thrower ?? NonActionableError.throw);
-    }
+    ) Error.captureStackTrace.call(undefined, newError, givenOptions?.thrower ?? this.throw); // eslint-disable-line @typescript-eslint/unbound-method -- `captureStackTrace` doesn't call the method, it only notes its reference
 
     return newError.throw();
-  };
+  }
 
-  public static rethrow = (
+  public static rethrow(
     givenError: Error,
     given: {
       message: NonActionableError['message'];
     },
-  ): never => {
+  ): never {
+    if (
+      givenError instanceof NonActionableError
+    ) return givenError.throw();
+
     return this.throw(given.message, {
       cause  : givenError,
-      thrower: NonActionableError.rethrow,
+      thrower: this.rethrow, // eslint-disable-line @typescript-eslint/unbound-method -- `captureStackTrace` doesn't call the method, it only notes its reference
     });
-  };
+  }
+
+  /** The error being "escorted" across the call stack by this instance, if any */
+  public get charge(): Error | null {
+    if (
+      this.cause instanceof Error
+    ) return this.cause;
+
+    return null;
+  }
 }
 
 export {

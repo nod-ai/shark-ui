@@ -3,7 +3,7 @@ import {
   VImg,
 } from 'vuetify/components/VImg';
 
-import * as TextToImage from '@/features/TextToImage';
+import type * as TextToImage from '@/features/TextToImage';
 
 defineProps<{
   modelValue: TextToImage.Output['image'];

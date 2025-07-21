@@ -7,6 +7,6 @@ interface TextToImage_Input {
   text: TextToImageRequestBody['textPrompts'];
 }
 
-export {
-  type TextToImage_Input,
+export type {
+  TextToImage_Input,
 };

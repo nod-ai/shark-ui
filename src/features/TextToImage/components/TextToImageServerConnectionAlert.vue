@@ -3,7 +3,7 @@ import {
   VAlert,
 } from 'vuetify/components/VAlert';
 
-import * as TextToImage from '@/features/TextToImage';
+import type * as TextToImage from '@/features/TextToImage';
 
 defineProps<{
   error: TextToImage.Server.ConnectionError;
@@ -15,7 +15,7 @@ defineProps<{
     type="error"
     title="Failed to Connect"
   >
-    Server not found at specified origin "{{ error.origin.toString() }}".<br>
+    Server not found at specified origin "{{ error.endpoint.origin }}".<br>
     <br>
     Ensure that:<br>
     a. the environment/config has the correct origin<br>

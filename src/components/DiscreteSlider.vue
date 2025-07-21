@@ -2,20 +2,22 @@
 import {
   get,
   set,
-} from '@/library/vue/reactivity.ts';
+} from '@/library/vue';
 
 import {
   VBtn,
 } from 'vuetify/components/VBtn';
+
 import {
   VCard,
 } from 'vuetify/components/VCard';
+
 import {
   VSlider,
 } from 'vuetify/components/VSlider';
 
 import DiscreteRange from '@/library/Range/DiscreteRange.ts';
-import Range from '@/library/Range/index.ts';
+import type Range from '@/library/Range/index.ts';
 
 import {
   shallowlyMerged,
@@ -54,10 +56,11 @@ const stylisticOffset = (
   const leftwardOffset = -endpointOffset;
   const rightwardOffset = endpointOffset;
 
-  if (givenPosition === givenRange.lowerBound) return leftwardOffset;
-  if (givenPosition === givenRange.upperBound) return rightwardOffset;
-
-  return defaultOffset;
+  switch (givenPosition) {
+    case givenRange.lowerBound: return leftwardOffset;
+    case givenRange.upperBound: return rightwardOffset;
+    default /*             */ : return defaultOffset;
+  }
 };
 
 type SliderTickLabel = string;
@@ -99,7 +102,7 @@ const tickLabelsAlong = (
     by  : givenStepSize,
   });
 
-  const labelSets = tickRange.inclusiveValues.map((eachPosition) => {
+  const labelSets = tickRange.inclusiveSteps.map((eachPosition) => {
     return tickLabels({
       by: eachPosition,
       in: tickRange,

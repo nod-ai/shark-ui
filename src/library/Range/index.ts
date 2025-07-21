@@ -2,22 +2,15 @@ import Attempt from '@/library/Attempt';
 
 import {
   arithmeticMeanOf,
-} from '@/library/math/aggregators.ts';
+} from '@/library/math';
 
 type RangeBound = 'exclusive' | 'inclusive';
 
 class Range {
-  public constructor(
+  protected constructor(
     public readonly lowerBound: number,
     public readonly upperBound: number,
-  ) {
-    if (
-      upperBound < lowerBound
-    ) return Attempt.abandon('Upper bound must not be lower than lower bound');
-
-    this.lowerBound = lowerBound;
-    this.upperBound = upperBound;
-  }
+  ) {}
 
   public static spanning(
     {
@@ -28,10 +21,16 @@ class Range {
       to: Range['upperBound'];
     },
   ): Range {
-    return new this(
+    if (
+      givenUpperBound < givenLowerBound
+    ) return Attempt.abandon('Upper bound must not be lower than lower bound');
+
+    const validRange = new this(
       givenLowerBound,
       givenUpperBound,
     );
+
+    return validRange;
   }
 
   public get width(): number {

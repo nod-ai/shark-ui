@@ -1,23 +1,20 @@
 import type {
   TextToImageRequestBody,
 } from 'stabilityai-client-typescript/models/components';
+
 import type {
   GenerateFromTextRequest,
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
-import {
-  z,
-} from 'zod/v4';
-
-import HTTPClient from '@/library/HTTPClient/index.ts';
-
-import Base64CharacterEncodedByteSequence from '@/library/customTypes/Base64CharacterEncodedByteSequence.ts';
+import Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
+import HTTP from '@/library/HTTP';
+import Schema from '@/library/Schema';
 
 import {
   URLOrigin,
   URLPath,
-} from '@/library/customTypes/URLComponent';
+} from '@/library/URLComponent';
 
 import {
   cloneOf,
@@ -92,17 +89,26 @@ const toBatchGenerationRequestBody = (givenRequests: GenerateFromTextRequest['te
   }, cloneOf(emptyBatchGenerationRequest));
 };
 
-const z_image = z.string().transform((someSubject) => {
-  return Base64CharacterEncodedByteSequence.forciblyParsedFrom(someSubject);
-});
+const Shortfin_TextToImage_Response_Body = {
+  SchemaMember: {
+    image: Schema.string().transform((someSubject) => {
+      return Base64CharacterEncodedByteSequence.parsedFrom(someSubject).forciblyUnwrap(/* Zod can safely propagate errors */);
+    }),
+    get images() {
+      return Schema.tuple([this.image]).rest(this.image);
+    },
+  },
+  get Schema() {
+    return Schema.object({
+      images: this.SchemaMember.images,
+    });
+  },
+};
 
-const z_imageGenerationResponseBody = z.object({
-  images: z.tuple([z_image]).rest(z_image),
-});
+const generationEndpoint = URLPath.parsedFrom('/generate').forciblyUnwrap();
 
-const generationEndpoint = URLPath.forciblyParsedFrom('/generate');
-
-class ImageClient extends HTTPClient {
+class ImageClient
+  extends HTTP.Client {
   public async forciblyGenerateFromText(
     givenRequest: GenerateFromTextRequest,
   ): Promise<GenerateFromTextResponse> {
@@ -113,11 +119,11 @@ class ImageClient extends HTTPClient {
       to: generationEndpoint,
     });
 
-    const newResource = outcomeOfSubmittingResource.forciblyUnwrap();
+    const newResource = outcomeOfSubmittingResource.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
 
     const {
       images,
-    } = z_imageGenerationResponseBody.parse(newResource);
+    } = Shortfin_TextToImage_Response_Body.Schema.parse(newResource);
 
     const [soleGeneratedImage] = images;
 
@@ -136,32 +142,38 @@ class ImageClient extends HTTPClient {
   }
 }
 
-class Version1Client extends HTTPClient {
-  private _image?: ImageClient;
+class Version1Client
+  extends HTTP.Client {
+  private cachedClient?: ImageClient;
 
   public get image(): ImageClient {
-    this._image ??= new ImageClient(this);
-    return this._image;
+    this.cachedClient ??= new ImageClient(this.origin, this.headers);
+    return this.cachedClient;
   }
 }
 
-class ShimmedStabilityAIClient extends HTTPClient {
+class ShimmedStabilityAIClient
+  extends HTTP.Client {
   public constructor(given: {
     serverURL: string;
   }) {
-    super({
-      origin : URLOrigin.forciblyParsedFrom(given.serverURL),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const serverOrigin = URLOrigin.parsedFrom(given.serverURL).forciblyUnwrap(/* matches error propagation of actual StabilityAI client */);
+
+    const defaultHeaders = {
+      'Content-Type': 'application/json',
+    };
+
+    super(
+      serverOrigin,
+      defaultHeaders,
+    );
   }
 
-  private _version1?: Version1Client;
+  private cachedClient?: Version1Client;
 
   public get version1(): Version1Client {
-    this._version1 ??= new Version1Client(this);
-    return this._version1;
+    this.cachedClient ??= new Version1Client(this.origin, this.headers);
+    return this.cachedClient;
   }
 }
 

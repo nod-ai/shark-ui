@@ -2,10 +2,10 @@ import Attempt from '@/library/Attempt';
 
 import {
   URLPath,
-} from '@/library/customTypes/URLComponent';
+} from '@/library/URLComponent';
 
 import {
-  Config,
+  type Config,
   ConfigSchema,
 } from '../../types';
 
@@ -15,12 +15,14 @@ import DynamicConfig_FetchingError from './FetchingError';
 const contentIsJSONIn = (givenResponse: Response): boolean => {
   const contentType = givenResponse.headers.get('Content-Type');
 
-  if (contentType === null) return false;
+  if (
+    contentType === null
+  ) return false;
 
   return contentType.includes('application/json');
 };
 
-const configEndpoint = URLPath.forciblyParsedFrom('/config/text-to-image');
+const configEndpoint = URLPath.parsedFrom('/config/text-to-image').forciblyUnwrap();
 
 type OutcomeOfFetchingConfig = Attempt.Outcome<Config,
   | DynamicConfig_FetchingError

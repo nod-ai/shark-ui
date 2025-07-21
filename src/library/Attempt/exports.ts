@@ -9,18 +9,22 @@ export {
 };
 
 export {
-  default as Outcome,
+  Attempt_Outcome as Outcome,
+  type Attempt_Success as Success,
+  type Attempt_Failure as Failure,
 } from './Outcome';
 
 export {
   attemptTo as to,
   attemptToEventually as toEventually,
   attemptToSettle as toSettle,
+  type AdapterConfig,
 } from './adapter';
 
 export {
   NonActionableError,
   ActionableError,
+  type ErrorInterpreter,
 } from './error';
 
 export {

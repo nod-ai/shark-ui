@@ -1,7 +1,4 @@
-import {
-  z,
-} from 'zod/v4';
-
+import Schema from '@/library/Schema';
 import * as WebAPI from '@/library/WebAPI';
 
 import {
@@ -9,7 +6,7 @@ import {
 } from './Config';
 
 /** Defines how to parse an instance of {@link TextToImage_Config} */
-const TextToImage_ConfigSchema = z.object({
+const TextToImage_ConfigSchema = Schema.object({
   server: WebAPI.ServerSchema
     .nullable()
     .catch(null),

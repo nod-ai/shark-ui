@@ -13,9 +13,11 @@ class Server {
   ) {}
 
   public static from(given: Server): Server {
-    return new Server(
+    const clonedServer = new Server(
       given.origin,
     );
+
+    return clonedServer;
   }
 }
 

@@ -2,8 +2,9 @@ import Attempt from '@/library/Attempt';
 
 import Range from './index.ts';
 
-class DiscreteRange extends Range implements Iterable<number> {
-  public constructor(
+class DiscreteRange
+  extends Range {
+  protected constructor(
     lowerBound: Range['lowerBound'],
     upperBound: Range['upperBound'],
     public readonly stepSize: number,
@@ -12,18 +13,6 @@ class DiscreteRange extends Range implements Iterable<number> {
       lowerBound,
       upperBound,
     );
-
-    if (
-      stepSize < 0
-    ) return Attempt.abandon('Step size must be positive');
-
-    const overstep = this.width % stepSize;
-
-    if (
-      overstep !== 0
-    ) return Attempt.abandon('Step size must fit evenly into the range');
-
-    this.stepSize = stepSize;
   }
 
   public static override spanning(
@@ -37,11 +26,28 @@ class DiscreteRange extends Range implements Iterable<number> {
       by: DiscreteRange['stepSize'];
     },
   ): DiscreteRange {
-    return new this(
-      givenLowerBound,
-      givenUpperBound,
+    const validRange = super.spanning({
+      from: givenLowerBound,
+      to  : givenUpperBound,
+    });
+
+    if (
+      givenStepSize < 0
+    ) return Attempt.abandon('Step size must be positive');
+
+    const overstep = validRange.width % givenStepSize;
+
+    if (
+      overstep !== 0
+    ) return Attempt.abandon('Step size must fit evenly into the range');
+
+    const validDiscreteRange = new this(
+      validRange.lowerBound,
+      validRange.upperBound,
       givenStepSize,
     );
+
+    return validDiscreteRange;
   }
 
   public override exclusivelyContains(givenValue: number): boolean {
@@ -50,44 +56,34 @@ class DiscreteRange extends Range implements Iterable<number> {
     return (overstep === 0) && super.exclusivelyContains(givenValue);
   }
 
-  public [Symbol.iterator](): Iterator<number> {
-    let eachValue = this.lowerBound;
+  private* generateExclusiveSteps() {
+    let eachExclusiveStep = this.lowerBound + this.stepSize;
 
-    const proceedWithBoundsExcluded = (): IteratorResult<number> => {
-      eachValue = eachValue + this.stepSize;
-
-      if (
-        this.upperBound < eachValue
-      ) return Attempt.abandon(`Unexpected overstep when iterating over ${this.inInclusiveNotation} with step size ${this.stepSize.toString()}`);
-
-      if (this.upperBound === eachValue) {
-        return {
-          done : true,
-          value: undefined,
-        };
-      }
-
-      return {
-        done : false,
-        value: eachValue,
-      };
-    };
-
-    return {
-      next: proceedWithBoundsExcluded,
-    };
+    while (eachExclusiveStep < this.upperBound) {
+      yield eachExclusiveStep;
+      eachExclusiveStep += this.stepSize;
+    }
   }
 
-  public get exclusiveValues(): number[] {
-    return Array.from(this);
+  private* generateInclusiveSteps() {
+    yield this.lowerBound;
+
+    if (
+      this.lowerBound === this.upperBound
+    ) return;
+
+    yield* this.generateExclusiveSteps();
+    yield this.upperBound;
   }
 
-  public get inclusiveValues(): number[] {
-    return [
-      this.lowerBound,
-      ...this.exclusiveValues,
-      this.upperBound,
-    ];
+  public get exclusiveSteps(): number[] {
+    const generatedSteps = this.generateExclusiveSteps();
+    return Array.from(generatedSteps);
+  }
+
+  public get inclusiveSteps(): number[] {
+    const generatedSteps = this.generateInclusiveSteps();
+    return Array.from(generatedSteps);
   }
 }
 

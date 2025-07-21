@@ -1,39 +1,54 @@
-import Outcome from '../Outcome';
+import type {
+  Attempt_Outcome,
+} from '../Outcome';
 
 import type {
   ActionableError,
 } from '../error';
 
 import {
-  outcomeOfFailedAttempt,
-} from '../utilities/outcomeOfFailedAttempt';
+  assertActionable,
+} from '../error/assertions';
+
+import {
+  Attempt_thatEventually,
+} from '../factory';
+
+import {
+  sanctionedAsync,
+} from '../utilities/sanctionedTryCatch';
+
+import type Attempt_AdapterConfig from './Config';
 
 const attemptToEventually = async <
   SomeProduct,
   SomeActionableError extends ActionableError<string>,
 >(
   forciblyRetrieveProduct: () => Promise<SomeProduct>,
-): Promise<Outcome<SomeProduct, SomeActionableError>> => {
-  // eslint-disable-next-line no-restricted-syntax
-  try {
+  given: Attempt_AdapterConfig<SomeActionableError>,
+): Promise<Attempt_Outcome<SomeProduct, SomeActionableError>> => Attempt_thatEventually(ends => sanctionedAsync({
+  async try() {
     const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
-    return Outcome.successThatYielded(retrievedProduct);
-  }
-  catch (whateverThatWasThrown) {
-    return outcomeOfFailedAttempt<SomeProduct, SomeActionableError>({
-      basedOn: whateverThatWasThrown,
+    return ends.inSuccessWith(retrievedProduct);
+  },
+  catch(someError) {
+    const someActionableError = assertActionable(someError, {
+      using: given.interpretationOf,
     });
-  }
-};
+
+    return ends.inFailureDueTo(someActionableError);
+  },
+}));
 
 const attemptToSettle = async <
   SomeProduct,
   SomeActionableError extends ActionableError<string>,
 >(
   promisedProduct: Promise<SomeProduct>,
-): Promise<Outcome<SomeProduct, SomeActionableError>> => {
+  givenConfig: Attempt_AdapterConfig<SomeActionableError>,
+): Promise<Attempt_Outcome<SomeProduct, SomeActionableError>> => {
   const getPromisedProduct = () => promisedProduct;
-  return attemptToEventually(getPromisedProduct);
+  return attemptToEventually(getPromisedProduct, givenConfig);
 };
 
 export {

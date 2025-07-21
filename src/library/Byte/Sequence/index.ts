@@ -1,27 +1,29 @@
+import Attempt from '@/library/Attempt';
+
 import {
-  cofactorTo as Byte_cofactorTo,
-} from '..';
+  Byte_cofactorTo,
+} from '../utilities/cofactorTo';
 
 import Byte_Sequence_EncodingCompatibilityError from './EncodingCompatibilityError';
 
-const Byte_Sequence_assertEncodable = (
+const Byte_Sequence_ensureEncodable = (
   givenSequence: string,
   {
     assuming: givenBitWidth,
   }: {
     assuming: number;
   },
-): string => {
+): Attempt.Outcome<string, Byte_Sequence_EncodingCompatibilityError> => Attempt.that((ends) => {
   const byteCofactor = Byte_cofactorTo(givenBitWidth);
 
   if (
     givenSequence.length % byteCofactor !== 0
-  ) return new Byte_Sequence_EncodingCompatibilityError(givenBitWidth).throwAnyway('To be converted to `Attempt` failure');
+  ) return ends.inFailureDueTo(new Byte_Sequence_EncodingCompatibilityError(givenBitWidth));
 
-  return givenSequence;
-};
+  return ends.inSuccessWith(givenSequence);
+});
 
 export {
   Byte_Sequence_EncodingCompatibilityError as EncodingCompatibilityError,
-  Byte_Sequence_assertEncodable as assertEncodable,
+  Byte_Sequence_ensureEncodable as ensureEncodable,
 };

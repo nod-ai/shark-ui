@@ -4,14 +4,13 @@ import {
   ref,
   set,
   type Ref,
-} from '@/library/vue/reactivity.ts';
-
-import {
   watch,
-} from 'vue';
+} from '@/library/vue';
+
 import {
   VCard,
 } from 'vuetify/components/VCard';
+
 import {
   VTextarea,
 } from 'vuetify/components/VTextarea';

@@ -3,23 +3,25 @@ import {
   get,
   ref,
   type Ref,
-} from '@/library/vue/reactivity.ts';
-import {
   useStatefulAttemptThatEventually,
-} from '@/library/vue/statefulAttempt';
+} from '@/library/vue';
 
 import {
   VBtn,
 } from 'vuetify/components/VBtn';
+
 import {
   VForm,
 } from 'vuetify/components/VForm';
+
 import {
   VContainer,
 } from 'vuetify/components/VGrid';
+
 import {
   VMain,
 } from 'vuetify/components/VMain';
+
 import {
   VSkeletonLoader,
 } from 'vuetify/components/VSkeletonLoader';
@@ -60,12 +62,11 @@ const imageGeneration = useStatefulAttemptThatEventually(async (ends) => {
     },
   });
 
-  if (
-    outcomeOfGeneratingOutput.isFailure
-  ) return outcomeOfGeneratingOutput;
+  const outcomeOfGeneratingImage = ends.inTermsOf(outcomeOfGeneratingOutput, {
+    product: $0 => $0.image,
+  });
 
-  const generatedOutput = outcomeOfGeneratingOutput.unwrapped;
-  return ends.inSuccessWith(generatedOutput.image);
+  return outcomeOfGeneratingImage;
 });
 </script>
 
