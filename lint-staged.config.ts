@@ -3,7 +3,8 @@ import type {
 } from 'lint-staged';
 
 const lintStagedConfig = {
-  '*': 'npm run lint',
+  '!(*.md)': 'npm run lint',
+  '*.md'   : 'npm run lint:docs',
 } satisfies Configuration;
 
 export {
