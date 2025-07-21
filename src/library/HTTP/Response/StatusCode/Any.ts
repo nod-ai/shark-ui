@@ -9,7 +9,7 @@ import type {
 type HTTP_Response_StatusCode_Any =
   | HTTP_Response_StatusCode_Success
   | HTTP_Response_StatusCode_Error.Any
-  ;
+;
 
 export type {
   HTTP_Response_StatusCode_Any,
