@@ -1,5 +1,3 @@
-# SHARK UI
-
 ![The logo for SHARK UI, depicted as the letter "u" with shark teeth and the letter "i" with a shark fin instead of a dot](docs/branding/banner-1280x640.png "SHARK UI Logo")
 
 ## Introduction
