@@ -31,6 +31,26 @@ To make it easy to write commit messages that:
 
 #### Type
 
+Must be one of the following:
+
+| Type          | Description                                                                                         | User-facing?       | Developer-facing?  | In other words...                                                                   |
+|---------------|-----------------------------------------------------------------------------------------------------|--------------------|--------------------|-------------------------------------------------------------------------------------|
+| `feature`     | New functionality                                                                                   | :white_check_mark: | :white_check_mark: | adding a new user story                                                             |
+| `prefeature`  | New _internal_ functionality                                                                        | :x:                | :white_check_mark: | making a change that unblocks or empowers developers                                |
+| `fix`         | Corrections to broken functionality                                                                 | :white_check_mark: | :white_check_mark: | fixing a bug                                                                        |
+| `preliminary` | New _internal_ functionality that's contextualized by a subsequent commit                           | :x:                | :white_check_mark: | adding a new utility to be used in the next commit                                  |
+| `refactor`    | Internal restructuring to existing functionality that unblocks future development                   | :x:                | :white_check_mark: | addressing a code smell                                                             |
+| `performance` | A refactor that specifically improves speed, efficiency, etc.                                       | :x:                | :white_check_mark: | load times, power consumption                                                       |
+| `types`       | A refactor that specifically affects compile-time only, not runtime                                 | :x:                | :white_check_mark: | adding a missing type annotation                                                    |
+| `tests`       | Affects validation of existing functionality without changing the functionality itself              | :x:                | :x:                | adding a missing unit test, correction an existing unit test                        |
+| `build`       | Affects the build system or external dependencies                                                   | :x:                | :x:                | something about npm                                                                 |
+| `ci`          | Affects files and scripts that define our CI configuration                                          | :x:                | :x:                | something about Github Actions/Apps                                                 |
+| `docs`        | Made for the "human runtime"                                                                        | :x:                | :x:                | a README update                                                                     |
+| `linter`      | Affects the files and script that define our lint rules, might also include changes for conformance | :x:                | :white_check_mark: | adding an ESLint Rule and letting it apply changes                                  |
+| `style`       | Affects the presentation of some file or script without actually affecting how it executes          | :x:                | :white_check_mark: | applying a useful "newline" convention for which an ESLint Rule does not yet exist  |
+| `chore`       | Addresses a housekeeping item                                                                       | :grey_question:    | :grey_question:    | a dependency update                                                                 |
+| `revert`      | Reverses an existing commit                                                                         | :grey_question:    | :grey_question:    |                                                                                     |
+
 #### Scope
 
 #### Summary
