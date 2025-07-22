@@ -107,4 +107,26 @@ Summaries should:
 
 ### Body
 
+The body of a commit is optional but recommended, especially when the commit's changes and summary require context for:
+
+- rationale, i.e. "feature(text-to-image): exposes input for diffusion steps"
+  - Which kind of input was it? A slider? A stepper? A textfield?
+  - Why was that kind chosen? Was it the only option? Was it the best option?
+- external concepts, i.e. "ci(node): triggers workflow for security updates"
+  - What's "node"?
+  - What's a "workflow"?
+  - What's a "security update"?
+
+When the body is provided in...
+
+- a single atomic commit (among several in the branch for a PR), it can provide additional context when the changes seem:
+  - irrelevant to the PR, i.e. "this documents something I had to learn in order to work on this PR"
+  - deceptively small, i.e. "it took X hours to figure out why this would fix the problem, here's why"
+  - deceptively obvious, i.e. "the first attempt involved X, but it didn't work because of Y, so the end result instead involved Z"
+- the merge commit of a PR, it can provide additional context about the outcome of the PR such as:
+  - the author's intent, i.e. "the goal was to make it easier to..."
+  - the resulting impact, i.e. "this will allow us to..."
+  - dead ends or alternatives considered but not pursued, i.e. "we considered doing X, but it would have required Y, so we decided to do Z instead"
+  - links or references to outside resources (e.g. tutorials, documentation)
+
 ### Footer
