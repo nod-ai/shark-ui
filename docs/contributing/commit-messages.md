@@ -17,6 +17,14 @@ To make it easy to write commit messages that:
 
 ## Structure
 
+```plaintext
+<type>(<optional scope>): <summary>
+
+<optional body>
+
+<optional footer>
+```
+
 ## Components
 
 ### Header
