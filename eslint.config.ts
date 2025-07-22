@@ -6,12 +6,14 @@ import {
 
 import pluginVue from 'eslint-plugin-vue';
 
-import type {
-  ConfigWithExtends,
+import {
+  config,
+  type ConfigWithExtends,
 } from 'typescript-eslint';
 
 import pluginCypress from './cypress/eslint.config';
 import pluginImport from './eslint.import';
+import pluginMarkdown from './eslint.markdown';
 import pluginStylistic from './eslint.stylistic';
 import pluginVitest from './eslint.vitest';
 
@@ -110,6 +112,21 @@ const configWithVueTS = defineConfigWithVueTs(
   ...pluginCypress,
 );
 
+const completeConfig = config([
+  {
+    extends: configWithVueTS,
+    ignores: [
+      '**/*.md',
+    ],
+  },
+  {
+    extends: pluginMarkdown,
+    files  : [
+      '**/*.md',
+    ],
+  },
+]);
+
 export {
-  configWithVueTS as default,
+  completeConfig as default,
 };
