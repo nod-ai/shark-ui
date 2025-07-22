@@ -6,6 +6,9 @@ import type {
 
 const pluginMarkdown: ConfigWithExtends[] = [
   ...markdown.configs.recommended,
+  {
+    language: 'markdown/gfm',
+  },
 ];
 
 export {
