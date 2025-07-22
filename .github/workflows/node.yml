@@ -31,18 +31,16 @@ jobs:
             **/*.jsx
             **/*.tsx
             **/*.vue
-      - name: If the workflow can be skipped, succeed early
-        if: steps.changed-files.outputs.any_changed != 'true'
-        run: |
-          echo "No relevant files have changed, workflow can be safely skipped"
-          exit 0
       - name: Set up Node.js
+        if: steps.changed-files.outputs.any_changed == 'true'
         uses: actions/setup-node@v4
         with:
           cache: 'npm'
       - name: Install all dependencies (which includes linters)
+        if: steps.changed-files.outputs.any_changed == 'true'
         run: npm clean-install
       - name: Run the linter
+        if: steps.changed-files.outputs.any_changed == 'true'
         id: lint
         run: npx eslint . --max-warnings 0 --cache
         continue-on-error: true
@@ -53,6 +51,7 @@ jobs:
           echo "::notice::Run \`npm run lint\` in your dev environment for details about issues that aren't automatically fixable"
           exit 1
       - name: Run the compiler
+        if: steps.changed-files.outputs.any_changed == 'true'
         id: compile
         run: npx vue-tsc --build
         continue-on-error: true
@@ -62,6 +61,7 @@ jobs:
           echo "::notice::Run \`npx vue-tsc --build\` in your dev environment for details about compiler issues"
           exit 1
       - name: Run the unit tests
+        if: steps.changed-files.outputs.any_changed == 'true'
         id: test_units
         run: npm run test:unit
         continue-on-error: true
