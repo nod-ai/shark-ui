@@ -130,3 +130,12 @@ When the body is provided in...
   - links or references to outside resources (e.g. tutorials, documentation)
 
 ### Footer
+
+The footer of a commit is optional. When relevant, use it to link the commit to an issue or pull request in cases where it:
+
+- fixes an issue, e.g. "fixes #1234"
+- precedes another PR to make it easier to review/merge, e.g. "facilitates #5678"
+- is a direct follow-up to another commit, e.g. "follows up on #9012"
+- specifies when a problem was first introduced, e.g. "introduced in #3456"
+
+Doing so allows yourself and other contributors to see the story of how the changes played out over time.
