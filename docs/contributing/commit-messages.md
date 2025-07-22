@@ -53,6 +53,24 @@ Must be one of the following:
 
 #### Scope
 
+The scope is an optional field that can be used to provide additional context about the change.
+
+Omitting the scope communicates that the change is relevant to the _entire_ project.
+However, the changes of most commits will be inherently scoped to keep changes as incremental as possible, thus warranting the scope to be called out in the commit message.
+
+When the scope _is_ included...
+
+| ...and the type is...                                             | ...it ought to denote...                        | ...such as...                                       |
+|-------------------------------------------------------------------|-------------------------------------------------|-----------------------------------------------------|
+| `feature`                                                         | the user-facing "idea"                          | "text-to-image"                                     |
+| `prefeature`                                                      | the library or dev-facing "idea"                | "library/math", "library/http"                      |
+| `fix`, `preliminary`, `refactor`, `types`, `tests`, `performance` | (see `feature` and `prefeature`)                |                                                     |
+| `build`                                                           | the affected tooling                            | "IDE"                                               |
+| `ci`                                                              | the affected workflow                           | "node", "docs", "tests"                             |
+| `docs`                                                            | the nature of what's being documented           | "README" or a "docs/" directory like "contributing" |
+| `chore`                                                           | the context of whatever is being "freshened up" | "deps", "deps-dev", "release"                       |
+| `linter`, `style`                                                 | the extent of what was linted                   | "app", "docs", "markdown"                           |
+
 #### Summary
 
 ### Body
