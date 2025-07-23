@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@eslint/markdown": "^7.0.0",
-    "@stylistic/eslint-plugin": "^5.2.1",
+    "@stylistic/eslint-plugin": "^5.2.2",
     "@tsconfig/node22": "^22.0.2",
     "@types/jsdom": "^21.1.7",
     "@types/lodash.clonedeep": "^4.5.9",
