@@ -159,7 +159,24 @@ describe(greatestCommonDivisor, () => {
         .toBe(/**/greatestCommonDivisor(greatestCommonDivisor(primeB, primeC), primeA));
     });
 
-    it.todo('should return an operable answer when zero is an operand');
+    const combosOfTogglingFactors = [
+      [0, 1, 1],
+      [0, 0, 0],
+      [1, 0, 1],
+    ] as const;
+
+    it.each(combosOfTogglingFactors)('should return an operable answer when zero is an operand', (...eachComboOfTogglingFactors) => {
+      expect.assertions(1);
+
+      expect(
+        greatestCommonDivisor(
+          primeA * eachComboOfTogglingFactors[0],
+          primeA * eachComboOfTogglingFactors[1],
+        ),
+      ).toBe(
+        primeA * eachComboOfTogglingFactors[2],
+      );
+    });
 
     it.todo('should preserve the identity of matching operands');
 
