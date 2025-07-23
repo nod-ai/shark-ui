@@ -11,6 +11,10 @@ import {
 } from '../../numberTaxonomy';
 
 import {
+  squared,
+} from '../hyper';
+
+import {
   greatestCommonDivisor,
 } from './greatestCommonDivisor';
 
@@ -193,7 +197,7 @@ describe(greatestCommonDivisor, () => {
 
     const coPrimePairs = [
       neighboringPrimes,
-      neighboringPrimes.map($0 => $0 * $0) as [number, number],
+      neighboringPrimes.map(squared) as [number, number],
     ];
 
     it.each(coPrimePairs)('should return identity factor for co-prime operands', (...eachCoPrimePair) => {
@@ -207,6 +211,33 @@ describe(greatestCommonDivisor, () => {
       ).toBe(identityFactor);
     });
 
-    it.todo('should extract a common factor applied to two distinct prime numbers');
+    const combosOfDistinctNonComposites = pairCombos({
+      left  : primeA,
+      right : primeB,
+      filler: identityFactor,
+    });
+
+    describe.each(combosOfDistinctNonComposites)('when applied to two distinct prime numbers', (...eachComboOfNonComposites) => {
+      const smallSquare = squared(primeA);
+      const largeSquare = squared(primeC);
+
+      const commonFactors = [
+        identityFactor,
+        primeC,
+        smallSquare,
+        largeSquare,
+      ];
+
+      it.each(commonFactors)('should extract a common factor', (eachCommonFactor) => {
+        expect.assertions(1);
+
+        expect(
+          greatestCommonDivisor(
+            eachCommonFactor * eachComboOfNonComposites[0],
+            eachCommonFactor * eachComboOfNonComposites[1],
+          ),
+        ).toBe(eachCommonFactor);
+      });
+    });
   });
 });
