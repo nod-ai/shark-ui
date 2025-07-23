@@ -55,6 +55,13 @@ where:
         npm run dev
         ```
 
+      OR
+    - specifying a custom port (e.g. 8080):
+
+        ```shell
+        npm run dev -- --port 8080
+        ```
+
     NOTE: Shows [Vue Dev Tools](https://devtools.vuejs.org/getting-started/features) for debugging UI
 
 ## Validation
