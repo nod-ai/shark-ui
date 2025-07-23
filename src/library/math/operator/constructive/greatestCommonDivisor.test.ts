@@ -11,6 +11,10 @@ import {
 } from '../../numberTaxonomy';
 
 import {
+  squared,
+} from '../hyper';
+
+import {
   greatestCommonDivisor,
 } from './greatestCommonDivisor';
 
@@ -193,7 +197,7 @@ describe(greatestCommonDivisor, () => {
 
     const coPrimePairs = [
       neighboringPrimes,
-      neighboringPrimes.map($0 => $0 * $0) as [number, number],
+      neighboringPrimes.map(squared) as [number, number],
     ];
 
     it.each(coPrimePairs)('should return identity factor for co-prime operands', (...eachCoPrimePair) => {
