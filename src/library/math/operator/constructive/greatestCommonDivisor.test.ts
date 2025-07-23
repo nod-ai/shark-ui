@@ -50,6 +50,7 @@ describe(greatestCommonDivisor, () => {
   const [
     primeA,
     primeB,
+    primeC,
   ] = singleDigitPrimes;
 
   describe('the sad outcomes', () => {
@@ -144,9 +145,19 @@ describe(greatestCommonDivisor, () => {
         .toBe(/**/greatestCommonDivisor(/* */primeA, /* */primeB));
     });
 
-    it.todo('should be commutative');
+    it('should be commutative', () => {
+      expect.assertions(1);
 
-    it.todo('should be associative');
+      expect(/* */greatestCommonDivisor(primeA, primeB))
+        .toBe(/**/greatestCommonDivisor(primeB, primeA));
+    });
+
+    it('should be associative', () => {
+      expect.assertions(1);
+
+      expect(/* */greatestCommonDivisor(greatestCommonDivisor(primeA, primeB), primeC))
+        .toBe(/**/greatestCommonDivisor(greatestCommonDivisor(primeB, primeC), primeA));
+    });
 
     it.todo('should return an operable answer when zero is an operand');
 
