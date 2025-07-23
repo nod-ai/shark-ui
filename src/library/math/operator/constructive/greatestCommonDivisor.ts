@@ -4,6 +4,10 @@ import {
   isWhole,
 } from '../predicate';
 
+import {
+  absoluteValueOf,
+} from './absoluteValueOf';
+
 const greatestCommonDivisor = (
   leftHandOperand: number,
   rightHandOperand: number,
@@ -16,8 +20,11 @@ const greatestCommonDivisor = (
     !isWhole(rightHandOperand)
   ) return Attempt.abandon('Right operand must be whole.');
 
-  let nextDividend = leftHandOperand;
-  let previousRemainder = rightHandOperand;
+  const leftHandMagnitude = absoluteValueOf(leftHandOperand);
+  const rightHandMagnitude = absoluteValueOf(rightHandOperand);
+
+  let nextDividend = leftHandMagnitude;
+  let previousRemainder = rightHandMagnitude;
 
   while (previousRemainder !== 0) {
     const eachDivisor = previousRemainder;
