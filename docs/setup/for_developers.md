@@ -47,11 +47,20 @@ where:
     1. [installation](#installation)
     2. [configuration](#configuration)
 1. In [VSCode](https://code.visualstudio.com/), [add the extensions recommended by the project](https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_extension-recommendations).
-1. Serve the project with [Hot Module Replacement](https://vite.dev/guide/features.html#hot-module-replacement) by running:
+1. Serve the project with [Hot Module Replacement](https://vite.dev/guide/features.html#hot-module-replacement) by:
 
-    ```shell
-    npm run dev
-    ```
+    - using the default port (5173):
+
+        ```shell
+        npm run dev
+        ```
+
+      OR
+    - specifying a custom port (e.g. 8080):
+
+        ```shell
+        npm run dev -- --port 8080
+        ```
 
     NOTE: Shows [Vue Dev Tools](https://devtools.vuejs.org/getting-started/features) for debugging UI
 
