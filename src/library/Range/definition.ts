@@ -4,7 +4,9 @@ import {
   arithmeticMeanOf,
 } from '@/library/math';
 
-type Range_BoundContainment = 'exclusive' | 'inclusive';
+import type {
+  Range_BoundContainment,
+} from './BoundContainment';
 
 class Range {
   protected constructor(
