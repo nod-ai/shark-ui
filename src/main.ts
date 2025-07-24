@@ -7,7 +7,7 @@ import {
 } from '@/library/utilitiesByType/error';
 
 import App from '@/App.vue';
-import vuetify from '@/plugins/vuetify.ts';
+import vuetify from '@/plugins/vuetify';
 import router from '@/router';
 
 import {

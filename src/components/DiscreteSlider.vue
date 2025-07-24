@@ -20,7 +20,7 @@ import Range from '@/library/Range';
 
 import {
   shallowlyMerged,
-} from '@/library/utilitiesByType/record.ts';
+} from '@/library/utilitiesByType/record';
 
 const currentValue = defineModel<number>({
   required: true,
