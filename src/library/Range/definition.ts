@@ -4,7 +4,7 @@ import {
   arithmeticMeanOf,
 } from '@/library/math';
 
-type RangeBound = 'exclusive' | 'inclusive';
+type Range_BoundContainment = 'exclusive' | 'inclusive';
 
 class Range {
   protected constructor(
@@ -54,8 +54,8 @@ class Range {
       lower: givenLower,
       upper: givenUpper,
     }: {
-      lower: RangeBound;
-      upper: RangeBound;
+      lower: Range_BoundContainment;
+      upper: Range_BoundContainment;
     },
   ): boolean {
     return this.exclusivelyContains(givenValue)
