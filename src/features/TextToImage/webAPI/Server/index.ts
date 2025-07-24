@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 
 import {
   Server,
-} from '@/library/WebAPI';
+} from '@/library/WebAPI/exports';
 
 import {
   DynamicConfig,
