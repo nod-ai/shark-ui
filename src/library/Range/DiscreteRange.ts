@@ -1,5 +1,9 @@
 import Attempt from '@/library/Attempt';
 
+import {
+  isNegative,
+} from '@/library/math';
+
 import Range from './index.ts';
 
 class DiscreteRange
@@ -32,7 +36,7 @@ class DiscreteRange
     });
 
     if (
-      givenStepSize < 0
+      isNegative(givenStepSize)
     ) return Attempt.abandon('Step size must be positive');
 
     const overstep = validRange.width % givenStepSize;
