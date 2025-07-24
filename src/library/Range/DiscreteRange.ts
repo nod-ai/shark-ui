@@ -37,7 +37,7 @@ class DiscreteRange
 
     if (
       isNegative(givenStepSize)
-    ) return Attempt.abandon('Step size must be positive');
+    ) return Attempt.abandon('Step size must be non-negative');
 
     const overstep = validRange.width % givenStepSize;
 
