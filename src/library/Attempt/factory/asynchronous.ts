@@ -2,7 +2,7 @@ import type {
   Attempt_Outcome,
   CauseOf,
   ProductOf,
-} from '../Outcome';
+} from '../Outcome/exports';
 
 import {
   Attempt_ended as handles,

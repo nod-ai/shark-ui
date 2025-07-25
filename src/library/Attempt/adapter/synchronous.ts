@@ -1,6 +1,6 @@
 import type {
   Attempt_Outcome,
-} from '../Outcome';
+} from '../Outcome/exports';
 
 import {
   assertActionable,
