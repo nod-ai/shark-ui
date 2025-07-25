@@ -25,3 +25,16 @@ jobs:
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Approve PRs for select dependencies
+        if: |
+          contains(
+            fromJSON('[
+              "vue-tsc"
+            ]'),
+            steps.metadata.outputs.dependency-names
+          )
+          && (steps.metadata.outputs.update-type == 'version-update:semver-patch')
+        run: gh pr review --approve "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
