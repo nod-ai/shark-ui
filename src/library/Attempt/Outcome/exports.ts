@@ -7,7 +7,7 @@ import {
   type Attempt_Failure_Transformer,
   failureDueTo,
   causeIdentity,
-} from './Failure';
+} from './Failure/exports';
 
 import {
   type Attempt_Success,
