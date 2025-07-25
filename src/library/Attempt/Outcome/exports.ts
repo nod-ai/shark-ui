@@ -14,7 +14,7 @@ import {
   type Attempt_Success_Transformer,
   successThatYielded,
   productIdentity,
-} from './Success';
+} from './Success/exports';
 
 import type {
   Attempt_Outcome_Transformer,
