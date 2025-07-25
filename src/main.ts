@@ -12,7 +12,7 @@ import router from '@/router';
 
 import {
   promptUserToReport,
-} from './features/reporting.ts';
+} from '@/features/reporting.ts';
 
 const app = createApp(App);
 app.use(router);
