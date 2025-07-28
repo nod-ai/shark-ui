@@ -1,4 +1,4 @@
-import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
+import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence/definition';
 import ContentDescriptor from '@/library/ContentDescriptor';
 
 import type {

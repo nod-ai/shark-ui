@@ -1,5 +1,5 @@
 import Attempt from '@/library/Attempt';
-import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
+import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence/definition';
 import type ContentDescriptor from '@/library/ContentDescriptor';
 import NonTrivialString from '@/library/NonTrivialString/definition';
 
