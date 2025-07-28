@@ -1,6 +1,6 @@
 import Attempt from '@/library/Attempt';
 import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence/definition';
-import type ContentDescriptor from '@/library/ContentDescriptor';
+import type ContentDescriptor from '@/library/ContentDescriptor/definition';
 import NonTrivialString from '@/library/NonTrivialString/definition';
 
 import UniformResourceIdentifier from '../index.ts';

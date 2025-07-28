@@ -1,5 +1,5 @@
 import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence/definition';
-import ContentDescriptor from '@/library/ContentDescriptor';
+import ContentDescriptor from '@/library/ContentDescriptor/definition';
 
 import type {
   DataURI_EncodingIdentifier,
