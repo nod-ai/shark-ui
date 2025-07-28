@@ -1,3 +1,1 @@
-export {
-  PotentiallyActionable,
-} from './definition.ts';
+export * from './definition.ts';

@@ -1,3 +1,1 @@
-export {
-  Repository,
-} from './definition.ts';
+export * from './definition.ts';

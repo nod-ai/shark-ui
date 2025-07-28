@@ -1,3 +1,1 @@
-export {
-  Contextualized,
-} from './definition.ts';
+export * from './definition.ts';

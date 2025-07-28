@@ -1,3 +1,1 @@
-export {
-  ShimmedStabilityAIClient,
-} from './definition.ts';
+export * from './definition.ts';

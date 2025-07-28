@@ -1,3 +1,1 @@
-export {
-  Contextualized,
-} from './Contextualized';
+export * from './Contextualized';
