@@ -43,6 +43,67 @@ Modules that no longer meet the criteria for a single-file structure should be s
 
 ### A Simple Case
 
+Say we had a single-file module:
+
+```plaintext
+src/
+├─ User.ts
+```
+
+In this module, everything about a `User` can be described in a single class declaration:
+
+```typescript
+// User.ts
+
+class User {
+  public constructor(
+    public readonly handle: string,
+  ) {}
+}
+
+export {
+  User as default,
+};
+```
+
+And using it is straightforward:
+
+```typescript
+import User from './User';
+
+const someUser = new User('@JohnDoe');
+```
+
+This same module _could_ be split into a directory structure, without affecting consumption:
+
+```plaintext
+src/
+├─ User
+  ├─ definition.declared.ts    # Defines what a `User` is via a class declaration
+  ├─ exports.object.primary.ts # Identifies the primary object to expose to consumers
+  ├─ index.ts                  # Exposes the primary object as the `default` export from the entire module 
+```
+
+But it would be _excessive_ until a valid need actually presented itself, such as:
+
+- custom member types
+  - e.g. `User.Handle`
+- nested classes
+  - e.g. `const someError = new User.ParsingError(...)`
+- nested types that require module augmentation
+  - e.g. `type SomeError = User.ParsingError`
+- declaration merging
+  - e.g. an `enum` that's given static methods
+- multiple symbols to export
+- etc.
+
+In fact, a directory structure like the one above would suggest that the module should be simplified into a single file, leaving us once again with:
+
+```plaintext
+src/
+├─ User.ts
+```
+
 ### A Simple Case Becomes Complex
 
 ## Summary
