@@ -234,3 +234,13 @@ export {
 - further growth has a place to go without cluttering the core concept
 
 ## Summary
+
+By following these guidelines, contributors can:
+
+- keep APIs intact for consumers while offering additional functionality
+- prevent premature modularization
+- manage the chaos of multiple declarations and exports
+- encourage clear test boundaries
+- support long-term maintainability
+
+> **Start simple.** Split only when complexity warrants it.
