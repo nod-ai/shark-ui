@@ -3,7 +3,7 @@ import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEn
 import type ContentDescriptor from '@/library/ContentDescriptor/definition';
 import NonTrivialString from '@/library/NonTrivialString/definition';
 
-import UniformResourceIdentifier from '../index.ts';
+import UniformResourceIdentifier from '../definition.ts';
 
 import type {
   DataURI_EncodingIdentifier,
