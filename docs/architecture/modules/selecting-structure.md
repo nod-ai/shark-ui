@@ -106,4 +106,131 @@ src/
 
 ### A Simple Case Becomes Complex
 
+Now, let's say that we add some parsing functionality to our `User` module:
+
+```typescript
+// User.ts
+
+import Attempt from '@/library/Attempt';
+import type Parsable from '@/library/Parsable';
+import ParsingError from '@/library/ParsingError';
+
+class User_ParsingError
+  extends ParsingError<
+    'User'
+  >
+{
+  ...
+}
+
+class User
+  implements Parsable.String<
+    typeof User,
+    /*  */ User_ParsingError
+  >
+{
+  public constructor(
+    public readonly handle: string,
+  ) {}
+
+  public static parsedFrom(
+    givenSubject: string,
+  ): Attempt.Outcome<
+    User,
+    User_ParsingError
+  > {
+    return Attempt.Fresh.that(ends => {
+      ...
+
+      if (
+        rawHandle.startsWith('@')
+      ) return ends.inSuccessWith(parsedUser);
+      
+      const newParsingError = new User_ParsingError('Expected handle to start with "@"');
+      return ends.inFailureWith(newParsingError);
+
+    });
+  }
+}
+
+export {
+  User as default,
+  User_ParsingError,
+};
+```
+
+By adding a single concept ("parsing"), the module has tripled in length and gained several new responsibilities:
+
+- Importing necessary tools from the library.
+- Defining a new error type for parsing failures.
+- Exporting the new error type alongside the `User` class so consumers can identify those issues if they so choose.
+
+And because this module is a single file, we can't create `User.ParsingError` for easy consumer access without making the file even longer.
+
+We can now justify splitting the module into a directory to better organize its components:
+
+```plaintext
+src/
+├─ library/
+├─ User/
+  ├─ ParsingError.ts                         # Holds the `User_ParsingError` class
+  ├─ definition.declared.ts                  # Defines the `User` class
+  ├─ definition.declared.augmentation.ts     # Augments the `User` class with `User.ParsingError` type/constructor
+  ├─ definition.declared.withAugmentation.ts # Presents the augmented `User` class
+  ├─ exports.object.primary.ts               # Permits exposure of `User` (with nested `ParsingError`) to consumers
+  ├─ index.ts                                # Presents the final `User` object as the `default` export from the entire module
+```
+
+This leaves the core file with only a single declaration, narrowing its focus as much as possible:
+
+```typescript
+// User/definition.declared.ts
+
+import Attempt from '@/library/Attempt';
+import type Parsable from '@/library/Parsable';
+
+import {
+  User_ParsingError
+} from './ParsingError';
+
+class User
+  implements Parsable.String<
+    typeof User,
+    /*  */ User_ParsingError
+  >
+{
+  public constructor(
+    public readonly handle: string,
+  ) {}
+
+  public static parsedFrom(
+    givenSubject: string,
+  ): Attempt.Outcome<
+    User,
+    User_ParsingError
+  > {
+    return Attempt.Fresh.that(ends => {
+      ...
+
+      if (
+        rawHandle.startsWith('@')
+      ) return ends.inSuccessWith(parsedUser);
+
+      const newParsingError = new User_ParsingError('Expected handle to start with "@"');
+      return ends.inFailureWith(newParsingError);
+    });
+  }
+}
+
+export {
+  User,
+};
+```
+
+**By using the directory structure**:
+
+- tests can be written without confounding primary behavior, internal behavior, the shape of the API, etc.
+- contributors have an easier time reading and understanding the purpose of the module
+- further growth has a place to go without cluttering the core concept
+
 ## Summary
