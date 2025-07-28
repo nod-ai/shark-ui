@@ -43,6 +43,7 @@ jobs:
         if: |
           contains(
             fromJSON('[
+              "eslint"
             ]'),
             steps.metadata.outputs.dependency-names
           )
