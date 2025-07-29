@@ -38,6 +38,9 @@ const extendedConfig: ConfigWithExtends = {
     ],
     'import/no-useless-path-segments': [
       'error',
+      {
+        noUselessIndex: true, // Avoids noise in diffs from converting single-file modules <-> directory modules
+      },
     ],
     'import/order': [
       'error',
