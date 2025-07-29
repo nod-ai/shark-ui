@@ -6,7 +6,7 @@ import {
   asError,
 } from '@/library/utilitiesByType/error.ts';
 
-import App from './App.vue';
+import App from '@/App.vue';
 
 import {
   promptUserToReport,
