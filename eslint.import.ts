@@ -4,18 +4,28 @@ import type {
   ConfigWithExtends,
 } from 'typescript-eslint';
 
-const extraConfig: ConfigWithExtends = {
-  name    : 'shark-ui/import',
-  files   : ['**/*.{ts,vue}'],
+const extendedConfig: ConfigWithExtends = {
+  name : 'shark-ui/import',
+  files: [
+    '**/*.{ts,vue}',
+  ],
+  extends: [
+    importPlugin.flatConfigs.recommended,
+    importPlugin.flatConfigs.typescript,
+  ],
   settings: {
     'import/resolver': {
-      'typescript'                         : true,
-      'node'                               : true,
+      'typescript': {
+        project: './tsconfig.json',
+      },
       'eslint-import-resolver-custom-alias': {
         alias: {
           '@': './src',
         },
-        extensions: ['.ts', '.vue'],
+        extensions: [
+          '.ts',
+          '.vue',
+        ],
       },
     },
   },
@@ -69,9 +79,7 @@ const extraConfig: ConfigWithExtends = {
 };
 
 const pluginImport: ConfigWithExtends[] = [
-  importPlugin.flatConfigs.recommended,
-  importPlugin.flatConfigs.typescript,
-  extraConfig,
+  extendedConfig,
 ];
 
 export {
