@@ -4,7 +4,7 @@ import {
 
 import {
   assertAppropriatelyThrown,
-} from '../error/assertions';
+} from '../error/assertions/exports';
 
 import type {
   AppropriatelyThrown,
