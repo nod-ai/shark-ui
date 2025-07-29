@@ -7,7 +7,7 @@ import {
 import {
   type Config,
   ConfigSchema,
-} from '../../types';
+} from '../../types/exports';
 
 import DynamicConfig_EndpointResponseError from './EndpointResponseError';
 import DynamicConfig_FetchingError from './FetchingError';

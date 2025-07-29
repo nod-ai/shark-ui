@@ -7,7 +7,7 @@ import {
 import {
   type Config,
   ConfigSchema,
-} from '../../types';
+} from '../../types/exports';
 
 import StaticConfigReadingError from './StaticConfigReadingError';
 

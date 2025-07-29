@@ -1,6 +1,6 @@
 import type {
   Config,
-} from '../types';
+} from '../types/exports';
 
 const emptyConfig: Config = {
   server: null,
