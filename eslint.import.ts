@@ -38,7 +38,7 @@ const extraConfig: ConfigWithExtends = {
         ],
         'pathGroups': [
           {
-            pattern : '@/library/vue', // Allows Vue utilities to bubble to the very top of the <script setup> tag
+            pattern : '@/library/vue{,/**}', // Allows Vue utilities to bubble to the very top of the <script setup> tag
             group   : 'builtin',
             position: 'before',
           },
@@ -48,7 +48,7 @@ const extraConfig: ConfigWithExtends = {
             position: 'after',
           },
           {
-            pattern : '@/!(features)/**', // Alias for "src/**"
+            pattern : '@/!(features){,/**}', // Highlights the supporting logic of the application
             group   : 'external',
             position: 'after',
           },
