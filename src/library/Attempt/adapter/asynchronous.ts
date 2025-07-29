@@ -12,7 +12,7 @@ import type {
 
 import {
   Attempt_thatEventually,
-} from '../factory';
+} from '../factory/exports';
 
 import {
   sanctionedAsync,

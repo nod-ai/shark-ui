@@ -12,7 +12,7 @@ import type {
 
 import {
   Attempt_that,
-} from '../factory';
+} from '../factory/exports';
 
 import {
   sanctioned,
