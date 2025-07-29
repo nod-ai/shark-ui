@@ -2,18 +2,17 @@ import {
   createApp,
 } from '@/library/vue';
 
-import App from './App.vue';
+import {
+  asError,
+} from '@/library/utilitiesByType/error.ts';
+
+import App from '@/App.vue';
+import vuetify from '@/plugins/vuetify.ts';
+import router from '@/router';
 
 import {
   promptUserToReport,
-} from './features/reporting.ts';
-
-import {
-  asError,
-} from './library/utilitiesByType/error.ts';
-
-import vuetify from './plugins/vuetify.ts';
-import router from './router';
+} from '@/features/reporting.ts';
 
 const app = createApp(App);
 app.use(router);
