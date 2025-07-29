@@ -39,6 +39,7 @@ const extendedConfig: ConfigWithExtends = {
     'import/no-useless-path-segments': [
       'error',
       {
+        // 2025-July-29: Only works for relative paths, not absolute paths
         noUselessIndex: true, // Avoids noise in diffs from converting single-file modules <-> directory modules
       },
     ],
