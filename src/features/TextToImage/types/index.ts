@@ -3,4 +3,4 @@ export type {
 } from './Input';
 export type {
   TextToImage_Output as Output,
-} from './Output';
+} from './Output/definition';

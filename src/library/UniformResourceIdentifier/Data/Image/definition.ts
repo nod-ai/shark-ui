@@ -1,11 +1,11 @@
-import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
-import ContentDescriptor from '@/library/ContentDescriptor';
+import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence/definition';
+import ContentDescriptor from '@/library/ContentDescriptor/definition';
 
 import type {
   DataURI_EncodingIdentifier,
 } from '../EncodingIdentifier';
 
-import DataURI from '../index.ts';
+import DataURI from '../definition.ts';
 
 import type {
   ImageURI_Format,
