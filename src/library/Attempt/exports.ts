@@ -19,7 +19,7 @@ export {
   attemptToEventually as toEventually,
   attemptToSettle as toSettle,
   type AdapterConfig,
-} from './adapter';
+} from './adapter/exports';
 
 export {
   NonActionableError,
