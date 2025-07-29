@@ -6,10 +6,6 @@ import Attempt from '@/library/Attempt';
 import HTTP from '@/library/HTTP';
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/index.ts';
 
-import {
-  firstTextToImageOutput,
-} from './conversions/GenerateFromTextResponse';
-
 import type {
   Output,
 } from '@/features/TextToImage/types';
@@ -17,6 +13,10 @@ import type {
 import {
   Server,
 } from '@/features/TextToImage/webAPI';
+
+import {
+  firstTextToImageOutput,
+} from './conversions/GenerateFromTextResponse';
 
 const initializeShimmedStabilityAIClient = async (): Promise<
   Attempt.Outcome<ShimmedStabilityAIClient, Server.SpecificationError>
