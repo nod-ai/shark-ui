@@ -48,7 +48,7 @@ const extraConfig: ConfigWithExtends = {
             position: 'after',
           },
           {
-            pattern : '@/!{features}/**', // Alias for "src/**"
+            pattern : '@/!(features)/**', // Alias for "src/**"
             group   : 'internal',
             position: 'after',
           },
