@@ -1,3 +1,3 @@
-export * from './operator';
+export * from './operator/exports';
 
 export * from './aggregator/exports';
