@@ -2,7 +2,7 @@
 
 import type {
   ActionableError,
-} from '../../error';
+} from '../../error/exports';
 
 import type {
   DiscriminableOutcome,

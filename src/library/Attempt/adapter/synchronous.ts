@@ -2,13 +2,13 @@ import type {
   Attempt_Outcome,
 } from '../Outcome';
 
-import type {
-  ActionableError,
-} from '../error';
-
 import {
   assertActionable,
 } from '../error/assertions';
+
+import type {
+  ActionableError,
+} from '../error/exports';
 
 import {
   Attempt_that,

@@ -25,7 +25,7 @@ export {
   NonActionableError,
   ActionableError,
   type ErrorInterpreter,
-} from './error';
+} from './error/exports';
 
 export {
   Attempt_that as that,

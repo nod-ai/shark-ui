@@ -4,7 +4,7 @@ import {
 
 import {
   NonActionableError,
-} from './error';
+} from './error/exports';
 
 /**
  * (noun) Defines the relationship between:

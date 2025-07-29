@@ -1,8 +1,8 @@
+import type Attempt_ErrorInterpreter from '../error/Interpreter';
+
 import type {
   ActionableError,
-} from '../error';
-
-import type Attempt_ErrorInterpreter from '../error/Interpreter';
+} from '../error/exports';
 
 interface Attempt_AdapterConfig<
   SomeActionableError extends ActionableError<string>,
