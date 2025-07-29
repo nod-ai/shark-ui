@@ -16,7 +16,6 @@ const extendedConfig: ConfigWithExtends = {
   settings: {
     'import/resolver': {
       'typescript'                         : true,
-      'node'                               : true,
       'eslint-import-resolver-custom-alias': {
         alias: {
           '@': './src',
