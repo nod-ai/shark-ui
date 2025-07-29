@@ -4,7 +4,7 @@ import Byte from '@/library/Byte';
 
 import type {
   StringParsable,
-} from '@/library/Parser/string';
+} from '@/library/Parser/string/exports';
 
 import StringSubset from '@/library/StringSubset';
 
