@@ -48,7 +48,7 @@ const extraConfig: ConfigWithExtends = {
             position: 'after',
           },
           {
-            pattern : '@/!(features)/**', // Highlights the supporting logic of the application
+            pattern : '@/!(features){,/**}', // Highlights the supporting logic of the application
             group   : 'external',
             position: 'after',
           },
