@@ -12,7 +12,7 @@ import type {
 
 import {
   Server,
-} from '@/features/TextToImage/webAPI';
+} from '@/features/TextToImage/webAPI/exports';
 
 import {
   firstTextToImageOutput,

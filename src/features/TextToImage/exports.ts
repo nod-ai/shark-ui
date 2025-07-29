@@ -2,6 +2,6 @@ export * as Client from './client/exports';
 
 export {
   Server,
-} from './webAPI';
+} from './webAPI/exports';
 
 export type * from './types/exports';
