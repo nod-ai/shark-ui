@@ -1,4 +1,4 @@
-export * from './predicate';
+export * from './predicate/exports';
 
 export * from './hyper';
 
