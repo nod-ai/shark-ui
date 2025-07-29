@@ -9,10 +9,6 @@ import {
 } from '@/library/utilitiesByType/array';
 
 import {
-  toOutputImage,
-} from './StabilityAI_Client_Image';
-
-import {
   allSerialized,
 } from '@/features/TextToImage/models/SDXL/client/conversions/TextPrompt';
 
@@ -20,6 +16,10 @@ import type {
   Input,
   Output,
 } from '@/features/TextToImage/types';
+
+import {
+  toOutputImage,
+} from './StabilityAI_Client_Image';
 
 const toNullableOutput = (
   givenImage: Output['image'] | null,

@@ -54,7 +54,7 @@ const extraConfig: ConfigWithExtends = {
           },
           {
             pattern : '@/features/**', // Highlights the business logic of the application
-            group   : 'internal',
+            group   : 'external',
             position: 'after',
           },
         ],

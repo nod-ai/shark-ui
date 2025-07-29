@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import * as TextToImage from '@/features/TextToImage';
+
 import TextToImageServerConnectionAlert from './TextToImageServerConnectionAlert.vue';
 import TextToImageServerSpecificationAlert from './TextToImageServerSpecificationAlert.vue';
-
-import * as TextToImage from '@/features/TextToImage';
 
 type OutputError =
   | TextToImage.Server.ConnectionError
