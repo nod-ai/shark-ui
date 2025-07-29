@@ -1,6 +1,6 @@
 import {
   cofactor,
-} from '@/library/math';
+} from '@/library/math/exports';
 
 const Byte_bitWidth = 8 as const;
 
