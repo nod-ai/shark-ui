@@ -4,7 +4,7 @@ import type {
   ConfigWithExtends,
 } from 'typescript-eslint';
 
-const extraConfig: ConfigWithExtends = {
+const extendedConfig: ConfigWithExtends = {
   name : 'shark-ui/import',
   files: [
     '**/*.{ts,vue}',
@@ -78,7 +78,7 @@ const extraConfig: ConfigWithExtends = {
 };
 
 const pluginImport: ConfigWithExtends[] = [
-  extraConfig,
+  extendedConfig,
 ];
 
 export {
