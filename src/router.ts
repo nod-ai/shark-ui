@@ -3,7 +3,7 @@ import {
   createWebHistory,
 } from 'vue-router';
 
-import TextToImagePage from '../pages/TextToImagePage.vue';
+import TextToImagePage from '@/pages/TextToImagePage.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
