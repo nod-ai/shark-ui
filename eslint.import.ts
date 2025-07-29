@@ -9,6 +9,10 @@ const extraConfig: ConfigWithExtends = {
   files: [
     '**/*.{ts,vue}',
   ],
+  extends: [
+    importPlugin.flatConfigs.recommended,
+    importPlugin.flatConfigs.typescript,
+  ],
   settings: {
     'import/resolver': {
       'typescript'                         : true,
@@ -74,8 +78,6 @@ const extraConfig: ConfigWithExtends = {
 };
 
 const pluginImport: ConfigWithExtends[] = [
-  importPlugin.flatConfigs.recommended,
-  importPlugin.flatConfigs.typescript,
   extraConfig,
 ];
 
