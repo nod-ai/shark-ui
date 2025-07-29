@@ -1,4 +1,4 @@
-export * as Client from './client';
+export * as Client from './client/exports';
 
 export {
   Server,
