@@ -2,7 +2,7 @@
 import {
   get,
   set,
-} from '@/library/vue';
+} from '@/library/vue/exports';
 
 import {
   VBtn,

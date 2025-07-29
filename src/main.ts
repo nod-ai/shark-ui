@@ -1,6 +1,6 @@
 import {
   createApp,
-} from '@/library/vue';
+} from '@/library/vue/exports';
 
 import {
   asError,

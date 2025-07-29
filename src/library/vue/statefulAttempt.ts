@@ -3,7 +3,7 @@ import {
   ref,
   set,
   type Ref,
-} from '@/library/vue';
+} from '@/library/vue/exports';
 
 import Attempt from '@/library/Attempt';
 
