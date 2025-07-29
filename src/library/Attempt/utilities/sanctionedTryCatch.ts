@@ -8,7 +8,7 @@ import {
 
 import type {
   AppropriatelyThrown,
-} from '../error/modifier';
+} from '../error/modifier/exports';
 
 const sanctioned = <
   TryBlockOutput,
