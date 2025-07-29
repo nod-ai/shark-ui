@@ -5,8 +5,10 @@ import type {
 } from 'typescript-eslint';
 
 const extraConfig: ConfigWithExtends = {
-  name    : 'shark-ui/import',
-  files   : ['**/*.{ts,vue}'],
+  name : 'shark-ui/import',
+  files: [
+    '**/*.{ts,vue}',
+  ],
   settings: {
     'import/resolver': {
       'typescript'                         : true,
@@ -15,7 +17,10 @@ const extraConfig: ConfigWithExtends = {
         alias: {
           '@': './src',
         },
-        extensions: ['.ts', '.vue'],
+        extensions: [
+          '.ts',
+          '.vue',
+        ],
       },
     },
   },
