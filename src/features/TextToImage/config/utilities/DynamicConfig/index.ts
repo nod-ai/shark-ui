@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 
 import {
   URLPath,
-} from '@/library/URLComponent';
+} from '@/library/URLComponent/exports';
 
 import {
   type Config,

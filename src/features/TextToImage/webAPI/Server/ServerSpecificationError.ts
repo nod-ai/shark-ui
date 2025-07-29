@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 
 import type {
   URLPath,
-} from '@/library/URLComponent';
+} from '@/library/URLComponent/exports';
 
 class TextToImage_Server_SpecificationError
   extends Attempt.ActionableError<
