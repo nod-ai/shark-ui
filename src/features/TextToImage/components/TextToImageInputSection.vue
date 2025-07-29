@@ -17,7 +17,7 @@ import {
 
 import type {
   Input,
-} from '../types';
+} from '../types/exports';
 
 type StandardizedInputText = Input['text'];
 
