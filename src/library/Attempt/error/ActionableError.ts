@@ -3,8 +3,8 @@ import type {
 } from '@/library/typeUtilities/Branded';
 
 import {
-  NonActionableError,
-} from '.';
+  default as NonActionableError,
+} from './NonActionableError';
 
 /** Extend this class to describe errors from which callers ought to recover */
 abstract class ActionableError<
