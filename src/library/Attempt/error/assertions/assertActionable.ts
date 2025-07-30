@@ -1,6 +1,6 @@
 import type {
-  ActionableError,
-} from '..';
+  default as ActionableError,
+} from '../ActionableError';
 
 import type Attempt_ErrorInterpreter from '../Interpreter';
 import NonActionableBuiltInError from '../NonActionableBuiltInError';
