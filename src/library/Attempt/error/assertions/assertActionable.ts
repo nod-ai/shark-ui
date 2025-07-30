@@ -1,10 +1,13 @@
-import {
-  NonActionableError,
-  type ActionableError,
+import type {
+  ActionableError,
 } from '..';
 
 import type Attempt_ErrorInterpreter from '../Interpreter';
 import NonActionableBuiltInError from '../NonActionableBuiltInError';
+
+import {
+  default as NonActionableError,
+} from '../NonActionableError';
 
 import type {
   AppropriatelyThrown,
