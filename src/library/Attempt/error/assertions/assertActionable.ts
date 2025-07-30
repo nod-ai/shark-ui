@@ -1,10 +1,13 @@
-import {
-  NonActionableError,
-  type ActionableError,
-} from '..';
+import type {
+  default as ActionableError,
+} from '../ActionableError';
 
 import type Attempt_ErrorInterpreter from '../Interpreter';
 import NonActionableBuiltInError from '../NonActionableBuiltInError';
+
+import {
+  default as NonActionableError,
+} from '../NonActionableError';
 
 import type {
   AppropriatelyThrown,
@@ -12,7 +15,7 @@ import type {
 
 import {
   assertPotentiallyActionable,
-} from '.';
+} from './assertPotentiallyActionable';
 
 const assertActionable = <
   SomeActionableError extends ActionableError<string>,

@@ -1,8 +1,8 @@
-import {
-  NonActionableError,
-} from '..';
-
 import AttemptCreationError from '../../factory/AttemptCreationError';
+
+import {
+  default as NonActionableError,
+} from '../NonActionableError';
 
 import type {
   PotentiallyActionable,
