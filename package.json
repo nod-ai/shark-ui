@@ -22,7 +22,7 @@
     "typescript-eslint": "^8.38.0",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1",
-    "vuetify": "^3.9.2",
+    "vuetify": "^3.9.3",
     "zod": "^4.0.14"
   },
   "devDependencies": {
