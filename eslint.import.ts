@@ -36,6 +36,13 @@ const extendedConfig: ConfigWithExtends = {
     'import/group-exports': [
       'error', // Encourages decoupling the export of a module from its declaration, which leads to cleaner diffs
     ],
+    'import/no-useless-path-segments': [
+      'error',
+      {
+        // 2025-July-29: Only works for relative paths, not absolute paths
+        noUselessIndex: true, // Avoids noise in diffs from converting single-file modules <-> directory modules
+      },
+    ],
     'import/order': [
       'error',
       {

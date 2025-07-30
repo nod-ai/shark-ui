@@ -6,13 +6,13 @@ import {
 import type Attempt_ErrorInterpreter from '../Interpreter';
 import NonActionableBuiltInError from '../NonActionableBuiltInError';
 
-import {
-  assertPotentiallyActionable,
-} from '../assertions';
-
 import type {
   AppropriatelyThrown,
 } from '../modifier';
+
+import {
+  assertPotentiallyActionable,
+} from '.';
 
 const assertActionable = <
   SomeActionableError extends ActionableError<string>,
