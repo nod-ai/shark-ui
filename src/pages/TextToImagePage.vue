@@ -4,7 +4,7 @@ import {
   ref,
   type Ref,
   useStatefulAttemptThatEventually,
-} from '@/library/vue';
+} from '@/library/vue/exports';
 
 import {
   VBtn,
@@ -34,7 +34,7 @@ import NavigationPanel from '@/components/NavigationPanel.vue';
 import TextToImageInputSection from '@/features/TextToImage/components/TextToImageInputSection.vue';
 import TextToImageOutputAlert from '@/features/TextToImage/components/TextToImageOutputAlert.vue';
 import TextToImageOutputImg from '@/features/TextToImage/components/TextToImageOutputImg.vue';
-import * as TextToImage from '@/features/TextToImage/index.ts';
+import * as TextToImage from '@/features/TextToImage/exports';
 
 const currentPrompt: Ref<TextToImage.Input['text'] | null> = ref(null);
 

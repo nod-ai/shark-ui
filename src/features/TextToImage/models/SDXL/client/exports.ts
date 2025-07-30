@@ -8,11 +8,11 @@ import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/definit
 
 import type {
   Output,
-} from '@/features/TextToImage/types';
+} from '@/features/TextToImage/types/exports';
 
 import {
   Server,
-} from '@/features/TextToImage/webAPI';
+} from '@/features/TextToImage/webAPI/exports';
 
 import {
   firstTextToImageOutput,

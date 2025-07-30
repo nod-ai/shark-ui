@@ -3,7 +3,7 @@ import {
   VAlert,
 } from 'vuetify/components/VAlert';
 
-import type * as TextToImage from '@/features/TextToImage';
+import type * as TextToImage from '@/features/TextToImage/exports';
 
 defineProps<{
   error: TextToImage.Server.SpecificationError;

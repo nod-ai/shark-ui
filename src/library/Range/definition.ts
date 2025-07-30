@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 
 import {
   arithmeticMeanOf,
-} from '@/library/math';
+} from '@/library/math/exports';
 
 type RangeBound = 'exclusive' | 'inclusive';
 

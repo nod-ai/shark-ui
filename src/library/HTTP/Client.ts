@@ -3,7 +3,7 @@ import Attempt from '@/library/Attempt';
 import type {
   URLOrigin,
   URLPath,
-} from '@/library/URLComponent';
+} from '@/library/URLComponent/exports';
 
 import {
   HTTP_Endpoint,

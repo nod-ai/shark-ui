@@ -1,10 +1,10 @@
 import {
   Attempt_Outcome,
-} from './Outcome';
+} from './Outcome/exports';
 
 import {
   NonActionableError,
-} from './error';
+} from './error/exports';
 
 /**
  * (noun) Defines the relationship between:

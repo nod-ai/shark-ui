@@ -2,13 +2,13 @@ import Attempt from '@/library/Attempt';
 
 import {
   Server,
-} from '@/library/WebAPI';
+} from '@/library/WebAPI/exports';
 
 import {
   DynamicConfig,
   StaticConfig,
   emptyConfig,
-} from '../../config';
+} from '../../config/exports';
 
 import TextToImage_Server_SpecificationError from './ServerSpecificationError';
 

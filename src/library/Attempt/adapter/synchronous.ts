@@ -1,18 +1,18 @@
 import type {
   Attempt_Outcome,
-} from '../Outcome';
-
-import type {
-  ActionableError,
-} from '../error';
+} from '../Outcome/exports';
 
 import {
   assertActionable,
-} from '../error/assertions';
+} from '../error/assertions/exports';
+
+import type {
+  ActionableError,
+} from '../error/exports';
 
 import {
   Attempt_that,
-} from '../factory';
+} from '../factory/exports';
 
 import {
   sanctioned,

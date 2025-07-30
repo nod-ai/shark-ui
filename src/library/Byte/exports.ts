@@ -1,4 +1,4 @@
-export * as Sequence from './Sequence';
+export * as Sequence from './Sequence/exports';
 
 export {
   Byte_cofactorTo as cofactorTo,

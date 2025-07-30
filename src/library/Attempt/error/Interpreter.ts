@@ -2,7 +2,7 @@ import type ActionableError from './ActionableError';
 
 import type {
   PotentiallyActionable,
-} from './modifier';
+} from './modifier/exports';
 
 type Attempt_ErrorInterpreter<
   SomeActionableError extends ActionableError<string>,

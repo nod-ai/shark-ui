@@ -15,7 +15,7 @@ import {
 import type {
   Input,
   Output,
-} from '@/features/TextToImage/types';
+} from '@/features/TextToImage/types/exports';
 
 import {
   toOutputImage,

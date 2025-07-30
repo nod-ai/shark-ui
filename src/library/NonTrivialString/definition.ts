@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 
 import type {
   StringParsable,
-} from '@/library/Parser/string';
+} from '@/library/Parser/string/exports';
 
 import StringSubset from '@/library/StringSubset';
 
