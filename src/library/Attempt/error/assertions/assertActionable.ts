@@ -12,7 +12,7 @@ import type {
 
 import {
   assertPotentiallyActionable,
-} from '.';
+} from './assertPotentiallyActionable';
 
 const assertActionable = <
   SomeActionableError extends ActionableError<string>,
