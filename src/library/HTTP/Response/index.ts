@@ -1,5 +1,1 @@
-import * as HTTP_Response from './exports.ts';
-
-export {
-  HTTP_Response,
-};
+export * as HTTP_Response from './exports.ts';
