@@ -12,7 +12,7 @@ import {
 
 import {
   squared,
-} from '../hyper/exports';
+} from '../hyper';
 
 import * as GCDAlias from './greatestCommonDivisor';
 

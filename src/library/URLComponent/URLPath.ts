@@ -2,11 +2,11 @@ import Attempt from '@/library/Attempt';
 
 import {
   ParsingError,
-} from '@/library/Parser/exports';
+} from '@/library/Parser';
 
 import type {
   StringParsable,
-} from '@/library/Parser/string/exports';
+} from '@/library/Parser/string';
 
 import StringSubset from '@/library/StringSubset';
 

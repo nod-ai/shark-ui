@@ -1,5 +1,5 @@
 import Schema from '@/library/Schema';
-import * as WebAPI from '@/library/WebAPI/exports';
+import * as WebAPI from '@/library/WebAPI';
 
 import {
   TextToImage_Config,

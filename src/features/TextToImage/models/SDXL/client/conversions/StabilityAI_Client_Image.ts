@@ -1,11 +1,11 @@
 import type * as StabilityAIClient from 'stabilityai-client-typescript/models/components';
 
-import Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence/exports';
-import ImageURI from '@/library/UniformResourceIdentifier/Data/Image/exports';
+import Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
+import ImageURI from '@/library/UniformResourceIdentifier/Data/Image';
 
 import type {
   Output,
-} from '@/features/TextToImage/types/exports';
+} from '@/features/TextToImage/types';
 
 const toOutputImage = (
   givenImage: StabilityAIClient.Image,

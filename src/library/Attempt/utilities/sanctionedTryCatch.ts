@@ -4,11 +4,11 @@ import {
 
 import {
   assertAppropriatelyThrown,
-} from '../error/assertions/exports';
+} from '../error/assertions';
 
 import type {
   AppropriatelyThrown,
-} from '../error/modifier/exports';
+} from '../error/modifier';
 
 const sanctioned = <
   TryBlockOutput,

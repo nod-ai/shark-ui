@@ -1,7 +1,7 @@
-export * as Client from './client/exports';
+export * as Client from './client';
 
 export {
   Server,
-} from './webAPI/exports';
+} from './webAPI';
 
-export type * from './types/exports';
+export type * from './types';

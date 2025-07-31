@@ -2,12 +2,12 @@ import Attempt from '@/library/Attempt';
 
 import {
   URLPath,
-} from '@/library/URLComponent/exports';
+} from '@/library/URLComponent';
 
 import {
   type Config,
   ConfigSchema,
-} from '../../types/exports';
+} from '../../types';
 
 import StaticConfigReadingError from './StaticConfigReadingError';
 

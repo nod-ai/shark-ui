@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 
 import {
   isOperable,
-} from '../../predicate/exports';
+} from '../../predicate';
 
 const squared = (
   givenOperand: number,

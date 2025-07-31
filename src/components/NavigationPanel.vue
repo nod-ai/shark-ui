@@ -2,7 +2,7 @@
 import {
   reactive,
   type Reactive,
-} from '@/library/vue/exports';
+} from '@/library/vue';
 
 import {
   VNavigationDrawer,

@@ -4,15 +4,15 @@ import type {
 
 import Attempt from '@/library/Attempt';
 import HTTP from '@/library/HTTP';
-import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/exports';
+import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient';
 
 import type {
   Output,
-} from '@/features/TextToImage/types/exports';
+} from '@/features/TextToImage/types';
 
 import {
   Server,
-} from '@/features/TextToImage/webAPI/exports';
+} from '@/features/TextToImage/webAPI';
 
 import {
   firstTextToImageOutput,

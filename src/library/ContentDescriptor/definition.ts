@@ -1,4 +1,4 @@
-import NonTrivialString from '@/library/NonTrivialString/exports';
+import NonTrivialString from '@/library/NonTrivialString';
 
 import {
   concatenated,

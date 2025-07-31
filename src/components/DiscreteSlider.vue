@@ -2,7 +2,7 @@
 import {
   get,
   set,
-} from '@/library/vue/exports';
+} from '@/library/vue';
 
 import {
   VBtn,
@@ -16,8 +16,8 @@ import {
   VSlider,
 } from 'vuetify/components/VSlider';
 
+import type Range from '@/library/Range';
 import DiscreteRange from '@/library/Range/DiscreteRange.ts';
-import type Range from '@/library/Range/exports';
 
 import {
   shallowlyMerged,

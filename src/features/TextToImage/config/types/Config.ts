@@ -1,4 +1,4 @@
-import type * as WebAPI from '@/library/WebAPI/exports';
+import type * as WebAPI from '@/library/WebAPI';
 
 /** The user-provided settings for the text-to-image feature */
 class TextToImage_Config {

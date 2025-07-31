@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 
 import type {
   URLPath,
-} from '@/library/URLComponent/exports';
+} from '@/library/URLComponent';
 
 class DynamicConfig_FetchingError
   extends Attempt.ActionableError<

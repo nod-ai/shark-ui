@@ -11,7 +11,7 @@ import {
 
 import type {
   AppropriatelyThrown,
-} from '../modifier/exports';
+} from '../modifier';
 
 import {
   assertPotentiallyActionable,

@@ -1,7 +1,7 @@
 declare module '*.vue' {
   import type {
     DefineComponent,
-  } from '@/library/vue/exports';
+  } from '@/library/vue';
 
   const component: DefineComponent;
 

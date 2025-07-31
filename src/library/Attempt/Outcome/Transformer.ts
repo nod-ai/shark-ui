@@ -1,6 +1,6 @@
 import type {
   ActionableError,
-} from '../error/exports';
+} from '../error';
 
 import type {
   Attempt_Failure_Transformer,

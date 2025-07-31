@@ -5,7 +5,7 @@ import {
   set,
   type Ref,
   watch,
-} from '@/library/vue/exports';
+} from '@/library/vue';
 
 import {
   VCard,
@@ -17,7 +17,7 @@ import {
 
 import type {
   Input,
-} from '../types/exports';
+} from '../types';
 
 type StandardizedInputText = Input['text'];
 

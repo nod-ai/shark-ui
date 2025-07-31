@@ -12,24 +12,24 @@ export {
   Attempt_Outcome as Outcome,
   type Attempt_Success as Success,
   type Attempt_Failure as Failure,
-} from './Outcome/exports';
+} from './Outcome';
 
 export {
   attemptTo as to,
   attemptToEventually as toEventually,
   attemptToSettle as toSettle,
   type AdapterConfig,
-} from './adapter/exports';
+} from './adapter';
 
 export {
   NonActionableError,
   ActionableError,
   type ErrorInterpreter,
-} from './error/exports';
+} from './error';
 
 export {
   Attempt_that as that,
   Attempt_thatEventually as thatEventually,
   type Attempt_EndGetter as EndGetter,
   type Attempt_EndRetriever as EndRetriever,
-} from './factory/exports';
+} from './factory';
