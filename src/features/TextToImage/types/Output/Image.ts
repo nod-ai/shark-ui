@@ -1,4 +1,4 @@
-import type ImageURI from '@/library/UniformResourceIdentifier/Data/Image/exports';
+import type ImageURI from '@/library/UniformResourceIdentifier/Data/Image';
 
 interface TextToImage_Output_Image {
   uri: ImageURI;

@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 
 import {
   isWhole,
-} from '../predicate/exports';
+} from '../predicate';
 
 import {
   absoluteValueOf,

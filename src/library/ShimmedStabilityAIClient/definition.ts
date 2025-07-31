@@ -7,14 +7,14 @@ import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
-import Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence/exports';
+import Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
 import HTTP from '@/library/HTTP';
 import Schema from '@/library/Schema';
 
 import {
   URLOrigin,
   URLPath,
-} from '@/library/URLComponent/exports';
+} from '@/library/URLComponent';
 
 import {
   cloneOf,

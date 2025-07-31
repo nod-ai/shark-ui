@@ -6,7 +6,7 @@ import {
 
 import type {
   PotentiallyActionable,
-} from '../modifier/exports';
+} from '../modifier';
 
 const assertPotentiallyActionable = <
   SomeError extends Error,

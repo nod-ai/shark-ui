@@ -1,5 +1,5 @@
 import Attempt from '@/library/Attempt';
-import type NonTrivialString from '@/library/NonTrivialString/exports';
+import type NonTrivialString from '@/library/NonTrivialString';
 
 import {
   concatenated,

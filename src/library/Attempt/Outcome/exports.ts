@@ -1,20 +1,20 @@
 import type {
   ActionableError,
-} from '../error/exports';
+} from '../error';
 
 import {
   type Attempt_Failure,
   type Attempt_Failure_Transformer,
   failureDueTo,
   causeIdentity,
-} from './Failure/exports';
+} from './Failure';
 
 import {
   type Attempt_Success,
   type Attempt_Success_Transformer,
   successThatYielded,
   productIdentity,
-} from './Success/exports';
+} from './Success';
 
 import type {
   Attempt_Outcome_Transformer,

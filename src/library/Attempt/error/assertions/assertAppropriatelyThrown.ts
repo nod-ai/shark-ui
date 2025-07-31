@@ -4,7 +4,7 @@ import {
 
 import type {
   AppropriatelyThrown,
-} from '../modifier/exports';
+} from '../modifier';
 
 /**
  * Expects `ActionableError`s to be propagated within the confines of the type system.

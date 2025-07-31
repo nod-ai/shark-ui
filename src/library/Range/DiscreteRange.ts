@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 
 import {
   isNegative,
-} from '@/library/math/exports';
+} from '@/library/math';
 
 import Range from './definition.ts';
 

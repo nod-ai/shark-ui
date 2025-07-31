@@ -1,3 +1,3 @@
 export {
   default as SDXL,
-} from '@/features/TextToImage/models/SDXL/client/exports';
+} from '@/features/TextToImage/models/SDXL/client';

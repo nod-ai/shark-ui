@@ -4,7 +4,7 @@ import {
   ref,
   type Ref,
   useStatefulAttemptThatEventually,
-} from '@/library/vue/exports';
+} from '@/library/vue';
 
 import {
   VBtn,
@@ -31,10 +31,10 @@ import SDXLDiffusionStepCount from '@/library/ShimmedStabilityAIClient/models/SD
 import DiscreteSlider from '@/components/DiscreteSlider.vue';
 import NavigationPanel from '@/components/NavigationPanel.vue';
 
+import * as TextToImage from '@/features/TextToImage';
 import TextToImageInputSection from '@/features/TextToImage/components/TextToImageInputSection.vue';
 import TextToImageOutputAlert from '@/features/TextToImage/components/TextToImageOutputAlert.vue';
 import TextToImageOutputImg from '@/features/TextToImage/components/TextToImageOutputImg.vue';
-import * as TextToImage from '@/features/TextToImage/exports';
 
 const currentPrompt: Ref<TextToImage.Input['text'] | null> = ref(null);
 

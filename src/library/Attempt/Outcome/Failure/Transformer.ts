@@ -1,6 +1,6 @@
 import type {
   ActionableError,
-} from '../../error/exports';
+} from '../../error';
 
 type CauseTransformer<
   TransformableActionableError extends ActionableError<string>,
