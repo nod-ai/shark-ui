@@ -1,5 +1,5 @@
 import type ParsingError from '../ParsingError';
-import type Parser from '../definition';
+import type Parser from '../definition.ts';
 
 type StringParser<
   SomeParsedOutput,
