@@ -1,4 +1,4 @@
-import * as Byte from './exports';
+import * as Byte from './exports.ts';
 
 export {
   Byte as default,
