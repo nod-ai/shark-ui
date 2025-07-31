@@ -4,7 +4,7 @@ import type {
 
 import Attempt from '@/library/Attempt';
 import HTTP from '@/library/HTTP';
-import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/definition';
+import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient/exports';
 
 import type {
   Output,

@@ -4,7 +4,7 @@ import Byte from '@/library/Byte';
 
 import {
   ParsingError,
-} from '@/library/Parser/definition';
+} from '@/library/Parser/exports';
 
 class Base64CharacterEncodedByteSequence_ParsingError
   extends ParsingError<
