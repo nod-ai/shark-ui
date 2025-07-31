@@ -1,5 +1,1 @@
-import * as HTTP from './exports.ts';
-
-export {
-  HTTP as default,
-};
+export * as default from './exports.ts';

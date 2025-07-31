@@ -1,5 +1,1 @@
-import * as Byte from './exports.ts';
-
-export {
-  Byte as default,
-};
+export * as default from './exports.ts';
