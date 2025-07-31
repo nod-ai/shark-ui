@@ -1,5 +1,1 @@
-import * as Attempt from './exports';
-
-export {
-  Attempt as default,
-};
+export * as default from './exports.ts';

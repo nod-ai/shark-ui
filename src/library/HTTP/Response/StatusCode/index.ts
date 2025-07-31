@@ -1,5 +1,1 @@
-import * as HTTP_Response_StatusCode from './exports';
-
-export {
-  HTTP_Response_StatusCode,
-};
+export * as HTTP_Response_StatusCode from './exports.ts';
