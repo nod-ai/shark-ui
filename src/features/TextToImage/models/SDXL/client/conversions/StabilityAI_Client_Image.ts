@@ -1,7 +1,7 @@
 import type * as StabilityAIClient from 'stabilityai-client-typescript/models/components';
 
-import Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence/definition';
-import ImageURI from '@/library/UniformResourceIdentifier/Data/Image/definition';
+import Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence/exports';
+import ImageURI from '@/library/UniformResourceIdentifier/Data/Image/exports';
 
 import type {
   Output,

@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 
 import {
   ParsingError,
-} from '@/library/Parser/definition';
+} from '@/library/Parser/exports';
 
 import type {
   StringParsable,

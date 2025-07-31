@@ -1,6 +1,6 @@
 import {
   ParsingError,
-} from '@/library/Parser/definition';
+} from '@/library/Parser/exports';
 
 class NonTrivialString_ParsingError
   extends ParsingError<

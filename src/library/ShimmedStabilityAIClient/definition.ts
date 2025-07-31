@@ -7,7 +7,7 @@ import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
-import Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence/definition';
+import Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence/exports';
 import HTTP from '@/library/HTTP';
 import Schema from '@/library/Schema';
 
