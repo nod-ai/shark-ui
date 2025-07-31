@@ -43,7 +43,8 @@ jobs:
         if: |
           contains(
             fromJSON('[
-              "eslint"
+              "eslint",
+              "eslint-plugin-vue"
             ]'),
             steps.metadata.outputs.dependency-names
           )
