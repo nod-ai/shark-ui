@@ -122,10 +122,11 @@ class ImageClient
     });
 
     const newResource = outcomeOfSubmittingResource.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
+    const parsedResource = Shortfin_TextToImage_Response_Body.Schema.parse(newResource);
 
     const {
       images,
-    } = Shortfin_TextToImage_Response_Body.Schema.parse(newResource);
+    } = parsedResource;
 
     const [soleGeneratedImage] = images;
 
