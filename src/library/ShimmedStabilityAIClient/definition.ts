@@ -112,11 +112,13 @@ class ImageClient
   public async forciblyGenerateFromText(
     givenRequest: GenerateFromTextRequest,
   ): Promise<GenerateFromTextResponse> {
+    const shimmedRequestBody = toBatchGenerationRequestBody([
+      givenRequest.textToImageRequestBody,
+    ]);
+
     const outcomeOfSubmittingResource = await this.submitResource({
-      bySending: toBatchGenerationRequestBody([
-        givenRequest.textToImageRequestBody,
-      ]),
-      to: generationEndpoint,
+      bySending: shimmedRequestBody,
+      to       : generationEndpoint,
     });
 
     const newResource = outcomeOfSubmittingResource.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
