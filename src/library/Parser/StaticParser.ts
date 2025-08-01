@@ -1,7 +1,10 @@
 import type Static from '@/library/typeUtilities/Static';
 
 import type ParsingError from './ParsingError';
-import type Parser from './definition.ts';
+
+import type {
+  default as Parser,
+} from './definition.ts';
 
 type StaticParser<
   SomeRawInput,
