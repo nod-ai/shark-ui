@@ -39,9 +39,8 @@ class ImageClient
     const parsedResource = Shortfin.TextToImage.SDXL.Client.Response.Body.parsedFrom(rawResource)
       .forciblyUnwrap(/* Implementation must align with established contract. */);
 
-    const [soleGeneratedImage] = parsedResource.images;
-
     const generatedImage = ((): Base64CharacterEncodedByteSequence => {
+      const [soleGeneratedImage] = parsedResource.images;
       return soleGeneratedImage;
     })();
 
