@@ -3,7 +3,7 @@ import type Static from '@/library/typeUtilities/Static';
 import type ParsingError from './ParsingError';
 
 import type {
-  default as Parser,
+  Parser,
 } from './definition.ts';
 
 type StaticParser<

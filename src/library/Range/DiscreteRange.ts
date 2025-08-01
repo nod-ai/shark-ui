@@ -5,7 +5,7 @@ import {
 } from '@/library/math';
 
 import {
-  default as Range,
+  Range,
 } from './definition.ts';
 
 class DiscreteRange

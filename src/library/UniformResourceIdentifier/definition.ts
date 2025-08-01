@@ -77,5 +77,5 @@ class UniformResourceIdentifier {
 }
 
 export {
-  UniformResourceIdentifier as default,
+  UniformResourceIdentifier,
 };

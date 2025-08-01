@@ -107,7 +107,7 @@ const MIMEType = ContentDescriptor;
 type MIMEType = ContentDescriptor;
 
 export {
-  ContentDescriptor as default,
+  ContentDescriptor,
   ContentType,
   MediaType,
   MIMEType,

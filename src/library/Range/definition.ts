@@ -79,5 +79,5 @@ class Range {
 }
 
 export {
-  Range as default,
+  Range,
 };

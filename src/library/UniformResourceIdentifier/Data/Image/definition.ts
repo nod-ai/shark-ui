@@ -6,7 +6,7 @@ import type {
 } from '../EncodingIdentifier';
 
 import {
-  default as DataURI,
+  DataURI,
 } from '../definition.ts';
 
 import type {
@@ -43,5 +43,5 @@ class ImageURI
 }
 
 export {
-  ImageURI as default,
+  ImageURI,
 };

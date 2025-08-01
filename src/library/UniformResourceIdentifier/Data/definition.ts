@@ -4,7 +4,7 @@ import type ContentDescriptor from '@/library/ContentDescriptor';
 import NonTrivialString from '@/library/NonTrivialString';
 
 import {
-  default as UniformResourceIdentifier,
+  UniformResourceIdentifier,
 } from '../definition.ts';
 
 import type {
@@ -63,5 +63,5 @@ class DataURI
 }
 
 export {
-  DataURI as default,
+  DataURI,
 };
