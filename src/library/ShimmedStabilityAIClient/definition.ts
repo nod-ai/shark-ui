@@ -43,7 +43,7 @@ class ImageClient
           outcomeOfSubmittingResource.isFailure
         ) return outcomeOfSubmittingResource;
 
-        const rawResource = outcomeOfSubmittingResource.forciblyUnwrap(/* TODO: propagate this error */);
+        const rawResource = outcomeOfSubmittingResource.unwrapped;
 
         const parsedResource = Shortfin.TextToImage.SDXL.Client.Response.Body.parsedFrom(rawResource)
           .forciblyUnwrap(/* Implementation must align with established contract. */);
