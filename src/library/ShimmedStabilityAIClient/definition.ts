@@ -34,9 +34,9 @@ class ImageClient
       to       : generationEndpoint,
     });
 
-    const rawResource = outcomeOfSubmittingResource.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
-
     const generatedImage = ((): Base64CharacterEncodedByteSequence => {
+      const rawResource = outcomeOfSubmittingResource.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
+
       const parsedResource = Shortfin.TextToImage.SDXL.Client.Response.Body.parsedFrom(rawResource)
         .forciblyUnwrap(/* Implementation must align with established contract. */);
 
