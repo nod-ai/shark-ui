@@ -27,7 +27,9 @@ class ImageClient
       givenRequest.textToImageRequestBody,
     ]);
 
-    const generatedImage = await (async (): Promise<Base64CharacterEncodedByteSequence> => {
+    const generatedImage = await (async (
+      derivedBatchedRequestBody: Shortfin.TextToImage.SDXL.Client.Request.Body.Batched,
+    ): Promise<Base64CharacterEncodedByteSequence> => {
       const generationEndpoint = URLPath.parsedFrom('/generate').forciblyUnwrap();
 
       const outcomeOfSubmittingResource = await this.submitResource({
@@ -42,7 +44,7 @@ class ImageClient
 
       const [soleGeneratedImage] = parsedResource.images;
       return soleGeneratedImage;
-    })();
+    })(derivedBatchedRequestBody);
 
     const soleGeneratedArtifact: StabilityAI_TextToImage_Pipeline_Output = {
       base64      : generatedImage.toString(),
