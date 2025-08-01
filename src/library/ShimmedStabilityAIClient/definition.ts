@@ -27,7 +27,7 @@ class ImageClient
       givenRequest.textToImageRequestBody,
     ]);
 
-    const generatedImage = (await (async function (
+    const outcomeOfGeneratingImage = await (async function (
       this: HTTP.Client,
       givenBatchedRequestBody: Shortfin.TextToImage.SDXL.Client.Request.Body.Batched,
     ): Promise<Shortfin.TextToImage.SDXL.Client.Request.Outcome> {
@@ -47,7 +47,9 @@ class ImageClient
         const [soleGeneratedImage] = parsedResource.images;
         return ends.inSuccessWith(soleGeneratedImage);
       });
-    }.bind(this))(derivedBatchedRequestBody)).forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
+    }.bind(this))(derivedBatchedRequestBody);
+
+    const generatedImage = outcomeOfGeneratingImage.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
 
     const soleGeneratedArtifact: StabilityAI_TextToImage_Pipeline_Output = {
       base64      : generatedImage.toString(),
