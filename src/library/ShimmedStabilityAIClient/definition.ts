@@ -7,6 +7,7 @@ import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
+import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
 import HTTP from '@/library/HTTP';
 import Shortfin from '@/library/Shortfin';
 
@@ -40,7 +41,7 @@ class ImageClient
 
     const [soleGeneratedImage] = parsedResource.images;
 
-    const generatedImage = (() => soleGeneratedImage)();
+    const generatedImage = ((): Base64CharacterEncodedByteSequence => soleGeneratedImage)();
 
     const soleGeneratedArtifact: StabilityAI_TextToImage_Pipeline_Output = {
       base64      : generatedImage.toString(),
