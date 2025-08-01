@@ -41,7 +41,9 @@ class ImageClient
 
     const [soleGeneratedImage] = parsedResource.images;
 
-    const generatedImage = ((): Base64CharacterEncodedByteSequence => soleGeneratedImage)();
+    const generatedImage = ((): Base64CharacterEncodedByteSequence => {
+      return soleGeneratedImage;
+    })();
 
     const soleGeneratedArtifact: StabilityAI_TextToImage_Pipeline_Output = {
       base64      : generatedImage.toString(),
