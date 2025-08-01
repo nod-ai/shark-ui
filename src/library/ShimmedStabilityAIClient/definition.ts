@@ -29,12 +29,12 @@ class ImageClient
 
     const generationEndpoint = URLPath.parsedFrom('/generate').forciblyUnwrap();
 
-    const outcomeOfSubmittingResource = await this.submitResource({
-      bySending: derivedBatchedRequestBody,
-      to       : generationEndpoint,
-    });
+    const generatedImage = await (async (): Promise<Base64CharacterEncodedByteSequence> => {
+      const outcomeOfSubmittingResource = await this.submitResource({
+        bySending: derivedBatchedRequestBody,
+        to       : generationEndpoint,
+      });
 
-    const generatedImage = ((): Base64CharacterEncodedByteSequence => {
       const rawResource = outcomeOfSubmittingResource.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
 
       const parsedResource = Shortfin.TextToImage.SDXL.Client.Response.Body.parsedFrom(rawResource)
