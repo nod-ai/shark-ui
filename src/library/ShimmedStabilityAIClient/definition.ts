@@ -39,6 +39,10 @@ class ImageClient
           to       : generationEndpoint,
         });
 
+        if (
+          outcomeOfSubmittingResource.isFailure
+        ) return outcomeOfSubmittingResource;
+
         const rawResource = outcomeOfSubmittingResource.forciblyUnwrap(/* TODO: propagate this error */);
 
         const parsedResource = Shortfin.TextToImage.SDXL.Client.Response.Body.parsedFrom(rawResource)
