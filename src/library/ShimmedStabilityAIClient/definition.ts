@@ -1,4 +1,5 @@
 import type {
+  Image as StabilityAI_TextToImage_Pipeline_Output,
   TextToImageRequestBody,
 } from 'stabilityai-client-typescript/models/components';
 
@@ -112,30 +113,30 @@ class ImageClient
   public async forciblyGenerateFromText(
     givenRequest: GenerateFromTextRequest,
   ): Promise<GenerateFromTextResponse> {
+    const shimmedRequestBody = toBatchGenerationRequestBody([
+      givenRequest.textToImageRequestBody,
+    ]);
+
     const outcomeOfSubmittingResource = await this.submitResource({
-      bySending: toBatchGenerationRequestBody([
-        givenRequest.textToImageRequestBody,
-      ]),
-      to: generationEndpoint,
+      bySending: shimmedRequestBody,
+      to       : generationEndpoint,
     });
 
     const newResource = outcomeOfSubmittingResource.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
+    const parsedResource = Shortfin_TextToImage_Response_Body.Schema.parse(newResource);
+    const [soleGeneratedImage] = parsedResource.images;
 
-    const {
-      images,
-    } = Shortfin_TextToImage_Response_Body.Schema.parse(newResource);
-
-    const [soleGeneratedImage] = images;
+    const soleGeneratedArtifact: StabilityAI_TextToImage_Pipeline_Output = {
+      base64      : soleGeneratedImage.toString(),
+      finishReason: 'SUCCESS',
+      seed        : givenRequest.textToImageRequestBody.seed,
+    };
 
     return {
       headers: {},
       result : {
         artifacts: [
-          {
-            base64      : soleGeneratedImage.toString(),
-            finishReason: 'SUCCESS',
-            seed        : givenRequest.textToImageRequestBody.seed,
-          },
+          soleGeneratedArtifact,
         ],
       },
     };
