@@ -25,8 +25,8 @@ const readConfig = (): Promise<OutcomeOfReadingConfig> => Attempt.thatEventually
     !fileResponse.ok
   ) return ends.inFailureDueTo(new StaticConfigReadingError(configFile, fileResponse));
 
-  const unparsedSchema = await fileResponse.json() as unknown;
-  const parsedConfig = ConfigSchema.parse(unparsedSchema);
+  const rawSchema = await fileResponse.json() as unknown;
+  const parsedConfig = ConfigSchema.parse(rawSchema);
   return ends.inSuccessWith(parsedConfig);
 });
 
