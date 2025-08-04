@@ -47,8 +47,8 @@ const fetchConfig = (): Promise<OutcomeOfFetchingConfig> => Attempt.thatEventual
   ) return ends.inFailureDueTo(endpointResponseError);
 
   const rawConfig = await endpointResponse.json() as unknown;
-  const fetchedConfig = ConfigSchema.parse(rawConfig);
-  return ends.inSuccessWith(fetchedConfig);
+  const parsedConfig = ConfigSchema.parse(rawConfig);
+  return ends.inSuccessWith(parsedConfig);
 });
 
 export {
