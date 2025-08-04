@@ -11,9 +11,9 @@ type Contextualized<
 ;
 
 interface Instantiable<
-  Any,
+  SomeClass,
 > {
-  [Symbol.hasInstance]: (value: unknown) => value is Any;
+  [Symbol.hasInstance]: (value: unknown) => value is SomeClass;
 }
 
 const isContextualized = <
