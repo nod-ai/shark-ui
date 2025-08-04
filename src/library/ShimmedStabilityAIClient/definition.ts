@@ -53,9 +53,11 @@ class ImageClient
       });
     };
 
-    const textToImageSDXLShortfinClient_generateImageFrom = generateImageFrom.bind(this);
+    const textToImageSDXLShortfinClient = {
+      generateImageFrom: generateImageFrom.bind(this),
+    };
 
-    const outcomeOfGeneratingImage = await textToImageSDXLShortfinClient_generateImageFrom(derivedBatchedRequestBody);
+    const outcomeOfGeneratingImage = await textToImageSDXLShortfinClient.generateImageFrom(derivedBatchedRequestBody);
     const generatedImage = outcomeOfGeneratingImage.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
 
     const soleGeneratedArtifact: StabilityAI_TextToImage_Pipeline_Output = {
