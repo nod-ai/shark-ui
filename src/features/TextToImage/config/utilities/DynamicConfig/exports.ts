@@ -46,8 +46,8 @@ const fetchConfig = (): Promise<OutcomeOfFetchingConfig> => Attempt.thatEventual
     !contentIsJSONIn(endpointResponse)
   ) return ends.inFailureDueTo(endpointResponseError);
 
-  const rawSchema = await endpointResponse.json() as unknown;
-  const fetchedConfig = ConfigSchema.parse(rawSchema);
+  const rawConfig = await endpointResponse.json() as unknown;
+  const fetchedConfig = ConfigSchema.parse(rawConfig);
   return ends.inSuccessWith(fetchedConfig);
 });
 
