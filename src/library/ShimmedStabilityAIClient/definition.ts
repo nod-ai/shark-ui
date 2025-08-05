@@ -58,7 +58,9 @@ const emptyBatchGenerationRequest: ShortfinSDClient_ImageGenerationBatchRequest_
   seed          : [],
 };
 
-const toBatchGenerationRequestBody = (givenRequests: GenerateFromTextRequest['textToImageRequestBody'][]): ShortfinSDClient_ImageGenerationBatchRequest_Body => {
+const toBatchGenerationRequestBody = (
+  givenRequests: GenerateFromTextRequest['textToImageRequestBody'][],
+): ShortfinSDClient_ImageGenerationBatchRequest_Body => {
   return givenRequests.reduce<
     ShortfinSDClient_ImageGenerationBatchRequest_Body
   >((runningBatchRequest, eachRequest) => {
