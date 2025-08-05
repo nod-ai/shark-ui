@@ -34,12 +34,12 @@ interface Shortfin_TextToImage_SDXL_Client_ImageGenerationBatchRequest_Body {
   seed: /*          */ UnsignedInteger[];
 }
 
-type Shortfin_TextToImage_SDXL_Input_Text_SupportedWeight = 1 | -1;
+type Shortfin_TextToImage_SDXL_Pipeline_Input_Text_SupportedWeight = 1 | -1;
 
 const toSerializedPromptValue = (
   givenTextPrompts: TextToImageRequestBody['textPrompts'],
   given: {
-    weight: Shortfin_TextToImage_SDXL_Input_Text_SupportedWeight;
+    weight: Shortfin_TextToImage_SDXL_Pipeline_Input_Text_SupportedWeight;
   },
 ): string => {
   return givenTextPrompts
