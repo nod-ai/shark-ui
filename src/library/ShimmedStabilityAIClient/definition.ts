@@ -92,7 +92,7 @@ const toBatchGenerationRequestBody = (
   }, cloneOf(emptyBatchGenerationRequest));
 };
 
-const Shortfin_TextToImage_SDXL_Response_Body = {
+const Shortfin_TextToImage_SDXL_Client_Response_Body = {
   SchemaMember: {
     image: Schema.string().transform((someSubject) => {
       return Base64CharacterEncodedByteSequence.parsedFrom(someSubject).forciblyUnwrap(/* Zod can safely propagate errors */);
@@ -125,7 +125,7 @@ class ImageClient
     });
 
     const newResource = outcomeOfSubmittingResource.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
-    const parsedResource = Shortfin_TextToImage_SDXL_Response_Body.Schema.parse(newResource);
+    const parsedResource = Shortfin_TextToImage_SDXL_Client_Response_Body.Schema.parse(newResource);
     const [soleGeneratedImage] = parsedResource.images;
 
     const soleGeneratedArtifact: StabilityAI_TextToImage_Pipeline_Output = {
