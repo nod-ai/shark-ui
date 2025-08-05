@@ -24,7 +24,7 @@ import {
 type UnsignedInteger = number;
 type FloatingPoint = number;
 
-interface Shortfin_TextToImage_SDClient_ImageGenerationBatchRequest_Body {
+interface Shortfin_TextToImage_SDXL_Client_ImageGenerationBatchRequest_Body {
   prompt: /*        */ string[];
   neg_prompt: /*    */ string[];
   height: /*        */ UnsignedInteger[];
@@ -34,12 +34,12 @@ interface Shortfin_TextToImage_SDClient_ImageGenerationBatchRequest_Body {
   seed: /*          */ UnsignedInteger[];
 }
 
-type Shortfin_TextToImage_SD_Input_Text_SupportedWeight = 1 | -1;
+type Shortfin_TextToImage_SDXL_Input_Text_SupportedWeight = 1 | -1;
 
 const toSerializedPromptValue = (
   givenTextPrompts: TextToImageRequestBody['textPrompts'],
   given: {
-    weight: Shortfin_TextToImage_SD_Input_Text_SupportedWeight;
+    weight: Shortfin_TextToImage_SDXL_Input_Text_SupportedWeight;
   },
 ): string => {
   return givenTextPrompts
@@ -48,7 +48,7 @@ const toSerializedPromptValue = (
     .join(',');
 };
 
-const emptyBatchGenerationRequest: Shortfin_TextToImage_SDClient_ImageGenerationBatchRequest_Body = {
+const emptyBatchGenerationRequest: Shortfin_TextToImage_SDXL_Client_ImageGenerationBatchRequest_Body = {
   prompt        : [],
   neg_prompt    : [],
   height        : [],
@@ -60,9 +60,9 @@ const emptyBatchGenerationRequest: Shortfin_TextToImage_SDClient_ImageGeneration
 
 const toBatchGenerationRequestBody = (
   givenRequests: GenerateFromTextRequest['textToImageRequestBody'][],
-): Shortfin_TextToImage_SDClient_ImageGenerationBatchRequest_Body => {
+): Shortfin_TextToImage_SDXL_Client_ImageGenerationBatchRequest_Body => {
   return givenRequests.reduce<
-    Shortfin_TextToImage_SDClient_ImageGenerationBatchRequest_Body
+    Shortfin_TextToImage_SDXL_Client_ImageGenerationBatchRequest_Body
   >((runningBatchRequest, eachRequest) => {
     if (
       (eachRequest.height !== undefined)
@@ -92,7 +92,7 @@ const toBatchGenerationRequestBody = (
   }, cloneOf(emptyBatchGenerationRequest));
 };
 
-const Shortfin_TextToImage_Response_Body = {
+const Shortfin_TextToImage_SDXL_Response_Body = {
   SchemaMember: {
     image: Schema.string().transform((someSubject) => {
       return Base64CharacterEncodedByteSequence.parsedFrom(someSubject).forciblyUnwrap(/* Zod can safely propagate errors */);
@@ -125,7 +125,7 @@ class ImageClient
     });
 
     const newResource = outcomeOfSubmittingResource.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
-    const parsedResource = Shortfin_TextToImage_Response_Body.Schema.parse(newResource);
+    const parsedResource = Shortfin_TextToImage_SDXL_Response_Body.Schema.parse(newResource);
     const [soleGeneratedImage] = parsedResource.images;
 
     const soleGeneratedArtifact: StabilityAI_TextToImage_Pipeline_Output = {
