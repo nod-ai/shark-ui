@@ -43,6 +43,7 @@ jobs:
         if: |
           contains(
             fromJSON('[
+              "@typescript-eslint/parser",
               "@types/node",
               "eslint",
               "eslint-plugin-vue"
