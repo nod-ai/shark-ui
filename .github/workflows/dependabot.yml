@@ -43,9 +43,11 @@ jobs:
         if: |
           contains(
             fromJSON('[
+              "@typescript-eslint/parser",
               "@types/node",
               "eslint",
-              "eslint-plugin-vue"
+              "eslint-plugin-vue",
+              "typescript-eslint"
             ]'),
             steps.metadata.outputs.dependency-names
           )
