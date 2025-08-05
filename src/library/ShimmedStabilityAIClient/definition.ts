@@ -22,19 +22,6 @@ import {
   cloneOf,
 } from '@/library/utilitiesByType/reference.ts';
 
-type UnsignedInteger = number;
-type FloatingPoint = number;
-
-interface Shortfin_TextToImage_SDXL_Client_Request_Body_Batched {
-  prompt: /*        */ string[];
-  neg_prompt: /*    */ string[];
-  height: /*        */ UnsignedInteger[];
-  width: /*         */ UnsignedInteger[];
-  steps: /*         */ UnsignedInteger[];
-  guidance_scale: /**/ FloatingPoint[];
-  seed: /*          */ UnsignedInteger[];
-}
-
 const toSerializedPromptValue = (
   givenTextPrompts: TextToImageRequestBody['textPrompts'],
   given: {
@@ -47,7 +34,7 @@ const toSerializedPromptValue = (
     .join(',');
 };
 
-const emptyBatchGenerationRequest: Shortfin_TextToImage_SDXL_Client_Request_Body_Batched = {
+const emptyBatchGenerationRequest: Shortfin.TextToImage.SDXL.Client.Request.Body.Batched = {
   prompt        : [],
   neg_prompt    : [],
   height        : [],
@@ -59,9 +46,9 @@ const emptyBatchGenerationRequest: Shortfin_TextToImage_SDXL_Client_Request_Body
 
 const toBatchGenerationRequestBody = (
   givenRequests: GenerateFromTextRequest['textToImageRequestBody'][],
-): Shortfin_TextToImage_SDXL_Client_Request_Body_Batched => {
+): Shortfin.TextToImage.SDXL.Client.Request.Body.Batched => {
   return givenRequests.reduce<
-    Shortfin_TextToImage_SDXL_Client_Request_Body_Batched
+    Shortfin.TextToImage.SDXL.Client.Request.Body.Batched
   >((runningBatchRequest, eachRequest) => {
     if (
       (eachRequest.height !== undefined)
