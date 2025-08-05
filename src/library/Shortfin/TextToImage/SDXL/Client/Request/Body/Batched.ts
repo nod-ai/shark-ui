@@ -1,5 +1,4 @@
 type UnsignedInteger = number;
-type FloatingPoint = number;
 
 interface Shortfin_TextToImage_SDXL_Client_Request_Body_Batched {
   /** The text that will be fed to the model. */
@@ -23,7 +22,7 @@ interface Shortfin_TextToImage_SDXL_Client_Request_Body_Batched {
    *
    * Must be in the range 0 <= x <= 10.
    */
-  guidance_scale: FloatingPoint[];
+  guidance_scale: number[];
   /**
    * The seed for random latents generation.
    */
