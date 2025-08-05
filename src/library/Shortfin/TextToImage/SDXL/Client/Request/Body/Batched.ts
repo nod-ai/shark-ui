@@ -1,5 +1,3 @@
-type UnsignedInteger = number;
-
 interface Shortfin_TextToImage_SDXL_Client_Request_Body_Batched {
   /** The text that will be fed to the model. */
   prompt/*    */: string[];
@@ -10,19 +8,19 @@ interface Shortfin_TextToImage_SDXL_Client_Request_Body_Batched {
    *
    * Must be an integer.
    */
-  height/*    */: UnsignedInteger[];
+  height/*    */: number[];
   /**
    * The horizontal dimension of the output image.
    *
    * Must be an integer.
    */
-  width/*     */: UnsignedInteger[];
+  width/*     */: number[];
   /**
    * The number of diffusion slices upon which model inference is performed.
    *
    * Must be an integer in the range 1 <= n <= 100.
    */
-  steps/*     */: UnsignedInteger[];
+  steps/*     */: number[];
   /**
    * Configures the pipeline's classifier-free guidance scale for de-noising.
    *
@@ -34,7 +32,7 @@ interface Shortfin_TextToImage_SDXL_Client_Request_Body_Batched {
    *
    * Must be a positive integer.
    */
-  seed/*      */: UnsignedInteger[];
+  seed/*      */: number[];
 }
 
 export type {
