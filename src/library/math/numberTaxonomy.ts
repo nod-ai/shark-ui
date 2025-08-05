@@ -1,8 +1,8 @@
 /** Examples from each classification of number */
 const numberTaxonomy = {
   signed: {
-    negative: -1,
-    positive: +1,
+    negative: /**/ -1,
+    positive: /* */ 1,
   },
   fractional: {
     rational      : 1 / 2,
