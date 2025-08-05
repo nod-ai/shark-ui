@@ -24,7 +24,7 @@ import {
 type UnsignedInteger = number;
 type FloatingPoint = number;
 
-interface Shortfin_SDClient_ImageGenerationBatchRequest_Body {
+interface Shortfin_TextToImage_SDClient_ImageGenerationBatchRequest_Body {
   prompt: /*        */ string[];
   neg_prompt: /*    */ string[];
   height: /*        */ UnsignedInteger[];
@@ -48,7 +48,7 @@ const toSerializedPromptValue = (
     .join(',');
 };
 
-const emptyBatchGenerationRequest: Shortfin_SDClient_ImageGenerationBatchRequest_Body = {
+const emptyBatchGenerationRequest: Shortfin_TextToImage_SDClient_ImageGenerationBatchRequest_Body = {
   prompt        : [],
   neg_prompt    : [],
   height        : [],
@@ -60,9 +60,9 @@ const emptyBatchGenerationRequest: Shortfin_SDClient_ImageGenerationBatchRequest
 
 const toBatchGenerationRequestBody = (
   givenRequests: GenerateFromTextRequest['textToImageRequestBody'][],
-): Shortfin_SDClient_ImageGenerationBatchRequest_Body => {
+): Shortfin_TextToImage_SDClient_ImageGenerationBatchRequest_Body => {
   return givenRequests.reduce<
-    Shortfin_SDClient_ImageGenerationBatchRequest_Body
+    Shortfin_TextToImage_SDClient_ImageGenerationBatchRequest_Body
   >((runningBatchRequest, eachRequest) => {
     if (
       (eachRequest.height !== undefined)
