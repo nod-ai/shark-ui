@@ -20,6 +20,8 @@ interface Shortfin_TextToImage_SDXL_Client_Request_Body_Batched {
   steps/*     */: UnsignedInteger[];
   /**
    * Configures the pipeline's classifier-free guidance scale for de-noising.
+   *
+   * Must be in the range 0 <= x <= 10.
    */
   guidance_scale: FloatingPoint[];
   /**
