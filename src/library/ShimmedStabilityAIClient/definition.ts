@@ -49,29 +49,29 @@ const toBatchGenerationRequestBody = (
 ): Shortfin.TextToImage.SDXL.Client.Request.Body.Batched => {
   return givenRequests.reduce<
     Shortfin.TextToImage.SDXL.Client.Request.Body.Batched
-  >((runningBatchRequest, eachRequest) => {
+  >((runningBatchRequest, eachStabilityAIRequest) => {
     if (
-      (eachRequest.height !== undefined)
-      && (eachRequest.width !== undefined)
-      && (eachRequest.steps !== undefined)
-      && (eachRequest.cfgScale !== undefined)
-      && (eachRequest.seed !== undefined)
+      (eachStabilityAIRequest.height !== undefined)
+      && (eachStabilityAIRequest.width !== undefined)
+      && (eachStabilityAIRequest.steps !== undefined)
+      && (eachStabilityAIRequest.cfgScale !== undefined)
+      && (eachStabilityAIRequest.seed !== undefined)
     ) {
-      const positiveTextPrompts = toSerializedPromptValue(eachRequest.textPrompts, {
+      const positiveTextPrompts = toSerializedPromptValue(eachStabilityAIRequest.textPrompts, {
         weight: 1,
       });
 
-      const negativeTextPrompts = toSerializedPromptValue(eachRequest.textPrompts, {
+      const negativeTextPrompts = toSerializedPromptValue(eachStabilityAIRequest.textPrompts, {
         weight: -1,
       });
 
       (runningBatchRequest.prompt/*    */).push(positiveTextPrompts/* */);
       (runningBatchRequest.neg_prompt/**/).push(negativeTextPrompts/* */);
-      (runningBatchRequest.height/*    */).push(eachRequest.height/*  */);
-      (runningBatchRequest.width/*     */).push(eachRequest.width/*   */);
-      (runningBatchRequest.steps/*     */).push(eachRequest.steps/*   */);
-      (runningBatchRequest.guidance_scale).push(eachRequest.cfgScale/**/);
-      (runningBatchRequest.seed/*      */).push(eachRequest.seed/*    */);
+      (runningBatchRequest.height/*    */).push(eachStabilityAIRequest.height/*  */);
+      (runningBatchRequest.width/*     */).push(eachStabilityAIRequest.width/*   */);
+      (runningBatchRequest.steps/*     */).push(eachStabilityAIRequest.steps/*   */);
+      (runningBatchRequest.guidance_scale).push(eachStabilityAIRequest.cfgScale/**/);
+      (runningBatchRequest.seed/*      */).push(eachStabilityAIRequest.seed/*    */);
     }
 
     return runningBatchRequest;
