@@ -30,9 +30,7 @@ const emptyBatchGenerationRequest = new Shortfin.TextToImage.SDXL.Client.Request
 const toShortfinBatchGenerationRequestBody = (
   givenRequests: GenerateFromTextRequest['textToImageRequestBody'][],
 ): Shortfin.TextToImage.SDXL.Client.Request.Body.Batched => {
-  return givenRequests.reduce<
-    Shortfin.TextToImage.SDXL.Client.Request.Body.Batched
-  >((runningBatchRequest, eachStabilityAIRequest) => {
+  return givenRequests.reduce((runningBatchRequest, eachStabilityAIRequest) => {
     if (
       (eachStabilityAIRequest.height !== undefined)
       && (eachStabilityAIRequest.width !== undefined)
