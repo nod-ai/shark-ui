@@ -22,7 +22,7 @@ import {
   cloneOf,
 } from '@/library/utilitiesByType/reference.ts';
 
-const toSerializedPromptValue = (
+const toShortfinSerializedPromptValue = (
   givenTextPrompts: TextToImageRequestBody['textPrompts'],
   given: {
     weight: Shortfin.TextToImage.SDXL.Pipeline.Input.Text.SupportedWeight;
@@ -57,11 +57,11 @@ const toShortfinBatchGenerationRequestBody = (
       && (eachStabilityAIRequest.cfgScale !== undefined)
       && (eachStabilityAIRequest.seed !== undefined)
     ) {
-      const positiveTextPrompts = toSerializedPromptValue(eachStabilityAIRequest.textPrompts, {
+      const positiveTextPrompts = toShortfinSerializedPromptValue(eachStabilityAIRequest.textPrompts, {
         weight: 1,
       });
 
-      const negativeTextPrompts = toSerializedPromptValue(eachStabilityAIRequest.textPrompts, {
+      const negativeTextPrompts = toShortfinSerializedPromptValue(eachStabilityAIRequest.textPrompts, {
         weight: -1,
       });
 
