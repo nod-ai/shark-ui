@@ -30,7 +30,7 @@ const emptyBatchedGenerationRequestBody = new Shortfin.TextToImage.SDXL.Client.R
 const toShortfinBatchedGenerationRequestBody = (
   givenRequestBodies: GenerateFromTextRequest['textToImageRequestBody'][],
 ): Shortfin.TextToImage.SDXL.Client.Request.Body.Batched => {
-  return givenRequestBodies.reduce((runningBatchedRequest, eachStabilityAIRequestBody) => {
+  return givenRequestBodies.reduce((runningBatchedRequestBody, eachStabilityAIRequestBody) => {
     if (
       (eachStabilityAIRequestBody.height !== undefined)
       && (eachStabilityAIRequestBody.width !== undefined)
@@ -46,16 +46,16 @@ const toShortfinBatchedGenerationRequestBody = (
         weight: -1,
       });
 
-      (runningBatchedRequest.prompt/*    */).push(positiveTextPrompts/* */);
-      (runningBatchedRequest.neg_prompt/**/).push(negativeTextPrompts/* */);
-      (runningBatchedRequest.height/*    */).push(eachStabilityAIRequestBody.height/*  */);
-      (runningBatchedRequest.width/*     */).push(eachStabilityAIRequestBody.width/*   */);
-      (runningBatchedRequest.steps/*     */).push(eachStabilityAIRequestBody.steps/*   */);
-      (runningBatchedRequest.guidance_scale).push(eachStabilityAIRequestBody.cfgScale/**/);
-      (runningBatchedRequest.seed/*      */).push(eachStabilityAIRequestBody.seed/*    */);
+      (runningBatchedRequestBody.prompt/*    */).push(positiveTextPrompts/* */);
+      (runningBatchedRequestBody.neg_prompt/**/).push(negativeTextPrompts/* */);
+      (runningBatchedRequestBody.height/*    */).push(eachStabilityAIRequestBody.height/*  */);
+      (runningBatchedRequestBody.width/*     */).push(eachStabilityAIRequestBody.width/*   */);
+      (runningBatchedRequestBody.steps/*     */).push(eachStabilityAIRequestBody.steps/*   */);
+      (runningBatchedRequestBody.guidance_scale).push(eachStabilityAIRequestBody.cfgScale/**/);
+      (runningBatchedRequestBody.seed/*      */).push(eachStabilityAIRequestBody.seed/*    */);
     }
 
-    return runningBatchedRequest;
+    return runningBatchedRequestBody;
   }, cloneOf(emptyBatchedGenerationRequestBody));
 };
 
