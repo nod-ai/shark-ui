@@ -82,12 +82,12 @@ class ImageClient
   public async forciblyGenerateFromText(
     givenRequest: GenerateFromTextRequest,
   ): Promise<GenerateFromTextResponse> {
-    const shimmedRequestBody = toShortfinBatchedGenerationRequestBody([
+    const shimmedBatchedRequestBody = toShortfinBatchedGenerationRequestBody([
       givenRequest.textToImageRequestBody,
     ]);
 
     const outcomeOfSubmittingResource = await this.submitResource({
-      bySending: shimmedRequestBody,
+      bySending: shimmedBatchedRequestBody,
       to       : generationEndpoint,
     });
 
