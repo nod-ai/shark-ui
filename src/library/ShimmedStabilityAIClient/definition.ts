@@ -25,7 +25,7 @@ import {
   toShortfinRequestBodyPrompt,
 } from './conversions';
 
-const emptyBatchedGenerationRequestBody = new Shortfin.TextToImage.SDXL.Client.Request.Body.Batched();
+const emptyBatchedRequestBody = new Shortfin.TextToImage.SDXL.Client.Request.Body.Batched();
 
 const toShortfinBatchedRequestBody = (
   givenRequestBodies: GenerateFromTextRequest['textToImageRequestBody'][],
@@ -56,7 +56,7 @@ const toShortfinBatchedRequestBody = (
     }
 
     return runningBatchedRequestBody;
-  }, cloneOf(emptyBatchedGenerationRequestBody));
+  }, cloneOf(emptyBatchedRequestBody));
 };
 
 const Shortfin_TextToImage_SDXL_Client_Response_Body = {
