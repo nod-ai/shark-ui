@@ -11,6 +11,7 @@ import type {
 import Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
 import HTTP from '@/library/HTTP';
 import Schema from '@/library/Schema';
+import type Shortfin from '@/library/Shortfin';
 
 import {
   URLOrigin,
@@ -34,12 +35,10 @@ interface Shortfin_TextToImage_SDXL_Client_Request_Body_Batched {
   seed: /*          */ UnsignedInteger[];
 }
 
-type Shortfin_TextToImage_SDXL_Pipeline_Input_Text_SupportedWeight = 1 | -1;
-
 const toSerializedPromptValue = (
   givenTextPrompts: TextToImageRequestBody['textPrompts'],
   given: {
-    weight: Shortfin_TextToImage_SDXL_Pipeline_Input_Text_SupportedWeight;
+    weight: Shortfin.TextToImage.SDXL.Pipeline.Input.Text.SupportedWeight;
   },
 ): string => {
   return givenTextPrompts
