@@ -18,10 +18,6 @@ import {
 } from '@/library/URLComponent';
 
 import {
-  cloneOf,
-} from '@/library/utilitiesByType/reference.ts';
-
-import {
   toShortfinRequestBodyPrompt,
 } from './conversions';
 
@@ -56,7 +52,7 @@ const toShortfinBatchedRequestBody = (
     }
 
     return runningBatchedRequestBody;
-  }, cloneOf(emptyBatchedRequestBody));
+  }, emptyBatchedRequestBody);
 };
 
 const Shortfin_TextToImage_SDXL_Client_Response_Body = {
