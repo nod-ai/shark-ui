@@ -7,14 +7,20 @@ interface Shortfin_TextToImage_SDXL_Client_Request_Body_Batched {
   neg_prompt/**/: string[];
   /**
    * The vertical dimension of the output image.
+   *
+   * Must be an integer.
    */
   height/*    */: UnsignedInteger[];
   /**
    * The horizontal dimension of the output image.
+   *
+   * Must be an integer.
    */
   width/*     */: UnsignedInteger[];
   /**
    * The number of diffusion slices upon which model inference is performed.
+   *
+   * Must be an integer in the range 1 <= n <= 100.
    */
   steps/*     */: UnsignedInteger[];
   /**
@@ -25,6 +31,8 @@ interface Shortfin_TextToImage_SDXL_Client_Request_Body_Batched {
   guidance_scale: number[];
   /**
    * The seed for random latents generation.
+   *
+   * Must be a positive integer.
    */
   seed/*      */: UnsignedInteger[];
 }
