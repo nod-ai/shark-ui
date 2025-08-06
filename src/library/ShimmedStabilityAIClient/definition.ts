@@ -27,7 +27,7 @@ const toShortfinSerializedPromptValue = (
   given: {
     weight: Shortfin.TextToImage.SDXL.Pipeline.Input.Text.SupportedWeight;
   },
-): string => {
+): Shortfin.TextToImage.SDXL.Client.Request.Body['prompt'] => {
   return givenTextPrompts
     .filter($0 => $0.weight === given.weight)
     .map($0 => $0.text.trim())
