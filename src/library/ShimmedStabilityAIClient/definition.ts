@@ -22,7 +22,7 @@ import {
   cloneOf,
 } from '@/library/utilitiesByType/reference.ts';
 
-const toSerializedPromptValue = (
+const toShortfinSerializedPromptValue = (
   givenTextPrompts: TextToImageRequestBody['textPrompts'],
   given: {
     weight: Shortfin.TextToImage.SDXL.Pipeline.Input.Text.SupportedWeight;
@@ -44,34 +44,34 @@ const emptyBatchGenerationRequest: Shortfin.TextToImage.SDXL.Client.Request.Body
   seed          : [],
 };
 
-const toBatchGenerationRequestBody = (
+const toShortfinBatchGenerationRequestBody = (
   givenRequests: GenerateFromTextRequest['textToImageRequestBody'][],
 ): Shortfin.TextToImage.SDXL.Client.Request.Body.Batched => {
   return givenRequests.reduce<
     Shortfin.TextToImage.SDXL.Client.Request.Body.Batched
-  >((runningBatchRequest, eachRequest) => {
+  >((runningBatchRequest, eachStabilityAIRequest) => {
     if (
-      (eachRequest.height !== undefined)
-      && (eachRequest.width !== undefined)
-      && (eachRequest.steps !== undefined)
-      && (eachRequest.cfgScale !== undefined)
-      && (eachRequest.seed !== undefined)
+      (eachStabilityAIRequest.height !== undefined)
+      && (eachStabilityAIRequest.width !== undefined)
+      && (eachStabilityAIRequest.steps !== undefined)
+      && (eachStabilityAIRequest.cfgScale !== undefined)
+      && (eachStabilityAIRequest.seed !== undefined)
     ) {
-      const positiveTextPrompts = toSerializedPromptValue(eachRequest.textPrompts, {
+      const positiveTextPrompts = toShortfinSerializedPromptValue(eachStabilityAIRequest.textPrompts, {
         weight: 1,
       });
 
-      const negativeTextPrompts = toSerializedPromptValue(eachRequest.textPrompts, {
+      const negativeTextPrompts = toShortfinSerializedPromptValue(eachStabilityAIRequest.textPrompts, {
         weight: -1,
       });
 
       (runningBatchRequest.prompt/*    */).push(positiveTextPrompts/* */);
       (runningBatchRequest.neg_prompt/**/).push(negativeTextPrompts/* */);
-      (runningBatchRequest.height/*    */).push(eachRequest.height/*  */);
-      (runningBatchRequest.width/*     */).push(eachRequest.width/*   */);
-      (runningBatchRequest.steps/*     */).push(eachRequest.steps/*   */);
-      (runningBatchRequest.guidance_scale).push(eachRequest.cfgScale/**/);
-      (runningBatchRequest.seed/*      */).push(eachRequest.seed/*    */);
+      (runningBatchRequest.height/*    */).push(eachStabilityAIRequest.height/*  */);
+      (runningBatchRequest.width/*     */).push(eachStabilityAIRequest.width/*   */);
+      (runningBatchRequest.steps/*     */).push(eachStabilityAIRequest.steps/*   */);
+      (runningBatchRequest.guidance_scale).push(eachStabilityAIRequest.cfgScale/**/);
+      (runningBatchRequest.seed/*      */).push(eachStabilityAIRequest.seed/*    */);
     }
 
     return runningBatchRequest;
@@ -101,7 +101,7 @@ class ImageClient
   public async forciblyGenerateFromText(
     givenRequest: GenerateFromTextRequest,
   ): Promise<GenerateFromTextResponse> {
-    const shimmedRequestBody = toBatchGenerationRequestBody([
+    const shimmedRequestBody = toShortfinBatchGenerationRequestBody([
       givenRequest.textToImageRequestBody,
     ]);
 
