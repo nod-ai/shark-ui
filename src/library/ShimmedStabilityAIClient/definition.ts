@@ -30,29 +30,29 @@ const emptyBatchedGenerationRequestBody = new Shortfin.TextToImage.SDXL.Client.R
 const toShortfinBatchedGenerationRequestBody = (
   givenRequestBodies: GenerateFromTextRequest['textToImageRequestBody'][],
 ): Shortfin.TextToImage.SDXL.Client.Request.Body.Batched => {
-  return givenRequestBodies.reduce((runningBatchedRequest, eachStabilityAIRequest) => {
+  return givenRequestBodies.reduce((runningBatchedRequest, eachStabilityAIRequestBody) => {
     if (
-      (eachStabilityAIRequest.height !== undefined)
-      && (eachStabilityAIRequest.width !== undefined)
-      && (eachStabilityAIRequest.steps !== undefined)
-      && (eachStabilityAIRequest.cfgScale !== undefined)
-      && (eachStabilityAIRequest.seed !== undefined)
+      (eachStabilityAIRequestBody.height !== undefined)
+      && (eachStabilityAIRequestBody.width !== undefined)
+      && (eachStabilityAIRequestBody.steps !== undefined)
+      && (eachStabilityAIRequestBody.cfgScale !== undefined)
+      && (eachStabilityAIRequestBody.seed !== undefined)
     ) {
-      const positiveTextPrompts = toShortfinRequestBodyPrompt(eachStabilityAIRequest.textPrompts, {
+      const positiveTextPrompts = toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
         weight: 1,
       });
 
-      const negativeTextPrompts = toShortfinRequestBodyPrompt(eachStabilityAIRequest.textPrompts, {
+      const negativeTextPrompts = toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
         weight: -1,
       });
 
       (runningBatchedRequest.prompt/*    */).push(positiveTextPrompts/* */);
       (runningBatchedRequest.neg_prompt/**/).push(negativeTextPrompts/* */);
-      (runningBatchedRequest.height/*    */).push(eachStabilityAIRequest.height/*  */);
-      (runningBatchedRequest.width/*     */).push(eachStabilityAIRequest.width/*   */);
-      (runningBatchedRequest.steps/*     */).push(eachStabilityAIRequest.steps/*   */);
-      (runningBatchedRequest.guidance_scale).push(eachStabilityAIRequest.cfgScale/**/);
-      (runningBatchedRequest.seed/*      */).push(eachStabilityAIRequest.seed/*    */);
+      (runningBatchedRequest.height/*    */).push(eachStabilityAIRequestBody.height/*  */);
+      (runningBatchedRequest.width/*     */).push(eachStabilityAIRequestBody.width/*   */);
+      (runningBatchedRequest.steps/*     */).push(eachStabilityAIRequestBody.steps/*   */);
+      (runningBatchedRequest.guidance_scale).push(eachStabilityAIRequestBody.cfgScale/**/);
+      (runningBatchedRequest.seed/*      */).push(eachStabilityAIRequestBody.seed/*    */);
     }
 
     return runningBatchedRequest;
