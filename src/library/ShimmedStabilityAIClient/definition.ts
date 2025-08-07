@@ -27,7 +27,9 @@ const toShortfinBatchedRequestBody = (
   const emptyBatchedRequestBody = new Shortfin.TextToImage.SDXL.Client.Request.Body.Batched();
 
   return givenRequestBodies.reduce((runningBatchedRequestBody, eachStabilityAIRequestBody) => {
-    const eachShortfinRequestBody = (() => {
+    const eachShortfinRequestBody = ((
+      eachStabilityAIRequestBody: GenerateFromTextRequest['textToImageRequestBody'],
+    ) => {
       if (
         (eachStabilityAIRequestBody.height !== undefined)
         && (eachStabilityAIRequestBody.width !== undefined)
@@ -53,7 +55,7 @@ const toShortfinBatchedRequestBody = (
       }
 
       return null;
-    })();
+    })(eachStabilityAIRequestBody);
 
     if (eachShortfinRequestBody !== null) {
       (runningBatchedRequestBody.prompt/*    */).push(eachShortfinRequestBody.prompt/*    */);
