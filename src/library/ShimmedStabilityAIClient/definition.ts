@@ -34,16 +34,17 @@ const toShortfinBatchedRequestBody = (
       && (eachStabilityAIRequestBody.cfgScale !== undefined)
       && (eachStabilityAIRequestBody.seed !== undefined)
     ) {
-      const positiveTextPrompts = toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
-        weight: 1,
-      });
+      const eachShortfinRequestBody = {
+        positiveTextPrompts: toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
+          weight: 1,
+        }),
+        negativeTextPrompts: toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
+          weight: -1,
+        }),
+      };
 
-      const negativeTextPrompts = toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
-        weight: -1,
-      });
-
-      (runningBatchedRequestBody.prompt/*    */).push(positiveTextPrompts/* */);
-      (runningBatchedRequestBody.neg_prompt/**/).push(negativeTextPrompts/* */);
+      (runningBatchedRequestBody.prompt/*    */).push(eachShortfinRequestBody.positiveTextPrompts);
+      (runningBatchedRequestBody.neg_prompt/**/).push(eachShortfinRequestBody.negativeTextPrompts);
       (runningBatchedRequestBody.height/*    */).push(eachStabilityAIRequestBody.height/*  */);
       (runningBatchedRequestBody.width/*     */).push(eachStabilityAIRequestBody.width/*   */);
       (runningBatchedRequestBody.steps/*     */).push(eachStabilityAIRequestBody.steps/*   */);
