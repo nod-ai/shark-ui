@@ -27,35 +27,37 @@ const toShortfinBatchedRequestBody = (
   const emptyBatchedRequestBody = new Shortfin.TextToImage.SDXL.Client.Request.Body.Batched();
 
   return givenRequestBodies.reduce((runningBatchedRequestBody, eachStabilityAIRequestBody) => {
-    if (
-      (eachStabilityAIRequestBody.height !== undefined)
-      && (eachStabilityAIRequestBody.width !== undefined)
-      && (eachStabilityAIRequestBody.steps !== undefined)
-      && (eachStabilityAIRequestBody.cfgScale !== undefined)
-      && (eachStabilityAIRequestBody.seed !== undefined)
-    ) {
-      const eachShortfinRequestBody = {
-        prompt: toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
-          weight: 1,
-        }),
-        neg_prompt: toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
-          weight: -1,
-        }),
-        height        : eachStabilityAIRequestBody.height,
-        width         : eachStabilityAIRequestBody.width,
-        steps         : eachStabilityAIRequestBody.steps,
-        guidance_scale: eachStabilityAIRequestBody.cfgScale,
-        seed          : eachStabilityAIRequestBody.seed,
-      };
+    (() => {
+      if (
+        (eachStabilityAIRequestBody.height !== undefined)
+        && (eachStabilityAIRequestBody.width !== undefined)
+        && (eachStabilityAIRequestBody.steps !== undefined)
+        && (eachStabilityAIRequestBody.cfgScale !== undefined)
+        && (eachStabilityAIRequestBody.seed !== undefined)
+      ) {
+        const eachShortfinRequestBody = {
+          prompt: toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
+            weight: 1,
+          }),
+          neg_prompt: toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
+            weight: -1,
+          }),
+          height        : eachStabilityAIRequestBody.height,
+          width         : eachStabilityAIRequestBody.width,
+          steps         : eachStabilityAIRequestBody.steps,
+          guidance_scale: eachStabilityAIRequestBody.cfgScale,
+          seed          : eachStabilityAIRequestBody.seed,
+        };
 
-      (runningBatchedRequestBody.prompt/*    */).push(eachShortfinRequestBody.prompt/*    */);
-      (runningBatchedRequestBody.neg_prompt/**/).push(eachShortfinRequestBody.neg_prompt/**/);
-      (runningBatchedRequestBody.height/*    */).push(eachShortfinRequestBody.height/*    */);
-      (runningBatchedRequestBody.width/*     */).push(eachShortfinRequestBody.width/*     */);
-      (runningBatchedRequestBody.steps/*     */).push(eachShortfinRequestBody.steps/*     */);
-      (runningBatchedRequestBody.guidance_scale).push(eachShortfinRequestBody.guidance_scale);
-      (runningBatchedRequestBody.seed/*      */).push(eachShortfinRequestBody.seed/*      */);
-    }
+        (runningBatchedRequestBody.prompt/*    */).push(eachShortfinRequestBody.prompt/*    */);
+        (runningBatchedRequestBody.neg_prompt/**/).push(eachShortfinRequestBody.neg_prompt/**/);
+        (runningBatchedRequestBody.height/*    */).push(eachShortfinRequestBody.height/*    */);
+        (runningBatchedRequestBody.width/*     */).push(eachShortfinRequestBody.width/*     */);
+        (runningBatchedRequestBody.steps/*     */).push(eachShortfinRequestBody.steps/*     */);
+        (runningBatchedRequestBody.guidance_scale).push(eachShortfinRequestBody.guidance_scale);
+        (runningBatchedRequestBody.seed/*      */).push(eachShortfinRequestBody.seed/*      */);
+      }
+    })();
 
     return runningBatchedRequestBody;
   }, emptyBatchedRequestBody);
