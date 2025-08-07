@@ -35,7 +35,7 @@ const toShortfinBatchedRequestBody = (
       && (eachStabilityAIRequestBody.seed !== undefined)
     ) {
       const eachShortfinRequestBody = {
-        positiveTextPrompts: toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
+        prompt: toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
           weight: 1,
         }),
         neg_prompt: toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
@@ -48,7 +48,7 @@ const toShortfinBatchedRequestBody = (
         seed    : eachStabilityAIRequestBody.seed,
       };
 
-      (runningBatchedRequestBody.prompt/*    */).push(eachShortfinRequestBody.positiveTextPrompts);
+      (runningBatchedRequestBody.prompt/*    */).push(eachShortfinRequestBody.prompt/*    */);
       (runningBatchedRequestBody.neg_prompt/**/).push(eachShortfinRequestBody.neg_prompt/**/);
       (runningBatchedRequestBody.height/*    */).push(eachShortfinRequestBody.height/*    */);
       (runningBatchedRequestBody.width/*     */).push(eachShortfinRequestBody.width/*     */);
