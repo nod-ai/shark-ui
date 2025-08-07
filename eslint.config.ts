@@ -83,14 +83,11 @@ const extraConfigForTypeScriptESLint: ConfigWithExtends = {
 const VueTSConfig_overridesForAugmentationsToModuleDefinitions: ConfigWithExtends = {
   name : 'shark-ui/module-definition-augmentations',
   files: [
-    '**/definitionWithAugmentation.ts',
+    '**/definitionAugmentation.ts',
   ],
   rules: {
     '@typescript-eslint/no-namespace': [
       'off', // Namespaces are the only way to emulate nested types. It's not possible to do this with pure modules.
-    ],
-    'import/group-exports': [
-      'off', // These files must have separate exports: one for the nested type within the namespace declaration, and another outside of it to allow "./exports.ts" to directly import augmented definition
     ],
   },
 };
