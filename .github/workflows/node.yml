@@ -39,7 +39,7 @@ jobs:
       - name: Install all dependencies
         if: steps.changed-files.outputs.any_changed == 'true'
         run: npm clean-install
-      - name: Run the linter
+      - name: Try to pass linter
         if: steps.changed-files.outputs.any_changed == 'true'
         id: lint
         run: npx eslint . --max-warnings 0 --cache
@@ -50,7 +50,7 @@ jobs:
           echo "::notice::Enable lint-on-save in your editor for automatic fixes"
           echo "::notice::Run \`npm run lint\` in your dev environment for details about issues that aren't automatically fixable"
           exit 1
-      - name: Run the compiler
+      - name: Try to pass compiler
         if: steps.changed-files.outputs.any_changed == 'true'
         id: compile
         run: npx vue-tsc --build
@@ -60,7 +60,7 @@ jobs:
         run: |
           echo "::notice::Run \`npx vue-tsc --build\` in your dev environment for details about compiler issues"
           exit 1
-      - name: Run the unit tests
+      - name: Try to pass all unit tests
         if: steps.changed-files.outputs.any_changed == 'true'
         id: test_units
         run: npm run test:unit
