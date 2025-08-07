@@ -27,7 +27,7 @@ import {
 
 const emptyBatchedGenerationRequest = new Shortfin.TextToImage.SDXL.Client.Request.Body.Batched();
 
-const toShortfinBatchGenerationRequestBody = (
+const toShortfinBatchedGenerationRequestBody = (
   givenRequests: GenerateFromTextRequest['textToImageRequestBody'][],
 ): Shortfin.TextToImage.SDXL.Client.Request.Body.Batched => {
   return givenRequests.reduce((runningBatchRequest, eachStabilityAIRequest) => {
@@ -82,7 +82,7 @@ class ImageClient
   public async forciblyGenerateFromText(
     givenRequest: GenerateFromTextRequest,
   ): Promise<GenerateFromTextResponse> {
-    const shimmedRequestBody = toShortfinBatchGenerationRequestBody([
+    const shimmedRequestBody = toShortfinBatchedGenerationRequestBody([
       givenRequest.textToImageRequestBody,
     ]);
 
