@@ -53,12 +53,12 @@ jobs:
       - name: Try to pass compiler
         if: steps.changed-files.outputs.any_changed == 'true'
         id: compile
-        run: npx vue-tsc --build
+        run: npm run type-check
         continue-on-error: true
       - name: If compilation fails, highlight debug tools
         if: steps.compile.outcome == 'failure'
         run: |
-          echo "::notice::Run \`npx vue-tsc --build\` in your dev environment for details about compiler issues"
+          echo "::notice::Run \`npm run type-check\` in your dev environment for details about compiler issues"
           exit 1
       - name: Try to pass all unit tests
         if: steps.changed-files.outputs.any_changed == 'true'
