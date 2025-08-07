@@ -10,7 +10,7 @@ import type {
 import Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
 import HTTP from '@/library/HTTP';
 import Schema from '@/library/Schema';
-import type Shortfin from '@/library/Shortfin';
+import Shortfin from '@/library/Shortfin';
 
 import {
   URLOrigin,
@@ -25,15 +25,7 @@ import {
   toShortfinRequestBodyPrompt,
 } from './conversions';
 
-const emptyBatchGenerationRequest: Shortfin.TextToImage.SDXL.Client.Request.Body.Batched = {
-  prompt        : [],
-  neg_prompt    : [],
-  height        : [],
-  width         : [],
-  steps         : [],
-  guidance_scale: [],
-  seed          : [],
-};
+const emptyBatchGenerationRequest = new Shortfin.TextToImage.SDXL.Client.Request.Body.Batched();
 
 const toShortfinBatchGenerationRequestBody = (
   givenRequests: GenerateFromTextRequest['textToImageRequestBody'][],
