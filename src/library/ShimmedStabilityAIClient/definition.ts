@@ -28,27 +28,27 @@ const toShortfinBatchedRequestBody = (
 
   return givenRequestBodies.reduce((runningBatchedRequestBody, eachStabilityAIRequestBody) => {
     const eachShortfinRequestBody = ((
-      eachStabilityAIRequestBody: GenerateFromTextRequest['textToImageRequestBody'],
+      givenRequestBody: GenerateFromTextRequest['textToImageRequestBody'],
     ) => {
       if (
-        (eachStabilityAIRequestBody.height !== undefined)
-        && (eachStabilityAIRequestBody.width !== undefined)
-        && (eachStabilityAIRequestBody.steps !== undefined)
-        && (eachStabilityAIRequestBody.cfgScale !== undefined)
-        && (eachStabilityAIRequestBody.seed !== undefined)
+        (givenRequestBody.height !== undefined)
+        && (givenRequestBody.width !== undefined)
+        && (givenRequestBody.steps !== undefined)
+        && (givenRequestBody.cfgScale !== undefined)
+        && (givenRequestBody.seed !== undefined)
       ) {
         const eachShortfinRequestBody: Shortfin.TextToImage.SDXL.Client.Request.Body = {
-          prompt: toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
+          prompt: toShortfinRequestBodyPrompt(givenRequestBody.textPrompts, {
             weight: 1,
           }),
-          neg_prompt: toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
+          neg_prompt: toShortfinRequestBodyPrompt(givenRequestBody.textPrompts, {
             weight: -1,
           }),
-          height        : eachStabilityAIRequestBody.height,
-          width         : eachStabilityAIRequestBody.width,
-          steps         : eachStabilityAIRequestBody.steps,
-          guidance_scale: eachStabilityAIRequestBody.cfgScale,
-          seed          : eachStabilityAIRequestBody.seed,
+          height        : givenRequestBody.height,
+          width         : givenRequestBody.width,
+          steps         : givenRequestBody.steps,
+          guidance_scale: givenRequestBody.cfgScale,
+          seed          : givenRequestBody.seed,
         };
 
         return eachShortfinRequestBody;
