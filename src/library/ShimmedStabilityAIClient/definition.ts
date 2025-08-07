@@ -25,9 +25,9 @@ import {
   toShortfinRequestBodyPrompt,
 } from './conversions';
 
-const emptyBatchedGenerationRequestBody = new Shortfin.TextToImage.SDXL.Client.Request.Body.Batched();
+const emptyBatchedRequestBody = new Shortfin.TextToImage.SDXL.Client.Request.Body.Batched();
 
-const toShortfinBatchedGenerationRequestBody = (
+const toShortfinBatchedRequestBody = (
   givenRequestBodies: GenerateFromTextRequest['textToImageRequestBody'][],
 ): Shortfin.TextToImage.SDXL.Client.Request.Body.Batched => {
   return givenRequestBodies.reduce((runningBatchedRequestBody, eachStabilityAIRequestBody) => {
@@ -56,7 +56,7 @@ const toShortfinBatchedGenerationRequestBody = (
     }
 
     return runningBatchedRequestBody;
-  }, cloneOf(emptyBatchedGenerationRequestBody));
+  }, cloneOf(emptyBatchedRequestBody));
 };
 
 const Shortfin_TextToImage_SDXL_Client_Response_Body = {
@@ -82,7 +82,7 @@ class ImageClient
   public async forciblyGenerateFromText(
     givenRequest: GenerateFromTextRequest,
   ): Promise<GenerateFromTextResponse> {
-    const shimmedBatchedRequestBody = toShortfinBatchedGenerationRequestBody([
+    const shimmedBatchedRequestBody = toShortfinBatchedRequestBody([
       givenRequest.textToImageRequestBody,
     ]);
 
