@@ -83,7 +83,7 @@ const extraConfigForTypeScriptESLint: ConfigWithExtends = {
 const VueTSConfig_overridesForAugmentationsToModuleDefinitions: ConfigWithExtends = {
   name : 'shark-ui/module-definition-augmentations',
   files: [
-    '**/definitionWithAugmentation.ts',
+    '**/definitionAugmentation.ts',
   ],
   rules: {
     '@typescript-eslint/no-namespace': [
