@@ -11,7 +11,7 @@ on:
 jobs:
   analyze:
     runs-on: ubuntu-latest
-    name: Lint, Compile, and Test
+    name: Lint, Compile, Build, and Test
     steps:
       - uses: actions/checkout@v4
       - name: Check for changes to this workflow, dependencies, scripts, and single-file components
