@@ -35,7 +35,7 @@ const toShortfinBatchedRequestBody = (
         && (eachStabilityAIRequestBody.cfgScale !== undefined)
         && (eachStabilityAIRequestBody.seed !== undefined)
       ) {
-        const eachShortfinRequestBody = {
+        const eachShortfinRequestBody: Shortfin.TextToImage.SDXL.Client.Request.Body = {
           prompt: toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
             weight: 1,
           }),
