@@ -60,6 +60,16 @@ jobs:
         run: |
           echo "::notice::Run \`npm run type-check\` in your dev environment for details about compiler issues"
           exit 1
+      - name: Try to build for production # "Build" in this context means "transpile, minify, tree-shake, and bundle"
+        if: steps.changed-files.outputs.any_changed == 'true'
+        id: build
+        run: npm run build-only
+        continue-on-error: true
+      - name: If building fails, highlight debug tools
+        if: steps.build.outcome == 'failure'
+        run: |
+          echo "::notice::Run \`npm run build-only\` in your dev environment for a detailed report about build failures"
+          exit 1
       - name: Try to pass all unit tests
         if: steps.changed-files.outputs.any_changed == 'true'
         id: test_units
