@@ -45,7 +45,8 @@ jobs:
               "eslint",
               "eslint-plugin-vue",
               "typescript-eslint",
-              "typescript"
+              "typescript",
+              "vite",
             ]'),
             steps.metadata.outputs.dependency-names
           )
