@@ -1,5 +1,5 @@
 import './definitionAugmentation.ts';
 
-export type {
+export {
   Shortfin_TextToImage_SDXL_Client_Request_Body,
 } from './definition.ts';

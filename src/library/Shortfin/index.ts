@@ -1,5 +1,5 @@
-import type * as Shortfin from './exports.ts';
+import * as Shortfin from './exports.ts';
 
-export type {
+export {
   Shortfin as default,
 };
