@@ -1,7 +1,7 @@
 import {
   configureVueProject,
   defineConfigWithVueTs,
-  vueTsConfigs,
+  vueTsConfigs as VueTSConfig,
 } from '@vue/eslint-config-typescript';
 
 import pluginVue from 'eslint-plugin-vue';
@@ -80,6 +80,21 @@ const extraConfigForTypeScriptESLint: ConfigWithExtends = {
   },
 };
 
+const VueTSConfig_overridesForAugmentationsToModuleDefinitions: ConfigWithExtends = {
+  name : 'shark-ui/module-definition-augmentations',
+  files: [
+    '**/definitionWithAugmentation.ts',
+  ],
+  rules: {
+    '@typescript-eslint/no-namespace': [
+      'off', // Namespaces are the only way to emulate nested types. It's not possible to do this with pure modules.
+    ],
+    'import/group-exports': [
+      'off', // These files must have separate exports: one for the nested type within the namespace declaration, and another outside of it to allow "./exports.ts" to directly import augmented definition
+    ],
+  },
+};
+
 configureVueProject({
   allowComponentTypeUnsafety: false, // Takes advantage of strict type checking
 });
@@ -105,8 +120,9 @@ const configWithVueTS = defineConfigWithVueTs(
   ...pluginImport,
 
   pluginVue.configs['flat/recommended'],
-  vueTsConfigs.strictTypeChecked,
-  vueTsConfigs.stylisticTypeChecked,
+  VueTSConfig.strictTypeChecked,
+  VueTSConfig.stylisticTypeChecked,
+  VueTSConfig_overridesForAugmentationsToModuleDefinitions,
 
   ...pluginVitest,
   ...pluginCypress,
