@@ -56,7 +56,11 @@ const toShortfinBatchedRequestBody = (
         (runningBatchedRequestBody.steps/*     */).push(eachShortfinRequestBody.steps/*     */);
         (runningBatchedRequestBody.guidance_scale).push(eachShortfinRequestBody.guidance_scale);
         (runningBatchedRequestBody.seed/*      */).push(eachShortfinRequestBody.seed/*      */);
+
+        return eachShortfinRequestBody;
       }
+
+      return null;
     })();
 
     return runningBatchedRequestBody;
