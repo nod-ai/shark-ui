@@ -6,10 +6,28 @@ import type {
   Shortfin_TextToImage_SDXL_Client_Request_Body,
 } from './definition.ts';
 
-type Shortfin_TextToImage_SDXL_Client_Request_Body_Batched = Batched<
+class Shortfin_TextToImage_SDXL_Client_Request_Body_Batched
+implements Batched<
   Shortfin_TextToImage_SDXL_Client_Request_Body
->;
+> {
+  public constructor(
+    /** @inheritdoc Number of elements defines the size of the batch. */
+    public prompt/*    */: string[],
+    /** @inheritdoc Number of elements must match the size of the batch. */
+    public neg_prompt/**/: string[],
+    /** @inheritdoc Number of elements must match the size of the batch. */
+    public height/*    */: number[],
+    /** @inheritdoc Number of elements must match the size of the batch. */
+    public width/*     */: number[],
+    /** @inheritdoc Number of elements must match the size of the batch. */
+    public steps/*     */: number[],
+    /** @inheritdoc Number of elements must match the size of the batch. */
+    public guidance_scale: number[],
+    /** @inheritdoc Number of elements must match the size of the batch. */
+    public seed/*      */: number[],
+  ) {}
+}
 
-export type {
+export {
   Shortfin_TextToImage_SDXL_Client_Request_Body_Batched,
 };
