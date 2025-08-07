@@ -1,7 +1,7 @@
 type Batched<
-  SomeRecord extends Record<string, NonNullable<unknown>>,
+  SomeObject extends object,
 > = {
-  [EachKeyOfSomeRecord in keyof SomeRecord]: SomeRecord[EachKeyOfSomeRecord][];
+  [EachKeyOfSomeObject in keyof SomeObject]: SomeObject[EachKeyOfSomeObject][];
 };
 
 export type {
