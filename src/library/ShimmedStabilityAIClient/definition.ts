@@ -25,38 +25,38 @@ import {
   toShortfinRequestBodyPrompt,
 } from './conversions';
 
-const emptyBatchedGenerationRequest = new Shortfin.TextToImage.SDXL.Client.Request.Body.Batched();
+const emptyBatchedGenerationRequestBody = new Shortfin.TextToImage.SDXL.Client.Request.Body.Batched();
 
 const toShortfinBatchedGenerationRequestBody = (
-  givenRequests: GenerateFromTextRequest['textToImageRequestBody'][],
+  givenRequestBodies: GenerateFromTextRequest['textToImageRequestBody'][],
 ): Shortfin.TextToImage.SDXL.Client.Request.Body.Batched => {
-  return givenRequests.reduce((runningBatchedRequest, eachStabilityAIRequest) => {
+  return givenRequestBodies.reduce((runningBatchedRequestBody, eachStabilityAIRequestBody) => {
     if (
-      (eachStabilityAIRequest.height !== undefined)
-      && (eachStabilityAIRequest.width !== undefined)
-      && (eachStabilityAIRequest.steps !== undefined)
-      && (eachStabilityAIRequest.cfgScale !== undefined)
-      && (eachStabilityAIRequest.seed !== undefined)
+      (eachStabilityAIRequestBody.height !== undefined)
+      && (eachStabilityAIRequestBody.width !== undefined)
+      && (eachStabilityAIRequestBody.steps !== undefined)
+      && (eachStabilityAIRequestBody.cfgScale !== undefined)
+      && (eachStabilityAIRequestBody.seed !== undefined)
     ) {
-      const positiveTextPrompts = toShortfinRequestBodyPrompt(eachStabilityAIRequest.textPrompts, {
+      const positiveTextPrompts = toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
         weight: 1,
       });
 
-      const negativeTextPrompts = toShortfinRequestBodyPrompt(eachStabilityAIRequest.textPrompts, {
+      const negativeTextPrompts = toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
         weight: -1,
       });
 
-      (runningBatchedRequest.prompt/*    */).push(positiveTextPrompts/* */);
-      (runningBatchedRequest.neg_prompt/**/).push(negativeTextPrompts/* */);
-      (runningBatchedRequest.height/*    */).push(eachStabilityAIRequest.height/*  */);
-      (runningBatchedRequest.width/*     */).push(eachStabilityAIRequest.width/*   */);
-      (runningBatchedRequest.steps/*     */).push(eachStabilityAIRequest.steps/*   */);
-      (runningBatchedRequest.guidance_scale).push(eachStabilityAIRequest.cfgScale/**/);
-      (runningBatchedRequest.seed/*      */).push(eachStabilityAIRequest.seed/*    */);
+      (runningBatchedRequestBody.prompt/*    */).push(positiveTextPrompts/* */);
+      (runningBatchedRequestBody.neg_prompt/**/).push(negativeTextPrompts/* */);
+      (runningBatchedRequestBody.height/*    */).push(eachStabilityAIRequestBody.height/*  */);
+      (runningBatchedRequestBody.width/*     */).push(eachStabilityAIRequestBody.width/*   */);
+      (runningBatchedRequestBody.steps/*     */).push(eachStabilityAIRequestBody.steps/*   */);
+      (runningBatchedRequestBody.guidance_scale).push(eachStabilityAIRequestBody.cfgScale/**/);
+      (runningBatchedRequestBody.seed/*      */).push(eachStabilityAIRequestBody.seed/*    */);
     }
 
-    return runningBatchedRequest;
-  }, cloneOf(emptyBatchedGenerationRequest));
+    return runningBatchedRequestBody;
+  }, cloneOf(emptyBatchedGenerationRequestBody));
 };
 
 const Shortfin_TextToImage_SDXL_Client_Response_Body = {
