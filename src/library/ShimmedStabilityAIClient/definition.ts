@@ -37,7 +37,7 @@ const toShortfinBatchedRequestBody = (
         && (givenRequestBody.cfgScale !== undefined)
         && (givenRequestBody.seed !== undefined)
       ) {
-        const eachShortfinRequestBody = {
+        const derivedShortfinRequestBody = {
           prompt: toShortfinRequestBodyPrompt(givenRequestBody.textPrompts, {
             weight: 1,
           }),
@@ -51,7 +51,7 @@ const toShortfinBatchedRequestBody = (
           seed          : givenRequestBody.seed,
         };
 
-        return eachShortfinRequestBody;
+        return derivedShortfinRequestBody;
       }
 
       return null;
