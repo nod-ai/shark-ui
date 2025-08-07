@@ -29,7 +29,7 @@ const toShortfinBatchedRequestBody = (
   return givenRequestBodies.reduce((runningBatchedRequestBody, eachStabilityAIRequestBody) => {
     const eachShortfinRequestBody = ((
       givenRequestBody: GenerateFromTextRequest['textToImageRequestBody'],
-    ) => {
+    ): Shortfin.TextToImage.SDXL.Client.Request.Body | null => {
       if (
         (givenRequestBody.height !== undefined)
         && (givenRequestBody.width !== undefined)
@@ -37,7 +37,7 @@ const toShortfinBatchedRequestBody = (
         && (givenRequestBody.cfgScale !== undefined)
         && (givenRequestBody.seed !== undefined)
       ) {
-        const eachShortfinRequestBody: Shortfin.TextToImage.SDXL.Client.Request.Body = {
+        const eachShortfinRequestBody = {
           prompt: toShortfinRequestBodyPrompt(givenRequestBody.textPrompts, {
             weight: 1,
           }),
