@@ -1,6 +1,5 @@
 import type {
   Image as StabilityAI_TextToImage_Pipeline_Output,
-  TextToImageRequestBody,
 } from 'stabilityai-client-typescript/models/components';
 
 import type {
@@ -22,17 +21,9 @@ import {
   cloneOf,
 } from '@/library/utilitiesByType/reference.ts';
 
-const toShortfinRequestBodyPrompt = (
-  givenTextPrompts: TextToImageRequestBody['textPrompts'],
-  given: {
-    weight: Shortfin.TextToImage.SDXL.Pipeline.Input.Text.SupportedWeight;
-  },
-): Shortfin.TextToImage.SDXL.Client.Request.Body['prompt'] => {
-  return givenTextPrompts
-    .filter($0 => $0.weight === given.weight)
-    .map($0 => $0.text.trim())
-    .join(',');
-};
+import {
+  toShortfinRequestBodyPrompt,
+} from './conversions';
 
 const emptyBatchGenerationRequest: Shortfin.TextToImage.SDXL.Client.Request.Body.Batched = {
   prompt        : [],
