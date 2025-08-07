@@ -12,19 +12,19 @@ implements Batched<
 > {
   public constructor(
     /** @inheritdoc Number of elements defines the size of the batch. */
-    public prompt/*    */: string[],
+    public prompt/*    */: string[] = [],
     /** @inheritdoc Number of elements must match the size of the batch. */
-    public neg_prompt/**/: string[],
+    public neg_prompt/**/: string[] = [],
     /** @inheritdoc Number of elements must match the size of the batch. */
-    public height/*    */: number[],
+    public height/*    */: number[] = [],
     /** @inheritdoc Number of elements must match the size of the batch. */
-    public width/*     */: number[],
+    public width/*     */: number[] = [],
     /** @inheritdoc Number of elements must match the size of the batch. */
-    public steps/*     */: number[],
+    public steps/*     */: number[] = [],
     /** @inheritdoc Number of elements must match the size of the batch. */
-    public guidance_scale: number[],
+    public guidance_scale: number[] = [],
     /** @inheritdoc Number of elements must match the size of the batch. */
-    public seed/*      */: number[],
+    public seed/*      */: number[] = [],
   ) {}
 }
 
