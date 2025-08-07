@@ -36,7 +36,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           cache: 'npm'
-      - name: Install all dependencies (which includes linters)
+      - name: Install all dependencies
         if: steps.changed-files.outputs.any_changed == 'true'
         run: npm clean-install
       - name: Run the linter
