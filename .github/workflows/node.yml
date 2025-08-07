@@ -44,7 +44,7 @@ jobs:
         id: lint
         run: npx eslint . --max-warnings 0 --cache
         continue-on-error: true
-      - name: If linter fails, highlight debug tools
+      - name: If linting fails, highlight debug tools
         if: steps.lint.outcome == 'failure'
         run: |
           echo "::notice::Enable lint-on-save in your editor for automatic fixes"
