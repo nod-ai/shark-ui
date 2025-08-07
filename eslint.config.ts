@@ -1,7 +1,7 @@
 import {
   configureVueProject,
   defineConfigWithVueTs,
-  vueTsConfigs,
+  vueTsConfigs as VueTSConfig,
 } from '@vue/eslint-config-typescript';
 
 import pluginVue from 'eslint-plugin-vue';
@@ -105,8 +105,8 @@ const configWithVueTS = defineConfigWithVueTs(
   ...pluginImport,
 
   pluginVue.configs['flat/recommended'],
-  vueTsConfigs.strictTypeChecked,
-  vueTsConfigs.stylisticTypeChecked,
+  VueTSConfig.strictTypeChecked,
+  VueTSConfig.stylisticTypeChecked,
 
   ...pluginVitest,
   ...pluginCypress,
