@@ -26,6 +26,18 @@ implements Batched<
     /** @inheritdoc Number of elements must match the size of the batch. */
     public seed/*      */: number[] = [],
   ) {}
+
+  public append(
+    givenRequestBody: Shortfin_TextToImage_SDXL_Client_Request_Body,
+  ): void {
+    (this.prompt/*    */).push(givenRequestBody.prompt/*    */);
+    (this.neg_prompt/**/).push(givenRequestBody.neg_prompt/**/);
+    (this.height/*    */).push(givenRequestBody.height/*    */);
+    (this.width/*     */).push(givenRequestBody.width/*     */);
+    (this.steps/*     */).push(givenRequestBody.steps/*     */);
+    (this.guidance_scale).push(givenRequestBody.guidance_scale);
+    (this.seed/*      */).push(givenRequestBody.seed/*      */);
+  }
 }
 
 export {
