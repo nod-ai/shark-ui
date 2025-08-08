@@ -32,7 +32,7 @@ const toShortfinBatchedRequestBody = (
 
   derivedShortfinRequestBodies
     .reduce((runningBatchedRequestBody, eachShortfinRequestBody) => {
-      runningBatchedRequestBody.append(eachShortfinRequestBody);
+      derivedBatchedRequestBody.append(eachShortfinRequestBody);
       return runningBatchedRequestBody;
     }, derivedBatchedRequestBody);
 
