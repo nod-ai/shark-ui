@@ -18,7 +18,7 @@ import {
 
 import {
   toShortfin_BatchedRequestBody,
-} from './conversions';
+} from './toShortfin';
 
 const Shortfin_TextToImage_SDXL_Client_Response_Body = {
   SchemaMember: {
