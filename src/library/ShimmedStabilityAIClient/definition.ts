@@ -35,26 +35,26 @@ const toShortfinBatchedRequestBody = (
       && (eachStabilityAIRequestBody.seed !== undefined)
     ) {
       const eachShortfinRequestBody = {
-        positiveTextPrompts: toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
+        prompt: toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
           weight: 1,
         }),
-        negativeTextPrompts: toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
+        neg_prompt: toShortfinRequestBodyPrompt(eachStabilityAIRequestBody.textPrompts, {
           weight: -1,
         }),
-        height  : eachStabilityAIRequestBody.height,
-        width   : eachStabilityAIRequestBody.width,
-        steps   : eachStabilityAIRequestBody.steps,
-        cfgScale: eachStabilityAIRequestBody.cfgScale,
-        seed    : eachStabilityAIRequestBody.seed,
+        height        : eachStabilityAIRequestBody.height,
+        width         : eachStabilityAIRequestBody.width,
+        steps         : eachStabilityAIRequestBody.steps,
+        guidance_scale: eachStabilityAIRequestBody.cfgScale,
+        seed          : eachStabilityAIRequestBody.seed,
       };
 
-      (runningBatchedRequestBody.prompt/*    */).push(eachShortfinRequestBody.positiveTextPrompts);
-      (runningBatchedRequestBody.neg_prompt/**/).push(eachShortfinRequestBody.negativeTextPrompts);
-      (runningBatchedRequestBody.height/*    */).push(eachShortfinRequestBody.height/*  */);
-      (runningBatchedRequestBody.width/*     */).push(eachShortfinRequestBody.width/*   */);
-      (runningBatchedRequestBody.steps/*     */).push(eachShortfinRequestBody.steps/*   */);
-      (runningBatchedRequestBody.guidance_scale).push(eachShortfinRequestBody.cfgScale/**/);
-      (runningBatchedRequestBody.seed/*      */).push(eachShortfinRequestBody.seed/*    */);
+      (runningBatchedRequestBody.prompt/*    */).push(eachShortfinRequestBody.prompt/*    */);
+      (runningBatchedRequestBody.neg_prompt/**/).push(eachShortfinRequestBody.neg_prompt/**/);
+      (runningBatchedRequestBody.height/*    */).push(eachShortfinRequestBody.height/*    */);
+      (runningBatchedRequestBody.width/*     */).push(eachShortfinRequestBody.width/*     */);
+      (runningBatchedRequestBody.steps/*     */).push(eachShortfinRequestBody.steps/*     */);
+      (runningBatchedRequestBody.guidance_scale).push(eachShortfinRequestBody.guidance_scale);
+      (runningBatchedRequestBody.seed/*      */).push(eachShortfinRequestBody.seed/*      */);
     }
 
     return runningBatchedRequestBody;
