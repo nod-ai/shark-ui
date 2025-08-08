@@ -26,15 +26,16 @@ const toShortfinBatchedRequestBody = (
 ): Shortfin.TextToImage.SDXL.Client.Request.Body.Batched => {
   const emptyBatchedRequestBody = new Shortfin.TextToImage.SDXL.Client.Request.Body.Batched();
 
-  const derivedBatchedRequestBody = givenRequestBodies.reduce((runningBatchedRequestBody, eachStabilityAIRequestBody) => {
-    const eachShortfinRequestBody = toShortfinRequestBody(eachStabilityAIRequestBody);
+  const derivedBatchedRequestBody = givenRequestBodies
+    .reduce((runningBatchedRequestBody, eachStabilityAIRequestBody) => {
+      const eachShortfinRequestBody = toShortfinRequestBody(eachStabilityAIRequestBody);
 
-    if (
-      eachShortfinRequestBody !== null
-    ) runningBatchedRequestBody.append(eachShortfinRequestBody);
+      if (
+        eachShortfinRequestBody !== null
+      ) runningBatchedRequestBody.append(eachShortfinRequestBody);
 
-    return runningBatchedRequestBody;
-  }, emptyBatchedRequestBody);
+      return runningBatchedRequestBody;
+    }, emptyBatchedRequestBody);
 
   return derivedBatchedRequestBody;
 };
