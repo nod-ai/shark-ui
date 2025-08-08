@@ -1,5 +1,11 @@
-export * from './RequestBodyPrompt';
+export {
+  toShortfin_RequestBodyPrompt,
+} from './RequestBodyPrompt';
 
-export * from './RequestBody';
+export {
+  toShortfin_RequestBody,
+} from './RequestBody';
 
-export * from './BatchedRequestBody';
+export {
+  toShortfin_BatchedRequestBody,
+} from './BatchedRequestBody';
