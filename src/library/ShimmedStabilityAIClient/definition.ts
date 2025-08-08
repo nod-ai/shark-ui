@@ -28,13 +28,11 @@ const toShortfinBatchedRequestBody = (
     .map(toShortfinRequestBody)
     .filter($0 => $0 !== null);
 
-  const emptyBatchedRequestBody = new Shortfin.TextToImage.SDXL.Client.Request.Body.Batched();
+  const derivedBatchedRequestBody = new Shortfin.TextToImage.SDXL.Client.Request.Body.Batched();
 
-  const derivedBatchedRequestBody = derivedShortfinRequestBodies
-    .reduce((runningBatchedRequestBody, eachShortfinRequestBody) => {
-      runningBatchedRequestBody.append(eachShortfinRequestBody);
-      return runningBatchedRequestBody;
-    }, emptyBatchedRequestBody);
+  derivedShortfinRequestBodies.forEach((eachShortfinRequestBody) => {
+    derivedBatchedRequestBody.append(eachShortfinRequestBody);
+  });
 
   return derivedBatchedRequestBody;
 };
