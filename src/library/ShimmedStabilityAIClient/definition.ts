@@ -17,7 +17,7 @@ import {
 } from '@/library/URLComponent';
 
 import {
-  toShortfinBatchedRequestBody,
+  toShortfin_BatchedRequestBody,
 } from './conversions';
 
 const Shortfin_TextToImage_SDXL_Client_Response_Body = {
@@ -43,7 +43,7 @@ class ImageClient
   public async forciblyGenerateFromText(
     givenRequest: GenerateFromTextRequest,
   ): Promise<GenerateFromTextResponse> {
-    const derivedBatchedRequestBody = toShortfinBatchedRequestBody([
+    const derivedBatchedRequestBody = toShortfin_BatchedRequestBody([
       givenRequest.textToImageRequestBody,
     ]);
 

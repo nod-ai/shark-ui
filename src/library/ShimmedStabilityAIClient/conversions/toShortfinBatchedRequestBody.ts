@@ -8,7 +8,7 @@ import {
   toShortfin_RequestBody,
 } from './toShortfinRequestBody';
 
-const toShortfinBatchedRequestBody = (
+const toShortfin_BatchedRequestBody = (
   givenRequestBodies: GenerateFromTextRequest['textToImageRequestBody'][],
 ): Shortfin.TextToImage.SDXL.Client.Request.Body.Batched => {
   const derivedShortfinRequestBodies = givenRequestBodies
@@ -25,5 +25,5 @@ const toShortfinBatchedRequestBody = (
 };
 
 export {
-  toShortfinBatchedRequestBody,
+  toShortfin_BatchedRequestBody,
 };
