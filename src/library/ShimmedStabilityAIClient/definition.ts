@@ -28,9 +28,7 @@ const toShortfinBatchedRequestBody = (
 
   const derivedBatchedRequestBody = givenRequestBodies
     .map(toShortfinRequestBody)
-    .reduce((runningBatchedRequestBody, eachStabilityAIRequestBody) => {
-      const eachShortfinRequestBody = eachStabilityAIRequestBody;
-
+    .reduce((runningBatchedRequestBody, eachShortfinRequestBody) => {
       if (
         eachShortfinRequestBody !== null
       ) runningBatchedRequestBody.append(eachShortfinRequestBody);
