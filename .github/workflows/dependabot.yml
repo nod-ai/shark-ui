@@ -40,6 +40,7 @@ jobs:
         if: |
           contains(
             fromJSON('[
+              "@stylistic/eslint-plugin",
               "@typescript-eslint/parser",
               "@types/node",
               "eslint",
