@@ -51,6 +51,7 @@ jobs:
             steps.metadata.outputs.dependency-names
           )
           && (
+            (steps.metadata.outputs.update-type == 'version-update:semver-patch') ||
             (steps.metadata.outputs.update-type == 'version-update:semver-minor')
           )
         run: gh pr review --approve "$PR_URL"
