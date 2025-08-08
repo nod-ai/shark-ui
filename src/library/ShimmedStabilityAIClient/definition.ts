@@ -28,11 +28,9 @@ const toShortfinBatchedRequestBody = (
 
   const derivedBatchedRequestBody = givenRequestBodies
     .map(toShortfinRequestBody)
+    .filter($0 => $0 !== null)
     .reduce((runningBatchedRequestBody, eachShortfinRequestBody) => {
-      if (
-        eachShortfinRequestBody !== null
-      ) runningBatchedRequestBody.append(eachShortfinRequestBody);
-
+      runningBatchedRequestBody.append(eachShortfinRequestBody);
       return runningBatchedRequestBody;
     }, emptyBatchedRequestBody);
 
