@@ -29,7 +29,9 @@ const toShortfinBatchedRequestBody = (
   return givenRequestBodies.reduce((runningBatchedRequestBody, eachStabilityAIRequestBody) => {
     const eachShortfinRequestBody = toShortfinRequestBody(eachStabilityAIRequestBody);
 
-    if (eachShortfinRequestBody !== null) {
+    if (
+      eachShortfinRequestBody !== null
+    ) {
       (runningBatchedRequestBody.prompt/*    */).push(eachShortfinRequestBody.prompt/*    */);
       (runningBatchedRequestBody.neg_prompt/**/).push(eachShortfinRequestBody.neg_prompt/**/);
       (runningBatchedRequestBody.height/*    */).push(eachShortfinRequestBody.height/*    */);
