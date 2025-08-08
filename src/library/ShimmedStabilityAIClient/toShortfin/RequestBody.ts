@@ -5,10 +5,10 @@ import type {
 import type Shortfin from '@/library/Shortfin';
 
 import {
-  toShortfinRequestBodyPrompt,
-} from './toShortfinRequestBodyPrompt';
+  toShortfin_RequestBodyPrompt,
+} from './RequestBodyPrompt';
 
-const toShortfinRequestBody = (
+const toShortfin_RequestBody = (
   givenRequestBody: GenerateFromTextRequest['textToImageRequestBody'],
 ): Shortfin.TextToImage.SDXL.Client.Request.Body | null => {
   if (
@@ -20,10 +20,10 @@ const toShortfinRequestBody = (
   ) return null;
 
   const derivedShortfinRequestBody = {
-    prompt: toShortfinRequestBodyPrompt(givenRequestBody.textPrompts, {
+    prompt: toShortfin_RequestBodyPrompt(givenRequestBody.textPrompts, {
       weight: 1,
     }),
-    neg_prompt: toShortfinRequestBodyPrompt(givenRequestBody.textPrompts, {
+    neg_prompt: toShortfin_RequestBodyPrompt(givenRequestBody.textPrompts, {
       weight: -1,
     }),
     height        : givenRequestBody.height,
@@ -37,5 +37,5 @@ const toShortfinRequestBody = (
 };
 
 export {
-  toShortfinRequestBody,
+  toShortfin_RequestBody,
 };
