@@ -31,10 +31,10 @@ const toShortfinBatchedRequestBody = (
   const derivedBatchedRequestBody = new Shortfin.TextToImage.SDXL.Client.Request.Body.Batched();
 
   derivedShortfinRequestBodies
-    .reduce((runningBatchedRequestBody, eachShortfinRequestBody) => {
+    .reduce((_, eachShortfinRequestBody) => {
       derivedBatchedRequestBody.append(eachShortfinRequestBody);
-      return runningBatchedRequestBody;
-    }, derivedBatchedRequestBody);
+      return undefined;
+    }, undefined);
 
   return derivedBatchedRequestBody;
 };
