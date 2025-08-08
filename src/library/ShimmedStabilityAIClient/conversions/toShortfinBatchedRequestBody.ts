@@ -5,14 +5,14 @@ import type {
 import Shortfin from '@/library/Shortfin';
 
 import {
-  toShortfinRequestBody,
+  toShortfin_RequestBody,
 } from './toShortfinRequestBody';
 
 const toShortfinBatchedRequestBody = (
   givenRequestBodies: GenerateFromTextRequest['textToImageRequestBody'][],
 ): Shortfin.TextToImage.SDXL.Client.Request.Body.Batched => {
   const derivedShortfinRequestBodies = givenRequestBodies
-    .map(toShortfinRequestBody)
+    .map(toShortfin_RequestBody)
     .filter($0 => $0 !== null);
 
   const derivedBatchedRequestBody = new Shortfin.TextToImage.SDXL.Client.Request.Body.Batched();

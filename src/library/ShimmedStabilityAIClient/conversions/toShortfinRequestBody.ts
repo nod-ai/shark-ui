@@ -8,7 +8,7 @@ import {
   toShortfin_RequestBodyPrompt,
 } from './toShortfinRequestBodyPrompt';
 
-const toShortfinRequestBody = (
+const toShortfin_RequestBody = (
   givenRequestBody: GenerateFromTextRequest['textToImageRequestBody'],
 ): Shortfin.TextToImage.SDXL.Client.Request.Body | null => {
   if (
@@ -37,5 +37,5 @@ const toShortfinRequestBody = (
 };
 
 export {
-  toShortfinRequestBody,
+  toShortfin_RequestBody,
 };
