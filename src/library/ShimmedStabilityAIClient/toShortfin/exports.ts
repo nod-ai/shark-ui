@@ -1,5 +1,5 @@
 export * from './toShortfinRequestBodyPrompt';
 
-export * from './toShortfinRequestBody';
+export * from './RequestBody';
 
 export * from './BatchedRequestBody';
