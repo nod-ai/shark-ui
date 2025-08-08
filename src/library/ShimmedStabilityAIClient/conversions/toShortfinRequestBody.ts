@@ -5,7 +5,7 @@ import type {
 import type Shortfin from '@/library/Shortfin';
 
 import {
-  toShortfinRequestBodyPrompt,
+  toShortfin_RequestBodyPrompt,
 } from './toShortfinRequestBodyPrompt';
 
 const toShortfinRequestBody = (
@@ -20,10 +20,10 @@ const toShortfinRequestBody = (
   ) return null;
 
   const derivedShortfinRequestBody = {
-    prompt: toShortfinRequestBodyPrompt(givenRequestBody.textPrompts, {
+    prompt: toShortfin_RequestBodyPrompt(givenRequestBody.textPrompts, {
       weight: 1,
     }),
-    neg_prompt: toShortfinRequestBodyPrompt(givenRequestBody.textPrompts, {
+    neg_prompt: toShortfin_RequestBodyPrompt(givenRequestBody.textPrompts, {
       weight: -1,
     }),
     height        : givenRequestBody.height,
