@@ -24,11 +24,13 @@ import {
 const toShortfinBatchedRequestBody = (
   givenRequestBodies: GenerateFromTextRequest['textToImageRequestBody'][],
 ): Shortfin.TextToImage.SDXL.Client.Request.Body.Batched => {
+  const derivedShortfinRequestBodies = givenRequestBodies
+    .map(toShortfinRequestBody)
+    .filter($0 => $0 !== null);
+
   const emptyBatchedRequestBody = new Shortfin.TextToImage.SDXL.Client.Request.Body.Batched();
 
-  const derivedBatchedRequestBody = givenRequestBodies
-    .map(toShortfinRequestBody)
-    .filter($0 => $0 !== null)
+  const derivedBatchedRequestBody = derivedShortfinRequestBodies
     .reduce((runningBatchedRequestBody, eachShortfinRequestBody) => {
       runningBatchedRequestBody.append(eachShortfinRequestBody);
       return runningBatchedRequestBody;
