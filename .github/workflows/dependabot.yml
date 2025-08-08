@@ -43,6 +43,7 @@ jobs:
               "@stylistic/eslint-plugin",
               "@typescript-eslint/parser",
               "@types/node",
+              "cypress",
               "eslint",
               "eslint-plugin-vue",
               "typescript-eslint",
