@@ -18,7 +18,7 @@ import {
 } from '@/library/URLComponent';
 
 import {
-  toShortfinRequestBodyPrompt,
+  toShortfinRequestBody,
 } from './conversions';
 
 const toShortfinBatchedRequestBody = (
@@ -27,33 +27,7 @@ const toShortfinBatchedRequestBody = (
   const emptyBatchedRequestBody = new Shortfin.TextToImage.SDXL.Client.Request.Body.Batched();
 
   return givenRequestBodies.reduce((runningBatchedRequestBody, eachStabilityAIRequestBody) => {
-    const eachShortfinRequestBody = ((
-      givenRequestBody: GenerateFromTextRequest['textToImageRequestBody'],
-    ): Shortfin.TextToImage.SDXL.Client.Request.Body | null => {
-      if (
-        (givenRequestBody.height === undefined)
-        || (givenRequestBody.width === undefined)
-        || (givenRequestBody.steps === undefined)
-        || (givenRequestBody.cfgScale === undefined)
-        || (givenRequestBody.seed === undefined)
-      ) return null;
-
-      const derivedShortfinRequestBody = {
-        prompt: toShortfinRequestBodyPrompt(givenRequestBody.textPrompts, {
-          weight: 1,
-        }),
-        neg_prompt: toShortfinRequestBodyPrompt(givenRequestBody.textPrompts, {
-          weight: -1,
-        }),
-        height        : givenRequestBody.height,
-        width         : givenRequestBody.width,
-        steps         : givenRequestBody.steps,
-        guidance_scale: givenRequestBody.cfgScale,
-        seed          : givenRequestBody.seed,
-      };
-
-      return derivedShortfinRequestBody;
-    })(eachStabilityAIRequestBody);
+    const eachShortfinRequestBody = toShortfinRequestBody(eachStabilityAIRequestBody);
 
     if (eachShortfinRequestBody !== null) {
       (runningBatchedRequestBody.prompt/*    */).push(eachShortfinRequestBody.prompt/*    */);
