@@ -30,13 +30,13 @@ const toShortfinBatchedRequestBody = (
     const eachShortfinRequestBody = ((
       givenRequestBody: GenerateFromTextRequest['textToImageRequestBody'],
     ): Shortfin.TextToImage.SDXL.Client.Request.Body | null => {
-      if (!(
-        (givenRequestBody.height !== undefined)
-        && (givenRequestBody.width !== undefined)
-        && (givenRequestBody.steps !== undefined)
-        && (givenRequestBody.cfgScale !== undefined)
-        && (givenRequestBody.seed !== undefined)
-      )) return null;
+      if (
+        (givenRequestBody.height === undefined)
+        || (givenRequestBody.width === undefined)
+        || (givenRequestBody.steps === undefined)
+        || (givenRequestBody.cfgScale === undefined)
+        || (givenRequestBody.seed === undefined)
+      ) return null;
 
       const derivedShortfinRequestBody = {
         prompt: toShortfinRequestBodyPrompt(givenRequestBody.textPrompts, {
