@@ -31,15 +31,7 @@ const toShortfinBatchedRequestBody = (
 
     if (
       eachShortfinRequestBody !== null
-    ) {
-      (runningBatchedRequestBody.prompt/*    */).push(eachShortfinRequestBody.prompt/*    */);
-      (runningBatchedRequestBody.neg_prompt/**/).push(eachShortfinRequestBody.neg_prompt/**/);
-      (runningBatchedRequestBody.height/*    */).push(eachShortfinRequestBody.height/*    */);
-      (runningBatchedRequestBody.width/*     */).push(eachShortfinRequestBody.width/*     */);
-      (runningBatchedRequestBody.steps/*     */).push(eachShortfinRequestBody.steps/*     */);
-      (runningBatchedRequestBody.guidance_scale).push(eachShortfinRequestBody.guidance_scale);
-      (runningBatchedRequestBody.seed/*      */).push(eachShortfinRequestBody.seed/*      */);
-    }
+    ) runningBatchedRequestBody.append(eachShortfinRequestBody);
 
     return runningBatchedRequestBody;
   }, emptyBatchedRequestBody);
