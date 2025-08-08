@@ -7,9 +7,8 @@ import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
-import Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
 import HTTP from '@/library/HTTP';
-import Schema from '@/library/Schema';
+import Shortfin from '@/library/Shortfin';
 
 import {
   URLOrigin,
@@ -17,22 +16,6 @@ import {
 } from '@/library/URLComponent';
 
 import toShortfin from './toShortfin';
-
-const Shortfin_TextToImage_SDXL_Client_Response_Body = {
-  SchemaMember: {
-    image: Schema.string().transform((someSubject) => {
-      return Base64CharacterEncodedByteSequence.parsedFrom(someSubject).forciblyUnwrap(/* Zod can safely propagate errors */);
-    }),
-    get images() {
-      return Schema.tuple([this.image]).rest(this.image);
-    },
-  },
-  get Schema() {
-    return Schema.object({
-      images: this.SchemaMember.images,
-    });
-  },
-};
 
 const generationEndpoint = URLPath.parsedFrom('/generate').forciblyUnwrap();
 
@@ -51,7 +34,7 @@ class ImageClient
     });
 
     const newResource = outcomeOfSubmittingResource.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
-    const parsedResource = Shortfin_TextToImage_SDXL_Client_Response_Body.Schema.parse(newResource);
+    const parsedResource = Shortfin.TextToImage.SDXL.Client.Response.Body.Schema.parse(newResource);
     const [soleGeneratedImage] = parsedResource.images;
 
     const soleGeneratedArtifact: StabilityAI_TextToImage_Pipeline_Output = {
