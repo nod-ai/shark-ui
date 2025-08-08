@@ -27,9 +27,9 @@ const toShortfinBatchedRequestBody = (
   const emptyBatchedRequestBody = new Shortfin.TextToImage.SDXL.Client.Request.Body.Batched();
 
   const derivedBatchedRequestBody = givenRequestBodies
-    .map($0 => $0)
+    .map($0 => toShortfinRequestBody($0))
     .reduce((runningBatchedRequestBody, eachStabilityAIRequestBody) => {
-      const eachShortfinRequestBody = toShortfinRequestBody(eachStabilityAIRequestBody);
+      const eachShortfinRequestBody = eachStabilityAIRequestBody;
 
       if (
         eachShortfinRequestBody !== null
