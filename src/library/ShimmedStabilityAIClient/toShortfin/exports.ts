@@ -1,4 +1,4 @@
-export * from './toShortfinRequestBodyPrompt';
+export * from './RequestBodyPrompt';
 
 export * from './RequestBody';
 
