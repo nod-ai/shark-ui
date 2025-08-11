@@ -3,12 +3,17 @@ import Schema from '@/library/Schema';
 
 const Shortfin_TextToImage_SDXL_Client_Response_Body = {
   SchemaMember: {
-    image: Schema.string().transform((someSubject) => {
+    image: Schema.string().transform((someSubject, currentContext) => {
       const outcomeOfParsingSubject = Base64CharacterEncodedByteSequence.parsedFrom(someSubject);
 
       if (
         outcomeOfParsingSubject.isSuccess
       ) return outcomeOfParsingSubject.unwrapped;
+
+      currentContext.addIssue({
+        code   : 'custom',
+        message: outcomeOfParsingSubject.cause.message,
+      });
 
       return outcomeOfParsingSubject.forciblyUnwrap(/* TODO: safely adapt errors so it can propagate to encompassing schemas */);
     }),
