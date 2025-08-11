@@ -1,7 +1,14 @@
+import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
 import Schema from '@/library/Schema';
 
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 class Shortfin_TextToImage_SDXL_Client_Response_Body {
+  public constructor(
+    public images: [
+      Base64CharacterEncodedByteSequence,
+      ...Base64CharacterEncodedByteSequence[],
+    ],
+  ) {}
+
   public static Schema = Schema
     .object({
       images: Schema
@@ -11,7 +18,10 @@ class Shortfin_TextToImage_SDXL_Client_Response_Body {
         .rest(
           Schema.base64CharacterEncodedByteSequence(),
         ),
-    });
+    })
+    .transform($0 => new Shortfin_TextToImage_SDXL_Client_Response_Body(
+      $0.images,
+    ));
 }
 
 export {
