@@ -1,1 +1,5 @@
-export * as default from './exports.ts';
+import * as Byte from './exports.ts';
+
+export {
+  Byte as default,
+};

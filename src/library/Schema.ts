@@ -1,5 +1,5 @@
-import * as z from 'zod';
+import * as Schema from 'zod';
 
 export {
-  z as default,
+  Schema as default,
 };
