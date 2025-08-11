@@ -1,6 +1,11 @@
 import Schema from '@/library/Schema';
 
 const Shortfin_TextToImage_SDXL_Client_Response_Body = {
+  get Schema() {
+    return Schema.object({
+      images: this.SchemaMember.images,
+    });
+  },
   SchemaMember: {
     images: Schema
       .tuple([
@@ -9,11 +14,6 @@ const Shortfin_TextToImage_SDXL_Client_Response_Body = {
       .rest(
         Schema.base64CharacterEncodedByteSequence(),
       ),
-  },
-  get Schema() {
-    return Schema.object({
-      images: this.SchemaMember.images,
-    });
   },
 };
 
