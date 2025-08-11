@@ -15,12 +15,12 @@ const productIdentity = <
 };
 
 interface Attempt_Success_Transformer<
-  TransformableProduct,
-  TransformedProduct,
+  SomeTransformableProduct,
+  SomeTransformedProduct,
 > {
   product: ProductTransformer<
-    TransformableProduct,
-    TransformedProduct
+    SomeTransformableProduct,
+    SomeTransformedProduct
   >;
 }
 

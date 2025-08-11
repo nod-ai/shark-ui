@@ -19,12 +19,12 @@ const causeIdentity = <
 };
 
 interface Attempt_Failure_Transformer<
-  TransformableActionableError extends ActionableError<string>,
-  TransformedActionableError extends ActionableError<string>,
+  SomeTransformableActionableError extends ActionableError<string>,
+  SomeTransformedActionableError extends ActionableError<string>,
 > {
   cause: CauseTransformer<
-    TransformableActionableError,
-    TransformedActionableError
+    SomeTransformableActionableError,
+    SomeTransformedActionableError
   >;
 }
 
