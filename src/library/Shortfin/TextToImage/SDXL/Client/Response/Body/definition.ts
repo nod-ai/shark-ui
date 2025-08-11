@@ -1,17 +1,15 @@
 import Schema from '@/library/Schema';
 
 const Shortfin_TextToImage_SDXL_Client_Response_Body = {
-  get Schema() {
-    return Schema.object({
-      images: Schema
-        .tuple([
-          Schema.base64CharacterEncodedByteSequence(),
-        ])
-        .rest(
-          Schema.base64CharacterEncodedByteSequence(),
-        ),
-    });
-  },
+  Schema: Schema.object({
+    images: Schema
+      .tuple([
+        Schema.base64CharacterEncodedByteSequence(),
+      ])
+      .rest(
+        Schema.base64CharacterEncodedByteSequence(),
+      ),
+  }),
 };
 
 export {
