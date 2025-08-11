@@ -5,8 +5,12 @@ const Shortfin_TextToImage_SDXL_Client_Response_Body = {
     image: Schema.base64CharacterEncodedByteSequence(),
     get images() {
       return Schema
-        .tuple([this.image])
-        .rest(this.image);
+        .tuple([
+          this.image,
+        ])
+        .rest(
+          this.image,
+        );
     },
   },
   get Schema() {
