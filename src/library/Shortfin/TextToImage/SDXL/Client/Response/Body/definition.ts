@@ -15,7 +15,7 @@ const Shortfin_TextToImage_SDXL_Client_Response_Body = {
         message: outcomeOfParsingSubject.cause.message,
       });
 
-      return outcomeOfParsingSubject.forciblyUnwrap(/* TODO: safely adapt errors so it can propagate to encompassing schemas */);
+      return Schema.NEVER;
     }),
     get images() {
       return Schema.tuple([this.image]).rest(this.image);
