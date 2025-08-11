@@ -1,3 +1,7 @@
+import {
+  Server_Schema,
+} from './Server_Schema';
+
 /**
  * The machine conforming to some web API that:
  * - listens for requests
@@ -18,6 +22,10 @@ class Server {
     );
 
     return clonedServer;
+  }
+
+  public static get Schema() {
+    return Server_Schema;
   }
 }
 
