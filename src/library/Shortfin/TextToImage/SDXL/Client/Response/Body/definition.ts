@@ -2,10 +2,13 @@ import Schema from '@/library/Schema';
 
 const Shortfin_TextToImage_SDXL_Client_Response_Body = {
   SchemaMember: {
-    image: Schema.base64CharacterEncodedByteSequence(),
-    get images() {
-      return Schema.tuple([this.image]).rest(this.image);
-    },
+    images: Schema
+      .tuple([
+        Schema.base64CharacterEncodedByteSequence(),
+      ])
+      .rest(
+        Schema.base64CharacterEncodedByteSequence(),
+      ),
   },
   get Schema() {
     return Schema.object({
