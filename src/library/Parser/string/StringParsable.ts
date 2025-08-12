@@ -1,3 +1,7 @@
+import type {
+  Parsable,
+} from '../Parsable';
+
 import type ParsingError from '../ParsingError';
 
 import type {
@@ -14,7 +18,11 @@ type StringParsable<
     SomeParsingError
   >,
   SomeParsingError extends ParsingError<string>,
-> = SomeImplementer['prototype'];
+> = Parsable<
+  SomeImplementer,
+  SomeParsingError,
+  string
+>;
 
 export type {
   StringParsable,
