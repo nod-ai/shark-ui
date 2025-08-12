@@ -7,10 +7,10 @@ import type {
  * Implement this type to ensure that the class follows the standard interface for this.
  */
 type StringParsable<
-  SomeClassConstructor extends StaticStringParser<
-    SomeClassConstructor['prototype']
+  SomeImplementer extends StaticStringParser<
+    SomeImplementer['prototype']
   >,
-> = SomeClassConstructor['prototype'];
+> = SomeImplementer['prototype'];
 
 export type {
   StringParsable,
