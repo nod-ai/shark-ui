@@ -1,10 +1,10 @@
 import Server from './Server.ts';
 
 import {
-  ServerSchema,
-} from './ServerSchema.ts';
+  Server_Schema,
+} from './Server_Schema.ts';
 
 export {
   Server,
-  ServerSchema,
+  Server_Schema,
 };
