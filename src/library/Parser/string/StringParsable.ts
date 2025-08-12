@@ -1,3 +1,5 @@
+import type ParsingError from '../ParsingError';
+
 import type {
   StaticStringParser,
 } from './StaticStringParser';
@@ -8,8 +10,10 @@ import type {
  */
 type StringParsable<
   SomeImplementer extends StaticStringParser<
-    SomeImplementer['prototype']
+    SomeImplementer['prototype'],
+    SomeParsingError
   >,
+  SomeParsingError extends ParsingError<string>,
 > = SomeImplementer['prototype'];
 
 export type {

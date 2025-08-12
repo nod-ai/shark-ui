@@ -8,13 +8,14 @@ import type {
 
 type StaticStringParser<
   SomeParsedOutput,
+  SomeParsingError extends ParsingError<string>,
 > =
   & Static<
     SomeParsedOutput
   >
   & StringParser<
     SomeParsedOutput,
-    ParsingError<string>
+    SomeParsingError
   >
 ;
 

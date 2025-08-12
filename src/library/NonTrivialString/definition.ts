@@ -18,7 +18,8 @@ class NonTrivialString
   extends StringSubset<
   'NonTrivialString'
 > implements StringParsable<
-  typeof NonTrivialString
+  typeof NonTrivialString,
+  /*  */ NonTrivialString_ParsingError
 > {
   public static parsedFrom = (
     givenSubject: string,
