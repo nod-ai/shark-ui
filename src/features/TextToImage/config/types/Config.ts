@@ -1,8 +1,5 @@
-import type * as WebAPI from '@/library/WebAPI';
-
-import {
-  TextToImage_Config_Schema,
-} from './Config_Schema';
+import Schema from '@/library/Schema';
+import * as WebAPI from '@/library/WebAPI';
 
 /** The user-provided settings for the text-to-image feature */
 class TextToImage_Config {
@@ -11,9 +8,15 @@ class TextToImage_Config {
     public readonly server: WebAPI.Server | null,
   ) {}
 
-  public static get Schema() {
-    return TextToImage_Config_Schema;
-  }
+  public static Schema = Schema
+    .object({
+      server: WebAPI.Server.Schema
+        .nullable()
+        .catch(null),
+    })
+    .transform($0 => new TextToImage_Config(
+      $0.server,
+    ));
 }
 
 export {

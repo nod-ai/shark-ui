@@ -1,6 +1,4 @@
-import {
-  Server_Schema,
-} from './Server_Schema';
+import Schema from '@/library/Schema';
 
 /**
  * The machine conforming to some web API that:
@@ -24,9 +22,11 @@ class Server {
     return clonedServer;
   }
 
-  public static get Schema() {
-    return Server_Schema;
-  }
+  public static Schema = Schema
+    .object({
+      origin: Schema.string(),
+    })
+    .transform($0 => Server.from($0));
 }
 
 export {
