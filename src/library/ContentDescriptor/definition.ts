@@ -18,7 +18,7 @@ class ContentDescriptor {
     public topLevelDescriptor: ContentDescriptor_TopLevel.Any,
     public tree: string[] | null,
     public bottomLevelDescriptor: string,
-    public structureType: ContentDescriptor_StructuredSyntaxNameSuffix.Any | null,
+    public structureDescriptor: ContentDescriptor_StructuredSyntaxNameSuffix.Any | null,
     public parameters: Record<string, string> | null,
   ) {}
 
@@ -41,14 +41,14 @@ class ContentDescriptor {
     return serializedTreeBranches;
   }
 
-  public static readonly structureTypePrefix = '+';
+  public static readonly structureDescriptorPrefix = '+';
 
-  private get serializableStructureType(): string | null {
+  private get serializableStructureDescriptor(): string | null {
     if (
-      this.structureType === null
+      this.structureDescriptor === null
     ) return null;
 
-    return ContentDescriptor.structureTypePrefix.concat(this.structureType);
+    return ContentDescriptor.structureDescriptorPrefix.concat(this.structureDescriptor);
   }
 
   public static readonly parameterPrefix = ';';
@@ -71,7 +71,7 @@ class ContentDescriptor {
       this.serializableTopLevelDescriptor,
       this.serializableTree,
       this.bottomLevelDescriptor,
-      this.serializableStructureType,
+      this.serializableStructureDescriptor,
       this.serializableParameters,
     ] as const;
 
