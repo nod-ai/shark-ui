@@ -28,7 +28,8 @@ class URLOrigin
   extends StringSubset<
   'URLOrigin'
 > implements StringParsable<
-  typeof URLOrigin
+  typeof URLOrigin,
+  /*  */ URLOrigin_ParsingError
 > {
   public static parsedFrom = (
     givenSubject: string,

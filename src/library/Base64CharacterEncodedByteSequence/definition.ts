@@ -20,7 +20,8 @@ class Base64CharacterEncodedByteSequence
   extends StringSubset<
   'Base64CharacterEncodedByteSequence'
 > implements StringParsable<
-  typeof Base64CharacterEncodedByteSequence
+  typeof Base64CharacterEncodedByteSequence,
+  /*  */ Base64CharacterEncodedByteSequence_ParsingError
 > {
   public static paddingCharacter = '=';
 

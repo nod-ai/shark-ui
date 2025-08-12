@@ -28,7 +28,8 @@ class URLPath
   extends StringSubset<
   'URLPath'
 > implements StringParsable<
-  typeof URLPath
+  typeof URLPath,
+  /*  */ URLPath_ParsingError
 > {
   public static parsedFrom = (
     givenSubject: string,
