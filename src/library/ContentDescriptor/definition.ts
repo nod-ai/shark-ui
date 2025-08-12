@@ -17,7 +17,7 @@ class ContentDescriptor {
   public constructor(
     public topLevelDescriptor: ContentDescriptor_TopLevel.Any,
     public tree: string[] | null,
-    public fileSubtype: string,
+    public bottomLevelDescriptor: string,
     public structureType: ContentDescriptor_StructuredSyntaxNameSuffix.Any | null,
     public parameters: Record<string, string> | null,
   ) {}
@@ -70,7 +70,7 @@ class ContentDescriptor {
     const orderedComponents = [
       this.serializableTopLevelDescriptor,
       this.serializableTree,
-      this.fileSubtype,
+      this.bottomLevelDescriptor,
       this.serializableStructureType,
       this.serializableParameters,
     ] as const;
