@@ -13,7 +13,7 @@ type StringParsable<
     SomeImplementer['prototype'],
     SomeParsingError
   >,
-  SomeParsingError extends ParsingError<string> = ParsingError<string>,
+  SomeParsingError extends ParsingError<string>,
 > = SomeImplementer['prototype'];
 
 export type {
