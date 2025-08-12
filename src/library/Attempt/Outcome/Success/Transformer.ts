@@ -1,9 +1,9 @@
 type ProductTransformer<
-  TransformableProduct,
-  TransformedProduct,
+  SomeTransformableProduct,
+  SomeTransformedProduct,
 > = (
-  transformableProduct: TransformableProduct,
-) => TransformedProduct;
+  transformableProduct: SomeTransformableProduct,
+) => SomeTransformedProduct;
 
 const productIdentity = <
   TransformableProduct,

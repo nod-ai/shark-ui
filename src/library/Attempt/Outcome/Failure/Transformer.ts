@@ -3,11 +3,11 @@ import type {
 } from '../../error';
 
 type CauseTransformer<
-  TransformableActionableError extends ActionableError<string>,
-  TransformedActionableError extends ActionableError<string>,
+  SomeTransformableActionableError extends ActionableError<string>,
+  SomeTransformedActionableError extends ActionableError<string>,
 > = (
-  transformableCause: TransformableActionableError,
-) => TransformedActionableError;
+  transformableCause: SomeTransformableActionableError,
+) => SomeTransformedActionableError;
 
 const causeIdentity = <
   TransformableActionableError extends ActionableError<string>,

@@ -19,10 +19,10 @@ import {
 import AttemptCreationError from './AttemptCreationError';
 
 type Attempt_EndRetriever<
-  InferredOutcome extends Attempt_Outcome<unknown, ActionableError<string>>,
+  SomeInferredOutcome extends Attempt_Outcome<unknown, ActionableError<string>>,
 > = (
   givenHandles: typeof handles
-) => Promise<InferredOutcome>;
+) => Promise<SomeInferredOutcome>;
 
 const Attempt_thatEventually = async <
   InferredOutcome extends Attempt_Outcome<unknown, ActionableError<string>>,

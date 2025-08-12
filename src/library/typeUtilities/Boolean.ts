@@ -1,22 +1,22 @@
 type Is<
-  LeftHandOperand,
-  RightHandOperand,
+  SomeLeftHandOperand,
+  SomeRightHandOperand,
 > =
-  LeftHandOperand extends RightHandOperand
-    ? RightHandOperand extends LeftHandOperand
+  SomeLeftHandOperand extends SomeRightHandOperand
+    ? SomeRightHandOperand extends SomeLeftHandOperand
       ? true
       : false
     : false
 ;
 
 type If<
-  Condition extends boolean,
-  WhenTrue,
-  WhenFalse,
+  SomeCondition extends boolean,
+  SomeExpressionWhenTrue,
+  SomeExpressionWhenFalse,
 > =
-  Condition extends true
-    ? WhenTrue
-    : WhenFalse
+  SomeCondition extends true
+    ? SomeExpressionWhenTrue
+    : SomeExpressionWhenFalse
 ;
 
 type Not<
