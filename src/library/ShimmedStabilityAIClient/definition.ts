@@ -33,8 +33,8 @@ class ImageClient
       to       : generationEndpoint,
     });
 
-    const newResource = outcomeOfSubmittingResource.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
-    const parsedResource = Shortfin.TextToImage.SDXL.Client.Response.Body.Schema.parse(newResource);
+    const rawResource = outcomeOfSubmittingResource.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
+    const parsedResource = Shortfin.TextToImage.SDXL.Client.Response.Body.Schema.parse(rawResource);
     const [soleGeneratedImage] = parsedResource.images;
 
     const soleGeneratedArtifact: StabilityAI_TextToImage_Pipeline_Output = {
