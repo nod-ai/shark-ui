@@ -15,18 +15,18 @@ import type {
 /** See [RFC 2045](https://datatracker.ietf.org/doc/html/rfc2045) for more information */
 class ContentDescriptor {
   public constructor(
-    public fileType: ContentDescriptor_TopLevel.Any,
+    public topLevelDescriptor: ContentDescriptor_TopLevel.Any,
     public tree: string[] | null,
-    public fileSubtype: string,
-    public structureType: ContentDescriptor_StructuredSyntaxNameSuffix.Any | null,
+    public bottomLevelDescriptor: string,
+    public structureDescriptor: ContentDescriptor_StructuredSyntaxNameSuffix.Any | null,
     public parameters: Record<string, string> | null,
   ) {}
 
-  public static readonly fileTypeSuffix = '/';
+  public static readonly suffixForTopLevelDescriptor = '/';
 
-  public get serializableFileType(): NonTrivialString {
-    const suffixedFileType = this.fileType.concat(ContentDescriptor.fileTypeSuffix);
-    return NonTrivialString.parsedFrom(suffixedFileType).forciblyUnwrap(/* Proven safe by inspecting intellisense of `fileType` */);
+  public get serializableTopLevelDescriptor(): NonTrivialString {
+    const suffixedTopLevelDescriptor = this.topLevelDescriptor.concat(ContentDescriptor.suffixForTopLevelDescriptor);
+    return NonTrivialString.parsedFrom(suffixedTopLevelDescriptor).forciblyUnwrap(/* Proven safe by inspecting intellisense of `topLevelDescriptor` */);
   }
 
   public static readonly treeBranchSuffix = '.';
@@ -41,14 +41,14 @@ class ContentDescriptor {
     return serializedTreeBranches;
   }
 
-  public static readonly structureTypePrefix = '+';
+  public static readonly structureDescriptorPrefix = '+';
 
-  private get serializableStructureType(): string | null {
+  private get serializableStructureDescriptor(): string | null {
     if (
-      this.structureType === null
+      this.structureDescriptor === null
     ) return null;
 
-    return ContentDescriptor.structureTypePrefix.concat(this.structureType);
+    return ContentDescriptor.structureDescriptorPrefix.concat(this.structureDescriptor);
   }
 
   public static readonly parameterPrefix = ';';
@@ -68,10 +68,10 @@ class ContentDescriptor {
 
   public get serialized(): NonTrivialString {
     const orderedComponents = [
-      this.serializableFileType,
+      this.serializableTopLevelDescriptor,
       this.serializableTree,
-      this.fileSubtype,
-      this.serializableStructureType,
+      this.bottomLevelDescriptor,
+      this.serializableStructureDescriptor,
       this.serializableParameters,
     ] as const;
 

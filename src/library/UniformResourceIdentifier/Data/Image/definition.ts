@@ -13,7 +13,7 @@ import type {
 
 class ImageURI
   extends DataURI {
-  public static readonly fileType = 'image';
+  public static readonly topLevelDescriptor = 'image';
 
   public constructor(
     public readonly format: ImageURI_Format.Any,
@@ -29,7 +29,7 @@ class ImageURI
 
   public override get descriptor(): DataURI['descriptor'] {
     const computedDescriptor = new ContentDescriptor(
-      ImageURI.fileType,
+      ImageURI.topLevelDescriptor,
       null,
       this.format,
       null,

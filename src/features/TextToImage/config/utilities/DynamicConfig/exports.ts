@@ -13,13 +13,13 @@ import DynamicConfig_EndpointResponseError from './EndpointResponseError';
 import DynamicConfig_FetchingError from './FetchingError';
 
 const contentIsJSONIn = (givenResponse: Response): boolean => {
-  const contentType = givenResponse.headers.get('Content-Type');
+  const rawContentDescriptor = givenResponse.headers.get('Content-Type');
 
   if (
-    contentType === null
+    rawContentDescriptor === null
   ) return false;
 
-  return contentType.includes('application/json');
+  return rawContentDescriptor.includes('application/json');
 };
 
 const configEndpoint = URLPath.parsedFrom('/config/text-to-image').forciblyUnwrap();
