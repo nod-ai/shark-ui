@@ -25,11 +25,11 @@ type Attempt_EndGetter<
 ) => SomeInferredOutcome;
 
 const Attempt_that = <
-  InferredOutcome extends Attempt_Outcome<unknown, ActionableError<string>>,
+  SomeInferredOutcome extends Attempt_Outcome<unknown, ActionableError<string>>,
 >(
-  endsAccordingTo: Attempt_EndGetter<InferredOutcome>,
+  endsAccordingTo: Attempt_EndGetter<SomeInferredOutcome>,
 ) => {
-  type EquivalentOutcome = Attempt_Outcome<ProductOf<InferredOutcome>, CauseOf<InferredOutcome>>;
+  type EquivalentOutcome = Attempt_Outcome<ProductOf<SomeInferredOutcome>, CauseOf<SomeInferredOutcome>>;
 
   return sanctioned({
     try() {

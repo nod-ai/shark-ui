@@ -11,17 +11,17 @@ import type {
 } from '../error/modifier';
 
 const sanctioned = <
-  TryBlockOutput,
-  CatchBlockOutput,
+  SomeTryBlockOutput,
+  SomeCatchBlockOutput,
 >(
   {
     try: getTryBlockOutput,
     catch: catchBlockOutputFor,
   }: {
-    try: () => TryBlockOutput;
-    catch: ($0: AppropriatelyThrown<Error>) => CatchBlockOutput;
+    try: () => SomeTryBlockOutput;
+    catch: ($0: AppropriatelyThrown<Error>) => SomeCatchBlockOutput;
   },
-): TryBlockOutput | CatchBlockOutput => {
+): SomeTryBlockOutput | SomeCatchBlockOutput => {
   // eslint-disable-next-line no-restricted-syntax -- this is the implementation designed to help avoid use of raw try/catch
   try {
     return getTryBlockOutput();

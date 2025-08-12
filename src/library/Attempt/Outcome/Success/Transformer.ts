@@ -6,12 +6,12 @@ type ProductTransformer<
 ) => SomeTransformedProduct;
 
 const productIdentity = <
-  TransformableProduct,
-  TransformedProduct,
+  SomeTransformableProduct,
+  SomeTransformedProduct,
 >(
-  transformableProduct: NoInfer<TransformableProduct>,
-): NoInfer<TransformedProduct> => {
-  return transformableProduct as unknown as TransformedProduct;
+  transformableProduct: NoInfer<SomeTransformableProduct>,
+): NoInfer<SomeTransformedProduct> => {
+  return transformableProduct as unknown as SomeTransformedProduct;
 };
 
 interface Attempt_Success_Transformer<
