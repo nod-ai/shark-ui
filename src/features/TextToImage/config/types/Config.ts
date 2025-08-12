@@ -23,7 +23,7 @@ implements Parsable<
     public readonly server: WebAPI.Server | null,
   ) {}
 
-  public static Schema = Schema
+  private static Schema = Schema
     .object({
       server: WebAPI.Server.Schema
         .nullable()

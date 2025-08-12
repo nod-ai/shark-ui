@@ -24,7 +24,7 @@ implements Parsable<
     ],
   ) {}
 
-  public static Schema = Schema
+  private static Schema = Schema
     .object({
       images: Schema
         .tuple([
