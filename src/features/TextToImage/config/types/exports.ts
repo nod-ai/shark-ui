@@ -3,5 +3,5 @@ export {
 } from './Config';
 
 export {
-  TextToImage_ConfigSchema as ConfigSchema,
-} from './ConfigSchema';
+  TextToImage_Config_Schema as Config_Schema,
+} from './Config_Schema';
