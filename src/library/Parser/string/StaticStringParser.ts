@@ -7,13 +7,13 @@ import type {
 } from './StringParser';
 
 type StaticStringParser<
-  Any,
+  SomeParsedOutput,
 > =
   & Static<
-    Any
+    SomeParsedOutput
   >
   & StringParser<
-    Any,
+    SomeParsedOutput,
     ParsingError<string>
   >
 ;

@@ -5,7 +5,7 @@ import {
 } from 'vue';
 
 /** Updates the wrapped instance */
-const updateRef = <Any>(givenSubject: Ref<Any>, givenValue: Any): void => {
+const updateRef = <SomeState>(givenSubject: Ref<SomeState>, givenValue: SomeState): void => {
   givenSubject.value = givenValue;
 };
 
