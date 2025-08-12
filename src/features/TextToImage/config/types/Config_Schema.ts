@@ -6,8 +6,8 @@ import {
 } from './Config';
 
 /** Defines how to parse an instance of {@link TextToImage_Config} */
-const TextToImage_ConfigSchema = Schema.object({
-  server: WebAPI.ServerSchema
+const TextToImage_Config_Schema = Schema.object({
+  server: WebAPI.Server_Schema
     .nullable()
     .catch(null),
 }).transform($0 => new TextToImage_Config(
@@ -15,5 +15,5 @@ const TextToImage_ConfigSchema = Schema.object({
 ));
 
 export {
-  TextToImage_ConfigSchema,
+  TextToImage_Config_Schema,
 };

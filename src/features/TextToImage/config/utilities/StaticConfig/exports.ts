@@ -6,7 +6,7 @@ import {
 
 import {
   type Config,
-  ConfigSchema,
+  Config_Schema,
 } from '../../types';
 
 import StaticConfigReadingError from './StaticConfigReadingError';
@@ -26,7 +26,7 @@ const readConfig = (): Promise<OutcomeOfReadingConfig> => Attempt.thatEventually
   ) return ends.inFailureDueTo(new StaticConfigReadingError(configFile, fileResponse));
 
   const rawConfig = await fileResponse.json() as unknown;
-  const parsedConfig = ConfigSchema.parse(rawConfig);
+  const parsedConfig = Config_Schema.parse(rawConfig);
   return ends.inSuccessWith(parsedConfig);
 });
 

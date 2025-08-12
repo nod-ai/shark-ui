@@ -6,7 +6,7 @@ import {
 
 import {
   type Config,
-  ConfigSchema,
+  Config_Schema,
 } from '../../types';
 
 import DynamicConfig_EndpointResponseError from './EndpointResponseError';
@@ -47,7 +47,7 @@ const fetchConfig = (): Promise<OutcomeOfFetchingConfig> => Attempt.thatEventual
   ) return ends.inFailureDueTo(endpointResponseError);
 
   const rawConfig = await endpointResponse.json() as unknown;
-  const parsedConfig = ConfigSchema.parse(rawConfig);
+  const parsedConfig = Config_Schema.parse(rawConfig);
   return ends.inSuccessWith(parsedConfig);
 });
 
