@@ -4,9 +4,9 @@ const isEmpty = (
   return givenSubject.length === 0;
 };
 
-const hasAtLeastOne = <Element>(
-  givenElements: Element[],
-): givenElements is [Element, ...Element[]] => {
+const hasAtLeastOne = <SomeElement>(
+  givenElements: SomeElement[],
+): givenElements is [SomeElement, ...SomeElement[]] => {
   return !isEmpty(givenElements);
 };
 

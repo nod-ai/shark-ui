@@ -37,62 +37,62 @@ type Attempt_Outcome<
 * Helps avoid boilerplate when transforming outcomes.
 */
 function fromRewrapping<
-  TransformableActionableError extends ActionableError<string>,
-  TransformedActionableError extends ActionableError<string> = TransformableActionableError,
+  SomeTransformableActionableError extends ActionableError<string>,
+  SomeTransformedActionableError extends ActionableError<string> = SomeTransformableActionableError,
 >(
-  givenOutcome: Attempt_Failure<TransformableActionableError>,
+  givenOutcome: Attempt_Failure<SomeTransformableActionableError>,
   given?: Attempt_Failure_Transformer<
-    TransformableActionableError,
-    TransformedActionableError
+    SomeTransformableActionableError,
+    SomeTransformedActionableError
   >,
-): Attempt_Failure<TransformedActionableError>;
+): Attempt_Failure<SomeTransformedActionableError>;
 //
 function fromRewrapping<
-  TransformableProduct,
-  TransformedProduct = TransformableProduct,
+  SomeTransformableProduct,
+  SomeTransformedProduct = SomeTransformableProduct,
 >(
-  givenOutcome: Attempt_Success<TransformableProduct>,
+  givenOutcome: Attempt_Success<SomeTransformableProduct>,
   given?: Attempt_Success_Transformer<
-    TransformableProduct,
-    TransformedProduct
+    SomeTransformableProduct,
+    SomeTransformedProduct
   >,
-): Attempt_Success<TransformedProduct>;
+): Attempt_Success<SomeTransformedProduct>;
 //
 function fromRewrapping<
-  TransformableProduct,
-  TransformableActionableError extends ActionableError<string>,
-  TransformedProduct = TransformableProduct,
-  TransformedActionableError extends ActionableError<string> = TransformableActionableError,
+  SomeTransformableProduct,
+  SomeTransformableActionableError extends ActionableError<string>,
+  SomeTransformedProduct = SomeTransformableProduct,
+  SomeTransformedActionableError extends ActionableError<string> = SomeTransformableActionableError,
 >(
-  givenOutcome: Attempt_Outcome<TransformableProduct, TransformableActionableError>,
+  givenOutcome: Attempt_Outcome<SomeTransformableProduct, SomeTransformableActionableError>,
   given?: Attempt_Outcome_Transformer<
-    TransformableProduct,
-    TransformableActionableError,
-    TransformedProduct,
-    TransformedActionableError
+    SomeTransformableProduct,
+    SomeTransformableActionableError,
+    SomeTransformedProduct,
+    SomeTransformedActionableError
   >,
-): Attempt_Outcome<TransformedProduct, TransformedActionableError>;
+): Attempt_Outcome<SomeTransformedProduct, SomeTransformedActionableError>;
 //
 function fromRewrapping<
-  TransformableProduct,
-  TransformableActionableError extends ActionableError<string>,
-  TransformedProduct = TransformableProduct,
-  TransformedActionableError extends ActionableError<string> = TransformableActionableError,
+  SomeTransformableProduct,
+  SomeTransformableActionableError extends ActionableError<string>,
+  SomeTransformedProduct = SomeTransformableProduct,
+  SomeTransformedActionableError extends ActionableError<string> = SomeTransformableActionableError,
 >(
-  givenOutcome: Attempt_Outcome<TransformableProduct, TransformableActionableError>,
+  givenOutcome: Attempt_Outcome<SomeTransformableProduct, SomeTransformableActionableError>,
   {
-    product: toTransformedProduct = productIdentity<TransformableProduct, TransformedProduct>,
-    cause: toTransformedCause = causeIdentity<TransformableActionableError, TransformedActionableError>,
+    product: toTransformedProduct = productIdentity<SomeTransformableProduct, SomeTransformedProduct>,
+    cause: toTransformedCause = causeIdentity<SomeTransformableActionableError, SomeTransformedActionableError>,
   }: Attempt_Outcome_Transformer<
-    TransformableProduct,
-    TransformableActionableError,
-    TransformedProduct,
-    TransformedActionableError
+    SomeTransformableProduct,
+    SomeTransformableActionableError,
+    SomeTransformedProduct,
+    SomeTransformedActionableError
   > = {
-    product: productIdentity<TransformableProduct, TransformedProduct>,
-    cause  : causeIdentity<TransformableActionableError, TransformedActionableError>,
+    product: productIdentity<SomeTransformableProduct, SomeTransformedProduct>,
+    cause  : causeIdentity<SomeTransformableActionableError, SomeTransformedActionableError>,
   },
-): Attempt_Outcome<TransformedProduct, TransformedActionableError> {
+): Attempt_Outcome<SomeTransformedProduct, SomeTransformedActionableError> {
   return givenOutcome.isSuccess
     ? givenOutcome.rewrappedWith({
         product: toTransformedProduct,

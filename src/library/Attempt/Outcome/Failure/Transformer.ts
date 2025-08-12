@@ -3,28 +3,28 @@ import type {
 } from '../../error';
 
 type CauseTransformer<
-  TransformableActionableError extends ActionableError<string>,
-  TransformedActionableError extends ActionableError<string>,
+  SomeTransformableActionableError extends ActionableError<string>,
+  SomeTransformedActionableError extends ActionableError<string>,
 > = (
-  transformableCause: TransformableActionableError,
-) => TransformedActionableError;
+  transformableCause: SomeTransformableActionableError,
+) => SomeTransformedActionableError;
 
 const causeIdentity = <
-  TransformableActionableError extends ActionableError<string>,
-  TransformedActionableError extends ActionableError<string>,
+  SomeTransformableActionableError extends ActionableError<string>,
+  SomeTransformedActionableError extends ActionableError<string>,
 >(
-  transformableCause: NoInfer<TransformableActionableError>,
-): NoInfer<TransformedActionableError> => {
-  return transformableCause as unknown as TransformedActionableError;
+  transformableCause: NoInfer<SomeTransformableActionableError>,
+): NoInfer<SomeTransformedActionableError> => {
+  return transformableCause as unknown as SomeTransformedActionableError;
 };
 
 interface Attempt_Failure_Transformer<
-  TransformableActionableError extends ActionableError<string>,
-  TransformedActionableError extends ActionableError<string>,
+  SomeTransformableActionableError extends ActionableError<string>,
+  SomeTransformedActionableError extends ActionableError<string>,
 > {
   cause: CauseTransformer<
-    TransformableActionableError,
-    TransformedActionableError
+    SomeTransformableActionableError,
+    SomeTransformedActionableError
   >;
 }
 

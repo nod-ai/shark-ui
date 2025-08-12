@@ -17,14 +17,14 @@ import {
 import * as GCDAlias from './greatestCommonDivisor';
 
 const pairCombos = <
-  LeftElement extends number,
-  RightElement extends number,
-  FillerElement extends number,
+  SomeLeftElement extends number,
+  SomeRightElement extends number,
+  SomeFillerElement extends number,
 >(
   given: {
-    left: LeftElement;
-    right: RightElement;
-    filler: FillerElement;
+    left: SomeLeftElement;
+    right: SomeRightElement;
+    filler: SomeFillerElement;
   },
 ) => [
   [given.left/*  */, given.filler/**/],
@@ -33,12 +33,12 @@ const pairCombos = <
 ] as const;
 
 const symmetricPairCombos = <
-  SymmetricElement extends number,
-  FillerElement extends number,
+  SomeSymmetricElement extends number,
+  SomeFillerElement extends number,
 >(
   given: {
-    of: SymmetricElement;
-    filler: FillerElement;
+    of: SomeSymmetricElement;
+    filler: SomeFillerElement;
   },
 ) => pairCombos({
   left  : given.of,

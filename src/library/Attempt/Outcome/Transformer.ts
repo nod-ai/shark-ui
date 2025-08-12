@@ -11,36 +11,36 @@ import type {
 } from './Success/Transformer';
 
 type Attempt_Outcome_Transformer<
-  TransformableProduct,
-  TransformableActionableError extends ActionableError<string>,
-  TransformedProduct,
-  TransformedActionableError extends ActionableError<string>,
+  SomeTransformableProduct,
+  SomeTransformableActionableError extends ActionableError<string>,
+  SomeTransformedProduct,
+  SomeTransformedActionableError extends ActionableError<string>,
 > =
   | (
     & Required<
       Attempt_Success_Transformer<
-        TransformableProduct,
-        TransformedProduct
+        SomeTransformableProduct,
+        SomeTransformedProduct
       >
     >
     & Partial<
       Attempt_Failure_Transformer<
-        TransformableActionableError,
-        TransformedActionableError
+        SomeTransformableActionableError,
+        SomeTransformedActionableError
       >
     >
   )
   | (
     & Partial<
       Attempt_Success_Transformer<
-        TransformableProduct,
-        TransformedProduct
+        SomeTransformableProduct,
+        SomeTransformedProduct
       >
     >
     & Required<
       Attempt_Failure_Transformer<
-        TransformableActionableError,
-        TransformedActionableError
+        SomeTransformableActionableError,
+        SomeTransformedActionableError
       >
     >
   )

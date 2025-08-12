@@ -1,26 +1,26 @@
 type ProductTransformer<
-  TransformableProduct,
-  TransformedProduct,
+  SomeTransformableProduct,
+  SomeTransformedProduct,
 > = (
-  transformableProduct: TransformableProduct,
-) => TransformedProduct;
+  transformableProduct: SomeTransformableProduct,
+) => SomeTransformedProduct;
 
 const productIdentity = <
-  TransformableProduct,
-  TransformedProduct,
+  SomeTransformableProduct,
+  SomeTransformedProduct,
 >(
-  transformableProduct: NoInfer<TransformableProduct>,
-): NoInfer<TransformedProduct> => {
-  return transformableProduct as unknown as TransformedProduct;
+  transformableProduct: NoInfer<SomeTransformableProduct>,
+): NoInfer<SomeTransformedProduct> => {
+  return transformableProduct as unknown as SomeTransformedProduct;
 };
 
 interface Attempt_Success_Transformer<
-  TransformableProduct,
-  TransformedProduct,
+  SomeTransformableProduct,
+  SomeTransformedProduct,
 > {
   product: ProductTransformer<
-    TransformableProduct,
-    TransformedProduct
+    SomeTransformableProduct,
+    SomeTransformedProduct
   >;
 }
 

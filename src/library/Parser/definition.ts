@@ -3,11 +3,11 @@ import type Attempt from '@/library/Attempt';
 import ParsingError from './ParsingError';
 
 interface Parser<
-  ParsableInput,
-  ParsedOutput,
+  SomeParsableInput,
+  SomeParsedOutput,
   SomeParsingError extends ParsingError<string>,
 > {
-  parsedFrom(givenSubject: ParsableInput): Attempt.Outcome<ParsedOutput, SomeParsingError>;
+  parsedFrom(givenSubject: SomeParsableInput): Attempt.Outcome<SomeParsedOutput, SomeParsingError>;
 }
 
 export {
