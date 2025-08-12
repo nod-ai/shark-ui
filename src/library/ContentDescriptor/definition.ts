@@ -15,18 +15,18 @@ import type {
 /** See [RFC 2045](https://datatracker.ietf.org/doc/html/rfc2045) for more information */
 class ContentDescriptor {
   public constructor(
-    public fileType: ContentDescriptor_TopLevel.Any,
+    public topLevelDescriptor: ContentDescriptor_TopLevel.Any,
     public tree: string[] | null,
     public fileSubtype: string,
     public structureType: ContentDescriptor_StructuredSyntaxNameSuffix.Any | null,
     public parameters: Record<string, string> | null,
   ) {}
 
-  public static readonly fileTypeSuffix = '/';
+  public static readonly suffixForTopLevelDescriptor = '/';
 
-  public get serializableFileType(): NonTrivialString {
-    const suffixedFileType = this.fileType.concat(ContentDescriptor.fileTypeSuffix);
-    return NonTrivialString.parsedFrom(suffixedFileType).forciblyUnwrap(/* Proven safe by inspecting intellisense of `fileType` */);
+  public get serializableTopLevelDescriptor(): NonTrivialString {
+    const suffixedTopLevelDescriptor = this.topLevelDescriptor.concat(ContentDescriptor.suffixForTopLevelDescriptor);
+    return NonTrivialString.parsedFrom(suffixedTopLevelDescriptor).forciblyUnwrap(/* Proven safe by inspecting intellisense of `topLevelDescriptor` */);
   }
 
   public static readonly treeBranchSuffix = '.';
@@ -68,7 +68,7 @@ class ContentDescriptor {
 
   public get serialized(): NonTrivialString {
     const orderedComponents = [
-      this.serializableFileType,
+      this.serializableTopLevelDescriptor,
       this.serializableTree,
       this.fileSubtype,
       this.serializableStructureType,
