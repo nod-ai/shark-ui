@@ -1,23 +1,17 @@
-import type Static from '@/library/typeUtilities/Static';
-
 import type ParsingError from '../ParsingError';
 
 import type {
-  StringParser,
-} from './StringParser';
+  StaticParser,
+} from '../StaticParser';
 
 type StaticStringParser<
   SomeParsedOutput,
   SomeParsingError extends ParsingError<string>,
-> =
-  & Static<
-    SomeParsedOutput
-  >
-  & StringParser<
-    SomeParsedOutput,
-    SomeParsingError
-  >
-;
+> = StaticParser<
+  string,
+  SomeParsedOutput,
+  SomeParsingError
+>;
 
 export type {
   StaticStringParser,
