@@ -25,11 +25,11 @@ type Attempt_EndRetriever<
 ) => Promise<SomeInferredOutcome>;
 
 const Attempt_thatEventually = async <
-  InferredOutcome extends Attempt_Outcome<unknown, ActionableError<string>>,
+  SomeInferredOutcome extends Attempt_Outcome<unknown, ActionableError<string>>,
 >(
-  endsAccordingTo: Attempt_EndRetriever<InferredOutcome>,
+  endsAccordingTo: Attempt_EndRetriever<SomeInferredOutcome>,
 ) => {
-  type EquivalentOutcome = Attempt_Outcome<ProductOf<InferredOutcome>, CauseOf<InferredOutcome>>;
+  type EquivalentOutcome = Attempt_Outcome<ProductOf<SomeInferredOutcome>, CauseOf<SomeInferredOutcome>>;
 
   return sanctionedAsync({
     async try() {

@@ -34,17 +34,17 @@ const sanctioned = <
 };
 
 const sanctionedAsync = async <
-  OutputOfResolvedPromise,
-  OutputOfRejectedPromise,
+  SomeOutputOfResolvedPromise,
+  SomeOutputOfRejectedPromise,
 >(
   {
     try: retrieveTryBlockOutput,
     catch: catchBlockOutputFor,
   }: {
-    try: () => Promise<OutputOfResolvedPromise>;
-    catch: ($0: AppropriatelyThrown<Error>) => OutputOfRejectedPromise;
+    try: () => Promise<SomeOutputOfResolvedPromise>;
+    catch: ($0: AppropriatelyThrown<Error>) => SomeOutputOfRejectedPromise;
   },
-): Promise<OutputOfResolvedPromise | OutputOfRejectedPromise> => {
+): Promise<SomeOutputOfResolvedPromise | SomeOutputOfRejectedPromise> => {
   const sanction = (whateverThatWasThrown: unknown) => sanctioned({
     try: () => {
       throw whateverThatWasThrown; // eslint-disable-line no-restricted-syntax -- puts the error back through the sanctioned catch
