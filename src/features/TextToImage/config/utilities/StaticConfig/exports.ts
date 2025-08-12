@@ -5,8 +5,7 @@ import {
 } from '@/library/URLComponent';
 
 import {
-  type Config,
-  Config_Schema,
+  Config,
 } from '../../types';
 
 import StaticConfigReadingError from './StaticConfigReadingError';
@@ -26,7 +25,7 @@ const readConfig = (): Promise<OutcomeOfReadingConfig> => Attempt.thatEventually
   ) return ends.inFailureDueTo(new StaticConfigReadingError(configFile, fileResponse));
 
   const rawConfig = await fileResponse.json() as unknown;
-  const parsedConfig = Config_Schema.parse(rawConfig);
+  const parsedConfig = Config.Schema.parse(rawConfig);
   return ends.inSuccessWith(parsedConfig);
 });
 

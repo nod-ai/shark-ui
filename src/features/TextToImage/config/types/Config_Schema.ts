@@ -7,7 +7,7 @@ import {
 
 /** Defines how to parse an instance of {@link TextToImage_Config} */
 const TextToImage_Config_Schema = Schema.object({
-  server: WebAPI.Server_Schema
+  server: WebAPI.Server.Schema
     .nullable()
     .catch(null),
 }).transform($0 => new TextToImage_Config(
