@@ -27,9 +27,9 @@ class ImageClient
       givenRequest.textToImageRequestBody,
     ]);
 
-    const generationEndpoint = URLPath.parsedFrom('/generate').forciblyUnwrap();
-
     const generatedImage = await (async (): Promise<Base64CharacterEncodedByteSequence> => {
+      const generationEndpoint = URLPath.parsedFrom('/generate').forciblyUnwrap();
+
       const outcomeOfSubmittingResource = await this.submitResource({
         bySending: derivedBatchedRequestBody,
         to       : generationEndpoint,
