@@ -1,16 +1,11 @@
 import Attempt from '@/library/Attempt';
 
 import {
-  Parse_instanceFrom,
-} from '@/library/Parser';
-
-import {
   URLPath,
 } from '@/library/URLComponent';
 
 import {
   Config,
-  Config_ParsingError,
 } from '../../types';
 
 import DynamicConfig_EndpointResponseError from './EndpointResponseError';
@@ -51,12 +46,7 @@ const fetchConfig = (): Promise<OutcomeOfFetchingConfig> => Attempt.thatEventual
   ) return ends.inFailureDueTo(endpointResponseError);
 
   const rawConfig = await endpointResponse.json() as unknown;
-
-  const parsedConfig = Parse_instanceFrom(rawConfig, {
-    using      : Config.Schema,
-    failingWith: Config_ParsingError,
-  }).forciblyUnwrap(/* Implementation must align with established contract. */);
-
+  const parsedConfig = Config.parsedFrom(rawConfig).forciblyUnwrap(/* Implementation must align with established contract. */);
   return ends.inSuccessWith(parsedConfig);
 });
 

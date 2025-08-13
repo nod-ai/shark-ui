@@ -1,16 +1,11 @@
 import Attempt from '@/library/Attempt';
 
 import {
-  Parse_instanceFrom,
-} from '@/library/Parser';
-
-import {
   URLPath,
 } from '@/library/URLComponent';
 
 import {
   Config,
-  Config_ParsingError,
 } from '../../types';
 
 import StaticConfigReadingError from './StaticConfigReadingError';
@@ -30,12 +25,7 @@ const readConfig = (): Promise<OutcomeOfReadingConfig> => Attempt.thatEventually
   ) return ends.inFailureDueTo(new StaticConfigReadingError(configFile, fileResponse));
 
   const rawConfig = await fileResponse.json() as unknown;
-
-  const parsedConfig = Parse_instanceFrom(rawConfig, {
-    using      : Config.Schema,
-    failingWith: Config_ParsingError,
-  }).forciblyUnwrap(/* Implementation must align with established contract. */);
-
+  const parsedConfig = Config.parsedFrom(rawConfig).forciblyUnwrap(/* Implementation must align with established contract. */);
   return ends.inSuccessWith(parsedConfig);
 });
 
