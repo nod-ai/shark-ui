@@ -7,6 +7,7 @@ import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
+import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
 import HTTP from '@/library/HTTP';
 import Shortfin from '@/library/Shortfin';
 
@@ -26,22 +27,28 @@ class ImageClient
       givenRequest.textToImageRequestBody,
     ]);
 
-    const generationEndpoint = URLPath.parsedFrom('/generate').forciblyUnwrap();
+    const generatedImage = await (async function (
+      this: HTTP.Client,
+      givenBatchedRequestBody: Shortfin.TextToImage.SDXL.Client.Request.Body.Batched,
+    ): Promise<Base64CharacterEncodedByteSequence> {
+      const generationEndpoint = URLPath.parsedFrom('/generate').forciblyUnwrap();
 
-    const outcomeOfSubmittingResource = await this.submitResource({
-      bySending: derivedBatchedRequestBody,
-      to       : generationEndpoint,
-    });
+      const outcomeOfSubmittingResource = await this.submitResource({
+        bySending: givenBatchedRequestBody,
+        to       : generationEndpoint,
+      });
 
-    const rawResource = outcomeOfSubmittingResource.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
+      const rawResource = outcomeOfSubmittingResource.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
 
-    const parsedResource = Shortfin.TextToImage.SDXL.Client.Response.Body.parsedFrom(rawResource)
-      .forciblyUnwrap(/* Implementation must align with established contract. */);
+      const parsedResource = Shortfin.TextToImage.SDXL.Client.Response.Body.parsedFrom(rawResource)
+        .forciblyUnwrap(/* Implementation must align with established contract. */);
 
-    const [soleGeneratedImage] = parsedResource.images;
+      const [soleGeneratedImage] = parsedResource.images;
+      return soleGeneratedImage;
+    }.bind(this))(derivedBatchedRequestBody);
 
     const soleGeneratedArtifact: StabilityAI_TextToImage_Pipeline_Output = {
-      base64      : soleGeneratedImage.toString(),
+      base64      : generatedImage.toString(),
       finishReason: 'SUCCESS',
       seed        : givenRequest.textToImageRequestBody.seed,
     };
