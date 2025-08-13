@@ -8,6 +8,11 @@ import type {
 } from 'stabilityai-client-typescript/models/operations';
 
 import HTTP from '@/library/HTTP';
+
+import {
+  Parse_instanceFrom,
+} from '@/library/Parser';
+
 import Shortfin from '@/library/Shortfin';
 
 import {
@@ -34,7 +39,12 @@ class ImageClient
     });
 
     const rawResource = outcomeOfSubmittingResource.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
-    const parsedResource = Shortfin.TextToImage.SDXL.Client.Response.Body.Schema.parse(rawResource); // Will raw `throw` upon failure. Implementation must align with established contract.
+
+    const parsedResource = Parse_instanceFrom(rawResource, {
+      using      : Shortfin.TextToImage.SDXL.Client.Response.Body.Schema,
+      failingWith: Shortfin.TextToImage.SDXL.Client.Response.Body.ParsingError,
+    }).forciblyUnwrap(/* Implementation must align with established contract. */);
+
     const [soleGeneratedImage] = parsedResource.images;
 
     const soleGeneratedArtifact: StabilityAI_TextToImage_Pipeline_Output = {
