@@ -1,7 +1,22 @@
+import type Attempt from '@/library/Attempt';
 import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
+
+import {
+  type Parsable,
+  Parse_instanceFrom,
+} from '@/library/Parser';
+
 import Schema from '@/library/Schema';
 
-class Shortfin_TextToImage_SDXL_Client_Response_Body {
+import {
+  Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError,
+} from './ParsingError';
+
+class Shortfin_TextToImage_SDXL_Client_Response_Body
+implements Parsable<
+  typeof Shortfin_TextToImage_SDXL_Client_Response_Body,
+  /*  */ Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError
+> {
   public constructor(
     public images: [
       Base64CharacterEncodedByteSequence,
@@ -9,7 +24,7 @@ class Shortfin_TextToImage_SDXL_Client_Response_Body {
     ],
   ) {}
 
-  public static Schema = Schema
+  private static Schema = Schema
     .object({
       images: Schema
         .tuple([
@@ -22,6 +37,20 @@ class Shortfin_TextToImage_SDXL_Client_Response_Body {
     .transform($0 => new Shortfin_TextToImage_SDXL_Client_Response_Body(
       $0.images,
     ));
+
+  public static parsedFrom(
+    givenSubject: unknown,
+  ): Attempt.Outcome<
+    Shortfin_TextToImage_SDXL_Client_Response_Body,
+    Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError
+  > {
+    const parsedBody = Parse_instanceFrom(givenSubject, {
+      using      : this.Schema,
+      failingWith: Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError,
+    });
+
+    return parsedBody;
+  }
 }
 
 export {
