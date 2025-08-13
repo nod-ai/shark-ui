@@ -17,8 +17,6 @@ import {
 
 import toShortfin from './toShortfin';
 
-const generationEndpoint = URLPath.parsedFrom('/generate').forciblyUnwrap();
-
 class ImageClient
   extends HTTP.Client {
   public async forciblyGenerateFromText(
@@ -27,6 +25,8 @@ class ImageClient
     const derivedBatchedRequestBody = toShortfin.BatchedRequestBody([
       givenRequest.textToImageRequestBody,
     ]);
+
+    const generationEndpoint = URLPath.parsedFrom('/generate').forciblyUnwrap();
 
     const outcomeOfSubmittingResource = await this.submitResource({
       bySending: derivedBatchedRequestBody,
