@@ -7,7 +7,7 @@ import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
-import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
+import Attempt from '@/library/Attempt';
 import HTTP from '@/library/HTTP';
 import Shortfin from '@/library/Shortfin';
 
@@ -27,25 +27,33 @@ class ImageClient
       givenRequest.textToImageRequestBody,
     ]);
 
-    const generatedImage = await (async function (
+    const outcomeOfGeneratingImage = await (async function (
       this: HTTP.Client,
       givenBatchedRequestBody: Shortfin.TextToImage.SDXL.Client.Request.Body.Batched,
-    ): Promise<Base64CharacterEncodedByteSequence> {
+    ): Promise<Shortfin.TextToImage.SDXL.Client.Request.Outcome> {
       const generationEndpoint = URLPath.parsedFrom('/generate').forciblyUnwrap();
 
-      const outcomeOfSubmittingResource = await this.submitResource({
-        bySending: givenBatchedRequestBody,
-        to       : generationEndpoint,
+      return Attempt.thatEventually(async (ends) => {
+        const outcomeOfSubmittingResource = await this.submitResource({
+          bySending: givenBatchedRequestBody,
+          to       : generationEndpoint,
+        });
+
+        if (
+          outcomeOfSubmittingResource.isFailure
+        ) return outcomeOfSubmittingResource;
+
+        const rawResource = outcomeOfSubmittingResource.unwrapped;
+
+        const parsedResource = Shortfin.TextToImage.SDXL.Client.Response.Body.parsedFrom(rawResource)
+          .forciblyUnwrap(/* Implementation must align with established contract. */);
+
+        const [soleGeneratedImage] = parsedResource.images;
+        return ends.inSuccessWith(soleGeneratedImage);
       });
-
-      const rawResource = outcomeOfSubmittingResource.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
-
-      const parsedResource = Shortfin.TextToImage.SDXL.Client.Response.Body.parsedFrom(rawResource)
-        .forciblyUnwrap(/* Implementation must align with established contract. */);
-
-      const [soleGeneratedImage] = parsedResource.images;
-      return soleGeneratedImage;
     }.bind(this))(derivedBatchedRequestBody);
+
+    const generatedImage = outcomeOfGeneratingImage.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
 
     const soleGeneratedArtifact: StabilityAI_TextToImage_Pipeline_Output = {
       base64      : generatedImage.toString(),
