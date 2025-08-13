@@ -46,7 +46,7 @@ const fetchConfig = (): Promise<OutcomeOfFetchingConfig> => Attempt.thatEventual
   ) return ends.inFailureDueTo(endpointResponseError);
 
   const rawConfig = await endpointResponse.json() as unknown;
-  const parsedConfig = Config.Schema.parse(rawConfig);
+  const parsedConfig = Config.Schema.parse(rawConfig); // Will raw `throw` upon failure. Implementation must align with established contract.
   return ends.inSuccessWith(parsedConfig);
 });
 
