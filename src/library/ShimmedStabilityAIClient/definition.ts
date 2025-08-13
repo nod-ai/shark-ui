@@ -28,12 +28,12 @@ class ImageClient
     ]);
 
     const generatedImage = await (async (
-      derivedBatchedRequestBody: Shortfin.TextToImage.SDXL.Client.Request.Body.Batched,
+      givenBatchedRequestBody: Shortfin.TextToImage.SDXL.Client.Request.Body.Batched,
     ): Promise<Base64CharacterEncodedByteSequence> => {
       const generationEndpoint = URLPath.parsedFrom('/generate').forciblyUnwrap();
 
       const outcomeOfSubmittingResource = await this.submitResource({
-        bySending: derivedBatchedRequestBody,
+        bySending: givenBatchedRequestBody,
         to       : generationEndpoint,
       });
 
