@@ -1,1 +1,5 @@
-export * as Shortfin_TextToImage_SDXL_Client from './definitionAugmentation.ts';
+import * as Shortfin_TextToImage_SDXL_Client from './definitionAugmentation.ts';
+
+export {
+  Shortfin_TextToImage_SDXL_Client,
+};
