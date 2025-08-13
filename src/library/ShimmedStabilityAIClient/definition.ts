@@ -54,7 +54,7 @@ class ImageClient
     };
 
     const textToImageSDXLShortfinClient = {
-      generateImageFrom: generateImageFrom.bind(this),
+      generateImageFrom: generateImageFrom.bind(new Shortfin.TextToImage.SDXL.Client(this.origin, this.headers)),
     };
 
     const outcomeOfGeneratingImage = await textToImageSDXLShortfinClient.generateImageFrom(derivedBatchedRequestBody);
