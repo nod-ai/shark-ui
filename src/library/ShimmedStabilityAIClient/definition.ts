@@ -7,13 +7,11 @@ import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
-import Attempt from '@/library/Attempt';
 import HTTP from '@/library/HTTP';
 import Shortfin from '@/library/Shortfin';
 
 import {
   URLOrigin,
-  URLPath,
 } from '@/library/URLComponent';
 
 import toShortfin from './toShortfin';
@@ -27,35 +25,7 @@ class ImageClient
       givenRequest.textToImageRequestBody,
     ]);
 
-    const generateImageFrom = async function (
-      this: HTTP.Client,
-      givenBatchedRequestBody: Shortfin.TextToImage.SDXL.Client.Request.Body.Batched,
-    ): Promise<Shortfin.TextToImage.SDXL.Client.Request.Outcome> {
-      const generationEndpoint = URLPath.parsedFrom('/generate').forciblyUnwrap();
-
-      return Attempt.thatEventually(async (ends) => {
-        const outcomeOfSubmittingResource = await this.submitResource({
-          bySending: givenBatchedRequestBody,
-          to       : generationEndpoint,
-        });
-
-        if (
-          outcomeOfSubmittingResource.isFailure
-        ) return outcomeOfSubmittingResource;
-
-        const rawResource = outcomeOfSubmittingResource.unwrapped;
-
-        const parsedResource = Shortfin.TextToImage.SDXL.Client.Response.Body.parsedFrom(rawResource)
-          .forciblyUnwrap(/* Implementation must align with established contract. */);
-
-        const [soleGeneratedImage] = parsedResource.images;
-        return ends.inSuccessWith(soleGeneratedImage);
-      });
-    };
-
-    const textToImageSDXLShortfinClient = {
-      generateImageFrom: generateImageFrom.bind(new Shortfin.TextToImage.SDXL.Client(this.origin, this.headers)),
-    };
+    const textToImageSDXLShortfinClient = new Shortfin.TextToImage.SDXL.Client(this.origin, this.headers);
 
     const outcomeOfGeneratingImage = await textToImageSDXLShortfinClient.generateImageFrom(derivedBatchedRequestBody);
     const generatedImage = outcomeOfGeneratingImage.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
