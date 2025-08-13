@@ -5,3 +5,5 @@ export type * from './Parsable';
 export {
   default as ParsingError,
 } from './ParsingError';
+
+export * from './Parse_instanceFrom';
