@@ -1,3 +1,3 @@
 export {
   Range,
-} from './definition.ts';
+} from './definitionWithAugmentation.ts';
