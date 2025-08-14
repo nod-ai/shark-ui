@@ -72,5 +72,4 @@ class NonTrivialString
 
 export {
   NonTrivialString,
-  NonTrivialString_ParsingError,
 };

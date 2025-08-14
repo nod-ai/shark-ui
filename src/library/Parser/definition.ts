@@ -12,5 +12,4 @@ interface Parser<
 
 export type {
   Parser,
-  ParsingError,
 };
