@@ -11,6 +11,6 @@ interface Parser<
 }
 
 export {
-  type Parser as default,
+  type Parser,
   ParsingError,
 };

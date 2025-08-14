@@ -5,7 +5,9 @@ import type {
   DataURI_EncodingIdentifier,
 } from '../EncodingIdentifier';
 
-import DataURI from '../definition.ts';
+import {
+  DataURI,
+} from '../definition.ts';
 
 import type {
   ImageURI_Format,
@@ -41,5 +43,5 @@ class ImageURI
 }
 
 export {
-  ImageURI as default,
+  ImageURI,
 };

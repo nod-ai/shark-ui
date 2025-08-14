@@ -74,6 +74,6 @@ class Base64CharacterEncodedByteSequence
 }
 
 export {
-  Base64CharacterEncodedByteSequence as default,
+  Base64CharacterEncodedByteSequence,
   Base64CharacterEncodedByteSequence_ParsingError,
 };

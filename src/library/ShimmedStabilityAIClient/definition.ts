@@ -34,5 +34,5 @@ class ShimmedStabilityAIClient
 }
 
 export {
-  ShimmedStabilityAIClient as default,
+  ShimmedStabilityAIClient,
 };

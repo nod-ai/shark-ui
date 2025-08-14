@@ -4,7 +4,9 @@ import {
   isNegative,
 } from '@/library/math';
 
-import Range from './definition.ts';
+import {
+  Range,
+} from './definition.ts';
 
 class DiscreteRange
   extends Range {

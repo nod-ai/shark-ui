@@ -1,3 +1,3 @@
 export {
-  default as default,
+  ContentDescriptor as default,
 } from './definition.ts';

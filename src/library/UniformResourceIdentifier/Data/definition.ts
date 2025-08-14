@@ -3,7 +3,9 @@ import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEn
 import type ContentDescriptor from '@/library/ContentDescriptor';
 import NonTrivialString from '@/library/NonTrivialString';
 
-import UniformResourceIdentifier from '../definition.ts';
+import {
+  UniformResourceIdentifier,
+} from '../definition.ts';
 
 import type {
   DataURI_EncodingIdentifier,
@@ -61,5 +63,5 @@ class DataURI
 }
 
 export {
-  DataURI as default,
+  DataURI,
 };
