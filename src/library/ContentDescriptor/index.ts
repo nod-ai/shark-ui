@@ -1,5 +1,5 @@
 export {
-  default as default,
+  ContentDescriptor as default,
   ContentType,
   MediaType,
   MIMEType,

@@ -94,5 +94,5 @@ const SDXLTextToImageClient = {
 };
 
 export {
-  SDXLTextToImageClient as default,
+  SDXLTextToImageClient,
 };

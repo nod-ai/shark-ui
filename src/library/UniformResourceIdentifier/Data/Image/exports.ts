@@ -1,3 +1,3 @@
 export {
-  ImageURI as default,
+  ImageURI,
 } from './definition.ts';

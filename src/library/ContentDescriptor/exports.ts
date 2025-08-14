@@ -1,5 +1,5 @@
 export {
-  ContentDescriptor as default,
+  ContentDescriptor,
 } from './definition.ts';
 
 export * from './misnomers';

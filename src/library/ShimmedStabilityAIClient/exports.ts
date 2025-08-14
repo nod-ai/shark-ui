@@ -1,3 +1,3 @@
 export {
-  ShimmedStabilityAIClient as default,
+  ShimmedStabilityAIClient,
 } from './definition.ts';

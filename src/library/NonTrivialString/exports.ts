@@ -1,3 +1,3 @@
 export {
-  NonTrivialString as default,
+  NonTrivialString,
 } from './definition.ts';
