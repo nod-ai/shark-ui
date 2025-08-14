@@ -13,7 +13,7 @@ import {
   type Attempt_Outcome_Success,
   type Attempt_Outcome_Success_Transformer,
   Attempt_Outcome_Success_thatYielded,
-  Attempt_Outcome_Success_productIdentity,
+  Attempt_Outcome_Success_Product_identity,
 } from './Success';
 
 import type {
@@ -81,7 +81,7 @@ function Attempt_Outcome_fromRewrapping<
 >(
   givenOutcome: Attempt_Outcome<SomeTransformableProduct, SomeTransformableActionableError>,
   {
-    product: toTransformedProduct = Attempt_Outcome_Success_productIdentity<SomeTransformableProduct, SomeTransformedProduct>,
+    product: toTransformedProduct = Attempt_Outcome_Success_Product_identity<SomeTransformableProduct, SomeTransformedProduct>,
     cause: toTransformedCause = Attempt_Outcome_Failure_causeIdentity<SomeTransformableActionableError, SomeTransformedActionableError>,
   }: Attempt_Outcome_Transformer<
     SomeTransformableProduct,
@@ -89,7 +89,7 @@ function Attempt_Outcome_fromRewrapping<
     SomeTransformedProduct,
     SomeTransformedActionableError
   > = {
-    product: Attempt_Outcome_Success_productIdentity<SomeTransformableProduct, SomeTransformedProduct>,
+    product: Attempt_Outcome_Success_Product_identity<SomeTransformableProduct, SomeTransformedProduct>,
     cause  : Attempt_Outcome_Failure_causeIdentity<SomeTransformableActionableError, SomeTransformedActionableError>,
   },
 ): Attempt_Outcome<SomeTransformedProduct, SomeTransformedActionableError> {
