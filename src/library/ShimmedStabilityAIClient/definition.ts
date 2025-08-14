@@ -16,7 +16,7 @@ import {
 
 import toShortfin from './toShortfin';
 
-class ImageClient
+class ShimmedStabilityAIClient_Version1_Image
   extends HTTP.Client {
   public async forciblyGenerateFromText(
     givenRequest: GenerateFromTextRequest,
@@ -47,12 +47,12 @@ class ImageClient
   }
 }
 
-class Version1Client
+class ShimmedStabilityAIClient_Version1
   extends HTTP.Client {
-  private cachedClient?: ImageClient;
+  private cachedClient?: ShimmedStabilityAIClient_Version1_Image;
 
-  public get image(): ImageClient {
-    this.cachedClient ??= new ImageClient(this.origin, this.headers);
+  public get image(): ShimmedStabilityAIClient_Version1_Image {
+    this.cachedClient ??= new ShimmedStabilityAIClient_Version1_Image(this.origin, this.headers);
     return this.cachedClient;
   }
 }
@@ -74,10 +74,10 @@ class ShimmedStabilityAIClient
     );
   }
 
-  private cachedClient?: Version1Client;
+  private cachedClient?: ShimmedStabilityAIClient_Version1;
 
-  public get version1(): Version1Client {
-    this.cachedClient ??= new Version1Client(this.origin, this.headers);
+  public get version1(): ShimmedStabilityAIClient_Version1 {
+    this.cachedClient ??= new ShimmedStabilityAIClient_Version1(this.origin, this.headers);
     return this.cachedClient;
   }
 }
