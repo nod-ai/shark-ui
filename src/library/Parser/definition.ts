@@ -1,6 +1,6 @@
 import type Attempt from '@/library/Attempt';
 
-import ParsingError from './ParsingError';
+import type ParsingError from './ParsingError';
 
 interface Parser<
   SomeRawInput,
@@ -10,7 +10,7 @@ interface Parser<
   parsedFrom(givenSubject: SomeRawInput): Attempt.Outcome<SomeParsedOutput, SomeParsingError>;
 }
 
-export {
-  type Parser,
+export type {
+  Parser,
   ParsingError,
 };
