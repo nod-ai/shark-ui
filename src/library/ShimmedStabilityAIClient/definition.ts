@@ -6,7 +6,7 @@ import {
 
 import {
   ShimmedStabilityAIClient_Version1,
-} from './Version1/definition.ts';
+} from './Version1';
 
 class ShimmedStabilityAIClient
   extends HTTP.Client {
