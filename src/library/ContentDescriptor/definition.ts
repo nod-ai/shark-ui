@@ -83,14 +83,6 @@ class ContentDescriptor {
 /**
  * A misnomer for {@link ContentDescriptor}.
  *
- * The intended connotation for "type" is "a string of characters that describes the nature of some content", which is more accurately described as a "descriptor"
- */
-const ContentType = ContentDescriptor;
-type ContentType = ContentDescriptor;
-
-/**
- * A misnomer for {@link ContentDescriptor}.
- *
  * The intended connotation for "media" is "data formatted for client-side consumption", which is more accurately described as "content".
  *
  * This it at odds with the common definition of "media" that's most prevalent to this context which is "digital content available for human consumption (i.e. playback, viewing, reading, etc.)".
@@ -108,7 +100,6 @@ type MIMEType = ContentDescriptor;
 
 export {
   ContentDescriptor,
-  ContentType,
   MediaType,
   MIMEType,
 };
