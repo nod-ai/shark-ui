@@ -1,20 +1,11 @@
 import type {
-  Attempt_Outcome_Discriminable,
-} from '../Discriminable';
+  Attempt_Outcome_Success_SemanticallySugarfree,
+} from './SemanticallySugarfree';
 
 import {
   type Attempt_Outcome_Success_Transformer,
   Attempt_Outcome_Success_Product_Transformer_identity,
 } from './Transformer';
-
-interface Attempt_Outcome_Success_SemanticallySugarfree<
-  SomeProduct,
-> extends Attempt_Outcome_Discriminable<
-    'success',
-    SomeProduct
-  > {
-  readonly product: SomeProduct;
-}
 
 interface Attempt_Outcome_Success<
   SomeProduct,
