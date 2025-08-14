@@ -4,3 +4,5 @@ export {
   MediaType,
   MIMEType,
 } from './definition.ts';
+
+export * from './misnomers';
