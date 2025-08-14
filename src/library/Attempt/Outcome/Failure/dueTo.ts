@@ -3,22 +3,13 @@ import type {
 } from '../../Error';
 
 import type {
-  Attempt_Outcome_Discriminable,
-} from '../Discriminable';
+  Attempt_Outcome_Failure_SemanticallySugarfree,
+} from './SemanticallySugarfree';
 
 import {
   type Attempt_Outcome_Failure_Transformer,
   Attempt_Outcome_Failure_Cause_Transformer_identity,
 } from './Transformer';
-
-interface Attempt_Outcome_Failure_SemanticallySugarfree<
-  SomeActionableError extends Attempt_Error_Actionable<string>,
-> extends Attempt_Outcome_Discriminable<
-    'failure',
-    SomeActionableError
-  > {
-  readonly cause: SomeActionableError;
-}
 
 interface Attempt_Outcome_Failure<
   SomeActionableError extends Attempt_Error_Actionable<string>,
