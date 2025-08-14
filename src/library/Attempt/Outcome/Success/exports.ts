@@ -1,5 +1,3 @@
-// cspell:words sugarfree discriminable
-
 import type {
   Attempt_Outcome_Discriminable,
 } from '../Discriminable';

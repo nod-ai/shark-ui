@@ -9,6 +9,14 @@
         "vite",
         "vuetify"
     ],
+    "cSpell.customDictionaries": {
+        "library/Attempt": {
+            "name": "library/Attempt",
+            "path": "./src/library/Attempt/dictionary.txt",
+            "description": "Words introduced by the @/library/Attempt module",
+            "addWords": false
+        },
+    },
     "editor.codeActionsOnSave": {
         "source.fixAll": "explicit",
     },

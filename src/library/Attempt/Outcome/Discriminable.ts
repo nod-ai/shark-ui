@@ -10,7 +10,6 @@ import type {
 
 type Attempt_Outcome_Discriminant = 'success' | 'failure';
 
-// cspell:words sugarfree discriminable
 interface Attempt_Outcome_Discriminable_SyntacticallySugarfree<
   SomeDiscriminant extends Attempt_Outcome_Discriminant,
 > {
