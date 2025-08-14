@@ -9,7 +9,7 @@ type Attempt_Outcome_Failure_Cause_Transformer<
   transformableCause: SomeTransformableActionableError,
 ) => SomeTransformedActionableError;
 
-const Attempt_Outcome_Failure_Cause_identity = <
+const Attempt_Outcome_Failure_Cause_Transformer_identity = <
   SomeTransformableActionableError extends Attempt_Error_Actionable<string>,
   SomeTransformedActionableError extends Attempt_Error_Actionable<string>,
 >(
@@ -30,5 +30,5 @@ interface Attempt_Outcome_Failure_Transformer<
 
 export {
   type Attempt_Outcome_Failure_Transformer,
-  Attempt_Outcome_Failure_Cause_identity,
+  Attempt_Outcome_Failure_Cause_Transformer_identity,
 };
