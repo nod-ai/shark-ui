@@ -16,7 +16,7 @@ import {
 
 import toShortfin from './toShortfin';
 
-class ImageClient
+class Version1Client_Image
   extends HTTP.Client {
   public async forciblyGenerateFromText(
     givenRequest: GenerateFromTextRequest,
@@ -49,10 +49,10 @@ class ImageClient
 
 class Version1Client
   extends HTTP.Client {
-  private cachedClient?: ImageClient;
+  private cachedClient?: Version1Client_Image;
 
-  public get image(): ImageClient {
-    this.cachedClient ??= new ImageClient(this.origin, this.headers);
+  public get image(): Version1Client_Image {
+    this.cachedClient ??= new Version1Client_Image(this.origin, this.headers);
     return this.cachedClient;
   }
 }
