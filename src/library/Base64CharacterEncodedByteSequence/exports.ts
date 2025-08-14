@@ -1,3 +1,3 @@
 export {
-  Base64CharacterEncodedByteSequence as default,
+  Base64CharacterEncodedByteSequence,
 } from './definition.ts';

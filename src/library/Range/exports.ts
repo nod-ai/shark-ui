@@ -1,3 +1,3 @@
 export {
-  Range as default,
+  Range,
 } from './definition.ts';

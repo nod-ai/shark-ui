@@ -1,3 +1,3 @@
 export {
-  default as default,
+  SDXLTextToImageClient as default,
 } from './exports.ts';
