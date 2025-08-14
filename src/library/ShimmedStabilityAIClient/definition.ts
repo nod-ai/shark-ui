@@ -5,18 +5,8 @@ import {
 } from '@/library/URLComponent';
 
 import {
-  ShimmedStabilityAIClient_Version1_Image,
-} from './Version1/Image';
-
-class ShimmedStabilityAIClient_Version1
-  extends HTTP.Client {
-  private cachedClient?: ShimmedStabilityAIClient_Version1_Image;
-
-  public get image(): ShimmedStabilityAIClient_Version1_Image {
-    this.cachedClient ??= new ShimmedStabilityAIClient_Version1_Image(this.origin, this.headers);
-    return this.cachedClient;
-  }
-}
+  ShimmedStabilityAIClient_Version1,
+} from './Version1';
 
 class ShimmedStabilityAIClient
   extends HTTP.Client {
