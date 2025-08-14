@@ -1,6 +1,5 @@
 export {
   ContentDescriptor as default,
-  MediaType,
   MIMEType,
 } from './definition.ts';
 
