@@ -6,7 +6,7 @@ import {
   type Attempt_Outcome_Failure,
   type Attempt_Outcome_Failure_Transformer,
   Attempt_Outcome_Failure_dueTo,
-  Attempt_Outcome_Failure_causeIdentity,
+  Attempt_Outcome_Failure_Cause_identity,
 } from './Failure';
 
 import {
@@ -82,7 +82,7 @@ function Attempt_Outcome_fromRewrapping<
   givenOutcome: Attempt_Outcome<SomeTransformableProduct, SomeTransformableActionableError>,
   {
     product: toTransformedProduct = Attempt_Outcome_Success_Product_identity<SomeTransformableProduct, SomeTransformedProduct>,
-    cause: toTransformedCause = Attempt_Outcome_Failure_causeIdentity<SomeTransformableActionableError, SomeTransformedActionableError>,
+    cause: toTransformedCause = Attempt_Outcome_Failure_Cause_identity<SomeTransformableActionableError, SomeTransformedActionableError>,
   }: Attempt_Outcome_Transformer<
     SomeTransformableProduct,
     SomeTransformableActionableError,
@@ -90,7 +90,7 @@ function Attempt_Outcome_fromRewrapping<
     SomeTransformedActionableError
   > = {
     product: Attempt_Outcome_Success_Product_identity<SomeTransformableProduct, SomeTransformedProduct>,
-    cause  : Attempt_Outcome_Failure_causeIdentity<SomeTransformableActionableError, SomeTransformedActionableError>,
+    cause  : Attempt_Outcome_Failure_Cause_identity<SomeTransformableActionableError, SomeTransformedActionableError>,
   },
 ): Attempt_Outcome<SomeTransformedProduct, SomeTransformedActionableError> {
   return givenOutcome.isSuccess
