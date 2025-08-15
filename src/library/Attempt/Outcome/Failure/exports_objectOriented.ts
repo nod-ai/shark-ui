@@ -1,8 +1,4 @@
-export type * from './definition.ts';
-
-export {
-  Attempt_Outcome_Failure_Cause,
-} from './Cause';
+export * from './definitionWithAugmentation.ts';
 
 export type {
   Attempt_Outcome_Failure_Transformer,

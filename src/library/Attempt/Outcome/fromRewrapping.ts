@@ -3,9 +3,8 @@ import type {
 } from '../Error';
 
 import {
-  type Attempt_Outcome_Failure,
+  /**/ Attempt_Outcome_Failure,
   type Attempt_Outcome_Failure_Transformer,
-  Attempt_Outcome_Failure_Cause,
 } from './Failure';
 
 import {
@@ -88,7 +87,7 @@ function Attempt_Outcome_fromRewrapping<
       SomeTransformableProduct,
       SomeTransformedProduct
     >,
-    cause: toTransformedCause = Attempt_Outcome_Failure_Cause.Transformer_identity<
+    cause: toTransformedCause = Attempt_Outcome_Failure.Cause.Transformer_identity<
       SomeTransformableActionableError,
       SomeTransformedActionableError
     >,
@@ -102,7 +101,7 @@ function Attempt_Outcome_fromRewrapping<
       SomeTransformableProduct,
       SomeTransformedProduct
     >,
-    cause: Attempt_Outcome_Failure_Cause.Transformer_identity<
+    cause: Attempt_Outcome_Failure.Cause.Transformer_identity<
       SomeTransformableActionableError,
       SomeTransformedActionableError
     >,

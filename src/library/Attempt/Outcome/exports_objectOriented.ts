@@ -8,8 +8,7 @@ export {
 } from './Success';
 
 export {
-  type Attempt_Outcome_Failure,
-  /**/ Attempt_Outcome_Failure_Cause,
+  /**/ Attempt_Outcome_Failure,
   type Attempt_Outcome_Failure_Transformer,
   /**/ Attempt_Outcome_Failure_dueTo,
 } from './Failure';
