@@ -12,7 +12,7 @@ import {
 class HTTP_Client {
   public constructor(
     public readonly origin: URLComponent.Origin,
-    public readonly headers: HTTP_Request.HeaderMap,
+    public readonly headers?: HTTP_Request.HeaderMap,
   ) {}
 
   public static contentIsJSONIn = (
