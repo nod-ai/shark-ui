@@ -16,25 +16,14 @@ import {
 const TextToImage_Config_Dynamic_fetch = (): Promise<
   TextToImage_Config_Dynamic_Fetching.Outcome
 > => Attempt.Fresh.thatEventually(async (ends) => {
-  const endpointResponse = await fetch(TextToImage_Config_Dynamic_endpoint.toString());
+  const outcomeOfFetchingResource = await HTTP.Client.local.fetchResource({
+    from: TextToImage_Config_Dynamic_endpoint,
+  });
 
-  if (!endpointResponse.ok) {
-    const fetchingError = new TextToImage_Config_Dynamic_Fetching.Error.Request(TextToImage_Config_Dynamic_endpoint);
-    return ends.inFailureDueTo(fetchingError);
-  }
-
-  if (!HTTP.Client.contentIsJSONIn(endpointResponse)) {
-    const endpointResponseError = new TextToImage_Config_Dynamic_Fetching.Error.Response({
-      endpoint: TextToImage_Config_Dynamic_endpoint,
-      response: endpointResponse,
-    });
-
-    return ends.inFailureDueTo(endpointResponseError);
-  }
-
-  const rawConfig = await endpointResponse.json() as unknown;
-  const parsedConfig = TextToImage_Config.parsedFrom(rawConfig).forciblyUnwrap(/* Implementation must align with established contract. */);
-  return ends.inSuccessWith(parsedConfig);
+  return ends.inTermsOf(outcomeOfFetchingResource, {
+    product: $0 => TextToImage_Config.parsedFrom($0).forciblyUnwrap(/* Implementation must align with established contract. */),
+    cause  : $0 => new TextToImage_Config_Dynamic_Fetching.Error(TextToImage_Config_Dynamic_endpoint, $0),
+  });
 });
 
 export {
