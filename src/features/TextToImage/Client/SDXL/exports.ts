@@ -30,7 +30,7 @@ const TextToImage_Client_SDXL_initialize = async (): Promise<
   return outcomeOfInitializingClient;
 };
 
-type TextToImage_Client_OutcomeOfGeneratingOutput = Attempt.Outcome<TextToImage_Pipeline_Output,
+type TextToImage_Client_Generation_Outcome = Attempt.Outcome<TextToImage_Pipeline_Output,
   | TextToImage_Server.ConnectionError
   | TextToImage_Server.SpecificationError
 >;
@@ -46,7 +46,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     | 'seed'
     >;
   },
-): Promise<TextToImage_Client_OutcomeOfGeneratingOutput> => {
+): Promise<TextToImage_Client_Generation_Outcome> => {
   const outcomeOfInitializingClient = await TextToImage_Client_SDXL_initialize();
 
   if (
