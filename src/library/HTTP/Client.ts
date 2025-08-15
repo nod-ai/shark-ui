@@ -47,7 +47,9 @@ class HTTP_Client {
     const promisedResponse = fetch(endpointURL, {
       method : givenMethod,
       headers: this.headers,
-      body   : JSON.stringify(givenRequestBody),
+      body   : (givenMethod === HTTP_Request.Method.FETCH)
+        ? null
+        : JSON.stringify(givenRequestBody),
     });
 
     const outcomeOfSettlingResponse = await Attempt.Adapted.toSettle(promisedResponse, {
