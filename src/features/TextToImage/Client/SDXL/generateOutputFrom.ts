@@ -4,7 +4,6 @@ import type {
 
 import Attempt from '@/library/Attempt';
 import HTTP from '@/library/HTTP';
-import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient';
 
 import * as TextToImage_Server from '../../Server';
 
@@ -13,25 +12,12 @@ import type {
 } from '../Generation';
 
 import {
+  TextToImage_Client_SDXL_initialize,
+} from './initialize';
+
+import {
   toSharkUIOutput_first,
 } from './toSharkUIOutput';
-
-const TextToImage_Client_SDXL_initialize = async (): Promise<
-  Attempt.Outcome<
-    ShimmedStabilityAIClient,
-    TextToImage_Server.Error.Specification
-  >
-> => {
-  const outcomeOfRetrievingCurrentServer = await TextToImage_Server.Current_retrieve();
-
-  const outcomeOfInitializingClient = Attempt.Outcome.fromRewrapping(outcomeOfRetrievingCurrentServer, {
-    product: textToImageServer => new ShimmedStabilityAIClient({
-      serverURL: textToImageServer.origin,
-    }),
-  });
-
-  return outcomeOfInitializingClient;
-};
 
 const TextToImage_Client_SDXL_generateOutputFrom = async (
   given: {
