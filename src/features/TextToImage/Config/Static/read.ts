@@ -1,4 +1,5 @@
 import Attempt from '@/library/Attempt';
+import HTTP from '@/library/HTTP';
 
 import {
   TextToImage_Config,
@@ -15,16 +16,14 @@ import {
 const TextToImage_Config_Static_read = (): Promise<
   TextToImage_Config_Static_Reading.Outcome
 > => Attempt.Fresh.thatEventually(async (ends) => {
-  const fileResponse = await fetch(TextToImage_Config_Static_file.toString());
+  const outcomeOfFetchingFile = await HTTP.Client.local.fetchResource({
+    from: TextToImage_Config_Static_file,
+  });
 
-  if (!fileResponse.ok) {
-    const newReadingError = new TextToImage_Config_Static_Reading.Error(TextToImage_Config_Static_file, fileResponse);
-    return ends.inFailureDueTo(newReadingError);
-  }
-
-  const rawConfig = await fileResponse.json() as unknown;
-  const parsedConfig = TextToImage_Config.parsedFrom(rawConfig).forciblyUnwrap(/* Implementation must align with established contract. */);
-  return ends.inSuccessWith(parsedConfig);
+  return ends.inTermsOf(outcomeOfFetchingFile, {
+    product: $0 => TextToImage_Config.parsedFrom($0).forciblyUnwrap(/* Implementation must align with established contract. */),
+    cause  : $0 => new TextToImage_Config_Static_Reading.Error(TextToImage_Config_Static_file, $0),
+  });
 });
 
 export {
