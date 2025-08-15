@@ -19,6 +19,18 @@ class HTTP_Client {
     public readonly headers: HTTP_Request.HeaderMap,
   ) {}
 
+  public static contentIsJSONIn = (
+    givenResponse: Response,
+  ): boolean => {
+    const rawContentDescriptor = givenResponse.headers.get('Content-Type');
+
+    if (
+      rawContentDescriptor === null
+    ) return false;
+
+    return rawContentDescriptor.includes('application/json');
+  };
+
   public originAt(givenPath: URLComponent_Path): URL {
     const serializedURLComponents = this.origin.appendedWith(givenPath);
     return new URL(serializedURLComponents);

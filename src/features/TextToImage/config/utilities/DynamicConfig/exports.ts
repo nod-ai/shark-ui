@@ -1,4 +1,5 @@
 import Attempt from '@/library/Attempt';
+import HTTP from '@/library/HTTP';
 
 import {
   URLComponent_Path,
@@ -10,16 +11,6 @@ import {
 
 import TextToImage_Config_Dynamic_EndpointResponseError from './EndpointResponseError';
 import TextToImage_Config_Dynamic_FetchingError from './FetchingError';
-
-const HTTP_Client_contentIsJSONIn = (givenResponse: Response): boolean => {
-  const rawContentDescriptor = givenResponse.headers.get('Content-Type');
-
-  if (
-    rawContentDescriptor === null
-  ) return false;
-
-  return rawContentDescriptor.includes('application/json');
-};
 
 const TextToImage_Config_endpoint = URLComponent_Path.parsedFrom('/config/text-to-image').forciblyUnwrap();
 
@@ -42,7 +33,7 @@ const TextToImage_Config_fetch = (): Promise<TextToImage_Config_OutcomeOfFetchin
   });
 
   if (
-    !HTTP_Client_contentIsJSONIn(endpointResponse)
+    !HTTP.Client.contentIsJSONIn(endpointResponse)
   ) return ends.inFailureDueTo(endpointResponseError);
 
   const rawConfig = await endpointResponse.json() as unknown;
