@@ -6,11 +6,11 @@ import Attempt from '@/library/Attempt';
 import HTTP from '@/library/HTTP';
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient';
 
-import type {
-  Output as TextToImage_Pipeline_Output,
-} from '@/features/TextToImage/Pipeline'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
-
 import * as TextToImage_Server from '../../Server';
+
+import type {
+  TextToImage_Client_Generation,
+} from '../Generation';
 
 import {
   toSharkUIOutput_first,
@@ -33,11 +33,6 @@ const TextToImage_Client_SDXL_initialize = async (): Promise<
   return outcomeOfInitializingClient;
 };
 
-type TextToImage_Client_Generation_Outcome = Attempt.Outcome<
-  TextToImage_Pipeline_Output,
-  TextToImage_Server.Error.Any
->;
-
 const TextToImage_Client_SDXL_generateOutputFrom = async (
   given: {
     textToImageRequestBody: Pick<GenerateFromTextRequest['textToImageRequestBody'],
@@ -50,7 +45,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     >;
   },
 ): Promise<
-  TextToImage_Client_Generation_Outcome
+  TextToImage_Client_Generation.Outcome
 > => {
   const outcomeOfInitializingClient = await TextToImage_Client_SDXL_initialize();
 
