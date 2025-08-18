@@ -14,10 +14,12 @@ import {
   TextToImage_Server_Error,
 } from '../Error';
 
-const TextToImage_Server_Origin_environmentKey = 'VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN';
+import {
+  TextToImage_Server_Origin,
+} from '../Origin';
 
 const TextToImage_Server_Current_accordingToEnvironment = ((): WebAPI_Server | null => {
-  const originAccordingToEnvironment = import.meta.env[TextToImage_Server_Origin_environmentKey];
+  const originAccordingToEnvironment = import.meta.env[TextToImage_Server_Origin.environmentKey];
 
   if (
     originAccordingToEnvironment === undefined
@@ -53,7 +55,7 @@ const TextToImage_Server_Current_retrieve = (): Promise<
   ) return ends.inSuccessWith(dynamicConfig.server);
 
   const newSpecificationError = new TextToImage_Server_Error.Specification(
-    TextToImage_Server_Origin_environmentKey,
+    TextToImage_Server_Origin.environmentKey,
     TextToImage_Config_Static.file,
     TextToImage_Config_Dynamic.endpoint,
   );
