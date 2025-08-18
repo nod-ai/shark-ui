@@ -4,13 +4,8 @@ import * as TextToImage from '@/features/TextToImage';
 import TextToImageServerConnectionAlert from './TextToImageServerConnectionAlert.vue';
 import TextToImageServerSpecificationAlert from './TextToImageServerSpecificationAlert.vue';
 
-type OutputError =
-  | TextToImage.Server.Error.Connection
-  | TextToImage.Server.Error.Specification
-;
-
 defineProps<{
-  error: OutputError;
+  error: TextToImage.Server.Error.Any;
 }>();
 </script>
 
