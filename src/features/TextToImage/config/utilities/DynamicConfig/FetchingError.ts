@@ -6,7 +6,7 @@ import type {
 
 class DynamicConfig_FetchingError
   extends Attempt.ActionableError<
-  'DynamicConfigFetchError'
+  'DynamicConfig_FetchingError'
 > {
   public override name = 'DynamicConfig_FetchingError' as const;
 

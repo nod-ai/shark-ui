@@ -8,7 +8,7 @@ class StaticConfigReadingError
   extends Attempt.ActionableError<
   'StaticConfigReadingError'
 > {
-  public override name = 'StaticConfigReadError' as const;
+  public override name = 'StaticConfigReadingError' as const;
 
   public constructor(
     givenFile: URLPath,
