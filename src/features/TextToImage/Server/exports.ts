@@ -29,7 +29,10 @@ const TextToImage_Server_Current_accordingToEnvironment = ((): WebAPI_Server | n
 })();
 
 const TextToImage_Server_Current_retrieve = (): Promise<
-  Attempt.Outcome<WebAPI_Server, TextToImage_Server_Error.Specification>
+  Attempt.Outcome<
+    WebAPI_Server,
+    TextToImage_Server_Error.Specification
+  >
 > => Attempt.thatEventually(async (ends) => {
   if (
     TextToImage_Server_Current_accordingToEnvironment !== null

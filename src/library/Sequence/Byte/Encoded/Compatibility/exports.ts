@@ -10,7 +10,10 @@ const Sequence_Byte_Encoded_Compatibility_ensure = (
   }: {
     assuming: number;
   },
-): Attempt.Outcome<string, Sequence_Byte_Encoded_Compatibility_Error> => Attempt.that((ends) => {
+): Attempt.Outcome<
+  string,
+  Sequence_Byte_Encoded_Compatibility_Error
+> => Attempt.that((ends) => {
   const byteCofactor = Byte.cofactorTo(givenBitWidth);
 
   if (

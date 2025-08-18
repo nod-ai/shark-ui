@@ -44,7 +44,9 @@ const sanctionedAsync = async <
     try: () => Promise<SomeOutputOfResolvedPromise>;
     catch: ($0: AppropriatelyThrown<Error>) => SomeOutputOfRejectedPromise;
   },
-): Promise<SomeOutputOfResolvedPromise | SomeOutputOfRejectedPromise> => {
+): Promise<
+  SomeOutputOfResolvedPromise | SomeOutputOfRejectedPromise
+> => {
   const sanction = (whateverThatWasThrown: unknown) => sanctioned({
     try: () => {
       throw whateverThatWasThrown; // eslint-disable-line no-restricted-syntax -- puts the error back through the sanctioned catch

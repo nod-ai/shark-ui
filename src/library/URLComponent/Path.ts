@@ -26,7 +26,10 @@ class URLComponent_Path
 > {
   public static parsedFrom = (
     givenSubject: string,
-  ): Attempt.Outcome<URLComponent_Path, URLComponent_Path_ParsingError> => Attempt.that((ends) => {
+  ): Attempt.Outcome<
+    URLComponent_Path,
+    URLComponent_Path_ParsingError
+  > => Attempt.that((ends) => {
     const exampleURL = new URL(`https://example.com${givenSubject}`);
 
     const newParsingError = new URLComponent_Path_ParsingError({

@@ -26,7 +26,12 @@ const Attempt_Adapted_toEventually = async <
 >(
   forciblyRetrieveProduct: () => Promise<SomeProduct>,
   given: Attempt_Adapted_Config<SomeActionableError>,
-): Promise<Attempt_Outcome<SomeProduct, SomeActionableError>> => Attempt_thatEventually(ends => sanctionedAsync({
+): Promise<
+  Attempt_Outcome<
+    SomeProduct,
+    SomeActionableError
+  >
+> => Attempt_thatEventually(ends => sanctionedAsync({
   async try() {
     const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
     return ends.inSuccessWith(retrievedProduct);
@@ -46,7 +51,12 @@ const Attempt_Adapted_toSettle = async <
 >(
   promisedProduct: Promise<SomeProduct>,
   givenConfig: Attempt_Adapted_Config<SomeActionableError>,
-): Promise<Attempt_Outcome<SomeProduct, SomeActionableError>> => {
+): Promise<
+  Attempt_Outcome<
+    SomeProduct,
+    SomeActionableError
+  >
+> => {
   const getPromisedProduct = () => promisedProduct;
   return Attempt_Adapted_toEventually(getPromisedProduct, givenConfig);
 };

@@ -29,7 +29,10 @@ const Attempt_that = <
 >(
   endsAccordingTo: Attempt_End_Getter<SomeInferredOutcome>,
 ) => {
-  type EquivalentOutcome = Attempt_Outcome<ProductOf<SomeInferredOutcome>, CauseOf<SomeInferredOutcome>>;
+  type EquivalentOutcome = Attempt_Outcome<
+    ProductOf<SomeInferredOutcome>,
+    CauseOf<SomeInferredOutcome>
+  >;
 
   return sanctioned({
     try() {

@@ -13,7 +13,10 @@ interface StatefulAttempt<
 > {
   initiate: () => Promise<void>;
   isInProgress: boolean;
-  outcome: Attempt.Outcome<SomeProduct, SomeActionableError> | null;
+  outcome: Attempt.Outcome<
+    SomeProduct,
+    SomeActionableError
+  > | null;
 }
 
 /** Useful when state of UI is dependent on some async operation and the outcome upon completion */
@@ -24,10 +27,17 @@ const useStatefulAttemptThatEventually = <
   retrieveOutcome: Attempt.End_Retriever<
     Attempt.Outcome<SomeProduct, SomeActionableError>
   >,
-): StatefulAttempt<SomeProduct, SomeActionableError> => {
+): StatefulAttempt<
+  SomeProduct,
+  SomeActionableError
+> => {
   const flagIsRaised = ref(false);
 
-  type CapturedOutcome = Attempt.Outcome<SomeProduct, SomeActionableError>;
+  type CapturedOutcome = Attempt.Outcome<
+    SomeProduct,
+    SomeActionableError
+  >;
+
   const capturedOutcome: Ref<CapturedOutcome | null> = ref(null);
 
   const captureOutcome = async (): Promise<void> => {

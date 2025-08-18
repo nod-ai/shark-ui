@@ -29,7 +29,10 @@ const Attempt_thatEventually = async <
 >(
   endsAccordingTo: Attempt_End_Retriever<SomeInferredOutcome>,
 ) => {
-  type EquivalentOutcome = Attempt_Outcome<ProductOf<SomeInferredOutcome>, CauseOf<SomeInferredOutcome>>;
+  type EquivalentOutcome = Attempt_Outcome<
+    ProductOf<SomeInferredOutcome>,
+    CauseOf<SomeInferredOutcome>
+  >;
 
   return sanctionedAsync({
     async try() {
