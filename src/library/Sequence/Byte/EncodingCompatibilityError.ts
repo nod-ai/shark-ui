@@ -1,8 +1,5 @@
 import Attempt from '@/library/Attempt';
-
-import {
-  Byte_cofactorTo,
-} from '@/library/Byte/utilities/cofactorTo';
+import Byte from '@/library/Byte';
 
 class Sequence_Byte_EncodingCompatibilityError
   extends Attempt.ActionableError<
@@ -13,7 +10,7 @@ class Sequence_Byte_EncodingCompatibilityError
   public constructor(
     givenBitWidth: number,
   ) {
-    const byteCofactor = Byte_cofactorTo(givenBitWidth);
+    const byteCofactor = Byte.cofactorTo(givenBitWidth);
     super(`Character count for ${givenBitWidth.toString()}-bit sequence must be a multiple of ${byteCofactor.toString()} to be byte encodable`);
   }
 }

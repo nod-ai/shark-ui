@@ -1,8 +1,5 @@
 import Attempt from '@/library/Attempt';
-
-import {
-  Byte_cofactorTo,
-} from '@/library/Byte/utilities/cofactorTo';
+import Byte from '@/library/Byte';
 
 import Sequence_Byte_EncodingCompatibilityError from './EncodingCompatibilityError';
 
@@ -14,7 +11,7 @@ const Sequence_Byte_ensureEncodable = (
     assuming: number;
   },
 ): Attempt.Outcome<string, Sequence_Byte_EncodingCompatibilityError> => Attempt.that((ends) => {
-  const byteCofactor = Byte_cofactorTo(givenBitWidth);
+  const byteCofactor = Byte.cofactorTo(givenBitWidth);
 
   if (
     givenSequence.length % byteCofactor !== 0
