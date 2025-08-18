@@ -4,4 +4,4 @@ export {
 
 export {
   default as Error_Response,
-} from './ResponseError';
+} from './Error/Response';

@@ -14,7 +14,7 @@ import {
 } from './Fetching';
 
 import type TextToImage_Config_Dynamic_Fetching_Error_Request from './Fetching/Error';
-import type TextToImage_Config_Dynamic_Fetching_Error_Response from './Fetching/ResponseError';
+import type TextToImage_Config_Dynamic_Fetching_Error_Response from './Fetching/Error/Response';
 
 const TextToImage_Config_Dynamic_endpoint = URLComponent_Path.parsedFrom('/config/text-to-image').forciblyUnwrap();
 
