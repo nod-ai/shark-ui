@@ -4,11 +4,11 @@ import {
   Byte_cofactorTo,
 } from '@/library/Byte/utilities/cofactorTo';
 
-class Byte_Sequence_EncodingCompatibilityError
+class Sequence_Byte_EncodingCompatibilityError
   extends Attempt.ActionableError<
-  'Byte_Sequence_EncodingCompatibilityError'
+  'Sequence_Byte_EncodingCompatibilityError'
 > {
-  public override name = 'Byte_Sequence_CompatibilityError' as const;
+  public override name = 'Sequence_Byte_CompatibilityError' as const;
 
   public constructor(
     givenBitWidth: number,
@@ -19,5 +19,5 @@ class Byte_Sequence_EncodingCompatibilityError
 }
 
 export {
-  Byte_Sequence_EncodingCompatibilityError as default,
+  Sequence_Byte_EncodingCompatibilityError as default,
 };
