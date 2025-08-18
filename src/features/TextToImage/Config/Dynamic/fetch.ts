@@ -2,10 +2,6 @@ import Attempt from '@/library/Attempt';
 import HTTP from '@/library/HTTP';
 
 import {
-  URLComponent_Path,
-} from '@/library/URLComponent';
-
-import {
   TextToImage_Config,
 } from '../definition.ts';
 
@@ -13,7 +9,9 @@ import {
   TextToImage_Config_Dynamic_Fetching,
 } from './Fetching';
 
-const TextToImage_Config_Dynamic_endpoint = URLComponent_Path.parsedFrom('/config/text-to-image').forciblyUnwrap();
+import {
+  TextToImage_Config_Dynamic_endpoint,
+} from './endpoint';
 
 const TextToImage_Config_Dynamic_fetch = (): Promise<
   TextToImage_Config_Dynamic_Fetching.Outcome
