@@ -6,6 +6,7 @@ import type {
   StringParsable,
 } from '@/library/Parser/string';
 
+import Sequence from '@/library/Sequence';
 import StringSubset from '@/library/StringSubset';
 
 import {
@@ -48,7 +49,7 @@ class Base64CharacterEncodedByteSequence
   public static parsedFrom = (
     givenCharacters: string,
   ): Attempt.Outcome<Base64CharacterEncodedByteSequence, Base64CharacterEncodedByteSequence_ParsingError> => {
-    const outcomeOfEnsuringEncodableCharacters = Byte.Sequence.ensureEncodable(givenCharacters, {
+    const outcomeOfEnsuringEncodableCharacters = Sequence.Byte.ensureEncodable(givenCharacters, {
       assuming: Base64.bitWidth,
     });
 
