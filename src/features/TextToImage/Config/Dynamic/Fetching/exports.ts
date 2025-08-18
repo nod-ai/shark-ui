@@ -1,6 +1,6 @@
 export {
   default as Error_Request,
-} from './Error';
+} from './Error/Request';
 
 export {
   default as Error_Response,
