@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 
 import {
   Byte_cofactorTo,
-} from '../utilities/cofactorTo';
+} from '@/library/Byte/utilities/cofactorTo';
 
 import Byte_Sequence_EncodingCompatibilityError from './EncodingCompatibilityError';
 

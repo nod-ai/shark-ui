@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 
 import {
   Byte_cofactorTo,
-} from '../utilities/cofactorTo';
+} from '@/library/Byte/utilities/cofactorTo';
 
 class Byte_Sequence_EncodingCompatibilityError
   extends Attempt.ActionableError<
