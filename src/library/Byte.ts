@@ -2,15 +2,16 @@ import {
   cofactor,
 } from '@/library/math';
 
-const Byte_bitWidth = 8 as const;
-
-function Byte_cofactorTo(givenBitWidth: number): number {
-  return cofactor({
-    to        : givenBitWidth,
-    forLCMWith: Byte_bitWidth,
-  });
-}
+const Byte = {
+  bitWidth: 8 as const,
+  cofactorTo(givenBitWidth: number): number {
+    return cofactor({
+      to        : givenBitWidth,
+      forLCMWith: this.bitWidth,
+    });
+  },
+};
 
 export {
-  Byte_cofactorTo,
+  Byte as default,
 };
