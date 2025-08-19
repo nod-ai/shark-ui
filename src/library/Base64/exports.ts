@@ -1,5 +1,6 @@
+import * as Base64_CharacterSequence from '../Sequence/Base64';
+
 import Base64_Alphabet from './Alphabet';
-import * as Base64_CharacterSequence from './CharacterSequence';
 
 const Base64_bitWidth = Math.log2(Base64_Alphabet.length);
 
