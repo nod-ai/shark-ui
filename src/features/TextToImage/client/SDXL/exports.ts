@@ -10,9 +10,7 @@ import type {
   Output,
 } from '@/features/TextToImage/types';
 
-import {
-  Server,
-} from '@/features/TextToImage/webAPI';
+import * as Server from '../../Server';
 
 import {
   firstTextToImageOutput,
