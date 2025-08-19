@@ -1,9 +1,9 @@
 import Attempt from '@/library/Attempt';
-import Base64_Alphabet from '@/library/Base64/Alphabet';
+import Base64 from '@/library/Base64';
 
 import Sequence_Base64_ConformanceError from './ConformanceError';
 
-const Sequence_Base64_pattern = new RegExp(`^[${Base64_Alphabet.pattern.source}]+$`);
+const Sequence_Base64_pattern = new RegExp(`^[${Base64.Alphabet.pattern.source}]+$`);
 
 const Sequence_Base64_ensureConformanceOf = (
   givenCharacterSequence: string,
