@@ -1,5 +1,5 @@
 import Attempt from '@/library/Attempt';
-import Byte from '@/library/Byte';
+import Byte from '@/library/Byte/index.ts';
 
 class Sequence_Byte_EncodingCompatibilityError
   extends Attempt.ActionableError<
