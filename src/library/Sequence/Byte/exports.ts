@@ -1,5 +1,5 @@
 import Attempt from '@/library/Attempt';
-import Byte from '@/library/Byte/index.ts';
+import Byte from '@/library/Byte.ts';
 
 import Sequence_Byte_EncodingCompatibilityError from './EncodingCompatibilityError';
 
