@@ -8,10 +8,6 @@ import {
   hasAtLeastOne,
 } from '@/library/utilitiesByType/array';
 
-import {
-  allSerialized,
-} from '@/features/TextToImage/models/SDXL/client/conversions/TextPrompt';
-
 import type {
   Input,
   Output,
@@ -20,6 +16,10 @@ import type {
 import {
   toOutputImage,
 } from './StabilityAI_Client_Image';
+
+import {
+  allSerialized,
+} from './TextPrompt';
 
 const toNullableOutput = (
   givenImage: Output['image'] | null,
