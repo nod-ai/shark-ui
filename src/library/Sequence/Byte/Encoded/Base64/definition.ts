@@ -2,6 +2,7 @@ import Attempt from '@/library/Attempt';
 import Base64 from '@/library/Base64';
 import Byte from '@/library/Byte';
 import type Parsable from '@/library/Parsable';
+import Schema from '@/library/Schema';
 import StringSubset from '@/library/StringSubset';
 
 import {
@@ -75,6 +76,8 @@ class Sequence_Byte_Encoded_Base64
 
     return outcomeOfParsingByteSequence;
   };
+
+  public static Schema = Schema.base64CharacterEncodedByteSequence;
 }
 
 export {
