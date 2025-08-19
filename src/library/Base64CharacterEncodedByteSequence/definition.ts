@@ -1,6 +1,6 @@
 import Attempt from '@/library/Attempt';
 import Base64 from '@/library/Base64';
-import Byte from '@/library/Byte.ts';
+import Byte from '@/library/Byte';
 
 import type {
   StringParsable,
