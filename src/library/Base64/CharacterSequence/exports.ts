@@ -1,6 +1,5 @@
 import Attempt from '@/library/Attempt';
-
-import Base64_Alphabet from '../Alphabet';
+import Base64_Alphabet from '@/library/Base64/Alphabet';
 
 import Base64_CharacterSequence_ConformanceError from './ConformanceError';
 

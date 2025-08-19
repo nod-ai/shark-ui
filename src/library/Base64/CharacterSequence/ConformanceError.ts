@@ -1,6 +1,5 @@
 import Attempt from '@/library/Attempt';
-
-import Base64_Alphabet from '../Alphabet';
+import Base64_Alphabet from '@/library/Base64/Alphabet';
 
 class Base64_CharacterSequence_ConformanceError
   extends Attempt.ActionableError<
