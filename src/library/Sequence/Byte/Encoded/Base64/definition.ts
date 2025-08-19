@@ -77,7 +77,21 @@ class Sequence_Byte_Encoded_Base64
     return outcomeOfParsingByteSequence;
   };
 
-  public static Schema = Schema.base64CharacterEncodedByteSequence;
+  /** An alternative to `Schema.base64()` that avoids using the deprecated `atob` conversion under the hood */
+  public static Schema = () => Schema.string().transform((someSubject, currentContext) => {
+    const outcomeOfParsingSubject = Sequence.Byte.Encoded.Base64.parsedFrom(someSubject);
+
+    if (
+      outcomeOfParsingSubject.isSuccess
+    ) return outcomeOfParsingSubject.unwrapped;
+
+    currentContext.addIssue({
+      code   : 'custom',
+      message: outcomeOfParsingSubject.cause.message,
+    });
+
+    return Schema.NEVER;
+  });
 }
 
 export {
