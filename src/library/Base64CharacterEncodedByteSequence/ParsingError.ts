@@ -1,5 +1,4 @@
 import Attempt from '@/library/Attempt';
-import Base64 from '@/library/Base64';
 
 import {
   ParsingError,
@@ -23,13 +22,13 @@ class Base64CharacterEncodedByteSequence_ParsingError
   public static thatEscorts(
     givenError:
       | Sequence.Byte.EncodingCompatibilityError
-      | Base64.CharacterSequence.ConformanceError,
+      | Sequence.Base64.ConformanceError,
   ): Base64CharacterEncodedByteSequence_ParsingError {
     const extraContext = (() => {
       switch (true) {
         case givenError instanceof Sequence.Byte.EncodingCompatibilityError:
           return 'Could not use given characters to encode byte sequence.';
-        case givenError instanceof Base64.CharacterSequence.ConformanceError:
+        case givenError instanceof Sequence.Base64.ConformanceError:
           return 'Could not use given characters to encode byte sequence in Base64.';
         default: return Attempt.abandon('Unexpected error type.');
       }
