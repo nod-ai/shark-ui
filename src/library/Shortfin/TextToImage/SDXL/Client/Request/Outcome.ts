@@ -1,9 +1,9 @@
 import type Attempt from '@/library/Attempt';
-import type Sequence_Byte_Encoded_Base64 from '@/library/Base64CharacterEncodedByteSequence';
 import type HTTP from '@/library/HTTP';
+import type Sequence from '@/library/Sequence';
 
 type Shortfin_TextToImage_SDXL_Client_Request_Outcome = Attempt.Outcome<
-  Sequence_Byte_Encoded_Base64,
+  Sequence.Byte.Encoded.Base64,
   HTTP.Endpoint.Error.Any
 >;
 
