@@ -2,13 +2,20 @@ import Attempt from '@/library/Attempt';
 import Base64 from '@/library/Base64';
 import Byte from '@/library/Byte';
 import type Parsable from '@/library/Parsable';
-import Sequence from '@/library/Sequence';
 import StringSubset from '@/library/StringSubset';
 
 import {
   droppingLastCharacter,
   lastCharacterOf,
 } from '@/library/utilitiesByType/string.ts';
+
+import {
+  Sequence_Base64,
+} from '../../../Base64';
+
+import {
+  Sequence_Byte_Encoded_Compatibility,
+} from '../Compatibility';
 
 import Sequence_Byte_Encoded_Base64_ParsingError from './ParsingError.ts';
 
@@ -45,7 +52,7 @@ class Sequence_Byte_Encoded_Base64
   public static parsedFrom = (
     givenCharacters: string,
   ): Attempt.Outcome<Sequence_Byte_Encoded_Base64, Sequence_Byte_Encoded_Base64_ParsingError> => {
-    const outcomeOfEnsuringEncodableCharacters = Sequence.Byte.Encoded.Compatibility.ensure(givenCharacters, {
+    const outcomeOfEnsuringEncodableCharacters = Sequence_Byte_Encoded_Compatibility.ensure(givenCharacters, {
       assuming: Base64.bitWidth,
     });
 
@@ -59,7 +66,7 @@ class Sequence_Byte_Encoded_Base64
 
     const paddedByteEncodableCharacters = outcomeOfEnsuringEncodableCharacters.unwrapped;
     const [byteEncodableCharacters, padding] = this.withPaddingDecoupled(paddedByteEncodableCharacters);
-    const outcomeOfEnsuringConformantCharacters = Sequence.Base64.Conformance.ensure(byteEncodableCharacters);
+    const outcomeOfEnsuringConformantCharacters = Sequence_Base64.Conformance.ensure(byteEncodableCharacters);
 
     const outcomeOfParsingByteSequence = Attempt.Outcome.fromRewrapping(outcomeOfEnsuringConformantCharacters, {
       product: $0 => new this($0.concat(padding)),
