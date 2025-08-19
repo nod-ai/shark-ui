@@ -5,7 +5,7 @@ class Sequence_Byte_EncodingCompatibilityError
   extends Attempt.ActionableError<
   'Sequence_Byte_EncodingCompatibilityError'
 > {
-  public override name = 'Sequence_Byte_CompatibilityError' as const;
+  public override name = 'Sequence_Byte_EncodingCompatibilityError' as const;
 
   public constructor(
     givenBitWidth: number,

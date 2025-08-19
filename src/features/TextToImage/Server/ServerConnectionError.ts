@@ -2,9 +2,9 @@ import Attempt from '@/library/Attempt';
 
 class TextToImage_Server_ConnectionError
   extends Attempt.ActionableError<
-  'TextToImage_ServerConnectionError'
+  'TextToImage_Server_ConnectionError'
 > {
-  public override name = 'TextToImage_ServerConnectionError' as const;
+  public override name = 'TextToImage_Server_ConnectionError' as const;
 
   public constructor(
     public readonly endpoint: URL,
