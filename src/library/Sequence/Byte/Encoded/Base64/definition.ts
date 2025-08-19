@@ -78,7 +78,7 @@ class Sequence_Byte_Encoded_Base64
   };
 
   /** An alternative to `Schema.base64()` that avoids using the deprecated `atob` conversion under the hood */
-  public static Schema = () => Schema.string().transform((someSubject, currentContext) => {
+  public static Schema = Schema.string().transform((someSubject, currentContext) => {
     const outcomeOfParsingSubject = this.parsedFrom(someSubject);
 
     if (

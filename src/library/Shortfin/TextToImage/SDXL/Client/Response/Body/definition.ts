@@ -24,10 +24,10 @@ implements Parsable<
     .object({
       images: Schema
         .tuple([
-          Sequence.Byte.Encoded.Base64.Schema(),
+          Sequence.Byte.Encoded.Base64.Schema,
         ])
         .rest(
-          Sequence.Byte.Encoded.Base64.Schema(),
+          Sequence.Byte.Encoded.Base64.Schema,
         ),
     })
     .transform($0 => new Shortfin_TextToImage_SDXL_Client_Response_Body(
