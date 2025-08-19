@@ -1,3 +1,3 @@
 export {
-  Base64 as default,
+  default as default,
 } from './definition.ts';

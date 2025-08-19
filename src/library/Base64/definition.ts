@@ -10,5 +10,5 @@ const Base64 = {
 };
 
 export {
-  Base64,
+  Base64 as default,
 };
