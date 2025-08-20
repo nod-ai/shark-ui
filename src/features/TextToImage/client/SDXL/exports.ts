@@ -7,7 +7,7 @@ import HTTP from '@/library/HTTP';
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient';
 
 import type {
-  Output as TextToImage_Output,
+  Output as TextToImage_Pipeline_Output,
 } from '@/features/TextToImage/types';
 
 import * as TextToImage_Server from '../../Server';
@@ -30,7 +30,7 @@ const TextToImage_initializeShimmedStabilityAIClient = async (): Promise<
   return outcomeOfInitializingClient;
 };
 
-type TextToImage_OutcomeOfGeneratingOutput = Attempt.Outcome<TextToImage_Output,
+type TextToImage_OutcomeOfGeneratingOutput = Attempt.Outcome<TextToImage_Pipeline_Output,
   | TextToImage_Server.ConnectionError
   | TextToImage_Server.SpecificationError
 >;

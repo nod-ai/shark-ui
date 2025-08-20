@@ -4,7 +4,7 @@ import Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncoded
 import URI_Image from '@/library/UniformResourceIdentifier/Data/Image';
 
 import type {
-  Output as TextToImage_Output,
+  Output as TextToImage_Pipeline_Output,
 } from '@/features/TextToImage/types';
 
 const toOutputImage = (
@@ -12,7 +12,7 @@ const toOutputImage = (
   given: {
     description: string;
   },
-): TextToImage_Output['image'] | null => {
+): TextToImage_Pipeline_Output['image'] | null => {
   if (
     givenImage.base64 === undefined
   ) return null;
