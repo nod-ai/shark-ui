@@ -52,6 +52,9 @@ const extraConfigForESLint: ConfigWithExtends = {
         message : 'Prefer `Attempt.that` callback for error propagation over `throw`.',
       },
     ],
+    'no-useless-rename': [
+      'error', // Reduces diff noise when renaming symbols at module boundaries
+    ],
   },
 };
 
