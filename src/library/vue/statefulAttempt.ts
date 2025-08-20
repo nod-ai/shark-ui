@@ -9,7 +9,7 @@ import Attempt from '@/library/Attempt';
 
 interface StatefulAttempt<
   SomeProduct,
-  SomeActionableError extends Attempt.ActionableError<string>,
+  SomeActionableError extends Attempt.Error_Actionable<string>,
 > {
   initiate: () => Promise<void>;
   isInProgress: boolean;
@@ -19,7 +19,7 @@ interface StatefulAttempt<
 /** Useful when state of UI is dependent on some async operation and the outcome upon completion */
 const useStatefulAttemptThatEventually = <
   SomeProduct,
-  SomeActionableError extends Attempt.ActionableError<string>,
+  SomeActionableError extends Attempt.Error_Actionable<string>,
 >(
   retrieveOutcome: Attempt.EndRetriever<
     Attempt.Outcome<SomeProduct, SomeActionableError>

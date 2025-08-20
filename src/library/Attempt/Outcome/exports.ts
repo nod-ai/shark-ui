@@ -1,5 +1,5 @@
 import type {
-  Attempt_ActionableError,
+  Attempt_Error_Actionable,
 } from '../error';
 
 import {
@@ -22,7 +22,7 @@ import type {
 
 type Attempt_Outcome<
   SomeProduct,
-  SomeActionableError extends Attempt_ActionableError<string>,
+  SomeActionableError extends Attempt_Error_Actionable<string>,
 > =
   | Attempt_Success<SomeProduct>
   | Attempt_Failure<SomeActionableError>
@@ -37,8 +37,8 @@ type Attempt_Outcome<
 * Helps avoid boilerplate when transforming outcomes.
 */
 function Attempt_fromRewrapping<
-  SomeTransformableActionableError extends Attempt_ActionableError<string>,
-  SomeTransformedActionableError extends Attempt_ActionableError<string> = SomeTransformableActionableError,
+  SomeTransformableActionableError extends Attempt_Error_Actionable<string>,
+  SomeTransformedActionableError extends Attempt_Error_Actionable<string> = SomeTransformableActionableError,
 >(
   givenOutcome: Attempt_Failure<SomeTransformableActionableError>,
   given?: Attempt_Failure_Transformer<
@@ -60,9 +60,9 @@ function Attempt_fromRewrapping<
 //
 function Attempt_fromRewrapping<
   SomeTransformableProduct,
-  SomeTransformableActionableError extends Attempt_ActionableError<string>,
+  SomeTransformableActionableError extends Attempt_Error_Actionable<string>,
   SomeTransformedProduct = SomeTransformableProduct,
-  SomeTransformedActionableError extends Attempt_ActionableError<string> = SomeTransformableActionableError,
+  SomeTransformedActionableError extends Attempt_Error_Actionable<string> = SomeTransformableActionableError,
 >(
   givenOutcome: Attempt_Outcome<SomeTransformableProduct, SomeTransformableActionableError>,
   given?: Attempt_Outcome_Transformer<
@@ -75,9 +75,9 @@ function Attempt_fromRewrapping<
 //
 function Attempt_fromRewrapping<
   SomeTransformableProduct,
-  SomeTransformableActionableError extends Attempt_ActionableError<string>,
+  SomeTransformableActionableError extends Attempt_Error_Actionable<string>,
   SomeTransformedProduct = SomeTransformableProduct,
-  SomeTransformedActionableError extends Attempt_ActionableError<string> = SomeTransformableActionableError,
+  SomeTransformedActionableError extends Attempt_Error_Actionable<string> = SomeTransformableActionableError,
 >(
   givenOutcome: Attempt_Outcome<SomeTransformableProduct, SomeTransformableActionableError>,
   {
@@ -109,13 +109,13 @@ const Attempt_Outcome = {
 };
 
 type ProductOf<
-  SomeOutcome extends Attempt_Outcome<unknown, Attempt_ActionableError<string>>,
+  SomeOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
 > = SomeOutcome extends Attempt_Success<infer NestedProduct>
   ? NestedProduct
   : never;
 
 type CauseOf<
-  SomeOutcome extends Attempt_Outcome<unknown, Attempt_ActionableError<string>>,
+  SomeOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
 > = SomeOutcome extends Attempt_Failure<infer NestedError>
   ? NestedError
   : never;

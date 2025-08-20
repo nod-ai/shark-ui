@@ -1,5 +1,5 @@
 import type {
-  Attempt_ActionableError,
+  Attempt_Error_Actionable,
 } from '../error';
 
 import type {
@@ -12,9 +12,9 @@ import type {
 
 type Attempt_Outcome_Transformer<
   SomeTransformableProduct,
-  SomeTransformableActionableError extends Attempt_ActionableError<string>,
+  SomeTransformableActionableError extends Attempt_Error_Actionable<string>,
   SomeTransformedProduct,
-  SomeTransformedActionableError extends Attempt_ActionableError<string>,
+  SomeTransformedActionableError extends Attempt_Error_Actionable<string>,
 > =
   | (
     & Required<

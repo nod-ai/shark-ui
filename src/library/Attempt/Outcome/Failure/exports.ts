@@ -1,7 +1,7 @@
 // cspell:words sugarfree discriminable
 
 import type {
-  Attempt_ActionableError,
+  Attempt_Error_Actionable,
 } from '../../error';
 
 import type {
@@ -14,7 +14,7 @@ import {
 } from './Transformer';
 
 interface Attempt_SemanticallySugarfreeFailure<
-  SomeActionableError extends Attempt_ActionableError<string>,
+  SomeActionableError extends Attempt_Error_Actionable<string>,
 > extends Attempt_DiscriminableOutcome<
   'failure',
   SomeActionableError
@@ -23,7 +23,7 @@ interface Attempt_SemanticallySugarfreeFailure<
 }
 
 interface Attempt_Failure<
-  SomeActionableError extends Attempt_ActionableError<string>,
+  SomeActionableError extends Attempt_Error_Actionable<string>,
 > extends Attempt_SemanticallySugarfreeFailure<
   SomeActionableError
 > {
@@ -47,7 +47,7 @@ interface Attempt_Failure<
   readonly causeOfFailure: this['cause'];
 
   rewrappedWith<
-    TransformedActionableError extends Attempt_ActionableError<string> = SomeActionableError,
+    TransformedActionableError extends Attempt_Error_Actionable<string> = SomeActionableError,
   >(
     given?: Attempt_Failure_Transformer<
       SomeActionableError,
@@ -57,7 +57,7 @@ interface Attempt_Failure<
 }
 
 const Attempt_failureDueTo = <
-  SomeActionableError extends Attempt_ActionableError<string>,
+  SomeActionableError extends Attempt_Error_Actionable<string>,
 >(
   givenCause: SomeActionableError,
 ): Attempt_Failure<SomeActionableError> => ({
@@ -69,7 +69,7 @@ const Attempt_failureDueTo = <
   forciblyUnwrap  : () => givenCause.throwAnyway('Unexpected forceful unwrap of a failure'),
   causeOfFailure  : givenCause,
   rewrappedWith   : <
-    TransformedActionableError extends Attempt_ActionableError<string>,
+    TransformedActionableError extends Attempt_Error_Actionable<string>,
   >(
     {
       cause: transformed,

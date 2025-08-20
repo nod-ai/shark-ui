@@ -1,8 +1,8 @@
-import type Attempt_NonActionableError from '../NonActionableError';
+import type Attempt_Error_NonActionable from '../NonActionableError';
 
 type PotentiallyActionable<
   SomeError extends Error,
-> = Exclude<SomeError, Attempt_NonActionableError>;
+> = Exclude<SomeError, Attempt_Error_NonActionable>;
 
 export type {
   PotentiallyActionable as default,

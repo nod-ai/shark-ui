@@ -9,23 +9,23 @@ import {
 } from '../ended';
 
 import type {
-  Attempt_ActionableError,
+  Attempt_Error_Actionable,
 } from '../error';
 
 import {
   sanctionedAsync,
 } from '../utilities/sanctionedTryCatch';
 
-import Attempt_CreationError from './AttemptCreationError';
+import Attempt_Error_Creation from './AttemptCreationError';
 
 type Attempt_EndRetriever<
-  SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_ActionableError<string>>,
+  SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
 > = (
   givenHandles: typeof handles
 ) => Promise<SomeInferredOutcome>;
 
 const Attempt_thatEventually = async <
-  SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_ActionableError<string>>,
+  SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
 >(
   endsAccordingTo: Attempt_EndRetriever<SomeInferredOutcome>,
 ) => {
@@ -36,7 +36,7 @@ const Attempt_thatEventually = async <
       return await endsAccordingTo(handles) as EquivalentOutcome;
     },
     catch(someError) {
-      return Attempt_CreationError.rethrow(someError);
+      return Attempt_Error_Creation.rethrow(someError);
     },
   });
 };

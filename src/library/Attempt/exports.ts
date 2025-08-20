@@ -22,9 +22,9 @@ export {
 } from './adapter';
 
 export {
-  Attempt_NonActionableError as NonActionableError,
-  Attempt_ActionableError as ActionableError,
-  type Attempt_ErrorInterpreter as ErrorInterpreter,
+  Attempt_Error_NonActionable as Error_NonActionable,
+  Attempt_Error_Actionable as Error_Actionable,
+  type Attempt_Error_Interpreter as Error_Interpreter,
 } from './error';
 
 export {

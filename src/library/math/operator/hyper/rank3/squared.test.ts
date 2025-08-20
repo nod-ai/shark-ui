@@ -42,7 +42,7 @@ describe(squared, () => {
       it('should safely propagate the error', () => {
         expect.assertions(1);
 
-        expect(() => squared(soleInoperableNumber)).toThrow(Attempt.NonActionableError);
+        expect(() => squared(soleInoperableNumber)).toThrow(Attempt.Error_NonActionable);
       });
 
       it('should communicate clearly with developers', () => {

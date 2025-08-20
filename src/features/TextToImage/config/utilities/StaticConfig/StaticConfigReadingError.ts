@@ -5,7 +5,7 @@ import type {
 } from '@/library/URLComponent';
 
 class TextToImage_Config_StaticReadingError
-  extends Attempt.ActionableError<
+  extends Attempt.Error_Actionable<
   'TextToImage_Config_StaticReadingError'
 > {
   public override name = 'TextToImage_Config_StaticReadingError' as const;

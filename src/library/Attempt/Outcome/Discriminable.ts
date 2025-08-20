@@ -5,7 +5,7 @@ import type {
 } from '@/library/typeUtilities/Boolean';
 
 import type {
-  Attempt_ActionableError,
+  Attempt_Error_Actionable,
 } from '../error';
 
 type Attempt_Outcome_Discriminant = 'success' | 'failure';
@@ -22,7 +22,7 @@ interface Attempt_DiscriminableOutcome<
   SomePayload extends (
     SomeDiscriminant extends 'success'
       ? unknown
-      : Attempt_ActionableError<string>
+      : Attempt_Error_Actionable<string>
   ),
 > extends Attempt_SyntacticallySugarfreeDiscriminableOutcome<
   SomeDiscriminant
@@ -44,7 +44,7 @@ interface Attempt_DiscriminableOutcome<
     TransformedPayload extends (
       SomeDiscriminant extends 'success'
         ? unknown
-        : Attempt_ActionableError<string>
+        : Attempt_Error_Actionable<string>
     ) = SomePayload,
   >(): Attempt_DiscriminableOutcome<SomeDiscriminant, TransformedPayload>;
 }

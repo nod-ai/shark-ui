@@ -1,5 +1,5 @@
 import {
-  default as Attempt_ActionableError,
+  default as Attempt_Error_Actionable,
 } from '../ActionableError';
 
 import type {
@@ -17,7 +17,7 @@ const assertAppropriatelyThrown = <
   givenError: SomeError,
 ): AppropriatelyThrown<SomeError> => {
   if (
-    givenError instanceof Attempt_ActionableError
+    givenError instanceof Attempt_Error_Actionable
   ) return givenError.throwAnyway('Unexpected raw `throw` of some `ActionableError`. If this was intentional, use `.throwAnyway(...)` on the instance instead.');
 
   return givenError as AppropriatelyThrown<SomeError>;

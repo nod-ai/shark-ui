@@ -1,17 +1,17 @@
 import type {
-  Attempt_ActionableError,
+  Attempt_Error_Actionable,
 } from '../../error';
 
 type Attempt_CauseTransformer<
-  SomeTransformableActionableError extends Attempt_ActionableError<string>,
-  SomeTransformedActionableError extends Attempt_ActionableError<string>,
+  SomeTransformableActionableError extends Attempt_Error_Actionable<string>,
+  SomeTransformedActionableError extends Attempt_Error_Actionable<string>,
 > = (
   transformableCause: SomeTransformableActionableError,
 ) => SomeTransformedActionableError;
 
 const Attempt_causeIdentity = <
-  SomeTransformableActionableError extends Attempt_ActionableError<string>,
-  SomeTransformedActionableError extends Attempt_ActionableError<string>,
+  SomeTransformableActionableError extends Attempt_Error_Actionable<string>,
+  SomeTransformedActionableError extends Attempt_Error_Actionable<string>,
 >(
   transformableCause: NoInfer<SomeTransformableActionableError>,
 ): NoInfer<SomeTransformedActionableError> => {
@@ -19,8 +19,8 @@ const Attempt_causeIdentity = <
 };
 
 interface Attempt_Failure_Transformer<
-  SomeTransformableActionableError extends Attempt_ActionableError<string>,
-  SomeTransformedActionableError extends Attempt_ActionableError<string>,
+  SomeTransformableActionableError extends Attempt_Error_Actionable<string>,
+  SomeTransformedActionableError extends Attempt_Error_Actionable<string>,
 > {
   cause: Attempt_CauseTransformer<
     SomeTransformableActionableError,

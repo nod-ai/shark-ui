@@ -1,7 +1,7 @@
 import Attempt from '@/library/Attempt';
 
 class TextToImage_Server_ConnectionError
-  extends Attempt.ActionableError<
+  extends Attempt.Error_Actionable<
   'TextToImage_Server_ConnectionError'
 > {
   public override name = 'TextToImage_Server_ConnectionError' as const;

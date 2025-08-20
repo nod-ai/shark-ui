@@ -2,7 +2,7 @@ import type {
   Branded,
 } from '@/library/typeUtilities/Branded';
 
-interface Attempt_NonActionableError_Options
+interface Attempt_Error_NonActionable_Options
   extends ErrorOptions {
   /** A function that's acting as an alternative to raw `throw` */
   thrower?: (...parameters: any[]) => unknown; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -14,7 +14,7 @@ interface Attempt_NonActionableError_Options
  * Applies to errors that the developer neglected to prevent, or that are
  * impossible to handle.
  */
-class Attempt_NonActionableError
+class Attempt_Error_NonActionable
   extends Error
   implements Branded<
   'NonActionableError'
@@ -23,7 +23,7 @@ class Attempt_NonActionableError
   public readonly brand!: 'NonActionableError';
 
   public constructor(
-    givenMessage: Attempt_NonActionableError['message'],
+    givenMessage: Attempt_Error_NonActionable['message'],
     givenOptions?: ErrorOptions,
   ) {
     super(givenMessage, givenOptions);
@@ -35,8 +35,8 @@ class Attempt_NonActionableError
   }
 
   public static throw(
-    givenMessage: Attempt_NonActionableError['message'],
-    givenOptions?: Attempt_NonActionableError_Options,
+    givenMessage: Attempt_Error_NonActionable['message'],
+    givenOptions?: Attempt_Error_NonActionable_Options,
   ): never {
     const newError = new this(givenMessage, givenOptions);
 
@@ -51,11 +51,11 @@ class Attempt_NonActionableError
   public static rethrow(
     givenError: Error,
     given: {
-      message: Attempt_NonActionableError['message'];
+      message: Attempt_Error_NonActionable['message'];
     },
   ): never {
     if (
-      givenError instanceof Attempt_NonActionableError
+      givenError instanceof Attempt_Error_NonActionable
     ) return givenError.throw();
 
     return this.throw(given.message, {
@@ -75,5 +75,5 @@ class Attempt_NonActionableError
 }
 
 export {
-  Attempt_NonActionableError as default,
+  Attempt_Error_NonActionable as default,
 };

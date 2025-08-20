@@ -1,7 +1,7 @@
 import Attempt from '@/library/Attempt';
 
 class HTTP_Endpoint_RequestError
-  extends Attempt.ActionableError<
+  extends Attempt.Error_Actionable<
   'HTTP_Endpoint_RequestError'
 > {
   public override name = 'HTTP_Endpoint_RequestError' as const;
