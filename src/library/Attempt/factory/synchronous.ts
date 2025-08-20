@@ -18,7 +18,7 @@ import {
 
 import Attempt_Error_Creation from './AttemptCreationError';
 
-type Attempt_EndGetter<
+type Attempt_End_Getter<
   SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
 > = (
   givenHandles: typeof handles
@@ -27,7 +27,7 @@ type Attempt_EndGetter<
 const Attempt_that = <
   SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
 >(
-  endsAccordingTo: Attempt_EndGetter<SomeInferredOutcome>,
+  endsAccordingTo: Attempt_End_Getter<SomeInferredOutcome>,
 ) => {
   type EquivalentOutcome = Attempt_Outcome<ProductOf<SomeInferredOutcome>, CauseOf<SomeInferredOutcome>>;
 
@@ -42,6 +42,6 @@ const Attempt_that = <
 };
 
 export {
-  type Attempt_EndGetter,
+  type Attempt_End_Getter,
   Attempt_that,
 };

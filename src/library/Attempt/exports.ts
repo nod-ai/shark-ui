@@ -30,6 +30,6 @@ export {
 export {
   Attempt_that as that,
   Attempt_thatEventually as thatEventually,
-  type Attempt_EndGetter as EndGetter,
-  type Attempt_EndRetriever as EndRetriever,
+  type Attempt_End_Getter as End_Getter,
+  type Attempt_End_Retriever as End_Retriever,
 } from './factory';

@@ -21,7 +21,7 @@ const useStatefulAttemptThatEventually = <
   SomeProduct,
   SomeActionableError extends Attempt.Error_Actionable<string>,
 >(
-  retrieveOutcome: Attempt.EndRetriever<
+  retrieveOutcome: Attempt.End_Retriever<
     Attempt.Outcome<SomeProduct, SomeActionableError>
   >,
 ): StatefulAttempt<SomeProduct, SomeActionableError> => {

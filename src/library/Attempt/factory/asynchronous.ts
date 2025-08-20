@@ -18,7 +18,7 @@ import {
 
 import Attempt_Error_Creation from './AttemptCreationError';
 
-type Attempt_EndRetriever<
+type Attempt_End_Retriever<
   SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
 > = (
   givenHandles: typeof handles
@@ -27,7 +27,7 @@ type Attempt_EndRetriever<
 const Attempt_thatEventually = async <
   SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
 >(
-  endsAccordingTo: Attempt_EndRetriever<SomeInferredOutcome>,
+  endsAccordingTo: Attempt_End_Retriever<SomeInferredOutcome>,
 ) => {
   type EquivalentOutcome = Attempt_Outcome<ProductOf<SomeInferredOutcome>, CauseOf<SomeInferredOutcome>>;
 
@@ -42,6 +42,6 @@ const Attempt_thatEventually = async <
 };
 
 export {
-  type Attempt_EndRetriever,
+  type Attempt_End_Retriever,
   Attempt_thatEventually,
 };
