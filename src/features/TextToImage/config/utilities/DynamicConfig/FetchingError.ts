@@ -1,7 +1,7 @@
 import Attempt from '@/library/Attempt';
 
 import type {
-  URLPath,
+  URLComponent_Path,
 } from '@/library/URLComponent';
 
 class DynamicConfig_FetchingError
@@ -11,7 +11,7 @@ class DynamicConfig_FetchingError
   public override name = 'DynamicConfig_FetchingError' as const;
 
   public constructor(
-    givenEndpoint: URLPath,
+    givenEndpoint: URLComponent_Path,
   ) {
     super(`Failed to fetch text-to-image config from endpoint: ${givenEndpoint.toString()}`);
   }

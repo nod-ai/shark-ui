@@ -10,11 +10,11 @@ import type {
 
 import StringSubset from '@/library/StringSubset';
 
-class URLOrigin_ParsingError
+class URLComponent_Origin_ParsingError
   extends ParsingError<
-  'URLOrigin'
+  'URLComponent_Origin'
 > {
-  public override name = 'URLOrigin_ParsingError' as const;
+  public override name = 'URLComponent_Origin_ParsingError' as const;
 
   public constructor(given: {
     expectation: string;
@@ -24,19 +24,19 @@ class URLOrigin_ParsingError
   }
 }
 
-class URLOrigin
+class URLComponent_Origin
   extends StringSubset<
-  'URLOrigin'
+  'URLComponent_Origin'
 > implements Parsable_String<
-  typeof URLOrigin,
-  /*  */ URLOrigin_ParsingError
+  typeof URLComponent_Origin,
+  /*  */ URLComponent_Origin_ParsingError
 > {
   public static parsedFrom = (
     givenSubject: string,
-  ): Attempt.Outcome<URLOrigin, URLOrigin_ParsingError> => Attempt.that((ends) => {
+  ): Attempt.Outcome<URLComponent_Origin, URLComponent_Origin_ParsingError> => Attempt.that((ends) => {
     const derived = new URL(givenSubject);
 
-    const newParsingError = new URLOrigin_ParsingError({
+    const newParsingError = new URLComponent_Origin_ParsingError({
       expectation: derived.origin,
       reality    : givenSubject,
     });
@@ -45,12 +45,12 @@ class URLOrigin
       derived.origin !== givenSubject
     ) return ends.inFailureDueTo(newParsingError);
 
-    const parsedURLOrigin = new URLOrigin(derived.origin);
+    const parsedURLOrigin = new URLComponent_Origin(derived.origin);
     return ends.inSuccessWith(parsedURLOrigin);
   });
 }
 
 export {
-  URLOrigin,
-  URLOrigin_ParsingError,
+  URLComponent_Origin,
+  URLComponent_Origin_ParsingError,
 };

@@ -1,7 +1,7 @@
 import Attempt from '@/library/Attempt';
 
 import type {
-  URLPath,
+  URLComponent_Path,
 } from '@/library/URLComponent';
 
 class StaticConfigReadingError
@@ -11,7 +11,7 @@ class StaticConfigReadingError
   public override name = 'StaticConfigReadingError' as const;
 
   public constructor(
-    givenFile: URLPath,
+    givenFile: URLComponent_Path,
     givenResponse: Response,
   ) {
     super(`Failed to read config at "${givenFile.toString()}". Cause: "${givenResponse.statusText}"`);

@@ -1,7 +1,7 @@
 import Attempt from '@/library/Attempt';
 
 import {
-  URLPath,
+  URLComponent_Path,
 } from '@/library/URLComponent';
 
 import {
@@ -21,7 +21,7 @@ const contentIsJSONIn = (givenResponse: Response): boolean => {
   return rawContentDescriptor.includes('application/json');
 };
 
-const configEndpoint = URLPath.parsedFrom('/config/text-to-image').forciblyUnwrap();
+const configEndpoint = URLComponent_Path.parsedFrom('/config/text-to-image').forciblyUnwrap();
 
 type OutcomeOfFetchingConfig = Attempt.Outcome<Config,
   | DynamicConfig_FetchingError

@@ -1,7 +1,7 @@
 import Attempt from '@/library/Attempt';
 
 import {
-  URLPath,
+  URLComponent_Path,
 } from '@/library/URLComponent';
 
 import {
@@ -10,7 +10,7 @@ import {
 
 import StaticConfigReadingError from './StaticConfigReadingError';
 
-const configFile = URLPath.parsedFrom('/config/text-to-image.json').forciblyUnwrap();
+const configFile = URLComponent_Path.parsedFrom('/config/text-to-image.json').forciblyUnwrap();
 
 type OutcomeOfReadingConfig = Attempt.Outcome<
   Config,
