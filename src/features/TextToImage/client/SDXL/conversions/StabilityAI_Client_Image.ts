@@ -1,7 +1,7 @@
 import type * as StabilityAIClient from 'stabilityai-client-typescript/models/components';
 
 import Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
-import ImageURI from '@/library/UniformResourceIdentifier/Data/Image';
+import URI_Image from '@/library/UniformResourceIdentifier/Data/Image';
 
 import type {
   Output,
@@ -20,7 +20,7 @@ const toOutputImage = (
   const base64DataOfRawImage = Base64CharacterEncodedByteSequence.parsedFrom(givenImage.base64).forciblyUnwrap(/* Broken web contracts require intervention */);
 
   const derivedImage = {
-    uri        : new ImageURI('png', 'base64', base64DataOfRawImage),
+    uri        : new URI_Image('png', 'base64', base64DataOfRawImage),
     description: given.description,
   };
 

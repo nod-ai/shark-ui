@@ -1,5 +1,5 @@
 /* Defined in accordance with [RFC 2397 Section 2](https://www.rfc-editor.org/rfc/rfc2397#section-2) */
-const DataURI_EncodingIdentifier_all = [
+const URI_Data_EncodingIdentifier_all = [
   'base64',
   /**
    * Means """
@@ -12,5 +12,5 @@ const DataURI_EncodingIdentifier_all = [
 ] as const;
 
 export {
-  DataURI_EncodingIdentifier_all,
+  URI_Data_EncodingIdentifier_all,
 };

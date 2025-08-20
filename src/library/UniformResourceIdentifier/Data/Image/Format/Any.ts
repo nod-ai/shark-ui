@@ -1,9 +1,9 @@
 import type {
-  ImageURI_Format_all,
+  URI_Image_Format_all,
 } from './all';
 
-type ImageURI_Format_Any = (typeof ImageURI_Format_all)[number];
+type URI_Image_Format_Any = (typeof URI_Image_Format_all)[number];
 
 export type {
-  ImageURI_Format_Any,
+  URI_Image_Format_Any,
 };

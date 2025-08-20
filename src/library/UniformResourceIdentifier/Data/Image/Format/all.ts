@@ -1,5 +1,5 @@
 /** For an exhaustive list, see [the IANA registry](https://www.iana.org/assignments/media-types/media-types.xhtml#image) */
-const ImageURI_Format_all = [
+const URI_Image_Format_all = [
   // https://www.iana.org/assignments/media-types/image/png
   'png',
   // https://www.iana.org/assignments/media-types/image/jpeg
@@ -11,5 +11,5 @@ const ImageURI_Format_all = [
 ] as const;
 
 export {
-  ImageURI_Format_all,
+  URI_Image_Format_all,
 };

@@ -12,7 +12,7 @@ import type {
 } from './EncodingIdentifier';
 
 /** See [RFC 2397](https://datatracker.ietf.org/doc/rfc2397) for more info */
-class DataURI
+class URI_Data
   extends UniformResourceIdentifier {
   public static readonly scheme = NonTrivialString.parsedFrom('data').forciblyUnwrap();
 
@@ -22,11 +22,11 @@ class DataURI
     public readonly data: Base64CharacterEncodedByteSequence,
   ) {
     super(
-      DataURI.scheme,
+      URI_Data.scheme,
     );
   }
 
-  public get descriptor(): Exclude<DataURI['overridableDescriptor'], null> {
+  public get descriptor(): Exclude<URI_Data['overridableDescriptor'], null> {
     if (
       this.overridableDescriptor === null
     ) return Attempt.abandon('Descriptor either needs to be initialized or overridden');
@@ -41,13 +41,13 @@ class DataURI
       this.encoding !== 'base64'
     ) return null;
 
-    return DataURI.encodingPrefix.concat(this.encoding);
+    return URI_Data.encodingPrefix.concat(this.encoding);
   }
 
   public static readonly dataPrefix = ',';
 
   public get serializableData(): string {
-    return this.data.prependedWith(DataURI.dataPrefix);
+    return this.data.prependedWith(URI_Data.dataPrefix);
   }
 
   public override get path(): NonTrivialString {
@@ -63,5 +63,5 @@ class DataURI
 }
 
 export {
-  DataURI,
+  URI_Data,
 };

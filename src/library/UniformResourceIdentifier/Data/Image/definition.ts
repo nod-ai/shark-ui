@@ -6,15 +6,15 @@ import type {
 } from '../EncodingIdentifier';
 
 import {
-  DataURI,
+  URI_Data,
 } from '../definition.ts';
 
 import type {
   ImageURI_Format,
 } from './Format';
 
-class ImageURI
-  extends DataURI {
+class URI_Image
+  extends URI_Data {
   public static readonly topLevelDescriptor = 'image';
 
   public constructor(
@@ -29,9 +29,9 @@ class ImageURI
     );
   }
 
-  public override get descriptor(): DataURI['descriptor'] {
+  public override get descriptor(): URI_Data['descriptor'] {
     const computedDescriptor = new ContentDescriptor(
-      ImageURI.topLevelDescriptor,
+      URI_Image.topLevelDescriptor,
       null,
       this.format,
       null,
@@ -43,5 +43,5 @@ class ImageURI
 }
 
 export {
-  ImageURI,
+  URI_Image,
 };
