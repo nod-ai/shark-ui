@@ -12,5 +12,5 @@ const hasAtLeastOne = <SomeElement>(
 
 export {
   isEmpty,
-  hasAtLeastOne as hasAtLeastOne,
+  hasAtLeastOne,
 };
