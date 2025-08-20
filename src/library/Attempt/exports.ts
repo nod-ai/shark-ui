@@ -2,10 +2,10 @@ import {
   Attempt_ended,
 } from './ended';
 
-const abandon = Attempt_ended.inFlamesBecause;
+const Attempt_abandon = Attempt_ended.inFlamesBecause;
 
 export {
-  abandon,
+  Attempt_abandon as abandon,
 };
 
 export {
@@ -15,16 +15,16 @@ export {
 } from './Outcome';
 
 export {
-  attemptTo as to,
-  attemptToEventually as toEventually,
-  attemptToSettle as toSettle,
-  type AdapterConfig,
+  Attempt_to as to,
+  Attempt_toEventually as toEventually,
+  Attempt_toSettle as toSettle,
+  type Attempt_AdapterConfig as AdapterConfig,
 } from './adapter';
 
 export {
-  NonActionableError,
-  ActionableError,
-  type ErrorInterpreter,
+  Attempt_NonActionableError as NonActionableError,
+  Attempt_ActionableError as ActionableError,
+  type Attempt_ErrorInterpreter as ErrorInterpreter,
 } from './error';
 
 export {

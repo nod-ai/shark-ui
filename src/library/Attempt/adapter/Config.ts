@@ -1,11 +1,11 @@
 import type {
-  ActionableError,
+  Attempt_ActionableError,
 } from '../error';
 
 import type Attempt_ErrorInterpreter from '../error/Interpreter';
 
 interface Attempt_AdapterConfig<
-  SomeActionableError extends ActionableError<string>,
+  SomeActionableError extends Attempt_ActionableError<string>,
 > {
   interpretationOf: Attempt_ErrorInterpreter<SomeActionableError>;
 }

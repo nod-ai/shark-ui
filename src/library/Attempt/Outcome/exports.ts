@@ -1,19 +1,19 @@
 import type {
-  ActionableError,
+  Attempt_ActionableError,
 } from '../error';
 
 import {
   type Attempt_Failure,
   type Attempt_Failure_Transformer,
-  failureDueTo,
-  causeIdentity,
+  Attempt_failureDueTo,
+  Attempt_causeIdentity,
 } from './Failure';
 
 import {
   type Attempt_Success,
   type Attempt_Success_Transformer,
-  successThatYielded,
-  productIdentity,
+  Attempt_successThatYielded,
+  Attempt_productIdentity,
 } from './Success';
 
 import type {
@@ -22,7 +22,7 @@ import type {
 
 type Attempt_Outcome<
   SomeProduct,
-  SomeActionableError extends ActionableError<string>,
+  SomeActionableError extends Attempt_ActionableError<string>,
 > =
   | Attempt_Success<SomeProduct>
   | Attempt_Failure<SomeActionableError>
@@ -36,9 +36,9 @@ type Attempt_Outcome<
 *
 * Helps avoid boilerplate when transforming outcomes.
 */
-function fromRewrapping<
-  SomeTransformableActionableError extends ActionableError<string>,
-  SomeTransformedActionableError extends ActionableError<string> = SomeTransformableActionableError,
+function Attempt_fromRewrapping<
+  SomeTransformableActionableError extends Attempt_ActionableError<string>,
+  SomeTransformedActionableError extends Attempt_ActionableError<string> = SomeTransformableActionableError,
 >(
   givenOutcome: Attempt_Failure<SomeTransformableActionableError>,
   given?: Attempt_Failure_Transformer<
@@ -47,7 +47,7 @@ function fromRewrapping<
   >,
 ): Attempt_Failure<SomeTransformedActionableError>;
 //
-function fromRewrapping<
+function Attempt_fromRewrapping<
   SomeTransformableProduct,
   SomeTransformedProduct = SomeTransformableProduct,
 >(
@@ -58,11 +58,11 @@ function fromRewrapping<
   >,
 ): Attempt_Success<SomeTransformedProduct>;
 //
-function fromRewrapping<
+function Attempt_fromRewrapping<
   SomeTransformableProduct,
-  SomeTransformableActionableError extends ActionableError<string>,
+  SomeTransformableActionableError extends Attempt_ActionableError<string>,
   SomeTransformedProduct = SomeTransformableProduct,
-  SomeTransformedActionableError extends ActionableError<string> = SomeTransformableActionableError,
+  SomeTransformedActionableError extends Attempt_ActionableError<string> = SomeTransformableActionableError,
 >(
   givenOutcome: Attempt_Outcome<SomeTransformableProduct, SomeTransformableActionableError>,
   given?: Attempt_Outcome_Transformer<
@@ -73,24 +73,24 @@ function fromRewrapping<
   >,
 ): Attempt_Outcome<SomeTransformedProduct, SomeTransformedActionableError>;
 //
-function fromRewrapping<
+function Attempt_fromRewrapping<
   SomeTransformableProduct,
-  SomeTransformableActionableError extends ActionableError<string>,
+  SomeTransformableActionableError extends Attempt_ActionableError<string>,
   SomeTransformedProduct = SomeTransformableProduct,
-  SomeTransformedActionableError extends ActionableError<string> = SomeTransformableActionableError,
+  SomeTransformedActionableError extends Attempt_ActionableError<string> = SomeTransformableActionableError,
 >(
   givenOutcome: Attempt_Outcome<SomeTransformableProduct, SomeTransformableActionableError>,
   {
-    product: toTransformedProduct = productIdentity<SomeTransformableProduct, SomeTransformedProduct>,
-    cause: toTransformedCause = causeIdentity<SomeTransformableActionableError, SomeTransformedActionableError>,
+    product: toTransformedProduct = Attempt_productIdentity<SomeTransformableProduct, SomeTransformedProduct>,
+    cause: toTransformedCause = Attempt_causeIdentity<SomeTransformableActionableError, SomeTransformedActionableError>,
   }: Attempt_Outcome_Transformer<
     SomeTransformableProduct,
     SomeTransformableActionableError,
     SomeTransformedProduct,
     SomeTransformedActionableError
   > = {
-    product: productIdentity<SomeTransformableProduct, SomeTransformedProduct>,
-    cause  : causeIdentity<SomeTransformableActionableError, SomeTransformedActionableError>,
+    product: Attempt_productIdentity<SomeTransformableProduct, SomeTransformedProduct>,
+    cause  : Attempt_causeIdentity<SomeTransformableActionableError, SomeTransformedActionableError>,
   },
 ): Attempt_Outcome<SomeTransformedProduct, SomeTransformedActionableError> {
   return givenOutcome.isSuccess
@@ -103,19 +103,19 @@ function fromRewrapping<
 }
 
 const Attempt_Outcome = {
-  failureDueTo,
-  successThatYielded,
-  fromRewrapping,
+  failureDueTo      : Attempt_failureDueTo,
+  successThatYielded: Attempt_successThatYielded,
+  fromRewrapping    : Attempt_fromRewrapping,
 };
 
 type ProductOf<
-  SomeOutcome extends Attempt_Outcome<unknown, ActionableError<string>>,
+  SomeOutcome extends Attempt_Outcome<unknown, Attempt_ActionableError<string>>,
 > = SomeOutcome extends Attempt_Success<infer NestedProduct>
   ? NestedProduct
   : never;
 
 type CauseOf<
-  SomeOutcome extends Attempt_Outcome<unknown, ActionableError<string>>,
+  SomeOutcome extends Attempt_Outcome<unknown, Attempt_ActionableError<string>>,
 > = SomeOutcome extends Attempt_Failure<infer NestedError>
   ? NestedError
   : never;

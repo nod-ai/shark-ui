@@ -1,17 +1,17 @@
 // cspell:words sugarfree discriminable
 
 import type {
-  DiscriminableOutcome,
+  Attempt_DiscriminableOutcome,
 } from '../Discriminable';
 
 import {
   type Attempt_Success_Transformer,
-  productIdentity,
+  Attempt_productIdentity,
 } from './Transformer';
 
-interface SemanticallySugarfreeSuccess<
+interface Attempt_SemanticallySugarfreeSuccess<
   SomeProduct,
-> extends DiscriminableOutcome<
+> extends Attempt_DiscriminableOutcome<
   'success',
   SomeProduct
 > {
@@ -20,7 +20,7 @@ interface SemanticallySugarfreeSuccess<
 
 interface Attempt_Success<
   SomeProduct,
-> extends SemanticallySugarfreeSuccess<
+> extends Attempt_SemanticallySugarfreeSuccess<
   SomeProduct
 > {
   /**
@@ -64,7 +64,7 @@ interface Attempt_Success<
   ): Attempt_Success<TransformedProduct>;
 }
 
-const successThatYielded = <
+const Attempt_successThatYielded = <
   SomeProduct,
 >(
   givenProduct: SomeProduct,
@@ -82,11 +82,11 @@ const successThatYielded = <
     {
       product: transformed,
     } = {
-      product: productIdentity<SomeProduct, TransformedProduct>,
+      product: Attempt_productIdentity<SomeProduct, TransformedProduct>,
     },
   ) => {
     const transformedProduct = transformed(givenProduct);
-    const transformedSuccess = successThatYielded(transformedProduct);
+    const transformedSuccess = Attempt_successThatYielded(transformedProduct);
     return transformedSuccess;
   },
 });
@@ -94,6 +94,6 @@ const successThatYielded = <
 export {
   type Attempt_Success,
   type Attempt_Success_Transformer,
-  successThatYielded,
-  productIdentity,
+  Attempt_successThatYielded,
+  Attempt_productIdentity,
 };

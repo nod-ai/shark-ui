@@ -1,10 +1,10 @@
-import type ActionableError from '../ActionableError';
+import type Attempt_ActionableError from '../ActionableError';
 
 type AppropriatelyThrown<
   SomeError extends Error,
 > = Exclude<
   SomeError,
-  ActionableError<string>
+  Attempt_ActionableError<string>
 >;
 
 export type {

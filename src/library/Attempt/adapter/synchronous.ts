@@ -3,7 +3,7 @@ import type {
 } from '../Outcome';
 
 import type {
-  ActionableError,
+  Attempt_ActionableError,
 } from '../error';
 
 import {
@@ -20,9 +20,9 @@ import {
 
 import type Attempt_AdapterConfig from './Config';
 
-const attemptTo = <
+const Attempt_to = <
   SomeProduct,
-  SomeActionableError extends ActionableError<string>,
+  SomeActionableError extends Attempt_ActionableError<string>,
 >(
   forciblyGetProduct: () => SomeProduct,
   given: Attempt_AdapterConfig<SomeActionableError>,
@@ -41,5 +41,5 @@ const attemptTo = <
 }));
 
 export {
-  attemptTo,
+  Attempt_to,
 };

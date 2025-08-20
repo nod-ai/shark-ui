@@ -1,11 +1,11 @@
 export {
-  default as NonActionableError,
+  default as Attempt_NonActionableError,
 } from './NonActionableError';
 
 export {
-  default as ActionableError,
+  default as Attempt_ActionableError,
 } from './ActionableError';
 
 export type {
-  default as ErrorInterpreter,
+  default as Attempt_ErrorInterpreter,
 } from './Interpreter';
