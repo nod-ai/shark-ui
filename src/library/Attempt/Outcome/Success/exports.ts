@@ -1,26 +1,26 @@
 // cspell:words sugarfree discriminable
 
 import type {
-  Attempt_DiscriminableOutcome,
+  Attempt_Outcome_Discriminable,
 } from '../Discriminable';
 
 import {
-  type Attempt_Success_Transformer,
-  Attempt_productIdentity,
+  type Attempt_Outcome_Success_Transformer,
+  Attempt_Outcome_productIdentity,
 } from './Transformer';
 
-interface Attempt_SemanticallySugarfreeSuccess<
+interface Attempt_Outcome_SemanticallySugarfreeSuccess<
   SomeProduct,
-> extends Attempt_DiscriminableOutcome<
+> extends Attempt_Outcome_Discriminable<
   'success',
   SomeProduct
 > {
   readonly product: SomeProduct;
 }
 
-interface Attempt_Success<
+interface Attempt_Outcome_Success<
   SomeProduct,
-> extends Attempt_SemanticallySugarfreeSuccess<
+> extends Attempt_Outcome_SemanticallySugarfreeSuccess<
   SomeProduct
 > {
   /**
@@ -57,18 +57,18 @@ interface Attempt_Success<
   rewrappedWith<
     TransformedProduct = SomeProduct,
   >(
-    given?: Attempt_Success_Transformer<
+    given?: Attempt_Outcome_Success_Transformer<
       SomeProduct,
       TransformedProduct
     >
-  ): Attempt_Success<TransformedProduct>;
+  ): Attempt_Outcome_Success<TransformedProduct>;
 }
 
-const Attempt_successThatYielded = <
+const Attempt_Outcome_successThatYielded = <
   SomeProduct,
 >(
   givenProduct: SomeProduct,
-): Attempt_Success<SomeProduct> => ({
+): Attempt_Outcome_Success<SomeProduct> => ({
   discriminant    : 'success',
   product         : givenProduct,
   isSuccess       : true,
@@ -82,18 +82,18 @@ const Attempt_successThatYielded = <
     {
       product: transformed,
     } = {
-      product: Attempt_productIdentity<SomeProduct, TransformedProduct>,
+      product: Attempt_Outcome_productIdentity<SomeProduct, TransformedProduct>,
     },
   ) => {
     const transformedProduct = transformed(givenProduct);
-    const transformedSuccess = Attempt_successThatYielded(transformedProduct);
+    const transformedSuccess = Attempt_Outcome_successThatYielded(transformedProduct);
     return transformedSuccess;
   },
 });
 
 export {
-  type Attempt_Success,
-  type Attempt_Success_Transformer,
-  Attempt_successThatYielded,
-  Attempt_productIdentity,
+  type Attempt_Outcome_Success,
+  type Attempt_Outcome_Success_Transformer,
+  Attempt_Outcome_successThatYielded,
+  Attempt_Outcome_productIdentity,
 };

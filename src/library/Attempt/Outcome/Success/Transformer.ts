@@ -1,11 +1,11 @@
-type Attempt_ProductTransformer<
+type Attempt_Outcome_ProductTransformer<
   SomeTransformableProduct,
   SomeTransformedProduct,
 > = (
   transformableProduct: SomeTransformableProduct,
 ) => SomeTransformedProduct;
 
-const Attempt_productIdentity = <
+const Attempt_Outcome_productIdentity = <
   SomeTransformableProduct,
   SomeTransformedProduct,
 >(
@@ -14,17 +14,17 @@ const Attempt_productIdentity = <
   return transformableProduct as unknown as SomeTransformedProduct;
 };
 
-interface Attempt_Success_Transformer<
+interface Attempt_Outcome_Success_Transformer<
   SomeTransformableProduct,
   SomeTransformedProduct,
 > {
-  product: Attempt_ProductTransformer<
+  product: Attempt_Outcome_ProductTransformer<
     SomeTransformableProduct,
     SomeTransformedProduct
   >;
 }
 
 export {
-  type Attempt_Success_Transformer,
-  Attempt_productIdentity,
+  type Attempt_Outcome_Success_Transformer,
+  Attempt_Outcome_productIdentity,
 };

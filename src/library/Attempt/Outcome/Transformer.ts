@@ -3,11 +3,11 @@ import type {
 } from '../error';
 
 import type {
-  Attempt_Failure_Transformer,
+  Attempt_Outcome_Failure_Transformer,
 } from './Failure/Transformer';
 
 import type {
-  Attempt_Success_Transformer,
+  Attempt_Outcome_Success_Transformer,
 } from './Success/Transformer';
 
 type Attempt_Outcome_Transformer<
@@ -18,13 +18,13 @@ type Attempt_Outcome_Transformer<
 > =
   | (
     & Required<
-      Attempt_Success_Transformer<
+      Attempt_Outcome_Success_Transformer<
         SomeTransformableProduct,
         SomeTransformedProduct
       >
     >
     & Partial<
-      Attempt_Failure_Transformer<
+      Attempt_Outcome_Failure_Transformer<
         SomeTransformableActionableError,
         SomeTransformedActionableError
       >
@@ -32,13 +32,13 @@ type Attempt_Outcome_Transformer<
   )
   | (
     & Partial<
-      Attempt_Success_Transformer<
+      Attempt_Outcome_Success_Transformer<
         SomeTransformableProduct,
         SomeTransformedProduct
       >
     >
     & Required<
-      Attempt_Failure_Transformer<
+      Attempt_Outcome_Failure_Transformer<
         SomeTransformableActionableError,
         SomeTransformedActionableError
       >
