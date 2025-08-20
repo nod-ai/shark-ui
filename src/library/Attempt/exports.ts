@@ -15,10 +15,10 @@ export {
 } from './Outcome';
 
 export {
-  Attempt_to as to,
-  Attempt_toEventually as toEventually,
-  Attempt_toSettle as toSettle,
-  type Attempt_AdapterConfig as AdapterConfig,
+  Attempt_Adapted_to as Adapted_to,
+  Attempt_Adapted_toEventually as Adapted_toEventually,
+  Attempt_Adapted_toSettle as Adapted_toSettle,
+  type Attempt_Adapted_Config as Adapted_Config,
 } from './adapter';
 
 export {
