@@ -5,9 +5,9 @@ import {
 } from '@/library/WebAPI';
 
 import {
-  DynamicConfig as TextToImage_DynamicConfig,
-  StaticConfig as TextToImage_StaticConfig,
-  TextToImage_emptyConfig,
+  Config_Dynamic as TextToImage_Config_Dynamic,
+  Config_Static as TextToImage_Config_Static,
+  TextToImage_Config_empty,
 } from '../config';
 
 import TextToImage_Server_SpecificationError from './ServerSpecificationError';
@@ -33,13 +33,13 @@ const TextToImage_retrieveCurrentServer = (): Promise<
     TextToImage_serverAccordingToEnvironment !== null
   ) return ends.inSuccessWith(TextToImage_serverAccordingToEnvironment);
 
-  const staticConfig = (await TextToImage_StaticConfig.read()).optionallyUnwrap() ?? TextToImage_emptyConfig;
+  const staticConfig = (await TextToImage_Config_Static.read()).optionallyUnwrap() ?? TextToImage_Config_empty;
 
   if (
     staticConfig.server !== null
   ) return ends.inSuccessWith(staticConfig.server);
 
-  const dynamicConfig = (await TextToImage_DynamicConfig.fetch()).optionallyUnwrap() ?? TextToImage_emptyConfig;
+  const dynamicConfig = (await TextToImage_Config_Dynamic.fetch()).optionallyUnwrap() ?? TextToImage_Config_empty;
 
   if (
     dynamicConfig.server !== null
@@ -47,8 +47,8 @@ const TextToImage_retrieveCurrentServer = (): Promise<
 
   const newSpecificationError = new TextToImage_Server_SpecificationError(
     TextToImage_environmentKeyForOriginOfServer,
-    TextToImage_StaticConfig.file,
-    TextToImage_DynamicConfig.endpoint,
+    TextToImage_Config_Static.file,
+    TextToImage_Config_Dynamic.endpoint,
   );
 
   return ends.inFailureDueTo(newSpecificationError);
