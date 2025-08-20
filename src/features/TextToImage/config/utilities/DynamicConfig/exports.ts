@@ -11,7 +11,7 @@ import {
 import TextToImage_DynamicConfig_EndpointResponseError from './EndpointResponseError';
 import TextToImage_DynamicConfig_FetchingError from './FetchingError';
 
-const HTTP_contentIsJSONIn = (givenResponse: Response): boolean => {
+const HTTP_Client_contentIsJSONIn = (givenResponse: Response): boolean => {
   const rawContentDescriptor = givenResponse.headers.get('Content-Type');
 
   if (
@@ -42,7 +42,7 @@ const TextToImage_fetchConfig = (): Promise<TextToImage_OutcomeOfFetchingConfig>
   });
 
   if (
-    !HTTP_contentIsJSONIn(endpointResponse)
+    !HTTP_Client_contentIsJSONIn(endpointResponse)
   ) return ends.inFailureDueTo(endpointResponseError);
 
   const rawConfig = await endpointResponse.json() as unknown;
