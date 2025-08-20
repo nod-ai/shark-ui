@@ -1,7 +1,7 @@
 import type ParsingError from './ParsingError';
 
 import type {
-  StaticParser,
+  Parser_Static,
 } from './StaticParser';
 
 /**
@@ -9,7 +9,7 @@ import type {
  * Implementing this type ensures conformance to a standard parsing interface.
  */
 type Parsable<
-  SomeImplementer extends StaticParser<
+  SomeImplementer extends Parser_Static<
     SomeRawInput,
     SomeImplementer['prototype'],
     SomeParsingError

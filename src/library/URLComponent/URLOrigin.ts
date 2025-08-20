@@ -5,7 +5,7 @@ import {
 } from '@/library/Parser';
 
 import type {
-  StringParsable,
+  Parsable_String,
 } from '@/library/Parser/string';
 
 import StringSubset from '@/library/StringSubset';
@@ -27,7 +27,7 @@ class URLOrigin_ParsingError
 class URLOrigin
   extends StringSubset<
   'URLOrigin'
-> implements StringParsable<
+> implements Parsable_String<
   typeof URLOrigin,
   /*  */ URLOrigin_ParsingError
 > {

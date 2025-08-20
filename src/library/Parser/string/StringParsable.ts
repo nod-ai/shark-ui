@@ -5,15 +5,15 @@ import type {
 import type ParsingError from '../ParsingError';
 
 import type {
-  StaticStringParser,
+  Parser_StaticString,
 } from './StaticStringParser';
 
 /**
  * Some classes need a factory that parses strings into an instance.
  * Implement this type to ensure that the class follows the standard interface for this.
  */
-type StringParsable<
-  SomeImplementer extends StaticStringParser<
+type Parsable_String<
+  SomeImplementer extends Parser_StaticString<
     SomeImplementer['prototype'],
     SomeParsingError
   >,
@@ -25,5 +25,5 @@ type StringParsable<
 >;
 
 export type {
-  StringParsable,
+  Parsable_String,
 };

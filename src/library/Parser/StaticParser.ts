@@ -6,7 +6,7 @@ import type {
   Parser,
 } from './definition.ts';
 
-type StaticParser<
+type Parser_Static<
   SomeRawInput,
   SomeParsedOutput,
   SomeParsingError extends ParsingError<string>,
@@ -22,5 +22,5 @@ type StaticParser<
 ;
 
 export type {
-  StaticParser,
+  Parser_Static,
 };
