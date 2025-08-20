@@ -8,21 +8,21 @@ import {
   Config as TextToImage_Config,
 } from '../../types';
 
-import TextToImage_StaticConfigReadingError from './StaticConfigReadingError';
+import TextToImage_Config_StaticReadingError from './StaticConfigReadingError';
 
-const TextToImage_configFile = URLComponent_Path.parsedFrom('/config/text-to-image.json').forciblyUnwrap();
+const TextToImage_Config_file = URLComponent_Path.parsedFrom('/config/text-to-image.json').forciblyUnwrap();
 
-type TextToImage_OutcomeOfReadingConfig = Attempt.Outcome<
+type TextToImage_Config_OutcomeOfReading = Attempt.Outcome<
   TextToImage_Config,
-  TextToImage_StaticConfigReadingError
+  TextToImage_Config_StaticReadingError
 >;
 
-const TextToImage_readConfig = (): Promise<TextToImage_OutcomeOfReadingConfig> => Attempt.thatEventually(async (ends) => {
-  const fileResponse = await fetch(TextToImage_configFile.toString());
+const TextToImage_Config_read = (): Promise<TextToImage_Config_OutcomeOfReading> => Attempt.thatEventually(async (ends) => {
+  const fileResponse = await fetch(TextToImage_Config_file.toString());
 
   if (
     !fileResponse.ok
-  ) return ends.inFailureDueTo(new TextToImage_StaticConfigReadingError(TextToImage_configFile, fileResponse));
+  ) return ends.inFailureDueTo(new TextToImage_Config_StaticReadingError(TextToImage_Config_file, fileResponse));
 
   const rawConfig = await fileResponse.json() as unknown;
   const parsedConfig = TextToImage_Config.parsedFrom(rawConfig).forciblyUnwrap(/* Implementation must align with established contract. */);
@@ -30,7 +30,7 @@ const TextToImage_readConfig = (): Promise<TextToImage_OutcomeOfReadingConfig> =
 });
 
 export {
-  TextToImage_configFile as file,
-  TextToImage_readConfig as read,
-  TextToImage_StaticConfigReadingError as ReadingError,
+  TextToImage_Config_file as file,
+  TextToImage_Config_read as read,
+  TextToImage_Config_StaticReadingError as ReadingError,
 };

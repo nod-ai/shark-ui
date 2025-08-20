@@ -9,8 +9,8 @@ import {
 } from '@/library/utilitiesByType/array';
 
 import type {
-  Input as TextToImage_Input,
-  Output as TextToImage_Output,
+  Input as TextToImage_Pipeline_Input,
+  Output as TextToImage_Pipeline_Output,
 } from '@/features/TextToImage/types';
 
 import {
@@ -22,8 +22,8 @@ import {
 } from './TextPrompt';
 
 const toNullableOutput = (
-  givenImage: TextToImage_Output['image'] | null,
-): TextToImage_Output | null => {
+  givenImage: TextToImage_Pipeline_Output['image'] | null,
+): TextToImage_Pipeline_Output | null => {
   if (
     givenImage === null
   ) return null;
@@ -39,9 +39,9 @@ const textToImageOutputs = (
     inferredFrom: givenInputText,
   }: {
     in: GenerateFromTextResponse;
-    inferredFrom: TextToImage_Input['text'];
+    inferredFrom: TextToImage_Pipeline_Input['text'];
   },
-): (TextToImage_Output | null)[] | null => {
+): (TextToImage_Pipeline_Output | null)[] | null => {
   if (
     !('artifacts' in givenResponse.result)
   ) return Attempt.abandon('Expected response body rather than readable stream');
@@ -67,9 +67,9 @@ const firstTextToImageOutput = (
     inferredFrom: givenInputText,
   }: {
     in: GenerateFromTextResponse;
-    inferredFrom: TextToImage_Input['text'];
+    inferredFrom: TextToImage_Pipeline_Input['text'];
   },
-): TextToImage_Output => {
+): TextToImage_Pipeline_Output => {
   const inferredOutputs = textToImageOutputs({
     in          : givenResponse,
     inferredFrom: givenInputText,
