@@ -1,7 +1,7 @@
-import AttemptCreationError from '../../factory/AttemptCreationError';
+import Attempt_CreationError from '../../factory/AttemptCreationError';
 
 import {
-  default as NonActionableError,
+  default as Attempt_NonActionableError,
 } from '../NonActionableError';
 
 import type {
@@ -14,11 +14,11 @@ const assertPotentiallyActionable = <
   givenError: SomeError,
 ): PotentiallyActionable<SomeError> => {
   if (
-    !(givenError instanceof NonActionableError)
+    !(givenError instanceof Attempt_NonActionableError)
   ) return givenError as PotentiallyActionable<SomeError>;
 
   if (
-    !(givenError instanceof AttemptCreationError)
+    !(givenError instanceof Attempt_CreationError)
     && (givenError.charge !== null)
   ) return givenError.charge as PotentiallyActionable<SomeError>;
 

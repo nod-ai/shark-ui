@@ -1,12 +1,12 @@
-import NonActionableError from '../error/NonActionableError';
+import Attempt_NonActionableError from '../error/NonActionableError';
 
-class AttemptCreationError
-  extends NonActionableError {
+class Attempt_CreationError
+  extends Attempt_NonActionableError {
   public override name = 'AttemptCreationError' as const;
   public override readonly cause: Error;
 
   private constructor(
-    givenMessage: NonActionableError['message'],
+    givenMessage: Attempt_NonActionableError['message'],
     givenOptions: {
       cause: Error;
     },
@@ -30,5 +30,5 @@ class AttemptCreationError
 }
 
 export {
-  AttemptCreationError as default,
+  Attempt_CreationError as default,
 };

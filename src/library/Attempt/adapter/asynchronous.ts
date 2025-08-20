@@ -3,7 +3,7 @@ import type {
 } from '../Outcome';
 
 import type {
-  ActionableError,
+  Attempt_ActionableError,
 } from '../error';
 
 import {
@@ -20,9 +20,9 @@ import {
 
 import type Attempt_AdapterConfig from './Config';
 
-const attemptToEventually = async <
+const Attempt_toEventually = async <
   SomeProduct,
-  SomeActionableError extends ActionableError<string>,
+  SomeActionableError extends Attempt_ActionableError<string>,
 >(
   forciblyRetrieveProduct: () => Promise<SomeProduct>,
   given: Attempt_AdapterConfig<SomeActionableError>,
@@ -40,18 +40,18 @@ const attemptToEventually = async <
   },
 }));
 
-const attemptToSettle = async <
+const Attempt_toSettle = async <
   SomeProduct,
-  SomeActionableError extends ActionableError<string>,
+  SomeActionableError extends Attempt_ActionableError<string>,
 >(
   promisedProduct: Promise<SomeProduct>,
   givenConfig: Attempt_AdapterConfig<SomeActionableError>,
 ): Promise<Attempt_Outcome<SomeProduct, SomeActionableError>> => {
   const getPromisedProduct = () => promisedProduct;
-  return attemptToEventually(getPromisedProduct, givenConfig);
+  return Attempt_toEventually(getPromisedProduct, givenConfig);
 };
 
 export {
-  attemptToEventually,
-  attemptToSettle,
+  Attempt_toEventually,
+  Attempt_toSettle,
 };

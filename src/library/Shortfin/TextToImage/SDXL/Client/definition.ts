@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 import HTTP from '@/library/HTTP';
 
 import {
-  URLPath,
+  URLComponent_Path,
 } from '@/library/URLComponent';
 
 import type {
@@ -18,7 +18,7 @@ class Shortfin_TextToImage_SDXL_Client
   public generateImageFrom(
     givenBatchedRequestBody: Shortfin_TextToImage_SDXL_Client_Request.Body.Batched,
   ): Promise<Shortfin_TextToImage_SDXL_Client_Request.Outcome> {
-    const generationEndpoint = URLPath.parsedFrom('/generate').forciblyUnwrap();
+    const generationEndpoint = URLComponent_Path.parsedFrom('/generate').forciblyUnwrap();
 
     return Attempt.thatEventually(async (ends) => {
       const outcomeOfSubmittingResource = await this.submitResource({

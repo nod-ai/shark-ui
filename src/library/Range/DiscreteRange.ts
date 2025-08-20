@@ -8,7 +8,7 @@ import {
   Range,
 } from './definition.ts';
 
-class DiscreteRange
+class Range_Discrete
   extends Range {
   protected constructor(
     lowerBound: Range['lowerBound'],
@@ -27,11 +27,11 @@ class DiscreteRange
       to: givenUpperBound,
       by: givenStepSize,
     }: {
-      from: DiscreteRange['lowerBound'];
-      to: DiscreteRange['upperBound'];
-      by: DiscreteRange['stepSize'];
+      from: Range_Discrete['lowerBound'];
+      to: Range_Discrete['upperBound'];
+      by: Range_Discrete['stepSize'];
     },
-  ): DiscreteRange {
+  ): Range_Discrete {
     const validRange = super.spanning({
       from: givenLowerBound,
       to  : givenUpperBound,
@@ -94,5 +94,5 @@ class DiscreteRange
 }
 
 export {
-  DiscreteRange as default,
+  Range_Discrete as default,
 };

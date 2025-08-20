@@ -1,8 +1,8 @@
 import Attempt from '@/library/Attempt';
 
 import type {
-  URLOrigin,
-  URLPath,
+  URLComponent_Origin,
+  URLComponent_Path,
 } from '@/library/URLComponent';
 
 import {
@@ -15,11 +15,11 @@ import {
 
 class HTTP_Client {
   public constructor(
-    public readonly origin: URLOrigin,
+    public readonly origin: URLComponent_Origin,
     public readonly headers: HTTP_Request.HeaderMap,
   ) {}
 
-  public originAt(givenPath: URLPath): URL {
+  public originAt(givenPath: URLComponent_Path): URL {
     const serializedURLComponents = this.origin.appendedWith(givenPath);
     return new URL(serializedURLComponents);
   }
@@ -30,7 +30,7 @@ class HTTP_Client {
       to: givenPath,
       using: givenMethod,
     }: {
-      to: URLPath;
+      to: URLComponent_Path;
       using: HTTP_Request.Method;
     },
   ): Promise<HTTP_Endpoint.Outcome> => Attempt.thatEventually(async (ends) => {
@@ -72,7 +72,7 @@ class HTTP_Client {
     {
       from: givenPath,
     }: {
-      from: URLPath;
+      from: URLComponent_Path;
     },
   ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(null, {
@@ -87,7 +87,7 @@ class HTTP_Client {
       to: givenPath,
     }: {
       bySending: unknown;
-      to: URLPath;
+      to: URLComponent_Path;
     },
   ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(givenSubmission, {
@@ -102,7 +102,7 @@ class HTTP_Client {
       to: givenPath,
     }: {
       bySending: unknown;
-      to: URLPath;
+      to: URLComponent_Path;
     },
   ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(givenProperties, {
@@ -117,7 +117,7 @@ class HTTP_Client {
       to: givenPath,
     }: {
       bySending: unknown;
-      to: URLPath;
+      to: URLComponent_Path;
     },
   ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(givenChanges, {
@@ -127,7 +127,7 @@ class HTTP_Client {
   }
 
   public async deleteResourceAt(
-    givenPath: URLPath,
+    givenPath: URLComponent_Path,
   ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(null, {
       to   : givenPath,

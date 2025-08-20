@@ -1,12 +1,12 @@
 import type {
-  default as ActionableError,
+  default as Attempt_ActionableError,
 } from '../ActionableError';
 
 import type Attempt_ErrorInterpreter from '../Interpreter';
 import NonActionableBuiltInError from '../NonActionableBuiltInError';
 
 import {
-  default as NonActionableError,
+  default as Attempt_NonActionableError,
 } from '../NonActionableError';
 
 import type {
@@ -18,7 +18,7 @@ import {
 } from './assertPotentiallyActionable';
 
 const assertActionable = <
-  SomeActionableError extends ActionableError<string>,
+  SomeActionableError extends Attempt_ActionableError<string>,
 >(
   givenError: AppropriatelyThrown<Error>,
   {
@@ -34,7 +34,7 @@ const assertActionable = <
     definitelyActionableError !== null
   ) return definitelyActionableError;
 
-  return NonActionableError.rethrow(potentiallyActionableError, {
+  return Attempt_NonActionableError.rethrow(potentiallyActionableError, {
     message: NonActionableBuiltInError.describes(givenError)
       ? 'Neglected to prevent built-in error'
       : 'Neglected to interpret or prevent potentially actionable error',

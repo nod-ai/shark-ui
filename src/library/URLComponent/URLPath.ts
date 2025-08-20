@@ -5,16 +5,16 @@ import {
 } from '@/library/Parser';
 
 import type {
-  StringParsable,
+  Parsable_String,
 } from '@/library/Parser/string';
 
 import StringSubset from '@/library/StringSubset';
 
-class URLPath_ParsingError
+class URLComponent_Path_ParsingError
   extends ParsingError<
-  'URLPath'
+  'URLComponent_Path'
 > {
-  public override name = 'URLPath_ParsingError' as const;
+  public override name = 'URLComponent_Path_ParsingError' as const;
 
   public constructor(given: {
     expectation: string;
@@ -24,19 +24,19 @@ class URLPath_ParsingError
   }
 }
 
-class URLPath
+class URLComponent_Path
   extends StringSubset<
-  'URLPath'
-> implements StringParsable<
-  typeof URLPath,
-  /*  */ URLPath_ParsingError
+  'URLComponent_Path'
+> implements Parsable_String<
+  typeof URLComponent_Path,
+  /*  */ URLComponent_Path_ParsingError
 > {
   public static parsedFrom = (
     givenSubject: string,
-  ): Attempt.Outcome<URLPath, URLPath_ParsingError> => Attempt.that((ends) => {
+  ): Attempt.Outcome<URLComponent_Path, URLComponent_Path_ParsingError> => Attempt.that((ends) => {
     const exampleURL = new URL(`https://example.com${givenSubject}`);
 
-    const newParsingError = new URLPath_ParsingError({
+    const newParsingError = new URLComponent_Path_ParsingError({
       expectation: exampleURL.pathname,
       reality    : givenSubject,
     });
@@ -45,12 +45,12 @@ class URLPath
       exampleURL.pathname !== givenSubject
     ) return ends.inFailureDueTo(newParsingError);
 
-    const parsedURLPath = new URLPath(exampleURL.pathname);
+    const parsedURLPath = new URLComponent_Path(exampleURL.pathname);
     return ends.inSuccessWith(parsedURLPath);
   });
 }
 
 export {
-  URLPath,
-  URLPath_ParsingError,
+  URLComponent_Path,
+  URLComponent_Path_ParsingError,
 };

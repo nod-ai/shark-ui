@@ -1,7 +1,7 @@
-import type ImageURI from '@/library/UniformResourceIdentifier/Data/Image';
+import type URI_Image from '@/library/UniformResourceIdentifier/Data/Image';
 
 interface TextToImage_Output_Image {
-  uri: ImageURI;
+  uri: URI_Image;
   description: string;
 }
 

@@ -1,12 +1,12 @@
 export {
-  attemptTo,
+  Attempt_to,
 } from './synchronous';
 
 export {
-  attemptToEventually,
-  attemptToSettle,
+  Attempt_toEventually,
+  Attempt_toSettle,
 } from './asynchronous';
 
 export type {
-  default as AdapterConfig,
+  default as Attempt_AdapterConfig,
 } from './Config';

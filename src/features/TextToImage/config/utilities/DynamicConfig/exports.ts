@@ -1,17 +1,17 @@
 import Attempt from '@/library/Attempt';
 
 import {
-  URLPath,
+  URLComponent_Path,
 } from '@/library/URLComponent';
 
 import {
-  Config,
+  Config as TextToImage_Config,
 } from '../../types';
 
-import DynamicConfig_EndpointResponseError from './EndpointResponseError';
-import DynamicConfig_FetchingError from './FetchingError';
+import TextToImage_DynamicConfig_EndpointResponseError from './EndpointResponseError';
+import TextToImage_DynamicConfig_FetchingError from './FetchingError';
 
-const contentIsJSONIn = (givenResponse: Response): boolean => {
+const HTTP_contentIsJSONIn = (givenResponse: Response): boolean => {
   const rawContentDescriptor = givenResponse.headers.get('Content-Type');
 
   if (
@@ -21,38 +21,38 @@ const contentIsJSONIn = (givenResponse: Response): boolean => {
   return rawContentDescriptor.includes('application/json');
 };
 
-const configEndpoint = URLPath.parsedFrom('/config/text-to-image').forciblyUnwrap();
+const TextToImage_configEndpoint = URLComponent_Path.parsedFrom('/config/text-to-image').forciblyUnwrap();
 
-type OutcomeOfFetchingConfig = Attempt.Outcome<Config,
-  | DynamicConfig_FetchingError
-  | DynamicConfig_EndpointResponseError
+type TextToImage_OutcomeOfFetchingConfig = Attempt.Outcome<TextToImage_Config,
+  | TextToImage_DynamicConfig_FetchingError
+  | TextToImage_DynamicConfig_EndpointResponseError
 >;
 
-const fetchConfig = (): Promise<OutcomeOfFetchingConfig> => Attempt.thatEventually(async (ends) => {
-  const endpointResponse = await fetch(configEndpoint.toString());
-  const fetchingError = new DynamicConfig_FetchingError(configEndpoint);
+const TextToImage_fetchConfig = (): Promise<TextToImage_OutcomeOfFetchingConfig> => Attempt.thatEventually(async (ends) => {
+  const endpointResponse = await fetch(TextToImage_configEndpoint.toString());
+  const fetchingError = new TextToImage_DynamicConfig_FetchingError(TextToImage_configEndpoint);
 
   if (
     !endpointResponse.ok
   ) return ends.inFailureDueTo(fetchingError);
 
-  const endpointResponseError = new DynamicConfig_EndpointResponseError({
-    endpoint: configEndpoint,
+  const endpointResponseError = new TextToImage_DynamicConfig_EndpointResponseError({
+    endpoint: TextToImage_configEndpoint,
     response: endpointResponse,
   });
 
   if (
-    !contentIsJSONIn(endpointResponse)
+    !HTTP_contentIsJSONIn(endpointResponse)
   ) return ends.inFailureDueTo(endpointResponseError);
 
   const rawConfig = await endpointResponse.json() as unknown;
-  const parsedConfig = Config.parsedFrom(rawConfig).forciblyUnwrap(/* Implementation must align with established contract. */);
+  const parsedConfig = TextToImage_Config.parsedFrom(rawConfig).forciblyUnwrap(/* Implementation must align with established contract. */);
   return ends.inSuccessWith(parsedConfig);
 });
 
 export {
-  configEndpoint as endpoint,
-  fetchConfig as fetch,
-  DynamicConfig_FetchingError as FetchingError,
-  DynamicConfig_EndpointResponseError as EndpointResponseError,
+  TextToImage_configEndpoint as endpoint,
+  TextToImage_fetchConfig as fetch,
+  TextToImage_DynamicConfig_FetchingError as FetchingError,
+  TextToImage_DynamicConfig_EndpointResponseError as EndpointResponseError,
 };

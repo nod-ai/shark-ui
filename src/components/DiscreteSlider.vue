@@ -17,7 +17,7 @@ import {
 } from 'vuetify/components/VSlider';
 
 import type Range from '@/library/Range';
-import DiscreteRange from '@/library/Range/DiscreteRange.ts';
+import Range_Discrete from '@/library/Range/DiscreteRange.ts';
 
 import {
   shallowlyMerged,
@@ -29,8 +29,8 @@ const currentValue = defineModel<number>({
 
 const given = defineProps<{
   label: string;
-  range: DiscreteRange;
-  tickStep: DiscreteRange['stepSize'];
+  range: Range_Discrete;
+  tickStep: Range_Discrete['stepSize'];
 }>();
 
 const incrementCurrentValueBy = (givenStepCount: number) => {
@@ -93,10 +93,10 @@ const tickLabelsAlong = (
   {
     atEvery: givenStepSize,
   }: {
-    atEvery: DiscreteRange['stepSize'];
+    atEvery: Range_Discrete['stepSize'];
   },
 ): SliderTickLabelsByPosition => {
-  const tickRange = DiscreteRange.spanning({
+  const tickRange = Range_Discrete.spanning({
     from: givenRange.lowerBound,
     to  : givenRange.upperBound,
     by  : givenStepSize,

@@ -9,23 +9,23 @@ import {
 } from '../ended';
 
 import type {
-  ActionableError,
+  Attempt_ActionableError,
 } from '../error';
 
 import {
   sanctioned,
 } from '../utilities/sanctionedTryCatch';
 
-import AttemptCreationError from './AttemptCreationError';
+import Attempt_CreationError from './AttemptCreationError';
 
 type Attempt_EndGetter<
-  SomeInferredOutcome extends Attempt_Outcome<unknown, ActionableError<string>>,
+  SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_ActionableError<string>>,
 > = (
   givenHandles: typeof handles
 ) => SomeInferredOutcome;
 
 const Attempt_that = <
-  SomeInferredOutcome extends Attempt_Outcome<unknown, ActionableError<string>>,
+  SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_ActionableError<string>>,
 >(
   endsAccordingTo: Attempt_EndGetter<SomeInferredOutcome>,
 ) => {
@@ -36,7 +36,7 @@ const Attempt_that = <
       return endsAccordingTo(handles) as EquivalentOutcome;
     },
     catch(someError) {
-      return AttemptCreationError.rethrow(someError);
+      return Attempt_CreationError.rethrow(someError);
     },
   });
 };

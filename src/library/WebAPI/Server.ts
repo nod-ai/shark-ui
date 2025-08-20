@@ -5,7 +5,7 @@ import Schema from '@/library/Schema';
  * - listens for requests
  * - responds to those requests
  */
-class Server {
+class WebAPI_Server {
   public constructor(
     /**
      * The web location of the server, which is the base URL of the API.
@@ -14,8 +14,8 @@ class Server {
     public readonly origin: string,
   ) {}
 
-  public static from(given: Server): Server {
-    const clonedServer = new Server(
+  public static from(given: WebAPI_Server): WebAPI_Server {
+    const clonedServer = new WebAPI_Server(
       given.origin,
     );
 
@@ -26,9 +26,9 @@ class Server {
     .object({
       origin: Schema.string(),
     })
-    .transform($0 => Server.from($0));
+    .transform($0 => WebAPI_Server.from($0));
 }
 
 export {
-  Server as default,
+  WebAPI_Server as default,
 };

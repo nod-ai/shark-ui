@@ -1,11 +1,11 @@
 import type {
-  Config,
+  Config as TextToImage_Config,
 } from '../types';
 
-const emptyConfig: Config = {
+const TextToImage_emptyConfig: TextToImage_Config = {
   server: null,
 };
 
 export {
-  emptyConfig,
+  TextToImage_emptyConfig,
 };

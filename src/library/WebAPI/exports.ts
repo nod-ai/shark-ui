@@ -1,5 +1,5 @@
-import Server from './Server.ts';
+import WebAPI_Server from './Server.ts';
 
 export {
-  Server,
+  WebAPI_Server as Server,
 };

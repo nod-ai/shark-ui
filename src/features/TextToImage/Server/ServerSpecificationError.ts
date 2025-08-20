@@ -1,7 +1,7 @@
 import Attempt from '@/library/Attempt';
 
 import type {
-  URLPath,
+  URLComponent_Path,
 } from '@/library/URLComponent';
 
 class TextToImage_Server_SpecificationError
@@ -12,8 +12,8 @@ class TextToImage_Server_SpecificationError
 
   public constructor(
     public readonly environmentKey: string,
-    public readonly file: URLPath,
-    public readonly endpoint: URLPath,
+    public readonly file: URLComponent_Path,
+    public readonly endpoint: URLComponent_Path,
   ) {
     super('Failed to determine text-to-image server');
   }

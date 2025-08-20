@@ -3,7 +3,7 @@ import Base64 from '@/library/Base64';
 import Byte from '@/library/Byte';
 
 import type {
-  StringParsable,
+  Parsable_String,
 } from '@/library/Parser/string';
 
 import Sequence from '@/library/Sequence';
@@ -20,7 +20,7 @@ import Base64CharacterEncodedByteSequence_ParsingError from './ParsingError.ts';
 class Base64CharacterEncodedByteSequence
   extends StringSubset<
   'Base64CharacterEncodedByteSequence'
-> implements StringParsable<
+> implements Parsable_String<
   typeof Base64CharacterEncodedByteSequence,
   /*  */ Base64CharacterEncodedByteSequence_ParsingError
 > {

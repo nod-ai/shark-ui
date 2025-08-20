@@ -1,7 +1,7 @@
 import Attempt from '@/library/Attempt';
 
 import type {
-  StringParsable,
+  Parsable_String,
 } from '@/library/Parser/string';
 
 import StringSubset from '@/library/StringSubset';
@@ -17,7 +17,7 @@ import NonTrivialString_ParsingError from './ParsingError.ts';
 class NonTrivialString
   extends StringSubset<
   'NonTrivialString'
-> implements StringParsable<
+> implements Parsable_String<
   typeof NonTrivialString,
   /*  */ NonTrivialString_ParsingError
 > {
