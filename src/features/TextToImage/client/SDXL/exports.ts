@@ -7,19 +7,19 @@ import HTTP from '@/library/HTTP';
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient';
 
 import type {
-  Output,
+  Output as TextToImage_Output,
 } from '@/features/TextToImage/types';
 
-import * as Server from '../../Server';
+import * as TextToImage_Server from '../../Server';
 
 import {
   firstTextToImageOutput,
 } from './conversions/GenerateFromTextResponse';
 
-const initializeShimmedStabilityAIClient = async (): Promise<
-  Attempt.Outcome<ShimmedStabilityAIClient, Server.SpecificationError>
+const TextToImage_initializeShimmedStabilityAIClient = async (): Promise<
+  Attempt.Outcome<ShimmedStabilityAIClient, TextToImage_Server.SpecificationError>
 > => {
-  const outcomeOfRetrievingCurrentServer = await Server.retrieveCurrent();
+  const outcomeOfRetrievingCurrentServer = await TextToImage_Server.retrieveCurrent();
 
   const outcomeOfInitializingClient = Attempt.Outcome.fromRewrapping(outcomeOfRetrievingCurrentServer, {
     product: textToImageServer => new ShimmedStabilityAIClient({
@@ -30,12 +30,12 @@ const initializeShimmedStabilityAIClient = async (): Promise<
   return outcomeOfInitializingClient;
 };
 
-type OutcomeOfGeneratingTextToImageOutput = Attempt.Outcome<Output,
-  | Server.ConnectionError
-  | Server.SpecificationError
+type TextToImage_OutcomeOfGeneratingOutput = Attempt.Outcome<TextToImage_Output,
+  | TextToImage_Server.ConnectionError
+  | TextToImage_Server.SpecificationError
 >;
 
-const generateOutputFrom = async (
+const TextToImage_generateOutputFrom = async (
   given: {
     textToImageRequestBody: Pick<GenerateFromTextRequest['textToImageRequestBody'],
     | 'textPrompts'
@@ -46,8 +46,8 @@ const generateOutputFrom = async (
     | 'seed'
     >;
   },
-): Promise<OutcomeOfGeneratingTextToImageOutput> => {
-  const outcomeOfInitializingClient = await initializeShimmedStabilityAIClient();
+): Promise<TextToImage_OutcomeOfGeneratingOutput> => {
+  const outcomeOfInitializingClient = await TextToImage_initializeShimmedStabilityAIClient();
 
   if (
     outcomeOfInitializingClient.isFailure
@@ -73,7 +73,7 @@ const generateOutputFrom = async (
         !(caughtError instanceof HTTP.Endpoint.RequestError)
       ) return null;
 
-      return new Server.ConnectionError(caughtError.endpoint);
+      return new TextToImage_Server.ConnectionError(caughtError.endpoint);
     },
   });
 
@@ -87,10 +87,10 @@ const generateOutputFrom = async (
   return outcomeOfSettlingSoleTextToImageOutput;
 };
 
-const SDXLTextToImageClient = {
-  generateOutputFrom,
+const TextToImage_SDXLClient = {
+  generateOutputFrom: TextToImage_generateOutputFrom,
 };
 
 export {
-  SDXLTextToImageClient,
+  TextToImage_SDXLClient,
 };
