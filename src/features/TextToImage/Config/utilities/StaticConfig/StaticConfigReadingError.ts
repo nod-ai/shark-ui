@@ -4,11 +4,11 @@ import type {
   URLComponent_Path,
 } from '@/library/URLComponent';
 
-class TextToImage_Config_StaticReadingError
+class TextToImage_Config_Static_ReadingError
   extends Attempt.Error_Actionable<
-  'TextToImage_Config_StaticReadingError'
+  'TextToImage_Config_Static_ReadingError'
 > {
-  public override name = 'TextToImage_Config_StaticReadingError' as const;
+  public override name = 'TextToImage_Config_Static_ReadingError' as const;
 
   public constructor(
     givenFile: URLComponent_Path,
@@ -19,5 +19,5 @@ class TextToImage_Config_StaticReadingError
 }
 
 export {
-  TextToImage_Config_StaticReadingError as default,
+  TextToImage_Config_Static_ReadingError as default,
 };
