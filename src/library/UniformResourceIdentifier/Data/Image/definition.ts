@@ -2,7 +2,7 @@ import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEn
 import ContentDescriptor from '@/library/ContentDescriptor';
 
 import type {
-  DataURI_EncodingIdentifier,
+  URI_Data_EncodingIdentifier,
 } from '../EncodingIdentifier';
 
 import {
@@ -19,7 +19,7 @@ class URI_Image
 
   public constructor(
     public readonly format: ImageURI_Format.Any,
-    givenEncoding: DataURI_EncodingIdentifier.Any,
+    givenEncoding: URI_Data_EncodingIdentifier.Any,
     givenData: Base64CharacterEncodedByteSequence,
   ) {
     super(
