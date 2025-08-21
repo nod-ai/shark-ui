@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 import Base64 from '@/library/Base64';
 
 class Sequence_Base64_ConformanceError
-  extends Attempt.ActionableError<
+  extends Attempt.Error_Actionable<
   'Sequence_Base64_ConformanceError'
 > {
   public override name = 'Sequence_Base64_ConformanceError' as const;

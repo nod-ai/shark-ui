@@ -42,7 +42,7 @@ class HTTP_Client {
       body   : JSON.stringify(givenRequestBody),
     });
 
-    const outcomeOfSettlingResponse = await Attempt.toSettle(promisedResponse, {
+    const outcomeOfSettlingResponse = await Attempt.Adapted_toSettle(promisedResponse, {
       interpretationOf: (caughtError) => {
         const clientFailedToReachServer = caughtError.message.includes('Failed to fetch');
 

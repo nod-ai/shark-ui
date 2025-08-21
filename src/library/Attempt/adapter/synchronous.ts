@@ -3,7 +3,7 @@ import type {
 } from '../Outcome';
 
 import type {
-  Attempt_ActionableError,
+  Attempt_Error_Actionable,
 } from '../error';
 
 import {
@@ -18,14 +18,14 @@ import {
   sanctioned,
 } from '../utilities/sanctionedTryCatch';
 
-import type Attempt_AdapterConfig from './Config';
+import type Attempt_Adapted_Config from './Config';
 
-const Attempt_to = <
+const Attempt_Adapted_to = <
   SomeProduct,
-  SomeActionableError extends Attempt_ActionableError<string>,
+  SomeActionableError extends Attempt_Error_Actionable<string>,
 >(
   forciblyGetProduct: () => SomeProduct,
-  given: Attempt_AdapterConfig<SomeActionableError>,
+  given: Attempt_Adapted_Config<SomeActionableError>,
 ): Attempt_Outcome<SomeProduct, SomeActionableError> => Attempt_that(ends => sanctioned({
   try() {
     const gottenProduct = forciblyGetProduct();
@@ -41,5 +41,5 @@ const Attempt_to = <
 }));
 
 export {
-  Attempt_to,
+  Attempt_Adapted_to,
 };

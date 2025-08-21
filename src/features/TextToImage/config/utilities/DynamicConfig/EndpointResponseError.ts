@@ -5,7 +5,7 @@ import type {
 } from '@/library/URLComponent';
 
 class TextToImage_Config_Dynamic_EndpointResponseError
-  extends Attempt.ActionableError<
+  extends Attempt.Error_Actionable<
   'TextToImage_Config_Dynamic_EndpointResponseError'
 > {
   public override name = 'TextToImage_Config_Dynamic_EndpointResponseError' as const;

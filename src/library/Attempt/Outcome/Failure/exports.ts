@@ -1,30 +1,30 @@
 // cspell:words sugarfree discriminable
 
 import type {
-  Attempt_ActionableError,
+  Attempt_Error_Actionable,
 } from '../../error';
 
 import type {
-  Attempt_DiscriminableOutcome,
+  Attempt_Outcome_Discriminable,
 } from '../Discriminable';
 
 import {
-  type Attempt_Failure_Transformer,
-  Attempt_causeIdentity,
+  type Attempt_Outcome_Failure_Transformer,
+  Attempt_Outcome_causeIdentity,
 } from './Transformer';
 
-interface Attempt_SemanticallySugarfreeFailure<
-  SomeActionableError extends Attempt_ActionableError<string>,
-> extends Attempt_DiscriminableOutcome<
+interface Attempt_Outcome_SemanticallySugarfreeFailure<
+  SomeActionableError extends Attempt_Error_Actionable<string>,
+> extends Attempt_Outcome_Discriminable<
   'failure',
   SomeActionableError
 > {
   readonly cause: SomeActionableError;
 }
 
-interface Attempt_Failure<
-  SomeActionableError extends Attempt_ActionableError<string>,
-> extends Attempt_SemanticallySugarfreeFailure<
+interface Attempt_Outcome_Failure<
+  SomeActionableError extends Attempt_Error_Actionable<string>,
+> extends Attempt_Outcome_SemanticallySugarfreeFailure<
   SomeActionableError
 > {
   /**
@@ -47,20 +47,20 @@ interface Attempt_Failure<
   readonly causeOfFailure: this['cause'];
 
   rewrappedWith<
-    TransformedActionableError extends Attempt_ActionableError<string> = SomeActionableError,
+    TransformedActionableError extends Attempt_Error_Actionable<string> = SomeActionableError,
   >(
-    given?: Attempt_Failure_Transformer<
+    given?: Attempt_Outcome_Failure_Transformer<
       SomeActionableError,
       TransformedActionableError
     >
-  ): Attempt_Failure<TransformedActionableError>;
+  ): Attempt_Outcome_Failure<TransformedActionableError>;
 }
 
-const Attempt_failureDueTo = <
-  SomeActionableError extends Attempt_ActionableError<string>,
+const Attempt_Outcome_failureDueTo = <
+  SomeActionableError extends Attempt_Error_Actionable<string>,
 >(
   givenCause: SomeActionableError,
-): Attempt_Failure<SomeActionableError> => ({
+): Attempt_Outcome_Failure<SomeActionableError> => ({
   discriminant    : 'failure',
   cause           : givenCause,
   isSuccess       : false,
@@ -69,23 +69,23 @@ const Attempt_failureDueTo = <
   forciblyUnwrap  : () => givenCause.throwAnyway('Unexpected forceful unwrap of a failure'),
   causeOfFailure  : givenCause,
   rewrappedWith   : <
-    TransformedActionableError extends Attempt_ActionableError<string>,
+    TransformedActionableError extends Attempt_Error_Actionable<string>,
   >(
     {
       cause: transformed,
     } = {
-      cause: Attempt_causeIdentity<SomeActionableError, TransformedActionableError>,
+      cause: Attempt_Outcome_causeIdentity<SomeActionableError, TransformedActionableError>,
     },
   ) => {
     const transformedCause = transformed(givenCause);
-    const transformedFailure = Attempt_failureDueTo(transformedCause);
+    const transformedFailure = Attempt_Outcome_failureDueTo(transformedCause);
     return transformedFailure;
   },
 });
 
 export {
-  type Attempt_Failure,
-  type Attempt_Failure_Transformer,
-  Attempt_failureDueTo,
-  Attempt_causeIdentity,
+  type Attempt_Outcome_Failure,
+  type Attempt_Outcome_Failure_Transformer,
+  Attempt_Outcome_failureDueTo,
+  Attempt_Outcome_causeIdentity,
 };

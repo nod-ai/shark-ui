@@ -10,26 +10,26 @@ export {
 
 export {
   Attempt_Outcome as Outcome,
-  type Attempt_Success as Success,
-  type Attempt_Failure as Failure,
+  type Attempt_Outcome_Success as Outcome_Success,
+  type Attempt_Outcome_Failure as Outcome_Failure,
 } from './Outcome';
 
 export {
-  Attempt_to as to,
-  Attempt_toEventually as toEventually,
-  Attempt_toSettle as toSettle,
-  type Attempt_AdapterConfig as AdapterConfig,
+  Attempt_Adapted_to as Adapted_to,
+  Attempt_Adapted_toEventually as Adapted_toEventually,
+  Attempt_Adapted_toSettle as Adapted_toSettle,
+  type Attempt_Adapted_Config as Adapted_Config,
 } from './adapter';
 
 export {
-  Attempt_NonActionableError as NonActionableError,
-  Attempt_ActionableError as ActionableError,
-  type Attempt_ErrorInterpreter as ErrorInterpreter,
+  Attempt_Error_NonActionable as Error_NonActionable,
+  Attempt_Error_Actionable as Error_Actionable,
+  type Attempt_Error_Interpreter as Error_Interpreter,
 } from './error';
 
 export {
   Attempt_that as that,
   Attempt_thatEventually as thatEventually,
-  type Attempt_EndGetter as EndGetter,
-  type Attempt_EndRetriever as EndRetriever,
+  type Attempt_End_Getter as End_Getter,
+  type Attempt_End_Retriever as End_Retriever,
 } from './factory';

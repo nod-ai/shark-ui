@@ -3,7 +3,7 @@ import {
 } from './Outcome';
 
 import {
-  Attempt_NonActionableError,
+  Attempt_Error_NonActionable,
 } from './error';
 
 /**
@@ -20,7 +20,7 @@ const Attempt_ended = {
   /** Call this when the attempt has completed in terms of a prior outcome */
   inTermsOf      : Attempt_Outcome.fromRewrapping,
   /** Call this when it's not possible to complete the attempt */
-  inFlamesBecause: Attempt_NonActionableError.throw.bind(Attempt_NonActionableError),
+  inFlamesBecause: Attempt_Error_NonActionable.throw.bind(Attempt_Error_NonActionable),
 };
 
 export {

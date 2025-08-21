@@ -3,11 +3,11 @@ import type {
 } from '@/library/typeUtilities/Branded';
 
 import {
-  default as Attempt_NonActionableError,
+  default as Attempt_Error_NonActionable,
 } from './NonActionableError';
 
 /** Extend this class to describe errors from which callers ought to recover */
-abstract class Attempt_ActionableError<
+abstract class Attempt_Error_Actionable<
   SomeBrand extends string,
 > extends Error
   implements Branded<
@@ -18,7 +18,7 @@ abstract class Attempt_ActionableError<
   public throwAnyway = (
     givenJustification: string,
   ): never => {
-    return Attempt_NonActionableError.throw(givenJustification, {
+    return Attempt_Error_NonActionable.throw(givenJustification, {
       cause  : this,
       thrower: this.throwAnyway,
     });
@@ -26,5 +26,5 @@ abstract class Attempt_ActionableError<
 }
 
 export {
-  Attempt_ActionableError as default,
+  Attempt_Error_Actionable as default,
 };

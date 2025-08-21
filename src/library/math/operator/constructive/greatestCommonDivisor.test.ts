@@ -102,7 +102,7 @@ describe.each(aliasKeys)(`${GCDAlias.default.name} alias: "%s"`, (eachAliasKey) 
         it.each(combosOfFractionalNumbers)('should safely propagate the error', (...$0) => {
           expect.assertions(1);
 
-          expect(() => eachAliasedGCD(...$0)).toThrow(Attempt.NonActionableError);
+          expect(() => eachAliasedGCD(...$0)).toThrow(Attempt.Error_NonActionable);
         });
 
         const fractionalCombosWithMessage = [

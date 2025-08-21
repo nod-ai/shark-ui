@@ -5,7 +5,7 @@ import type {
 } from '@/library/URLComponent';
 
 class TextToImage_Server_SpecificationError
-  extends Attempt.ActionableError<
+  extends Attempt.Error_Actionable<
   'TextToImage_Server_SpecificationError'
 > {
   public override name = 'TextToImage_Server_SpecificationError' as const;

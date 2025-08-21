@@ -42,7 +42,7 @@ describe(isNegative, () => {
       it('should safely propagate the error', () => {
         expect.assertions(1);
 
-        expect(() => isNegative(soleInoperableNumber)).toThrow(Attempt.NonActionableError);
+        expect(() => isNegative(soleInoperableNumber)).toThrow(Attempt.Error_NonActionable);
       });
 
       it('should communicate clearly with developers', () => {

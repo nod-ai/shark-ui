@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 
 abstract class ParsingError<
   SomeSubject extends string,
-> extends Attempt.ActionableError<
+> extends Attempt.Error_Actionable<
   `${SomeSubject}_ParsingError`
 > {
   public constructor(

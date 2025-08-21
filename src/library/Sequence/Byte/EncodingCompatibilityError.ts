@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 import Byte from '@/library/Byte';
 
 class Sequence_Byte_EncodingCompatibilityError
-  extends Attempt.ActionableError<
+  extends Attempt.Error_Actionable<
   'Sequence_Byte_EncodingCompatibilityError'
 > {
   public override name = 'Sequence_Byte_EncodingCompatibilityError' as const;
