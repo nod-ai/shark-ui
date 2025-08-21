@@ -8,7 +8,7 @@ import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient';
 
 import type {
   Output as TextToImage_Pipeline_Output,
-} from '@/features/TextToImage/types';
+} from '@/features/TextToImage/Pipeline';
 
 import * as TextToImage_Server from '../../Server';
 

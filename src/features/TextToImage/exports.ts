@@ -1,5 +1,5 @@
-export * as Client from './client';
+export * as Client from './Client';
 
 export * as Server from './Server';
 
-export type * from './types';
+export type * from './Pipeline';

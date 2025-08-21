@@ -5,7 +5,7 @@ import URI_Image from '@/library/UniformResourceIdentifier/Data/Image';
 
 import type {
   Output as TextToImage_Pipeline_Output,
-} from '@/features/TextToImage/types';
+} from '@/features/TextToImage/Pipeline';
 
 const toOutputImage = (
   givenImage: StabilityAIClient.Image,

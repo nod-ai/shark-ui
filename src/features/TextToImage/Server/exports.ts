@@ -8,7 +8,7 @@ import {
   Config_Dynamic as TextToImage_Config_Dynamic,
   Config_Static as TextToImage_Config_Static,
   TextToImage_Config_empty,
-} from '../config';
+} from '../Config';
 
 import TextToImage_Server_SpecificationError from './ServerSpecificationError';
 
