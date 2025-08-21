@@ -11,7 +11,7 @@ import type {
 type Attempt_Outcome_Discriminant = 'success' | 'failure';
 
 // cspell:words sugarfree discriminable
-interface Attempt_Outcome_SyntacticallySugarfreeDiscriminable<
+interface Attempt_Outcome_Discriminable_SyntacticallySugarfree<
   SomeDiscriminant extends Attempt_Outcome_Discriminant,
 > {
   readonly discriminant: SomeDiscriminant;
@@ -24,7 +24,7 @@ interface Attempt_Outcome_Discriminable<
       ? unknown
       : Attempt_Error_Actionable<string>
   ),
-> extends Attempt_Outcome_SyntacticallySugarfreeDiscriminable<
+> extends Attempt_Outcome_Discriminable_SyntacticallySugarfree<
   SomeDiscriminant
 > {
   readonly isSuccess: Is<this['discriminant'], 'success'>;
