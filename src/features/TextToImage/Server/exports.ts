@@ -12,10 +12,10 @@ import {
 
 import TextToImage_Server_SpecificationError from './ServerSpecificationError';
 
-const TextToImage_Server_environmentKeyForOrigin = 'VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN';
+const TextToImage_Server_Origin_environmentKey = 'VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN';
 
 const TextToImage_Server_accordingToEnvironment = ((): WebAPI_Server | null => {
-  const originAccordingToEnvironment = import.meta.env[TextToImage_Server_environmentKeyForOrigin];
+  const originAccordingToEnvironment = import.meta.env[TextToImage_Server_Origin_environmentKey];
 
   if (
     originAccordingToEnvironment === undefined
@@ -46,7 +46,7 @@ const TextToImage_Server_retrieveCurrent = (): Promise<
   ) return ends.inSuccessWith(dynamicConfig.server);
 
   const newSpecificationError = new TextToImage_Server_SpecificationError(
-    TextToImage_Server_environmentKeyForOrigin,
+    TextToImage_Server_Origin_environmentKey,
     TextToImage_Config_Static.file,
     TextToImage_Config_Dynamic.endpoint,
   );
