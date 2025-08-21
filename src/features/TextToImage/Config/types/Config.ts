@@ -1,10 +1,6 @@
 import type Attempt from '@/library/Attempt';
-
-import {
-  type Parsable,
-  Parse_instanceFrom,
-} from '@/library/Parser';
-
+import type Parsable from '@/library/Parsable';
+import Parse from '@/library/Parse';
 import Schema from '@/library/Schema';
 import * as WebAPI from '@/library/WebAPI';
 
@@ -39,7 +35,7 @@ implements Parsable<
     TextToImage_Config,
     TextToImage_Config_ParsingError
   > {
-    const parsedConfig = Parse_instanceFrom(givenSubject, {
+    const parsedConfig = Parse.instanceFrom(givenSubject, {
       using      : this.Schema,
       failingWith: TextToImage_Config_ParsingError,
     });

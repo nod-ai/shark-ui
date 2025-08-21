@@ -1,3 +1,3 @@
 export type {
-  Parser as default,
+  Parsable as default,
 } from './exports.ts';

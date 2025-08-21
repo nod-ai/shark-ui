@@ -1,13 +1,6 @@
 import Attempt from '@/library/Attempt';
-
-import {
-  ParsingError,
-} from '@/library/Parser';
-
-import type {
-  Parsable_String,
-} from '@/library/Parser/string';
-
+import type Parsable from '@/library/Parsable';
+import ParsingError from '@/library/ParsingError';
 import StringSubset from '@/library/StringSubset';
 
 class URLComponent_Origin_ParsingError
@@ -27,7 +20,7 @@ class URLComponent_Origin_ParsingError
 class URLComponent_Origin
   extends StringSubset<
   'URLComponent_Origin'
-> implements Parsable_String<
+> implements Parsable.String<
   typeof URLComponent_Origin,
   /*  */ URLComponent_Origin_ParsingError
 > {

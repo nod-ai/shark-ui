@@ -1,6 +1,4 @@
-import {
-  ParsingError,
-} from '@/library/Parser';
+import ParsingError from '@/library/ParsingError';
 
 class Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError
   extends ParsingError<

@@ -1,9 +1,5 @@
 import Attempt from '@/library/Attempt';
-
-import {
-  ParsingError,
-} from '@/library/Parser';
-
+import ParsingError from '@/library/ParsingError';
 import Sequence from '@/library/Sequence';
 
 class Base64CharacterEncodedByteSequence_ParsingError

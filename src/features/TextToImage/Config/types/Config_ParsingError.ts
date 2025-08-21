@@ -1,6 +1,4 @@
-import {
-  ParsingError,
-} from '@/library/Parser';
+import ParsingError from '@/library/ParsingError';
 
 class TextToImage_Config_ParsingError
   extends ParsingError<

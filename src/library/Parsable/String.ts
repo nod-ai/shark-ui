@@ -1,19 +1,16 @@
+import type Parser from '@/library/Parser';
+import type ParsingError from '@/library/ParsingError';
+
 import type {
   Parsable,
-} from '../Parsable';
-
-import type ParsingError from '../ParsingError';
-
-import type {
-  Parser_StaticString,
-} from './StaticStringParser';
+} from './definition';
 
 /**
  * Some classes need a factory that parses strings into an instance.
  * Implement this type to ensure that the class follows the standard interface for this.
  */
 type Parsable_String<
-  SomeImplementer extends Parser_StaticString<
+  SomeImplementer extends Parser.StaticString<
     SomeImplementer['prototype'],
     SomeParsingError
   >,

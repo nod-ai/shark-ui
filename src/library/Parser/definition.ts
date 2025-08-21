@@ -1,6 +1,5 @@
 import type Attempt from '@/library/Attempt';
-
-import type ParsingError from './ParsingError';
+import type ParsingError from '@/library/ParsingError';
 
 interface Parser<
   SomeRawInput,
