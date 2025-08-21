@@ -1,8 +1,5 @@
+import type Parser from '@/library/Parser';
 import type ParsingError from '@/library/ParsingError';
-
-import type {
-  Parser_StaticString,
-} from '../Parser/StaticString';
 
 import type {
   Parsable,
@@ -13,7 +10,7 @@ import type {
  * Implement this type to ensure that the class follows the standard interface for this.
  */
 type Parsable_String<
-  SomeImplementer extends Parser_StaticString<
+  SomeImplementer extends Parser.StaticString<
     SomeImplementer['prototype'],
     SomeParsingError
   >,
