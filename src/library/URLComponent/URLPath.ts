@@ -1,13 +1,10 @@
 import Attempt from '@/library/Attempt';
 
-import {
-  ParsingError,
-} from '@/library/Parser';
-
 import type {
   Parsable_String,
 } from '@/library/Parser/string';
 
+import ParsingError from '@/library/ParsingError';
 import StringSubset from '@/library/StringSubset';
 
 class URLComponent_Path_ParsingError
