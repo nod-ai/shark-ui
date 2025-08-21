@@ -1,4 +1,4 @@
-import type ParsingError from './ParsingError';
+import type ParsingError from '@/library/ParsingError';
 
 import type {
   Parser_Static,

@@ -4,6 +4,6 @@ export type * from './Parsable';
 
 export {
   default as ParsingError,
-} from './ParsingError';
+} from '@/library/ParsingError';
 
 export * from './Parse_instanceFrom';

@@ -1,9 +1,6 @@
 import Attempt from '@/library/Attempt';
+import type ParsingError from '@/library/ParsingError';
 import type Schema from '@/library/Schema';
-
-import type {
-  default as ParsingError,
-} from './ParsingError';
 
 const Parse_instanceFrom = <
   SomeSchema extends Schema.ZodType,
