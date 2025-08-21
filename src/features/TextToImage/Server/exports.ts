@@ -14,7 +14,7 @@ import TextToImage_Server_SpecificationError from './ServerSpecificationError';
 
 const TextToImage_Server_Origin_environmentKey = 'VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN';
 
-const TextToImage_Server_accordingToEnvironment = ((): WebAPI_Server | null => {
+const TextToImage_Server_Current_accordingToEnvironment = ((): WebAPI_Server | null => {
   const originAccordingToEnvironment = import.meta.env[TextToImage_Server_Origin_environmentKey];
 
   if (
@@ -26,12 +26,12 @@ const TextToImage_Server_accordingToEnvironment = ((): WebAPI_Server | null => {
   });
 })();
 
-const TextToImage_Server_retrieveCurrent = (): Promise<
+const TextToImage_Server_Current_retrieve = (): Promise<
   Attempt.Outcome<WebAPI_Server, TextToImage_Server_SpecificationError>
 > => Attempt.thatEventually(async (ends) => {
   if (
-    TextToImage_Server_accordingToEnvironment !== null
-  ) return ends.inSuccessWith(TextToImage_Server_accordingToEnvironment);
+    TextToImage_Server_Current_accordingToEnvironment !== null
+  ) return ends.inSuccessWith(TextToImage_Server_Current_accordingToEnvironment);
 
   const staticConfig = (await TextToImage_Config_Static.read()).optionallyUnwrap() ?? TextToImage_Config_empty;
 
@@ -59,7 +59,7 @@ export {
 } from './ServerConnectionError';
 
 export {
-  TextToImage_Server_accordingToEnvironment as accordingToEnvironment,
-  TextToImage_Server_retrieveCurrent as retrieveCurrent,
+  TextToImage_Server_Current_accordingToEnvironment as Current_accordingToEnvironment,
+  TextToImage_Server_Current_retrieve as Current_retrieve,
   TextToImage_Server_SpecificationError as SpecificationError,
 };
