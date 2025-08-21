@@ -1,11 +1,11 @@
 import Attempt from '@/library/Attempt';
 import Byte from '@/library/Byte';
 
-class Sequence_Byte_EncodingCompatibilityError
+class Sequence_Byte_Encoded_CompatibilityError
   extends Attempt.Error_Actionable<
-  'Sequence_Byte_EncodingCompatibilityError'
+  'Sequence_Byte_Encoded_CompatibilityError'
 > {
-  public override name = 'Sequence_Byte_EncodingCompatibilityError' as const;
+  public override name = 'Sequence_Byte_Encoded_CompatibilityError' as const;
 
   public constructor(
     givenBitWidth: number,
@@ -16,5 +16,5 @@ class Sequence_Byte_EncodingCompatibilityError
 }
 
 export {
-  Sequence_Byte_EncodingCompatibilityError as default,
+  Sequence_Byte_Encoded_CompatibilityError as default,
 };
