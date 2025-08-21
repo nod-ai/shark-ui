@@ -17,7 +17,7 @@ import {
 
 import type {
   Input as TextToImage_Pipeline_Input,
-} from '../types';
+} from '../Pipeline';
 
 type StandardizedInputText = TextToImage_Pipeline_Input['text'];
 

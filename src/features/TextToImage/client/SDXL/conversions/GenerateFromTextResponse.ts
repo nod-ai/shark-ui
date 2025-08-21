@@ -11,7 +11,7 @@ import {
 import type {
   Input as TextToImage_Pipeline_Input,
   Output as TextToImage_Pipeline_Output,
-} from '@/features/TextToImage/types';
+} from '@/features/TextToImage/Pipeline';
 
 import {
   toOutputImage,
