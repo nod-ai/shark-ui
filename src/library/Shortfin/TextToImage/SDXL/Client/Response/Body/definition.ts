@@ -1,11 +1,7 @@
 import type Attempt from '@/library/Attempt';
 import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
+import type Parsable from '@/library/Parsable';
 import Parse from '@/library/Parse';
-
-import type {
-  Parsable,
-} from '@/library/Parser';
-
 import Schema from '@/library/Schema';
 
 import {

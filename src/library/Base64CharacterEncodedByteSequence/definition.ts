@@ -1,11 +1,7 @@
 import Attempt from '@/library/Attempt';
 import Base64 from '@/library/Base64';
 import Byte from '@/library/Byte';
-
-import type {
-  Parsable_String,
-} from '@/library/Parser/string';
-
+import type Parsable from '@/library/Parsable';
 import Sequence from '@/library/Sequence';
 import StringSubset from '@/library/StringSubset';
 
@@ -20,7 +16,7 @@ import Base64CharacterEncodedByteSequence_ParsingError from './ParsingError.ts';
 class Base64CharacterEncodedByteSequence
   extends StringSubset<
   'Base64CharacterEncodedByteSequence'
-> implements Parsable_String<
+> implements Parsable.String<
   typeof Base64CharacterEncodedByteSequence,
   /*  */ Base64CharacterEncodedByteSequence_ParsingError
 > {
