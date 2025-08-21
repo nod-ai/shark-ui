@@ -1,3 +1,3 @@
-export type * from './StaticParser';
+export type * from './Static';
 
 export type * from './Parsable';
