@@ -1,4 +1,8 @@
 import type {
+  Attempt_Error_Actionable,
+} from '../Error';
+
+import type {
   Attempt_Outcome,
   CauseOf,
   ProductOf,
@@ -7,10 +11,6 @@ import type {
 import {
   Attempt_ended as handles,
 } from '../ended';
-
-import type {
-  Attempt_Error_Actionable,
-} from '../error';
 
 import {
   sanctioned,

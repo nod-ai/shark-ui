@@ -1,14 +1,14 @@
 import type {
-  Attempt_Outcome,
-} from '../Outcome';
-
-import type {
   Attempt_Error_Actionable,
-} from '../error';
+} from '../Error';
 
 import {
   assertActionable,
-} from '../error/assertions';
+} from '../Error/assertions';
+
+import type {
+  Attempt_Outcome,
+} from '../Outcome';
 
 import {
   Attempt_thatEventually,

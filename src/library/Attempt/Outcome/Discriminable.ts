@@ -6,7 +6,7 @@ import type {
 
 import type {
   Attempt_Error_Actionable,
-} from '../error';
+} from '../Error';
 
 type Attempt_Outcome_Discriminant = 'success' | 'failure';
 

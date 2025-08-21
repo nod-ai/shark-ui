@@ -1,6 +1,6 @@
 import type {
   Attempt_Error_Actionable,
-} from '../../error';
+} from '../../Error';
 
 type Attempt_Outcome_CauseTransformer<
   SomeTransformableActionableError extends Attempt_Error_Actionable<string>,

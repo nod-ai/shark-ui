@@ -2,7 +2,7 @@
 
 import type {
   Attempt_Error_Actionable,
-} from '../../error';
+} from '../../Error';
 
 import type {
   Attempt_Outcome_Discriminable,
