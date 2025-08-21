@@ -1,2 +1,2 @@
-export * from './URLOrigin.ts';
-export * from './URLPath.ts';
+export * from './Origin.ts';
+export * from './Path.ts';
