@@ -16,7 +16,7 @@ import {
   firstTextToImageOutput,
 } from './conversions/GenerateFromTextResponse';
 
-const TextToImage_Client_initializeShimmedStabilityAI = async (): Promise<
+const TextToImage_Client_SDXL_initialize = async (): Promise<
   Attempt.Outcome<ShimmedStabilityAIClient, TextToImage_Server.SpecificationError>
 > => {
   const outcomeOfRetrievingCurrentServer = await TextToImage_Server.retrieveCurrent();
@@ -35,7 +35,7 @@ type TextToImage_Client_OutcomeOfGeneratingOutput = Attempt.Outcome<TextToImage_
   | TextToImage_Server.SpecificationError
 >;
 
-const TextToImage_Client_generateOutputFrom = async (
+const TextToImage_Client_SDXL_generateOutputFrom = async (
   given: {
     textToImageRequestBody: Pick<GenerateFromTextRequest['textToImageRequestBody'],
     | 'textPrompts'
@@ -47,7 +47,7 @@ const TextToImage_Client_generateOutputFrom = async (
     >;
   },
 ): Promise<TextToImage_Client_OutcomeOfGeneratingOutput> => {
-  const outcomeOfInitializingClient = await TextToImage_Client_initializeShimmedStabilityAI();
+  const outcomeOfInitializingClient = await TextToImage_Client_SDXL_initialize();
 
   if (
     outcomeOfInitializingClient.isFailure
@@ -88,7 +88,7 @@ const TextToImage_Client_generateOutputFrom = async (
 };
 
 const TextToImage_Client_SDXL = {
-  generateOutputFrom: TextToImage_Client_generateOutputFrom,
+  generateOutputFrom: TextToImage_Client_SDXL_generateOutputFrom,
 };
 
 export {
