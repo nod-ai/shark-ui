@@ -1,12 +1,12 @@
 import type ParsingError from '@/library/ParsingError';
 
 import type {
-  Parsable,
-} from '../Parsable';
+  Parser_StaticString,
+} from '../Parser/StaticString';
 
 import type {
-  Parser_StaticString,
-} from '../StaticString';
+  Parsable,
+} from './definition';
 
 /**
  * Some classes need a factory that parses strings into an instance.

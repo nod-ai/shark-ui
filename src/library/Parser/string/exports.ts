@@ -1,3 +1,3 @@
 export type {
   Parsable_String,
-} from './StringParsable';
+} from '../../Parsable/String';

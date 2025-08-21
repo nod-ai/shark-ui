@@ -2,7 +2,7 @@ import type ParsingError from '@/library/ParsingError';
 
 import type {
   Parser_Static,
-} from './Static';
+} from '../Parser/Static';
 
 /**
  * Some classes need a factory that parses an unknown subject into an instance.
