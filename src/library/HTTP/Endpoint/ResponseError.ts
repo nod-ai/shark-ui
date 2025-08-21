@@ -4,11 +4,11 @@ import type {
   HTTP_Response,
 } from '../Response';
 
-class HTTP_Endpoint_ResponseError
+class HTTP_Endpoint_Error_Response
   extends Attempt.Error_Actionable<
-  'HTTP_Endpoint_ResponseError'
+  'HTTP_Endpoint_Error_Response'
 > {
-  public override name = 'HTTP_Endpoint_ResponseError' as const;
+  public override name = 'HTTP_Endpoint_Error_Response' as const;
 
   public constructor(
     givenMessage: string,
@@ -19,5 +19,5 @@ class HTTP_Endpoint_ResponseError
 }
 
 export {
-  HTTP_Endpoint_ResponseError,
+  HTTP_Endpoint_Error_Response,
 };

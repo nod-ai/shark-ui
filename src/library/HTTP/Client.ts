@@ -62,7 +62,7 @@ class HTTP_Client {
           !clientFailedToReachServer
         ) return null;
 
-        return new HTTP_Endpoint.RequestError(endpointURL);
+        return new HTTP_Endpoint.Error_Request(endpointURL);
       },
     });
 
@@ -74,7 +74,7 @@ class HTTP_Client {
 
     if (
       !response.ok
-    ) return ends.inFailureDueTo(new HTTP_Endpoint.ResponseError(response.statusText, response.status));
+    ) return ends.inFailureDueTo(new HTTP_Endpoint.Error_Response(response.statusText, response.status));
 
     const responseBody: unknown = await response.json();
     return ends.inSuccessWith(responseBody);
