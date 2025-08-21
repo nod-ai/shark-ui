@@ -4,11 +4,11 @@ import type {
   URLComponent_Path,
 } from '@/library/URLComponent';
 
-class TextToImage_Server_SpecificationError
+class TextToImage_Server_Error_Specification
   extends Attempt.Error_Actionable<
-  'TextToImage_Server_SpecificationError'
+  'TextToImage_Server_Error_Specification'
 > {
-  public override name = 'TextToImage_Server_SpecificationError' as const;
+  public override name = 'TextToImage_Server_Error_Specification' as const;
 
   public constructor(
     public readonly environmentKey: string,
@@ -20,5 +20,5 @@ class TextToImage_Server_SpecificationError
 }
 
 export {
-  TextToImage_Server_SpecificationError as default,
+  TextToImage_Server_Error_Specification as default,
 };

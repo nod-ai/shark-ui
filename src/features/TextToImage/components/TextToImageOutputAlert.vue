@@ -5,8 +5,8 @@ import TextToImageServerConnectionAlert from './TextToImageServerConnectionAlert
 import TextToImageServerSpecificationAlert from './TextToImageServerSpecificationAlert.vue';
 
 type OutputError =
-  | TextToImage.Server.ConnectionError
-  | TextToImage.Server.SpecificationError
+  | TextToImage.Server.Error_Connection
+  | TextToImage.Server.Error_Specification
 ;
 
 defineProps<{
@@ -16,7 +16,7 @@ defineProps<{
 
 <template>
   <TextToImageServerSpecificationAlert
-    v-if="(error instanceof TextToImage.Server.SpecificationError)"
+    v-if="(error instanceof TextToImage.Server.Error_Specification)"
     :error="error"
   />
   <TextToImageServerConnectionAlert

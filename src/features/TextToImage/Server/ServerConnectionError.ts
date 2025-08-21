@@ -1,10 +1,10 @@
 import Attempt from '@/library/Attempt';
 
-class TextToImage_Server_ConnectionError
+class TextToImage_Server_Error_Connection
   extends Attempt.Error_Actionable<
-  'TextToImage_Server_ConnectionError'
+  'TextToImage_Server_Error_Connection'
 > {
-  public override name = 'TextToImage_Server_ConnectionError' as const;
+  public override name = 'TextToImage_Server_Error_Connection' as const;
 
   public constructor(
     public readonly endpoint: URL,
@@ -14,5 +14,5 @@ class TextToImage_Server_ConnectionError
 }
 
 export {
-  TextToImage_Server_ConnectionError as default,
+  TextToImage_Server_Error_Connection as default,
 };
