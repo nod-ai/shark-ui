@@ -1,4 +1,4 @@
-import Range_Discrete from '@/library/Range/DiscreteRange.ts';
+import Range_Discrete from '@/library/Range/Discrete';
 
 /**
  * Sourced from the [StabilityAI OpenAPI spec](https://github.com/nod-ai/StabilityAI-client-typescript/blob/HEAD/openapi.json)
