@@ -6,7 +6,7 @@ import type {
 
 import type {
   Parser_StaticString,
-} from './StaticStringParser';
+} from '../StaticString';
 
 /**
  * Some classes need a factory that parses strings into an instance.
