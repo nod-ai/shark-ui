@@ -10,10 +10,10 @@ import type {
 
 import {
   type Attempt_Outcome_Failure_Transformer,
-  Attempt_Outcome_causeIdentity,
+  Attempt_Outcome_Failure_causeIdentity,
 } from './Transformer';
 
-interface Attempt_Outcome_SemanticallySugarfreeFailure<
+interface Attempt_Outcome_Failure_SemanticallySugarfree<
   SomeActionableError extends Attempt_Error_Actionable<string>,
 > extends Attempt_Outcome_Discriminable<
   'failure',
@@ -24,7 +24,7 @@ interface Attempt_Outcome_SemanticallySugarfreeFailure<
 
 interface Attempt_Outcome_Failure<
   SomeActionableError extends Attempt_Error_Actionable<string>,
-> extends Attempt_Outcome_SemanticallySugarfreeFailure<
+> extends Attempt_Outcome_Failure_SemanticallySugarfree<
   SomeActionableError
 > {
   /**
@@ -56,7 +56,7 @@ interface Attempt_Outcome_Failure<
   ): Attempt_Outcome_Failure<TransformedActionableError>;
 }
 
-const Attempt_Outcome_failureDueTo = <
+const Attempt_Outcome_Failure_dueTo = <
   SomeActionableError extends Attempt_Error_Actionable<string>,
 >(
   givenCause: SomeActionableError,
@@ -74,11 +74,11 @@ const Attempt_Outcome_failureDueTo = <
     {
       cause: transformed,
     } = {
-      cause: Attempt_Outcome_causeIdentity<SomeActionableError, TransformedActionableError>,
+      cause: Attempt_Outcome_Failure_causeIdentity<SomeActionableError, TransformedActionableError>,
     },
   ) => {
     const transformedCause = transformed(givenCause);
-    const transformedFailure = Attempt_Outcome_failureDueTo(transformedCause);
+    const transformedFailure = Attempt_Outcome_Failure_dueTo(transformedCause);
     return transformedFailure;
   },
 });
@@ -86,6 +86,6 @@ const Attempt_Outcome_failureDueTo = <
 export {
   type Attempt_Outcome_Failure,
   type Attempt_Outcome_Failure_Transformer,
-  Attempt_Outcome_failureDueTo,
-  Attempt_Outcome_causeIdentity,
+  Attempt_Outcome_Failure_dueTo,
+  Attempt_Outcome_Failure_causeIdentity,
 };
