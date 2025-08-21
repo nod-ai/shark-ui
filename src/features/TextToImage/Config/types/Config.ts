@@ -1,8 +1,8 @@
 import type Attempt from '@/library/Attempt';
+import Parse from '@/library/Parse';
 
-import {
-  type Parsable,
-  Parse_instanceFrom,
+import type {
+  Parsable,
 } from '@/library/Parser';
 
 import Schema from '@/library/Schema';
@@ -39,7 +39,7 @@ implements Parsable<
     TextToImage_Config,
     TextToImage_Config_ParsingError
   > {
-    const parsedConfig = Parse_instanceFrom(givenSubject, {
+    const parsedConfig = Parse.instanceFrom(givenSubject, {
       using      : this.Schema,
       failingWith: TextToImage_Config_ParsingError,
     });

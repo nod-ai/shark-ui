@@ -1,9 +1,9 @@
 import type Attempt from '@/library/Attempt';
 import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
+import Parse from '@/library/Parse';
 
-import {
-  type Parsable,
-  Parse_instanceFrom,
+import type {
+  Parsable,
 } from '@/library/Parser';
 
 import Schema from '@/library/Schema';
@@ -44,7 +44,7 @@ implements Parsable<
     Shortfin_TextToImage_SDXL_Client_Response_Body,
     Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError
   > {
-    const parsedBody = Parse_instanceFrom(givenSubject, {
+    const parsedBody = Parse.instanceFrom(givenSubject, {
       using      : this.Schema,
       failingWith: Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError,
     });
