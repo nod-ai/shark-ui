@@ -19,13 +19,13 @@ export {
   Attempt_Adapted_toEventually as Adapted_toEventually,
   Attempt_Adapted_toSettle as Adapted_toSettle,
   type Attempt_Adapted_Config as Adapted_Config,
-} from './adapter';
+} from './Adapted';
 
 export {
   Attempt_Error_NonActionable as Error_NonActionable,
   Attempt_Error_Actionable as Error_Actionable,
   type Attempt_Error_Interpreter as Error_Interpreter,
-} from './error';
+} from './Error';
 
 export {
   Attempt_that as that,
