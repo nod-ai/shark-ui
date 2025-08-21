@@ -19,7 +19,7 @@ export {
   Attempt_Adapted_toEventually as Adapted_toEventually,
   Attempt_Adapted_toSettle as Adapted_toSettle,
   type Attempt_Adapted_Config as Adapted_Config,
-} from './adapter';
+} from './Adapted';
 
 export {
   Attempt_Error_NonActionable as Error_NonActionable,
