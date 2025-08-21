@@ -8,7 +8,7 @@ import {
 } from '../definition.ts';
 
 import type {
-  DataURI_EncodingIdentifier,
+  URI_Data_EncodingIdentifier,
 } from './EncodingIdentifier';
 
 /** See [RFC 2397](https://datatracker.ietf.org/doc/rfc2397) for more info */
@@ -18,7 +18,7 @@ class URI_Data
 
   public constructor(
     private readonly overridableDescriptor: ContentDescriptor | null,
-    public readonly encoding: DataURI_EncodingIdentifier.Any,
+    public readonly encoding: URI_Data_EncodingIdentifier.Any,
     public readonly data: Base64CharacterEncodedByteSequence,
   ) {
     super(
