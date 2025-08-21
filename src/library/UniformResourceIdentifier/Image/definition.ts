@@ -3,7 +3,7 @@ import ContentDescriptor from '@/library/ContentDescriptor';
 
 import {
   URI_Data,
-} from '..';
+} from '../Data';
 
 import type {
   URI_Image_Format,
