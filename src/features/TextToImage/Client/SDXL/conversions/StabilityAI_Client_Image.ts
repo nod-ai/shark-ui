@@ -1,7 +1,7 @@
 import type * as StabilityAIClient from 'stabilityai-client-typescript/models/components';
 
 import Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
-import URI_Image from '@/library/UniformResourceIdentifier/Data/Image';
+import URI_Image from '@/library/UniformResourceIdentifier/Image';
 
 import type {
   Output as TextToImage_Pipeline_Output,

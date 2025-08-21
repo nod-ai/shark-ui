@@ -1,13 +1,9 @@
 import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
 import ContentDescriptor from '@/library/ContentDescriptor';
 
-import type {
-  URI_Data_EncodingIdentifier,
-} from '../EncodingIdentifier';
-
 import {
   URI_Data,
-} from '../definition.ts';
+} from '../Data';
 
 import type {
   URI_Image_Format,
@@ -19,7 +15,7 @@ class URI_Image
 
   public constructor(
     public readonly format: URI_Image_Format.Any,
-    givenEncoding: URI_Data_EncodingIdentifier.Any,
+    givenEncoding: URI_Data.EncodingIdentifier.Any,
     givenData: Base64CharacterEncodedByteSequence,
   ) {
     super(
