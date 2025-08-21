@@ -1,1 +1,3 @@
-export * from './exports.ts';
+export type {
+  Parser as default,
+} from './exports.ts';

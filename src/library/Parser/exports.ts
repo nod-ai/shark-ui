@@ -1,1 +1,1 @@
-export type * from './Static';
+export type * from './definitionWithAugmentation.ts';
