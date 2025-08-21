@@ -10,7 +10,7 @@ import {
 } from '../definition.ts';
 
 import type {
-  ImageURI_Format,
+  URI_Image_Format,
 } from './Format';
 
 class URI_Image
@@ -18,7 +18,7 @@ class URI_Image
   public static readonly topLevelDescriptor = 'image';
 
   public constructor(
-    public readonly format: ImageURI_Format.Any,
+    public readonly format: URI_Image_Format.Any,
     givenEncoding: URI_Data_EncodingIdentifier.Any,
     givenData: Base64CharacterEncodedByteSequence,
   ) {
