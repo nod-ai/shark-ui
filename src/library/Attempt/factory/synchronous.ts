@@ -2,6 +2,8 @@ import type {
   Attempt_Error_Actionable,
 } from '../Error';
 
+import Attempt_Error_Creation from '../Error/Creation';
+
 import type {
   Attempt_Outcome,
   CauseOf,
@@ -15,8 +17,6 @@ import {
 import {
   sanctioned,
 } from '../utilities/sanctionedTryCatch';
-
-import Attempt_Error_Creation from './AttemptCreationError';
 
 type Attempt_End_Getter<
   SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
