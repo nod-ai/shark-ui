@@ -1,1 +1,1 @@
-export * as ImageURI_Format from './exports.ts';
+export * as URI_Image_Format from './exports.ts';
