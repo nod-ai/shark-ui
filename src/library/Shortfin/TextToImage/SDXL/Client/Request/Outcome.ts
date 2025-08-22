@@ -4,8 +4,8 @@ import type HTTP from '@/library/HTTP';
 
 type Shortfin_TextToImage_SDXL_Client_Request_Outcome = Attempt.Outcome<
   Base64CharacterEncodedByteSequence,
-  | HTTP.Endpoint.Error_Request
-  | HTTP.Endpoint.Error_Response
+  | HTTP.Endpoint.Error.Request
+  | HTTP.Endpoint.Error.Response
 >;
 
 export type {

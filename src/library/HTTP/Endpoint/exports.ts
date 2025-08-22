@@ -1,10 +1,6 @@
 export {
-  HTTP_Endpoint_Error_Request as Error_Request,
-} from './RequestError';
-
-export {
-  HTTP_Endpoint_Error_Response as Error_Response,
-} from './ResponseError';
+  HTTP_Endpoint_Error as Error,
+} from './Error';
 
 export type {
   HTTP_Endpoint_Outcome as Outcome,
