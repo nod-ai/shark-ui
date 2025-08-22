@@ -1,1 +1,3 @@
-export * as Encoded from './Encoded';
+export {
+  default as Encoded,
+} from './Encoded';

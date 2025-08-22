@@ -1,1 +1,1 @@
-export * from './exports.ts';
+export * as default from './exports.ts';
