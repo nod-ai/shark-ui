@@ -1,1 +1,1 @@
-export * from './Conformance/exports.ts';
+export * from './Conformance';
