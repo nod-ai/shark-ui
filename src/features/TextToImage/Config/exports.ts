@@ -1,3 +1,3 @@
 export * as Config_Dynamic from './Dynamic';
-export * as Config_Static from './utilities/StaticConfig';
+export * as Config_Static from './Static';
 export * from './empty';

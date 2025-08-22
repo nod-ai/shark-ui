@@ -6,7 +6,7 @@ import {
 
 import {
   TextToImage_Config,
-} from '../../definition.ts';
+} from '../definition.ts';
 
 import TextToImage_Config_Static_ReadingError from './StaticConfigReadingError';
 
