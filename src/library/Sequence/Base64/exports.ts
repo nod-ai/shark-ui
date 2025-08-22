@@ -1,1 +1,3 @@
-export * as Conformance from './Conformance';
+export {
+  Sequence_Base64_Conformance as Conformance,
+} from './Conformance';
