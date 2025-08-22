@@ -4,4 +4,4 @@ export {
 
 export {
   default as Connection,
-} from '../ServerConnectionError';
+} from './Connection';
