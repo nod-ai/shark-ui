@@ -3,11 +3,12 @@ import type {
 } from '../ActionableError';
 
 import type Attempt_ErrorInterpreter from '../Interpreter';
-import NonActionableBuiltInError from '../NonActionableBuiltInError';
 
 import {
   default as Attempt_Error_NonActionable,
-} from '../NonActionableError';
+} from '../NonActionable';
+
+import NonActionableBuiltInError from '../NonActionableBuiltInError';
 
 import type {
   AppropriatelyThrown,

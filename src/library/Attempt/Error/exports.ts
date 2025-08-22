@@ -1,6 +1,6 @@
 export {
   default as Attempt_Error_NonActionable,
-} from './NonActionableError';
+} from './NonActionable';
 
 export {
   default as Attempt_Error_Actionable,
