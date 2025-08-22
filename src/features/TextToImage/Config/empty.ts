@@ -1,6 +1,6 @@
 import type {
   TextToImage_Config,
-} from '../definition.ts';
+} from './definition.ts';
 
 const TextToImage_Config_empty: TextToImage_Config = {
   server: null,
