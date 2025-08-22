@@ -16,10 +16,10 @@ import {
   firstTextToImageOutput,
 } from './conversions/GenerateFromTextResponse';
 
-const TextToImage_Client_initializeShimmedStabilityAI = async (): Promise<
-  Attempt.Outcome<ShimmedStabilityAIClient, TextToImage_Server.SpecificationError>
+const TextToImage_Client_SDXL_initialize = async (): Promise<
+  Attempt.Outcome<ShimmedStabilityAIClient, TextToImage_Server.Error_Specification>
 > => {
-  const outcomeOfRetrievingCurrentServer = await TextToImage_Server.retrieveCurrent();
+  const outcomeOfRetrievingCurrentServer = await TextToImage_Server.Current_retrieve();
 
   const outcomeOfInitializingClient = Attempt.Outcome.fromRewrapping(outcomeOfRetrievingCurrentServer, {
     product: textToImageServer => new ShimmedStabilityAIClient({
@@ -30,12 +30,12 @@ const TextToImage_Client_initializeShimmedStabilityAI = async (): Promise<
   return outcomeOfInitializingClient;
 };
 
-type TextToImage_Client_OutcomeOfGeneratingOutput = Attempt.Outcome<TextToImage_Pipeline_Output,
-  | TextToImage_Server.ConnectionError
-  | TextToImage_Server.SpecificationError
+type TextToImage_Client_Generation_Outcome = Attempt.Outcome<TextToImage_Pipeline_Output,
+  | TextToImage_Server.Error_Connection
+  | TextToImage_Server.Error_Specification
 >;
 
-const TextToImage_Client_generateOutputFrom = async (
+const TextToImage_Client_SDXL_generateOutputFrom = async (
   given: {
     textToImageRequestBody: Pick<GenerateFromTextRequest['textToImageRequestBody'],
     | 'textPrompts'
@@ -46,8 +46,8 @@ const TextToImage_Client_generateOutputFrom = async (
     | 'seed'
     >;
   },
-): Promise<TextToImage_Client_OutcomeOfGeneratingOutput> => {
-  const outcomeOfInitializingClient = await TextToImage_Client_initializeShimmedStabilityAI();
+): Promise<TextToImage_Client_Generation_Outcome> => {
+  const outcomeOfInitializingClient = await TextToImage_Client_SDXL_initialize();
 
   if (
     outcomeOfInitializingClient.isFailure
@@ -73,7 +73,7 @@ const TextToImage_Client_generateOutputFrom = async (
         !(caughtError instanceof HTTP.Endpoint.RequestError)
       ) return null;
 
-      return new TextToImage_Server.ConnectionError(caughtError.endpoint);
+      return new TextToImage_Server.Error_Connection(caughtError.endpoint);
     },
   });
 
@@ -88,7 +88,7 @@ const TextToImage_Client_generateOutputFrom = async (
 };
 
 const TextToImage_Client_SDXL = {
-  generateOutputFrom: TextToImage_Client_generateOutputFrom,
+  generateOutputFrom: TextToImage_Client_SDXL_generateOutputFrom,
 };
 
 export {
