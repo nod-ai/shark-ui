@@ -3,14 +3,14 @@ import type {
 } from './Static';
 
 import type {
-  Parser_StaticString,
+  Parser_Static_String,
 } from './StaticString';
 
 declare module './definition.ts' {
   namespace Parser {
     export type {
       Parser_Static as Static,
-      Parser_StaticString as StaticString,
+      Parser_Static_String as Static_String,
     };
   }
 }

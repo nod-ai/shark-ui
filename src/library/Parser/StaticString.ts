@@ -4,7 +4,7 @@ import type {
   Parser_Static,
 } from './Static';
 
-type Parser_StaticString<
+type Parser_Static_String<
   SomeParsedOutput,
   SomeParsingError extends ParsingError<string>,
 > = Parser_Static<
@@ -14,5 +14,5 @@ type Parser_StaticString<
 >;
 
 export type {
-  Parser_StaticString,
+  Parser_Static_String,
 };

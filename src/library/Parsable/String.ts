@@ -10,7 +10,7 @@ import type {
  * Implement this type to ensure that the class follows the standard interface for this.
  */
 type Parsable_String<
-  SomeImplementer extends Parser.StaticString<
+  SomeImplementer extends Parser.Static_String<
     SomeImplementer['prototype'],
     SomeParsingError
   >,
