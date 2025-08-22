@@ -1,7 +1,7 @@
 import Attempt from '@/library/Attempt';
 import Base64 from '@/library/Base64';
 
-import Sequence_Base64_Conformance_Error from '../ConformanceError';
+import Sequence_Base64_Conformance_Error from './Error';
 
 const Sequence_Base64_pattern = new RegExp(`^[${Base64.Alphabet.pattern.source}]+$`);
 
