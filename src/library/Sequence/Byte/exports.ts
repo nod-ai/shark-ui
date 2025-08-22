@@ -1,1 +1,1 @@
-export * from './Encoded/exports.ts';
+export * from './Encoded';
