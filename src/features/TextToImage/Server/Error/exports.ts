@@ -1,6 +1,6 @@
 export {
   default as Specification,
-} from '../ServerSpecificationError';
+} from './Specification';
 
 export {
   default as Connection,
