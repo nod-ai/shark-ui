@@ -6,7 +6,7 @@ import {
 import type * as TextToImage from '@/features/TextToImage';
 
 defineProps<{
-  error: TextToImage.Server.Error_Specification;
+  error: TextToImage.Server.Error.Specification;
 }>();
 </script>
 
