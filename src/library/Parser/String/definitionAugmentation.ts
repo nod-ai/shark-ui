@@ -1,6 +1,6 @@
 import type {
   Parser_String_Static,
-} from '../StaticString';
+} from './Static';
 
 declare module './definition.ts' {
   namespace Parser_String {
