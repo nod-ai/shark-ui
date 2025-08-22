@@ -17,12 +17,12 @@ class Base64CharacterEncodedByteSequence_ParsingError
 
   public static thatEscorts(
     givenError:
-      | Sequence.Byte.Encoded_CompatibilityError
+      | Sequence.Byte.Encoded.CompatibilityError
       | Sequence.Base64.Conformance_Error,
   ): Base64CharacterEncodedByteSequence_ParsingError {
     const extraContext = (() => {
       switch (true) {
-        case givenError instanceof Sequence.Byte.Encoded_CompatibilityError:
+        case givenError instanceof Sequence.Byte.Encoded.CompatibilityError:
           return 'Could not use given characters to encode byte sequence.';
         case givenError instanceof Sequence.Base64.Conformance_Error:
           return 'Could not use given characters to encode byte sequence in Base64.';
