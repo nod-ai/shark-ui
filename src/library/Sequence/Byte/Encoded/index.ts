@@ -1,4 +1,1 @@
-export {
-  CompatibilityError,
-  ensureCompatibility,
-} from './exports.ts';
+export * from './exports.ts';
