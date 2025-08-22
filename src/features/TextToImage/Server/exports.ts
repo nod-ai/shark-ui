@@ -10,7 +10,9 @@ import {
   TextToImage_Config_empty,
 } from '../Config';
 
-import TextToImage_Server_Error_Specification from './ServerSpecificationError';
+import {
+  TextToImage_Server_Error,
+} from './Error';
 
 const TextToImage_Server_Origin_environmentKey = 'VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN';
 
@@ -27,7 +29,7 @@ const TextToImage_Server_Current_accordingToEnvironment = ((): WebAPI_Server | n
 })();
 
 const TextToImage_Server_Current_retrieve = (): Promise<
-  Attempt.Outcome<WebAPI_Server, TextToImage_Server_Error_Specification>
+  Attempt.Outcome<WebAPI_Server, TextToImage_Server_Error.Specification>
 > => Attempt.thatEventually(async (ends) => {
   if (
     TextToImage_Server_Current_accordingToEnvironment !== null
@@ -45,7 +47,7 @@ const TextToImage_Server_Current_retrieve = (): Promise<
     dynamicConfig.server !== null
   ) return ends.inSuccessWith(dynamicConfig.server);
 
-  const newSpecificationError = new TextToImage_Server_Error_Specification(
+  const newSpecificationError = new TextToImage_Server_Error.Specification(
     TextToImage_Server_Origin_environmentKey,
     TextToImage_Config_Static.file,
     TextToImage_Config_Dynamic.endpoint,
@@ -55,11 +57,7 @@ const TextToImage_Server_Current_retrieve = (): Promise<
 });
 
 export {
-  default as Error_Connection,
-} from './ServerConnectionError';
-
-export {
   TextToImage_Server_Current_accordingToEnvironment as Current_accordingToEnvironment,
   TextToImage_Server_Current_retrieve as Current_retrieve,
-  TextToImage_Server_Error_Specification as Error_Specification,
+  TextToImage_Server_Error as Error,
 };
