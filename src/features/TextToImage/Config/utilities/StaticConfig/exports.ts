@@ -5,8 +5,8 @@ import {
 } from '@/library/URLComponent';
 
 import {
-  Config as TextToImage_Config,
-} from '../../types';
+  TextToImage_Config,
+} from '../../definition.ts';
 
 import TextToImage_Config_Static_ReadingError from './StaticConfigReadingError';
 

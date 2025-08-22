@@ -6,8 +6,8 @@ import {
 } from '@/library/URLComponent';
 
 import {
-  Config as TextToImage_Config,
-} from '../../types';
+  TextToImage_Config,
+} from '../../definition.ts';
 
 import TextToImage_Config_Dynamic_EndpointResponseError from './EndpointResponseError';
 import TextToImage_Config_Dynamic_FetchingError from './FetchingError';
