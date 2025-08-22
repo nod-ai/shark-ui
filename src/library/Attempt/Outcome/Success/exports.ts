@@ -6,10 +6,10 @@ import type {
 
 import {
   type Attempt_Outcome_Success_Transformer,
-  Attempt_Outcome_productIdentity,
+  Attempt_Outcome_Success_productIdentity,
 } from './Transformer';
 
-interface Attempt_Outcome_SemanticallySugarfreeSuccess<
+interface Attempt_Outcome_Success_SemanticallySugarfree<
   SomeProduct,
 > extends Attempt_Outcome_Discriminable<
   'success',
@@ -20,7 +20,7 @@ interface Attempt_Outcome_SemanticallySugarfreeSuccess<
 
 interface Attempt_Outcome_Success<
   SomeProduct,
-> extends Attempt_Outcome_SemanticallySugarfreeSuccess<
+> extends Attempt_Outcome_Success_SemanticallySugarfree<
   SomeProduct
 > {
   /**
@@ -64,7 +64,7 @@ interface Attempt_Outcome_Success<
   ): Attempt_Outcome_Success<TransformedProduct>;
 }
 
-const Attempt_Outcome_successThatYielded = <
+const Attempt_Outcome_Success_thatYielded = <
   SomeProduct,
 >(
   givenProduct: SomeProduct,
@@ -82,11 +82,11 @@ const Attempt_Outcome_successThatYielded = <
     {
       product: transformed,
     } = {
-      product: Attempt_Outcome_productIdentity<SomeProduct, TransformedProduct>,
+      product: Attempt_Outcome_Success_productIdentity<SomeProduct, TransformedProduct>,
     },
   ) => {
     const transformedProduct = transformed(givenProduct);
-    const transformedSuccess = Attempt_Outcome_successThatYielded(transformedProduct);
+    const transformedSuccess = Attempt_Outcome_Success_thatYielded(transformedProduct);
     return transformedSuccess;
   },
 });
@@ -94,6 +94,6 @@ const Attempt_Outcome_successThatYielded = <
 export {
   type Attempt_Outcome_Success,
   type Attempt_Outcome_Success_Transformer,
-  Attempt_Outcome_successThatYielded,
-  Attempt_Outcome_productIdentity,
+  Attempt_Outcome_Success_thatYielded,
+  Attempt_Outcome_Success_productIdentity,
 };

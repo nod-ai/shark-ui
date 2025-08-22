@@ -5,15 +5,15 @@ import type {
 import {
   type Attempt_Outcome_Failure,
   type Attempt_Outcome_Failure_Transformer,
-  Attempt_Outcome_failureDueTo,
-  Attempt_Outcome_causeIdentity,
+  Attempt_Outcome_Failure_dueTo,
+  Attempt_Outcome_Failure_causeIdentity,
 } from './Failure';
 
 import {
   type Attempt_Outcome_Success,
   type Attempt_Outcome_Success_Transformer,
-  Attempt_Outcome_successThatYielded,
-  Attempt_Outcome_productIdentity,
+  Attempt_Outcome_Success_thatYielded,
+  Attempt_Outcome_Success_productIdentity,
 } from './Success';
 
 import type {
@@ -81,16 +81,16 @@ function Attempt_Outcome_fromRewrapping<
 >(
   givenOutcome: Attempt_Outcome<SomeTransformableProduct, SomeTransformableActionableError>,
   {
-    product: toTransformedProduct = Attempt_Outcome_productIdentity<SomeTransformableProduct, SomeTransformedProduct>,
-    cause: toTransformedCause = Attempt_Outcome_causeIdentity<SomeTransformableActionableError, SomeTransformedActionableError>,
+    product: toTransformedProduct = Attempt_Outcome_Success_productIdentity<SomeTransformableProduct, SomeTransformedProduct>,
+    cause: toTransformedCause = Attempt_Outcome_Failure_causeIdentity<SomeTransformableActionableError, SomeTransformedActionableError>,
   }: Attempt_Outcome_Transformer<
     SomeTransformableProduct,
     SomeTransformableActionableError,
     SomeTransformedProduct,
     SomeTransformedActionableError
   > = {
-    product: Attempt_Outcome_productIdentity<SomeTransformableProduct, SomeTransformedProduct>,
-    cause  : Attempt_Outcome_causeIdentity<SomeTransformableActionableError, SomeTransformedActionableError>,
+    product: Attempt_Outcome_Success_productIdentity<SomeTransformableProduct, SomeTransformedProduct>,
+    cause  : Attempt_Outcome_Failure_causeIdentity<SomeTransformableActionableError, SomeTransformedActionableError>,
   },
 ): Attempt_Outcome<SomeTransformedProduct, SomeTransformedActionableError> {
   return givenOutcome.isSuccess
@@ -103,9 +103,9 @@ function Attempt_Outcome_fromRewrapping<
 }
 
 const Attempt_Outcome = {
-  failureDueTo      : Attempt_Outcome_failureDueTo,
-  successThatYielded: Attempt_Outcome_successThatYielded,
-  fromRewrapping    : Attempt_Outcome_fromRewrapping,
+  Failure_dueTo      : Attempt_Outcome_Failure_dueTo,
+  Success_thatYielded: Attempt_Outcome_Success_thatYielded,
+  fromRewrapping     : Attempt_Outcome_fromRewrapping,
 };
 
 type ProductOf<
