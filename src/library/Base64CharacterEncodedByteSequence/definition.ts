@@ -45,7 +45,7 @@ class Base64CharacterEncodedByteSequence
   public static parsedFrom = (
     givenCharacters: string,
   ): Attempt.Outcome<Base64CharacterEncodedByteSequence, Base64CharacterEncodedByteSequence_ParsingError> => {
-    const outcomeOfEnsuringEncodableCharacters = Sequence.Byte.ensureEncodable(givenCharacters, {
+    const outcomeOfEnsuringEncodableCharacters = Sequence.Byte.Encoded_ensureCompatibility(givenCharacters, {
       assuming: Base64.bitWidth,
     });
 
@@ -59,7 +59,7 @@ class Base64CharacterEncodedByteSequence
 
     const paddedByteEncodableCharacters = outcomeOfEnsuringEncodableCharacters.unwrapped;
     const [byteEncodableCharacters, padding] = this.withPaddingDecoupled(paddedByteEncodableCharacters);
-    const outcomeOfEnsuringConformantCharacters = Sequence.Base64.ensureConformanceOf(byteEncodableCharacters);
+    const outcomeOfEnsuringConformantCharacters = Sequence.Base64.Conformance_ensure(byteEncodableCharacters);
 
     const outcomeOfParsingByteSequence = Attempt.Outcome.fromRewrapping(outcomeOfEnsuringConformantCharacters, {
       product: $0 => new this($0.concat(padding)),

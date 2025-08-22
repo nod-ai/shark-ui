@@ -1,21 +1,21 @@
 import Attempt from '@/library/Attempt';
 import Base64 from '@/library/Base64';
 
-import Sequence_Base64_ConformanceError from './ConformanceError';
+import Sequence_Base64_Conformance_Error from './ConformanceError';
 
 const Sequence_Base64_pattern = new RegExp(`^[${Base64.Alphabet.pattern.source}]+$`);
 
-const Sequence_Base64_ensureConformanceOf = (
+const Sequence_Base64_Conformance_ensure = (
   givenCharacterSequence: string,
-): Attempt.Outcome<string, Sequence_Base64_ConformanceError> => Attempt.that((ends) => {
+): Attempt.Outcome<string, Sequence_Base64_Conformance_Error> => Attempt.that((ends) => {
   if (
     !Sequence_Base64_pattern.test(givenCharacterSequence)
-  ) return ends.inFailureDueTo(new Sequence_Base64_ConformanceError());
+  ) return ends.inFailureDueTo(new Sequence_Base64_Conformance_Error());
 
   return ends.inSuccessWith(givenCharacterSequence);
 });
 
 export {
-  Sequence_Base64_ensureConformanceOf as ensureConformanceOf,
-  Sequence_Base64_ConformanceError as ConformanceError,
+  Sequence_Base64_Conformance_ensure as Conformance_ensure,
+  Sequence_Base64_Conformance_Error as Conformance_Error,
 };
