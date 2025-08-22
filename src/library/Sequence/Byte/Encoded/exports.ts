@@ -21,6 +21,6 @@ const Sequence_Byte_Encoded_ensureCompatibility = (
 });
 
 export {
-  Sequence_Byte_Encoded_CompatibilityError as Encoded_CompatibilityError,
-  Sequence_Byte_Encoded_ensureCompatibility as Encoded_ensureCompatibility,
+  Sequence_Byte_Encoded_CompatibilityError as CompatibilityError,
+  Sequence_Byte_Encoded_ensureCompatibility as ensureCompatibility,
 };
