@@ -1,1 +1,4 @@
-export * from './exports.ts';
+export {
+  Conformance_ensure,
+  Conformance_Error,
+} from './exports.ts';
