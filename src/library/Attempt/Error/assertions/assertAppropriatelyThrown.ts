@@ -1,6 +1,6 @@
 import {
   default as Attempt_Error_Actionable,
-} from '../ActionableError';
+} from '../Actionable';
 
 import type {
   AppropriatelyThrown,
