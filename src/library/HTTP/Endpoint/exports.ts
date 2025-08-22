@@ -1,9 +1,9 @@
 export {
-  HTTP_Endpoint_RequestError as RequestError,
+  HTTP_Endpoint_Error_Request as Error_Request,
 } from './RequestError';
 
 export {
-  HTTP_Endpoint_ResponseError as ResponseError,
+  HTTP_Endpoint_Error_Response as Error_Response,
 } from './ResponseError';
 
 export type {
