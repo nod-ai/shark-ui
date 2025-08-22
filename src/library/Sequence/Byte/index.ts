@@ -1,1 +1,1 @@
-export * as Sequence_Byte from './Encoded/exports.ts';
+export * as Sequence_Byte from './exports.ts';
