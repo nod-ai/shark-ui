@@ -1,3 +1,3 @@
 export {
-  default as Encoded,
+  Sequence_Byte_Encoded as Encoded,
 } from './Encoded';
