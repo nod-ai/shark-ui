@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 
 import type {
   HTTP_Response,
-} from '../Response';
+} from '../../Response';
 
 class HTTP_Endpoint_Error_Response
   extends Attempt.Error_Actionable<
