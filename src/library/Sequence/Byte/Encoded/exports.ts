@@ -1,7 +1,7 @@
 import Attempt from '@/library/Attempt';
 import Byte from '@/library/Byte';
 
-import Sequence_Byte_Encoded_CompatibilityError from './EncodingCompatibilityError';
+import Sequence_Byte_Encoded_CompatibilityError from '../EncodingCompatibilityError';
 
 const Sequence_Byte_Encoded_ensureCompatibility = (
   givenSequence: string,
