@@ -6,7 +6,7 @@ import * as WebAPI from '@/library/WebAPI';
 
 import {
   TextToImage_Config_ParsingError,
-} from './Config_ParsingError';
+} from './types/Config_ParsingError';
 
 /** The user-provided settings for the text-to-image feature */
 class TextToImage_Config
