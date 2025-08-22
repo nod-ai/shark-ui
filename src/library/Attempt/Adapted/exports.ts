@@ -1,6 +1,6 @@
 export {
   Attempt_Adapted_to,
-} from './synchronous';
+} from './to';
 
 export {
   Attempt_Adapted_toEventually,

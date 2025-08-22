@@ -1,4 +1,4 @@
-import type Attempt_Error_Actionable from './ActionableError';
+import type Attempt_Error_Actionable from './Actionable';
 
 import type {
   PotentiallyActionable,

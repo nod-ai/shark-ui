@@ -4,7 +4,7 @@ import type {
 
 import {
   default as Attempt_Error_NonActionable,
-} from './NonActionableError';
+} from './NonActionable';
 
 /** Extend this class to describe errors from which callers ought to recover */
 abstract class Attempt_Error_Actionable<

@@ -1,10 +1,10 @@
 export {
   default as Attempt_Error_NonActionable,
-} from './NonActionableError';
+} from './NonActionable';
 
 export {
   default as Attempt_Error_Actionable,
-} from './ActionableError';
+} from './Actionable';
 
 export type {
   default as Attempt_Error_Interpreter,
