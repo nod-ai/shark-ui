@@ -7,7 +7,7 @@ import {
 
 import {
   TextToImage_Config,
-} from '../../definition.ts';
+} from '../definition.ts';
 
 import TextToImage_Config_Dynamic_EndpointResponseError from './EndpointResponseError';
 import TextToImage_Config_Dynamic_FetchingError from './FetchingError';
