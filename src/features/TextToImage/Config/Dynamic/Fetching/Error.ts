@@ -4,11 +4,11 @@ import type {
   URLComponent_Path,
 } from '@/library/URLComponent';
 
-class TextToImage_Config_Dynamic_Fetching_Error
+class TextToImage_Config_Dynamic_Fetching_Error_Request
   extends Attempt.Error_Actionable<
-  'TextToImage_Config_Dynamic_Fetching_Error'
+  'TextToImage_Config_Dynamic_Fetching_Error_Request'
 > {
-  public override name = 'TextToImage_Config_Dynamic_Fetching_Error' as const;
+  public override name = 'TextToImage_Config_Dynamic_Fetching_Error_Request' as const;
 
   public constructor(
     givenEndpoint: URLComponent_Path,
@@ -18,5 +18,5 @@ class TextToImage_Config_Dynamic_Fetching_Error
 }
 
 export {
-  TextToImage_Config_Dynamic_Fetching_Error as default,
+  TextToImage_Config_Dynamic_Fetching_Error_Request as default,
 };
