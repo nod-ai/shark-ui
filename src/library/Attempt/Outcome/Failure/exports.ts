@@ -45,13 +45,13 @@ interface Attempt_Outcome_Failure<
   readonly causeOfFailure: this['cause'];
 
   rewrappedWith<
-    TransformedActionableError extends Attempt_Error_Actionable<string> = SomeActionableError,
+    SomeTransformedActionableError extends Attempt_Error_Actionable<string> = SomeActionableError,
   >(
     given?: Attempt_Outcome_Failure_Transformer<
       SomeActionableError,
-      TransformedActionableError
+      SomeTransformedActionableError
     >
-  ): Attempt_Outcome_Failure<TransformedActionableError>;
+  ): Attempt_Outcome_Failure<SomeTransformedActionableError>;
 }
 
 const Attempt_Outcome_Failure_dueTo = <
@@ -67,12 +67,12 @@ const Attempt_Outcome_Failure_dueTo = <
   forciblyUnwrap  : () => givenCause.throwAnyway('Unexpected forceful unwrap of a failure'),
   causeOfFailure  : givenCause,
   rewrappedWith   : <
-    TransformedActionableError extends Attempt_Error_Actionable<string>,
+    SomeTransformedActionableError extends Attempt_Error_Actionable<string>,
   >(
     {
       cause: transformed,
     } = {
-      cause: Attempt_Outcome_Failure_Cause_Transformer_identity<SomeActionableError, TransformedActionableError>,
+      cause: Attempt_Outcome_Failure_Cause_Transformer_identity<SomeActionableError, SomeTransformedActionableError>,
     },
   ) => {
     const transformedCause = transformed(givenCause);
