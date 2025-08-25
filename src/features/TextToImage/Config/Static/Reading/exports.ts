@@ -1,3 +1,3 @@
 export {
   default as Error,
-} from '../StaticConfigReadingError';
+} from './Error';
