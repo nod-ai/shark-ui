@@ -1,5 +1,3 @@
-// cspell:words sugarfree discriminable
-
 import type {
   Attempt_Error_Actionable,
 } from '../../Error';
