@@ -10,7 +10,7 @@ import type {
 
 import {
   type Attempt_Outcome_Failure_Transformer,
-  Attempt_Outcome_Failure_Cause_identity,
+  Attempt_Outcome_Failure_Cause_Transformer_identity,
 } from './Transformer';
 
 interface Attempt_Outcome_Failure_SemanticallySugarfree<
@@ -74,7 +74,7 @@ const Attempt_Outcome_Failure_dueTo = <
     {
       cause: transformed,
     } = {
-      cause: Attempt_Outcome_Failure_Cause_identity<SomeActionableError, TransformedActionableError>,
+      cause: Attempt_Outcome_Failure_Cause_Transformer_identity<SomeActionableError, TransformedActionableError>,
     },
   ) => {
     const transformedCause = transformed(givenCause);
@@ -87,5 +87,5 @@ export {
   type Attempt_Outcome_Failure,
   type Attempt_Outcome_Failure_Transformer,
   Attempt_Outcome_Failure_dueTo,
-  Attempt_Outcome_Failure_Cause_identity,
+  Attempt_Outcome_Failure_Cause_Transformer_identity,
 };

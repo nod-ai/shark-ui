@@ -5,7 +5,7 @@ type Attempt_Outcome_Success_Product_Transformer<
   transformableProduct: SomeTransformableProduct,
 ) => SomeTransformedProduct;
 
-const Attempt_Outcome_Success_Product_identity = <
+const Attempt_Outcome_Success_Product_Transformer_identity = <
   SomeTransformableProduct,
   SomeTransformedProduct,
 >(
@@ -26,5 +26,5 @@ interface Attempt_Outcome_Success_Transformer<
 
 export {
   type Attempt_Outcome_Success_Transformer,
-  Attempt_Outcome_Success_Product_identity,
+  Attempt_Outcome_Success_Product_Transformer_identity,
 };
