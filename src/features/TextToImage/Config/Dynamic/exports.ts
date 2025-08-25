@@ -26,13 +26,13 @@ type TextToImage_Config_Dynamic_Fetching_Outcome = Attempt.Outcome<TextToImage_C
 
 const TextToImage_Config_Dynamic_fetch = (): Promise<TextToImage_Config_Dynamic_Fetching_Outcome> => Attempt.thatEventually(async (ends) => {
   const endpointResponse = await fetch(TextToImage_Config_Dynamic_endpoint.toString());
-  const fetchingError = new TextToImage_Config_Dynamic_Fetching_Error(TextToImage_Config_Dynamic_endpoint);
+  const fetchingError = new TextToImage_Config_Dynamic_Fetching.Error(TextToImage_Config_Dynamic_endpoint);
 
   if (
     !endpointResponse.ok
   ) return ends.inFailureDueTo(fetchingError);
 
-  const endpointResponseError = new TextToImage_Config_Dynamic_Fetching_ResponseError({
+  const endpointResponseError = new TextToImage_Config_Dynamic_Fetching.ResponseError({
     endpoint: TextToImage_Config_Dynamic_endpoint,
     response: endpointResponse,
   });
