@@ -1,6 +1,6 @@
 export {
   default as Error,
-} from '../FetchingError';
+} from './Error';
 
 export {
   default as ResponseError,
