@@ -9,13 +9,12 @@ import {
   TextToImage_Config,
 } from '../definition.ts';
 
-import type TextToImage_Config_Dynamic_Fetching_ResponseError from './EndpointResponseError';
-
 import {
   TextToImage_Config_Dynamic_Fetching,
 } from './Fetching';
 
 import type TextToImage_Config_Dynamic_Fetching_Error from './Fetching/Error';
+import type TextToImage_Config_Dynamic_Fetching_ResponseError from './Fetching/ResponseError';
 
 const TextToImage_Config_Dynamic_endpoint = URLComponent_Path.parsedFrom('/config/text-to-image').forciblyUnwrap();
 

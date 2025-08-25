@@ -4,4 +4,4 @@ export {
 
 export {
   default as ResponseError,
-} from '../EndpointResponseError';
+} from './ResponseError';
