@@ -1,4 +1,4 @@
 export {
-  Compatibility_ensure,
-  Compatibility_Error,
+  ensure as Compatibility_ensure,
+  Error as Compatibility_Error,
 } from './Compatibility';
