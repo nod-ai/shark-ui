@@ -2,14 +2,14 @@ import type {
   Attempt_Error_Actionable,
 } from '../../Error';
 
-type Attempt_Outcome_Failure_CauseTransformer<
+type Attempt_Outcome_Failure_Cause_Transformer<
   SomeTransformableActionableError extends Attempt_Error_Actionable<string>,
   SomeTransformedActionableError extends Attempt_Error_Actionable<string>,
 > = (
   transformableCause: SomeTransformableActionableError,
 ) => SomeTransformedActionableError;
 
-const Attempt_Outcome_Failure_causeIdentity = <
+const Attempt_Outcome_Failure_Cause_identity = <
   SomeTransformableActionableError extends Attempt_Error_Actionable<string>,
   SomeTransformedActionableError extends Attempt_Error_Actionable<string>,
 >(
@@ -22,7 +22,7 @@ interface Attempt_Outcome_Failure_Transformer<
   SomeTransformableActionableError extends Attempt_Error_Actionable<string>,
   SomeTransformedActionableError extends Attempt_Error_Actionable<string>,
 > {
-  cause: Attempt_Outcome_Failure_CauseTransformer<
+  cause: Attempt_Outcome_Failure_Cause_Transformer<
     SomeTransformableActionableError,
     SomeTransformedActionableError
   >;
@@ -30,5 +30,5 @@ interface Attempt_Outcome_Failure_Transformer<
 
 export {
   type Attempt_Outcome_Failure_Transformer,
-  Attempt_Outcome_Failure_causeIdentity,
+  Attempt_Outcome_Failure_Cause_identity,
 };

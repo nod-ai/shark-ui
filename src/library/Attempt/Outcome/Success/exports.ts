@@ -6,7 +6,7 @@ import type {
 
 import {
   type Attempt_Outcome_Success_Transformer,
-  Attempt_Outcome_Success_productIdentity,
+  Attempt_Outcome_Success_Product_identity,
 } from './Transformer';
 
 interface Attempt_Outcome_Success_SemanticallySugarfree<
@@ -82,7 +82,7 @@ const Attempt_Outcome_Success_thatYielded = <
     {
       product: transformed,
     } = {
-      product: Attempt_Outcome_Success_productIdentity<SomeProduct, TransformedProduct>,
+      product: Attempt_Outcome_Success_Product_identity<SomeProduct, TransformedProduct>,
     },
   ) => {
     const transformedProduct = transformed(givenProduct);
@@ -95,5 +95,5 @@ export {
   type Attempt_Outcome_Success,
   type Attempt_Outcome_Success_Transformer,
   Attempt_Outcome_Success_thatYielded,
-  Attempt_Outcome_Success_productIdentity,
+  Attempt_Outcome_Success_Product_identity,
 };
