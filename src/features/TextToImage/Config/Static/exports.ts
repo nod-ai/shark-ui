@@ -12,7 +12,7 @@ import {
   TextToImage_Config_Static_Reading,
 } from './Reading';
 
-import TextToImage_Config_Static_Reading_Error from './StaticConfigReadingError';
+import type TextToImage_Config_Static_Reading_Error from './StaticConfigReadingError';
 
 const TextToImage_Config_Static_file = URLComponent_Path.parsedFrom('/config/text-to-image.json').forciblyUnwrap();
 
@@ -37,5 +37,4 @@ export {
   TextToImage_Config_Static_file as file,
   TextToImage_Config_Static_read as read,
   TextToImage_Config_Static_Reading as Reading,
-  TextToImage_Config_Static_Reading_Error as Reading_Error,
 };
