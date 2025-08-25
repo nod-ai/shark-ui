@@ -4,11 +4,11 @@ import type {
   URLComponent_Path,
 } from '@/library/URLComponent';
 
-class TextToImage_Config_Dynamic_EndpointResponseError
+class TextToImage_Config_Dynamic_Fetching_ResponseError
   extends Attempt.Error_Actionable<
-  'TextToImage_Config_Dynamic_EndpointResponseError'
+  'TextToImage_Config_Dynamic_Fetching_ResponseError'
 > {
-  public override name = 'TextToImage_Config_Dynamic_EndpointResponseError' as const;
+  public override name = 'TextToImage_Config_Dynamic_Fetching_ResponseError' as const;
 
   public constructor(given: {
     endpoint: URLComponent_Path;
@@ -19,5 +19,5 @@ class TextToImage_Config_Dynamic_EndpointResponseError
 }
 
 export {
-  TextToImage_Config_Dynamic_EndpointResponseError as default,
+  TextToImage_Config_Dynamic_Fetching_ResponseError as default,
 };

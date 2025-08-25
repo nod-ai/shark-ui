@@ -9,25 +9,25 @@ import {
   TextToImage_Config,
 } from '../definition.ts';
 
-import TextToImage_Config_Dynamic_EndpointResponseError from './EndpointResponseError';
-import TextToImage_Config_Dynamic_FetchingError from './FetchingError';
+import TextToImage_Config_Dynamic_Fetching_ResponseError from './EndpointResponseError';
+import TextToImage_Config_Dynamic_Fetching_Error from './FetchingError';
 
 const TextToImage_Config_Dynamic_endpoint = URLComponent_Path.parsedFrom('/config/text-to-image').forciblyUnwrap();
 
-type TextToImage_Config_Dynamic_OutcomeOfFetching = Attempt.Outcome<TextToImage_Config,
-  | TextToImage_Config_Dynamic_FetchingError
-  | TextToImage_Config_Dynamic_EndpointResponseError
+type TextToImage_Config_Dynamic_Fetching_Outcome = Attempt.Outcome<TextToImage_Config,
+  | TextToImage_Config_Dynamic_Fetching_Error
+  | TextToImage_Config_Dynamic_Fetching_ResponseError
 >;
 
-const TextToImage_Config_Dynamic_fetch = (): Promise<TextToImage_Config_Dynamic_OutcomeOfFetching> => Attempt.thatEventually(async (ends) => {
+const TextToImage_Config_Dynamic_fetch = (): Promise<TextToImage_Config_Dynamic_Fetching_Outcome> => Attempt.thatEventually(async (ends) => {
   const endpointResponse = await fetch(TextToImage_Config_Dynamic_endpoint.toString());
-  const fetchingError = new TextToImage_Config_Dynamic_FetchingError(TextToImage_Config_Dynamic_endpoint);
+  const fetchingError = new TextToImage_Config_Dynamic_Fetching_Error(TextToImage_Config_Dynamic_endpoint);
 
   if (
     !endpointResponse.ok
   ) return ends.inFailureDueTo(fetchingError);
 
-  const endpointResponseError = new TextToImage_Config_Dynamic_EndpointResponseError({
+  const endpointResponseError = new TextToImage_Config_Dynamic_Fetching_ResponseError({
     endpoint: TextToImage_Config_Dynamic_endpoint,
     response: endpointResponse,
   });
@@ -44,6 +44,6 @@ const TextToImage_Config_Dynamic_fetch = (): Promise<TextToImage_Config_Dynamic_
 export {
   TextToImage_Config_Dynamic_endpoint as endpoint,
   TextToImage_Config_Dynamic_fetch as fetch,
-  TextToImage_Config_Dynamic_FetchingError as FetchingError,
-  TextToImage_Config_Dynamic_EndpointResponseError as EndpointResponseError,
+  TextToImage_Config_Dynamic_Fetching_Error as Fetching_Error,
+  TextToImage_Config_Dynamic_Fetching_ResponseError as Fetching_ResponseError,
 };
