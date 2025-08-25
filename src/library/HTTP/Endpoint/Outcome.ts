@@ -6,7 +6,7 @@ import type {
 
 type HTTP_Endpoint_Outcome = Attempt.Outcome<
   unknown,
-  HTTP_Endpoint_Error.Request | HTTP_Endpoint_Error.Response
+  HTTP_Endpoint_Error.Any
 >;
 
 export type {
