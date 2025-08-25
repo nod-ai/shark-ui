@@ -9,13 +9,13 @@ import {
   TextToImage_Config,
 } from '../definition.ts';
 
-import TextToImage_Config_Dynamic_Fetching_ResponseError from './EndpointResponseError';
+import type TextToImage_Config_Dynamic_Fetching_ResponseError from './EndpointResponseError';
 
 import {
   TextToImage_Config_Dynamic_Fetching,
 } from './Fetching';
 
-import TextToImage_Config_Dynamic_Fetching_Error from './FetchingError';
+import type TextToImage_Config_Dynamic_Fetching_Error from './FetchingError';
 
 const TextToImage_Config_Dynamic_endpoint = URLComponent_Path.parsedFrom('/config/text-to-image').forciblyUnwrap();
 
@@ -50,6 +50,4 @@ export {
   TextToImage_Config_Dynamic_endpoint as endpoint,
   TextToImage_Config_Dynamic_fetch as fetch,
   TextToImage_Config_Dynamic_Fetching as Fetching,
-  TextToImage_Config_Dynamic_Fetching_Error as Fetching_Error,
-  TextToImage_Config_Dynamic_Fetching_ResponseError as Fetching_ResponseError,
 };
