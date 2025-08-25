@@ -2,7 +2,6 @@
     "cSpell.words": [
         "concatenatable",
         "SDXL",
-        "Shortfin",
         "stabilityai",
         "vite",
         "vuetify"
@@ -18,6 +17,12 @@
             "name": "library/math",
             "path": "./src/library/math/dictionary.txt",
             "description": "Words introduced by the @/library/math module",
+            "addWords": false
+        },
+        "library/Shortfin": {
+            "name": "library/Shortfin",
+            "path": "./src/library/Shortfin/dictionary.txt",
+            "description": "Words introduced by the @/library/Shortfin module",
             "addWords": false
         },
     },
