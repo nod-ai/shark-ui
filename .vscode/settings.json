@@ -1,6 +1,5 @@
 {
     "cSpell.words": [
-        "cofactor",
         "concatenatable",
         "SDXL",
         "Shortfin",
@@ -13,6 +12,12 @@
             "name": "library/Attempt",
             "path": "./src/library/Attempt/dictionary.txt",
             "description": "Words introduced by the @/library/Attempt module",
+            "addWords": false
+        },
+        "library/math": {
+            "name": "library/math",
+            "path": "./src/library/math/dictionary.txt",
+            "description": "Words introduced by the @/library/math module",
             "addWords": false
         },
     },
