@@ -13,14 +13,15 @@ import {
   TextToImage_Config_Dynamic_Fetching,
 } from './Fetching';
 
-import type TextToImage_Config_Dynamic_Fetching_Error_Request from './Fetching/Error/Request';
-import type TextToImage_Config_Dynamic_Fetching_Error_Response from './Fetching/Error/Response';
+import type {
+  TextToImage_Config_Dynamic_Fetching_Error,
+} from './Fetching/Error';
 
 const TextToImage_Config_Dynamic_endpoint = URLComponent_Path.parsedFrom('/config/text-to-image').forciblyUnwrap();
 
 type TextToImage_Config_Dynamic_Fetching_Outcome = Attempt.Outcome<TextToImage_Config,
-  | TextToImage_Config_Dynamic_Fetching_Error_Request
-  | TextToImage_Config_Dynamic_Fetching_Error_Response
+  | TextToImage_Config_Dynamic_Fetching_Error.Request
+  | TextToImage_Config_Dynamic_Fetching_Error.Response
 >;
 
 const TextToImage_Config_Dynamic_fetch = (): Promise<TextToImage_Config_Dynamic_Fetching_Outcome> => Attempt.thatEventually(async (ends) => {
