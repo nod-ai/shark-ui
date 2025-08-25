@@ -1,7 +1,7 @@
 import Attempt from '@/library/Attempt';
 import Byte from '@/library/Byte';
 
-import Sequence_Byte_Encoded_Compatibility_Error from '../CompatibilityError';
+import Sequence_Byte_Encoded_Compatibility_Error from './Error';
 
 const Sequence_Byte_Encoded_Compatibility_ensure = (
   givenSequence: string,
@@ -21,6 +21,6 @@ const Sequence_Byte_Encoded_Compatibility_ensure = (
 });
 
 export {
-  Sequence_Byte_Encoded_Compatibility_Error as Compatibility_Error,
-  Sequence_Byte_Encoded_Compatibility_ensure as Compatibility_ensure,
+  Sequence_Byte_Encoded_Compatibility_Error as Error,
+  Sequence_Byte_Encoded_Compatibility_ensure as ensure,
 };
