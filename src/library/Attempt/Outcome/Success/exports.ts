@@ -53,13 +53,13 @@ interface Attempt_Outcome_Success<
   readonly unwrapped: this['product'];
 
   rewrappedWith<
-    TransformedProduct = SomeProduct,
+    SomeTransformedProduct = SomeProduct,
   >(
     given?: Attempt_Outcome_Success_Transformer<
       SomeProduct,
-      TransformedProduct
+      SomeTransformedProduct
     >
-  ): Attempt_Outcome_Success<TransformedProduct>;
+  ): Attempt_Outcome_Success<SomeTransformedProduct>;
 }
 
 const Attempt_Outcome_Success_thatYielded = <
@@ -75,12 +75,12 @@ const Attempt_Outcome_Success_thatYielded = <
   forciblyUnwrap  : () => givenProduct,
   unwrapped       : givenProduct,
   rewrappedWith   : <
-    TransformedProduct,
+    SomeTransformedProduct,
   >(
     {
       product: transformed,
     } = {
-      product: Attempt_Outcome_Success_Product_Transformer_identity<SomeProduct, TransformedProduct>,
+      product: Attempt_Outcome_Success_Product_Transformer_identity<SomeProduct, SomeTransformedProduct>,
     },
   ) => {
     const transformedProduct = transformed(givenProduct);

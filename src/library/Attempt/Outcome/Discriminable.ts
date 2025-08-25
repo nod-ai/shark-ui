@@ -40,12 +40,12 @@ interface Attempt_Outcome_Discriminable<
   >;
 
   rewrappedWith<
-    TransformedPayload extends (
+    SomeTransformedPayload extends (
       SomeDiscriminant extends 'success'
         ? unknown
         : Attempt_Error_Actionable<string>
     ) = SomePayload,
-  >(): Attempt_Outcome_Discriminable<SomeDiscriminant, TransformedPayload>;
+  >(): Attempt_Outcome_Discriminable<SomeDiscriminant, SomeTransformedPayload>;
 }
 
 export type {
