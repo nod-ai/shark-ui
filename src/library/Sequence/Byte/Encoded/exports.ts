@@ -1,1 +1,1 @@
-export * from './Compatibility/exports.ts';
+export * from './Compatibility';
