@@ -3,5 +3,5 @@ export {
 } from './Error';
 
 export {
-  default as ResponseError,
+  default as Error_Response,
 } from './ResponseError';

@@ -14,13 +14,13 @@ import {
 } from './Fetching';
 
 import type TextToImage_Config_Dynamic_Fetching_Error_Request from './Fetching/Error';
-import type TextToImage_Config_Dynamic_Fetching_ResponseError from './Fetching/ResponseError';
+import type TextToImage_Config_Dynamic_Fetching_Error_Response from './Fetching/ResponseError';
 
 const TextToImage_Config_Dynamic_endpoint = URLComponent_Path.parsedFrom('/config/text-to-image').forciblyUnwrap();
 
 type TextToImage_Config_Dynamic_Fetching_Outcome = Attempt.Outcome<TextToImage_Config,
   | TextToImage_Config_Dynamic_Fetching_Error_Request
-  | TextToImage_Config_Dynamic_Fetching_ResponseError
+  | TextToImage_Config_Dynamic_Fetching_Error_Response
 >;
 
 const TextToImage_Config_Dynamic_fetch = (): Promise<TextToImage_Config_Dynamic_Fetching_Outcome> => Attempt.thatEventually(async (ends) => {
@@ -31,7 +31,7 @@ const TextToImage_Config_Dynamic_fetch = (): Promise<TextToImage_Config_Dynamic_
     !endpointResponse.ok
   ) return ends.inFailureDueTo(fetchingError);
 
-  const endpointResponseError = new TextToImage_Config_Dynamic_Fetching.ResponseError({
+  const endpointResponseError = new TextToImage_Config_Dynamic_Fetching.Error_Response({
     endpoint: TextToImage_Config_Dynamic_endpoint,
     response: endpointResponse,
   });
