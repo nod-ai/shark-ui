@@ -1,4 +1,8 @@
 export {
+  TextToImage_Config_Dynamic_Fetching_Error as Error,
+} from './Error';
+
+export {
   default as Error_Request,
 } from './Error/Request';
 
