@@ -24,7 +24,7 @@
     "zod": "^4.1.1"
   },
   "devDependencies": {
-    "@eslint/markdown": "^7.1.0",
+    "@eslint/markdown": "^7.2.0",
     "@stylistic/eslint-plugin": "^5.2.3",
     "@tsconfig/node22": "^22.0.2",
     "@types/jsdom": "^21.1.7",
