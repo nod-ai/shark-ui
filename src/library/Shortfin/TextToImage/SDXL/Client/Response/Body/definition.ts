@@ -1,5 +1,5 @@
 import type Attempt from '@/library/Attempt';
-import type Sequence_Base64CharacterEncodedByte from '@/library/Base64CharacterEncodedByteSequence';
+import type Sequence_Byte_Base64CharacterEncoded from '@/library/Base64CharacterEncodedByteSequence';
 import type Parsable from '@/library/Parsable';
 import Parse from '@/library/Parse';
 import Schema from '@/library/Schema';
@@ -15,8 +15,8 @@ implements Parsable<
 > {
   public constructor(
     public images: [
-      Sequence_Base64CharacterEncodedByte,
-      ...Sequence_Base64CharacterEncodedByte[],
+      Sequence_Byte_Base64CharacterEncoded,
+      ...Sequence_Byte_Base64CharacterEncoded[],
     ],
   ) {}
 

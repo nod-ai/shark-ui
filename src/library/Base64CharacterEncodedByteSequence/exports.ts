@@ -1,3 +1,3 @@
 export {
-  Sequence_Base64CharacterEncodedByte,
+  Sequence_Byte_Base64CharacterEncoded,
 } from './definition.ts';

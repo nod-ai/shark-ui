@@ -10,15 +10,15 @@ import {
   lastCharacterOf,
 } from '@/library/utilitiesByType/string.ts';
 
-import Sequence_Base64CharacterEncodedByte_ParsingError from './ParsingError.ts';
+import Sequence_Byte_Base64CharacterEncoded_ParsingError from './ParsingError.ts';
 
 /** See [RFC 4648 Section 4](https://www.rfc-editor.org/rfc/rfc4648.html#section-4) for more information */
-class Sequence_Base64CharacterEncodedByte
+class Sequence_Byte_Base64CharacterEncoded
   extends StringSubset<
-  'Sequence_Base64CharacterEncodedByte'
+  'Sequence_Byte_Base64CharacterEncoded'
 > implements Parsable.String<
-  typeof Sequence_Base64CharacterEncodedByte,
-  /*  */ Sequence_Base64CharacterEncodedByte_ParsingError
+  typeof Sequence_Byte_Base64CharacterEncoded,
+  /*  */ Sequence_Byte_Base64CharacterEncoded_ParsingError
 > {
   public static paddingCharacter = '=';
 
@@ -44,14 +44,14 @@ class Sequence_Base64CharacterEncodedByte
 
   public static parsedFrom = (
     givenCharacters: string,
-  ): Attempt.Outcome<Sequence_Base64CharacterEncodedByte, Sequence_Base64CharacterEncodedByte_ParsingError> => {
+  ): Attempt.Outcome<Sequence_Byte_Base64CharacterEncoded, Sequence_Byte_Base64CharacterEncoded_ParsingError> => {
     const outcomeOfEnsuringEncodableCharacters = Sequence.Byte.Encoded.Compatibility.ensure(givenCharacters, {
       assuming: Base64.bitWidth,
     });
 
     if (outcomeOfEnsuringEncodableCharacters.isFailure) {
       const failureToEnsureEncodableCharacters = outcomeOfEnsuringEncodableCharacters.rewrappedWith({
-        cause: $0 => Sequence_Base64CharacterEncodedByte_ParsingError.thatEscorts($0),
+        cause: $0 => Sequence_Byte_Base64CharacterEncoded_ParsingError.thatEscorts($0),
       });
 
       return failureToEnsureEncodableCharacters;
@@ -63,7 +63,7 @@ class Sequence_Base64CharacterEncodedByte
 
     const outcomeOfParsingByteSequence = Attempt.Outcome.fromRewrapping(outcomeOfEnsuringConformantCharacters, {
       product: $0 => new this($0.concat(padding)),
-      cause  : $0 => Sequence_Base64CharacterEncodedByte_ParsingError.thatEscorts($0),
+      cause  : $0 => Sequence_Byte_Base64CharacterEncoded_ParsingError.thatEscorts($0),
     });
 
     return outcomeOfParsingByteSequence;
@@ -71,5 +71,5 @@ class Sequence_Base64CharacterEncodedByte
 }
 
 export {
-  Sequence_Base64CharacterEncodedByte,
+  Sequence_Byte_Base64CharacterEncoded,
 };
