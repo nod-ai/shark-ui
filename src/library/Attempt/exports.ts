@@ -1,12 +1,6 @@
-import {
-  Attempt_ended,
-} from './ended';
-
-const Attempt_abandon = Attempt_ended.inFlamesBecause;
-
 export {
   Attempt_abandon as abandon,
-};
+} from './abandon';
 
 export {
   Attempt_Outcome as Outcome,
