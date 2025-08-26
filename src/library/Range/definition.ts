@@ -76,7 +76,8 @@ class Range {
   }
 
   public get inInclusiveNotation(): string {
-    return `[${this.lowerBound.toString()}, ${this.upperBound.toString()}]`;
+    const bracedBounds = `[${this.lowerBound.toString()}, ${this.upperBound.toString()}]`;
+    return bracedBounds;
   }
 }
 

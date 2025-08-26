@@ -5,7 +5,8 @@ const Base64 = {
     pattern: /A-Za-z\d\+\//,
   },
   get bitWidth() {
-    return Math.log2(this.Alphabet.length);
+    const maxBitCount = Math.log2(this.Alphabet.length);
+    return maxBitCount;
   },
 };
 

@@ -26,7 +26,8 @@ class ContentDescriptor {
 
   public get serializableTopLevelDescriptor(): NonTrivialString {
     const suffixedTopLevelDescriptor = this.topLevelDescriptor.concat(ContentDescriptor.suffixForTopLevelDescriptor);
-    return NonTrivialString.parsedFrom(suffixedTopLevelDescriptor).forciblyUnwrap(/* Proven safe by inspecting intellisense of `topLevelDescriptor` */);
+    const coercedTopLevelDescriptor = NonTrivialString.parsedFrom(suffixedTopLevelDescriptor).forciblyUnwrap(/* Proven safe by inspecting intellisense of `topLevelDescriptor` */);
+    return coercedTopLevelDescriptor;
   }
 
   public static readonly treeBranchSuffix = '.';
@@ -48,7 +49,8 @@ class ContentDescriptor {
       this.structureDescriptor === null
     ) return null;
 
-    return ContentDescriptor.structureDescriptorPrefix.concat(this.structureDescriptor);
+    const prefixedStructureDescriptor = ContentDescriptor.structureDescriptorPrefix.concat(this.structureDescriptor);
+    return prefixedStructureDescriptor;
   }
 
   public static readonly parameterPrefix = ';';

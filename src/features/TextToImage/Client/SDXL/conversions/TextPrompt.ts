@@ -15,7 +15,8 @@ const serialized = (
     isDefault(givenPrompt.weight)
   ) return givenPrompt.text;
 
-  return `(${givenPrompt.text}: ${givenPrompt.weight.toString()})`;
+  const promptWithSerializedWeights = `(${givenPrompt.text}: ${givenPrompt.weight.toString()})`;
+  return promptWithSerializedWeights;
 };
 
 const allSerialized = (

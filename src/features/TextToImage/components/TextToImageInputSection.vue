@@ -55,29 +55,36 @@ const byQualitativeWeight = (givenInputText: StandardizedInputText): InputTextBy
         .map($0 => $0.text.trim())
         .join(', ');
 
-      return [
+      const eachDerivedEntry = [
         eachUnsafeQualitativeWeight,
         eachSerializationByWeight,
       ] as [
         QualitativeTextWeight,
         string,
       ];
+
+      return eachDerivedEntry;
     });
 
-  return Object.fromEntries(entriesForInputTextByQualitativeWeight) as unknown as InputTextByQualitativeWeight;
+  const computedInputTextByQualitativeWeight = Object.fromEntries(entriesForInputTextByQualitativeWeight);
+  return computedInputTextByQualitativeWeight as unknown as InputTextByQualitativeWeight;
 };
 
 const standardized = (givenInputText: InputTextByQualitativeWeight): StandardizedInputText => {
-  return Object.entries(qualitativeToQuantitativeTextWeightMap)
+  const computedInputText = Object.entries(qualitativeToQuantitativeTextWeightMap)
     .map(([eachUnsafeQualitativeWeight, eachQuantitativeWeight]): StandardizedInputText[number] => {
       const eachQualitativeWeight = eachUnsafeQualitativeWeight as QualitativeTextWeight;
       const weightedText = givenInputText[eachQualitativeWeight];
 
-      return {
+      const newInputTextComponent = {
         text  : weightedText,
         weight: eachQuantitativeWeight,
       };
+
+      return newInputTextComponent;
     });
+
+  return computedInputText;
 };
 
 const defaultInitialInputText: InputTextByQualitativeWeight = {

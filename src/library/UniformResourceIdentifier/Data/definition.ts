@@ -41,13 +41,15 @@ class URI_Data
       this.encoding !== 'base64'
     ) return null;
 
-    return URI_Data.encodingPrefix.concat(this.encoding);
+    const prefixedEncoding = URI_Data.encodingPrefix.concat(this.encoding);
+    return prefixedEncoding;
   }
 
   public static readonly dataPrefix = ',';
 
   public get serializableData(): string {
-    return this.data.prependedWith(URI_Data.dataPrefix);
+    const prefixedData = this.data.prependedWith(URI_Data.dataPrefix);
+    return prefixedData;
   }
 
   public override get path(): NonTrivialString {

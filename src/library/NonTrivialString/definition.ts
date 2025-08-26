@@ -54,7 +54,8 @@ class NonTrivialString
   ): NonTrivialString {
     const concatenatedOperands = concatenated(this, ...givenOperands);
     const outcomeOfParsingConcatenatedOperands = NonTrivialString.parsedFrom(concatenatedOperands);
-    return outcomeOfParsingConcatenatedOperands.forciblyUnwrap(/* Safe to call since the leading string is always non-trivial and concatenation is purely additive */);
+    const coercedConcatenatedOperands = outcomeOfParsingConcatenatedOperands.forciblyUnwrap(/* Safe to call since the leading string is always non-trivial and concatenation is purely additive */);
+    return coercedConcatenatedOperands;
   }
 
   public static fromConcatenating(
