@@ -2,11 +2,11 @@ import Attempt from '@/library/Attempt';
 import ParsingError from '@/library/ParsingError';
 import Sequence from '@/library/Sequence';
 
-class Sequence_Byte_Encoded_Base64Character_ParsingError
+class Sequence_Byte_Encoded_Base64_ParsingError
   extends ParsingError<
-  'Sequence_Byte_Encoded_Base64Character'
+  'Sequence_Byte_Encoded_Base64'
 > {
-  public override name = 'Sequence_Byte_Encoded_Base64Character_ParsingError' as const;
+  public override name = 'Sequence_Byte_Encoded_Base64_ParsingError' as const;
 
   public constructor(
     givenMessage: string,
@@ -19,7 +19,7 @@ class Sequence_Byte_Encoded_Base64Character_ParsingError
     givenError:
       | Sequence.Byte.Encoded.Compatibility.Error
       | Sequence.Base64.Conformance.Error,
-  ): Sequence_Byte_Encoded_Base64Character_ParsingError {
+  ): Sequence_Byte_Encoded_Base64_ParsingError {
     const extraContext = (() => {
       switch (true) {
         case givenError instanceof Sequence.Byte.Encoded.Compatibility.Error:
@@ -41,5 +41,5 @@ class Sequence_Byte_Encoded_Base64Character_ParsingError
 }
 
 export {
-  Sequence_Byte_Encoded_Base64Character_ParsingError as default,
+  Sequence_Byte_Encoded_Base64_ParsingError as default,
 };
