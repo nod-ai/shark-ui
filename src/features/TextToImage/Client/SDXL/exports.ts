@@ -31,8 +31,7 @@ const TextToImage_Client_SDXL_initialize = async (): Promise<
 };
 
 type TextToImage_Client_Generation_Outcome = Attempt.Outcome<TextToImage_Pipeline_Output,
-  | TextToImage_Server.Error.Connection
-  | TextToImage_Server.Error.Specification
+  TextToImage_Server.Error.Any
 >;
 
 const TextToImage_Client_SDXL_generateOutputFrom = async (
