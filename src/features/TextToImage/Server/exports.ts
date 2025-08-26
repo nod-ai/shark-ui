@@ -23,9 +23,11 @@ const TextToImage_Server_Current_accordingToEnvironment = ((): WebAPI_Server | n
     originAccordingToEnvironment === undefined
   ) return null;
 
-  return WebAPI_Server.from({
+  const serverAccordingToEnvironment = WebAPI_Server.from({
     origin: originAccordingToEnvironment,
   });
+
+  return serverAccordingToEnvironment;
 })();
 
 const TextToImage_Server_Current_retrieve = (): Promise<

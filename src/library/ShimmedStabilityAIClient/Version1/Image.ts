@@ -32,7 +32,7 @@ class ShimmedStabilityAIClient_Version1_Image
       seed        : givenRequest.textToImageRequestBody.seed,
     };
 
-    return {
+    const newStabilityAIGenerationResponse = {
       headers: {},
       result : {
         artifacts: [
@@ -40,6 +40,8 @@ class ShimmedStabilityAIClient_Version1_Image
         ],
       },
     };
+
+    return newStabilityAIGenerationResponse;
   }
 }
 

@@ -37,7 +37,8 @@ const PanelWidth = {
   for(
     givenDisplay: Display,
   ) {
-    return this.scaleFor(givenDisplay) * this.default;
+    const computedWidth = this.scaleFor(givenDisplay) * this.default;
+    return computedWidth;
   },
 };
 

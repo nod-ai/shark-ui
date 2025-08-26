@@ -21,7 +21,8 @@ class UniformResourceIdentifier {
   public static readonly schemeSuffix = ':';
 
   public get serializableScheme(): string {
-    return this.scheme.concat(UniformResourceIdentifier.schemeSuffix);
+    const suffixedScheme = this.scheme.concat(UniformResourceIdentifier.schemeSuffix);
+    return suffixedScheme;
   }
 
   public static readonly authorityPrefix = '//';
@@ -31,7 +32,8 @@ class UniformResourceIdentifier {
       this.authority === null
     ) return null;
 
-    return this.authority.prependedWith(UniformResourceIdentifier.authorityPrefix);
+    const prefixedAuthority = this.authority.prependedWith(UniformResourceIdentifier.authorityPrefix);
+    return prefixedAuthority;
   }
 
   public get path(): Exclude<UniformResourceIdentifier['overridablePath'], null> {
@@ -49,7 +51,8 @@ class UniformResourceIdentifier {
       this.query === null
     ) return null;
 
-    return this.query.prependedWith(UniformResourceIdentifier.queryPrefix);
+    const prefixedQuery = this.query.prependedWith(UniformResourceIdentifier.queryPrefix);
+    return prefixedQuery;
   }
 
   public static readonly fragmentPrefix = '#';
@@ -59,7 +62,8 @@ class UniformResourceIdentifier {
       this.fragment === null
     ) return null;
 
-    return this.fragment.prependedWith(UniformResourceIdentifier.fragmentPrefix);
+    const prefixedFragment = this.fragment.prependedWith(UniformResourceIdentifier.fragmentPrefix);
+    return prefixedFragment;
   }
 
   public get serialized(): string {

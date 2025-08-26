@@ -15,16 +15,15 @@ const serialized = (
     isDefault(givenPrompt.weight)
   ) return givenPrompt.text;
 
-  return `(${givenPrompt.text}: ${givenPrompt.weight.toString()})`;
+  const promptWithSerializedWeights = `(${givenPrompt.text}: ${givenPrompt.weight.toString()})`;
+  return promptWithSerializedWeights;
 };
 
 const allSerialized = (
   givenPrompts: TextPrompt[],
-): string => {
-  return givenPrompts
-    .map(serialized)
-    .join(', ');
-};
+): string => givenPrompts
+  .map(serialized)
+  .join(', ');
 
 export {
   allSerialized,

@@ -28,9 +28,11 @@ const toNullableOutput = (
     givenImage === null
   ) return null;
 
-  return {
+  const derivedPipelineOutput = {
     image: givenImage,
   };
+
+  return derivedPipelineOutput;
 };
 
 const textToImageOutputs = (

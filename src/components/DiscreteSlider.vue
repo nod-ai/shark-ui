@@ -83,9 +83,11 @@ const tickLabels = (
   const tickPosition = givenPosition + derivedOffset;
   const tickLabel = givenPosition.toString();
 
-  return {
+  const tickLabelByPosition = {
     [tickPosition]: tickLabel,
   };
+
+  return tickLabelByPosition;
 };
 
 const tickLabelsAlong = (
@@ -102,14 +104,13 @@ const tickLabelsAlong = (
     by  : givenStepSize,
   });
 
-  const labelSets = tickRange.inclusiveSteps.map((eachPosition) => {
-    return tickLabels({
-      by: eachPosition,
-      in: tickRange,
-    });
-  });
+  const labelSets = tickRange.inclusiveSteps.map(eachPosition => tickLabels({
+    by: eachPosition,
+    in: tickRange,
+  }));
 
-  return shallowlyMerged(...labelSets);
+  const mergedLabelTables = shallowlyMerged(...labelSets);
+  return mergedLabelTables;
 };
 </script>
 
