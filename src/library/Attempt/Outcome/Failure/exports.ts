@@ -72,7 +72,10 @@ const Attempt_Outcome_Failure_dueTo = <
     {
       cause: transformed,
     } = {
-      cause: Attempt_Outcome_Failure_Cause_Transformer_identity<SomeActionableError, SomeTransformedActionableError>,
+      cause: Attempt_Outcome_Failure_Cause_Transformer_identity<
+        SomeActionableError,
+        SomeTransformedActionableError
+      >,
     },
   ) => {
     const transformedCause = transformed(givenCause);

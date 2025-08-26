@@ -26,7 +26,10 @@ class URLComponent_Origin
 > {
   public static parsedFrom = (
     givenSubject: string,
-  ): Attempt.Outcome<URLComponent_Origin, URLComponent_Origin_ParsingError> => Attempt.that((ends) => {
+  ): Attempt.Outcome<
+    URLComponent_Origin,
+    URLComponent_Origin_ParsingError
+  > => Attempt.that((ends) => {
     const derived = new URL(givenSubject);
 
     const newParsingError = new URLComponent_Origin_ParsingError({

@@ -80,7 +80,10 @@ const Attempt_Outcome_Success_thatYielded = <
     {
       product: transformed,
     } = {
-      product: Attempt_Outcome_Success_Product_Transformer_identity<SomeProduct, SomeTransformedProduct>,
+      product: Attempt_Outcome_Success_Product_Transformer_identity<
+        SomeProduct,
+        SomeTransformedProduct
+      >,
     },
   ) => {
     const transformedProduct = transformed(givenProduct);

@@ -19,11 +19,14 @@ import type {
 
 const TextToImage_Config_Dynamic_endpoint = URLComponent_Path.parsedFrom('/config/text-to-image').forciblyUnwrap();
 
-type TextToImage_Config_Dynamic_Fetching_Outcome = Attempt.Outcome<TextToImage_Config,
+type TextToImage_Config_Dynamic_Fetching_Outcome = Attempt.Outcome<
+  TextToImage_Config,
   TextToImage_Config_Dynamic_Fetching_Error.Any
 >;
 
-const TextToImage_Config_Dynamic_fetch = (): Promise<TextToImage_Config_Dynamic_Fetching_Outcome> => Attempt.thatEventually(async (ends) => {
+const TextToImage_Config_Dynamic_fetch = (): Promise<
+  TextToImage_Config_Dynamic_Fetching_Outcome
+> => Attempt.thatEventually(async (ends) => {
   const endpointResponse = await fetch(TextToImage_Config_Dynamic_endpoint.toString());
   const fetchingError = new TextToImage_Config_Dynamic_Fetching.Error.Request(TextToImage_Config_Dynamic_endpoint);
 

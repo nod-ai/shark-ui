@@ -17,7 +17,9 @@ class Shortfin_TextToImage_SDXL_Client
   extends HTTP.Client {
   public generateImageFrom(
     givenBatchedRequestBody: Shortfin_TextToImage_SDXL_Client_Request.Body.Batched,
-  ): Promise<Shortfin_TextToImage_SDXL_Client_Request.Outcome> {
+  ): Promise<
+    Shortfin_TextToImage_SDXL_Client_Request.Outcome
+  > {
     const generationEndpoint = URLComponent_Path.parsedFrom('/generate').forciblyUnwrap();
 
     return Attempt.thatEventually(async (ends) => {

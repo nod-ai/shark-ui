@@ -19,7 +19,10 @@ class NonTrivialString
 > {
   public static parsedFrom = (
     givenSubject: string,
-  ): Attempt.Outcome<NonTrivialString, NonTrivialString_ParsingError> => Attempt.that((ends) => {
+  ): Attempt.Outcome<
+    NonTrivialString,
+    NonTrivialString_ParsingError
+  > => Attempt.that((ends) => {
     const trimmedSubject = givenSubject.trim();
 
     if (
@@ -31,7 +34,10 @@ class NonTrivialString
 
   public static nullableParsedFrom = (
     givenSubject: string | null,
-  ): Attempt.Outcome<NonTrivialString | null, NonTrivialString_ParsingError> => Attempt.that((ends) => {
+  ): Attempt.Outcome<
+    NonTrivialString | null,
+    NonTrivialString_ParsingError
+  > => Attempt.that((ends) => {
     if (
       givenSubject === null
     ) return ends.inSuccessWith(givenSubject);

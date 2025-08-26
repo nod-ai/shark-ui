@@ -64,14 +64,20 @@ function Attempt_Outcome_fromRewrapping<
   SomeTransformedProduct = SomeTransformableProduct,
   SomeTransformedActionableError extends Attempt_Error_Actionable<string> = SomeTransformableActionableError,
 >(
-  givenOutcome: Attempt_Outcome<SomeTransformableProduct, SomeTransformableActionableError>,
+  givenOutcome: Attempt_Outcome<
+    SomeTransformableProduct,
+    SomeTransformableActionableError
+  >,
   given?: Attempt_Outcome_Transformer<
     SomeTransformableProduct,
     SomeTransformableActionableError,
     SomeTransformedProduct,
     SomeTransformedActionableError
   >,
-): Attempt_Outcome<SomeTransformedProduct, SomeTransformedActionableError>;
+): Attempt_Outcome<
+  SomeTransformedProduct,
+  SomeTransformedActionableError
+>;
 //
 function Attempt_Outcome_fromRewrapping<
   SomeTransformableProduct,
@@ -79,20 +85,38 @@ function Attempt_Outcome_fromRewrapping<
   SomeTransformedProduct = SomeTransformableProduct,
   SomeTransformedActionableError extends Attempt_Error_Actionable<string> = SomeTransformableActionableError,
 >(
-  givenOutcome: Attempt_Outcome<SomeTransformableProduct, SomeTransformableActionableError>,
+  givenOutcome: Attempt_Outcome<
+    SomeTransformableProduct,
+    SomeTransformableActionableError
+  >,
   {
-    product: toTransformedProduct = Attempt_Outcome_Success_Product_Transformer_identity<SomeTransformableProduct, SomeTransformedProduct>,
-    cause: toTransformedCause = Attempt_Outcome_Failure_Cause_Transformer_identity<SomeTransformableActionableError, SomeTransformedActionableError>,
+    product: toTransformedProduct = Attempt_Outcome_Success_Product_Transformer_identity<
+      SomeTransformableProduct,
+      SomeTransformedProduct
+    >,
+    cause: toTransformedCause = Attempt_Outcome_Failure_Cause_Transformer_identity<
+      SomeTransformableActionableError,
+      SomeTransformedActionableError
+    >,
   }: Attempt_Outcome_Transformer<
     SomeTransformableProduct,
     SomeTransformableActionableError,
     SomeTransformedProduct,
     SomeTransformedActionableError
   > = {
-    product: Attempt_Outcome_Success_Product_Transformer_identity<SomeTransformableProduct, SomeTransformedProduct>,
-    cause  : Attempt_Outcome_Failure_Cause_Transformer_identity<SomeTransformableActionableError, SomeTransformedActionableError>,
+    product: Attempt_Outcome_Success_Product_Transformer_identity<
+      SomeTransformableProduct,
+      SomeTransformedProduct
+    >,
+    cause: Attempt_Outcome_Failure_Cause_Transformer_identity<
+      SomeTransformableActionableError,
+      SomeTransformedActionableError
+    >,
   },
-): Attempt_Outcome<SomeTransformedProduct, SomeTransformedActionableError> {
+): Attempt_Outcome<
+  SomeTransformedProduct,
+  SomeTransformedActionableError
+> {
   return givenOutcome.isSuccess
     ? givenOutcome.rewrappedWith({
         product: toTransformedProduct,

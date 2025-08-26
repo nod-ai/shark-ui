@@ -6,7 +6,10 @@ interface Parser<
   SomeParsedOutput,
   SomeParsingError extends ParsingError<string>,
 > {
-  parsedFrom(givenSubject: SomeRawInput): Attempt.Outcome<SomeParsedOutput, SomeParsingError>;
+  parsedFrom(givenSubject: SomeRawInput): Attempt.Outcome<
+    SomeParsedOutput,
+    SomeParsingError
+  >;
 }
 
 export type {

@@ -52,7 +52,10 @@ class Sequence_Byte_Encoded_Base64
 
   public static parsedFrom = (
     givenCharacters: string,
-  ): Attempt.Outcome<Sequence_Byte_Encoded_Base64, Sequence_Byte_Encoded_Base64_ParsingError> => {
+  ): Attempt.Outcome<
+    Sequence_Byte_Encoded_Base64,
+    Sequence_Byte_Encoded_Base64_ParsingError
+  > => {
     const outcomeOfEnsuringEncodableCharacters = Sequence_Byte_Encoded_Compatibility.ensure(givenCharacters, {
       assuming: Base64.bitWidth,
     });

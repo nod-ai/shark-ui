@@ -17,7 +17,10 @@ import {
 } from './conversions/GenerateFromTextResponse';
 
 const TextToImage_Client_SDXL_initialize = async (): Promise<
-  Attempt.Outcome<ShimmedStabilityAIClient, TextToImage_Server.Error.Specification>
+  Attempt.Outcome<
+    ShimmedStabilityAIClient,
+    TextToImage_Server.Error.Specification
+  >
 > => {
   const outcomeOfRetrievingCurrentServer = await TextToImage_Server.Current_retrieve();
 
@@ -30,7 +33,8 @@ const TextToImage_Client_SDXL_initialize = async (): Promise<
   return outcomeOfInitializingClient;
 };
 
-type TextToImage_Client_Generation_Outcome = Attempt.Outcome<TextToImage_Pipeline_Output,
+type TextToImage_Client_Generation_Outcome = Attempt.Outcome<
+  TextToImage_Pipeline_Output,
   TextToImage_Server.Error.Any
 >;
 
@@ -45,7 +49,9 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     | 'seed'
     >;
   },
-): Promise<TextToImage_Client_Generation_Outcome> => {
+): Promise<
+  TextToImage_Client_Generation_Outcome
+> => {
   const outcomeOfInitializingClient = await TextToImage_Client_SDXL_initialize();
 
   if (
