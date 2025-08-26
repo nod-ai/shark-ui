@@ -1,3 +1,3 @@
 export {
-  Sequence_Byte_Base64CharacterEncoded as default,
+  Sequence_Byte_Encoded_Base64Character as default,
 } from './exports.ts';

@@ -1,4 +1,4 @@
-import Sequence_Byte_Base64CharacterEncoded from '@/library/Base64CharacterEncodedByteSequence';
+import Sequence_Byte_Encoded_Base64Character from '@/library/Base64CharacterEncodedByteSequence';
 
 import {
   string as Schema_string,
@@ -7,7 +7,7 @@ import {
 
 /** An alternative to `Schema.base64()` that avoids using the deprecated `atob` conversion under the hood */
 const Schema_base64CharacterEncodedByteSequence = () => Schema_string().transform((someSubject, currentContext) => {
-  const outcomeOfParsingSubject = Sequence_Byte_Base64CharacterEncoded.parsedFrom(someSubject);
+  const outcomeOfParsingSubject = Sequence_Byte_Encoded_Base64Character.parsedFrom(someSubject);
 
   if (
     outcomeOfParsingSubject.isSuccess
