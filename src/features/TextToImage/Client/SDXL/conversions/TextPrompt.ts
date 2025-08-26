@@ -20,11 +20,9 @@ const serialized = (
 
 const allSerialized = (
   givenPrompts: TextPrompt[],
-): string => {
-  return givenPrompts
-    .map(serialized)
-    .join(', ');
-};
+): string => givenPrompts
+  .map(serialized)
+  .join(', ');
 
 export {
   allSerialized,

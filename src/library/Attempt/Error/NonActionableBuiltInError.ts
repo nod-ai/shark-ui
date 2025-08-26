@@ -63,16 +63,14 @@ type NonActionableBuiltInError =
 
 const isNonActionableBuiltInError = (
   givenError: Error,
-): givenError is NonActionableBuiltInError => {
-  return (
-    (givenError instanceof ReferenceError)
-    || (givenError instanceof TypeError)
-    || (givenError instanceof RangeError)
-    || (givenError instanceof URIError)
-    || (givenError instanceof EvalError)
-    || (givenError instanceof SyntaxError)
-  );
-};
+): givenError is NonActionableBuiltInError => (
+  (givenError instanceof ReferenceError)
+  || (givenError instanceof TypeError)
+  || (givenError instanceof RangeError)
+  || (givenError instanceof URIError)
+  || (givenError instanceof EvalError)
+  || (givenError instanceof SyntaxError)
+);
 
 const NonActionableBuiltInError = {
   describes: isNonActionableBuiltInError,
