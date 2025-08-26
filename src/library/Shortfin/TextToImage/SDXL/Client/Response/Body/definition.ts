@@ -1,8 +1,8 @@
 import type Attempt from '@/library/Attempt';
-import type Sequence_Byte_Encoded_Base64 from '@/library/Base64CharacterEncodedByteSequence';
 import type Parsable from '@/library/Parsable';
 import Parse from '@/library/Parse';
 import Schema from '@/library/Schema';
+import type Sequence from '@/library/Sequence';
 
 import {
   Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError,
@@ -15,8 +15,8 @@ implements Parsable<
 > {
   public constructor(
     public images: [
-      Sequence_Byte_Encoded_Base64,
-      ...Sequence_Byte_Encoded_Base64[],
+      Sequence.Byte.Encoded.Base64,
+      ...Sequence.Byte.Encoded.Base64[],
     ],
   ) {}
 
