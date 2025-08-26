@@ -8,11 +8,11 @@ import {
   Config_Dynamic as TextToImage_Config_Dynamic,
   Config_Static as TextToImage_Config_Static,
   TextToImage_Config_empty,
-} from '../Config';
+} from '../../Config';
 
 import {
   TextToImage_Server_Error,
-} from './Error';
+} from '../Error';
 
 const TextToImage_Server_Origin_environmentKey = 'VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN';
 
