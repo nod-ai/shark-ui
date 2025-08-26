@@ -1,1 +1,1 @@
-export * from './exports.ts';
+export * from './definition.ts';
