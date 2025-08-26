@@ -2,7 +2,7 @@ import type Attempt from '@/library/Attempt';
 import type Parsable from '@/library/Parsable';
 import Parse from '@/library/Parse';
 import Schema from '@/library/Schema';
-import type Sequence from '@/library/Sequence';
+import Sequence from '@/library/Sequence';
 
 import {
   Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError,
@@ -24,10 +24,10 @@ implements Parsable<
     .object({
       images: Schema
         .tuple([
-          Schema.base64CharacterEncodedByteSequence(),
+          Sequence.Byte.Encoded.Base64.Schema,
         ])
         .rest(
-          Schema.base64CharacterEncodedByteSequence(),
+          Sequence.Byte.Encoded.Base64.Schema,
         ),
     })
     .transform($0 => new Shortfin_TextToImage_SDXL_Client_Response_Body(

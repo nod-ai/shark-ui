@@ -2,6 +2,7 @@ import Attempt from '@/library/Attempt';
 import Base64 from '@/library/Base64';
 import Byte from '@/library/Byte';
 import type Parsable from '@/library/Parsable';
+import Schema from '@/library/Schema';
 import StringSubset from '@/library/StringSubset';
 
 import {
@@ -75,6 +76,22 @@ class Sequence_Byte_Encoded_Base64
 
     return outcomeOfParsingByteSequence;
   };
+
+  /** An alternative to `Schema.base64()` that avoids using the deprecated `atob` conversion under the hood */
+  public static Schema = Schema.string().transform((someSubject, currentContext) => {
+    const outcomeOfParsingSubject = this.parsedFrom(someSubject);
+
+    if (
+      outcomeOfParsingSubject.isSuccess
+    ) return outcomeOfParsingSubject.unwrapped;
+
+    currentContext.addIssue({
+      code   : 'custom',
+      message: outcomeOfParsingSubject.cause.message,
+    });
+
+    return Schema.NEVER;
+  });
 }
 
 export {
