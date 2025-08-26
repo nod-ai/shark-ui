@@ -1,4 +1,4 @@
-import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
+import type Sequence_Base64CharacterEncodedByte from '@/library/Base64CharacterEncodedByteSequence';
 import ContentDescriptor from '@/library/ContentDescriptor';
 
 import {
@@ -16,7 +16,7 @@ class URI_Image
   public constructor(
     public readonly format: URI_Image_Format.Any,
     givenEncoding: URI_Data.EncodingIdentifier.Any,
-    givenData: Base64CharacterEncodedByteSequence,
+    givenData: Sequence_Base64CharacterEncodedByte,
   ) {
     super(
       null,

@@ -1,5 +1,5 @@
 import Attempt from '@/library/Attempt';
-import type Base64CharacterEncodedByteSequence from '@/library/Base64CharacterEncodedByteSequence';
+import type Sequence_Base64CharacterEncodedByte from '@/library/Base64CharacterEncodedByteSequence';
 import type ContentDescriptor from '@/library/ContentDescriptor';
 import NonTrivialString from '@/library/NonTrivialString';
 
@@ -19,7 +19,7 @@ class URI_Data
   public constructor(
     private readonly overridableDescriptor: ContentDescriptor | null,
     public readonly encoding: URI_Data_EncodingIdentifier.Any,
-    public readonly data: Base64CharacterEncodedByteSequence,
+    public readonly data: Sequence_Base64CharacterEncodedByte,
   ) {
     super(
       URI_Data.scheme,
