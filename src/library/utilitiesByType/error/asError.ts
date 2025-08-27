@@ -1,6 +1,6 @@
 import {
   asString,
-} from './string';
+} from '../string';
 
 const isError = (givenSubject: unknown): givenSubject is Error => {
   return (givenSubject instanceof Error);

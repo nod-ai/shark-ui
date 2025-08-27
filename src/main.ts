@@ -4,7 +4,7 @@ import {
 
 import {
   asError,
-} from '@/library/utilitiesByType/error.ts';
+} from '@/library/utilitiesByType/error/asError';
 
 import App from '@/App.vue';
 import vuetify from '@/plugins/vuetify.ts';
