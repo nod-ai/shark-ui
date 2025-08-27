@@ -6,7 +6,7 @@ import {
 
 import {
   absoluteValueOf,
-} from '../../absoluteValueOf/aliases/modulusOf';
+} from '../../absoluteValueOf';
 
 const greatestCommonDivisor = (
   leftHandOperand: number,

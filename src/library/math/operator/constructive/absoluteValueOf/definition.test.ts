@@ -12,7 +12,7 @@ import {
 
 import {
   absoluteValueOf,
-} from './aliases/modulusOf';
+} from './aliases';
 
 describe(absoluteValueOf, () => {
   const {

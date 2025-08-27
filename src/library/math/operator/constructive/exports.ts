@@ -1,4 +1,4 @@
-export * from './absoluteValueOf/aliases/modulusOf';
+export * from './absoluteValueOf';
 
 export * from './greatestCommonDivisor/abbreviations/gcf';
 
