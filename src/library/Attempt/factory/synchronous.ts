@@ -15,8 +15,8 @@ import {
 } from '../ended';
 
 import {
-  sanctioned,
-} from '../utilities/sanctionedTryCatch';
+  safe,
+} from '../utilities/safeTryCatch';
 
 type Attempt_End_Getter<
   SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
@@ -34,7 +34,7 @@ const Attempt_that = <
     CauseOf<SomeInferredOutcome>
   >;
 
-  return sanctioned({
+  return safe({
     try() {
       return endsAccordingTo(handles) as EquivalentOutcome;
     },

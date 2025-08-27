@@ -10,7 +10,7 @@ import type {
   AppropriatelyThrown,
 } from '../Error/modifier';
 
-const sanctioned = <
+const safe = <
   SomeTryBlockOutput,
   SomeCatchBlockOutput,
 >(
@@ -33,7 +33,7 @@ const sanctioned = <
   }
 };
 
-const sanctionedAsync = async <
+const safeAsync = async <
   SomeOutputOfResolvedPromise,
   SomeOutputOfRejectedPromise,
 >(
@@ -47,17 +47,17 @@ const sanctionedAsync = async <
 ): Promise<
   SomeOutputOfResolvedPromise | SomeOutputOfRejectedPromise
 > => {
-  const sanction = (whateverThatWasThrown: unknown) => sanctioned({
+  const safelyCatch = (whateverThatWasThrown: unknown) => safe({
     try: () => {
-      throw whateverThatWasThrown; // eslint-disable-line no-restricted-syntax -- puts the error back through the sanctioned catch
+      throw whateverThatWasThrown; // eslint-disable-line no-restricted-syntax -- puts the error back through the safe catch
     },
     catch: catchBlockOutputFor,
   });
 
-  return retrieveTryBlockOutput().catch(sanction);
+  return retrieveTryBlockOutput().catch(safelyCatch);
 };
 
 export {
-  sanctioned,
-  sanctionedAsync,
+  safe,
+  safeAsync,
 };
