@@ -24,7 +24,7 @@ type Attempt_End_Retriever<
   givenHandles: typeof handles
 ) => Promise<SomeInferredOutcome>;
 
-const Attempt_thatEventually = async <
+const Attempt_Fresh_thatEventually = async <
   SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
 >(
   endsAccordingTo: Attempt_End_Retriever<SomeInferredOutcome>,
@@ -46,5 +46,5 @@ const Attempt_thatEventually = async <
 
 export {
   type Attempt_End_Retriever,
-  Attempt_thatEventually,
+  Attempt_Fresh_thatEventually,
 };

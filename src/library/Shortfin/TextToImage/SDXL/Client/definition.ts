@@ -22,7 +22,7 @@ class Shortfin_TextToImage_SDXL_Client
   > {
     const generationEndpoint = URLComponent_Path.parsedFrom('/generate').forciblyUnwrap();
 
-    return Attempt.thatEventually(async (ends) => {
+    return Attempt.Fresh_thatEventually(async (ends) => {
       const outcomeOfSubmittingResource = await this.submitResource({
         bySending: givenBatchedRequestBody,
         to       : generationEndpoint,

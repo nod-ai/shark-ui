@@ -26,7 +26,7 @@ type TextToImage_Config_Dynamic_Fetching_Outcome = Attempt.Outcome<
 
 const TextToImage_Config_Dynamic_fetch = (): Promise<
   TextToImage_Config_Dynamic_Fetching_Outcome
-> => Attempt.thatEventually(async (ends) => {
+> => Attempt.Fresh_thatEventually(async (ends) => {
   const endpointResponse = await fetch(TextToImage_Config_Dynamic_endpoint.toString());
   const fetchingError = new TextToImage_Config_Dynamic_Fetching.Error.Request(TextToImage_Config_Dynamic_endpoint);
 

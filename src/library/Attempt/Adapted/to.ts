@@ -8,7 +8,7 @@ import type {
 } from '../Outcome';
 
 import {
-  Attempt_that,
+  Attempt_Fresh_that,
 } from '../factory';
 
 import {
@@ -23,7 +23,7 @@ const Attempt_Adapted_to = <
 >(
   forciblyGetProduct: () => SomeProduct,
   given: Attempt_Adapted_Config<SomeActionableError>,
-): Attempt_Outcome<SomeProduct, SomeActionableError> => Attempt_that(ends => safe({
+): Attempt_Outcome<SomeProduct, SomeActionableError> => Attempt_Fresh_that(ends => safe({
   try() {
     const gottenProduct = forciblyGetProduct();
     return ends.inSuccessWith(gottenProduct);

@@ -45,7 +45,7 @@ class HTTP_Client {
       to: URLComponent_Path;
       using: HTTP_Request.Method;
     },
-  ): Promise<HTTP_Endpoint.Outcome> => Attempt.thatEventually(async (ends) => {
+  ): Promise<HTTP_Endpoint.Outcome> => Attempt.Fresh_thatEventually(async (ends) => {
     const endpointURL = this.originAt(givenPath);
 
     const promisedResponse = fetch(endpointURL, {

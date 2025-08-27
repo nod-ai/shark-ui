@@ -8,7 +8,7 @@ import type {
 } from '../Outcome';
 
 import {
-  Attempt_thatEventually,
+  Attempt_Fresh_thatEventually,
 } from '../factory';
 
 import {
@@ -28,7 +28,7 @@ const Attempt_Adapted_toEventually = async <
     SomeProduct,
     SomeActionableError
   >
-> => Attempt_thatEventually(ends => safeAsync({
+> => Attempt_Fresh_thatEventually(ends => safeAsync({
   async try() {
     const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
     return ends.inSuccessWith(retrievedProduct);

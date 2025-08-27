@@ -23,7 +23,7 @@ type TextToImage_Config_Static_Reading_Outcome = Attempt.Outcome<
 
 const TextToImage_Config_Static_read = (): Promise<
   TextToImage_Config_Static_Reading_Outcome
-> => Attempt.thatEventually(async (ends) => {
+> => Attempt.Fresh_thatEventually(async (ends) => {
   const fileResponse = await fetch(TextToImage_Config_Static_file.toString());
 
   if (
