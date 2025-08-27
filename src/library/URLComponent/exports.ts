@@ -1,2 +1,2 @@
-export * from './Origin/definition.ts';
+export * from './Origin';
 export * from './Path/definition.ts';
