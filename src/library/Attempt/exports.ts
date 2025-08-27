@@ -26,4 +26,4 @@ export {
   Attempt_Fresh_thatEventually as Fresh_thatEventually,
   type Attempt_End_Getter as End_Getter,
   type Attempt_End_Retriever as End_Retriever,
-} from './factory';
+} from './Fresh';
