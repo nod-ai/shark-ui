@@ -1,6 +1,6 @@
 export * from './absoluteValueOf';
 
-export * from './greatestCommonDivisor/abbreviations/gcf';
+export * from './greatestCommonDivisor';
 
 export * from './leastCommonMultiple';
 

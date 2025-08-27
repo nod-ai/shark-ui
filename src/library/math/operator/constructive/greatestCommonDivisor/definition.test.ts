@@ -14,7 +14,7 @@ import {
   squared,
 } from '../../hyper';
 
-import * as GCDAlias from './abbreviations/gcf';
+import * as GCDAlias from './abbreviations';
 
 const pairCombos = <
   SomeLeftElement extends number,
