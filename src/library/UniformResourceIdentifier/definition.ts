@@ -3,7 +3,7 @@ import type NonTrivialString from '@/library/NonTrivialString';
 
 import {
   concatenated,
-} from '@/library/utilitiesByType/string';
+} from '@/library/utilitiesByType/string/concatenated';
 
 /**
  * Identifies an abstract or physical resource.

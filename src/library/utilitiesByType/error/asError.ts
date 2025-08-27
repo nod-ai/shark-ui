@@ -1,6 +1,6 @@
 import {
   asString,
-} from '../string';
+} from '../string/concatenated';
 
 const isError = (givenSubject: unknown): givenSubject is Error => {
   return (givenSubject instanceof Error);
