@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 
 import {
   isFinite,
-} from './isFinite';
+} from '../../isFinite';
 
 const isWhole = (
   givenOperand: number,
