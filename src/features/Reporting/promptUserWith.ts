@@ -1,4 +1,4 @@
-import Contextualized from '@/library/modifiersByType/error/Contextualized';
+import Contextualized from '@/library/modifiersByType/error/Contextualized/definition';
 
 import Repository from '@/utilities/Repository/definition';
 
