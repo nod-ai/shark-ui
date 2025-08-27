@@ -22,6 +22,7 @@ import type {
 
 import type {
   CauseOf,
+  ProductOf,
 } from './typeParameters';
 
 type Attempt_Outcome<
@@ -135,12 +136,6 @@ const Attempt_Outcome = {
   Success_thatYielded: Attempt_Outcome_Success_thatYielded,
   fromRewrapping     : Attempt_Outcome_fromRewrapping,
 };
-
-type ProductOf<
-  SomeOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
-> = SomeOutcome extends Attempt_Outcome_Success<infer NestedProduct>
-  ? NestedProduct
-  : never;
 
 export {
   Attempt_Outcome,
