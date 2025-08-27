@@ -12,7 +12,7 @@ import {
 
 import {
   isWhole,
-} from './aliases/isInteger';
+} from './aliases';
 
 describe(isWhole, () => {
   describe('the sad outcomes', () => {
