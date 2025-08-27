@@ -1,6 +1,6 @@
 import Contextualized from '@/library/modifiersByType/error/Contextualized';
 
-import Repository from '@/utilities/Repository.ts';
+import Repository from '@/utilities/Repository/definition';
 
 const Reporting_formatFor = (
   givenError: Contextualized<Error, Error>,
