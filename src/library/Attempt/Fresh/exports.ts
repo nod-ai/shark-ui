@@ -1,2 +1,2 @@
-export * from './synchronous';
+export * from './that';
 export * from './asynchronous';
