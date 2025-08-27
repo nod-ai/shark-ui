@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 
 import {
   isOperable,
-} from '../predicate';
+} from '../../../predicate';
 
 /** The distance the given value is from the 1-dimensional origin */
 const absoluteValueOf = (

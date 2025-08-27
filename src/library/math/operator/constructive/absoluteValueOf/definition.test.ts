@@ -8,11 +8,11 @@ import Attempt from '@/library/Attempt';
 
 import {
   numberTaxonomy,
-} from '../../numberTaxonomy';
+} from '../../../numberTaxonomy';
 
 import {
   absoluteValueOf,
-} from './absoluteValueOf';
+} from './aliases/modulusOf';
 
 describe(absoluteValueOf, () => {
   const {

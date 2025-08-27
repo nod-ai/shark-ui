@@ -1,4 +1,4 @@
-export * from './absoluteValueOf';
+export * from './absoluteValueOf/aliases/modulusOf';
 
 export * from './greatestCommonDivisor';
 
