@@ -1,6 +1,6 @@
 import {
   asError,
-} from '@/library/utilitiesByType/error/asError';
+} from '@/library/utilitiesByType/error';
 
 import {
   type AppropriatelyThrown,
