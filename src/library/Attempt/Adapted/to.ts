@@ -13,7 +13,7 @@ import type {
 
 import {
   safe,
-} from '../tryCatchStatements/safeTryCatch';
+} from '../tryCatchStatements/safeAsync';
 
 import type Attempt_Adapted_Config from './Config';
 
