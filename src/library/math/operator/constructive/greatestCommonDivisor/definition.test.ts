@@ -8,13 +8,13 @@ import Attempt from '@/library/Attempt';
 
 import {
   numberTaxonomy,
-} from '../../numberTaxonomy';
+} from '../../../numberTaxonomy';
 
 import {
   squared,
-} from '../hyper';
+} from '../../hyper';
 
-import * as GCDAlias from './greatestCommonDivisor';
+import * as GCDAlias from './abbreviations/gcf';
 
 const pairCombos = <
   SomeLeftElement extends number,
