@@ -12,7 +12,7 @@ import router from '@/router';
 
 import {
   Reporting_promptUserWith,
-} from '@/features/Reporting/promptUserWith';
+} from '@/features/Reporting';
 
 const app = createApp(App);
 app.use(router);
