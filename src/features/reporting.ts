@@ -2,7 +2,7 @@ import Contextualized from '@/library/modifiersByType/error/Contextualized';
 
 import Repository from '@/utilities/Repository.ts';
 
-const formatted = (
+const Reporting_formatFor = (
   givenError: Contextualized<Error, Error>,
 ): string => [
   `${givenError.message}:`,
@@ -11,10 +11,10 @@ const formatted = (
   '"""',
 ].join('\n');
 
-const promptUserToReport = (givenError: Error) => {
+const Reporting_promptUserWith = (givenError: Error) => {
   const unexpectedError = Contextualized.cast(givenError, 'Unexpected Error');
   console.debug(givenError);
-  const formattedErrorDetails = formatted(unexpectedError);
+  const formattedErrorDetails = Reporting_formatFor(unexpectedError);
 
   const userDidPermitDraftingNewIssue = window.confirm([
     formattedErrorDetails,
@@ -37,5 +37,5 @@ const promptUserToReport = (givenError: Error) => {
 };
 
 export {
-  promptUserToReport,
+  Reporting_promptUserWith,
 };
