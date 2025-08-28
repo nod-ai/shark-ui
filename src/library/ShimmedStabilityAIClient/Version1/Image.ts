@@ -10,7 +10,7 @@ import type {
 import HTTP from '@/library/HTTP';
 import Shortfin from '@/library/Shortfin';
 
-import toShortfinRequestBody from '../toShortfin';
+import toShortfinRequestBody from '../toShortfinRequestBody';
 
 class ShimmedStabilityAIClient_Version1_Image
   extends HTTP.Client {

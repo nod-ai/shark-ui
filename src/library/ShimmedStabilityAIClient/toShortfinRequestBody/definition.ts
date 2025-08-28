@@ -6,7 +6,7 @@ import type Shortfin from '@/library/Shortfin';
 
 import {
   toShortfinRequestBody_Prompt,
-} from './RequestBodyPrompt';
+} from './Prompt';
 
 const toShortfinRequestBody = (
   givenRequestBody: GenerateFromTextRequest['textToImageRequestBody'],

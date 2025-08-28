@@ -6,7 +6,7 @@ import Shortfin from '@/library/Shortfin';
 
 import {
   toShortfinRequestBody,
-} from './RequestBody';
+} from './definition.ts';
 
 const toShortfinRequestBody_Batched = (
   givenRequestBodies: GenerateFromTextRequest['textToImageRequestBody'][],
