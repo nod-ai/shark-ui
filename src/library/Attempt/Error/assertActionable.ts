@@ -2,7 +2,7 @@ import type {
   default as Attempt_Error_Actionable,
 } from './Actionable';
 
-import type Attempt_ErrorInterpreter from './Interpreter';
+import type Attempt_Error_Interpreter from './Interpreter';
 
 import {
   default as Attempt_Error_NonActionable,
@@ -22,7 +22,7 @@ const assertActionable = <
   {
     using: interpretationOf,
   }: {
-    using: Attempt_ErrorInterpreter<SomeActionableError>;
+    using: Attempt_Error_Interpreter<SomeActionableError>;
   },
 ): SomeActionableError => {
   const potentiallyActionableError = assertPotentiallyActionable(givenError);

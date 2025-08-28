@@ -4,12 +4,12 @@ import type {
   PotentiallyActionable,
 } from './modifier';
 
-type Attempt_ErrorInterpreter<
+type Attempt_Error_Interpreter<
   SomeActionableError extends Attempt_Error_Actionable<string>,
 > = (
   caughtError: PotentiallyActionable<Error>
 ) => SomeActionableError | null;
 
 export type {
-  Attempt_ErrorInterpreter as default,
+  Attempt_Error_Interpreter as default,
 };
