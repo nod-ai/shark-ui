@@ -16,7 +16,7 @@ import {
 
 import {
   type AppropriatelyThrown,
-  PotentiallyActionable_assume,
+  PotentiallyActionable,
 } from './modifier';
 
 const Attempt_Error_Actionable_from = <
@@ -29,7 +29,7 @@ const Attempt_Error_Actionable_from = <
     using: Attempt_Error_Interpreter<SomeActionableError>;
   },
 ): SomeActionableError => {
-  const potentiallyActionableError = PotentiallyActionable_assume(givenError);
+  const potentiallyActionableError = PotentiallyActionable.assume(givenError);
   const definitelyActionableError = interpretationOf(potentiallyActionableError);
 
   if (

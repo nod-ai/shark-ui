@@ -4,6 +4,5 @@ export {
 } from './AppropriatelyThrown';
 
 export {
-  type PotentiallyActionable,
-  PotentiallyActionable_assume,
+  PotentiallyActionable,
 } from './PotentiallyActionable';

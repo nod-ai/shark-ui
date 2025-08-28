@@ -1,4 +1,3 @@
 export {
-  type PotentiallyActionable,
-  PotentiallyActionable_assume,
+  PotentiallyActionable,
 } from './exports_objectOriented.ts';

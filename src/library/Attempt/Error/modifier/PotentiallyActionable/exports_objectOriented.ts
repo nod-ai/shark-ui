@@ -1,7 +1,3 @@
-export type {
+export {
   PotentiallyActionable,
 } from './definition.ts';
-
-export {
-  PotentiallyActionable_assume,
-} from './assume';
