@@ -5,7 +5,7 @@ import Range_Discrete from '@/library/Range/Discrete';
  *
  * Defined at "components.schemas.Steps"
  */
-abstract class SDXLDiffusionStepCount { // eslint-disable-line @typescript-eslint/no-extraneous-class
+abstract class SDXL_DiffusionStepCount { // eslint-disable-line @typescript-eslint/no-extraneous-class
   public static range = Range_Discrete.spanning({
     from: 10,
     to  : 50,
@@ -14,5 +14,5 @@ abstract class SDXLDiffusionStepCount { // eslint-disable-line @typescript-eslin
 }
 
 export {
-  SDXLDiffusionStepCount as default,
+  SDXL_DiffusionStepCount as default,
 };
