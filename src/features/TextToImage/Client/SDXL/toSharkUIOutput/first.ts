@@ -6,7 +6,7 @@ import Attempt from '@/library/Attempt';
 
 import {
   hasAtLeastOne,
-} from '@/library/utilitiesByType/array/hasAtLeastOne';
+} from '@/library/utilitiesByType/array';
 
 import type {
   Input as TextToImage_Pipeline_Input,
