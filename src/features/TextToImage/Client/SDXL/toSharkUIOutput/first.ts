@@ -15,7 +15,7 @@ import type {
 
 import {
   toSharkUIOutput_Image,
-} from './StabilityAI_Client_Image';
+} from './Image/definition';
 
 import {
   toSharkUIOutput_Image_Description_all,
