@@ -2,11 +2,11 @@ import type {
   Is,
   If,
   Not,
-} from '@/library/typeUtilities/Boolean';
+} from '@/library/typeUtilities/boolean/Not';
 
 import type {
   Attempt_Error_Actionable,
-} from '../Error';
+} from '../../Error';
 
 type Attempt_Outcome_Discriminant = 'success' | 'failure';
 

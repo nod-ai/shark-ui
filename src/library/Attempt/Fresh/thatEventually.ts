@@ -16,7 +16,7 @@ import {
 
 import {
   safeAsync,
-} from '../utilities/safeTryCatch';
+} from '../tryCatchStatements/safeAsync';
 
 type Attempt_End_Retriever<
   SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,

@@ -6,7 +6,7 @@ import Attempt from '@/library/Attempt';
 
 import {
   hasAtLeastOne,
-} from '@/library/utilitiesByType/array';
+} from '@/library/utilitiesByType/array/hasAtLeastOne';
 
 import type {
   Input as TextToImage_Pipeline_Input,
@@ -14,12 +14,12 @@ import type {
 } from '@/features/TextToImage/Pipeline';
 
 import {
-  toSharkUIOutput_Image,
-} from './StabilityAI_Client_Image';
+  toSharkUIOutput_Image_Description_all,
+} from './Image/Description/all';
 
 import {
-  toSharkUIOutput_Image_Description_all,
-} from './TextPrompt';
+  toSharkUIOutput_Image,
+} from './Image/definition';
 
 const TextToImage_Pipeline_Output_Nullable_from = (
   givenImage: TextToImage_Pipeline_Output['image'] | null,

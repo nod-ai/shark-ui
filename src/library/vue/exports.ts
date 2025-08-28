@@ -13,4 +13,4 @@ export {
   set,
 } from './reactivity';
 
-export * from './statefulAttempt';
+export * from './composables/useStatefulAttemptThatEventually';

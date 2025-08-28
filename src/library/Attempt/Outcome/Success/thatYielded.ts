@@ -1,6 +1,6 @@
 import type {
   Attempt_Outcome_Discriminable,
-} from '../Discriminable';
+} from '../Discriminable/definition';
 
 import {
   type Attempt_Outcome_Success_Transformer,

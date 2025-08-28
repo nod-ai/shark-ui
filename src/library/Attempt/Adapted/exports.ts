@@ -5,7 +5,7 @@ export {
 export {
   Attempt_Adapted_toEventually,
   Attempt_Adapted_toSettle,
-} from './asynchronous';
+} from './toSettle';
 
 export type {
   default as Attempt_Adapted_Config,

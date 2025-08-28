@@ -2,7 +2,7 @@ import NonTrivialString from '@/library/NonTrivialString';
 
 import {
   concatenated,
-} from '@/library/utilitiesByType/string';
+} from '@/library/utilitiesByType/string/concatenated';
 
 import type {
   ContentDescriptor_StructuredSyntaxNameSuffix,

@@ -2,11 +2,11 @@ import Attempt from '@/library/Attempt';
 
 import {
   isWhole,
-} from '../predicate';
+} from '../../../predicate';
 
 import {
   absoluteValueOf,
-} from './absoluteValueOf';
+} from '../../absoluteValueOf/aliases/modulusOf';
 
 const greatestCommonDivisor = (
   leftHandOperand: number,

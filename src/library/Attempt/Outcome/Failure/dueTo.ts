@@ -4,7 +4,7 @@ import type {
 
 import type {
   Attempt_Outcome_Discriminable,
-} from '../Discriminable';
+} from '../Discriminable/definition';
 
 import {
   type Attempt_Outcome_Failure_Transformer,

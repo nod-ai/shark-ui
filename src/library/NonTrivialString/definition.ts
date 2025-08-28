@@ -6,7 +6,7 @@ import {
   concatenated,
   isEmpty,
   type StringLike,
-} from '@/library/utilitiesByType/string.ts';
+} from '@/library/utilitiesByType/string/concatenated.ts';
 
 import NonTrivialString_ParsingError from './ParsingError.ts';
 

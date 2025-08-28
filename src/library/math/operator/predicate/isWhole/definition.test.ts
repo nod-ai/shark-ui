@@ -8,11 +8,11 @@ import Attempt from '@/library/Attempt';
 
 import {
   numberTaxonomy,
-} from '../../numberTaxonomy';
+} from '../../../numberTaxonomy';
 
 import {
   isWhole,
-} from './isWhole';
+} from './aliases/isInteger';
 
 describe(isWhole, () => {
   describe('the sad outcomes', () => {

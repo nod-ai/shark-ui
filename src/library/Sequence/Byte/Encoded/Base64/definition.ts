@@ -8,7 +8,7 @@ import StringSubset from '@/library/StringSubset';
 import {
   droppingLastCharacter,
   lastCharacterOf,
-} from '@/library/utilitiesByType/string.ts';
+} from '@/library/utilitiesByType/string/concatenated.ts';
 
 import {
   Sequence_Base64,
