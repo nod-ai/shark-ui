@@ -8,7 +8,7 @@ export {
 
 export {
   assertActionable,
-} from './assertions/assertActionable';
+} from './assertActionable';
 
 export type {
   default as Attempt_Error_Interpreter,

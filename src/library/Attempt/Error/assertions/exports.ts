@@ -8,4 +8,4 @@ export {
 
 export {
   assertActionable,
-} from './assertActionable';
+} from '../assertActionable';
