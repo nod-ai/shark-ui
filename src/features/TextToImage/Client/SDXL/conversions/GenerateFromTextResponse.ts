@@ -21,7 +21,7 @@ import {
   allSerialized,
 } from './TextPrompt';
 
-const toNullableOutput = (
+const NullableOutput_from = (
   givenImage: TextToImage_Pipeline_Output['image'] | null,
 ): TextToImage_Pipeline_Output | null => {
   if (
@@ -58,7 +58,7 @@ const textToImageOutputs = (
     .map($0 => toOutputImage($0, {
       description: allSerialized(givenInputText),
     }))
-    .map(toNullableOutput);
+    .map($0 => NullableOutput_from($0));
 
   return inferredOutputs;
 };
