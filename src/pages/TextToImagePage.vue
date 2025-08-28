@@ -26,7 +26,7 @@ import {
   VSkeletonLoader,
 } from 'vuetify/components/VSkeletonLoader';
 
-import SDXL_DiffusionStepCount from '@/library/ShimmedStabilityAIClient/models/SDXLDiffusionStepCount.ts';
+import SDXL_DiffusionStepCount from '@/library/ShimmedStabilityAIClient/SDXL/DiffusionStepCount';
 
 import DiscreteSlider from '@/components/DiscreteSlider.vue';
 import NavigationPanel from '@/components/NavigationPanel.vue';
