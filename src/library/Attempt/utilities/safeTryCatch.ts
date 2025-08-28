@@ -3,11 +3,8 @@ import {
 } from '@/library/utilitiesByType/error';
 
 import {
+  type AppropriatelyThrown,
   assertAppropriatelyThrown,
-} from '../Error/assertions';
-
-import type {
-  AppropriatelyThrown,
 } from '../Error/modifier';
 
 const safe = <
