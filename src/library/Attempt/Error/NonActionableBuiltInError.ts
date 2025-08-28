@@ -61,7 +61,7 @@ type NonActionableBuiltInError =
   | SyntaxError // The JS engine couldn't even parse the code.
 ;
 
-const isNonActionableBuiltInError = (
+const NonActionableBuiltInError_describes = (
   givenError: Error,
 ): givenError is NonActionableBuiltInError => (
   (givenError instanceof ReferenceError)
@@ -73,7 +73,7 @@ const isNonActionableBuiltInError = (
 );
 
 const NonActionableBuiltInError = {
-  describes: isNonActionableBuiltInError,
+  describes: NonActionableBuiltInError_describes,
 };
 
 export {
