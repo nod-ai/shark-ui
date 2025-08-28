@@ -10,7 +10,7 @@ import type {
 const toOutputImage = (
   givenImage: StabilityAIClient.Image,
   given: {
-    description: string;
+    description: TextToImage_Pipeline_Output['image']['description'];
   },
 ): TextToImage_Pipeline_Output['image'] | null => {
   if (
