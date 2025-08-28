@@ -4,7 +4,7 @@ export type {
 
 export {
   assertAppropriatelyThrown,
-} from '../assertions/assertAppropriatelyThrown';
+} from './assertAppropriatelyThrown';
 
 export type {
   default as PotentiallyActionable,
@@ -12,4 +12,4 @@ export type {
 
 export {
   assertPotentiallyActionable,
-} from '../assertions/assertPotentiallyActionable';
+} from './assertPotentiallyActionable';

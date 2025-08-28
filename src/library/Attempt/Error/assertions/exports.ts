@@ -1,7 +1,7 @@
 export {
   assertAppropriatelyThrown,
-} from './assertAppropriatelyThrown';
+} from '../modifier/assertAppropriatelyThrown';
 
 export {
   assertPotentiallyActionable,
-} from './assertPotentiallyActionable';
+} from '../modifier/assertPotentiallyActionable';
