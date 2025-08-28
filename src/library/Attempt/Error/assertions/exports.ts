@@ -5,7 +5,3 @@ export {
 export {
   assertPotentiallyActionable,
 } from './assertPotentiallyActionable';
-
-export {
-  assertActionable,
-} from '../assertActionable';
