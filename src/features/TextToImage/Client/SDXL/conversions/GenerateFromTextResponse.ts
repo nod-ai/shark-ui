@@ -18,7 +18,7 @@ import {
 } from './StabilityAI_Client_Image';
 
 import {
-  toSharkUIOutput_allSerialized,
+  toSharkUIOutput_Image_allSerialized,
 } from './TextPrompt';
 
 const TextToImage_Pipeline_Output_Nullable_from = (
@@ -56,7 +56,7 @@ const toSharkUIOutput_plural = (
 
   const inferredOutputs = inferredRawImages
     .map($0 => toSharkUIOutput_Image($0, {
-      description: toSharkUIOutput_allSerialized(givenInputText),
+      description: toSharkUIOutput_Image_allSerialized(givenInputText),
     }))
     .map($0 => TextToImage_Pipeline_Output_Nullable_from($0));
 
