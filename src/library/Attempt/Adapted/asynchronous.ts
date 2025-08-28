@@ -3,13 +3,13 @@ import {
   Attempt_Error_Actionable_from,
 } from '../Error';
 
+import {
+  Attempt_Fresh_thatEventually,
+} from '../Fresh';
+
 import type {
   Attempt_Outcome,
 } from '../Outcome';
-
-import {
-  Attempt_Fresh_thatEventually,
-} from '../factory';
 
 import {
   safeAsync,

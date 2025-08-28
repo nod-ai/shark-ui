@@ -1,10 +1,10 @@
 import {
   default as Attempt_Error_Actionable,
-} from '../Actionable';
+} from '../../Actionable';
 
 import type {
   default as AppropriatelyThrown,
-} from './AppropriatelyThrown';
+} from './definition.ts';
 
 /**
  * Expects `ActionableError`s to be propagated within the confines of the type system.

@@ -1,15 +1,9 @@
-export type {
-  default as AppropriatelyThrown,
+export {
+  type default as AppropriatelyThrown,
+  AppropriatelyThrown_assume,
 } from './AppropriatelyThrown';
 
 export {
-  AppropriatelyThrown_assume,
-} from './assertAppropriatelyThrown';
-
-export type {
-  default as PotentiallyActionable,
-} from './PotentiallyActionable';
-
-export {
+  type default as PotentiallyActionable,
   PotentiallyActionable_assume,
-} from './assertPotentiallyActionable';
+} from './PotentiallyActionable';
