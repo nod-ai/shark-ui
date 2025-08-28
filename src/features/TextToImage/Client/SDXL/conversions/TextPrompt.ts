@@ -2,6 +2,10 @@ import type {
   TextPrompt,
 } from 'stabilityai-client-typescript/models/components';
 
+import type {
+  Output as TextToImage_Pipeline_Output,
+} from '@/features/TextToImage/Pipeline';
+
 const isDefault = (
   givenWeight: TextPrompt['weight'],
 ) => {
@@ -10,7 +14,7 @@ const isDefault = (
 
 const serialized = (
   givenPrompt: TextPrompt,
-): string => {
+): TextToImage_Pipeline_Output['image']['description'] => {
   if (
     isDefault(givenPrompt.weight)
   ) return givenPrompt.text;
@@ -21,7 +25,7 @@ const serialized = (
 
 const allSerialized = (
   givenPrompts: TextPrompt[],
-): string => givenPrompts
+): TextToImage_Pipeline_Output['image']['description'] => givenPrompts
   .map(serialized)
   .join(', ');
 
