@@ -14,12 +14,12 @@ import type {
 } from '@/features/TextToImage/Pipeline';
 
 import {
-  toSharkUIOutput_Image_Description_all,
-} from './Image/Description/all';
+  toSharkUIOutput_Image,
+} from './Image';
 
 import {
-  toSharkUIOutput_Image,
-} from './Image/definition';
+  toSharkUIOutput_Image_Description_all,
+} from './Image/Description/all';
 
 const TextToImage_Pipeline_Output_Nullable_from = (
   givenImage: TextToImage_Pipeline_Output['image'] | null,
