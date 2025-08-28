@@ -5,8 +5,8 @@ import {
 } from '../NonActionable';
 
 import type {
-  PotentiallyActionable,
-} from '../modifier';
+  default as PotentiallyActionable,
+} from '../modifier/PotentiallyActionable';
 
 const assertPotentiallyActionable = <
   SomeError extends Error,
