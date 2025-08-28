@@ -13,7 +13,7 @@ import type {
 import * as TextToImage_Server from '../../Server';
 
 import {
-  toSharkUIOutput_firstTextToImage,
+  toSharkUIOutput_first,
 } from './conversions/GenerateFromTextResponse';
 
 const TextToImage_Client_SDXL_initialize = async (): Promise<
@@ -83,7 +83,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
   });
 
   const outcomeOfSettlingSoleTextToImageOutput = Attempt.Outcome.fromRewrapping(outcomeOfSettlingTextToImageResponse, {
-    product: textToImageResponse => toSharkUIOutput_firstTextToImage({
+    product: textToImageResponse => toSharkUIOutput_first({
       in          : textToImageResponse,
       inferredFrom: given.textToImageRequestBody.textPrompts,
     }),

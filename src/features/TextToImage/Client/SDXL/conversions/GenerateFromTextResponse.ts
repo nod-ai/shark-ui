@@ -63,7 +63,7 @@ const toSharkUIOutput_plural = (
   return inferredOutputs;
 };
 
-const toSharkUIOutput_firstTextToImage = (
+const toSharkUIOutput_first = (
   {
     in: givenResponse,
     inferredFrom: givenInputText,
@@ -95,5 +95,5 @@ const toSharkUIOutput_firstTextToImage = (
 };
 
 export {
-  toSharkUIOutput_firstTextToImage,
+  toSharkUIOutput_first,
 };
