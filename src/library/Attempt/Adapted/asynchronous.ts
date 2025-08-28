@@ -1,6 +1,6 @@
 import {
   type Attempt_Error_Actionable,
-  assertActionable,
+  Attempt_Error_Actionable_from,
 } from '../Error';
 
 import type {
@@ -34,7 +34,7 @@ const Attempt_Adapted_toEventually = async <
     return ends.inSuccessWith(retrievedProduct);
   },
   catch(someError) {
-    const someActionableError = assertActionable(someError, {
+    const someActionableError = Attempt_Error_Actionable_from(someError, {
       using: given.interpretationOf,
     });
 

@@ -7,7 +7,7 @@ export {
 } from './Actionable';
 
 export {
-  assertActionable,
+  Attempt_Error_Actionable_from,
 } from './assertActionable';
 
 export type {

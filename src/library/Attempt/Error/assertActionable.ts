@@ -15,7 +15,7 @@ import {
   PotentiallyActionable_assume,
 } from './modifier';
 
-const assertActionable = <
+const Attempt_Error_Actionable_from = <
   SomeActionableError extends Attempt_Error_Actionable<string>,
 >(
   givenError: AppropriatelyThrown<Error>,
@@ -40,5 +40,5 @@ const assertActionable = <
 };
 
 export {
-  assertActionable,
+  Attempt_Error_Actionable_from,
 };

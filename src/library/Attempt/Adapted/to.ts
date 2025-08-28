@@ -1,6 +1,6 @@
 import {
   type Attempt_Error_Actionable,
-  assertActionable,
+  Attempt_Error_Actionable_from,
 } from '../Error';
 
 import type {
@@ -29,7 +29,7 @@ const Attempt_Adapted_to = <
     return ends.inSuccessWith(gottenProduct);
   },
   catch(someError) {
-    const someActionableError = assertActionable(someError, {
+    const someActionableError = Attempt_Error_Actionable_from(someError, {
       using: given.interpretationOf,
     });
 
