@@ -14,7 +14,7 @@ import * as TextToImage_Server from '../../Server';
 
 import {
   toSharkUIOutput_first,
-} from './toSharkUIOutput/GenerateFromTextResponse';
+} from './toSharkUIOutput/first';
 
 const TextToImage_Client_SDXL_initialize = async (): Promise<
   Attempt.Outcome<
