@@ -4,7 +4,7 @@ import type {
 
 import type Shortfin from '@/library/Shortfin';
 
-const toShortfin_RequestBodyPrompt = (
+const toShortfinRequestBody_Prompt = (
   givenTextPrompts: TextToImageRequestBody['textPrompts'],
   given: {
     weight: Shortfin.TextToImage.SDXL.Pipeline.Input.Text.SupportedWeight;
@@ -17,5 +17,5 @@ const toShortfin_RequestBodyPrompt = (
 };
 
 export {
-  toShortfin_RequestBodyPrompt,
+  toShortfinRequestBody_Prompt,
 };

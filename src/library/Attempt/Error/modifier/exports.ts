@@ -3,7 +3,7 @@ export type {
 } from './AppropriatelyThrown';
 
 export {
-  assertAppropriatelyThrown,
+  AppropriatelyThrown_assume,
 } from './assertAppropriatelyThrown';
 
 export type {
@@ -11,5 +11,5 @@ export type {
 } from './PotentiallyActionable';
 
 export {
-  assertPotentiallyActionable,
+  PotentiallyActionable_assume,
 } from './assertPotentiallyActionable';

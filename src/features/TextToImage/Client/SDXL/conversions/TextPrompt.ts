@@ -12,7 +12,7 @@ const isDefault = (
   return (givenWeight === undefined) || (givenWeight === 1);
 };
 
-const serialized = (
+const toSharkUIOutput_Image_Description_singular = (
   givenPrompt: TextPrompt,
 ): TextToImage_Pipeline_Output['image']['description'] => {
   if (
@@ -23,12 +23,12 @@ const serialized = (
   return promptWithSerializedWeights;
 };
 
-const allSerialized = (
+const toSharkUIOutput_Image_Description_all = (
   givenPrompts: TextPrompt[],
 ): TextToImage_Pipeline_Output['image']['description'] => givenPrompts
-  .map(serialized)
+  .map(toSharkUIOutput_Image_Description_singular)
   .join(', ');
 
 export {
-  allSerialized,
+  toSharkUIOutput_Image_Description_all,
 };

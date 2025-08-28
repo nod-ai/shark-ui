@@ -11,7 +11,7 @@ import vuetify from '@/plugins/vuetify.ts';
 import router from '@/router';
 
 import {
-  promptUserToReport,
+  Reporting_promptUserWith,
 } from '@/features/reporting.ts';
 
 const app = createApp(App);
@@ -21,12 +21,12 @@ app.mount('#app');
 
 window.onunhandledrejection = (someEvent) => {
   const rejectionReason = asError(someEvent.reason);
-  promptUserToReport(rejectionReason);
+  Reporting_promptUserWith(rejectionReason);
   someEvent.preventDefault();
 };
 
 // In production version (post build/bundling), errors that originate from Vue components bypass the listeners on the current `Window` instance
 app.config.errorHandler = (whateverThatWasThrown) => {
   const someError = asError(whateverThatWasThrown);
-  promptUserToReport(someError);
+  Reporting_promptUserWith(someError);
 };

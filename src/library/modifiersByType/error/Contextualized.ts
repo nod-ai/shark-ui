@@ -16,7 +16,7 @@ interface Instantiable<
   [Symbol.hasInstance]: (value: unknown) => value is SomeClass;
 }
 
-const isContextualized = <
+const Contextualized_describes = <
   SomeError extends Error,
   SomeCause extends Error,
 >(
@@ -26,7 +26,7 @@ const isContextualized = <
   return givenError.cause instanceof GivenCause;
 };
 
-const assertContextualized = <
+const Contextualized_assume = <
   SomeError extends Error,
   SomeCause extends Error,
 >(
@@ -34,13 +34,13 @@ const assertContextualized = <
   GivenCause: Instantiable<SomeCause> | ErrorConstructor = Error,
 ): Contextualized<SomeError, SomeCause> => {
   if (
-    isContextualized<SomeError, SomeCause>(givenError, GivenCause)
+    Contextualized_describes<SomeError, SomeCause>(givenError, GivenCause)
   ) return givenError;
 
   return Attempt.abandon('Expected error to have a cause');
 };
 
-const asContextualized = <
+const Contextualized_cast = <
   SomeError extends Error,
   SomeCause extends Error,
 >(
@@ -49,21 +49,21 @@ const asContextualized = <
   GivenCause: Instantiable<SomeCause> | ErrorConstructor = Error,
 ): Contextualized<SomeError, SomeCause> | Contextualized<Error, SomeError> => {
   if (
-    isContextualized<SomeError, SomeCause>(givenError, GivenCause)
+    Contextualized_describes<SomeError, SomeCause>(givenError, GivenCause)
   ) return givenError;
 
   const contextualizedError = new Error(givenFallbackMessage, {
     cause: givenError,
   });
 
-  return assertContextualized<Error, SomeError>(contextualizedError, Error);
+  return Contextualized_assume<Error, SomeError>(contextualizedError, Error);
 };
 
 /** Utilities for identifying and casting `Error` instances as "contextualized" */
 const Contextualized = {
-  describes: isContextualized,
-  assume   : assertContextualized,
-  cast     : asContextualized,
+  describes: Contextualized_describes,
+  assume   : Contextualized_assume,
+  cast     : Contextualized_cast,
 };
 
 export {

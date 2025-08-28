@@ -50,7 +50,7 @@ const useStatefulAttemptThatEventually = <
       set(flagIsRaised, false);
     });
 
-    const retrievedOutcome = await Attempt.thatEventually(retrieveOutcome);
+    const retrievedOutcome = await Attempt.Fresh_thatEventually(retrieveOutcome);
     set(capturedOutcome, retrievedOutcome);
   };
 

@@ -2,7 +2,7 @@ import type {
   default as Attempt_Error_Actionable,
 } from './Actionable';
 
-import type Attempt_ErrorInterpreter from './Interpreter';
+import type Attempt_Error_Interpreter from './Interpreter';
 
 import {
   default as Attempt_Error_NonActionable,
@@ -12,20 +12,20 @@ import NonActionableBuiltInError from './NonActionableBuiltInError';
 
 import {
   type AppropriatelyThrown,
-  assertPotentiallyActionable,
+  PotentiallyActionable_assume,
 } from './modifier';
 
-const assertActionable = <
+const Attempt_Error_Actionable_from = <
   SomeActionableError extends Attempt_Error_Actionable<string>,
 >(
   givenError: AppropriatelyThrown<Error>,
   {
     using: interpretationOf,
   }: {
-    using: Attempt_ErrorInterpreter<SomeActionableError>;
+    using: Attempt_Error_Interpreter<SomeActionableError>;
   },
 ): SomeActionableError => {
-  const potentiallyActionableError = assertPotentiallyActionable(givenError);
+  const potentiallyActionableError = PotentiallyActionable_assume(givenError);
   const definitelyActionableError = interpretationOf(potentiallyActionableError);
 
   if (
@@ -40,5 +40,5 @@ const assertActionable = <
 };
 
 export {
-  assertActionable,
+  Attempt_Error_Actionable_from,
 };

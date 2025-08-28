@@ -24,7 +24,7 @@ type Attempt_End_Getter<
   givenHandles: typeof handles
 ) => SomeInferredOutcome;
 
-const Attempt_that = <
+const Attempt_Fresh_that = <
   SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
 >(
   endsAccordingTo: Attempt_End_Getter<SomeInferredOutcome>,
@@ -46,5 +46,5 @@ const Attempt_that = <
 
 export {
   type Attempt_End_Getter,
-  Attempt_that,
+  Attempt_Fresh_that,
 };

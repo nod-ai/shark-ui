@@ -26,7 +26,7 @@ import {
   VSkeletonLoader,
 } from 'vuetify/components/VSkeletonLoader';
 
-import SDXLDiffusionStepCount from '@/library/ShimmedStabilityAIClient/models/SDXLDiffusionStepCount.ts';
+import SDXL_DiffusionStepCount from '@/library/ShimmedStabilityAIClient/models/SDXLDiffusionStepCount.ts';
 
 import DiscreteSlider from '@/components/DiscreteSlider.vue';
 import NavigationPanel from '@/components/NavigationPanel.vue';
@@ -40,7 +40,7 @@ const currentPrompt: Ref<TextToImage.Input['text'] | null> = ref(null);
 
 const {
   range,
-} = SDXLDiffusionStepCount;
+} = SDXL_DiffusionStepCount;
 
 const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
 

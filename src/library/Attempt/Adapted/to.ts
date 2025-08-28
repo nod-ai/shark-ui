@@ -1,6 +1,6 @@
 import {
   type Attempt_Error_Actionable,
-  assertActionable,
+  Attempt_Error_Actionable_from,
 } from '../Error';
 
 import type {
@@ -8,7 +8,7 @@ import type {
 } from '../Outcome';
 
 import {
-  Attempt_that,
+  Attempt_Fresh_that,
 } from '../factory';
 
 import {
@@ -23,13 +23,13 @@ const Attempt_Adapted_to = <
 >(
   forciblyGetProduct: () => SomeProduct,
   given: Attempt_Adapted_Config<SomeActionableError>,
-): Attempt_Outcome<SomeProduct, SomeActionableError> => Attempt_that(ends => safe({
+): Attempt_Outcome<SomeProduct, SomeActionableError> => Attempt_Fresh_that(ends => safe({
   try() {
     const gottenProduct = forciblyGetProduct();
     return ends.inSuccessWith(gottenProduct);
   },
   catch(someError) {
-    const someActionableError = assertActionable(someError, {
+    const someActionableError = Attempt_Error_Actionable_from(someError, {
       using: given.interpretationOf,
     });
 

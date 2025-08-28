@@ -22,8 +22,8 @@ export {
 } from './Error';
 
 export {
-  Attempt_that as that,
-  Attempt_thatEventually as thatEventually,
+  Attempt_Fresh_that as Fresh_that,
+  Attempt_Fresh_thatEventually as Fresh_thatEventually,
   type Attempt_End_Getter as End_Getter,
   type Attempt_End_Retriever as End_Retriever,
 } from './factory';

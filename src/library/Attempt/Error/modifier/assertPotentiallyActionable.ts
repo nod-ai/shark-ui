@@ -8,7 +8,7 @@ import type {
   default as PotentiallyActionable,
 } from './PotentiallyActionable';
 
-const assertPotentiallyActionable = <
+const PotentiallyActionable_assume = <
   SomeError extends Error,
 >(
   givenError: SomeError,
@@ -26,5 +26,5 @@ const assertPotentiallyActionable = <
 };
 
 export {
-  assertPotentiallyActionable,
+  PotentiallyActionable_assume,
 };

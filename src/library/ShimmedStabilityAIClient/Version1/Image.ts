@@ -10,14 +10,14 @@ import type {
 import HTTP from '@/library/HTTP';
 import Shortfin from '@/library/Shortfin';
 
-import toShortfin from '../toShortfin';
+import toShortfinRequestBody from '../toShortfin';
 
 class ShimmedStabilityAIClient_Version1_Image
   extends HTTP.Client {
   public async forciblyGenerateFromText(
     givenRequest: GenerateFromTextRequest,
   ): Promise<GenerateFromTextResponse> {
-    const derivedBatchedRequestBody = toShortfin.BatchedRequestBody([
+    const derivedBatchedRequestBody = toShortfinRequestBody.Batched([
       givenRequest.textToImageRequestBody,
     ]);
 

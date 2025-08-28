@@ -4,7 +4,7 @@ import {
 
 import {
   type AppropriatelyThrown,
-  assertAppropriatelyThrown,
+  AppropriatelyThrown_assume,
 } from '../Error/modifier';
 
 const safe = <
@@ -25,7 +25,7 @@ const safe = <
   }
   catch (whateverThatWasThrown) {
     const someError = asError(whateverThatWasThrown);
-    const someAppropriatelyThrownError = assertAppropriatelyThrown(someError);
+    const someAppropriatelyThrownError = AppropriatelyThrown_assume(someError);
     return catchBlockOutputFor(someAppropriatelyThrownError);
   }
 };

@@ -35,7 +35,7 @@ const TextToImage_Server_Current_retrieve = (): Promise<
     WebAPI_Server,
     TextToImage_Server_Error.Specification
   >
-> => Attempt.thatEventually(async (ends) => {
+> => Attempt.Fresh_thatEventually(async (ends) => {
   if (
     TextToImage_Server_Current_accordingToEnvironment !== null
   ) return ends.inSuccessWith(TextToImage_Server_Current_accordingToEnvironment);

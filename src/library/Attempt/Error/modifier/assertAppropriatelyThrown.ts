@@ -11,7 +11,7 @@ import type {
  *
  * Using raw `throw` breaches this contract because it prevents the key differentiator between actionable and non-actionable errors.
  */
-const assertAppropriatelyThrown = <
+const AppropriatelyThrown_assume = <
   SomeError extends Error,
 >(
   givenError: SomeError,
@@ -24,5 +24,5 @@ const assertAppropriatelyThrown = <
 };
 
 export {
-  assertAppropriatelyThrown,
+  AppropriatelyThrown_assume,
 };
