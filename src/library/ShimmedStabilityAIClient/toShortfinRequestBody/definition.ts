@@ -8,9 +8,9 @@ import {
   toShortfinRequestBody_Prompt,
 } from './Prompt';
 
-const toShortfinRequestBody = (
+function toShortfinRequestBody(
   givenRequestBody: GenerateFromTextRequest['textToImageRequestBody'],
-): Shortfin.TextToImage.SDXL.Client.Request.Body | null => {
+): Shortfin.TextToImage.SDXL.Client.Request.Body | null {
   if (
     (givenRequestBody.height === undefined)
     || (givenRequestBody.width === undefined)
@@ -34,7 +34,7 @@ const toShortfinRequestBody = (
   };
 
   return derivedShortfinRequestBody;
-};
+}
 
 export {
   toShortfinRequestBody,
