@@ -1,10 +1,7 @@
-import type {
-  Attempt_Error_Actionable,
-} from '../Error';
-
 import {
+  type Attempt_Error_Actionable,
   assertActionable,
-} from '../Error/assertions';
+} from '../Error';
 
 import type {
   Attempt_Outcome,

@@ -1,22 +1,19 @@
 import type {
   default as Attempt_Error_Actionable,
-} from '../Actionable';
+} from './Actionable';
 
-import type Attempt_ErrorInterpreter from '../Interpreter';
+import type Attempt_ErrorInterpreter from './Interpreter';
 
 import {
   default as Attempt_Error_NonActionable,
-} from '../NonActionable';
+} from './NonActionable';
 
-import NonActionableBuiltInError from '../NonActionableBuiltInError';
-
-import type {
-  AppropriatelyThrown,
-} from '../modifier';
+import NonActionableBuiltInError from './NonActionableBuiltInError';
 
 import {
+  type AppropriatelyThrown,
   assertPotentiallyActionable,
-} from './assertPotentiallyActionable';
+} from './modifier';
 
 const assertActionable = <
   SomeActionableError extends Attempt_Error_Actionable<string>,

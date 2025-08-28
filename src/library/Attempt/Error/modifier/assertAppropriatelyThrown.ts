@@ -3,8 +3,8 @@ import {
 } from '../Actionable';
 
 import type {
-  AppropriatelyThrown,
-} from '../modifier';
+  default as AppropriatelyThrown,
+} from './AppropriatelyThrown';
 
 /**
  * Expects `ActionableError`s to be propagated within the confines of the type system.
