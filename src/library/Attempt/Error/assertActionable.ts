@@ -12,7 +12,7 @@ import NonActionableBuiltInError from './NonActionableBuiltInError';
 
 import {
   type AppropriatelyThrown,
-  assertPotentiallyActionable,
+  PotentiallyActionable_assume,
 } from './modifier';
 
 const assertActionable = <
@@ -25,7 +25,7 @@ const assertActionable = <
     using: Attempt_Error_Interpreter<SomeActionableError>;
   },
 ): SomeActionableError => {
-  const potentiallyActionableError = assertPotentiallyActionable(givenError);
+  const potentiallyActionableError = PotentiallyActionable_assume(givenError);
   const definitelyActionableError = interpretationOf(potentiallyActionableError);
 
   if (

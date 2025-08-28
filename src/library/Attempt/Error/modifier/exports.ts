@@ -11,5 +11,5 @@ export type {
 } from './PotentiallyActionable';
 
 export {
-  assertPotentiallyActionable,
+  PotentiallyActionable_assume,
 } from './assertPotentiallyActionable';
