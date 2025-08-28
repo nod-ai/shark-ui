@@ -1,12 +1,12 @@
-import Attempt_Error_Creation from '../Creation';
+import Attempt_Error_Creation from '../../Creation';
 
 import {
   default as Attempt_Error_NonActionable,
-} from '../NonActionable';
+} from '../../NonActionable';
 
 import type {
   default as PotentiallyActionable,
-} from './PotentiallyActionable/definition.ts';
+} from './definition.ts';
 
 const PotentiallyActionable_assume = <
   SomeError extends Error,

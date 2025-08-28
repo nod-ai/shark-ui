@@ -12,4 +12,4 @@ export type {
 
 export {
   PotentiallyActionable_assume,
-} from './assertPotentiallyActionable';
+} from './PotentiallyActionable/assume';
