@@ -6,6 +6,10 @@ export {
   default as Attempt_Error_Actionable,
 } from './Actionable';
 
+export {
+  assertActionable,
+} from './assertions/assertActionable';
+
 export type {
   default as Attempt_Error_Interpreter,
 } from './Interpreter';
