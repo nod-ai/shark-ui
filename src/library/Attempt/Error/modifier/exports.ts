@@ -3,7 +3,7 @@ export type {
 } from './AppropriatelyThrown';
 
 export {
-  assertAppropriatelyThrown,
+  AppropriatelyThrown_assume,
 } from './assertAppropriatelyThrown';
 
 export type {
