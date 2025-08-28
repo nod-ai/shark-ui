@@ -1,10 +1,7 @@
-export type {
-  default as AppropriatelyThrown,
-} from './AppropriatelyThrown';
-
 export {
+  type default as AppropriatelyThrown,
   AppropriatelyThrown_assume,
-} from './AppropriatelyThrown/assume';
+} from './AppropriatelyThrown';
 
 export {
   type default as PotentiallyActionable,
