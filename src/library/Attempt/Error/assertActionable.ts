@@ -8,7 +8,7 @@ import {
   default as Attempt_Error_NonActionable,
 } from './NonActionable';
 
-import NonActionableBuiltInError from './NonActionableBuiltInError';
+import NonActionableBuiltInError from './NonActionableBuiltInError/definition.ts';
 
 import {
   type AppropriatelyThrown,
