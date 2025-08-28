@@ -8,7 +8,7 @@ export {
 
 export type {
   default as PotentiallyActionable,
-} from './PotentiallyActionable';
+} from './PotentiallyActionable/definition';
 
 export {
   PotentiallyActionable_assume,

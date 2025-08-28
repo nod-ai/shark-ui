@@ -6,7 +6,7 @@ import {
 
 import type {
   default as PotentiallyActionable,
-} from './PotentiallyActionable';
+} from './PotentiallyActionable/definition';
 
 const PotentiallyActionable_assume = <
   SomeError extends Error,
