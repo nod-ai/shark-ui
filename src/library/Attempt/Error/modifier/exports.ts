@@ -6,10 +6,7 @@ export {
   AppropriatelyThrown_assume,
 } from './assertAppropriatelyThrown';
 
-export type {
-  default as PotentiallyActionable,
-} from './PotentiallyActionable';
-
 export {
+  type default as PotentiallyActionable,
   PotentiallyActionable_assume,
-} from './PotentiallyActionable/assume';
+} from './PotentiallyActionable';
