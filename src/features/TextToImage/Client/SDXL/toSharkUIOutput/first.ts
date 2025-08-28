@@ -19,7 +19,7 @@ import {
 
 import {
   toSharkUIOutput_Image_Description_all,
-} from './Image/Description/all';
+} from './Image/Description';
 
 const TextToImage_Pipeline_Output_Nullable_from = (
   givenImage: TextToImage_Pipeline_Output['image'] | null,
