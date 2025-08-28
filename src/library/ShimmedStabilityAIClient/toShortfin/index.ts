@@ -1,5 +1,5 @@
-import * as toShortfin from './exports.ts';
+import * as toShortfinRequestBody from './exports.ts';
 
 export {
-  toShortfin as default,
+  toShortfinRequestBody as default,
 };

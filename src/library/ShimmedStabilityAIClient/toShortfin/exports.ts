@@ -1,11 +1,11 @@
 export {
-  toShortfin_RequestBodyPrompt as RequestBodyPrompt,
+  toShortfinRequestBody_Prompt as Prompt,
 } from './RequestBodyPrompt';
 
 export {
-  toShortfin_RequestBody as RequestBody,
+  toShortfinRequestBody as call,
 } from './RequestBody';
 
 export {
-  toShortfin_BatchedRequestBody as BatchedRequestBody,
+  toShortfinRequestBody_Batched as Batched,
 } from './BatchedRequestBody';
