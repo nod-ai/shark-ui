@@ -15,8 +15,8 @@ import {
 } from '../factory';
 
 import {
-  sanctioned,
-} from '../utilities/sanctionedTryCatch';
+  safe,
+} from '../utilities/safeTryCatch';
 
 import type Attempt_Adapted_Config from './Config';
 
@@ -26,7 +26,7 @@ const Attempt_Adapted_to = <
 >(
   forciblyGetProduct: () => SomeProduct,
   given: Attempt_Adapted_Config<SomeActionableError>,
-): Attempt_Outcome<SomeProduct, SomeActionableError> => Attempt_that(ends => sanctioned({
+): Attempt_Outcome<SomeProduct, SomeActionableError> => Attempt_that(ends => safe({
   try() {
     const gottenProduct = forciblyGetProduct();
     return ends.inSuccessWith(gottenProduct);

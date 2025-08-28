@@ -15,8 +15,8 @@ import {
 } from '../factory';
 
 import {
-  sanctionedAsync,
-} from '../utilities/sanctionedTryCatch';
+  safeAsync,
+} from '../utilities/safeTryCatch';
 
 import type Attempt_Adapted_Config from './Config';
 
@@ -31,7 +31,7 @@ const Attempt_Adapted_toEventually = async <
     SomeProduct,
     SomeActionableError
   >
-> => Attempt_thatEventually(ends => sanctionedAsync({
+> => Attempt_thatEventually(ends => safeAsync({
   async try() {
     const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
     return ends.inSuccessWith(retrievedProduct);

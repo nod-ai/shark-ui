@@ -15,8 +15,8 @@ import {
 } from '../ended';
 
 import {
-  sanctionedAsync,
-} from '../utilities/sanctionedTryCatch';
+  safeAsync,
+} from '../utilities/safeTryCatch';
 
 type Attempt_End_Retriever<
   SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
@@ -34,7 +34,7 @@ const Attempt_thatEventually = async <
     CauseOf<SomeInferredOutcome>
   >;
 
-  return sanctionedAsync({
+  return safeAsync({
     async try() {
       return await endsAccordingTo(handles) as EquivalentOutcome;
     },
