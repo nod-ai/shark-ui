@@ -4,7 +4,7 @@ export type {
 
 export {
   AppropriatelyThrown_assume,
-} from './assertAppropriatelyThrown';
+} from './AppropriatelyThrown/assume';
 
 export {
   type default as PotentiallyActionable,
