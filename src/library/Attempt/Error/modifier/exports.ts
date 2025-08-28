@@ -1,6 +1,6 @@
 export type {
   default as AppropriatelyThrown,
-} from './AppropriatelyThrown';
+} from './AppropriatelyThrown/definition';
 
 export {
   AppropriatelyThrown_assume,

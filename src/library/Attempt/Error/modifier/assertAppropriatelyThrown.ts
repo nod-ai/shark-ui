@@ -4,7 +4,7 @@ import {
 
 import type {
   default as AppropriatelyThrown,
-} from './AppropriatelyThrown';
+} from './AppropriatelyThrown/definition.ts';
 
 /**
  * Expects `ActionableError`s to be propagated within the confines of the type system.
