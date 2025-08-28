@@ -7,7 +7,7 @@ import type {
   Output as TextToImage_Pipeline_Output,
 } from '@/features/TextToImage/Pipeline';
 
-const toOutputImage = (
+const toSharkUIOutput_Image = (
   givenImage: StabilityAIClient.Image,
   given: {
     description: TextToImage_Pipeline_Output['image']['description'];
@@ -28,5 +28,5 @@ const toOutputImage = (
 };
 
 export {
-  toOutputImage,
+  toSharkUIOutput_Image,
 };

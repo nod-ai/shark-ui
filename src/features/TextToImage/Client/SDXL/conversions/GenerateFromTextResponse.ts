@@ -14,11 +14,11 @@ import type {
 } from '@/features/TextToImage/Pipeline';
 
 import {
-  toOutputImage,
+  toSharkUIOutput_Image,
 } from './StabilityAI_Client_Image';
 
 import {
-  allSerialized,
+  toSharkUIOutput_allSerialized,
 } from './TextPrompt';
 
 const TextToImage_Pipeline_Output_Nullable_from = (
@@ -35,7 +35,7 @@ const TextToImage_Pipeline_Output_Nullable_from = (
   return derivedPipelineOutput;
 };
 
-const textToImageOutputs = (
+const toSharkUIOutput_plural = (
   {
     in: givenResponse,
     inferredFrom: givenInputText,
@@ -55,15 +55,15 @@ const textToImageOutputs = (
   ) return null;
 
   const inferredOutputs = inferredRawImages
-    .map($0 => toOutputImage($0, {
-      description: allSerialized(givenInputText),
+    .map($0 => toSharkUIOutput_Image($0, {
+      description: toSharkUIOutput_allSerialized(givenInputText),
     }))
     .map($0 => TextToImage_Pipeline_Output_Nullable_from($0));
 
   return inferredOutputs;
 };
 
-const firstTextToImageOutput = (
+const toSharkUIOutput_firstTextToImage = (
   {
     in: givenResponse,
     inferredFrom: givenInputText,
@@ -72,7 +72,7 @@ const firstTextToImageOutput = (
     inferredFrom: TextToImage_Pipeline_Input['text'];
   },
 ): TextToImage_Pipeline_Output => {
-  const inferredOutputs = textToImageOutputs({
+  const inferredOutputs = toSharkUIOutput_plural({
     in          : givenResponse,
     inferredFrom: givenInputText,
   });
@@ -95,5 +95,5 @@ const firstTextToImageOutput = (
 };
 
 export {
-  firstTextToImageOutput,
+  toSharkUIOutput_firstTextToImage,
 };
