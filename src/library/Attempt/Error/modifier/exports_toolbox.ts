@@ -1,6 +1,5 @@
 export {
-  type AppropriatelyThrown,
-  AppropriatelyThrown_assume,
+  AppropriatelyThrown,
 } from './AppropriatelyThrown';
 
 export {
