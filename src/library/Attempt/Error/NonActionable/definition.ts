@@ -2,11 +2,9 @@ import type {
   Branded,
 } from '@/library/typeUtilities';
 
-interface Attempt_Error_NonActionable_Options
-  extends ErrorOptions {
-  /** A function that's acting as an alternative to raw `throw` */
-  thrower?: (...parameters: any[]) => unknown; // eslint-disable-line @typescript-eslint/no-explicit-any
-}
+import type {
+  Attempt_Error_NonActionable_Options,
+} from './Options';
 
 /**
  * Errors from which normal execution cannot be recovered.
