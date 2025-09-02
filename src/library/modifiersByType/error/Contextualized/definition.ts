@@ -1,8 +1,10 @@
-import Attempt from '@/library/Attempt';
-
 import type {
   Instantiable,
 } from '@/library/typeUtilities';
+
+import {
+  Contextualized_assume,
+} from './assume';
 
 import {
   Contextualized_describes,
@@ -17,20 +19,6 @@ type Contextualized<
     cause: SomeCause;
   }
 ;
-
-const Contextualized_assume = <
-  SomeError extends Error,
-  SomeCause extends Error,
->(
-  givenError: SomeError,
-  GivenCause: Instantiable<SomeCause> | ErrorConstructor = Error,
-): Contextualized<SomeError, SomeCause> => {
-  if (
-    Contextualized_describes<SomeError, SomeCause>(givenError, GivenCause)
-  ) return givenError;
-
-  return Attempt.abandon('Expected error to have a cause');
-};
 
 const Contextualized_cast = <
   SomeError extends Error,
