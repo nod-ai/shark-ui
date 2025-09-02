@@ -1,3 +1,7 @@
+import {
+  NonActionableBuiltInError_describes,
+} from './describes';
+
 import './globalAugmentations';
 
 /**
@@ -13,17 +17,6 @@ type NonActionableBuiltInError =
   | EvalError // Something illegal was done with `eval` or `Function` constructor.
   | SyntaxError // The JS engine couldn't even parse the code.
 ;
-
-const NonActionableBuiltInError_describes = (
-  givenError: Error,
-): givenError is NonActionableBuiltInError => (
-  (givenError instanceof ReferenceError)
-  || (givenError instanceof TypeError)
-  || (givenError instanceof RangeError)
-  || (givenError instanceof URIError)
-  || (givenError instanceof EvalError)
-  || (givenError instanceof SyntaxError)
-);
 
 const NonActionableBuiltInError = {
   describes: NonActionableBuiltInError_describes,
