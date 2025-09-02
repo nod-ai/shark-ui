@@ -1,3 +1,9 @@
+import {
+  emptyString,
+  type EmptyString,
+  isEmpty,
+} from './empty';
+
 const isString = (givenSubject: unknown): givenSubject is string => {
   return (typeof givenSubject === 'string');
 };
@@ -8,14 +14,6 @@ const asString = (givenSubject: unknown): string => {
   ) return givenSubject;
 
   return JSON.stringify(givenSubject);
-};
-
-const emptyString = '';
-
-type EmptyString = typeof emptyString;
-
-const isEmpty = (givenSubject: string): givenSubject is EmptyString => {
-  return givenSubject === emptyString;
 };
 
 const lastCharacterOf = (givenCharacters: string): string | null => {
