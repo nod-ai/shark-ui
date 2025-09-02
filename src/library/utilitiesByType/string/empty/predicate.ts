@@ -1,4 +1,6 @@
-const emptyString = '';
+import {
+  emptyString,
+} from './instance';
 
 type EmptyString = typeof emptyString;
 
