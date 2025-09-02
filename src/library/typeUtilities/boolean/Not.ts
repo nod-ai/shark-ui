@@ -1,13 +1,6 @@
-type Is<
-  SomeLeftHandOperand,
-  SomeRightHandOperand,
-> =
-  SomeLeftHandOperand extends SomeRightHandOperand
-    ? SomeRightHandOperand extends SomeLeftHandOperand
-      ? true
-      : false
-    : false
-;
+import type {
+  Is,
+} from './Is';
 
 type If<
   SomeCondition extends boolean,
