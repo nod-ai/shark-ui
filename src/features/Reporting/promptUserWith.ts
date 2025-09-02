@@ -1,6 +1,8 @@
-import Contextualized from '@/library/modifiersByType/error/Contextualized/definition';
+import {
+  Contextualized,
+} from '@/library/modifiersByType/error';
 
-import Repository from '@/utilities/Repository/definition';
+import Repository from '@/utilities/Repository';
 
 const Reporting_formatFor = (
   givenError: Contextualized<Error, Error>,

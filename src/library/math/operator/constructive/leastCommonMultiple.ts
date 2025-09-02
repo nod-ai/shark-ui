@@ -1,6 +1,6 @@
 import {
   greatestCommonDivisor,
-} from './greatestCommonDivisor/abbreviations/gcf';
+} from './greatestCommonDivisor';
 
 const leastCommonMultiple = (
   a: number,

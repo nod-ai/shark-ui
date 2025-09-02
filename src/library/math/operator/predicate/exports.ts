@@ -4,4 +4,4 @@ export * from './isFinite';
 
 export * from './isNegative';
 
-export * from './isWhole/aliases/isInteger';
+export * from './isWhole';

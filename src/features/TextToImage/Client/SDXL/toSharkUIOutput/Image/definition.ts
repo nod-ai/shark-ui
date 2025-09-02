@@ -1,7 +1,10 @@
 import type * as StabilityAIClient from 'stabilityai-client-typescript/models/components';
 
 import Sequence from '@/library/Sequence';
-import URI_Image from '@/library/UniformResourceIdentifier/Image';
+
+import {
+  URI_Image,
+} from '@/library/UniformResourceIdentifier';
 
 import type {
   Output as TextToImage_Pipeline_Output,

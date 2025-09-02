@@ -4,7 +4,7 @@ import {
 
 import {
   asError,
-} from '@/library/utilitiesByType/error/asError';
+} from '@/library/utilitiesByType/error';
 
 import App from '@/App.vue';
 import vuetify from '@/plugins/vuetify.ts';
@@ -12,7 +12,7 @@ import router from '@/router';
 
 import {
   Reporting_promptUserWith,
-} from '@/features/Reporting/promptUserWith';
+} from '@/features/Reporting';
 
 const app = createApp(App);
 app.use(router);
