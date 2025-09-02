@@ -1,8 +1,7 @@
-import type {
-  Attempt_Error_Actionable,
+import {
+  type Attempt_Error_Actionable,
+  Attempt_Error_Creation,
 } from '../Error';
-
-import Attempt_Error_Creation from '../Error/Creation';
 
 import type {
   Attempt_Outcome,

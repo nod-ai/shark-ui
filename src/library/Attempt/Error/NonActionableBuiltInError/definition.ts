@@ -1,6 +1,6 @@
 import type {
   Branded,
-} from '@/library/typeUtilities/Branded';
+} from '@/library/typeUtilities';
 
 // These augmentations allow TypeScript to distinguish these error types from `Error` at the annotation level.
 declare global {

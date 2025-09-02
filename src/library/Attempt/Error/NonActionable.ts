@@ -1,6 +1,6 @@
 import type {
   Branded,
-} from '@/library/typeUtilities/Branded';
+} from '@/library/typeUtilities';
 
 interface Attempt_Error_NonActionable_Options
   extends ErrorOptions {
