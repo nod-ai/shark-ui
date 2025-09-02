@@ -1,4 +1,9 @@
 import {
+  lastCharacterOf,
+  droppingLastCharacter,
+} from './character';
+
+import {
   emptyString,
   type EmptyString,
   isEmpty,
@@ -14,14 +19,6 @@ const asString = (givenSubject: unknown): string => {
   ) return givenSubject;
 
   return JSON.stringify(givenSubject);
-};
-
-const lastCharacterOf = (givenCharacters: string): string | null => {
-  return givenCharacters[givenCharacters.length - 1] ?? null;
-};
-
-const droppingLastCharacter = (givenCharacters: string): string => {
-  return givenCharacters.substring(0, givenCharacters.length - 1);
 };
 
 type StringLike = string | String; // eslint-disable-line @typescript-eslint/no-wrapper-object-types -- means "both the auto-boxed and primitive types"
