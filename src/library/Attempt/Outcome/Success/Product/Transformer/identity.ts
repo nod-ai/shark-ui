@@ -1,9 +1,6 @@
-type Attempt_Outcome_Success_Product_Transformer<
-  SomeTransformableProduct,
-  SomeTransformedProduct,
-> = (
-  transformableProduct: SomeTransformableProduct,
-) => SomeTransformedProduct;
+import type {
+  Attempt_Outcome_Success_Product_Transformer,
+} from './definition.ts';
 
 const Attempt_Outcome_Success_Product_Transformer_identity = <
   SomeTransformableProduct,
