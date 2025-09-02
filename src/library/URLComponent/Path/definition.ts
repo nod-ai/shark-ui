@@ -1,21 +1,10 @@
 import Attempt from '@/library/Attempt';
 import type Parsable from '@/library/Parsable';
-import ParsingError from '@/library/ParsingError';
 import StringSubset from '@/library/StringSubset';
 
-class URLComponent_Path_ParsingError
-  extends ParsingError<
-    'URLComponent_Path'
-  > {
-  public override name = 'URLComponent_Path_ParsingError' as const;
-
-  public constructor(given: {
-    expectation: string;
-    reality: string;
-  }) {
-    super(`Expected pure path: "${given.expectation}", got "${given.reality}"`);
-  }
-}
+import {
+  URLComponent_Path_ParsingError,
+} from './ParsingError';
 
 class URLComponent_Path
   extends StringSubset<
