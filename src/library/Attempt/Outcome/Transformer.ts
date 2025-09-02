@@ -4,11 +4,11 @@ import type {
 
 import type {
   Attempt_Outcome_Failure_Transformer,
-} from './Failure/Transformer';
+} from './Failure';
 
 import type {
   Attempt_Outcome_Success_Transformer,
-} from './Success/Transformer';
+} from './Success';
 
 type Attempt_Outcome_Transformer<
   SomeTransformableProduct,

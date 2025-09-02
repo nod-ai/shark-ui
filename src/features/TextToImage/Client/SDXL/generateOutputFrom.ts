@@ -8,7 +8,7 @@ import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient';
 
 import type {
   Output as TextToImage_Pipeline_Output,
-} from '@/features/TextToImage/Pipeline';
+} from '@/features/TextToImage/Pipeline'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
 
 import * as TextToImage_Server from '../../Server';
 

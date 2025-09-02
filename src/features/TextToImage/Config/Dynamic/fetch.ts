@@ -15,7 +15,7 @@ import {
 
 import type {
   TextToImage_Config_Dynamic_Fetching_Error,
-} from './Fetching/Error';
+} from './Fetching/Error'; // eslint-disable-line import/no-internal-modules -- will be deleted once usage is extracted
 
 const TextToImage_Config_Dynamic_endpoint = URLComponent_Path.parsedFrom('/config/text-to-image').forciblyUnwrap();
 

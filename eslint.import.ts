@@ -43,6 +43,18 @@ const extendedConfig: ConfigWithExtends = {
         noUselessIndex: true, // Avoids noise in diffs from converting single-file modules <-> directory modules
       },
     ],
+    'import/no-internal-modules': [
+      'error',
+      {
+        allow: [
+          '**/*.vue', // .vue files must be imported directly for bundler to enable type-safety
+          '[a-z]*/**', // matches packages
+          '@/*/*', // matches src modules
+          '@/library/modifiersByType/*', // bag of tools where consumer must pick a type
+          '@/library/utilitiesByType/*', // bag of tools where consumer must pick a type
+        ],
+      },
+    ],
     'import/order': [
       'error',
       {

@@ -8,7 +8,7 @@ import Attempt from '@/library/Attempt';
 
 import {
   numberTaxonomy,
-} from '@/library/math/numberTaxonomy';
+} from '@/library/math/numberTaxonomy'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
 
 import {
   squared,
