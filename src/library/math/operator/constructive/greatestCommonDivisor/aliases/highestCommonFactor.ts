@@ -2,8 +2,9 @@ import {
   greatestCommonDivisor,
 } from '../definition.ts';
 
-/** Alias for {@link greatestCommonDivisor} */
-const greatestCommonFactor = greatestCommonDivisor;
+import {
+  greatestCommonFactor,
+} from './greatestCommonFactor';
 
 /** Alias for {@link greatestCommonDivisor} */
 const highestCommonDivisor = greatestCommonDivisor;
