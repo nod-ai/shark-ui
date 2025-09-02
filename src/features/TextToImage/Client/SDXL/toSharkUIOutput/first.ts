@@ -11,7 +11,7 @@ import {
 import type {
   Input as TextToImage_Pipeline_Input,
   Output as TextToImage_Pipeline_Output,
-} from '@/features/TextToImage/Pipeline';
+} from '@/features/TextToImage/Pipeline'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
 
 import {
   toSharkUIOutput_Image,
