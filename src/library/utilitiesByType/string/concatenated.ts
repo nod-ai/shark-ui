@@ -9,9 +9,9 @@ import {
   isEmpty,
 } from './empty';
 
-const isString = (givenSubject: unknown): givenSubject is string => {
-  return (typeof givenSubject === 'string');
-};
+import {
+  isString,
+} from './isString';
 
 const asString = (givenSubject: unknown): string => {
   if (
