@@ -1,5 +1,9 @@
 import Attempt from '@/library/Attempt';
 
+import type {
+  Instantiable,
+} from '@/library/typeUtilities';
+
 type Contextualized<
   SomeError extends Error,
   SomeCause extends Error,
@@ -9,12 +13,6 @@ type Contextualized<
     cause: SomeCause;
   }
 ;
-
-interface Instantiable<
-  SomeClass,
-> {
-  [Symbol.hasInstance]: (value: unknown) => value is SomeClass;
-}
 
 const Contextualized_describes = <
   SomeError extends Error,
