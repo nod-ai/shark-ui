@@ -1,3 +1,7 @@
+import type {
+  Attempt_End_Retriever,
+} from '../End';
+
 import {
   type Attempt_Error_Actionable,
   Attempt_Error_Creation,
@@ -16,12 +20,6 @@ import {
 import {
   safeAsync,
 } from '../tryCatchStatements';
-
-type Attempt_End_Retriever<
-  SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
-> = (
-  givenHandles: typeof handles
-) => Promise<SomeInferredOutcome>;
 
 const Attempt_Fresh_thatEventually = async <
   SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
