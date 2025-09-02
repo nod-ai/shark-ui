@@ -1,5 +1,8 @@
 import type ParsingError from '@/library/ParsingError';
-import type Static from '@/library/typeUtilities/Static';
+
+import type {
+  Static,
+} from '@/library/typeUtilities';
 
 import type {
   Parser,
