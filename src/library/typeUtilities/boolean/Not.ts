@@ -1,16 +1,10 @@
 import type {
+  If,
+} from './If';
+
+import type {
   Is,
 } from './Is';
-
-type If<
-  SomeCondition extends boolean,
-  SomeExpressionWhenTrue,
-  SomeExpressionWhenFalse,
-> =
-  SomeCondition extends true
-    ? SomeExpressionWhenTrue
-    : SomeExpressionWhenFalse
-;
 
 type Not<
   SomeBoolean extends boolean,
