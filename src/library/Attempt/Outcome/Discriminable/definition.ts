@@ -2,7 +2,7 @@ import type {
   Is,
   If,
   Not,
-} from '@/library/typeUtilities/boolean';
+} from '@/library/typeUtilities';
 
 import type {
   Attempt_Error_Actionable,
