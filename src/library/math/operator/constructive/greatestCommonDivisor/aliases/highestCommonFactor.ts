@@ -6,8 +6,9 @@ import {
   greatestCommonFactor,
 } from './greatestCommonFactor';
 
-/** Alias for {@link greatestCommonDivisor} */
-const highestCommonDivisor = greatestCommonDivisor;
+import {
+  highestCommonDivisor,
+} from './highestCommonDivisor';
 
 /** Alias for {@link greatestCommonDivisor} */
 const highestCommonFactor = greatestCommonDivisor;
