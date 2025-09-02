@@ -1,3 +1,7 @@
+import type {
+  Attempt_End_Getter,
+} from '../End';
+
 import {
   type Attempt_Error_Actionable,
   Attempt_Error_Creation,
@@ -16,12 +20,6 @@ import {
 import {
   safe,
 } from '../tryCatchStatements';
-
-type Attempt_End_Getter<
-  SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
-> = (
-  givenHandles: typeof handles
-) => SomeInferredOutcome;
 
 const Attempt_Fresh_that = <
   SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
