@@ -27,3 +27,7 @@ export {
   type Attempt_End_Getter as End_Getter,
   type Attempt_End_Retriever as End_Retriever,
 } from './Fresh';
+
+export type {
+  Attempt_Progressive as Progressive,
+} from './Progressive';

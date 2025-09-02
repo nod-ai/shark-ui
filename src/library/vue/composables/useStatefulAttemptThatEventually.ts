@@ -7,18 +7,6 @@ import {
 
 import Attempt from '@/library/Attempt';
 
-interface StatefulAttempt<
-  SomeProduct,
-  SomeActionableError extends Attempt.Error_Actionable<string>,
-> {
-  initiate: () => Promise<void>;
-  isInProgress: boolean;
-  outcome: Attempt.Outcome<
-    SomeProduct,
-    SomeActionableError
-  > | null;
-}
-
 /** Useful when state of UI is dependent on some async operation and the outcome upon completion */
 const useStatefulAttemptThatEventually = <
   SomeProduct,
@@ -27,7 +15,7 @@ const useStatefulAttemptThatEventually = <
   retrieveOutcome: Attempt.End_Retriever<
     Attempt.Outcome<SomeProduct, SomeActionableError>
   >,
-): StatefulAttempt<
+): Attempt.Progressive<
   SomeProduct,
   SomeActionableError
 > => {
