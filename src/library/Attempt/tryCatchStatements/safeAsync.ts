@@ -5,7 +5,7 @@ import {
 import {
   type AppropriatelyThrown,
   AppropriatelyThrown_assume,
-} from '../Error/modifier';
+} from '../Error';
 
 const safe = <
   SomeTryBlockOutput,
