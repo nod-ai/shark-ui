@@ -28,7 +28,7 @@ import {
 
 import {
   SDXL_DiffusionStepCount,
-} from '@/library/ShimmedStabilityAIClient/SDXL';
+} from '@/library/ShimmedStabilityAIClient';
 
 import DiscreteSlider from '@/components/DiscreteSlider.vue';
 import NavigationPanel from '@/components/NavigationPanel.vue';
