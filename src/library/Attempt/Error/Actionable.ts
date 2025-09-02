@@ -11,8 +11,8 @@ abstract class Attempt_Error_Actionable<
   SomeBrand extends string,
 > extends Error
   implements Branded<
-  SomeBrand
-> {
+    SomeBrand
+  > {
   public readonly brand!: SomeBrand;
 
   public throwAnyway = (

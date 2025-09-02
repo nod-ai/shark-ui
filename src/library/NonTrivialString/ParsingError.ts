@@ -2,8 +2,8 @@ import ParsingError from '@/library/ParsingError';
 
 class NonTrivialString_ParsingError
   extends ParsingError<
-  'NonTrivialString'
-> {
+    'NonTrivialString'
+  > {
   public override name = 'NonTrivialString_ParsingError' as const;
 
   public constructor(

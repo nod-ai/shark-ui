@@ -3,8 +3,8 @@ import Base64 from '@/library/Base64';
 
 class Sequence_Base64_Conformance_Error
   extends Attempt.Error_Actionable<
-  'Sequence_Base64_Conformance_Error'
-> {
+    'Sequence_Base64_Conformance_Error'
+  > {
   public override name = 'Sequence_Base64_Conformance_Error' as const;
 
   public constructor() {

@@ -14,8 +14,8 @@ abstract class StringSubset<
   SomeBrand extends string,
 > extends String
   implements Branded<
-  SomeBrand
-> {
+    SomeBrand
+  > {
   public readonly brand!: SomeBrand;
 
   public appendedWith(

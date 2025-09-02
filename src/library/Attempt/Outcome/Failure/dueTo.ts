@@ -14,17 +14,17 @@ import {
 interface Attempt_Outcome_Failure_SemanticallySugarfree<
   SomeActionableError extends Attempt_Error_Actionable<string>,
 > extends Attempt_Outcome_Discriminable<
-  'failure',
-  SomeActionableError
-> {
+    'failure',
+    SomeActionableError
+  > {
   readonly cause: SomeActionableError;
 }
 
 interface Attempt_Outcome_Failure<
   SomeActionableError extends Attempt_Error_Actionable<string>,
 > extends Attempt_Outcome_Failure_SemanticallySugarfree<
-  SomeActionableError
-> {
+    SomeActionableError
+  > {
   /**
    * Semantic sugar for `cause`; useful for juxtaposition against early exits:
    * ```ts

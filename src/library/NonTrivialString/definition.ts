@@ -12,11 +12,11 @@ import NonTrivialString_ParsingError from './ParsingError.ts';
 
 class NonTrivialString
   extends StringSubset<
-  'NonTrivialString'
-> implements Parsable.String<
-  typeof NonTrivialString,
-  /*  */ NonTrivialString_ParsingError
-> {
+    'NonTrivialString'
+  > implements Parsable.String<
+    typeof NonTrivialString,
+    /*  */ NonTrivialString_ParsingError
+  > {
   public static parsedFrom = (
     givenSubject: string,
   ): Attempt.Outcome<

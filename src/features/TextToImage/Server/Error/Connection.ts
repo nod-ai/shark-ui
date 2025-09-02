@@ -2,8 +2,8 @@ import Attempt from '@/library/Attempt';
 
 class TextToImage_Server_Error_Connection
   extends Attempt.Error_Actionable<
-  'TextToImage_Server_Error_Connection'
-> {
+    'TextToImage_Server_Error_Connection'
+  > {
   public override name = 'TextToImage_Server_Error_Connection' as const;
 
   public constructor(
