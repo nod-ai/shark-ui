@@ -1,4 +1,6 @@
-import type URI_Image from '@/library/UniformResourceIdentifier/Image';
+import type {
+  URI_Image,
+} from '@/library/UniformResourceIdentifier';
 
 interface TextToImage_Pipeline_Output_Image {
   uri: URI_Image;
