@@ -1,6 +1,6 @@
 import type {
   Branded,
-} from '@/library/typeUtilities/Branded';
+} from '@/library/typeUtilities';
 
 import {
   type StringLike,
