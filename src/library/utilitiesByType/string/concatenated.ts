@@ -1,3 +1,7 @@
+import type {
+  StringLike,
+} from './StringLike';
+
 import {
   asString,
 } from './asString';
@@ -16,8 +20,6 @@ import {
 import {
   isString,
 } from './isString';
-
-type StringLike = string | String; // eslint-disable-line @typescript-eslint/no-wrapper-object-types -- means "both the auto-boxed and primitive types"
 
 const concatenated = (
   ...givenOperands: (StringLike | null)[]
