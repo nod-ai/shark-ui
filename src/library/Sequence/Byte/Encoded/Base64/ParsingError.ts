@@ -11,8 +11,8 @@ import {
 
 class Sequence_Byte_Encoded_Base64_ParsingError
   extends ParsingError<
-  'Sequence_Byte_Encoded_Base64'
-> {
+    'Sequence_Byte_Encoded_Base64'
+  > {
   public override name = 'Sequence_Byte_Encoded_Base64_ParsingError' as const;
 
   public constructor(

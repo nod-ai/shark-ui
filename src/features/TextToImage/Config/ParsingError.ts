@@ -2,8 +2,8 @@ import ParsingError from '@/library/ParsingError';
 
 class TextToImage_Config_ParsingError
   extends ParsingError<
-  'TextToImage_Config'
-> {
+    'TextToImage_Config'
+  > {
   public override name = 'TextToImage_Config_ParsingError' as const;
 
   public constructor(

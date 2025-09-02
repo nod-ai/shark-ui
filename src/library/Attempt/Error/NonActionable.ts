@@ -17,8 +17,8 @@ interface Attempt_Error_NonActionable_Options
 class Attempt_Error_NonActionable
   extends Error
   implements Branded<
-  'NonActionableError'
-> {
+    'NonActionableError'
+  > {
   public override name = 'NonActionableError';
   public readonly brand!: 'NonActionableError';
 

@@ -6,8 +6,8 @@ import type {
 
 class TextToImage_Config_Dynamic_Fetching_Error_Request
   extends Attempt.Error_Actionable<
-  'TextToImage_Config_Dynamic_Fetching_Error_Request'
-> {
+    'TextToImage_Config_Dynamic_Fetching_Error_Request'
+  > {
   public override name = 'TextToImage_Config_Dynamic_Fetching_Error_Request' as const;
 
   public constructor(

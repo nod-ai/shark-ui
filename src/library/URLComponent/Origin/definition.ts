@@ -5,8 +5,8 @@ import StringSubset from '@/library/StringSubset';
 
 class URLComponent_Origin_ParsingError
   extends ParsingError<
-  'URLComponent_Origin'
-> {
+    'URLComponent_Origin'
+  > {
   public override name = 'URLComponent_Origin_ParsingError' as const;
 
   public constructor(given: {
@@ -19,11 +19,11 @@ class URLComponent_Origin_ParsingError
 
 class URLComponent_Origin
   extends StringSubset<
-  'URLComponent_Origin'
-> implements Parsable.String<
-  typeof URLComponent_Origin,
-  /*  */ URLComponent_Origin_ParsingError
-> {
+    'URLComponent_Origin'
+  > implements Parsable.String<
+    typeof URLComponent_Origin,
+    /*  */ URLComponent_Origin_ParsingError
+  > {
   public static parsedFrom = (
     givenSubject: string,
   ): Attempt.Outcome<

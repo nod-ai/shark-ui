@@ -6,8 +6,8 @@ import type {
 
 class TextToImage_Server_Error_Specification
   extends Attempt.Error_Actionable<
-  'TextToImage_Server_Error_Specification'
-> {
+    'TextToImage_Server_Error_Specification'
+  > {
   public override name = 'TextToImage_Server_Error_Specification' as const;
 
   public constructor(

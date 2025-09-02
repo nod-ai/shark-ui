@@ -6,43 +6,43 @@ import type {
 declare global {
   interface ReferenceError
     extends Branded<
-    'ReferenceError'
-  > {
+      'ReferenceError'
+    > {
     readonly brand: this['name'];
   }
 
   interface TypeError
     extends Branded<
-    'TypeError'
-  > {
+      'TypeError'
+    > {
     readonly brand: this['name'];
   }
 
   interface RangeError
     extends Branded<
-    'RangeError'
-  > {
+      'RangeError'
+    > {
     readonly brand: this['name'];
   }
 
   interface URIError
     extends Branded<
-    'URIError'
-  > {
+      'URIError'
+    > {
     readonly brand: this['name'];
   }
 
   interface EvalError
     extends Branded<
-    'EvalError'
-  > {
+      'EvalError'
+    > {
     readonly brand: this['name'];
   }
 
   interface SyntaxError
     extends Branded<
-    'SyntaxError'
-  > {
+      'SyntaxError'
+    > {
     readonly brand: this['name'];
   }
 }

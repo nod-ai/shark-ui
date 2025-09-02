@@ -6,8 +6,8 @@ import type {
 
 class HTTP_Endpoint_Error_Response
   extends Attempt.Error_Actionable<
-  'HTTP_Endpoint_Error_Response'
-> {
+    'HTTP_Endpoint_Error_Response'
+  > {
   public override name = 'HTTP_Endpoint_Error_Response' as const;
 
   public constructor(

@@ -10,17 +10,17 @@ import {
 interface Attempt_Outcome_Success_SemanticallySugarfree<
   SomeProduct,
 > extends Attempt_Outcome_Discriminable<
-  'success',
-  SomeProduct
-> {
+    'success',
+    SomeProduct
+  > {
   readonly product: SomeProduct;
 }
 
 interface Attempt_Outcome_Success<
   SomeProduct,
 > extends Attempt_Outcome_Success_SemanticallySugarfree<
-  SomeProduct
-> {
+    SomeProduct
+  > {
   /**
    * Access the product nested within a successful outcome.
    *

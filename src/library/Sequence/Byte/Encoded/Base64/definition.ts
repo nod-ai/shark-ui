@@ -23,11 +23,11 @@ import Sequence_Byte_Encoded_Base64_ParsingError from './ParsingError.ts';
 /** See [RFC 4648 Section 4](https://www.rfc-editor.org/rfc/rfc4648.html#section-4) for more information */
 class Sequence_Byte_Encoded_Base64
   extends StringSubset<
-  'Sequence_Byte_Encoded_Base64'
-> implements Parsable.String<
-  typeof Sequence_Byte_Encoded_Base64,
-  /*  */ Sequence_Byte_Encoded_Base64_ParsingError
-> {
+    'Sequence_Byte_Encoded_Base64'
+  > implements Parsable.String<
+    typeof Sequence_Byte_Encoded_Base64,
+    /*  */ Sequence_Byte_Encoded_Base64_ParsingError
+  > {
   public static paddingCharacter = '=';
 
   private static readonly byteCofactor = Byte.cofactorTo(Base64.bitWidth);

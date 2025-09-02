@@ -24,8 +24,8 @@ interface Attempt_Outcome_Discriminable<
       : Attempt_Error_Actionable<string>
   ),
 > extends Attempt_Outcome_Discriminable_SyntacticallySugarfree<
-  SomeDiscriminant
-> {
+    SomeDiscriminant
+  > {
   readonly isSuccess: Is<this['discriminant'], 'success'>;
   readonly isFailure: Not<this['isSuccess']>;
 
