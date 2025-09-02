@@ -4,6 +4,10 @@ import type {
   Instantiable,
 } from '@/library/typeUtilities';
 
+import {
+  Contextualized_describes,
+} from './describes';
+
 type Contextualized<
   SomeError extends Error,
   SomeCause extends Error,
@@ -13,16 +17,6 @@ type Contextualized<
     cause: SomeCause;
   }
 ;
-
-const Contextualized_describes = <
-  SomeError extends Error,
-  SomeCause extends Error,
->(
-  givenError: SomeError,
-  GivenCause: Instantiable<SomeCause> | ErrorConstructor = Error,
-): givenError is Contextualized<SomeError, SomeCause> => {
-  return givenError.cause instanceof GivenCause;
-};
 
 const Contextualized_assume = <
   SomeError extends Error,
