@@ -8,7 +8,9 @@ import type {
   Attempt_Error_Actionable,
 } from '../../Error';
 
-type Attempt_Outcome_Discriminant = 'success' | 'failure';
+import type {
+  Attempt_Outcome_Discriminant,
+} from '../Discriminant';
 
 interface Attempt_Outcome_Discriminable_SyntacticallySugarfree<
   SomeDiscriminant extends Attempt_Outcome_Discriminant,
