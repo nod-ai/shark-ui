@@ -1,6 +1,10 @@
-const emptyString = '';
+import {
+  emptyString,
+} from './instance';
 
-type EmptyString = typeof emptyString;
+import type {
+  EmptyString,
+} from './type';
 
 const isEmpty = (
   givenSubject: string,

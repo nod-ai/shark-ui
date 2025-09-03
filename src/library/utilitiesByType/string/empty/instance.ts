@@ -1,0 +1,5 @@
+const emptyString = '';
+
+export {
+  emptyString,
+};
