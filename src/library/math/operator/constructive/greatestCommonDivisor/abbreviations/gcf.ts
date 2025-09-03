@@ -8,8 +8,9 @@ import {
   greatestCommonDivisor,
 } from '../definition.ts';
 
-/** Abbreviation for {@link greatestCommonDivisor} */
-const gcd = greatestCommonDivisor;
+import {
+  gcd,
+} from './gcd';
 
 /** Abbreviation for {@link greatestCommonFactor} */
 const gcf = greatestCommonFactor;
