@@ -4,14 +4,9 @@ import {
 
 import Repository from '@/utilities/Repository';
 
-const Reporting_formatFor = (
-  givenError: Contextualized<Error, Error>,
-): string => [
-  `${givenError.message}:`,
-  '"""',
-  givenError.cause.message,
-  '"""',
-].join('\n');
+import {
+  Reporting_formatFor,
+} from './formatFor';
 
 const Reporting_promptUserWith = (givenError: Error) => {
   const unexpectedError = Contextualized.cast(givenError, 'Unexpected Error');
