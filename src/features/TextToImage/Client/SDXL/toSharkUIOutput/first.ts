@@ -8,29 +8,16 @@ import {
   hasAtLeastOne,
 } from '@/library/utilitiesByType/array';
 
-import type {
-  Input as TextToImage_Pipeline_Input,
-  Output as TextToImage_Pipeline_Output,
+import {
+  type Input as TextToImage_Pipeline_Input,
+  type Output as TextToImage_Pipeline_Output,
+  Output_Nullable_from as TextToImage_Pipeline_Output_Nullable_from,
 } from '@/features/TextToImage/Pipeline'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
 
 import {
   toSharkUIOutput_Image,
   toSharkUIOutput_Image_Description_all,
 } from './Image';
-
-const TextToImage_Pipeline_Output_Nullable_from = (
-  givenImage: TextToImage_Pipeline_Output['image'] | null,
-): TextToImage_Pipeline_Output | null => {
-  if (
-    givenImage === null
-  ) return null;
-
-  const derivedPipelineOutput = {
-    image: givenImage,
-  };
-
-  return derivedPipelineOutput;
-};
 
 const toSharkUIOutput_plural = (
   {
