@@ -1,21 +1,10 @@
 import Attempt from '@/library/Attempt';
 import type Parsable from '@/library/Parsable';
-import ParsingError from '@/library/ParsingError';
 import StringSubset from '@/library/StringSubset';
 
-class URLComponent_Origin_ParsingError
-  extends ParsingError<
-    'URLComponent_Origin'
-  > {
-  public override name = 'URLComponent_Origin_ParsingError' as const;
-
-  public constructor(given: {
-    expectation: string;
-    reality: string;
-  }) {
-    super(`Expected pure origin "${given.expectation}", got "${given.reality}"`);
-  }
-}
+import {
+  URLComponent_Origin_ParsingError,
+} from './ParsingError';
 
 class URLComponent_Origin
   extends StringSubset<
