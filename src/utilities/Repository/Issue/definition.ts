@@ -1,8 +1,6 @@
-type Repository_Issue_Label =
-  | 'bug'
-  | 'enhancement'
-  | 'documentation'
-;
+import type {
+  Repository_Issue_Label,
+} from './Label';
 
 type Repository_Issue_Category =
   | 'Feature'
