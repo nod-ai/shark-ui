@@ -13,19 +13,10 @@ import {
   TextToImage_Config_Dynamic_Fetching,
 } from './Fetching';
 
-import type {
-  TextToImage_Config_Dynamic_Fetching_Error,
-} from './Fetching/Error'; // eslint-disable-line import/no-internal-modules -- will be deleted once usage is extracted
-
 const TextToImage_Config_Dynamic_endpoint = URLComponent_Path.parsedFrom('/config/text-to-image').forciblyUnwrap();
 
-type TextToImage_Config_Dynamic_Fetching_Outcome = Attempt.Outcome<
-  TextToImage_Config,
-  TextToImage_Config_Dynamic_Fetching_Error.Any
->;
-
 const TextToImage_Config_Dynamic_fetch = (): Promise<
-  TextToImage_Config_Dynamic_Fetching_Outcome
+  TextToImage_Config_Dynamic_Fetching.Outcome
 > => Attempt.Fresh_thatEventually(async (ends) => {
   const endpointResponse = await fetch(TextToImage_Config_Dynamic_endpoint.toString());
   const fetchingError = new TextToImage_Config_Dynamic_Fetching.Error.Request(TextToImage_Config_Dynamic_endpoint);
