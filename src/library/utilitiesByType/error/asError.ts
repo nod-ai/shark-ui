@@ -2,9 +2,9 @@ import {
   asString,
 } from '../string';
 
-const isError = (givenSubject: unknown): givenSubject is Error => {
-  return (givenSubject instanceof Error);
-};
+import {
+  isError,
+} from './isError';
 
 const asError = (givenSubject: unknown): Error => {
   if (
