@@ -20,6 +20,11 @@ import type {
   Attempt_Outcome_Transformer,
 } from './Transformer';
 
+import type {
+  CauseOf,
+  ProductOf,
+} from './typeParameters';
+
 type Attempt_Outcome<
   SomeProduct,
   SomeActionableError extends Attempt_Error_Actionable<string>,
@@ -131,18 +136,6 @@ const Attempt_Outcome = {
   Success_thatYielded: Attempt_Outcome_Success_thatYielded,
   fromRewrapping     : Attempt_Outcome_fromRewrapping,
 };
-
-type ProductOf<
-  SomeOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
-> = SomeOutcome extends Attempt_Outcome_Success<infer NestedProduct>
-  ? NestedProduct
-  : never;
-
-type CauseOf<
-  SomeOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
-> = SomeOutcome extends Attempt_Outcome_Failure<infer NestedError>
-  ? NestedError
-  : never;
 
 export {
   Attempt_Outcome,
