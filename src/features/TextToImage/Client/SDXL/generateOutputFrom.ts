@@ -73,10 +73,6 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
   return outcomeOfSettlingSoleTextToImageOutput;
 };
 
-const TextToImage_Client_SDXL = {
-  generateOutputFrom: TextToImage_Client_SDXL_generateOutputFrom,
-};
-
 export {
-  TextToImage_Client_SDXL,
+  TextToImage_Client_SDXL_generateOutputFrom as generateOutputFrom,
 };
