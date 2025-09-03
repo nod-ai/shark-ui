@@ -1,10 +1,6 @@
 import Attempt from '@/library/Attempt';
 
 import {
-  URLComponent_Path,
-} from '@/library/URLComponent';
-
-import {
   TextToImage_Config,
 } from '../definition.ts';
 
@@ -12,7 +8,9 @@ import {
   TextToImage_Config_Static_Reading,
 } from './Reading';
 
-const TextToImage_Config_Static_file = URLComponent_Path.parsedFrom('/config/text-to-image.json').forciblyUnwrap();
+import {
+  TextToImage_Config_Static_file,
+} from './file';
 
 const TextToImage_Config_Static_read = (): Promise<
   TextToImage_Config_Static_Reading.Outcome
