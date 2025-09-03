@@ -12,17 +12,10 @@ import {
   TextToImage_Config_Static_Reading,
 } from './Reading';
 
-import type TextToImage_Config_Static_Reading_Error from './Reading/Error'; // eslint-disable-line import/no-internal-modules -- will be deleted once usage is extracted
-
 const TextToImage_Config_Static_file = URLComponent_Path.parsedFrom('/config/text-to-image.json').forciblyUnwrap();
 
-type TextToImage_Config_Static_Reading_Outcome = Attempt.Outcome<
-  TextToImage_Config,
-  TextToImage_Config_Static_Reading_Error
->;
-
 const TextToImage_Config_Static_read = (): Promise<
-  TextToImage_Config_Static_Reading_Outcome
+  TextToImage_Config_Static_Reading.Outcome
 > => Attempt.Fresh_thatEventually(async (ends) => {
   const fileResponse = await fetch(TextToImage_Config_Static_file.toString());
 
