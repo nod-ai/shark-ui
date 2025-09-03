@@ -1,3 +1,11 @@
+import type {
+  StringLike,
+} from './StringLike';
+
+import {
+  asString,
+} from './asString';
+
 import {
   lastCharacterOf,
   droppingLastCharacter,
@@ -9,19 +17,9 @@ import {
   isEmpty,
 } from './empty';
 
-const isString = (givenSubject: unknown): givenSubject is string => {
-  return (typeof givenSubject === 'string');
-};
-
-const asString = (givenSubject: unknown): string => {
-  if (
-    isString(givenSubject)
-  ) return givenSubject;
-
-  return JSON.stringify(givenSubject);
-};
-
-type StringLike = string | String; // eslint-disable-line @typescript-eslint/no-wrapper-object-types -- means "both the auto-boxed and primitive types"
+import {
+  isString,
+} from './isString';
 
 const concatenated = (
   ...givenOperands: (StringLike | null)[]
