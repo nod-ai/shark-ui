@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - integration
+      - release
   pull_request:
     branches:
       - integration
+      - release
 
 jobs:
   analyze:
