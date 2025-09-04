@@ -37,5 +37,4 @@ class URLComponent_Path
 
 export {
   URLComponent_Path,
-  URLComponent_Path_ParsingError,
 };
