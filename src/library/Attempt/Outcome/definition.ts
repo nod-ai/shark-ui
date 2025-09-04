@@ -16,11 +16,6 @@ import {
   Attempt_Outcome_fromRewrapping,
 } from './fromRewrapping';
 
-import type {
-  CauseOf,
-  ProductOf,
-} from './typeParameters';
-
 type Attempt_Outcome<
   SomeProduct,
   SomeActionableError extends Attempt_Error_Actionable<string>,
@@ -37,8 +32,4 @@ const Attempt_Outcome = {
 
 export {
   Attempt_Outcome,
-  type Attempt_Outcome_Success,
-  type Attempt_Outcome_Failure,
-  type ProductOf,
-  type CauseOf,
 };
