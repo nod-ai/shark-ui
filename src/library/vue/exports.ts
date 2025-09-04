@@ -11,6 +11,6 @@ export {
   ref,
   get,
   set,
-} from './reactivity';
+} from './Ref';
 
 export * from './composables';
