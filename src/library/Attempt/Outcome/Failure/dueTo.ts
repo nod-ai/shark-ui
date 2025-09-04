@@ -7,10 +7,6 @@ import {
 } from './Cause';
 
 import type {
-  Attempt_Outcome_Failure_Transformer,
-} from './Transformer';
-
-import type {
   Attempt_Outcome_Failure,
 } from './definition.ts';
 
@@ -45,8 +41,5 @@ const Attempt_Outcome_Failure_dueTo = <
 });
 
 export {
-  type Attempt_Outcome_Failure,
-  type Attempt_Outcome_Failure_Transformer,
   Attempt_Outcome_Failure_dueTo,
-  Attempt_Outcome_Failure_Cause_Transformer_identity,
 };
