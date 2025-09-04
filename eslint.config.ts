@@ -4,11 +4,14 @@ import {
   vueTsConfigs as VueTSConfig,
 } from '@vue/eslint-config-typescript';
 
+import {
+  defineConfig,
+} from 'eslint/config';
+
 import pluginVue from 'eslint-plugin-vue';
 
-import {
-  config,
-  type ConfigWithExtends,
+import type {
+  ConfigWithExtends,
 } from 'typescript-eslint';
 
 import pluginCypress from './cypress/eslint.config';
@@ -128,8 +131,9 @@ const configWithVueTS = defineConfigWithVueTs(
   ...pluginCypress,
 );
 
-const completeConfig = config([
+const completeConfig = defineConfig([
   {
+    // @ts-expect-error: according to bullet "2." under https://typescript-eslint.io/packages/typescript-eslint/#migrating-to-defineconfig
     extends: configWithVueTS,
     ignores: [
       '**/*.md',

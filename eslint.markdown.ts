@@ -1,10 +1,10 @@
 import markdown from '@eslint/markdown';
 
 import type {
-  ConfigWithExtends,
-} from 'typescript-eslint';
+  Linter,
+} from 'eslint';
 
-const pluginMarkdown: ConfigWithExtends[] = [
+const pluginMarkdown: Linter.Config[] = [
   ...markdown.configs.recommended,
   {
     language: 'markdown/gfm',
