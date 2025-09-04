@@ -12,7 +12,8 @@ const asError = (givenSubject: unknown): Error => {
   ) return givenSubject;
 
   const castedMessage = asString(givenSubject);
-  return new Error(castedMessage);
+  const castedError = new Error(castedMessage);
+  return castedError;
 };
 
 export {

@@ -1,0 +1,45 @@
+import type {
+  Attempt_Error_Actionable,
+} from '../Error';
+
+import {
+  assertActionable,
+} from '../Error/assertions';
+
+import type {
+  Attempt_Outcome,
+} from '../Outcome';
+
+import {
+  Attempt_that,
+} from '../factory';
+
+import {
+  sanctioned,
+} from '../utilities/sanctionedTryCatch';
+
+import type Attempt_Adapted_Config from './Config';
+
+const Attempt_Adapted_to = <
+  SomeProduct,
+  SomeActionableError extends Attempt_Error_Actionable<string>,
+>(
+  forciblyGetProduct: () => SomeProduct,
+  given: Attempt_Adapted_Config<SomeActionableError>,
+): Attempt_Outcome<SomeProduct, SomeActionableError> => Attempt_that(ends => sanctioned({
+  try() {
+    const gottenProduct = forciblyGetProduct();
+    return ends.inSuccessWith(gottenProduct);
+  },
+  catch(someError) {
+    const someActionableError = assertActionable(someError, {
+      using: given.interpretationOf,
+    });
+
+    return ends.inFailureDueTo(someActionableError);
+  },
+}));
+
+export {
+  Attempt_Adapted_to,
+};

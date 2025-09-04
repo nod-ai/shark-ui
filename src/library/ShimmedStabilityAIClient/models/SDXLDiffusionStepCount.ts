@@ -1,4 +1,4 @@
-import DiscreteRange from '@/library/Range/DiscreteRange.ts';
+import Range_Discrete from '@/library/Range/Discrete';
 
 /**
  * Sourced from the [StabilityAI OpenAPI spec](https://github.com/nod-ai/StabilityAI-client-typescript/blob/HEAD/openapi.json)
@@ -6,7 +6,7 @@ import DiscreteRange from '@/library/Range/DiscreteRange.ts';
  * Defined at "components.schemas.Steps"
  */
 abstract class SDXLDiffusionStepCount { // eslint-disable-line @typescript-eslint/no-extraneous-class
-  public static range = DiscreteRange.spanning({
+  public static range = Range_Discrete.spanning({
     from: 10,
     to  : 50,
     by  : 1,

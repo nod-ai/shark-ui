@@ -5,26 +5,25 @@ import type {
 } from '@/library/typeUtilities/Boolean';
 
 import type {
-  ActionableError,
-} from '../error';
+  Attempt_Error_Actionable,
+} from '../Error';
 
 type Attempt_Outcome_Discriminant = 'success' | 'failure';
 
-// cspell:words sugarfree discriminable
-interface SyntacticallySugarfreeDiscriminableOutcome<
+interface Attempt_Outcome_Discriminable_SyntacticallySugarfree<
   SomeDiscriminant extends Attempt_Outcome_Discriminant,
 > {
   readonly discriminant: SomeDiscriminant;
 }
 
-interface DiscriminableOutcome<
+interface Attempt_Outcome_Discriminable<
   SomeDiscriminant extends Attempt_Outcome_Discriminant,
   SomePayload extends (
     SomeDiscriminant extends 'success'
       ? unknown
-      : ActionableError<string>
+      : Attempt_Error_Actionable<string>
   ),
-> extends SyntacticallySugarfreeDiscriminableOutcome<
+> extends Attempt_Outcome_Discriminable_SyntacticallySugarfree<
   SomeDiscriminant
 > {
   readonly isSuccess: Is<this['discriminant'], 'success'>;
@@ -41,14 +40,14 @@ interface DiscriminableOutcome<
   >;
 
   rewrappedWith<
-    TransformedPayload extends (
+    SomeTransformedPayload extends (
       SomeDiscriminant extends 'success'
         ? unknown
-        : ActionableError<string>
+        : Attempt_Error_Actionable<string>
     ) = SomePayload,
-  >(): DiscriminableOutcome<SomeDiscriminant, TransformedPayload>;
+  >(): Attempt_Outcome_Discriminable<SomeDiscriminant, SomeTransformedPayload>;
 }
 
 export type {
-  DiscriminableOutcome,
+  Attempt_Outcome_Discriminable,
 };

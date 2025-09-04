@@ -4,66 +4,81 @@ on:
   push:
     branches:
       - integration
-    paths:
-      - '.github/workflows/node.yml' # Trigger workflow when it's modified
-      - 'package.json'               # For dependency changes
-      - '**/*.js'                    # For scripts
-      - '**/*.ts'                    # For scripts
-      - '**/*.cjs'                   # For scripts
-      - '**/*.cts'                   # For scripts
-      - '**/*.mjs'                   # For scripts
-      - '**/*.mts'                   # For scripts
-      - '**/*.jsx'                   # For scripts
-      - '**/*.tsx'                   # For scripts
-      - '**/*.vue'                   # For single-file components that contain a script block
-      - '!**/*.md'                   # Ignore markdown files (and their constituent fenced code blocks)
-      - '!docs/**'                   # Ignore docs folder
+      - release
   pull_request:
     branches:
       - integration
-    paths:
-      - '.github/workflows/node.yml' # Trigger workflow when it's modified
-      - 'package.json'               # For dependency changes
-      - '**/*.js'                    # For scripts
-      - '**/*.ts'                    # For scripts
-      - '**/*.cjs'                   # For scripts
-      - '**/*.cts'                   # For scripts
-      - '**/*.mjs'                   # For scripts
-      - '**/*.mts'                   # For scripts
-      - '**/*.jsx'                   # For scripts
-      - '**/*.tsx'                   # For scripts
-      - '**/*.vue'                   # For single-file components that contain a script block
-      - '!**/*.md'                   # Ignore markdown files (and their constituent fenced code blocks)
-      - '!docs/**'                   # Ignore docs folder
+      - release
 
 jobs:
   analyze:
     runs-on: ubuntu-latest
-    name: Lint and compile via package.json
+    name: Lint, Compile, Build, and Test
     steps:
       - uses: actions/checkout@v4
+      - name: Check for changes to this workflow, dependencies, scripts, and single-file components
+        uses: tj-actions/changed-files@v46
+        id: changed-files
+        with:
+          files: |
+            .github/workflows/node.yml
+            package.json
+            package-lock.json
+            **/*.js
+            **/*.ts
+            **/*.cjs
+            **/*.cts
+            **/*.mjs
+            **/*.mts
+            **/*.jsx
+            **/*.tsx
+            **/*.vue
       - name: Set up Node.js
+        if: steps.changed-files.outputs.any_changed == 'true'
         uses: actions/setup-node@v4
         with:
           cache: 'npm'
-      - name: Install all dependencies (which includes linters)
+      - name: Install all dependencies
+        if: steps.changed-files.outputs.any_changed == 'true'
         run: npm clean-install
-      - name: Run the linter
+      - name: Try to pass linter
+        if: steps.changed-files.outputs.any_changed == 'true'
         id: lint
         run: npx eslint . --max-warnings 0 --cache
         continue-on-error: true
-      - name: If linter fails, highlight debug tools
+      - name: If linting fails, highlight debug tools
         if: steps.lint.outcome == 'failure'
         run: |
           echo "::notice::Enable lint-on-save in your editor for automatic fixes"
           echo "::notice::Run \`npm run lint\` in your dev environment for details about issues that aren't automatically fixable"
           exit 1
-      - name: Run the compiler
+      - name: Try to pass compiler
+        if: steps.changed-files.outputs.any_changed == 'true'
         id: compile
-        run: npx vue-tsc --build
+        run: npm run type-check
         continue-on-error: true
       - name: If compilation fails, highlight debug tools
         if: steps.compile.outcome == 'failure'
         run: |
-          echo "::notice::Run \`npx vue-tsc --build\` in your dev environment for details about compiler issues"
+          echo "::notice::Run \`npm run type-check\` in your dev environment for details about compiler issues"
+          exit 1
+      - name: Try to build for production # "Build" in this context means "transpile, minify, tree-shake, and bundle"
+        if: steps.changed-files.outputs.any_changed == 'true'
+        id: build
+        run: npm run build-only
+        continue-on-error: true
+      - name: If building fails, highlight debug tools
+        if: steps.build.outcome == 'failure'
+        run: |
+          echo "::notice::Run \`npm run build-only\` in your dev environment for a detailed report about build failures"
+          exit 1
+      - name: Try to pass all unit tests
+        if: steps.changed-files.outputs.any_changed == 'true'
+        id: test_units
+        run: npm run test:unit
+        continue-on-error: true
+      - name: If unit tests fail, highlight debug tools
+        if: steps.test_units.outcome == 'failure'
+        run: |
+          echo "::notice::Run \`npm run test:unit\` in your dev environment for a detailed report about failed unit tests"
           exit 1

@@ -1,14 +1,30 @@
 {
     "cSpell.words": [
-        "cofactor",
-        "concatenatable",
-        "Flaggable",
         "SDXL",
-        "Shortfin",
         "stabilityai",
         "vite",
         "vuetify"
     ],
+    "cSpell.customDictionaries": {
+        "library/Attempt": {
+            "name": "library/Attempt",
+            "path": "./src/library/Attempt/dictionary.txt",
+            "description": "Words introduced by the @/library/Attempt module",
+            "addWords": false
+        },
+        "library/math": {
+            "name": "library/math",
+            "path": "./src/library/math/dictionary.txt",
+            "description": "Words introduced by the @/library/math module",
+            "addWords": false
+        },
+        "library/Shortfin": {
+            "name": "library/Shortfin",
+            "path": "./src/library/Shortfin/dictionary.txt",
+            "description": "Words introduced by the @/library/Shortfin module",
+            "addWords": false
+        },
+    },
     "editor.codeActionsOnSave": {
         "source.fixAll": "explicit",
     },
@@ -28,6 +44,7 @@
     ],
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
+        "*.ts": "${capture}.test.ts",
         "tsconfig.json": "tsconfig.*.json",
         "vite.config.*": "jsconfig*, vitest.config.*, cypress.config.*, playwright.config.*, env.d.ts",
         "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*",

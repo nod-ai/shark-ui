@@ -1,0 +1,37 @@
+name: Docs
+
+on:
+  push:
+    branches:
+      - integration
+      - release
+  pull_request:
+    branches:
+      - integration
+      - release
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check for changes to doc files
+        uses: tj-actions/changed-files@v46
+        id: changed-files
+        with:
+          files: '**/*.md'
+          separator: ','
+      - name: Lint the updated Markdown files
+        id: lint-markdown-files
+        uses: DavidAnson/markdownlint-cli2-action@v20
+        if: steps.changed-files.outputs.any_changed == 'true'
+        with:
+          config: .markdownlint-cli2.yaml
+          globs: ${{ steps.changed-files.outputs.all_changed_files }}
+          separator: ','
+        continue-on-error: true
+      - name: If linter failed, highlight debug tools
+        if: steps.lint-markdown-files.outcome == 'failure'
+        run: |
+          echo "::notice::Run \`npm run lint:docs\` in your dev environment to see which issues aren't automatically fixable."
+          exit 1

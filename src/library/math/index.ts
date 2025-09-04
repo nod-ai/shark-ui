@@ -1,3 +1,1 @@
-export * from './operator';
-
-export * from './aggregator';
+export * from './exports.ts';

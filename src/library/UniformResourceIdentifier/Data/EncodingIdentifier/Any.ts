@@ -1,9 +1,9 @@
 import type {
-  DataURI_EncodingIdentifier_all,
+  URI_Data_EncodingIdentifier_all,
 } from './all';
 
-type DataURI_EncodingIdentifier_Any = (typeof DataURI_EncodingIdentifier_all)[number];
+type URI_Data_EncodingIdentifier_Any = (typeof URI_Data_EncodingIdentifier_all)[number];
 
 export type {
-  DataURI_EncodingIdentifier_Any,
+  URI_Data_EncodingIdentifier_Any,
 };

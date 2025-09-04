@@ -1,2 +1,1 @@
-export * from './synchronous';
-export * from './asynchronous';
+export * from './exports.ts';

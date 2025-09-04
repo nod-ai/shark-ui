@@ -16,8 +16,8 @@ import {
   VSlider,
 } from 'vuetify/components/VSlider';
 
-import DiscreteRange from '@/library/Range/DiscreteRange.ts';
-import type Range from '@/library/Range/index.ts';
+import type Range from '@/library/Range';
+import Range_Discrete from '@/library/Range/Discrete';
 
 import {
   shallowlyMerged,
@@ -29,8 +29,8 @@ const currentValue = defineModel<number>({
 
 const given = defineProps<{
   label: string;
-  range: DiscreteRange;
-  tickStep: DiscreteRange['stepSize'];
+  range: Range_Discrete;
+  tickStep: Range_Discrete['stepSize'];
 }>();
 
 const incrementCurrentValueBy = (givenStepCount: number) => {
@@ -83,9 +83,11 @@ const tickLabels = (
   const tickPosition = givenPosition + derivedOffset;
   const tickLabel = givenPosition.toString();
 
-  return {
+  const tickLabelByPosition = {
     [tickPosition]: tickLabel,
   };
+
+  return tickLabelByPosition;
 };
 
 const tickLabelsAlong = (
@@ -93,23 +95,22 @@ const tickLabelsAlong = (
   {
     atEvery: givenStepSize,
   }: {
-    atEvery: DiscreteRange['stepSize'];
+    atEvery: Range_Discrete['stepSize'];
   },
 ): SliderTickLabelsByPosition => {
-  const tickRange = DiscreteRange.spanning({
+  const tickRange = Range_Discrete.spanning({
     from: givenRange.lowerBound,
     to  : givenRange.upperBound,
     by  : givenStepSize,
   });
 
-  const labelSets = tickRange.inclusiveSteps.map((eachPosition) => {
-    return tickLabels({
-      by: eachPosition,
-      in: tickRange,
-    });
-  });
+  const labelSets = tickRange.inclusiveSteps.map(eachPosition => tickLabels({
+    by: eachPosition,
+    in: tickRange,
+  }));
 
-  return shallowlyMerged(...labelSets);
+  const mergedLabelTables = shallowlyMerged(...labelSets);
+  return mergedLabelTables;
 };
 </script>
 

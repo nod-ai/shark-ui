@@ -4,7 +4,7 @@ type Repository_Issue_Label =
   | 'documentation'
 ;
 
-type Repository_Issue_Type =
+type Repository_Issue_Category =
   | 'Feature'
   | 'Bug'
   | 'Task'
@@ -14,7 +14,8 @@ interface Repository_Issue {
   title: string;
   body: string;
   labels: Repository_Issue_Label[];
-  type: Repository_Issue_Type;
+  /** a.k.a. "type" */
+  category: Repository_Issue_Category;
 }
 
 const Repository = {
@@ -32,7 +33,7 @@ const Repository = {
     referencedParameters.set('title', given.title);
     referencedParameters.set('body', given.body);
     referencedParameters.set('labels', given.labels.join());
-    referencedParameters.set('type', given.type);
+    referencedParameters.set('type', given.category);
 
     return mutableDraft;
   },

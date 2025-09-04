@@ -1,30 +1,30 @@
-type ProductTransformer<
-  TransformableProduct,
-  TransformedProduct,
+type Attempt_Outcome_Success_Product_Transformer<
+  SomeTransformableProduct,
+  SomeTransformedProduct,
 > = (
-  transformableProduct: TransformableProduct,
-) => TransformedProduct;
+  transformableProduct: SomeTransformableProduct,
+) => SomeTransformedProduct;
 
-const productIdentity = <
-  TransformableProduct,
-  TransformedProduct,
+const Attempt_Outcome_Success_Product_Transformer_identity = <
+  SomeTransformableProduct,
+  SomeTransformedProduct,
 >(
-  transformableProduct: NoInfer<TransformableProduct>,
-): NoInfer<TransformedProduct> => {
-  return transformableProduct as unknown as TransformedProduct;
+  transformableProduct: NoInfer<SomeTransformableProduct>,
+): NoInfer<SomeTransformedProduct> => {
+  return transformableProduct as unknown as SomeTransformedProduct;
 };
 
-interface Attempt_Success_Transformer<
-  TransformableProduct,
-  TransformedProduct,
+interface Attempt_Outcome_Success_Transformer<
+  SomeTransformableProduct,
+  SomeTransformedProduct,
 > {
-  product: ProductTransformer<
-    TransformableProduct,
-    TransformedProduct
+  product: Attempt_Outcome_Success_Product_Transformer<
+    SomeTransformableProduct,
+    SomeTransformedProduct
   >;
 }
 
 export {
-  type Attempt_Success_Transformer,
-  productIdentity,
+  type Attempt_Outcome_Success_Transformer,
+  Attempt_Outcome_Success_Product_Transformer_identity,
 };

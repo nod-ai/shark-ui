@@ -1,19 +1,59 @@
+import Attempt from '@/library/Attempt';
+
+import {
+  isWhole,
+} from '../predicate';
+
+import {
+  absoluteValueOf,
+} from './absoluteValueOf';
+
 const greatestCommonDivisor = (
   leftHandOperand: number,
   rightHandOperand: number,
 ): number => {
-  let nextDividend = leftHandOperand;
-  let previousRemainder = rightHandOperand;
+  if (
+    !isWhole(leftHandOperand)
+  ) return Attempt.abandon('Left operand must be whole.');
 
-  while (previousRemainder !== 0) {
-    const eachDivisor = previousRemainder;
-    previousRemainder = nextDividend % eachDivisor;
-    nextDividend = eachDivisor;
-  }
+  if (
+    !isWhole(rightHandOperand)
+  ) return Attempt.abandon('Right operand must be whole.');
 
-  return nextDividend;
+  const leftHandMagnitude = absoluteValueOf(leftHandOperand);
+  const rightHandMagnitude = absoluteValueOf(rightHandOperand);
+
+  if (
+    rightHandMagnitude > leftHandMagnitude
+  ) return greatestCommonDivisor(rightHandMagnitude, leftHandMagnitude);
+  else if (
+    rightHandMagnitude !== 0
+  ) return greatestCommonDivisor(rightHandMagnitude, leftHandMagnitude % rightHandMagnitude);
+
+  return leftHandMagnitude;
 };
 
+/** Alias for {@link greatestCommonDivisor} */
+const greatestCommonFactor = greatestCommonDivisor;
+
+/** Alias for {@link greatestCommonDivisor} */
+const highestCommonDivisor = greatestCommonDivisor;
+
+/** Alias for {@link greatestCommonDivisor} */
+const highestCommonFactor = greatestCommonDivisor;
+
+/** Abbreviation for {@link greatestCommonDivisor} */
+const gcd = greatestCommonDivisor;
+
+/** Abbreviation for {@link greatestCommonFactor} */
+const gcf = greatestCommonFactor;
+
 export {
+  greatestCommonDivisor as default,
   greatestCommonDivisor,
+  greatestCommonFactor,
+  highestCommonDivisor,
+  highestCommonFactor,
+  gcd,
+  gcf,
 };

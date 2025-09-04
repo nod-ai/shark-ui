@@ -1,5 +1,1 @@
-import * as DataURI_EncodingIdentifier from './exports';
-
-export {
-  DataURI_EncodingIdentifier,
-};
+export * as URI_Data_EncodingIdentifier from './exports.ts';

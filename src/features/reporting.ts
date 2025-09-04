@@ -4,14 +4,12 @@ import Repository from '@/utilities/Repository.ts';
 
 const formatted = (
   givenError: Contextualized<Error, Error>,
-): string => {
-  return [
-    `${givenError.message}:`,
-    '"""',
-    givenError.cause.message,
-    '"""',
-  ].join('\n');
-};
+): string => [
+  `${givenError.message}:`,
+  '"""',
+  givenError.cause.message,
+  '"""',
+].join('\n');
 
 const promptUserToReport = (givenError: Error) => {
   const unexpectedError = Contextualized.cast(givenError, 'Unexpected Error');
@@ -29,10 +27,10 @@ const promptUserToReport = (givenError: Error) => {
   ) return;
 
   const draftOfNewIssue = Repository.draftIssue({
-    title : `[Unexpected Error]: can't <some task> when <some context>`,
-    body  : `### Details\n${formattedErrorDetails}`.replaceAll('\n', '\n> '),
-    labels: ['bug'],
-    type  : 'Bug',
+    title   : `[Unexpected Error]: can't <some task> when <some context>`,
+    body    : `### Details\n${formattedErrorDetails}`.replaceAll('\n', '\n> '),
+    labels  : ['bug'],
+    category: 'Bug',
   });
 
   window.open(draftOfNewIssue);

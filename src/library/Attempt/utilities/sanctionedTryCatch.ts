@@ -4,24 +4,24 @@ import {
 
 import {
   assertAppropriatelyThrown,
-} from '../error/assertions';
+} from '../Error/assertions';
 
 import type {
   AppropriatelyThrown,
-} from '../error/modifier';
+} from '../Error/modifier';
 
 const sanctioned = <
-  TryBlockOutput,
-  CatchBlockOutput,
+  SomeTryBlockOutput,
+  SomeCatchBlockOutput,
 >(
   {
     try: getTryBlockOutput,
     catch: catchBlockOutputFor,
   }: {
-    try: () => TryBlockOutput;
-    catch: ($0: AppropriatelyThrown<Error>) => CatchBlockOutput;
+    try: () => SomeTryBlockOutput;
+    catch: ($0: AppropriatelyThrown<Error>) => SomeCatchBlockOutput;
   },
-): TryBlockOutput | CatchBlockOutput => {
+): SomeTryBlockOutput | SomeCatchBlockOutput => {
   // eslint-disable-next-line no-restricted-syntax -- this is the implementation designed to help avoid use of raw try/catch
   try {
     return getTryBlockOutput();
@@ -34,17 +34,19 @@ const sanctioned = <
 };
 
 const sanctionedAsync = async <
-  OutputOfResolvedPromise,
-  OutputOfRejectedPromise,
+  SomeOutputOfResolvedPromise,
+  SomeOutputOfRejectedPromise,
 >(
   {
     try: retrieveTryBlockOutput,
     catch: catchBlockOutputFor,
   }: {
-    try: () => Promise<OutputOfResolvedPromise>;
-    catch: ($0: AppropriatelyThrown<Error>) => OutputOfRejectedPromise;
+    try: () => Promise<SomeOutputOfResolvedPromise>;
+    catch: ($0: AppropriatelyThrown<Error>) => SomeOutputOfRejectedPromise;
   },
-): Promise<OutputOfResolvedPromise | OutputOfRejectedPromise> => {
+): Promise<
+  SomeOutputOfResolvedPromise | SomeOutputOfRejectedPromise
+> => {
   const sanction = (whateverThatWasThrown: unknown) => sanctioned({
     try: () => {
       throw whateverThatWasThrown; // eslint-disable-line no-restricted-syntax -- puts the error back through the sanctioned catch

@@ -1,34 +1,34 @@
 import type {
-  ActionableError,
-} from '../../error';
+  Attempt_Error_Actionable,
+} from '../../Error';
 
-type CauseTransformer<
-  TransformableActionableError extends ActionableError<string>,
-  TransformedActionableError extends ActionableError<string>,
+type Attempt_Outcome_Failure_Cause_Transformer<
+  SomeTransformableActionableError extends Attempt_Error_Actionable<string>,
+  SomeTransformedActionableError extends Attempt_Error_Actionable<string>,
 > = (
-  transformableCause: TransformableActionableError,
-) => TransformedActionableError;
+  transformableCause: SomeTransformableActionableError,
+) => SomeTransformedActionableError;
 
-const causeIdentity = <
-  TransformableActionableError extends ActionableError<string>,
-  TransformedActionableError extends ActionableError<string>,
+const Attempt_Outcome_Failure_Cause_Transformer_identity = <
+  SomeTransformableActionableError extends Attempt_Error_Actionable<string>,
+  SomeTransformedActionableError extends Attempt_Error_Actionable<string>,
 >(
-  transformableCause: NoInfer<TransformableActionableError>,
-): NoInfer<TransformedActionableError> => {
-  return transformableCause as unknown as TransformedActionableError;
+  transformableCause: NoInfer<SomeTransformableActionableError>,
+): NoInfer<SomeTransformedActionableError> => {
+  return transformableCause as unknown as SomeTransformedActionableError;
 };
 
-interface Attempt_Failure_Transformer<
-  TransformableActionableError extends ActionableError<string>,
-  TransformedActionableError extends ActionableError<string>,
+interface Attempt_Outcome_Failure_Transformer<
+  SomeTransformableActionableError extends Attempt_Error_Actionable<string>,
+  SomeTransformedActionableError extends Attempt_Error_Actionable<string>,
 > {
-  cause: CauseTransformer<
-    TransformableActionableError,
-    TransformedActionableError
+  cause: Attempt_Outcome_Failure_Cause_Transformer<
+    SomeTransformableActionableError,
+    SomeTransformedActionableError
   >;
 }
 
 export {
-  type Attempt_Failure_Transformer,
-  causeIdentity,
+  type Attempt_Outcome_Failure_Transformer,
+  Attempt_Outcome_Failure_Cause_Transformer_identity,
 };

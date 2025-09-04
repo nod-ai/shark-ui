@@ -1,17 +1,19 @@
 import {
   configureVueProject,
   defineConfigWithVueTs,
-  vueTsConfigs,
+  vueTsConfigs as VueTSConfig,
 } from '@vue/eslint-config-typescript';
 
 import pluginVue from 'eslint-plugin-vue';
 
-import type {
-  ConfigWithExtends,
+import {
+  config,
+  type ConfigWithExtends,
 } from 'typescript-eslint';
 
 import pluginCypress from './cypress/eslint.config';
 import pluginImport from './eslint.import';
+import pluginMarkdown from './eslint.markdown';
 import pluginStylistic from './eslint.stylistic';
 import pluginVitest from './eslint.vitest';
 
@@ -50,6 +52,9 @@ const extraConfigForESLint: ConfigWithExtends = {
         message : 'Prefer `Attempt.that` callback for error propagation over `throw`.',
       },
     ],
+    'no-useless-rename': [
+      'error', // Reduces diff noise when renaming symbols at module boundaries
+    ],
   },
 };
 
@@ -74,6 +79,18 @@ const extraConfigForTypeScriptESLint: ConfigWithExtends = {
     ],
     '@typescript-eslint/no-unnecessary-parameter-property-assignment': [
       'error', // See https://www.typescriptlang.org/docs/handbook/2/classes.html#parameter-properties for more information
+    ],
+  },
+};
+
+const VueTSConfig_overridesForAugmentationsToModuleDefinitions: ConfigWithExtends = {
+  name : 'shark-ui/module-definition-augmentations',
+  files: [
+    '**/definitionAugmentation.ts',
+  ],
+  rules: {
+    '@typescript-eslint/no-namespace': [
+      'off', // Namespaces are the only way to emulate nested types. It's not possible to do this with pure modules.
     ],
   },
 };
@@ -103,13 +120,29 @@ const configWithVueTS = defineConfigWithVueTs(
   ...pluginImport,
 
   pluginVue.configs['flat/recommended'],
-  vueTsConfigs.strictTypeChecked,
-  vueTsConfigs.stylisticTypeChecked,
+  VueTSConfig.strictTypeChecked,
+  VueTSConfig.stylisticTypeChecked,
+  VueTSConfig_overridesForAugmentationsToModuleDefinitions,
 
   ...pluginVitest,
   ...pluginCypress,
 );
 
+const completeConfig = config([
+  {
+    extends: configWithVueTS,
+    ignores: [
+      '**/*.md',
+    ],
+  },
+  {
+    extends: pluginMarkdown,
+    files  : [
+      '**/*.md',
+    ],
+  },
+]);
+
 export {
-  configWithVueTS as default,
+  completeConfig as default,
 };

@@ -1,22 +1,17 @@
 <script setup lang="ts">
+import * as TextToImage from '@/features/TextToImage';
+
 import TextToImageServerConnectionAlert from './TextToImageServerConnectionAlert.vue';
 import TextToImageServerSpecificationAlert from './TextToImageServerSpecificationAlert.vue';
 
-import * as TextToImage from '@/features/TextToImage';
-
-type OutputError =
-  | TextToImage.Server.ConnectionError
-  | TextToImage.Server.SpecificationError
-;
-
 defineProps<{
-  error: OutputError;
+  error: TextToImage.Server.Error.Any;
 }>();
 </script>
 
 <template>
   <TextToImageServerSpecificationAlert
-    v-if="(error instanceof TextToImage.Server.SpecificationError)"
+    v-if="(error instanceof TextToImage.Server.Error.Specification)"
     :error="error"
   />
   <TextToImageServerConnectionAlert

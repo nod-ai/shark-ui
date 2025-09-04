@@ -31,9 +31,9 @@ type StringLike = string | String; // eslint-disable-line @typescript-eslint/no-
 const concatenated = (
   ...givenOperands: (StringLike | null)[]
 ): string => {
-  const concatenatableOperands = givenOperands.map($0 => $0?.toString() ?? '');
-  const concatenatedOperands = concatenatableOperands.join('');
-  return concatenatedOperands;
+  const joinableOperands = givenOperands.map($0 => $0?.toString() ?? '');
+  const joinedOperands = joinableOperands.join('');
+  return joinedOperands;
 };
 
 export {

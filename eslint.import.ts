@@ -4,18 +4,28 @@ import type {
   ConfigWithExtends,
 } from 'typescript-eslint';
 
-const extraConfig: ConfigWithExtends = {
-  name    : 'shark-ui/import',
-  files   : ['**/*.{ts,vue}'],
+const extendedConfig: ConfigWithExtends = {
+  name : 'shark-ui/import',
+  files: [
+    '**/*.{ts,vue}',
+  ],
+  extends: [
+    importPlugin.flatConfigs.recommended,
+    importPlugin.flatConfigs.typescript,
+  ],
   settings: {
     'import/resolver': {
-      'typescript'                         : true,
-      'node'                               : true,
+      'typescript': {
+        project: './tsconfig.json',
+      },
       'eslint-import-resolver-custom-alias': {
         alias: {
           '@': './src',
         },
-        extensions: ['.ts', '.vue'],
+        extensions: [
+          '.ts',
+          '.vue',
+        ],
       },
     },
   },
@@ -25,6 +35,13 @@ const extraConfig: ConfigWithExtends = {
     ],
     'import/group-exports': [
       'error', // Encourages decoupling the export of a module from its declaration, which leads to cleaner diffs
+    ],
+    'import/no-useless-path-segments': [
+      'error',
+      {
+        // 2025-July-29: Only works for relative paths, not absolute paths
+        noUselessIndex: true, // Avoids noise in diffs from converting single-file modules <-> directory modules
+      },
     ],
     'import/order': [
       'error',
@@ -38,7 +55,7 @@ const extraConfig: ConfigWithExtends = {
         ],
         'pathGroups': [
           {
-            pattern : '@/library/vue', // Allows Vue utilities to bubble to the very top of the <script setup> tag
+            pattern : '@/library/vue{,/**}', // Allows Vue utilities to bubble to the very top of the <script setup> tag
             group   : 'builtin',
             position: 'before',
           },
@@ -48,13 +65,13 @@ const extraConfig: ConfigWithExtends = {
             position: 'after',
           },
           {
-            pattern : '@/!{features}/**', // Alias for "src/**"
-            group   : 'internal',
+            pattern : '@/!(features){,/**}', // Highlights the supporting logic of the application
+            group   : 'external',
             position: 'after',
           },
           {
             pattern : '@/features/**', // Highlights the business logic of the application
-            group   : 'internal',
+            group   : 'external',
             position: 'after',
           },
         ],
@@ -69,9 +86,7 @@ const extraConfig: ConfigWithExtends = {
 };
 
 const pluginImport: ConfigWithExtends[] = [
-  importPlugin.flatConfigs.recommended,
-  importPlugin.flatConfigs.typescript,
-  extraConfig,
+  extendedConfig,
 ];
 
 export {

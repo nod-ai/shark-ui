@@ -1,4 +1,10 @@
 import type {
+  Attempt_Error_Actionable,
+} from '../Error';
+
+import Attempt_Error_Creation from '../Error/Creation';
+
+import type {
   Attempt_Outcome,
   CauseOf,
   ProductOf,
@@ -8,40 +14,37 @@ import {
   Attempt_ended as handles,
 } from '../ended';
 
-import type {
-  ActionableError,
-} from '../error';
-
 import {
   sanctioned,
 } from '../utilities/sanctionedTryCatch';
 
-import AttemptCreationError from './AttemptCreationError';
-
-type Attempt_EndGetter<
-  InferredOutcome extends Attempt_Outcome<unknown, ActionableError<string>>,
+type Attempt_End_Getter<
+  SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
 > = (
   givenHandles: typeof handles
-) => InferredOutcome;
+) => SomeInferredOutcome;
 
 const Attempt_that = <
-  InferredOutcome extends Attempt_Outcome<unknown, ActionableError<string>>,
+  SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
 >(
-  endsAccordingTo: Attempt_EndGetter<InferredOutcome>,
+  endsAccordingTo: Attempt_End_Getter<SomeInferredOutcome>,
 ) => {
-  type EquivalentOutcome = Attempt_Outcome<ProductOf<InferredOutcome>, CauseOf<InferredOutcome>>;
+  type EquivalentOutcome = Attempt_Outcome<
+    ProductOf<SomeInferredOutcome>,
+    CauseOf<SomeInferredOutcome>
+  >;
 
   return sanctioned({
     try() {
       return endsAccordingTo(handles) as EquivalentOutcome;
     },
     catch(someError) {
-      return AttemptCreationError.rethrow(someError);
+      return Attempt_Error_Creation.rethrow(someError);
     },
   });
 };
 
 export {
-  type Attempt_EndGetter,
+  type Attempt_End_Getter,
   Attempt_that,
 };

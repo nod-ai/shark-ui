@@ -1,5 +1,1 @@
-import * as ContentDescriptor_StructuredSyntaxNameSuffix from './exports';
-
-export {
-  ContentDescriptor_StructuredSyntaxNameSuffix,
-};
+export * as ContentDescriptor_StructuredSyntaxNameSuffix from './exports.ts';
