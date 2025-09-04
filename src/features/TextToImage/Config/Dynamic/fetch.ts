@@ -38,7 +38,5 @@ const TextToImage_Config_Dynamic_fetch = (): Promise<
 });
 
 export {
-  TextToImage_Config_Dynamic_endpoint as endpoint,
   TextToImage_Config_Dynamic_fetch as fetch,
-  TextToImage_Config_Dynamic_Fetching as Fetching,
 };
