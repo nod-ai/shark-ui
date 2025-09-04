@@ -20,7 +20,17 @@ Thanks for your interest in contributing to SHARK UI! We're excited to have you 
 
 ## Commit Message Guidelines
 
-<!-- TODO -->
+Here's the template:
+
+```plaintext
+<type>(<optional scope>): <summary>
+
+<optional body>
+
+<optional footer>
+```
+
+See the doc on [commit messages](./docs/contributing/commit-messages.md) for more details!
 
 ## Questions?
 
