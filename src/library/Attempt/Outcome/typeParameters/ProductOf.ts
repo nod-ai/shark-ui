@@ -3,8 +3,11 @@ import type {
 } from '../../Error';
 
 import type {
-  Attempt_Outcome,
   Attempt_Outcome_Success,
+} from '../Success';
+
+import type {
+  Attempt_Outcome,
 } from '../definition.ts';
 
 type ProductOf<

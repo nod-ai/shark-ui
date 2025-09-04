@@ -37,5 +37,4 @@ class URLComponent_Origin
 
 export {
   URLComponent_Origin,
-  URLComponent_Origin_ParsingError,
 };

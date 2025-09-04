@@ -27,7 +27,5 @@ const TextToImage_Config_Static_read = (): Promise<
 });
 
 export {
-  TextToImage_Config_Static_file as file,
   TextToImage_Config_Static_read as read,
-  TextToImage_Config_Static_Reading as Reading,
 };

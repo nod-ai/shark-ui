@@ -6,6 +6,5 @@ import {
 const isInteger = isWhole;
 
 export {
-  isWhole,
   isInteger,
 };

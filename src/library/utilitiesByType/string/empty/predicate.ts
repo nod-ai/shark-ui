@@ -13,7 +13,5 @@ const isEmpty = (
 };
 
 export {
-  emptyString,
-  type EmptyString,
   isEmpty,
 };

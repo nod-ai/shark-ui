@@ -1,6 +1,5 @@
-import {
-  type Attempt_Outcome_Success_Product_Transformer,
-  Attempt_Outcome_Success_Product_Transformer_identity,
+import type {
+  Attempt_Outcome_Success_Product_Transformer,
 } from './Product';
 
 interface Attempt_Outcome_Success_Transformer<
@@ -13,7 +12,6 @@ interface Attempt_Outcome_Success_Transformer<
   >;
 }
 
-export {
-  type Attempt_Outcome_Success_Transformer,
-  Attempt_Outcome_Success_Product_Transformer_identity,
+export type {
+  Attempt_Outcome_Success_Transformer,
 };

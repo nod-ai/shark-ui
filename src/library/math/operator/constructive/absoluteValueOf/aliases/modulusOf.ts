@@ -2,15 +2,9 @@ import {
   absoluteValueOf,
 } from '../definition.ts';
 
-import {
-  unsigned,
-} from './unsigned.ts';
-
 /** Alias for {@link absoluteValueOf} */
 const modulusOf = absoluteValueOf;
 
 export {
-  absoluteValueOf,
   modulusOf,
-  unsigned,
 };

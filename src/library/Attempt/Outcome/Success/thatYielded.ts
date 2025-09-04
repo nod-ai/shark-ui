@@ -1,7 +1,6 @@
 import {
-  type Attempt_Outcome_Success_Transformer,
   Attempt_Outcome_Success_Product_Transformer_identity,
-} from './Transformer';
+} from './Product';
 
 import type {
   Attempt_Outcome_Success,
@@ -38,8 +37,5 @@ const Attempt_Outcome_Success_thatYielded = <
 });
 
 export {
-  type Attempt_Outcome_Success,
-  type Attempt_Outcome_Success_Transformer,
   Attempt_Outcome_Success_thatYielded,
-  Attempt_Outcome_Success_Product_Transformer_identity,
 };

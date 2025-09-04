@@ -31,6 +31,5 @@ const safeAsync = async <
 };
 
 export {
-  safe,
   safeAsync,
 };

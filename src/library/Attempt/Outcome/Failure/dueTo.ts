@@ -3,9 +3,8 @@ import type {
 } from '../../Error';
 
 import {
-  type Attempt_Outcome_Failure_Transformer,
   Attempt_Outcome_Failure_Cause_Transformer_identity,
-} from './Transformer';
+} from './Cause';
 
 import type {
   Attempt_Outcome_Failure,
@@ -42,8 +41,5 @@ const Attempt_Outcome_Failure_dueTo = <
 });
 
 export {
-  type Attempt_Outcome_Failure,
-  type Attempt_Outcome_Failure_Transformer,
   Attempt_Outcome_Failure_dueTo,
-  Attempt_Outcome_Failure_Cause_Transformer_identity,
 };

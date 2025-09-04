@@ -42,6 +42,5 @@ const Attempt_Fresh_thatEventually = async <
 };
 
 export {
-  type Attempt_End_Retriever,
   Attempt_Fresh_thatEventually,
 };

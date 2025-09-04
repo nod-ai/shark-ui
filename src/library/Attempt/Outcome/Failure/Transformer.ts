@@ -2,9 +2,8 @@ import type {
   Attempt_Error_Actionable,
 } from '../../Error';
 
-import {
-  type Attempt_Outcome_Failure_Cause_Transformer,
-  /**/ Attempt_Outcome_Failure_Cause_Transformer_identity,
+import type {
+  Attempt_Outcome_Failure_Cause_Transformer,
 } from './Cause';
 
 interface Attempt_Outcome_Failure_Transformer<
@@ -17,7 +16,6 @@ interface Attempt_Outcome_Failure_Transformer<
   >;
 }
 
-export {
-  type Attempt_Outcome_Failure_Transformer,
-  Attempt_Outcome_Failure_Cause_Transformer_identity,
+export type {
+  Attempt_Outcome_Failure_Transformer,
 };

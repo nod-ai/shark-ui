@@ -3,8 +3,11 @@ import type {
 } from '../../Error';
 
 import type {
-  Attempt_Outcome,
   Attempt_Outcome_Failure,
+} from '../Failure';
+
+import type {
+  Attempt_Outcome,
 } from '../definition.ts';
 
 type CauseOf<

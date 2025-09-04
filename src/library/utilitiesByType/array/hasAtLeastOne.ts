@@ -9,6 +9,5 @@ const hasAtLeastOne = <SomeElement>(
 };
 
 export {
-  isEmpty,
   hasAtLeastOne,
 };
