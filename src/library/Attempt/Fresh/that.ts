@@ -42,6 +42,5 @@ const Attempt_Fresh_that = <
 };
 
 export {
-  type Attempt_End_Getter,
   Attempt_Fresh_that,
 };
