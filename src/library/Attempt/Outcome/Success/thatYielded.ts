@@ -1,6 +1,9 @@
 import {
-  type Attempt_Outcome_Success_Transformer,
   Attempt_Outcome_Success_Product_Transformer_identity,
+} from './Product';
+
+import type {
+  Attempt_Outcome_Success_Transformer,
 } from './Transformer';
 
 import type {
