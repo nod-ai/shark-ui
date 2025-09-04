@@ -1,7 +1,3 @@
-import type {
-  Attempt_Outcome_Success_Product_Transformer,
-} from './definition.ts';
-
 const Attempt_Outcome_Success_Product_Transformer_identity = <
   SomeTransformableProduct,
   SomeTransformedProduct,
@@ -12,6 +8,5 @@ const Attempt_Outcome_Success_Product_Transformer_identity = <
 };
 
 export {
-  type Attempt_Outcome_Success_Product_Transformer,
-  /**/ Attempt_Outcome_Success_Product_Transformer_identity,
+  Attempt_Outcome_Success_Product_Transformer_identity,
 };
