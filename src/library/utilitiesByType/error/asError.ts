@@ -17,6 +17,5 @@ const asError = (givenSubject: unknown): Error => {
 };
 
 export {
-  isError,
   asError,
 };
