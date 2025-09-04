@@ -1,11 +1,3 @@
-import type {
-  If,
-} from './If';
-
-import type {
-  Is,
-} from './Is';
-
 type Not<
   SomeBoolean extends boolean,
 > = SomeBoolean extends true
@@ -13,7 +5,5 @@ type Not<
   : true;
 
 export type {
-  Is,
-  If,
   Not,
 };
