@@ -29,6 +29,5 @@ const Attempt_Adapted_toSettle = async <
 };
 
 export {
-  Attempt_Adapted_toEventually,
   Attempt_Adapted_toSettle,
 };
