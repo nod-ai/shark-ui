@@ -21,5 +21,4 @@ const Sequence_Base64_Conformance_ensure = (
 
 export {
   Sequence_Base64_Conformance_ensure as ensure,
-  Sequence_Base64_Conformance_Error as Error,
 };
