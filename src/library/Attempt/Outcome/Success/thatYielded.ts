@@ -24,7 +24,7 @@ const Attempt_Outcome_Success_thatYielded = <
     {
       product: transformed,
     } = {
-      product: Attempt_Outcome_Success_Product.Transformer_identity<
+      product: Attempt_Outcome_Success_Product.Transformer.identity<
         SomeProduct,
         SomeTransformedProduct
       >,

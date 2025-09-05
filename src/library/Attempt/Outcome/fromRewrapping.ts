@@ -80,7 +80,7 @@ function Attempt_Outcome_fromRewrapping<
     SomeTransformableActionableError
   >,
   {
-    product: toTransformedProduct = Attempt_Outcome_Success.Product.Transformer_identity<
+    product: toTransformedProduct = Attempt_Outcome_Success.Product.Transformer.identity<
       SomeTransformableProduct,
       SomeTransformedProduct
     >,
@@ -94,7 +94,7 @@ function Attempt_Outcome_fromRewrapping<
     SomeTransformedProduct,
     SomeTransformedActionableError
   > = {
-    product: Attempt_Outcome_Success.Product.Transformer_identity<
+    product: Attempt_Outcome_Success.Product.Transformer.identity<
       SomeTransformableProduct,
       SomeTransformedProduct
     >,
