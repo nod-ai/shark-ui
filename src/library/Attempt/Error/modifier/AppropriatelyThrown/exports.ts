@@ -1,5 +1,5 @@
 export type {
-  AppropriatelyThrown as _default,
+  AppropriatelyThrown,
 } from './definition.ts';
 
 export {

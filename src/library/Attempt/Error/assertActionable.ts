@@ -11,7 +11,7 @@ import {
 } from './NonActionable';
 
 import {
-  _default as NonActionableBuiltInError,
+  NonActionableBuiltInError,
 } from './NonActionableBuiltInError';
 
 import {
