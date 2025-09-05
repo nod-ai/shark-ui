@@ -1,9 +1,9 @@
 export {
-  _default as Request,
+  TextToImage_Config_Dynamic_Fetching_Error_Request as Request,
 } from './Request';
 
 export {
-  _default as Response,
+  TextToImage_Config_Dynamic_Fetching_Error_Response as Response,
 } from './Response';
 
 export type {

@@ -3,7 +3,7 @@ import type {
 } from '@/library/typeUtilities';
 
 import {
-  _default as Attempt_Error_NonActionable,
+  Attempt_Error_NonActionable,
 } from './NonActionable';
 
 /** Extend this class to describe errors from which callers ought to recover */
@@ -26,5 +26,5 @@ abstract class Attempt_Error_Actionable<
 }
 
 export {
-  Attempt_Error_Actionable as _default,
+  Attempt_Error_Actionable,
 };

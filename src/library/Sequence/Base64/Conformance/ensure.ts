@@ -5,7 +5,7 @@ import {
 } from '../pattern';
 
 import {
-  _default as Sequence_Base64_Conformance_Error,
+  Sequence_Base64_Conformance_Error,
 } from './Error';
 
 const Sequence_Base64_Conformance_ensure = (

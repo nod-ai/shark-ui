@@ -3,5 +3,5 @@ export {
 } from './ensure';
 
 export {
-  _default as Error,
+  Sequence_Byte_Encoded_Compatibility_Error as Error,
 } from './Error';

@@ -1,9 +1,9 @@
 import type {
-  _default as TextToImage_Server_Error_Connection,
+  TextToImage_Server_Error_Connection,
 } from './Connection';
 
 import type {
-  _default as TextToImage_Server_Error_Specification,
+  TextToImage_Server_Error_Specification,
 } from './Specification';
 
 type TextToImage_Server_Error_Any =

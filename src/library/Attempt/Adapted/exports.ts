@@ -11,5 +11,5 @@ export {
 } from './toSettle';
 
 export type {
-  _default as Attempt_Adapted_Config,
+  Attempt_Adapted_Config,
 } from './Config';

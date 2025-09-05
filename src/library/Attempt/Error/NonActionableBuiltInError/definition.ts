@@ -23,5 +23,5 @@ const NonActionableBuiltInError = {
 };
 
 export {
-  NonActionableBuiltInError as _default,
+  NonActionableBuiltInError,
 };

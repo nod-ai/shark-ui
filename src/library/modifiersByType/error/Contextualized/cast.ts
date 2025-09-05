@@ -7,7 +7,7 @@ import {
 } from './assume';
 
 import type {
-  _default as Contextualized,
+  Contextualized,
 } from './definition.ts';
 
 import {

@@ -1,5 +1,5 @@
 export type {
-  _default,
+  PotentiallyActionable as _default,
 } from './definition.ts';
 
 export {

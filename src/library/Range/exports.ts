@@ -3,5 +3,5 @@ export {
 } from './definitionWithAugmentation.ts';
 
 export {
-  _default as Range_Discrete,
+  Range_Discrete,
 } from './Discrete';

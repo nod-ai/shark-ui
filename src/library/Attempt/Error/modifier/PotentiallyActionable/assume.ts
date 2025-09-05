@@ -1,13 +1,13 @@
 import {
-  _default as Attempt_Error_Creation,
+  Attempt_Error_Creation,
 } from '../../Creation';
 
 import {
-  _default as Attempt_Error_NonActionable,
+  Attempt_Error_NonActionable,
 } from '../../NonActionable';
 
 import type {
-  _default as PotentiallyActionable,
+  PotentiallyActionable,
 } from './definition.ts';
 
 const PotentiallyActionable_assume = <

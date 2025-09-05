@@ -1,5 +1,5 @@
 export {
-  _default as Error,
+  TextToImage_Config_Static_Reading_Error as Error,
 } from './Error';
 
 export type {

@@ -73,5 +73,5 @@ class Attempt_Error_NonActionable
 }
 
 export {
-  Attempt_Error_NonActionable as _default,
+  Attempt_Error_NonActionable,
 };

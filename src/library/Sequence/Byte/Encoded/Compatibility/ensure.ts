@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 import Byte from '@/library/Byte';
 
 import {
-  _default as Sequence_Byte_Encoded_Compatibility_Error,
+  Sequence_Byte_Encoded_Compatibility_Error,
 } from './Error';
 
 const Sequence_Byte_Encoded_Compatibility_ensure = (

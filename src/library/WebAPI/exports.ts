@@ -1,5 +1,5 @@
 import {
-  _default as WebAPI_Server,
+  WebAPI_Server,
 } from './Server.ts';
 
 export {

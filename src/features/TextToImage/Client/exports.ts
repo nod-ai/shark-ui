@@ -1,3 +1,3 @@
 export {
-  _default as SDXL,
+  TextToImage_Client_SDXL as SDXL,
 } from './SDXL';
