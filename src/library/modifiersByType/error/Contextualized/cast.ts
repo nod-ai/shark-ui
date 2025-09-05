@@ -6,7 +6,9 @@ import {
   Contextualized_assume,
 } from './assume';
 
-import type Contextualized from './definition.ts';
+import type {
+  default as Contextualized,
+} from './definition.ts';
 
 import {
   Contextualized_describes,

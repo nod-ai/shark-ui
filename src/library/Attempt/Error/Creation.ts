@@ -1,4 +1,6 @@
-import Attempt_Error_NonActionable from './NonActionable';
+import {
+  default as Attempt_Error_NonActionable,
+} from './NonActionable';
 
 class Attempt_Error_Creation
   extends Attempt_Error_NonActionable {

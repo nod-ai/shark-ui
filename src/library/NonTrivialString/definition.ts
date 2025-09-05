@@ -8,7 +8,9 @@ import {
   type StringLike,
 } from '@/library/utilitiesByType/string';
 
-import NonTrivialString_ParsingError from './ParsingError.ts';
+import {
+  default as NonTrivialString_ParsingError,
+} from './ParsingError.ts';
 
 class NonTrivialString
   extends StringSubset<

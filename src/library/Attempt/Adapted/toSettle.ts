@@ -6,7 +6,9 @@ import type {
   Attempt_Outcome,
 } from '../Outcome';
 
-import type Attempt_Adapted_Config from './Config';
+import type {
+  default as Attempt_Adapted_Config,
+} from './Config';
 
 import {
   Attempt_Adapted_toEventually,

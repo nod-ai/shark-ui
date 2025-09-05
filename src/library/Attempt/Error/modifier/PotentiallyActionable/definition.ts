@@ -1,4 +1,6 @@
-import type Attempt_Error_NonActionable from '../../NonActionable';
+import type {
+  default as Attempt_Error_NonActionable,
+} from '../../NonActionable';
 
 type PotentiallyActionable<
   SomeError extends Error,

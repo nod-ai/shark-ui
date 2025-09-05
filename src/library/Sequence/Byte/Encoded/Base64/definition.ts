@@ -18,7 +18,9 @@ import {
   Sequence_Byte_Encoded_Compatibility,
 } from '../Compatibility';
 
-import Sequence_Byte_Encoded_Base64_ParsingError from './ParsingError.ts';
+import {
+  default as Sequence_Byte_Encoded_Base64_ParsingError,
+} from './ParsingError.ts';
 
 /** See [RFC 4648 Section 4](https://www.rfc-editor.org/rfc/rfc4648.html#section-4) for more information */
 class Sequence_Byte_Encoded_Base64

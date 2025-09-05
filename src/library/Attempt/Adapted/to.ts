@@ -15,7 +15,9 @@ import {
   safe,
 } from '../tryCatchStatements';
 
-import type Attempt_Adapted_Config from './Config';
+import type {
+  default as Attempt_Adapted_Config,
+} from './Config';
 
 const Attempt_Adapted_to = <
   SomeProduct,
