@@ -1,9 +1,9 @@
 import type {
-  default as TextToImage_Config_Dynamic_Fetching_Error_Request,
+  _default as TextToImage_Config_Dynamic_Fetching_Error_Request,
 } from './Request';
 
 import type {
-  default as TextToImage_Config_Dynamic_Fetching_Error_Response,
+  _default as TextToImage_Config_Dynamic_Fetching_Error_Response,
 } from './Response';
 
 type TextToImage_Config_Dynamic_Fetching_Error_Any =

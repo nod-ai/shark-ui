@@ -1,3 +1,3 @@
 export {
-  default,
+  _default,
 } from './exports.ts';

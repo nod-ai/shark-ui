@@ -1,3 +1,3 @@
 export {
-  default as SDXL,
+  _default as SDXL,
 } from './SDXL';

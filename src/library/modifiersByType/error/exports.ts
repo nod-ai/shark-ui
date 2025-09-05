@@ -1,3 +1,3 @@
 export {
-  default as Contextualized,
+  _default as Contextualized,
 } from './Contextualized';

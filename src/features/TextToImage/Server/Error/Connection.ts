@@ -14,5 +14,5 @@ class TextToImage_Server_Error_Connection
 }
 
 export {
-  TextToImage_Server_Error_Connection as default,
+  TextToImage_Server_Error_Connection as _default,
 };

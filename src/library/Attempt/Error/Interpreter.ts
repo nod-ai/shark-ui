@@ -1,5 +1,5 @@
 import type {
-  default as Attempt_Error_Actionable,
+  _default as Attempt_Error_Actionable,
 } from './Actionable';
 
 import type {
@@ -13,5 +13,5 @@ type Attempt_Error_Interpreter<
 ) => SomeActionableError | null;
 
 export type {
-  Attempt_Error_Interpreter as default,
+  Attempt_Error_Interpreter as _default,
 };

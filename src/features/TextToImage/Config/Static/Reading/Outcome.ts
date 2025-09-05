@@ -5,7 +5,7 @@ import type {
 } from '../../definition.ts';
 
 import type {
-  default as TextToImage_Config_Static_Reading_Error,
+  _default as TextToImage_Config_Static_Reading_Error,
 } from './Error';
 
 type TextToImage_Config_Static_Reading_Outcome = Attempt.Outcome<

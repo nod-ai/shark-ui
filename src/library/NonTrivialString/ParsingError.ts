@@ -14,5 +14,5 @@ class NonTrivialString_ParsingError
 }
 
 export {
-  NonTrivialString_ParsingError as default,
+  NonTrivialString_ParsingError as _default,
 };

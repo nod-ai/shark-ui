@@ -1,3 +1,3 @@
 export {
-  default as URI_Image,
+  _default as URI_Image,
 } from './Image';

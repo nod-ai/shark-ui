@@ -94,5 +94,5 @@ class Range_Discrete
 }
 
 export {
-  Range_Discrete as default,
+  Range_Discrete as _default,
 };

@@ -1,3 +1,3 @@
 export {
-  default as SDXL_DiffusionStepCount,
+  _default as SDXL_DiffusionStepCount,
 } from './DiffusionStepCount';

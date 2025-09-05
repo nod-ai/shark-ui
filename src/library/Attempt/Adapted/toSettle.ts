@@ -7,7 +7,7 @@ import type {
 } from '../Outcome';
 
 import type {
-  default as Attempt_Adapted_Config,
+  _default as Attempt_Adapted_Config,
 } from './Config';
 
 import {

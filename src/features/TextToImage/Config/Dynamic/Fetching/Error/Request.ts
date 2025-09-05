@@ -18,5 +18,5 @@ class TextToImage_Config_Dynamic_Fetching_Error_Request
 }
 
 export {
-  TextToImage_Config_Dynamic_Fetching_Error_Request as default,
+  TextToImage_Config_Dynamic_Fetching_Error_Request as _default,
 };

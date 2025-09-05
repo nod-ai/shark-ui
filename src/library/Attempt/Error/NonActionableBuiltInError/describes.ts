@@ -1,5 +1,5 @@
 import type {
-  default as NonActionableBuiltInError,
+  _default as NonActionableBuiltInError,
 } from './definition.ts';
 
 const NonActionableBuiltInError_describes = (

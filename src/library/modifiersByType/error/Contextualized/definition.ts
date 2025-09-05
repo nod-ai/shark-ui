@@ -28,5 +28,5 @@ const Contextualized = {
 };
 
 export {
-  Contextualized as default,
+  Contextualized as _default,
 };

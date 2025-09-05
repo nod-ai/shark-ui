@@ -1,3 +1,3 @@
 export {
-  URI_Image as default,
+  URI_Image as _default,
 } from './exports.ts';

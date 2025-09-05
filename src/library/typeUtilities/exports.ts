@@ -5,7 +5,7 @@ export type * from './Instantiable';
 export type * from './Batched';
 
 export type {
-  default as Static,
+  _default as Static,
 } from './Static';
 
 export type * from './Branded';

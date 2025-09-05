@@ -1,5 +1,5 @@
 import type {
-  default as Attempt_Error_NonActionable,
+  _default as Attempt_Error_NonActionable,
 } from '../../NonActionable';
 
 type PotentiallyActionable<
@@ -7,5 +7,5 @@ type PotentiallyActionable<
 > = Exclude<SomeError, Attempt_Error_NonActionable>;
 
 export type {
-  PotentiallyActionable as default,
+  PotentiallyActionable as _default,
 };

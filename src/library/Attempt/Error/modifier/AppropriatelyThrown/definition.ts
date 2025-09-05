@@ -1,5 +1,5 @@
 import type {
-  default as Attempt_Error_Actionable,
+  _default as Attempt_Error_Actionable,
 } from '../../Actionable';
 
 type AppropriatelyThrown<
@@ -10,5 +10,5 @@ type AppropriatelyThrown<
 >;
 
 export type {
-  AppropriatelyThrown as default,
+  AppropriatelyThrown as _default,
 };

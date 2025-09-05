@@ -10,5 +10,5 @@ interface Attempt_Adapted_Config<
 }
 
 export type {
-  Attempt_Adapted_Config as default,
+  Attempt_Adapted_Config as _default,
 };
