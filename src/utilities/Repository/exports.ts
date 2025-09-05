@@ -1,3 +1,3 @@
 export {
-  Repository as _default,
+  Repository,
 } from './definition.ts';

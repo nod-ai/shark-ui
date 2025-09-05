@@ -1,4 +1,4 @@
 export {
-  type _default,
+  type PotentiallyActionable,
   PotentiallyActionable_assume,
 } from './exports.ts';

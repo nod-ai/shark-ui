@@ -1,3 +1,3 @@
 export {
-  _default,
+  NonActionableBuiltInError,
 } from './exports.ts';

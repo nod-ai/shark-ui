@@ -1,4 +1,4 @@
 export {
-  type _default,
+  type AppropriatelyThrown,
   AppropriatelyThrown_assume,
 } from './exports.ts';

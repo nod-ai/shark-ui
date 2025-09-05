@@ -1,9 +1,9 @@
 export {
-  type _default as AppropriatelyThrown,
+  type AppropriatelyThrown,
   AppropriatelyThrown_assume,
 } from './AppropriatelyThrown';
 
 export {
-  type _default as PotentiallyActionable,
+  type PotentiallyActionable,
   PotentiallyActionable_assume,
 } from './PotentiallyActionable';

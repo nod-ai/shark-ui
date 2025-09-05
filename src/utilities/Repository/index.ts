@@ -1,3 +1,3 @@
 export {
-  _default as default,
+  Repository as default,
 } from './exports.ts';
