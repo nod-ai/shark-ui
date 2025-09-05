@@ -84,7 +84,7 @@ function Attempt_Outcome_fromRewrapping<
       SomeTransformableProduct,
       SomeTransformedProduct
     >,
-    cause: toTransformedCause = Attempt_Outcome_Failure.Cause.Transformer_identity<
+    cause: toTransformedCause = Attempt_Outcome_Failure.Cause.Transformer.identity<
       SomeTransformableActionableError,
       SomeTransformedActionableError
     >,
@@ -98,7 +98,7 @@ function Attempt_Outcome_fromRewrapping<
       SomeTransformableProduct,
       SomeTransformedProduct
     >,
-    cause: Attempt_Outcome_Failure.Cause.Transformer_identity<
+    cause: Attempt_Outcome_Failure.Cause.Transformer.identity<
       SomeTransformableActionableError,
       SomeTransformedActionableError
     >,
