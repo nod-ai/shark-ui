@@ -16,5 +16,5 @@ class Sequence_Byte_Encoded_Compatibility_Error
 }
 
 export {
-  Sequence_Byte_Encoded_Compatibility_Error as _default,
+  Sequence_Byte_Encoded_Compatibility_Error,
 };

@@ -30,5 +30,5 @@ class WebAPI_Server {
 }
 
 export {
-  WebAPI_Server as _default,
+  WebAPI_Server,
 };

@@ -1,5 +1,5 @@
 import type {
-  _default as TextToImage_Pipeline_Output_Image,
+  TextToImage_Pipeline_Output_Image,
 } from './Image';
 
 /** The resulting information after a text-to-image model has ingested some input with some configuration */

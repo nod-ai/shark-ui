@@ -16,7 +16,7 @@ import {
 } from '../tryCatchStatements';
 
 import type {
-  _default as Attempt_Adapted_Config,
+  Attempt_Adapted_Config,
 } from './Config';
 
 const Attempt_Adapted_toEventually = async <

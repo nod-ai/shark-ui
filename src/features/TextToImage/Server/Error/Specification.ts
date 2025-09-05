@@ -20,5 +20,5 @@ class TextToImage_Server_Error_Specification
 }
 
 export {
-  TextToImage_Server_Error_Specification as _default,
+  TextToImage_Server_Error_Specification,
 };

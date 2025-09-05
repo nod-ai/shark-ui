@@ -3,7 +3,7 @@ export {
 } from './file';
 
 export {
-  read,
+  TextToImage_Config_Static_read as read,
 } from './read';
 
 export {

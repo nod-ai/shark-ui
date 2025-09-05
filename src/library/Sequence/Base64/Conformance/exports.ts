@@ -1,7 +1,7 @@
 export {
-  ensure,
+  Sequence_Base64_Conformance_ensure as ensure,
 } from './ensure';
 
 export {
-  _default as Error,
+  Sequence_Base64_Conformance_Error as Error,
 } from './Error';

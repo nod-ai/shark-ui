@@ -1,3 +1,3 @@
 export {
-  _default,
+  Contextualized as _default,
 } from './definition.ts';

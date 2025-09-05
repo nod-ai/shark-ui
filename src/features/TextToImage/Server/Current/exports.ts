@@ -3,5 +3,5 @@ export {
 } from './accordingToEnvironment';
 
 export {
-  Current_retrieve,
+  TextToImage_Server_Current_retrieve as Current_retrieve,
 } from './retrieve';

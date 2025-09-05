@@ -3,7 +3,7 @@ import type {
 } from '@/library/typeUtilities';
 
 import type {
-  _default as Contextualized,
+  Contextualized,
 } from './definition.ts';
 
 const Contextualized_describes = <

@@ -54,5 +54,5 @@ const TextToImage_Server_Current_retrieve = (): Promise<
 });
 
 export {
-  TextToImage_Server_Current_retrieve as Current_retrieve,
+  TextToImage_Server_Current_retrieve,
 };

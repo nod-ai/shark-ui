@@ -74,5 +74,5 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
 };
 
 export {
-  TextToImage_Client_SDXL_generateOutputFrom as generateOutputFrom,
+  TextToImage_Client_SDXL_generateOutputFrom,
 };

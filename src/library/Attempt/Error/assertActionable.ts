@@ -1,13 +1,13 @@
 import type {
-  _default as Attempt_Error_Actionable,
+  Attempt_Error_Actionable,
 } from './Actionable';
 
 import type {
-  _default as Attempt_Error_Interpreter,
+  Attempt_Error_Interpreter,
 } from './Interpreter';
 
 import {
-  _default as Attempt_Error_NonActionable,
+  Attempt_Error_NonActionable,
 } from './NonActionable';
 
 import {

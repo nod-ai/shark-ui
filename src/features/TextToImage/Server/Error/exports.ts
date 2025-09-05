@@ -1,9 +1,9 @@
 export {
-  _default as Specification,
+  TextToImage_Server_Error_Specification as Specification,
 } from './Specification';
 
 export {
-  _default as Connection,
+  TextToImage_Server_Error_Connection as Connection,
 } from './Connection';
 
 export type {

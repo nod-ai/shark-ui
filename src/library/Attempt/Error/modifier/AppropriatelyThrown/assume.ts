@@ -1,9 +1,9 @@
 import {
-  _default as Attempt_Error_Actionable,
+  Attempt_Error_Actionable,
 } from '../../Actionable';
 
 import type {
-  _default as AppropriatelyThrown,
+  AppropriatelyThrown,
 } from './definition.ts';
 
 /**

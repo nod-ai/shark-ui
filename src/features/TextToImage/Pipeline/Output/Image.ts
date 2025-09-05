@@ -8,5 +8,5 @@ interface TextToImage_Pipeline_Output_Image {
 }
 
 export type {
-  TextToImage_Pipeline_Output_Image as _default,
+  TextToImage_Pipeline_Output_Image,
 };
