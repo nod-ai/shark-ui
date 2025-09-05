@@ -1,3 +1,5 @@
 export * from './definition.ts';
 
-export * from './ParsingError';
+export {
+  URLComponent_Path_ParsingError,
+} from './ParsingError';
