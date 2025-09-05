@@ -3,8 +3,7 @@ import type {
 } from '../Error';
 
 import {
-  /**/ Attempt_Outcome_Failure,
-  type Attempt_Outcome_Failure_Transformer,
+  Attempt_Outcome_Failure,
 } from './Failure';
 
 import {
@@ -34,7 +33,7 @@ function Attempt_Outcome_fromRewrapping<
   SomeTransformedActionableError extends Attempt_Error.Actionable<string> = SomeTransformableActionableError,
 >(
   givenOutcome: Attempt_Outcome_Failure<SomeTransformableActionableError>,
-  given?: Attempt_Outcome_Failure_Transformer<
+  given?: Attempt_Outcome_Failure.Transformer<
     SomeTransformableActionableError,
     SomeTransformedActionableError
   >,

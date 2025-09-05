@@ -8,6 +8,5 @@ export {
 } from './Success';
 
 export {
-  /**/ Attempt_Outcome_Failure,
-  type Attempt_Outcome_Failure_Transformer,
+  Attempt_Outcome_Failure,
 } from './Failure';
