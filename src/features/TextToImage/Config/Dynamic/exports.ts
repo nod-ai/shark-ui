@@ -3,7 +3,7 @@ export {
 } from './endpoint';
 
 export {
-  fetch,
+  TextToImage_Config_Dynamic_fetch as fetch,
 } from './fetch';
 
 export {
