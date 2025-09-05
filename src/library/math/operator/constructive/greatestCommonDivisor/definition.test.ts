@@ -14,7 +14,9 @@ import {
   squared,
 } from '../../hyper';
 
-import * as GCDAlias from './abbreviations';
+import {
+  greatestCommonDivisor,
+} from './definition.ts';
 
 const pairCombos = <
   SomeLeftElement extends number,
@@ -46,11 +48,7 @@ const symmetricPairCombos = <
   filler: given.filler,
 });
 
-const aliasKeys = Object.keys(GCDAlias) as (keyof typeof GCDAlias)[];
-
-describe.each(aliasKeys)(`${GCDAlias.default.name} alias: "%s"`, (eachAliasKey) => {
-  const eachAliasedGCD = GCDAlias[eachAliasKey]; // eslint-disable-line import/namespace
-
+describe(greatestCommonDivisor, () => {
   const singleDigitPrimes = [2, 3, 5, 7] as const;
 
   const [
@@ -69,7 +67,7 @@ describe.each(aliasKeys)(`${GCDAlias.default.name} alias: "%s"`, (eachAliasKey) 
       it.each(combosOfInoperableNumbers)('should reject inoperable operands', (...$0) => {
         expect.assertions(1);
 
-        expect(() => eachAliasedGCD(...$0)).toThrow(Error);
+        expect(() => greatestCommonDivisor(...$0)).toThrow(Error);
       });
 
       const combosOfInfiniteNumbers = symmetricPairCombos({
@@ -80,7 +78,7 @@ describe.each(aliasKeys)(`${GCDAlias.default.name} alias: "%s"`, (eachAliasKey) 
       it.each(combosOfInfiniteNumbers)('should reject infinite operands', (...$0) => {
         expect.assertions(1);
 
-        expect(() => eachAliasedGCD(...$0)).toThrow(Error);
+        expect(() => greatestCommonDivisor(...$0)).toThrow(Error);
       });
     });
 
@@ -96,13 +94,13 @@ describe.each(aliasKeys)(`${GCDAlias.default.name} alias: "%s"`, (eachAliasKey) 
         it.each(combosOfFractionalNumbers)('should reject them', (...$0) => {
           expect.assertions(1);
 
-          expect(() => eachAliasedGCD(...$0)).toThrow(Error);
+          expect(() => greatestCommonDivisor(...$0)).toThrow(Error);
         });
 
         it.each(combosOfFractionalNumbers)('should safely propagate the error', (...$0) => {
           expect.assertions(1);
 
-          expect(() => eachAliasedGCD(...$0)).toThrow(Attempt.Error_NonActionable);
+          expect(() => greatestCommonDivisor(...$0)).toThrow(Attempt.Error_NonActionable);
         });
 
         const fractionalCombosWithMessage = [
@@ -123,7 +121,7 @@ describe.each(aliasKeys)(`${GCDAlias.default.name} alias: "%s"`, (eachAliasKey) 
         it.each(fractionalCombosWithMessage)('should communicate clearly with developers', ($0) => {
           expect.assertions(1);
 
-          expect(() => eachAliasedGCD(...$0.numbers)).toThrow($0.message);
+          expect(() => greatestCommonDivisor(...$0.numbers)).toThrow($0.message);
         });
       });
     });
@@ -133,7 +131,7 @@ describe.each(aliasKeys)(`${GCDAlias.default.name} alias: "%s"`, (eachAliasKey) 
     it('should accept valid operands', () => {
       expect.assertions(1);
 
-      expect(() => eachAliasedGCD(primeA, primeB)).not.toThrow();
+      expect(() => greatestCommonDivisor(primeA, primeB)).not.toThrow();
     });
 
     const combosOfSignedIdentityFactors = symmetricPairCombos({
@@ -147,22 +145,22 @@ describe.each(aliasKeys)(`${GCDAlias.default.name} alias: "%s"`, (eachAliasKey) 
       const signedA = eachComboOfSignedIdentityFactors[0] * primeA;
       const signedB = eachComboOfSignedIdentityFactors[1] * primeB;
 
-      expect(/* */eachAliasedGCD(/**/signedA, /**/signedB))
-        .toBe(/**/eachAliasedGCD(/* */primeA, /* */primeB));
+      expect(/* */greatestCommonDivisor(/**/signedA, /**/signedB))
+        .toBe(/**/greatestCommonDivisor(/* */primeA, /* */primeB));
     });
 
     it('should be commutative', () => {
       expect.assertions(1);
 
-      expect(/* */eachAliasedGCD(primeA, primeB))
-        .toBe(/**/eachAliasedGCD(primeB, primeA));
+      expect(/* */greatestCommonDivisor(primeA, primeB))
+        .toBe(/**/greatestCommonDivisor(primeB, primeA));
     });
 
     it('should be associative', () => {
       expect.assertions(1);
 
-      expect(/* */eachAliasedGCD(eachAliasedGCD(primeA, primeB), primeC))
-        .toBe(/**/eachAliasedGCD(eachAliasedGCD(primeB, primeC), primeA));
+      expect(/* */greatestCommonDivisor(greatestCommonDivisor(primeA, primeB), primeC))
+        .toBe(/**/greatestCommonDivisor(greatestCommonDivisor(primeB, primeC), primeA));
     });
 
     const combosOfTogglingFactors = [
@@ -175,7 +173,7 @@ describe.each(aliasKeys)(`${GCDAlias.default.name} alias: "%s"`, (eachAliasKey) 
       expect.assertions(1);
 
       expect(
-        eachAliasedGCD(
+        greatestCommonDivisor(
           primeA * eachComboOfTogglingFactors[0],
           primeA * eachComboOfTogglingFactors[1],
         ),
@@ -187,7 +185,7 @@ describe.each(aliasKeys)(`${GCDAlias.default.name} alias: "%s"`, (eachAliasKey) 
     it('should preserve the identity of matching operands', () => {
       expect.assertions(1);
 
-      expect(eachAliasedGCD(primeA, primeA)).toBe(primeA);
+      expect(greatestCommonDivisor(primeA, primeA)).toBe(primeA);
     });
 
     const identityFactor = 1;
@@ -206,7 +204,7 @@ describe.each(aliasKeys)(`${GCDAlias.default.name} alias: "%s"`, (eachAliasKey) 
       expect.assertions(1);
 
       expect(
-        eachAliasedGCD(
+        greatestCommonDivisor(
           identityFactor * eachCoPrimePair[0],
           identityFactor * eachCoPrimePair[1],
         ),
@@ -234,7 +232,7 @@ describe.each(aliasKeys)(`${GCDAlias.default.name} alias: "%s"`, (eachAliasKey) 
         expect.assertions(1);
 
         expect(
-          eachAliasedGCD(
+          greatestCommonDivisor(
             eachCommonFactor * eachComboOfNonComposites[0],
             eachCommonFactor * eachComboOfNonComposites[1],
           ),
