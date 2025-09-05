@@ -1,3 +1,7 @@
+import {
+  Attempt_Error,
+} from '../../Error';
+
 import type {
   Attempt_Outcome_Success_SemanticallySugarfree,
 } from './SemanticallySugarfree';
@@ -52,6 +56,14 @@ interface Attempt_Outcome_Success<
   ): Attempt_Outcome_Success<SomeTransformedProduct>;
 }
 
-export type {
+function Attempt_Outcome_Success(
+  namespaceOnly: never = Attempt_Error.NonActionable.throw(
+    `Unexpected call of module augmentation provision for "${Attempt_Outcome_Success.name}".`,
+  ),
+) {
+  return namespaceOnly;
+}
+
+export {
   Attempt_Outcome_Success,
 };

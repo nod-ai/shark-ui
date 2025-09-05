@@ -7,9 +7,8 @@ import {
 } from './Failure';
 
 import {
-  type Attempt_Outcome_Success,
+  /**/ Attempt_Outcome_Success,
   type Attempt_Outcome_Success_Transformer,
-  Attempt_Outcome_Success_Product,
 } from './Success';
 
 import type {
@@ -82,7 +81,7 @@ function Attempt_Outcome_fromRewrapping<
     SomeTransformableActionableError
   >,
   {
-    product: toTransformedProduct = Attempt_Outcome_Success_Product.Transformer_identity<
+    product: toTransformedProduct = Attempt_Outcome_Success.Product.Transformer_identity<
       SomeTransformableProduct,
       SomeTransformedProduct
     >,
@@ -96,7 +95,7 @@ function Attempt_Outcome_fromRewrapping<
     SomeTransformedProduct,
     SomeTransformedActionableError
   > = {
-    product: Attempt_Outcome_Success_Product.Transformer_identity<
+    product: Attempt_Outcome_Success.Product.Transformer_identity<
       SomeTransformableProduct,
       SomeTransformedProduct
     >,

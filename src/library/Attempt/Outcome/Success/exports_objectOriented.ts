@@ -1,8 +1,4 @@
-export type * from './definition.ts';
-
-export {
-  Attempt_Outcome_Success_Product,
-} from './Product';
+export * from './definitionWithAugmentation.ts';
 
 export type {
   Attempt_Outcome_Success_Transformer,

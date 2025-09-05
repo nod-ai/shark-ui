@@ -1,8 +1,7 @@
 export * from './definition.ts';
 
 export {
-  type Attempt_Outcome_Success,
-  /**/ Attempt_Outcome_Success_Product,
+  /**/ Attempt_Outcome_Success,
   type Attempt_Outcome_Success_Transformer,
   /**/ Attempt_Outcome_Success_thatYielded,
 } from './Success';
