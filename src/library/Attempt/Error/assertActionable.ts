@@ -2,13 +2,17 @@ import type {
   default as Attempt_Error_Actionable,
 } from './Actionable';
 
-import type Attempt_Error_Interpreter from './Interpreter';
+import type {
+  default as Attempt_Error_Interpreter,
+} from './Interpreter';
 
 import {
   default as Attempt_Error_NonActionable,
 } from './NonActionable';
 
-import NonActionableBuiltInError from './NonActionableBuiltInError';
+import {
+  default as NonActionableBuiltInError,
+} from './NonActionableBuiltInError';
 
 import {
   type AppropriatelyThrown,

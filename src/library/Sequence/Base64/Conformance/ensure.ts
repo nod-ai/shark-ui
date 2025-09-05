@@ -4,7 +4,9 @@ import {
   Sequence_Base64_pattern,
 } from '../pattern';
 
-import Sequence_Base64_Conformance_Error from './Error';
+import {
+  default as Sequence_Base64_Conformance_Error,
+} from './Error';
 
 const Sequence_Base64_Conformance_ensure = (
   givenCharacterSequence: string,

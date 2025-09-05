@@ -1,4 +1,6 @@
-import Attempt_Error_Creation from '../../Creation';
+import {
+  default as Attempt_Error_Creation,
+} from '../../Creation';
 
 import {
   default as Attempt_Error_NonActionable,

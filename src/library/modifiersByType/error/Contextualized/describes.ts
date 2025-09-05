@@ -2,7 +2,9 @@ import type {
   Instantiable,
 } from '@/library/typeUtilities';
 
-import type Contextualized from './definition.ts';
+import type {
+  default as Contextualized,
+} from './definition.ts';
 
 const Contextualized_describes = <
   SomeError extends Error,
