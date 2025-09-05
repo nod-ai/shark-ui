@@ -1,18 +1,14 @@
-import type {
+import {
   Attempt_Error,
 } from '../Error';
 
-import {
+import type {
   Attempt_Outcome_Failure,
 } from './Failure';
 
-import {
+import type {
   Attempt_Outcome_Success,
 } from './Success';
-
-import {
-  Attempt_Outcome_fromRewrapping,
-} from './fromRewrapping';
 
 type Attempt_Outcome<
   SomeProduct,
@@ -22,11 +18,13 @@ type Attempt_Outcome<
   | Attempt_Outcome_Failure<SomeActionableError>
 ;
 
-const Attempt_Outcome = {
-  Failure       : Attempt_Outcome_Failure,
-  Success       : Attempt_Outcome_Success,
-  fromRewrapping: Attempt_Outcome_fromRewrapping,
-};
+function Attempt_Outcome(
+  namespaceOnly: never = Attempt_Error.NonActionable.throw(
+    `Unexpected call of module augmentation provision for ${Attempt_Outcome.name}.`,
+  ),
+) {
+  return namespaceOnly;
+}
 
 export {
   Attempt_Outcome,
