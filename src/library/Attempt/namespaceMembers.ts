@@ -16,9 +16,9 @@ export {
 } from './Adapted';
 
 export {
-  Attempt_Error_NonActionable as Error_NonActionable,
-  Attempt_Error_Actionable as Error_Actionable,
-  type Attempt_Error_Interpreter as Error_Interpreter,
+  NonActionable as Error_NonActionable,
+  Actionable as Error_Actionable,
+  type Interpreter as Error_Interpreter,
 } from './Error';
 
 export {

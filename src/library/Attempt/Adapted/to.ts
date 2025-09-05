@@ -1,6 +1,6 @@
 import {
-  type Attempt_Error_Actionable,
-  Attempt_Error_Actionable_from,
+  type Actionable as Attempt_Error_Actionable,
+  Actionable_from as Attempt_Error_Actionable_from,
 } from '../Error';
 
 import {

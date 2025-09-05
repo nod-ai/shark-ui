@@ -1,5 +1,5 @@
 import type {
-  Attempt_Error_Actionable,
+  Actionable as Attempt_Error_Actionable,
 } from '@/library/Attempt/Error'; // eslint-disable-line import/no-internal-modules -- avoids lengthy relative paths
 
 type Attempt_Outcome_Failure_Cause_Transformer<

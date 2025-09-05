@@ -1,6 +1,6 @@
 import type {
-  Attempt_Error_Actionable,
-  Attempt_Error_Interpreter,
+  Actionable as Attempt_Error_Actionable,
+  Interpreter as Attempt_Error_Interpreter,
 } from '../Error';
 
 interface Attempt_Adapted_Config<

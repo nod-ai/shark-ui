@@ -5,7 +5,7 @@ import type {
 } from '@/library/typeUtilities';
 
 import type {
-  Attempt_Error_Actionable,
+  Actionable as Attempt_Error_Actionable,
 } from '../../Error';
 
 import type {
