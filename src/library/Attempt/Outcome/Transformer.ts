@@ -46,6 +46,6 @@ type Attempt_Outcome_Transformer<
   )
 ;
 
-export {
-  type Attempt_Outcome_Transformer,
+export type {
+  Attempt_Outcome_Transformer,
 };
