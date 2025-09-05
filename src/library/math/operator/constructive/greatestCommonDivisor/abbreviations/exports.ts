@@ -1,5 +1,4 @@
 export {
-  greatestCommonDivisor as default,
   greatestCommonDivisor,
 } from '../definition.ts';
 
