@@ -1,1 +1,3 @@
-export * from './promptUserWith';
+export {
+  Reporting_promptUserWith,
+} from './promptUserWith';

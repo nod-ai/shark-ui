@@ -2,7 +2,9 @@ export {
   Attempt_Adapted_to,
 } from './to';
 
-export * from './toEventually';
+export {
+  Attempt_Adapted_toEventually,
+} from './toEventually';
 
 export {
   Attempt_Adapted_toSettle,
