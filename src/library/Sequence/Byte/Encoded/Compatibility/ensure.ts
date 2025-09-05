@@ -26,5 +26,5 @@ const Sequence_Byte_Encoded_Compatibility_ensure = (
 });
 
 export {
-  Sequence_Byte_Encoded_Compatibility_ensure as ensure,
+  Sequence_Byte_Encoded_Compatibility_ensure,
 };
