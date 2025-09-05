@@ -9,10 +9,10 @@ export {
 } from './Outcome';
 
 export {
-  Attempt_Adapted_to as Adapted_to,
-  Attempt_Adapted_toEventually as Adapted_toEventually,
-  Attempt_Adapted_toSettle as Adapted_toSettle,
-  type Attempt_Adapted_Config as Adapted_Config,
+  to as Adapted_to,
+  toEventually as Adapted_toEventually,
+  toSettle as Adapted_toSettle,
+  type Config as Adapted_Config,
 } from './Adapted';
 
 export {
