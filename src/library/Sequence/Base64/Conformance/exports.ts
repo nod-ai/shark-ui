@@ -1,5 +1,5 @@
 export {
-  ensure,
+  Sequence_Base64_Conformance_ensure as ensure,
 } from './ensure';
 
 export {
