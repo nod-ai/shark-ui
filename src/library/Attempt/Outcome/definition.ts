@@ -7,8 +7,7 @@ import {
 } from './Failure';
 
 import {
-  type Attempt_Outcome_Success,
-  Attempt_Outcome_Success_thatYielded,
+  Attempt_Outcome_Success,
 } from './Success';
 
 import {
@@ -24,9 +23,9 @@ type Attempt_Outcome<
 ;
 
 const Attempt_Outcome = {
-  Failure            : Attempt_Outcome_Failure,
-  Success_thatYielded: Attempt_Outcome_Success_thatYielded,
-  fromRewrapping     : Attempt_Outcome_fromRewrapping,
+  Failure       : Attempt_Outcome_Failure,
+  Success       : Attempt_Outcome_Success,
+  fromRewrapping: Attempt_Outcome_fromRewrapping,
 };
 
 export {

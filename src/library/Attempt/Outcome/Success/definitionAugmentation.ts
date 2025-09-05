@@ -6,12 +6,18 @@ import {
   Attempt_Outcome_Success,
 } from './definition.ts';
 
-Attempt_Outcome_Success.Product = Attempt_Outcome_Success_Product;
+import {
+  Attempt_Outcome_Success_thatYielded,
+} from './thatYielded';
+
+Attempt_Outcome_Success.Product/**/ = Attempt_Outcome_Success_Product;
+Attempt_Outcome_Success.thatYielded = Attempt_Outcome_Success_thatYielded;
 
 declare module './definition.ts' {
   namespace Attempt_Outcome_Success {
     export {
-      Attempt_Outcome_Success_Product as Product,
+      Attempt_Outcome_Success_Product/**/ as Product,
+      Attempt_Outcome_Success_thatYielded as thatYielded,
     };
   }
 }
