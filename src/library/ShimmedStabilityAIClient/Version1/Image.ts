@@ -11,7 +11,7 @@ import HTTP from '@/library/HTTP';
 import Shortfin from '@/library/Shortfin';
 
 import {
-  default as toShortfinRequestBody,
+  _default as toShortfinRequestBody,
 } from '../toShortfinRequestBody';
 
 class ShimmedStabilityAIClient_Version1_Image

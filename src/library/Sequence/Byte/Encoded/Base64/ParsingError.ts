@@ -48,5 +48,5 @@ class Sequence_Byte_Encoded_Base64_ParsingError
 }
 
 export {
-  Sequence_Byte_Encoded_Base64_ParsingError as default,
+  Sequence_Byte_Encoded_Base64_ParsingError as _default,
 };

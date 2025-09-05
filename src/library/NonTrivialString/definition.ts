@@ -9,7 +9,7 @@ import {
 } from '@/library/utilitiesByType/string';
 
 import {
-  default as NonTrivialString_ParsingError,
+  _default as NonTrivialString_ParsingError,
 } from './ParsingError.ts';
 
 class NonTrivialString

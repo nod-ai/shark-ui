@@ -5,7 +5,7 @@ import type {
 } from '@/library/typeUtilities';
 
 import type {
-  default as Contextualized,
+  _default as Contextualized,
 } from './definition.ts';
 
 import {

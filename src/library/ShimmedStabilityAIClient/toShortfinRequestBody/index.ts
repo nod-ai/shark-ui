@@ -1,3 +1,3 @@
 export {
-  toShortfinRequestBody as default,
+  toShortfinRequestBody as _default,
 } from './exports.ts';

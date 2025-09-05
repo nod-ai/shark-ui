@@ -19,5 +19,5 @@ class TextToImage_Config_Static_Reading_Error
 }
 
 export {
-  TextToImage_Config_Static_Reading_Error as default,
+  TextToImage_Config_Static_Reading_Error as _default,
 };

@@ -1,5 +1,5 @@
 export {
-  default as Error,
+  _default as Error,
 } from './Error';
 
 export type {

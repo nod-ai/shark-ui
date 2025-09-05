@@ -13,5 +13,5 @@ class Sequence_Base64_Conformance_Error
 }
 
 export {
-  Sequence_Base64_Conformance_Error as default,
+  Sequence_Base64_Conformance_Error as _default,
 };

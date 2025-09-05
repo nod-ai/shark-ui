@@ -1,9 +1,9 @@
 export {
-  default as Request,
+  _default as Request,
 } from './Request';
 
 export {
-  default as Response,
+  _default as Response,
 } from './Response';
 
 export type {

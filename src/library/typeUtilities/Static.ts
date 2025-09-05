@@ -6,5 +6,5 @@ interface Static<
 }
 
 export type {
-  Static as default,
+  Static as _default,
 };

@@ -1,3 +1,3 @@
 export {
-  default as Attempt_Error_NonActionable,
+  _default as Attempt_Error_NonActionable,
 } from './definition.ts';

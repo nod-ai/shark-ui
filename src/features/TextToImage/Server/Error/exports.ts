@@ -1,9 +1,9 @@
 export {
-  default as Specification,
+  _default as Specification,
 } from './Specification';
 
 export {
-  default as Connection,
+  _default as Connection,
 } from './Connection';
 
 export type {

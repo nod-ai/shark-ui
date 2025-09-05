@@ -16,5 +16,5 @@ abstract class SDXL_DiffusionStepCount { // eslint-disable-line @typescript-esli
 }
 
 export {
-  SDXL_DiffusionStepCount as default,
+  SDXL_DiffusionStepCount as _default,
 };

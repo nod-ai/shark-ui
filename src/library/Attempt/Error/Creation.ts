@@ -1,5 +1,5 @@
 import {
-  default as Attempt_Error_NonActionable,
+  _default as Attempt_Error_NonActionable,
 } from './NonActionable';
 
 class Attempt_Error_Creation
@@ -32,5 +32,5 @@ class Attempt_Error_Creation
 }
 
 export {
-  Attempt_Error_Creation as default,
+  Attempt_Error_Creation as _default,
 };

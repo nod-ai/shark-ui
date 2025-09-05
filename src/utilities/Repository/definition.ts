@@ -24,5 +24,5 @@ const Repository = {
 };
 
 export {
-  Repository as default,
+  Repository as _default,
 };
