@@ -7,8 +7,7 @@ import {
 } from './Failure';
 
 import {
-  /**/ Attempt_Outcome_Success,
-  type Attempt_Outcome_Success_Transformer,
+  Attempt_Outcome_Success,
 } from './Success';
 
 import type {
@@ -43,7 +42,7 @@ function Attempt_Outcome_fromRewrapping<
   SomeTransformedProduct = SomeTransformableProduct,
 >(
   givenOutcome: Attempt_Outcome_Success<SomeTransformableProduct>,
-  given?: Attempt_Outcome_Success_Transformer<
+  given?: Attempt_Outcome_Success.Transformer<
     SomeTransformableProduct,
     SomeTransformedProduct
   >,

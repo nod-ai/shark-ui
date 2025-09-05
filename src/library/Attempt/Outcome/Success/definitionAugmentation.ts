@@ -2,6 +2,10 @@ import {
   Attempt_Outcome_Success_Product,
 } from './Product';
 
+import type {
+  Attempt_Outcome_Success_Transformer,
+} from './Transformer';
+
 import {
   Attempt_Outcome_Success,
 } from './definition.ts';
@@ -16,8 +20,9 @@ Attempt_Outcome_Success.thatYielded = Attempt_Outcome_Success_thatYielded;
 declare module './definition.ts' {
   namespace Attempt_Outcome_Success {
     export {
-      Attempt_Outcome_Success_Product/**/ as Product,
-      Attempt_Outcome_Success_thatYielded as thatYielded,
+      /**/ Attempt_Outcome_Success_Product/**/ as Product,
+      type Attempt_Outcome_Success_Transformer as Transformer,
+      /**/ Attempt_Outcome_Success_thatYielded as thatYielded,
     };
   }
 }
