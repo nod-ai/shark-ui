@@ -1,1 +1,3 @@
-export * from './generateOutputFrom';
+export {
+  generateOutputFrom,
+} from './generateOutputFrom';

@@ -1,3 +1,7 @@
-export type * from './Getter';
+export type {
+  Attempt_End_Getter,
+} from './Getter';
 
-export type * from './Retriever';
+export type {
+  Attempt_End_Retriever,
+} from './Retriever';

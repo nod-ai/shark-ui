@@ -1,3 +1,7 @@
-export * from './plural';
+export {
+  toSharkUIOutput_plural,
+} from './plural';
 
-export * from './first';
+export {
+  toSharkUIOutput_first,
+} from './first';
