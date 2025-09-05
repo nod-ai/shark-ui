@@ -24,10 +24,13 @@ export {
 export {
   Attempt_Fresh_that as Fresh_that,
   Attempt_Fresh_thatEventually as Fresh_thatEventually,
-  type Attempt_End_Getter as End_Getter,
-  type Attempt_End_Retriever as End_Retriever,
 } from './Fresh';
 
 export type {
   Attempt_Progressive as Progressive,
 } from './Progressive';
+
+export type {
+  Attempt_End_Getter as End_Getter,
+  Attempt_End_Retriever as End_Retriever,
+} from './End';

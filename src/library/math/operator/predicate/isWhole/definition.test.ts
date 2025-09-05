@@ -12,7 +12,7 @@ import {
 
 import {
   isWhole,
-} from './aliases';
+} from './definition.ts';
 
 describe(isWhole, () => {
   describe('the sad outcomes', () => {
