@@ -3,7 +3,7 @@ import type ParsingError from '@/library/ParsingError';
 
 import type {
   Parsable,
-} from './definition';
+} from './definition.ts';
 
 /**
  * Some classes need a factory that parses strings into an instance.

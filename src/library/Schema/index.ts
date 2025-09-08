@@ -1,4 +1,4 @@
-import * as Schema from './exports';
+import * as Schema from './exports.ts';
 
 export {
   Schema as default,
