@@ -2,4 +2,4 @@ export {
   ShimmedStabilityAIClient,
 } from './definition.ts';
 
-export * from './SDXL';
+export * from './exports_objectAdjacent.ts';

@@ -1,5 +1,3 @@
 export * from './definition.ts';
 
-export * from './aliases';
-
-export * from './abbreviations';
+export * from './exports_objectAdjacent.ts';

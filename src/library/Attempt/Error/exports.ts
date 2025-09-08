@@ -18,4 +18,4 @@ export type {
   Attempt_Error_Interpreter,
 } from './Interpreter';
 
-export * from './modifier';
+export * from './exports_objectAdjacent.ts';

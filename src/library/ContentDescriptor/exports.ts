@@ -2,4 +2,4 @@ export {
   ContentDescriptor,
 } from './definition.ts';
 
-export * from './misnomers';
+export * from './exports_objectAdjacent.ts';
