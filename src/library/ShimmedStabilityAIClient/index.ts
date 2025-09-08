@@ -1,4 +1,5 @@
 export {
   ShimmedStabilityAIClient as default,
-  SDXL_DiffusionStepCount,
 } from './exports.ts';
+
+export * from './exports_objectAdjacent.ts';
