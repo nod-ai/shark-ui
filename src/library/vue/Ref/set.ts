@@ -1,6 +1,6 @@
 import type {
   Ref,
-} from './definition.ts';
+} from './core';
 
 /** Updates the wrapped instance */
 const set = <SomeState>(

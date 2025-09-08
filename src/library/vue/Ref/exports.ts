@@ -1,4 +1,4 @@
-export * from './definition.ts';
+export * from './core';
 
 export * from './get';
 
