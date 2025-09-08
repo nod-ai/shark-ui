@@ -1,1 +1,1 @@
-export * as Shortfin_TextToImage_SDXL from './exports.ts';
+export * as Shortfin_TextToImage_SDXL from './namespaceMembers.ts';

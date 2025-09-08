@@ -1,4 +1,4 @@
-import * as Attempt from './exports.ts';
+import * as Attempt from './namespaceMembers.ts';
 
 export {
   Attempt as default,

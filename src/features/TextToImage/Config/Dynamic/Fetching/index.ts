@@ -1,1 +1,1 @@
-export * as TextToImage_Config_Dynamic_Fetching from './exports.ts';
+export * as TextToImage_Config_Dynamic_Fetching from './namespaceMembers.ts';

@@ -1,4 +1,4 @@
-import * as Shortfin from './exports.ts';
+import * as Shortfin from './namespaceMembers.ts';
 
 export {
   Shortfin as default,

@@ -1,3 +1,3 @@
 export {
   URI_Image,
-} from './exports.ts';
+} from './exports_objectOriented.ts';

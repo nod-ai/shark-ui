@@ -1,1 +1,1 @@
-export type * from './exports.ts';
+export type * from './namespaceMembers.ts';
