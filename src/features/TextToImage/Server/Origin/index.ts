@@ -1,1 +1,1 @@
-export * as TextToImage_Server_Origin from './exports.ts';
+export * as TextToImage_Server_Origin from './namespaceMembers.ts';

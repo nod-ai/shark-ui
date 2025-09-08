@@ -1,4 +1,4 @@
-import * as Schema from './exports.ts';
+import * as Schema from './namespaceMembers.ts';
 
 export {
   Schema as default,

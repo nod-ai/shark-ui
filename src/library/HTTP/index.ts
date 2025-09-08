@@ -1,4 +1,4 @@
-import * as HTTP from './exports.ts';
+import * as HTTP from './namespaceMembers.ts';
 
 export {
   HTTP as default,

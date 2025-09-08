@@ -1,4 +1,4 @@
-import * as Parse from './exports.ts';
+import * as Parse from './namespaceMembers.ts';
 
 export {
   Parse as default,

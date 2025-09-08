@@ -1,1 +1,1 @@
-export * as Shortfin_TextToImage from './exports.ts';
+export * as Shortfin_TextToImage from './namespaceMembers.ts';

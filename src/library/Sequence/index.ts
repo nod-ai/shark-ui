@@ -1,4 +1,4 @@
-import * as Sequence from './exports.ts';
+import * as Sequence from './namespaceMembers.ts';
 
 export {
   Sequence as default,
