@@ -1,6 +1,5 @@
 export {
   ContentDescriptor as default,
-  ContentType,
-  MediaType,
-  MIMEType,
 } from './exports.ts';
+
+export * from './exports_objectAdjacent.ts';

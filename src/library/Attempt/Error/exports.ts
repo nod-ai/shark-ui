@@ -17,5 +17,3 @@ export {
 export type {
   Attempt_Error_Interpreter,
 } from './Interpreter';
-
-export * from './exports_objectAdjacent.ts';
