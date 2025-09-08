@@ -1,1 +1,1 @@
-export * as TextToImage_Server_Error from './namespaceMembers.ts';
+export * as TextToImage_Server_Error from './exports_objectOriented.ts';
