@@ -1,4 +1,4 @@
-import * as HTTP from './namespaceMembers.ts';
+import * as HTTP from './exports_objectOriented.ts';
 
 export {
   HTTP as default,
