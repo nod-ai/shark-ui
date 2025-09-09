@@ -1,1 +1,1 @@
-export * from './namespaceMembers.ts';
+export * as ContentDescriptor_StructuredSyntaxNameSuffix from './namespaceMembers.ts';

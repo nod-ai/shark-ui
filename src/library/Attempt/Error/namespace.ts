@@ -1,1 +1,1 @@
-export * from './namespaceMembers.ts';
+export * as Attempt_Error from './namespaceMembers.ts';

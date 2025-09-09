@@ -1,4 +1,6 @@
-import * as HTTP from './exports_objectOriented.ts';
+import {
+  HTTP,
+} from './exports_objectOriented.ts';
 
 export {
   HTTP as default,

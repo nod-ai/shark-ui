@@ -1,1 +1,1 @@
-export * as HTTP_Response_StatusCode_Error from './exports_objectOriented.ts';
+export * from './exports_objectOriented.ts';

@@ -1,1 +1,1 @@
-export * from './namespaceMembers.ts';
+export * as TextToImage_Config from './namespaceMembers.ts';

@@ -1,1 +1,1 @@
-export * as Attempt_Outcome_Success_Product from './exports_objectOriented.ts';
+export * from './exports_objectOriented.ts';

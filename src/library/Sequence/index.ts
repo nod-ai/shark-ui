@@ -1,4 +1,6 @@
-import * as Sequence from './exports_objectOriented.ts';
+import {
+  Sequence,
+} from './exports_objectOriented.ts';
 
 export {
   Sequence as default,

@@ -1,1 +1,1 @@
-export type * from './namespaceMembers.ts';
+export type * as TextToImage_Client_Generation from './namespaceMembers.ts';
