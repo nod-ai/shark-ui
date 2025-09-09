@@ -1,4 +1,8 @@
 export {
+  TextToImage_Config_ParsingError as ParsingError,
+} from './ParsingError';
+
+export {
   TextToImage_Config_Dynamic as Dynamic,
 } from './Dynamic';
 export {
