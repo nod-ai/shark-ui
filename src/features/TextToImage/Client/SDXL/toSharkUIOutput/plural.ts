@@ -10,7 +10,6 @@ import {
 
 import {
   toSharkUIOutput_Image,
-  toSharkUIOutput_Image_Description,
 } from './Image';
 
 const toSharkUIOutput_plural = (
@@ -34,7 +33,7 @@ const toSharkUIOutput_plural = (
 
   const inferredOutputs = inferredRawImages
     .map($0 => toSharkUIOutput_Image($0, {
-      description: toSharkUIOutput_Image_Description.all(givenInputText),
+      description: toSharkUIOutput_Image.Description.all(givenInputText),
     }))
     .map($0 => TextToImage_Pipeline.Output_Nullable.from($0));
 
