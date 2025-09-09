@@ -53,7 +53,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     },
   });
 
-  const outcomeOfSettlingTextToImageResponse = await Attempt.Adapted_toSettle(promisedTextToImageResponse, {
+  const outcomeOfSettlingTextToImageResponse = await Attempt.Adapted.toSettle(promisedTextToImageResponse, {
     interpretationOf: (caughtError) => {
       if (
         !(caughtError instanceof HTTP.Endpoint.Error.Request)

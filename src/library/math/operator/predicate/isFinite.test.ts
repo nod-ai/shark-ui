@@ -27,7 +27,7 @@ describe(isFinite, () => {
     it('should safely propagate the error', () => {
       expect.assertions(1);
 
-      expect(() => isFinite(theSoleInoperableNumber)).toThrow(Attempt.Error_NonActionable);
+      expect(() => isFinite(theSoleInoperableNumber)).toThrow(Attempt.Error.NonActionable);
     });
 
     it('should communicate clearly with developers', () => {

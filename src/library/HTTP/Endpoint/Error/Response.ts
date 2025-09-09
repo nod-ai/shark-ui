@@ -5,7 +5,7 @@ import type {
 } from '../../Response';
 
 class HTTP_Endpoint_Error_Response
-  extends Attempt.Error_Actionable<
+  extends Attempt.Error.Actionable<
     'HTTP_Endpoint_Error_Response'
   > {
   public override name = 'HTTP_Endpoint_Error_Response' as const;

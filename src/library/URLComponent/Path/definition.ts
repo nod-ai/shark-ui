@@ -18,7 +18,7 @@ class URLComponent_Path
   ): Attempt.Outcome<
     URLComponent_Path,
     URLComponent_Path_ParsingError
-  > => Attempt.Fresh_that((ends) => {
+  > => Attempt.Fresh.that((ends) => {
     const exampleURL = new URL(`https://example.com${givenSubject}`);
 
     const newParsingError = new URLComponent_Path_ParsingError({

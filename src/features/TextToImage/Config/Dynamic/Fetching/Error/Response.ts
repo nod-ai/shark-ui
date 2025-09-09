@@ -5,7 +5,7 @@ import type {
 } from '@/library/URLComponent';
 
 class TextToImage_Config_Dynamic_Fetching_Error_Response
-  extends Attempt.Error_Actionable<
+  extends Attempt.Error.Actionable<
     'TextToImage_Config_Dynamic_Fetching_Error_Response'
   > {
   public override name = 'TextToImage_Config_Dynamic_Fetching_Error_Response' as const;

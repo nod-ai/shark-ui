@@ -8,29 +8,14 @@ export {
   type Attempt_Outcome_Failure as Outcome_Failure,
 } from './Outcome';
 
-export {
-  to as Adapted_to,
-  toEventually as Adapted_toEventually,
-  toSettle as Adapted_toSettle,
-  type Config as Adapted_Config,
-} from './Adapted';
+export * as Adapted from './Adapted';
 
-export {
-  NonActionable as Error_NonActionable,
-  Actionable as Error_Actionable,
-  type Interpreter as Error_Interpreter,
-} from './Error';
+export * as Error from './Error';
 
-export {
-  that as Fresh_that,
-  thatEventually as Fresh_thatEventually,
-} from './Fresh';
+export * as Fresh from './Fresh';
 
 export type {
   Attempt_Progressive as Progressive,
 } from './Progressive';
 
-export type {
-  Getter as End_Getter,
-  Retriever as End_Retriever,
-} from './End';
+export type * as End from './End';

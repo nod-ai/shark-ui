@@ -17,7 +17,7 @@ const Parse_instanceFrom = <
 ): Attempt.Outcome<
   Schema.infer<SomeSchema>,
   SomeParsingError
-> => Attempt.Fresh_that((ends) => {
+> => Attempt.Fresh.that((ends) => {
   const resultOfParsingSubject = givenSchema.safeParse(givenSubject);
 
   if (

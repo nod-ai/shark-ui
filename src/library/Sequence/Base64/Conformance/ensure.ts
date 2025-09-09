@@ -13,7 +13,7 @@ const Sequence_Base64_Conformance_ensure = (
 ): Attempt.Outcome<
   string,
   Sequence_Base64_Conformance_Error
-> => Attempt.Fresh_that((ends) => {
+> => Attempt.Fresh.that((ends) => {
   if (
     !Sequence_Base64_pattern.test(givenCharacterSequence)
   ) return ends.inFailureDueTo(new Sequence_Base64_Conformance_Error());
