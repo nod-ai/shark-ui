@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import {
-  TextToImage,
-} from '@/features/TextToImage';
+import TextToImage from '@/features/TextToImage';
 
 import TextToImageServerConnectionAlert from './TextToImageServerConnectionAlert.vue';
 import TextToImageServerSpecificationAlert from './TextToImageServerSpecificationAlert.vue';

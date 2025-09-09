@@ -1,6 +1,4 @@
-import {
-  WebAPI,
-} from '@/library/WebAPI';
+import WebAPI from '@/library/WebAPI';
 
 import {
   TextToImage_Server_Origin,

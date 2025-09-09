@@ -1,8 +1,5 @@
 import Attempt from '@/library/Attempt';
-
-import type {
-  URLComponent,
-} from '@/library/URLComponent';
+import type URLComponent from '@/library/URLComponent';
 
 import {
   HTTP_Endpoint,

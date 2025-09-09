@@ -1,8 +1,5 @@
 import Attempt from '@/library/Attempt';
-
-import type {
-  WebAPI,
-} from '@/library/WebAPI';
+import type WebAPI from '@/library/WebAPI';
 
 import {
   TextToImage_Config,

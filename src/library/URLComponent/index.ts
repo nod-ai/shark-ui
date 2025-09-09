@@ -1,1 +1,5 @@
-export * as URLComponent from './exports_objectOriented.ts';
+import * as URLComponent from './exports_objectOriented.ts';
+
+export {
+  URLComponent as default,
+};

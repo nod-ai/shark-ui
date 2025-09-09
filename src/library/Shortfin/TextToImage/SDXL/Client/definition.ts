@@ -1,9 +1,6 @@
 import Attempt from '@/library/Attempt';
 import HTTP from '@/library/HTTP';
-
-import {
-  URLComponent,
-} from '@/library/URLComponent';
+import URLComponent from '@/library/URLComponent';
 
 import type {
   Shortfin_TextToImage_SDXL_Client_Request,

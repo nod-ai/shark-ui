@@ -1,1 +1,5 @@
-export * as TextToImage from './exports_objectOriented.ts';
+import * as TextToImage from './exports_objectOriented.ts';
+
+export {
+  TextToImage as default,
+};
