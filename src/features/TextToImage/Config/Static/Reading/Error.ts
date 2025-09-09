@@ -1,5 +1,8 @@
 import Attempt from '@/library/Attempt';
-import type * as URLComponent from '@/library/URLComponent';
+
+import type {
+  URLComponent,
+} from '@/library/URLComponent';
 
 class TextToImage_Config_Static_Reading_Error
   extends Attempt.Error.Actionable<

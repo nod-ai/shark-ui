@@ -1,1 +1,1 @@
-export * from './exports_objectOriented.ts';
+export * as toSharkUIOutput from './exports_objectOriented.ts';

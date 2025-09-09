@@ -1,1 +1,1 @@
-export * from './exports_objectOriented.ts';
+export * as SDXL from './exports_objectOriented.ts';

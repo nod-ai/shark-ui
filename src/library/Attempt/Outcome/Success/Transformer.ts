@@ -1,4 +1,6 @@
-import type * as Attempt_Outcome_Success_Product from './Product';
+import type {
+  Attempt_Outcome_Success_Product,
+} from './Product';
 
 interface Attempt_Outcome_Success_Transformer<
   SomeTransformableProduct,

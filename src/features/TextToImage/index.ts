@@ -1,1 +1,1 @@
-export * from './exports_objectOriented.ts';
+export * as TextToImage from './exports_objectOriented.ts';

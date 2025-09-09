@@ -1,4 +1,6 @@
-import * as URLComponent from '@/library/URLComponent';
+import {
+  URLComponent,
+} from '@/library/URLComponent';
 
 const TextToImage_Config_Static_file = URLComponent.Path.parsedFrom('/config/text-to-image.json').forciblyUnwrap();
 

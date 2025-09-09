@@ -5,7 +5,9 @@ import type {
 import Attempt from '@/library/Attempt';
 import HTTP from '@/library/HTTP';
 
-import * as TextToImage_Server from '../../Server';
+import {
+  TextToImage_Server,
+} from '../../Server';
 
 import type {
   TextToImage_Client_Generation,
@@ -15,7 +17,9 @@ import {
   TextToImage_Client_SDXL_initialize,
 } from './initialize';
 
-import * as toSharkUIOutput from './toSharkUIOutput';
+import {
+  toSharkUIOutput,
+} from './toSharkUIOutput';
 
 const TextToImage_Client_SDXL_generateOutputFrom = async (
   given: {

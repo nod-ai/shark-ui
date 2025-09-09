@@ -1,1 +1,1 @@
-export * from './exports_objectOriented.ts';
+export * as Attempt_Fresh from './exports_objectOriented.ts';

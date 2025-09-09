@@ -1,4 +1,6 @@
-import * as Attempt_Outcome_Success_Product from './Product';
+import {
+  Attempt_Outcome_Success_Product,
+} from './Product';
 
 import type {
   Attempt_Outcome_Success,
