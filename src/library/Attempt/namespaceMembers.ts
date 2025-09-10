@@ -4,8 +4,6 @@ export {
 
 export {
   Attempt_Outcome as Outcome,
-  type Attempt_Outcome_Success as Outcome_Success,
-  type Attempt_Outcome_Failure as Outcome_Failure,
 } from './Outcome';
 
 export {
