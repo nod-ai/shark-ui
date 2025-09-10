@@ -3,7 +3,7 @@ import type {
 } from '../Error';
 
 import type {
-  Attempt_Outcome_Failure_Transformer,
+  Attempt_Outcome_Failure,
 } from './Failure';
 
 import type {
@@ -24,7 +24,7 @@ type Attempt_Outcome_Transformer<
       >
     >
     & Partial<
-      Attempt_Outcome_Failure_Transformer<
+      Attempt_Outcome_Failure.Transformer<
         SomeTransformableActionableError,
         SomeTransformedActionableError
       >
@@ -38,7 +38,7 @@ type Attempt_Outcome_Transformer<
       >
     >
     & Required<
-      Attempt_Outcome_Failure_Transformer<
+      Attempt_Outcome_Failure.Transformer<
         SomeTransformableActionableError,
         SomeTransformedActionableError
       >

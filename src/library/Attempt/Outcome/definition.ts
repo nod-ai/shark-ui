@@ -3,8 +3,7 @@ import type {
 } from '../Error';
 
 import {
-  type Attempt_Outcome_Failure,
-  Attempt_Outcome_Failure_dueTo,
+  Attempt_Outcome_Failure,
 } from './Failure';
 
 import {
@@ -25,7 +24,7 @@ type Attempt_Outcome<
 ;
 
 const Attempt_Outcome = {
-  Failure_dueTo      : Attempt_Outcome_Failure_dueTo,
+  Failure            : Attempt_Outcome_Failure,
   Success_thatYielded: Attempt_Outcome_Success_thatYielded,
   fromRewrapping     : Attempt_Outcome_fromRewrapping,
 };

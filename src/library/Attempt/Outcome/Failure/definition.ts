@@ -1,4 +1,4 @@
-import type {
+import {
   Attempt_Error,
 } from '../../Error';
 
@@ -44,6 +44,14 @@ interface Attempt_Outcome_Failure<
   ): Attempt_Outcome_Failure<SomeTransformedActionableError>;
 }
 
-export type {
+function Attempt_Outcome_Failure(
+  namespaceOnly: never = Attempt_Error.NonActionable.throw(
+    `Unexpected call of module augmentation provision for "${Attempt_Outcome_Failure.name}".`,
+  ),
+) {
+  return namespaceOnly;
+}
+
+export {
   Attempt_Outcome_Failure,
 };

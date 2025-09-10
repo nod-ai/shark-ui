@@ -3,9 +3,7 @@ import type {
 } from '../Error';
 
 import {
-  type Attempt_Outcome_Failure,
-  type Attempt_Outcome_Failure_Transformer,
-  Attempt_Outcome_Failure_Cause,
+  Attempt_Outcome_Failure,
 } from './Failure';
 
 import {
@@ -35,7 +33,7 @@ function Attempt_Outcome_fromRewrapping<
   SomeTransformedActionableError extends Attempt_Error.Actionable<string> = SomeTransformableActionableError,
 >(
   givenOutcome: Attempt_Outcome_Failure<SomeTransformableActionableError>,
-  given?: Attempt_Outcome_Failure_Transformer<
+  given?: Attempt_Outcome_Failure.Transformer<
     SomeTransformableActionableError,
     SomeTransformedActionableError
   >,
@@ -88,7 +86,7 @@ function Attempt_Outcome_fromRewrapping<
       SomeTransformableProduct,
       SomeTransformedProduct
     >,
-    cause: toTransformedCause = Attempt_Outcome_Failure_Cause.Transformer_identity<
+    cause: toTransformedCause = Attempt_Outcome_Failure.Cause.Transformer_identity<
       SomeTransformableActionableError,
       SomeTransformedActionableError
     >,
@@ -102,7 +100,7 @@ function Attempt_Outcome_fromRewrapping<
       SomeTransformableProduct,
       SomeTransformedProduct
     >,
-    cause: Attempt_Outcome_Failure_Cause.Transformer_identity<
+    cause: Attempt_Outcome_Failure.Cause.Transformer_identity<
       SomeTransformableActionableError,
       SomeTransformedActionableError
     >,
