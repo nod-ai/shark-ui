@@ -7,7 +7,7 @@ import type {
 } from './Failure';
 
 import type {
-  Attempt_Outcome_Success_Transformer,
+  Attempt_Outcome_Success,
 } from './Success';
 
 type Attempt_Outcome_Transformer<
@@ -18,7 +18,7 @@ type Attempt_Outcome_Transformer<
 > =
   | (
     & Required<
-      Attempt_Outcome_Success_Transformer<
+      Attempt_Outcome_Success.Transformer<
         SomeTransformableProduct,
         SomeTransformedProduct
       >
@@ -32,7 +32,7 @@ type Attempt_Outcome_Transformer<
   )
   | (
     & Partial<
-      Attempt_Outcome_Success_Transformer<
+      Attempt_Outcome_Success.Transformer<
         SomeTransformableProduct,
         SomeTransformedProduct
       >
