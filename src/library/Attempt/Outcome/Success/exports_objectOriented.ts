@@ -1,9 +1,6 @@
 export type * from './definition.ts';
 
-export {
-  type Transformer as Attempt_Outcome_Success_Product_Transformer,
-  /**/ Transformer_identity as Attempt_Outcome_Success_Product_Transformer_identity,
-} from './Product';
+export * as Attempt_Outcome_Success_Product from './Product';
 
 export type {
   Attempt_Outcome_Success_Transformer,

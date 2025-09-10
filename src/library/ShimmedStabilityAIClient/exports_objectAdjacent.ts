@@ -1,3 +1,1 @@
-export {
-  DiffusionStepCount as SDXL_DiffusionStepCount,
-} from './SDXL';
+export * as SDXL from './SDXL';

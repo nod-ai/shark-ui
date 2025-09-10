@@ -5,13 +5,13 @@ import type {
 import {
   type Attempt_Outcome_Failure,
   type Attempt_Outcome_Failure_Transformer,
-  Attempt_Outcome_Failure_Cause_Transformer_identity,
+  Attempt_Outcome_Failure_Cause,
 } from './Failure';
 
 import {
   type Attempt_Outcome_Success,
   type Attempt_Outcome_Success_Transformer,
-  Attempt_Outcome_Success_Product_Transformer_identity,
+  Attempt_Outcome_Success_Product,
 } from './Success';
 
 import type {
@@ -84,11 +84,11 @@ function Attempt_Outcome_fromRewrapping<
     SomeTransformableActionableError
   >,
   {
-    product: toTransformedProduct = Attempt_Outcome_Success_Product_Transformer_identity<
+    product: toTransformedProduct = Attempt_Outcome_Success_Product.Transformer_identity<
       SomeTransformableProduct,
       SomeTransformedProduct
     >,
-    cause: toTransformedCause = Attempt_Outcome_Failure_Cause_Transformer_identity<
+    cause: toTransformedCause = Attempt_Outcome_Failure_Cause.Transformer_identity<
       SomeTransformableActionableError,
       SomeTransformedActionableError
     >,
@@ -98,11 +98,11 @@ function Attempt_Outcome_fromRewrapping<
     SomeTransformedProduct,
     SomeTransformedActionableError
   > = {
-    product: Attempt_Outcome_Success_Product_Transformer_identity<
+    product: Attempt_Outcome_Success_Product.Transformer_identity<
       SomeTransformableProduct,
       SomeTransformedProduct
     >,
-    cause: Attempt_Outcome_Failure_Cause_Transformer_identity<
+    cause: Attempt_Outcome_Failure_Cause.Transformer_identity<
       SomeTransformableActionableError,
       SomeTransformedActionableError
     >,
