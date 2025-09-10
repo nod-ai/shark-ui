@@ -4,7 +4,7 @@ import Sequence from '@/library/Sequence';
 
 import {
   URI_Image,
-} from '@/library/UniformResourceIdentifier';
+} from '@/library/URI';
 
 import type {
   TextToImage_Pipeline,

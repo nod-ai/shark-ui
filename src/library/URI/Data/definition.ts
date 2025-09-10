@@ -4,7 +4,7 @@ import NonTrivialString from '@/library/NonTrivialString';
 import type Sequence from '@/library/Sequence';
 
 import {
-  UniformResourceIdentifier,
+  URI,
 } from '../definition.ts';
 
 import type {
@@ -13,7 +13,7 @@ import type {
 
 /** See [RFC 2397](https://datatracker.ietf.org/doc/rfc2397) for more info */
 class URI_Data
-  extends UniformResourceIdentifier {
+  extends URI {
   public static readonly scheme = NonTrivialString.parsedFrom('data').forciblyUnwrap();
 
   public constructor(
