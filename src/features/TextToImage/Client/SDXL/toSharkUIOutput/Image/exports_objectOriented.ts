@@ -1,6 +1,6 @@
 export * from './definition.ts';
 
 export {
-  toSharkUIOutput_Image_Description_singular,
-  toSharkUIOutput_Image_Description_all,
+  singular as toSharkUIOutput_Image_Description_singular,
+  all as toSharkUIOutput_Image_Description_all,
 } from './Description';

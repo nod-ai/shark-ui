@@ -7,7 +7,7 @@ import type {
 import {
   Dynamic as TextToImage_Config_Dynamic,
   Static as TextToImage_Config_Static,
-  TextToImage_Config_empty,
+  empty as TextToImage_Config_empty,
 } from '../../Config';
 
 import {

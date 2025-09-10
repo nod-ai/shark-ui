@@ -1,9 +1,9 @@
 import type {
-  Attempt_Error_Actionable,
+  Actionable as Attempt_Error_Actionable,
 } from '../../Error';
 
 import {
-  Attempt_Outcome_Failure_Cause_Transformer_identity,
+  Transformer_identity as Attempt_Outcome_Failure_Cause_Transformer_identity,
 } from './Cause';
 
 import type {

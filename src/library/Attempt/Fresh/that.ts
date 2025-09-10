@@ -1,10 +1,10 @@
 import type {
-  Attempt_End_Getter,
+  Getter as Attempt_End_Getter,
 } from '../End';
 
 import {
-  type Attempt_Error_Actionable,
-  Attempt_Error_Creation,
+  type Actionable as Attempt_Error_Actionable,
+  Creation as Attempt_Error_Creation,
 } from '../Error';
 
 import type {

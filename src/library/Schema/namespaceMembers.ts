@@ -1,1 +1,1 @@
-export * from './core';
+export * from './core'; // Uses the aliases as-is

@@ -1,8 +1,8 @@
 export {
-  URLComponent_Origin,
-  URLComponent_Origin_ParsingError,
+  URLComponent_Origin as Origin,
+  URLComponent_Origin_ParsingError as Origin_ParsingError,
 } from './Origin';
 export {
-  URLComponent_Path,
-  URLComponent_Path_ParsingError,
+  URLComponent_Path as Path,
+  URLComponent_Path_ParsingError as Path_ParsingError,
 } from './Path';

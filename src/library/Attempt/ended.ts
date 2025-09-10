@@ -1,5 +1,5 @@
 import {
-  Attempt_Error_NonActionable,
+  NonActionable as Attempt_Error_NonActionable,
 } from './Error';
 
 import {

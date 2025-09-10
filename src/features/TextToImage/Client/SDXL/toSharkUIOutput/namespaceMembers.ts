@@ -1,7 +1,7 @@
 export {
-  toSharkUIOutput_plural,
+  toSharkUIOutput_plural as plural,
 } from './plural';
 
 export {
-  toSharkUIOutput_first,
+  toSharkUIOutput_first as first,
 } from './first';

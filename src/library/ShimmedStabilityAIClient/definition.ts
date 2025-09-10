@@ -1,7 +1,7 @@
 import HTTP from '@/library/HTTP';
 
 import {
-  URLComponent_Origin,
+  Origin as URLComponent_Origin,
 } from '@/library/URLComponent';
 
 import {
