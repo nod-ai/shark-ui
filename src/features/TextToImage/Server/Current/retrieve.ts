@@ -5,8 +5,8 @@ import type {
 } from '@/library/WebAPI';
 
 import {
-  Config_Dynamic as TextToImage_Config_Dynamic,
-  Config_Static as TextToImage_Config_Static,
+  Dynamic as TextToImage_Config_Dynamic,
+  Static as TextToImage_Config_Static,
   TextToImage_Config_empty,
 } from '../../Config';
 
