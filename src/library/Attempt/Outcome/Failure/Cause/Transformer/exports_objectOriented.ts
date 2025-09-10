@@ -1,3 +1,5 @@
 export type * from './definition.ts';
 
-export * from './identity';
+export {
+  Attempt_Outcome_Failure_Cause_Transformer_identity,
+} from './identity';

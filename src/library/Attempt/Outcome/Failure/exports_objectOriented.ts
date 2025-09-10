@@ -1,7 +1,14 @@
 export type * from './definition.ts';
 
-export * from './Cause';
+export {
+  type Attempt_Outcome_Failure_Cause_Transformer,
+  /**/ Attempt_Outcome_Failure_Cause_Transformer_identity,
+} from './Cause';
 
-export type * from './Transformer';
+export type {
+  Attempt_Outcome_Failure_Transformer,
+} from './Transformer';
 
-export * from './dueTo';
+export {
+  Attempt_Outcome_Failure_dueTo,
+} from './dueTo';
