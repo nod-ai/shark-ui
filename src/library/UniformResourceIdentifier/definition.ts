@@ -6,7 +6,12 @@ import {
 } from '@/library/utilitiesByType/string';
 
 /**
- * Identifies an abstract or physical resource.
+ * Uniform: is consistent and unambiguous
+ *
+ * Resource: can be physical or abstract
+ *
+ * Identifier: can be used to differentiate one from another
+ *
  * See [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986) for more information
  */
 class UniformResourceIdentifier {
