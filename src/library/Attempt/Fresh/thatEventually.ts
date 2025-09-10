@@ -1,5 +1,5 @@
 import type {
-  Attempt_End_Retriever,
+  Retriever as Attempt_End_Retriever,
 } from '../End';
 
 import {

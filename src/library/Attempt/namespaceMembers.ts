@@ -22,8 +22,8 @@ export {
 } from './Error';
 
 export {
-  Attempt_Fresh_that as Fresh_that,
-  Attempt_Fresh_thatEventually as Fresh_thatEventually,
+  that as Fresh_that,
+  thatEventually as Fresh_thatEventually,
 } from './Fresh';
 
 export type {
@@ -31,6 +31,6 @@ export type {
 } from './Progressive';
 
 export type {
-  Attempt_End_Getter as End_Getter,
-  Attempt_End_Retriever as End_Retriever,
+  Getter as End_Getter,
+  Retriever as End_Retriever,
 } from './End';

@@ -4,7 +4,7 @@ import {
 } from '../Error';
 
 import {
-  Attempt_Fresh_thatEventually,
+  thatEventually as Attempt_Fresh_thatEventually,
 } from '../Fresh';
 
 import type {

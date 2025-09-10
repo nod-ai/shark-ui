@@ -16,7 +16,7 @@ import {
 } from './initialize';
 
 import {
-  toSharkUIOutput_first,
+  first as toSharkUIOutput_first,
 } from './toSharkUIOutput';
 
 const TextToImage_Client_SDXL_generateOutputFrom = async (

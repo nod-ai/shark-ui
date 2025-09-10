@@ -1,5 +1,5 @@
 import type {
-  Attempt_Outcome_Success_Product_Transformer,
+  Transformer as Attempt_Outcome_Success_Product_Transformer,
 } from './Product';
 
 interface Attempt_Outcome_Success_Transformer<

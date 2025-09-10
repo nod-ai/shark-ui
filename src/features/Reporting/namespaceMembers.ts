@@ -1,3 +1,3 @@
 export {
-  Reporting_promptUserWith,
+  Reporting_promptUserWith as promptUserWith,
 } from './promptUserWith';

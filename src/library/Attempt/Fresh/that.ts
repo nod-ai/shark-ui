@@ -1,5 +1,5 @@
 import type {
-  Attempt_End_Getter,
+  Getter as Attempt_End_Getter,
 } from '../End';
 
 import {

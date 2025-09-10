@@ -3,7 +3,7 @@ import type {
 } from '../../Error';
 
 import {
-  Attempt_Outcome_Failure_Cause_Transformer_identity,
+  Transformer_identity as Attempt_Outcome_Failure_Cause_Transformer_identity,
 } from './Cause';
 
 import type {

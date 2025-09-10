@@ -1,7 +1,7 @@
 export {
-  TextToImage_Server_Current_accordingToEnvironment as Current_accordingToEnvironment,
+  TextToImage_Server_Current_accordingToEnvironment as accordingToEnvironment,
 } from './accordingToEnvironment';
 
 export {
-  TextToImage_Server_Current_retrieve as Current_retrieve,
+  TextToImage_Server_Current_retrieve as retrieve,
 } from './retrieve';

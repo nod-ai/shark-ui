@@ -1,5 +1,5 @@
 export {
-  ContentDescriptor_TopLevel_Discrete_all,
+  ContentDescriptor_TopLevel_Discrete_all as all,
 } from './all';
 
 export {

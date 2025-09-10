@@ -1,6 +1,6 @@
 export {
-  Current_accordingToEnvironment,
-  Current_retrieve,
+  accordingToEnvironment as Current_accordingToEnvironment,
+  retrieve as Current_retrieve,
 } from './Current';
 
 export {
