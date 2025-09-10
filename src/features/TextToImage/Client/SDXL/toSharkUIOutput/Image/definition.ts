@@ -1,10 +1,7 @@
 import type * as StabilityAIClient from 'stabilityai-client-typescript/models/components';
 
 import Sequence from '@/library/Sequence';
-
-import {
-  URI_Image,
-} from '@/library/URI';
+import URI from '@/library/URI';
 
 import type {
   TextToImage_Pipeline,
@@ -23,7 +20,7 @@ const toSharkUIOutput_Image = (
   const base64DataOfRawImage = Sequence.Byte.Encoded.Base64.parsedFrom(givenImage.base64).forciblyUnwrap(/* Broken web contracts require intervention */);
 
   const derivedImage = {
-    uri        : new URI_Image('png', 'base64', base64DataOfRawImage),
+    uri        : new URI.Image('png', 'base64', base64DataOfRawImage),
     description: given.description,
   };
 

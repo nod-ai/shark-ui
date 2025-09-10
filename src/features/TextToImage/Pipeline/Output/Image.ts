@@ -1,9 +1,7 @@
-import type {
-  URI_Image,
-} from '@/library/URI';
+import type URI from '@/library/URI';
 
 interface TextToImage_Pipeline_Output_Image {
-  uri: URI_Image;
+  uri: URI.Image;
   description: string;
 }
 
