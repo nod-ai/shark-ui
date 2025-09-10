@@ -1,6 +1,4 @@
-import type {
-  Actionable as Attempt_Error_Actionable,
-} from './Error';
+import type * as Attempt_Error from './Error';
 
 import type {
   Attempt_Outcome,
@@ -8,7 +6,7 @@ import type {
 
 interface Attempt_Progressive<
   SomeProduct,
-  SomeActionableError extends Attempt_Error_Actionable<string>,
+  SomeActionableError extends Attempt_Error.Actionable<string>,
 > {
   initiate: () => Promise<void>;
   isInProgress: boolean;

@@ -15,9 +15,7 @@ import {
   TextToImage_Client_SDXL_initialize,
 } from './initialize';
 
-import {
-  first as toSharkUIOutput_first,
-} from './toSharkUIOutput';
+import * as toSharkUIOutput from './toSharkUIOutput';
 
 const TextToImage_Client_SDXL_generateOutputFrom = async (
   given: {
@@ -64,7 +62,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
   });
 
   const outcomeOfSettlingSoleTextToImageOutput = Attempt.Outcome.fromRewrapping(outcomeOfSettlingTextToImageResponse, {
-    product: textToImageResponse => toSharkUIOutput_first({
+    product: textToImageResponse => toSharkUIOutput.first({
       in          : textToImageResponse,
       inferredFrom: given.textToImageRequestBody.textPrompts,
     }),

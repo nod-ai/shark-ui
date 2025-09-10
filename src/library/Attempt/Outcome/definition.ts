@@ -1,6 +1,4 @@
-import type {
-  Actionable as Attempt_Error_Actionable,
-} from '../Error';
+import type * as Attempt_Error from '../Error';
 
 import {
   type Attempt_Outcome_Failure,
@@ -18,7 +16,7 @@ import {
 
 type Attempt_Outcome<
   SomeProduct,
-  SomeActionableError extends Attempt_Error_Actionable<string>,
+  SomeActionableError extends Attempt_Error.Actionable<string>,
 > =
   | Attempt_Outcome_Success<SomeProduct>
   | Attempt_Outcome_Failure<SomeActionableError>

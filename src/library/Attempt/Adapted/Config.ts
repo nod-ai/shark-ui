@@ -1,12 +1,9 @@
-import type {
-  Actionable as Attempt_Error_Actionable,
-  Interpreter as Attempt_Error_Interpreter,
-} from '../Error';
+import type * as Attempt_Error from '../Error';
 
 interface Attempt_Adapted_Config<
-  SomeActionableError extends Attempt_Error_Actionable<string>,
+  SomeActionableError extends Attempt_Error.Actionable<string>,
 > {
-  interpretationOf: Attempt_Error_Interpreter<SomeActionableError>;
+  interpretationOf: Attempt_Error.Interpreter<SomeActionableError>;
 }
 
 export type {

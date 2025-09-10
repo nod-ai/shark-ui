@@ -1,8 +1,5 @@
 import Attempt from '@/library/Attempt';
-
-import type {
-  Path as URLComponent_Path,
-} from '@/library/URLComponent';
+import type * as URLComponent from '@/library/URLComponent';
 
 class TextToImage_Server_Error_Specification
   extends Attempt.Error.Actionable<
@@ -12,8 +9,8 @@ class TextToImage_Server_Error_Specification
 
   public constructor(
     public readonly environmentKey: string,
-    public readonly file: URLComponent_Path,
-    public readonly endpoint: URLComponent_Path,
+    public readonly file: URLComponent.Path,
+    public readonly endpoint: URLComponent.Path,
   ) {
     super('Failed to determine text-to-image server');
   }

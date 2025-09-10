@@ -1,13 +1,11 @@
-import type {
-  Actionable as Attempt_Error_Actionable,
-} from '../../Error';
+import type * as Attempt_Error from '../../Error';
 
 import type {
   Attempt_Outcome_Discriminable,
 } from '../Discriminable';
 
 interface Attempt_Outcome_Failure_SemanticallySugarfree<
-  SomeActionableError extends Attempt_Error_Actionable<string>,
+  SomeActionableError extends Attempt_Error.Actionable<string>,
 > extends Attempt_Outcome_Discriminable<
     'failure',
     SomeActionableError

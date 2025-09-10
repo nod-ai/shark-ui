@@ -4,11 +4,7 @@ import type {
 
 import Attempt from '@/library/Attempt';
 
-import {
-  type Input as TextToImage_Pipeline_Input,
-  type Output as TextToImage_Pipeline_Output,
-  Output_Nullable as TextToImage_Pipeline_Output_Nullable,
-} from '@/features/TextToImage/Pipeline'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
+import * as TextToImage_Pipeline from '@/features/TextToImage/Pipeline'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
 
 import {
   toSharkUIOutput_Image,
@@ -21,9 +17,9 @@ const toSharkUIOutput_plural = (
     inferredFrom: givenInputText,
   }: {
     in: GenerateFromTextResponse;
-    inferredFrom: TextToImage_Pipeline_Input['text'];
+    inferredFrom: TextToImage_Pipeline.Input['text'];
   },
-): (TextToImage_Pipeline_Output | null)[] | null => {
+): (TextToImage_Pipeline.Output | null)[] | null => {
   if (
     !('artifacts' in givenResponse.result)
   ) return Attempt.abandon('Expected response body rather than readable stream');
@@ -38,7 +34,7 @@ const toSharkUIOutput_plural = (
     .map($0 => toSharkUIOutput_Image($0, {
       description: toSharkUIOutput_Image_Description.all(givenInputText),
     }))
-    .map($0 => TextToImage_Pipeline_Output_Nullable.from($0));
+    .map($0 => TextToImage_Pipeline.Output_Nullable.from($0));
 
   return inferredOutputs;
 };

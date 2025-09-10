@@ -4,9 +4,7 @@ import type {
   Not,
 } from '@/library/typeUtilities';
 
-import type {
-  Actionable as Attempt_Error_Actionable,
-} from '../../Error';
+import type * as Attempt_Error from '../../Error';
 
 import type {
   Attempt_Outcome_Discriminant,
@@ -21,7 +19,7 @@ interface Attempt_Outcome_Discriminable<
   SomePayload extends (
     SomeDiscriminant extends 'success'
       ? unknown
-      : Attempt_Error_Actionable<string>
+      : Attempt_Error.Actionable<string>
   ),
 > extends Attempt_Outcome_Discriminable_SyntacticallySugarfree<
     SomeDiscriminant
@@ -43,7 +41,7 @@ interface Attempt_Outcome_Discriminable<
     SomeTransformedPayload extends (
       SomeDiscriminant extends 'success'
         ? unknown
-        : Attempt_Error_Actionable<string>
+        : Attempt_Error.Actionable<string>
     ) = SomePayload,
   >(): Attempt_Outcome_Discriminable<SomeDiscriminant, SomeTransformedPayload>;
 }

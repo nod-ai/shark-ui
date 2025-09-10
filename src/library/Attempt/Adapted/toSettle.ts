@@ -1,6 +1,4 @@
-import type {
-  Actionable as Attempt_Error_Actionable,
-} from '../Error';
+import type * as Attempt_Error from '../Error';
 
 import type {
   Attempt_Outcome,
@@ -16,7 +14,7 @@ import {
 
 const Attempt_Adapted_toSettle = async <
   SomeProduct,
-  SomeActionableError extends Attempt_Error_Actionable<string>,
+  SomeActionableError extends Attempt_Error.Actionable<string>,
 >(
   promisedProduct: Promise<SomeProduct>,
   givenConfig: Attempt_Adapted_Config<SomeActionableError>,

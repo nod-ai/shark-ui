@@ -1,6 +1,4 @@
-import type {
-  Actionable as Attempt_Error_Actionable,
-} from '../Error';
+import type * as Attempt_Error from '../Error';
 
 import type {
   Attempt_Outcome,
@@ -11,7 +9,7 @@ import type {
 } from '../ended';
 
 type Attempt_End_Getter<
-  SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
+  SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error.Actionable<string>>,
 > = (
   givenHandles: typeof handles
 ) => SomeInferredOutcome;

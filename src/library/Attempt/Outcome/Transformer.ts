@@ -1,6 +1,4 @@
-import type {
-  Actionable as Attempt_Error_Actionable,
-} from '../Error';
+import type * as Attempt_Error from '../Error';
 
 import type {
   Attempt_Outcome_Failure_Transformer,
@@ -12,9 +10,9 @@ import type {
 
 type Attempt_Outcome_Transformer<
   SomeTransformableProduct,
-  SomeTransformableActionableError extends Attempt_Error_Actionable<string>,
+  SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
   SomeTransformedProduct,
-  SomeTransformedActionableError extends Attempt_Error_Actionable<string>,
+  SomeTransformedActionableError extends Attempt_Error.Actionable<string>,
 > =
   | (
     & Required<

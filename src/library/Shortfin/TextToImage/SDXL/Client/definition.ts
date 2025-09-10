@@ -1,9 +1,6 @@
 import Attempt from '@/library/Attempt';
 import HTTP from '@/library/HTTP';
-
-import {
-  Path as URLComponent_Path,
-} from '@/library/URLComponent';
+import * as URLComponent from '@/library/URLComponent';
 
 import type {
   Shortfin_TextToImage_SDXL_Client_Request,
@@ -20,7 +17,7 @@ class Shortfin_TextToImage_SDXL_Client
   ): Promise<
     Shortfin_TextToImage_SDXL_Client_Request.Outcome
   > {
-    const generationEndpoint = URLComponent_Path.parsedFrom('/generate').forciblyUnwrap();
+    const generationEndpoint = URLComponent.Path.parsedFrom('/generate').forciblyUnwrap();
 
     return Attempt.Fresh.thatEventually(async (ends) => {
       const outcomeOfSubmittingResource = await this.submitResource({
