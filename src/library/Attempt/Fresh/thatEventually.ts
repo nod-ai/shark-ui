@@ -1,5 +1,10 @@
-import type * as Attempt_End from '../End';
-import * as Attempt_Error from '../Error';
+import type {
+  Attempt_End,
+} from '../End';
+
+import {
+  Attempt_Error,
+} from '../Error';
 
 import type {
   Attempt_Outcome,

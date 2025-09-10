@@ -2,7 +2,10 @@ import type Attempt from '@/library/Attempt';
 import type Parsable from '@/library/Parsable';
 import Parse from '@/library/Parse';
 import Schema from '@/library/Schema';
-import * as WebAPI from '@/library/WebAPI';
+
+import {
+  WebAPI,
+} from '@/library/WebAPI';
 
 import {
   TextToImage_Config_ParsingError,

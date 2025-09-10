@@ -15,7 +15,9 @@ import {
   VTextarea,
 } from 'vuetify/components/VTextarea';
 
-import type * as TextToImage_Pipeline from '../Pipeline';
+import type {
+  TextToImage_Pipeline,
+} from '../Pipeline';
 
 type StandardizedInputText = TextToImage_Pipeline.Input['text'];
 

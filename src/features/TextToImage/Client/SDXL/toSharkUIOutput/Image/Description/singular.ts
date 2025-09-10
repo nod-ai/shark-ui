@@ -2,7 +2,9 @@ import type {
   TextPrompt,
 } from 'stabilityai-client-typescript/models/components';
 
-import type * as TextToImage_Pipeline from '@/features/TextToImage/Pipeline'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
+import type {
+  TextToImage_Pipeline,
+} from '@/features/TextToImage/Pipeline'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
 
 const toSharkUIOutput_Image_Description_singular = (
   givenPrompt: TextPrompt,

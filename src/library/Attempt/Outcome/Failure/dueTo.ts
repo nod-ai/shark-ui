@@ -1,6 +1,10 @@
-import type * as Attempt_Error from '../../Error';
+import type {
+  Attempt_Error,
+} from '../../Error';
 
-import * as Attempt_Outcome_Failure_Cause from './Cause';
+import {
+  Attempt_Outcome_Failure_Cause,
+} from './Cause';
 
 import type {
   Attempt_Outcome_Failure,

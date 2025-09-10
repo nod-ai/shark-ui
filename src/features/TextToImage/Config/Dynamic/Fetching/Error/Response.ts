@@ -1,5 +1,8 @@
 import Attempt from '@/library/Attempt';
-import type * as URLComponent from '@/library/URLComponent';
+
+import type {
+  URLComponent,
+} from '@/library/URLComponent';
 
 class TextToImage_Config_Dynamic_Fetching_Error_Response
   extends Attempt.Error.Actionable<

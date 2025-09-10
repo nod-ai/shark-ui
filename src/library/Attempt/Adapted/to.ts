@@ -1,5 +1,10 @@
-import * as Attempt_Error from '../Error';
-import * as Attempt_Fresh from '../Fresh';
+import {
+  Attempt_Error,
+} from '../Error';
+
+import {
+  Attempt_Fresh,
+} from '../Fresh';
 
 import type {
   Attempt_Outcome,

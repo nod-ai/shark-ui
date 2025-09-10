@@ -1,1 +1,1 @@
-export * from './exports_objectOriented.ts';
+export * as Reporting from './exports_objectOriented.ts';

@@ -1,7 +1,9 @@
 import Attempt from '@/library/Attempt';
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient';
 
-import * as TextToImage_Server from '../../Server';
+import {
+  TextToImage_Server,
+} from '../../Server';
 
 const TextToImage_Client_SDXL_initialize = async (): Promise<
   Attempt.Outcome<

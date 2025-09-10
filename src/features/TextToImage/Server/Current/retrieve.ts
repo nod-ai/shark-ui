@@ -1,7 +1,12 @@
 import Attempt from '@/library/Attempt';
-import type * as WebAPI from '@/library/WebAPI';
 
-import * as TextToImage_Config from '../../Config';
+import type {
+  WebAPI,
+} from '@/library/WebAPI';
+
+import {
+  TextToImage_Config,
+} from '../../Config';
 
 import {
   TextToImage_Server_Error,

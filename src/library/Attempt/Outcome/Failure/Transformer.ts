@@ -1,6 +1,10 @@
-import type * as Attempt_Error from '../../Error';
+import type {
+  Attempt_Error,
+} from '../../Error';
 
-import type * as Attempt_Outcome_Failure_Cause from './Cause';
+import type {
+  Attempt_Outcome_Failure_Cause,
+} from './Cause';
 
 interface Attempt_Outcome_Failure_Transformer<
   SomeTransformableActionableError extends Attempt_Error.Actionable<string>,

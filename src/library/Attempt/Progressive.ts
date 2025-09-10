@@ -1,4 +1,6 @@
-import type * as Attempt_Error from './Error';
+import type {
+  Attempt_Error,
+} from './Error';
 
 import type {
   Attempt_Outcome,

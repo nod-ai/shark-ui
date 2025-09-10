@@ -1,1 +1,1 @@
-export * as SDXL from './SDXL';
+export * from './SDXL';

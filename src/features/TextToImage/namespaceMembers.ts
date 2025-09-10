@@ -1,5 +1,11 @@
-export * as Client from './Client';
+export {
+  TextToImage_Client as Client,
+} from './Client';
 
-export * as Server from './Server';
+export {
+  TextToImage_Server as Server,
+} from './Server';
 
-export type * as Pipeline from './Pipeline';
+export type {
+  TextToImage_Pipeline as Pipeline,
+} from './Pipeline';

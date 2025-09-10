@@ -33,7 +33,10 @@ import {
 import DiscreteSlider from '@/components/DiscreteSlider.vue';
 import NavigationPanel from '@/components/NavigationPanel.vue';
 
-import * as TextToImage from '@/features/TextToImage';
+import {
+  TextToImage,
+} from '@/features/TextToImage';
+
 import TextToImageInputSection from '@/features/TextToImage/components/TextToImageInputSection.vue';
 import TextToImageOutputAlert from '@/features/TextToImage/components/TextToImageOutputAlert.vue';
 import TextToImageOutputImg from '@/features/TextToImage/components/TextToImageOutputImg.vue';

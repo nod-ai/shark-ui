@@ -10,7 +10,9 @@ import App from '@/App.vue';
 import vuetify from '@/plugins/vuetify.ts';
 import router from '@/router';
 
-import * as Reporting from '@/features/Reporting';
+import {
+  Reporting,
+} from '@/features/Reporting';
 
 const app = createApp(App);
 app.use(router);

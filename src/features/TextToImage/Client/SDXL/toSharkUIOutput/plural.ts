@@ -4,7 +4,9 @@ import type {
 
 import Attempt from '@/library/Attempt';
 
-import * as TextToImage_Pipeline from '@/features/TextToImage/Pipeline'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
+import {
+  TextToImage_Pipeline,
+} from '@/features/TextToImage/Pipeline'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
 
 import {
   toSharkUIOutput_Image,

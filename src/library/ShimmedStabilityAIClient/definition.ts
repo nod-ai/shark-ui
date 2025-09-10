@@ -1,5 +1,8 @@
 import HTTP from '@/library/HTTP';
-import * as URLComponent from '@/library/URLComponent';
+
+import {
+  URLComponent,
+} from '@/library/URLComponent';
 
 import {
   ShimmedStabilityAIClient_Version1,

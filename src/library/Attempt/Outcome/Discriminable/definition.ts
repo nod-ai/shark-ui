@@ -4,7 +4,9 @@ import type {
   Not,
 } from '@/library/typeUtilities';
 
-import type * as Attempt_Error from '../../Error';
+import type {
+  Attempt_Error,
+} from '../../Error';
 
 import type {
   Attempt_Outcome_Discriminant,

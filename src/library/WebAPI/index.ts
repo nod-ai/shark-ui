@@ -1,1 +1,1 @@
-export * from './exports_objectOriented.ts';
+export * as WebAPI from './exports_objectOriented.ts';

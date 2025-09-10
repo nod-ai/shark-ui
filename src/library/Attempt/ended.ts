@@ -1,4 +1,6 @@
-import * as Attempt_Error from './Error';
+import {
+  Attempt_Error,
+} from './Error';
 
 import {
   Attempt_Outcome,

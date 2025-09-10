@@ -8,7 +8,9 @@ import {
   hasAtLeastOne,
 } from '@/library/utilitiesByType/array';
 
-import type * as TextToImage_Pipeline from '@/features/TextToImage/Pipeline'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
+import type {
+  TextToImage_Pipeline,
+} from '@/features/TextToImage/Pipeline'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
 
 import {
   toSharkUIOutput_plural,
