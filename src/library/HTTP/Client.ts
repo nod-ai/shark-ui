@@ -45,7 +45,7 @@ class HTTP_Client {
       to: URLComponent_Path;
       using: HTTP_Request.Method;
     },
-  ): Promise<HTTP_Endpoint.Outcome> => Attempt.Fresh_thatEventually(async (ends) => {
+  ): Promise<HTTP_Endpoint.Outcome> => Attempt.Fresh.thatEventually(async (ends) => {
     const endpointURL = this.originAt(givenPath);
 
     const promisedResponse = fetch(endpointURL, {
@@ -54,7 +54,7 @@ class HTTP_Client {
       body   : JSON.stringify(givenRequestBody),
     });
 
-    const outcomeOfSettlingResponse = await Attempt.Adapted_toSettle(promisedResponse, {
+    const outcomeOfSettlingResponse = await Attempt.Adapted.toSettle(promisedResponse, {
       interpretationOf: (caughtError) => {
         const clientFailedToReachServer = caughtError.message.includes('Failed to fetch');
 

@@ -18,7 +18,7 @@ class URLComponent_Origin
   ): Attempt.Outcome<
     URLComponent_Origin,
     URLComponent_Origin_ParsingError
-  > => Attempt.Fresh_that((ends) => {
+  > => Attempt.Fresh.that((ends) => {
     const derived = new URL(givenSubject);
 
     const newParsingError = new URLComponent_Origin_ParsingError({

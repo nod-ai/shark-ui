@@ -15,7 +15,7 @@ const Sequence_Byte_Encoded_Compatibility_ensure = (
 ): Attempt.Outcome<
   string,
   Sequence_Byte_Encoded_Compatibility_Error
-> => Attempt.Fresh_that((ends) => {
+> => Attempt.Fresh.that((ends) => {
   const byteCofactor = Byte.cofactorTo(givenBitWidth);
 
   if (

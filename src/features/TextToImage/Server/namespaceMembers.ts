@@ -1,7 +1,4 @@
-export {
-  accordingToEnvironment as Current_accordingToEnvironment,
-  retrieve as Current_retrieve,
-} from './Current';
+export * as Current from './Current';
 
 export {
   TextToImage_Server_Error as Error,

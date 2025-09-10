@@ -15,7 +15,7 @@ import {
 
 const TextToImage_Config_Dynamic_fetch = (): Promise<
   TextToImage_Config_Dynamic_Fetching.Outcome
-> => Attempt.Fresh_thatEventually(async (ends) => {
+> => Attempt.Fresh.thatEventually(async (ends) => {
   const endpointResponse = await fetch(TextToImage_Config_Dynamic_endpoint.toString());
   const fetchingError = new TextToImage_Config_Dynamic_Fetching.Error.Request(TextToImage_Config_Dynamic_endpoint);
 

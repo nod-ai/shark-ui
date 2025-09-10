@@ -24,7 +24,7 @@ class NonTrivialString
   ): Attempt.Outcome<
     NonTrivialString,
     NonTrivialString_ParsingError
-  > => Attempt.Fresh_that((ends) => {
+  > => Attempt.Fresh.that((ends) => {
     const trimmedSubject = givenSubject.trim();
 
     if (
@@ -39,7 +39,7 @@ class NonTrivialString
   ): Attempt.Outcome<
     NonTrivialString | null,
     NonTrivialString_ParsingError
-  > => Attempt.Fresh_that((ends) => {
+  > => Attempt.Fresh.that((ends) => {
     if (
       givenSubject === null
     ) return ends.inSuccessWith(givenSubject);

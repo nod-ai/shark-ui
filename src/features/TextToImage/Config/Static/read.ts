@@ -14,7 +14,7 @@ import {
 
 const TextToImage_Config_Static_read = (): Promise<
   TextToImage_Config_Static_Reading.Outcome
-> => Attempt.Fresh_thatEventually(async (ends) => {
+> => Attempt.Fresh.thatEventually(async (ends) => {
   const fileResponse = await fetch(TextToImage_Config_Static_file.toString());
 
   if (

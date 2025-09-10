@@ -43,7 +43,7 @@ describe(absoluteValueOf, () => {
         it('should safely propagate the error', () => {
           expect.assertions(1);
 
-          expect(() => absoluteValueOf(soleInoperableNumber)).toThrow(Attempt.Error_NonActionable);
+          expect(() => absoluteValueOf(soleInoperableNumber)).toThrow(Attempt.Error.NonActionable);
         });
 
         it('should communicate clearly with developers', () => {

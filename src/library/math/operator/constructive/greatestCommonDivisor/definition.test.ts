@@ -100,7 +100,7 @@ describe(greatestCommonDivisor, () => {
         it.each(combosOfFractionalNumbers)('should safely propagate the error', (...$0) => {
           expect.assertions(1);
 
-          expect(() => greatestCommonDivisor(...$0)).toThrow(Attempt.Error_NonActionable);
+          expect(() => greatestCommonDivisor(...$0)).toThrow(Attempt.Error.NonActionable);
         });
 
         const fractionalCombosWithMessage = [

@@ -40,7 +40,7 @@ describe(isWhole, () => {
         it('should safely propagate the error', () => {
           expect.assertions(1);
 
-          expect(() => isWhole(eachInfiniteNumber)).toThrow(Attempt.Error_NonActionable);
+          expect(() => isWhole(eachInfiniteNumber)).toThrow(Attempt.Error.NonActionable);
         });
 
         it('should communicate clearly with developers', () => {

@@ -10,9 +10,9 @@ import Attempt from '@/library/Attempt';
 /** Useful when state of UI is dependent on some async operation and the outcome upon completion */
 const useStatefulAttemptThatEventually = <
   SomeProduct,
-  SomeActionableError extends Attempt.Error_Actionable<string>,
+  SomeActionableError extends Attempt.Error.Actionable<string>,
 >(
-  retrieveOutcome: Attempt.End_Retriever<
+  retrieveOutcome: Attempt.End.Retriever<
     Attempt.Outcome<SomeProduct, SomeActionableError>
   >,
 ): Attempt.Progressive<
@@ -38,7 +38,7 @@ const useStatefulAttemptThatEventually = <
       set(flagIsRaised, false);
     });
 
-    const retrievedOutcome = await Attempt.Fresh_thatEventually(retrieveOutcome);
+    const retrievedOutcome = await Attempt.Fresh.thatEventually(retrieveOutcome);
     set(capturedOutcome, retrievedOutcome);
   };
 
