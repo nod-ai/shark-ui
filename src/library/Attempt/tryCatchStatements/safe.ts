@@ -3,8 +3,7 @@ import {
 } from '@/library/utilitiesByType/error';
 
 import {
-  type AppropriatelyThrown,
-  AppropriatelyThrown_assume,
+  AppropriatelyThrown,
 } from '../Error';
 
 const safe = <
@@ -25,7 +24,7 @@ const safe = <
   }
   catch (whateverThatWasThrown) {
     const someError = asError(whateverThatWasThrown);
-    const someAppropriatelyThrownError = AppropriatelyThrown_assume(someError);
+    const someAppropriatelyThrownError = AppropriatelyThrown.assume(someError);
     return catchBlockOutputFor(someAppropriatelyThrownError);
   }
 };

@@ -35,7 +35,7 @@ const toSharkUIOutput_plural = (
     .map($0 => toSharkUIOutput_Image($0, {
       description: toSharkUIOutput_Image.Description.all(givenInputText),
     }))
-    .map($0 => TextToImage_Pipeline.Output_Nullable.from($0));
+    .map($0 => TextToImage_Pipeline.Output.Nullable.from($0));
 
   return inferredOutputs;
 };

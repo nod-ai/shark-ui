@@ -1,9 +1,7 @@
 export {
-  type AppropriatelyThrown,
-  AppropriatelyThrown_assume,
+  AppropriatelyThrown,
 } from './AppropriatelyThrown';
 
 export {
-  type PotentiallyActionable,
-  PotentiallyActionable_assume,
+  PotentiallyActionable,
 } from './PotentiallyActionable';

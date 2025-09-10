@@ -28,7 +28,7 @@ const Attempt_Outcome_Failure_dueTo = <
     {
       cause: transformed,
     } = {
-      cause: Attempt_Outcome_Failure_Cause.Transformer_identity<
+      cause: Attempt_Outcome_Failure_Cause.Transformer.identity<
         SomeActionableError,
         SomeTransformedActionableError
       >,

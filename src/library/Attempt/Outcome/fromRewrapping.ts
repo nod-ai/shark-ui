@@ -80,11 +80,11 @@ function Attempt_Outcome_fromRewrapping<
     SomeTransformableActionableError
   >,
   {
-    product: toTransformedProduct = Attempt_Outcome_Success.Product.Transformer_identity<
+    product: toTransformedProduct = Attempt_Outcome_Success.Product.Transformer.identity<
       SomeTransformableProduct,
       SomeTransformedProduct
     >,
-    cause: toTransformedCause = Attempt_Outcome_Failure.Cause.Transformer_identity<
+    cause: toTransformedCause = Attempt_Outcome_Failure.Cause.Transformer.identity<
       SomeTransformableActionableError,
       SomeTransformedActionableError
     >,
@@ -94,11 +94,11 @@ function Attempt_Outcome_fromRewrapping<
     SomeTransformedProduct,
     SomeTransformedActionableError
   > = {
-    product: Attempt_Outcome_Success.Product.Transformer_identity<
+    product: Attempt_Outcome_Success.Product.Transformer.identity<
       SomeTransformableProduct,
       SomeTransformedProduct
     >,
-    cause: Attempt_Outcome_Failure.Cause.Transformer_identity<
+    cause: Attempt_Outcome_Failure.Cause.Transformer.identity<
       SomeTransformableActionableError,
       SomeTransformedActionableError
     >,
