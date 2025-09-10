@@ -38,7 +38,7 @@ import TextToImageInputSection from '@/features/TextToImage/components/TextToIma
 import TextToImageOutputAlert from '@/features/TextToImage/components/TextToImageOutputAlert.vue';
 import TextToImageOutputImg from '@/features/TextToImage/components/TextToImageOutputImg.vue';
 
-const currentPrompt: Ref<TextToImage.Input['text'] | null> = ref(null);
+const currentPrompt: Ref<TextToImage.Pipeline_Input['text'] | null> = ref(null);
 
 const {
   range,

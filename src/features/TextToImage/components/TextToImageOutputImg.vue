@@ -6,7 +6,7 @@ import {
 import type * as TextToImage from '@/features/TextToImage';
 
 defineProps<{
-  modelValue: TextToImage.Output['image'];
+  modelValue: TextToImage.Pipeline_Output['image'];
 }>();
 </script>
 
