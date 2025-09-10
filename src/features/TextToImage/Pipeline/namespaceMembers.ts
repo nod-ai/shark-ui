@@ -3,5 +3,5 @@ export type {
 } from './Input';
 export {
   type TextToImage_Pipeline_Output as Output,
-  /**/ TextToImage_Pipeline_Output_Nullable_from as Output_Nullable_from,
+  /**/ TextToImage_Pipeline_Output_Nullable as Output_Nullable,
 } from './Output';

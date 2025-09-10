@@ -7,12 +7,12 @@ import Attempt from '@/library/Attempt';
 import {
   type Input as TextToImage_Pipeline_Input,
   type Output as TextToImage_Pipeline_Output,
-  Output_Nullable_from as TextToImage_Pipeline_Output_Nullable_from,
+  Output_Nullable as TextToImage_Pipeline_Output_Nullable,
 } from '@/features/TextToImage/Pipeline'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
 
 import {
   toSharkUIOutput_Image,
-  toSharkUIOutput_Image_Description_all,
+  toSharkUIOutput_Image_Description,
 } from './Image';
 
 const toSharkUIOutput_plural = (
@@ -36,9 +36,9 @@ const toSharkUIOutput_plural = (
 
   const inferredOutputs = inferredRawImages
     .map($0 => toSharkUIOutput_Image($0, {
-      description: toSharkUIOutput_Image_Description_all(givenInputText),
+      description: toSharkUIOutput_Image_Description.all(givenInputText),
     }))
-    .map($0 => TextToImage_Pipeline_Output_Nullable_from($0));
+    .map($0 => TextToImage_Pipeline_Output_Nullable.from($0));
 
   return inferredOutputs;
 };

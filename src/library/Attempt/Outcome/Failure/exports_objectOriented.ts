@@ -1,9 +1,6 @@
 export type * from './definition.ts';
 
-export {
-  type Transformer as Attempt_Outcome_Failure_Cause_Transformer,
-  /**/ Transformer_identity as Attempt_Outcome_Failure_Cause_Transformer_identity,
-} from './Cause';
+export * as Attempt_Outcome_Failure_Cause from './Cause';
 
 export type {
   Attempt_Outcome_Failure_Transformer,
