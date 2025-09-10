@@ -14,7 +14,7 @@ import {
  *
  * See [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986) for more information
  */
-class UniformResourceIdentifier {
+class URI {
   public constructor(
     public readonly scheme/*      */: NonTrivialString,
     public readonly authority/*   */: NonTrivialString | null = null,
@@ -26,7 +26,7 @@ class UniformResourceIdentifier {
   public static readonly schemeSuffix = ':';
 
   public get serializableScheme(): string {
-    const suffixedScheme = this.scheme.concat(UniformResourceIdentifier.schemeSuffix);
+    const suffixedScheme = this.scheme.concat(URI.schemeSuffix);
     return suffixedScheme;
   }
 
@@ -37,11 +37,11 @@ class UniformResourceIdentifier {
       this.authority === null
     ) return null;
 
-    const prefixedAuthority = this.authority.prependedWith(UniformResourceIdentifier.authorityPrefix);
+    const prefixedAuthority = this.authority.prependedWith(URI.authorityPrefix);
     return prefixedAuthority;
   }
 
-  public get path(): Exclude<UniformResourceIdentifier['overridablePath'], null> {
+  public get path(): Exclude<URI['overridablePath'], null> {
     if (
       this.overridablePath === null
     ) return Attempt.abandon('`path` must either be a) provided via constructor or b) overridden via public getter');
@@ -56,7 +56,7 @@ class UniformResourceIdentifier {
       this.query === null
     ) return null;
 
-    const prefixedQuery = this.query.prependedWith(UniformResourceIdentifier.queryPrefix);
+    const prefixedQuery = this.query.prependedWith(URI.queryPrefix);
     return prefixedQuery;
   }
 
@@ -67,7 +67,7 @@ class UniformResourceIdentifier {
       this.fragment === null
     ) return null;
 
-    const prefixedFragment = this.fragment.prependedWith(UniformResourceIdentifier.fragmentPrefix);
+    const prefixedFragment = this.fragment.prependedWith(URI.fragmentPrefix);
     return prefixedFragment;
   }
 
@@ -86,5 +86,5 @@ class UniformResourceIdentifier {
 }
 
 export {
-  UniformResourceIdentifier,
+  URI,
 };
