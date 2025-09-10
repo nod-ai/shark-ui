@@ -6,16 +6,14 @@ import {
   URI_Image,
 } from '@/library/UniformResourceIdentifier';
 
-import type {
-  Output as TextToImage_Pipeline_Output,
-} from '@/features/TextToImage/Pipeline'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
+import type * as TextToImage_Pipeline from '@/features/TextToImage/Pipeline'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
 
 const toSharkUIOutput_Image = (
   givenImage: StabilityAIClient.Image,
   given: {
-    description: TextToImage_Pipeline_Output['image']['description'];
+    description: TextToImage_Pipeline.Output['image']['description'];
   },
-): TextToImage_Pipeline_Output['image'] | null => {
+): TextToImage_Pipeline.Output['image'] | null => {
   if (
     givenImage.base64 === undefined
   ) return null;

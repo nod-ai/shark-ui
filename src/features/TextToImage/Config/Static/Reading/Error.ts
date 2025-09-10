@@ -1,8 +1,5 @@
 import Attempt from '@/library/Attempt';
-
-import type {
-  Path as URLComponent_Path,
-} from '@/library/URLComponent';
+import type * as URLComponent from '@/library/URLComponent';
 
 class TextToImage_Config_Static_Reading_Error
   extends Attempt.Error.Actionable<
@@ -11,7 +8,7 @@ class TextToImage_Config_Static_Reading_Error
   public override name = 'TextToImage_Config_Static_Reading_Error' as const;
 
   public constructor(
-    givenFile: URLComponent_Path,
+    givenFile: URLComponent.Path,
     givenResponse: Response,
   ) {
     super(`Failed to read config at "${givenFile.toString()}". Cause: "${givenResponse.statusText}"`);

@@ -1,11 +1,5 @@
-import {
-  type Actionable as Attempt_Error_Actionable,
-  Actionable_from as Attempt_Error_Actionable_from,
-} from '../Error';
-
-import {
-  that as Attempt_Fresh_that,
-} from '../Fresh';
+import * as Attempt_Error from '../Error';
+import * as Attempt_Fresh from '../Fresh';
 
 import type {
   Attempt_Outcome,
@@ -21,17 +15,17 @@ import type {
 
 const Attempt_Adapted_to = <
   SomeProduct,
-  SomeActionableError extends Attempt_Error_Actionable<string>,
+  SomeActionableError extends Attempt_Error.Actionable<string>,
 >(
   forciblyGetProduct: () => SomeProduct,
   given: Attempt_Adapted_Config<SomeActionableError>,
-): Attempt_Outcome<SomeProduct, SomeActionableError> => Attempt_Fresh_that(ends => safe({
+): Attempt_Outcome<SomeProduct, SomeActionableError> => Attempt_Fresh.that(ends => safe({
   try() {
     const gottenProduct = forciblyGetProduct();
     return ends.inSuccessWith(gottenProduct);
   },
   catch(someError) {
-    const someActionableError = Attempt_Error_Actionable_from(someError, {
+    const someActionableError = Attempt_Error.Actionable_from(someError, {
       using: given.interpretationOf,
     });
 

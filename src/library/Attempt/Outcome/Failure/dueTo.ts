@@ -1,17 +1,13 @@
-import type {
-  Actionable as Attempt_Error_Actionable,
-} from '../../Error';
+import type * as Attempt_Error from '../../Error';
 
-import {
-  Transformer_identity as Attempt_Outcome_Failure_Cause_Transformer_identity,
-} from './Cause';
+import * as Attempt_Outcome_Failure_Cause from './Cause';
 
 import type {
   Attempt_Outcome_Failure,
 } from './definition.ts';
 
 const Attempt_Outcome_Failure_dueTo = <
-  SomeActionableError extends Attempt_Error_Actionable<string>,
+  SomeActionableError extends Attempt_Error.Actionable<string>,
 >(
   givenCause: SomeActionableError,
 ): Attempt_Outcome_Failure<SomeActionableError> => ({
@@ -23,12 +19,12 @@ const Attempt_Outcome_Failure_dueTo = <
   forciblyUnwrap  : () => givenCause.throwAnyway('Unexpected forceful unwrap of a failure'),
   causeOfFailure  : givenCause,
   rewrappedWith   : <
-    SomeTransformedActionableError extends Attempt_Error_Actionable<string>,
+    SomeTransformedActionableError extends Attempt_Error.Actionable<string>,
   >(
     {
       cause: transformed,
     } = {
-      cause: Attempt_Outcome_Failure_Cause_Transformer_identity<
+      cause: Attempt_Outcome_Failure_Cause.Transformer_identity<
         SomeActionableError,
         SomeTransformedActionableError
       >,

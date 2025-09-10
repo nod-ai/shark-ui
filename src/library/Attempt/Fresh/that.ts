@@ -1,11 +1,5 @@
-import type {
-  Getter as Attempt_End_Getter,
-} from '../End';
-
-import {
-  type Actionable as Attempt_Error_Actionable,
-  Creation as Attempt_Error_Creation,
-} from '../Error';
+import type * as Attempt_End from '../End';
+import * as Attempt_Error from '../Error';
 
 import type {
   Attempt_Outcome,
@@ -22,9 +16,9 @@ import {
 } from '../tryCatchStatements';
 
 const Attempt_Fresh_that = <
-  SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error_Actionable<string>>,
+  SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error.Actionable<string>>,
 >(
-  endsAccordingTo: Attempt_End_Getter<SomeInferredOutcome>,
+  endsAccordingTo: Attempt_End.Getter<SomeInferredOutcome>,
 ) => {
   type EquivalentOutcome = Attempt_Outcome<
     ProductOf<SomeInferredOutcome>,
@@ -36,7 +30,7 @@ const Attempt_Fresh_that = <
       return endsAccordingTo(handles) as EquivalentOutcome;
     },
     catch(someError) {
-      return Attempt_Error_Creation.rethrow(someError);
+      return Attempt_Error.Creation.rethrow(someError);
     },
   });
 };

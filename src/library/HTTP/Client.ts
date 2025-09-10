@@ -1,9 +1,5 @@
 import Attempt from '@/library/Attempt';
-
-import type {
-  Origin as URLComponent_Origin,
-  Path as URLComponent_Path,
-} from '@/library/URLComponent';
+import type * as URLComponent from '@/library/URLComponent';
 
 import {
   HTTP_Endpoint,
@@ -15,7 +11,7 @@ import {
 
 class HTTP_Client {
   public constructor(
-    public readonly origin: URLComponent_Origin,
+    public readonly origin: URLComponent.Origin,
     public readonly headers: HTTP_Request.HeaderMap,
   ) {}
 
@@ -31,7 +27,7 @@ class HTTP_Client {
     return rawContentDescriptor.includes('application/json');
   };
 
-  public originAt(givenPath: URLComponent_Path): URL {
+  public originAt(givenPath: URLComponent.Path): URL {
     const serializedURLComponents = this.origin.appendedWith(givenPath);
     return new URL(serializedURLComponents);
   }
@@ -42,7 +38,7 @@ class HTTP_Client {
       to: givenPath,
       using: givenMethod,
     }: {
-      to: URLComponent_Path;
+      to: URLComponent.Path;
       using: HTTP_Request.Method;
     },
   ): Promise<HTTP_Endpoint.Outcome> => Attempt.Fresh.thatEventually(async (ends) => {
@@ -84,7 +80,7 @@ class HTTP_Client {
     {
       from: givenPath,
     }: {
-      from: URLComponent_Path;
+      from: URLComponent.Path;
     },
   ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(null, {
@@ -99,7 +95,7 @@ class HTTP_Client {
       to: givenPath,
     }: {
       bySending: unknown;
-      to: URLComponent_Path;
+      to: URLComponent.Path;
     },
   ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(givenSubmission, {
@@ -114,7 +110,7 @@ class HTTP_Client {
       to: givenPath,
     }: {
       bySending: unknown;
-      to: URLComponent_Path;
+      to: URLComponent.Path;
     },
   ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(givenProperties, {
@@ -129,7 +125,7 @@ class HTTP_Client {
       to: givenPath,
     }: {
       bySending: unknown;
-      to: URLComponent_Path;
+      to: URLComponent.Path;
     },
   ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(givenChanges, {
@@ -139,7 +135,7 @@ class HTTP_Client {
   }
 
   public async deleteResourceAt(
-    givenPath: URLComponent_Path,
+    givenPath: URLComponent.Path,
   ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(null, {
       to   : givenPath,

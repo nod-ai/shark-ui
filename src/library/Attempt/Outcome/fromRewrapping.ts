@@ -1,6 +1,4 @@
-import type {
-  Actionable as Attempt_Error_Actionable,
-} from '../Error';
+import type * as Attempt_Error from '../Error';
 
 import {
   type Attempt_Outcome_Failure,
@@ -31,8 +29,8 @@ import type {
 * Helps avoid boilerplate when transforming outcomes.
 */
 function Attempt_Outcome_fromRewrapping<
-  SomeTransformableActionableError extends Attempt_Error_Actionable<string>,
-  SomeTransformedActionableError extends Attempt_Error_Actionable<string> = SomeTransformableActionableError,
+  SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
+  SomeTransformedActionableError extends Attempt_Error.Actionable<string> = SomeTransformableActionableError,
 >(
   givenOutcome: Attempt_Outcome_Failure<SomeTransformableActionableError>,
   given?: Attempt_Outcome_Failure_Transformer<
@@ -54,9 +52,9 @@ function Attempt_Outcome_fromRewrapping<
 //
 function Attempt_Outcome_fromRewrapping<
   SomeTransformableProduct,
-  SomeTransformableActionableError extends Attempt_Error_Actionable<string>,
+  SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
   SomeTransformedProduct = SomeTransformableProduct,
-  SomeTransformedActionableError extends Attempt_Error_Actionable<string> = SomeTransformableActionableError,
+  SomeTransformedActionableError extends Attempt_Error.Actionable<string> = SomeTransformableActionableError,
 >(
   givenOutcome: Attempt_Outcome<
     SomeTransformableProduct,
@@ -75,9 +73,9 @@ function Attempt_Outcome_fromRewrapping<
 //
 function Attempt_Outcome_fromRewrapping<
   SomeTransformableProduct,
-  SomeTransformableActionableError extends Attempt_Error_Actionable<string>,
+  SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
   SomeTransformedProduct = SomeTransformableProduct,
-  SomeTransformedActionableError extends Attempt_Error_Actionable<string> = SomeTransformableActionableError,
+  SomeTransformedActionableError extends Attempt_Error.Actionable<string> = SomeTransformableActionableError,
 >(
   givenOutcome: Attempt_Outcome<
     SomeTransformableProduct,

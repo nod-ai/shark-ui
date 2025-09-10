@@ -1,14 +1,7 @@
 import Attempt from '@/library/Attempt';
+import type * as WebAPI from '@/library/WebAPI';
 
-import type {
-  Server as WebAPI_Server,
-} from '@/library/WebAPI';
-
-import {
-  Dynamic as TextToImage_Config_Dynamic,
-  Static as TextToImage_Config_Static,
-  empty as TextToImage_Config_empty,
-} from '../../Config';
+import * as TextToImage_Config from '../../Config';
 
 import {
   TextToImage_Server_Error,
@@ -24,7 +17,7 @@ import {
 
 const TextToImage_Server_Current_retrieve = (): Promise<
   Attempt.Outcome<
-    WebAPI_Server,
+    WebAPI.Server,
     TextToImage_Server_Error.Specification
   >
 > => Attempt.Fresh.thatEventually(async (ends) => {
@@ -32,13 +25,13 @@ const TextToImage_Server_Current_retrieve = (): Promise<
     TextToImage_Server_Current_accordingToEnvironment !== null
   ) return ends.inSuccessWith(TextToImage_Server_Current_accordingToEnvironment);
 
-  const staticConfig = (await TextToImage_Config_Static.read()).optionallyUnwrap() ?? TextToImage_Config_empty;
+  const staticConfig = (await TextToImage_Config.Static.read()).optionallyUnwrap() ?? TextToImage_Config.empty;
 
   if (
     staticConfig.server !== null
   ) return ends.inSuccessWith(staticConfig.server);
 
-  const dynamicConfig = (await TextToImage_Config_Dynamic.fetch()).optionallyUnwrap() ?? TextToImage_Config_empty;
+  const dynamicConfig = (await TextToImage_Config.Dynamic.fetch()).optionallyUnwrap() ?? TextToImage_Config.empty;
 
   if (
     dynamicConfig.server !== null
@@ -46,8 +39,8 @@ const TextToImage_Server_Current_retrieve = (): Promise<
 
   const newSpecificationError = new TextToImage_Server_Error.Specification(
     TextToImage_Server_Origin.environmentKey,
-    TextToImage_Config_Static.file,
-    TextToImage_Config_Dynamic.endpoint,
+    TextToImage_Config.Static.file,
+    TextToImage_Config.Dynamic.endpoint,
   );
 
   return ends.inFailureDueTo(newSpecificationError);

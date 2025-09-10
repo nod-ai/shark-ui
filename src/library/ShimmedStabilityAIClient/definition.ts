@@ -1,8 +1,5 @@
 import HTTP from '@/library/HTTP';
-
-import {
-  Origin as URLComponent_Origin,
-} from '@/library/URLComponent';
+import * as URLComponent from '@/library/URLComponent';
 
 import {
   ShimmedStabilityAIClient_Version1,
@@ -13,7 +10,7 @@ class ShimmedStabilityAIClient
   public constructor(given: {
     serverURL: string;
   }) {
-    const serverOrigin = URLComponent_Origin.parsedFrom(given.serverURL).forciblyUnwrap(/* matches error propagation of actual StabilityAI client */);
+    const serverOrigin = URLComponent.Origin.parsedFrom(given.serverURL).forciblyUnwrap(/* matches error propagation of actual StabilityAI client */);
 
     const defaultHeaders = {
       'Content-Type': 'application/json',

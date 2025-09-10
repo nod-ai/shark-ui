@@ -1,6 +1,4 @@
-import type {
-  Actionable as Attempt_Error_Actionable,
-} from '../../Error';
+import type * as Attempt_Error from '../../Error';
 
 import type {
   Attempt_Outcome_Failure_SemanticallySugarfree,
@@ -11,7 +9,7 @@ import type {
 } from './Transformer';
 
 interface Attempt_Outcome_Failure<
-  SomeActionableError extends Attempt_Error_Actionable<string>,
+  SomeActionableError extends Attempt_Error.Actionable<string>,
 > extends Attempt_Outcome_Failure_SemanticallySugarfree<
     SomeActionableError
   > {
@@ -35,7 +33,7 @@ interface Attempt_Outcome_Failure<
   readonly causeOfFailure: this['cause'];
 
   rewrappedWith<
-    SomeTransformedActionableError extends Attempt_Error_Actionable<string> = SomeActionableError,
+    SomeTransformedActionableError extends Attempt_Error.Actionable<string> = SomeActionableError,
   >(
     given?: Attempt_Outcome_Failure_Transformer<
       SomeActionableError,
