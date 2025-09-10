@@ -1,1 +1,1 @@
-export * from './namespaceMembers.ts';
+export * as SDXL from './namespaceMembers.ts';

@@ -1,1 +1,1 @@
-export type * as TextToImage_Client_Generation from './exports_objectOriented.ts';
+export type * from './exports_objectOriented.ts';

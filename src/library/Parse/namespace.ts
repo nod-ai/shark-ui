@@ -1,1 +1,1 @@
-export * from './namespaceMembers.ts';
+export * as Parse from './namespaceMembers.ts';

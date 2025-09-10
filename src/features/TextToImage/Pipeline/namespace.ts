@@ -1,1 +1,1 @@
-export * from './namespaceMembers.ts';
+export * as TextToImage_Pipeline from './namespaceMembers.ts';

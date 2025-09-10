@@ -1,1 +1,1 @@
-export * as Shortfin_TextToImage from './exports_objectOriented.ts';
+export * from './exports_objectOriented.ts';

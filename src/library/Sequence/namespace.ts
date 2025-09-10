@@ -1,1 +1,1 @@
-export * from './namespaceMembers.ts';
+export * as Sequence from './namespaceMembers.ts';
