@@ -2,7 +2,7 @@ import Attempt from '@/library/Attempt';
 import HTTP from '@/library/HTTP';
 
 import {
-  URLComponent_Path,
+  Path as URLComponent_Path,
 } from '@/library/URLComponent';
 
 import type {

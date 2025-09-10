@@ -1,7 +1,7 @@
 import Attempt from '@/library/Attempt';
 
 import type {
-  URLComponent_Path,
+  Path as URLComponent_Path,
 } from '@/library/URLComponent';
 
 class TextToImage_Server_Error_Specification

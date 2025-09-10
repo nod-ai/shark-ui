@@ -1,8 +1,8 @@
 import Attempt from '@/library/Attempt';
 
 import type {
-  URLComponent_Origin,
-  URLComponent_Path,
+  Origin as URLComponent_Origin,
+  Path as URLComponent_Path,
 } from '@/library/URLComponent';
 
 import {

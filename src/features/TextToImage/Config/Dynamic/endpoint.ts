@@ -1,5 +1,5 @@
 import {
-  URLComponent_Path,
+  Path as URLComponent_Path,
 } from '@/library/URLComponent';
 
 const TextToImage_Config_Dynamic_endpoint = URLComponent_Path.parsedFrom('/config/text-to-image').forciblyUnwrap();
