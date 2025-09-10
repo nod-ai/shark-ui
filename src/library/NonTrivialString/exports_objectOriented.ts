@@ -1,3 +1,3 @@
 export {
   NonTrivialString,
-} from './definition.ts';
+} from './definitionWithAugmentation.ts';
