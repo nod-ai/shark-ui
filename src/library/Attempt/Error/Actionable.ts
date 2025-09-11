@@ -6,6 +6,10 @@ import {
   Attempt_Error_NonActionable,
 } from './NonActionable';
 
+import {
+  Attempt_Error_Actionable_from,
+} from './assertActionable';
+
 /** Extend this class to describe errors from which callers ought to recover */
 abstract class Attempt_Error_Actionable<
   SomeBrand extends string,
@@ -23,6 +27,8 @@ abstract class Attempt_Error_Actionable<
       thrower: this.throwAnyway,
     });
   };
+
+  public static from = Attempt_Error_Actionable_from;
 }
 
 export {
