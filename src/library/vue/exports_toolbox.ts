@@ -1,6 +1,4 @@
-export {
-  createApp,
-} from 'vue';
+export * from './app';
 
 export type * from './component';
 
