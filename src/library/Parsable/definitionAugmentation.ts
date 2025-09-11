@@ -4,8 +4,8 @@ import type {
 
 declare module './definition.ts' {
   namespace Parsable {
-    export type {
-      Parsable_String as String,
+    export {
+      type Parsable_String as String,
     };
   }
 }
