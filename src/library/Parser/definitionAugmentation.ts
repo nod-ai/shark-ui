@@ -8,9 +8,9 @@ import type {
 
 declare module './definition.ts' {
   namespace Parser {
-    export type {
-      Parser_Static as Static,
-      Parser_String as String,
+    export {
+      type Parser_Static as Static,
+      type Parser_String as String,
     };
   }
 }
