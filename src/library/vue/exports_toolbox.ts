@@ -1,7 +1,8 @@
 export {
   createApp,
-  type DefineComponent,
 } from 'vue';
+
+export type * from './component';
 
 export {
   type Ref,
