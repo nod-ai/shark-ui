@@ -10,7 +10,7 @@ import {
 
 import {
   NonTrivialString_ParsingError,
-} from './ParsingError.ts';
+} from './ParsingError';
 
 class NonTrivialString
   extends StringSubset<

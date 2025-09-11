@@ -20,7 +20,7 @@ import {
 
 import {
   Sequence_Byte_Encoded_Base64_ParsingError,
-} from './ParsingError.ts';
+} from './ParsingError';
 
 /** See [RFC 4648 Section 4](https://www.rfc-editor.org/rfc/rfc4648.html#section-4) for more information */
 class Sequence_Byte_Encoded_Base64
