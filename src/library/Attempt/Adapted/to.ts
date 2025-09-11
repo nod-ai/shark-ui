@@ -30,7 +30,7 @@ const Attempt_Adapted_to = <
     return ends.inSuccessWith(gottenProduct);
   },
   catch(someError) {
-    const someActionableError = Attempt_Error.Actionable_from(someError, {
+    const someActionableError = Attempt_Error.Actionable.from(someError, {
       using: given.interpretationOf,
     });
 
