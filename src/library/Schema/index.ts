@@ -1,7 +1,3 @@
-import {
-  Schema,
-} from './exports_objectOriented.ts';
-
 export {
   Schema as default,
-};
+} from './exports_objectOriented.ts';
