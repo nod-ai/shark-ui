@@ -58,6 +58,14 @@ const extraConfig: ConfigWithExtends = {
         },
       },
     ],
+    '@stylistic/padding-line-between-statements': [
+      'error',
+      {
+        blankLine: 'always', // Each of these statements should be padded to look like an "island" since they will never express an order-sensitive procedure
+        prev     : 'export',
+        next     : 'export',
+      },
+    ],
   },
 };
 
