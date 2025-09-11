@@ -35,7 +35,7 @@ const Attempt_Adapted_toEventually = async <
     return ends.inSuccessWith(retrievedProduct);
   },
   catch(someError) {
-    const someActionableError = Attempt_Error.Actionable_from(someError, {
+    const someActionableError = Attempt_Error.Actionable.from(someError, {
       using: given.interpretationOf,
     });
 
