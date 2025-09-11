@@ -1,10 +1,6 @@
-export {
-  createApp,
-  type DefineComponent,
-  reactive,
-  type Reactive,
-  watch,
-} from 'vue';
+export * from './app';
+
+export type * from './component';
 
 export {
   type Ref,
@@ -12,5 +8,9 @@ export {
   get,
   set,
 } from './Ref';
+
+export * from './Reactive';
+
+export * from './watchers';
 
 export * from './composables';
