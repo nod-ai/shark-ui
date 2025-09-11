@@ -1,3 +1,1 @@
-export {
-  AppropriatelyThrown,
-} from './definition.ts';
+export * from './definition.ts';

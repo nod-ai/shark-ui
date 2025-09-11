@@ -1,3 +1,1 @@
-export {
-  URI_Image,
-} from './definition.ts';
+export * from './definition.ts';

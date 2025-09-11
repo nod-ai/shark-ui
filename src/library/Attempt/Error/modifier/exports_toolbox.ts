@@ -1,7 +1,3 @@
-export {
-  AppropriatelyThrown,
-} from './AppropriatelyThrown';
+export * from './AppropriatelyThrown';
 
-export {
-  PotentiallyActionable,
-} from './PotentiallyActionable';
+export * from './PotentiallyActionable';

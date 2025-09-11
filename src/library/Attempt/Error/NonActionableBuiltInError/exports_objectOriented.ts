@@ -1,3 +1,1 @@
-export {
-  NonActionableBuiltInError,
-} from './definition.ts';
+export * from './definition.ts';
