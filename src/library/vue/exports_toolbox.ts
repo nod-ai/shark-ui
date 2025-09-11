@@ -3,7 +3,6 @@ export {
   type DefineComponent,
   reactive,
   type Reactive,
-  watch,
 } from 'vue';
 
 export {
@@ -12,5 +11,7 @@ export {
   get,
   set,
 } from './Ref';
+
+export * from './watchers';
 
 export * from './composables';
