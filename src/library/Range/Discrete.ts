@@ -6,7 +6,7 @@ import {
 
 import {
   Range,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 class Range_Discrete
   extends Range {

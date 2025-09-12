@@ -1,6 +1,6 @@
 import {
   isWhole,
-} from '../definition.ts';
+} from '../definition.declared.ts';
 
 /** Alias for {@link isWhole} */
 const isInteger = isWhole;

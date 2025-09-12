@@ -16,7 +16,7 @@ import type {
 
 import type {
   Attempt_Outcome,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 /**
  * Convenience method for:

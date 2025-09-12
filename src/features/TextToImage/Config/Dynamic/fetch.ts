@@ -3,7 +3,7 @@ import HTTP from '@/library/HTTP';
 
 import {
   TextToImage_Config,
-} from '../definition.ts';
+} from '../definition.declared.ts';
 
 import {
   TextToImage_Config_Dynamic_Fetching,

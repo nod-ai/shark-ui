@@ -4,7 +4,7 @@ import type {
 
 import type {
   Contextualized,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 const Contextualized_describes = <
   SomeError extends Error,

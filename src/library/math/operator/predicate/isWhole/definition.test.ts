@@ -12,7 +12,7 @@ import {
 
 import {
   isWhole,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 describe(isWhole, () => {
   describe('the sad outcomes', () => {

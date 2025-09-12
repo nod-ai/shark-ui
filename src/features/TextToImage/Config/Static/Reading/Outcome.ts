@@ -2,7 +2,7 @@ import type Attempt from '@/library/Attempt';
 
 import type {
   TextToImage_Config,
-} from '../../definition.ts';
+} from '../../definition.declared.ts';
 
 import type {
   TextToImage_Config_Static_Reading_Error,

@@ -1,6 +1,6 @@
 import type {
   TextToImage_Pipeline_Output,
-} from '../definition.ts';
+} from '../definition.declared.ts';
 
 const TextToImage_Pipeline_Output_Nullable_from = (
   givenImage: TextToImage_Pipeline_Output['image'] | null,

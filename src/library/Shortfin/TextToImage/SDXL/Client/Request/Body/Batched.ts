@@ -4,7 +4,7 @@ import type {
 
 import type {
   Shortfin_TextToImage_SDXL_Client_Request_Body,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 class Shortfin_TextToImage_SDXL_Client_Request_Body_Batched
 implements Batched<

@@ -8,11 +8,11 @@ import {
 
 import {
   Range,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 Range.Discrete = Range_Discrete;
 
-declare module './definition.ts' {
+declare module './definition.declared.ts' {
   namespace Range {
     export {
       type Range_BoundContainment as BoundContainment,

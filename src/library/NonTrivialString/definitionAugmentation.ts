@@ -4,11 +4,11 @@ import {
 
 import {
   NonTrivialString,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 NonTrivialString.ParsingError = NonTrivialString_ParsingError;
 
-declare module './definition.ts' {
+declare module './definition.declared.ts' {
   namespace NonTrivialString {
     export {
       NonTrivialString_ParsingError as ParsingError,

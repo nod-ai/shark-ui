@@ -8,12 +8,12 @@ import {
 
 import {
   Shortfin_TextToImage_SDXL_Client,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 Shortfin_TextToImage_SDXL_Client.Request = Shortfin_TextToImage_SDXL_Client_Request;
 Shortfin_TextToImage_SDXL_Client.Response = Shortfin_TextToImage_SDXL_Client_Response;
 
-declare module './definition.ts' {
+declare module './definition.declared.ts' {
   namespace Shortfin_TextToImage_SDXL_Client {
     export {
       Shortfin_TextToImage_SDXL_Client_Request as Request,

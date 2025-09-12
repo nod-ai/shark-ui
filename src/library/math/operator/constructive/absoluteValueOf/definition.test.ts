@@ -12,7 +12,7 @@ import {
 
 import {
   absoluteValueOf,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 describe(absoluteValueOf, () => {
   const {
