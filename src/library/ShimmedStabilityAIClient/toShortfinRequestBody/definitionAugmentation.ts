@@ -8,12 +8,12 @@ import {
 
 import {
   toShortfinRequestBody,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 toShortfinRequestBody.Prompt = toShortfinRequestBody_Prompt;
 toShortfinRequestBody.Batched = toShortfinRequestBody_Batched;
 
-declare module './definition.ts' {
+declare module './definition.declared.ts' {
   namespace toShortfinRequestBody {
     export {
       toShortfinRequestBody_Prompt as Prompt,

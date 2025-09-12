@@ -4,11 +4,11 @@ import {
 
 import {
   Shortfin_TextToImage_SDXL_Client_Response_Body,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 Shortfin_TextToImage_SDXL_Client_Response_Body.ParsingError = Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError;
 
-declare module './definition.ts' {
+declare module './definition.declared.ts' {
   namespace Shortfin_TextToImage_SDXL_Client_Response_Body {
     export {
       Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError as ParsingError,

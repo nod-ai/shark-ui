@@ -8,12 +8,12 @@ import {
 
 import {
   ContentDescriptor,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 ContentDescriptor.TopLevel /*             */ = ContentDescriptor_TopLevel;
 ContentDescriptor.StructuredSyntaxNameSuffix = ContentDescriptor_StructuredSyntaxNameSuffix;
 
-declare module './definition.ts' {
+declare module './definition.declared.ts' {
   namespace ContentDescriptor {
     export {
       ContentDescriptor_TopLevel /*             */ as TopLevel,

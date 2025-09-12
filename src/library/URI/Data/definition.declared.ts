@@ -5,7 +5,7 @@ import type Sequence from '@/library/Sequence';
 
 import {
   URI,
-} from '../definition.ts';
+} from '../definition.declared.ts';
 
 import type {
   URI_Data_EncodingIdentifier,

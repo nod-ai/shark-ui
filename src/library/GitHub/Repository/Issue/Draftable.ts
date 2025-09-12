@@ -1,6 +1,6 @@
 import {
   GitHub_Repository_Issue,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 function GitHub_Repository_Issue_Draftable(
   givenSite: URL,

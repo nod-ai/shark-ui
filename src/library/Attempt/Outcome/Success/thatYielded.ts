@@ -4,7 +4,7 @@ import {
 
 import type {
   Attempt_Outcome_Success,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 const Attempt_Outcome_Success_thatYielded = <
   SomeProduct,

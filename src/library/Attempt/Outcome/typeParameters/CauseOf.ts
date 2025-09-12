@@ -8,7 +8,7 @@ import type {
 
 import type {
   Attempt_Outcome,
-} from '../definition.ts';
+} from '../definition.declared.ts';
 
 type CauseOf<
   SomeOutcome extends Attempt_Outcome<unknown, Attempt_Error.Actionable<string>>,

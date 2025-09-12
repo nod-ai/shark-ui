@@ -4,11 +4,11 @@ import {
 
 import {
   Shortfin_TextToImage_SDXL_Client_Request_Body,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 Shortfin_TextToImage_SDXL_Client_Request_Body.Batched = Shortfin_TextToImage_SDXL_Client_Request_Body_Batched;
 
-declare module './definition.ts' {
+declare module './definition.declared.ts' {
   namespace Shortfin_TextToImage_SDXL_Client_Request_Body {
     export {
       Shortfin_TextToImage_SDXL_Client_Request_Body_Batched as Batched,

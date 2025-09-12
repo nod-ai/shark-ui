@@ -8,7 +8,7 @@ import {
 
 import {
   Attempt_Outcome,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 import {
   Attempt_Outcome_fromRewrapping,
@@ -18,7 +18,7 @@ Attempt_Outcome.Failure /*  */ = Attempt_Outcome_Failure;
 Attempt_Outcome.Success /*  */ = Attempt_Outcome_Success;
 Attempt_Outcome.fromRewrapping = Attempt_Outcome_fromRewrapping;
 
-declare module './definition.ts' {
+declare module './definition.declared.ts' {
   namespace Attempt_Outcome {
     export {
       Attempt_Outcome_Failure /*  */ as Failure,

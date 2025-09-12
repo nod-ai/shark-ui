@@ -8,7 +8,7 @@ import type {
 
 import {
   Attempt_Outcome_Success,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 import {
   Attempt_Outcome_Success_thatYielded,
@@ -17,7 +17,7 @@ import {
 Attempt_Outcome_Success.Product/**/ = Attempt_Outcome_Success_Product;
 Attempt_Outcome_Success.thatYielded = Attempt_Outcome_Success_thatYielded;
 
-declare module './definition.ts' {
+declare module './definition.declared.ts' {
   namespace Attempt_Outcome_Success {
     export {
       /**/ Attempt_Outcome_Success_Product/**/ as Product,

@@ -6,7 +6,7 @@ import type {
 
 import type {
   Contextualized,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 import {
   Contextualized_describes,

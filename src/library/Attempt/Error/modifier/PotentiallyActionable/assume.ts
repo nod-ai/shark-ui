@@ -8,7 +8,7 @@ import {
 
 import type {
   PotentiallyActionable,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 const PotentiallyActionable_assume = <
   SomeError extends Error,

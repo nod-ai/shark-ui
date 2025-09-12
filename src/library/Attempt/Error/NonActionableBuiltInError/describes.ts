@@ -1,6 +1,6 @@
 import type {
   NonActionableBuiltInError,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 const NonActionableBuiltInError_describes = (
   givenError: Error,

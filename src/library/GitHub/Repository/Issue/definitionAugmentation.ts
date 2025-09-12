@@ -8,11 +8,11 @@ import type {
 
 import {
   GitHub_Repository_Issue,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 GitHub_Repository_Issue.Draftable = GitHub_Repository_Issue_Draftable;
 
-declare module './definition.ts' {
+declare module './definition.declared.ts' {
   namespace GitHub_Repository_Issue {
     export {
       type GitHub_Repository_Issue_Label/**/ as Label,

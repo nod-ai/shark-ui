@@ -16,7 +16,7 @@ import {
 
 import {
   greatestCommonDivisor,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 const pairCombos = <
   SomeLeftElement extends number,

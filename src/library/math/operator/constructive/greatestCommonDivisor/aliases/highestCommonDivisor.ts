@@ -1,6 +1,6 @@
 import {
   greatestCommonDivisor,
-} from '../definition.ts';
+} from '../definition.declared.ts';
 
 /** Alias for {@link greatestCommonDivisor} */
 const highestCommonDivisor = greatestCommonDivisor;

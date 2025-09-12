@@ -2,7 +2,7 @@ import type {
   Attempt_Error_NonActionable_Options,
 } from './Options';
 
-declare module './definition.ts' {
+declare module './definition.declared.ts' {
   namespace Attempt_Error_NonActionable {
     export {
       type Attempt_Error_NonActionable_Options as Options,

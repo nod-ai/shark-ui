@@ -2,7 +2,7 @@ import type ParsingError from '@/library/ParsingError';
 
 import type {
   Parser,
-} from '../definition.ts';
+} from '../definition.declared.ts';
 
 type Parser_String<
   SomeParsedOutput,

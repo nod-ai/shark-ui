@@ -6,7 +6,7 @@ import type {
 
 import type {
   Parser,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 type Parser_Static<
   SomeRawInput,

@@ -4,11 +4,11 @@ import {
 
 import {
   URLComponent_Origin,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 URLComponent_Origin.ParsingError = URLComponent_Origin_ParsingError;
 
-declare module './definition.ts' {
+declare module './definition.declared.ts' {
   namespace URLComponent_Origin {
     export {
       URLComponent_Origin_ParsingError as ParsingError,

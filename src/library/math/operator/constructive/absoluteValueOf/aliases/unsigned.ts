@@ -1,6 +1,6 @@
 import {
   absoluteValueOf,
-} from '../definition.ts';
+} from '../definition.declared.ts';
 
 /** Alias for {@link absoluteValueOf} */
 const unsigned = absoluteValueOf;
