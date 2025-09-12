@@ -23,14 +23,14 @@ const Reporting_promptUserWith = (givenError: Error) => {
     !userDidPermitDraftingNewIssue
   ) return;
 
-  const draftOfNewIssue = Repository.draftIssue({
+  const newIssue = Repository.Issue_from({
     title   : `[Unexpected Error]: can't <some task> when <some context>`,
     body    : `### Details\n${formattedErrorDetails}`.replaceAll('\n', '\n> '),
     labels  : ['bug'],
     category: 'Bug',
   });
 
-  window.open(draftOfNewIssue);
+  window.open(newIssue.draft);
 };
 
 export {

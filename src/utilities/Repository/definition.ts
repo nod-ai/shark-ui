@@ -2,11 +2,11 @@ import GitHub from '@/library/GitHub';
 
 const Repository = {
   /** Creates a URL that drafts a new issue with pre-populated fields  */
-  draftIssue(
+  Issue_from(
     givenIssue: GitHub.Repository.Issue,
-  ): URL {
+  ) {
     const SharkUIRepository = new GitHub.Repository('nod-ai', 'shark-ui');
-    return SharkUIRepository.Issue.from(givenIssue).draft;
+    return SharkUIRepository.Issue.from(givenIssue);
   },
 };
 
