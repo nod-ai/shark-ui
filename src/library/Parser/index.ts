@@ -1,3 +1,3 @@
 export type {
   Parser as default,
-} from './exports_objectOriented.ts';
+} from './exports.object.primary.ts';

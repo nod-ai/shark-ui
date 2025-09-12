@@ -1,1 +1,1 @@
-export type * from './exports_objectOriented.ts';
+export type * from './exports.object.primary.ts';
