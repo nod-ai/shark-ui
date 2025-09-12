@@ -2,18 +2,19 @@ import type {
   GitHub_Repository_Issue_Label,
 } from './Label';
 
-interface GitHub_Repository_Issue {
-  title: string;
-  body: string;
-  labels: GitHub_Repository_Issue_Label[];
-  /** a.k.a. "type" */
-  category:
-    | 'Feature'
-    | 'Bug'
-    | 'Task'
-  ;
+class GitHub_Repository_Issue {
+  public constructor(
+    public title: string,
+    public body: string,
+    public labels: GitHub_Repository_Issue_Label[],
+    /** a.k.a. "type" */
+    public category:
+      | 'Feature'
+      | 'Bug'
+      | 'Task',
+  ) {}
 }
 
-export type {
+export {
   GitHub_Repository_Issue,
 };
