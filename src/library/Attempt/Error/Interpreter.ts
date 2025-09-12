@@ -4,7 +4,7 @@ import type {
 
 import type {
   PotentiallyActionable,
-} from './modifier';
+} from './modifiers';
 
 type Attempt_Error_Interpreter<
   SomeActionableError extends Attempt_Error_Actionable<string>,

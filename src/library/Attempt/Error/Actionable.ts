@@ -17,7 +17,7 @@ import {
 import {
   type AppropriatelyThrown,
   PotentiallyActionable,
-} from './modifier';
+} from './modifiers';
 
 /** Extend this class to describe errors from which callers ought to recover */
 abstract class Attempt_Error_Actionable<
