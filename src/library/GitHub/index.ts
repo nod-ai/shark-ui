@@ -1,3 +1,3 @@
 export {
-  Repository as default,
+  GitHub as default,
 } from './exports_objectOriented.ts';
