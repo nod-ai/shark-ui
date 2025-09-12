@@ -1,1 +1,1 @@
-export * as Shortfin from './namespaceMembers.ts';
+export * as Shortfin from './definition.assembled.members.ts';

@@ -1,1 +1,1 @@
-export * as ContentDescriptor_TopLevel_Discrete from './namespaceMembers.ts';
+export * as ContentDescriptor_TopLevel_Discrete from './definition.assembled.members.ts';

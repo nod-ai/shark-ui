@@ -1,1 +1,1 @@
-export * as toSharkUIOutput from './namespaceMembers.ts';
+export * as toSharkUIOutput from './definition.assembled.members.ts';

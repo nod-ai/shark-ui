@@ -1,1 +1,1 @@
-export * as GitHub from './namespaceMembers.ts';
+export * as GitHub from './definition.assembled.members.ts';

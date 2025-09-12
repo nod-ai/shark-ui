@@ -1,1 +1,1 @@
-export * as Attempt_Adapted from './namespaceMembers.ts';
+export * as Attempt_Adapted from './definition.assembled.members.ts';

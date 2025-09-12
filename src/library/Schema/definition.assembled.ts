@@ -1,1 +1,1 @@
-export * as Schema from './namespaceMembers.ts';
+export * as Schema from './definition.assembled.members.ts';

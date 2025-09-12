@@ -1,1 +1,1 @@
-export * as Reporting from './namespaceMembers.ts';
+export * as Reporting from './definition.assembled.members.ts';
