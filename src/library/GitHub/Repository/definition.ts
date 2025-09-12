@@ -4,6 +4,10 @@ import {
   GitHub_site,
 } from '../site';
 
+import {
+  GitHub_Repository_Issue,
+} from './Issue';
+
 class GitHub_Repository<
   SomeOrganization extends string,
   SomeProject extends string,
@@ -21,6 +25,10 @@ class GitHub_Repository<
 
   public get site(): URL {
     return new URL(GitHub_site.toString().concat(this.path.toString()));
+  }
+
+  public get Issue() {
+    return GitHub_Repository_Issue.Draftable(this.site);
   }
 }
 
