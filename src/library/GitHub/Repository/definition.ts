@@ -1,5 +1,9 @@
 import URLComponent from '@/library/URLComponent';
 
+import {
+  GitHub_site,
+} from '../site';
+
 class GitHub_Repository<
   SomeOrganization extends string,
   SomeProject extends string,
@@ -13,6 +17,10 @@ class GitHub_Repository<
     const outcomeOfParsingPath = URLComponent.Path.parsedFrom(`/${this.organization}/${this.project}`);
     const parsedPath = outcomeOfParsingPath.forciblyUnwrap(/* a failed unwrap would mean the hardcoded template was malformed */);
     return parsedPath;
+  }
+
+  public get site(): URL {
+    return new URL(GitHub_site.toString().concat(this.path.toString()));
   }
 }
 
