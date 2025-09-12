@@ -1,1 +1,1 @@
-export * as Attempt_Outcome_Success_Product from './namespaceMembers.ts';
+export * as Attempt_Outcome_Success_Product from './definition.assembled.members.ts';

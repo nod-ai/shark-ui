@@ -1,1 +1,1 @@
-export * as Attempt from './namespaceMembers.ts';
+export * as Attempt from './definition.assembled.members.ts';

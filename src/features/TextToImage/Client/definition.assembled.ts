@@ -1,1 +1,1 @@
-export * as TextToImage_Client from './namespaceMembers.ts';
+export * as TextToImage_Client from './definition.assembled.members.ts';

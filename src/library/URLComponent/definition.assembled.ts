@@ -1,1 +1,1 @@
-export * as URLComponent from './namespaceMembers.ts';
+export * as URLComponent from './definition.assembled.members.ts';

@@ -1,1 +1,1 @@
-export * as TextToImage_Pipeline from './namespaceMembers.ts';
+export * as TextToImage_Pipeline from './definition.assembled.members.ts';

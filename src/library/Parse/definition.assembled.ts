@@ -1,1 +1,1 @@
-export * as Parse from './namespaceMembers.ts';
+export * as Parse from './definition.assembled.members.ts';

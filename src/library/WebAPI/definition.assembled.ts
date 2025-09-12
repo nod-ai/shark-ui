@@ -1,1 +1,1 @@
-export * as WebAPI from './namespaceMembers.ts';
+export * as WebAPI from './definition.assembled.members.ts';

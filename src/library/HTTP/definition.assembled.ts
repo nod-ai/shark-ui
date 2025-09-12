@@ -1,1 +1,1 @@
-export * as HTTP from './namespaceMembers.ts';
+export * as HTTP from './definition.assembled.members.ts';
