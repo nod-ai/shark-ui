@@ -1,1 +1,1 @@
-export type * from './namespace.ts';
+export type * from './definition.assembled.ts';
