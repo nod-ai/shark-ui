@@ -8,6 +8,12 @@ To see why barrel files might be needed, see ["Selecting a Module Structure"](..
 
 ## Terms
 
+A "barrel" file is one that:
+
+- re-exports the symbols of its peers
+- has no declarations of its own
+- avoids any side-effects
+
 ## Flow
 
 ### Legend
