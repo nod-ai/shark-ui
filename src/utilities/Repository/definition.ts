@@ -1,7 +1,7 @@
 import GitHub from '@/library/GitHub';
 
 import type {
-  Repository_Issue,
+  GitHub_Repository_Issue,
 } from './Issue';
 
 const Repository = {
@@ -12,7 +12,7 @@ const Repository = {
   },
   /** Creates a URL that drafts a new issue with pre-populated fields  */
   draftIssue(
-    given: Repository_Issue,
+    given: GitHub_Repository_Issue,
   ): URL {
     const mutableDraft = this.emptyDraftOfNewIssue;
     const referencedParameters = mutableDraft.searchParams;

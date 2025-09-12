@@ -1,9 +1,9 @@
-type Repository_Issue_Label =
+type GitHub_Repository_Issue_Label =
   | 'bug'
   | 'enhancement'
   | 'documentation'
 ;
 
 export type {
-  Repository_Issue_Label,
+  GitHub_Repository_Issue_Label,
 };
