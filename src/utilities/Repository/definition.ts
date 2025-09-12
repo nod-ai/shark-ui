@@ -1,10 +1,12 @@
+import GitHub from '@/library/GitHub';
+
 import type {
   Repository_Issue,
 } from './Issue';
 
 const Repository = {
   get emptyDraftOfNewIssue(): URL {
-    const mutableURLForNewIssue = new URL(('https://github.com').concat('/nod-ai/shark-ui/issues/new'));
+    const mutableURLForNewIssue = new URL(GitHub.site.toString().concat('/nod-ai/shark-ui/issues/new'));
     return mutableURLForNewIssue;
   },
   /** Creates a URL that drafts a new issue with pre-populated fields  */
