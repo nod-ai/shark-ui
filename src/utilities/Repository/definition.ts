@@ -1,9 +1,5 @@
 import GitHub from '@/library/GitHub';
 
-import type {
-  GitHub_Repository_Issue,
-} from './Issue';
-
 const Repository = {
   get emptyDraftOfNewIssue(): URL {
     const SharkUIRepository = new GitHub.Repository('nod-ai', 'shark-ui');
@@ -12,7 +8,7 @@ const Repository = {
   },
   /** Creates a URL that drafts a new issue with pre-populated fields  */
   draftIssue(
-    given: GitHub_Repository_Issue,
+    given: GitHub.Repository.Issue,
   ): URL {
     const mutableDraft = this.emptyDraftOfNewIssue;
     const referencedParameters = mutableDraft.searchParams;
