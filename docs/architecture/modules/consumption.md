@@ -31,6 +31,33 @@ Here, the `HTTP` module centralizes access to its various members using a single
 
 ### Toolbox (Functional)
 
+Modules that expose a collection of related functions without a central object are considered "toolbox" style. This generally aligns with the functional programming paradigm, where public functions are imported and used directly.
+
+```typescript
+import {
+  greatestCommonDivisor,
+  leastCommonMultiple,
+} from '@/library/math';
+
+...
+```
+
+Here, the `math` module acts as a "toolbox", the "tools" being the various mathematical functions it exposes. In cases like this, the tools are to be used at runtime.
+
+This applies to "type functions" as well:
+
+```typescript
+import type {
+  If,
+  Is,
+  Not,
+} from '@/library/typeUtilities';
+
+...
+```
+
+Here, the `typeUtilities` module also acts as a "toolbox", but the tools are to be used in the type system only.
+
 ### Hybrid
 
 ## Consumption of Internal Modules
