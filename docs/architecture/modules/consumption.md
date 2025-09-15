@@ -60,4 +60,22 @@ Here, the `typeUtilities` module also acts as a "toolbox", but the tools are to 
 
 ### Hybrid
 
+Some modules may choose to expose both a primary object and named exports.
+
+```typescript
+import ContentDescriptor from '@/library/ContentDescriptor';
+
+...
+```
+
+```typescript
+import {
+  ContentType,
+} from '@/library/ContentDescriptor';
+
+...
+```
+
+Here, the `ContentDescriptor` module provides both a default export for the primary object and named exports for common aliases.
+
 ## Consumption of Internal Modules
