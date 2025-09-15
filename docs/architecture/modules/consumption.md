@@ -79,3 +79,29 @@ import {
 Here, the `ContentDescriptor` module provides both a default export for the primary object and named exports for common aliases.
 
 ## Consumption of Internal Modules
+
+For modules that are internal to a library (i.e., must be explicitly exposed for public consumption), the same principles apply with the exception that `default` exports are avoided.
+
+Consider the import of a hybrid internal module from one of its peers:
+
+```typescript
+// @/library/Attempt/Fresh/that.ts
+
+import {
+  Attempt_Outcome,
+  type ProductOf,
+  type CauseOf,
+} from '../../Outcome';
+
+...
+
+export {
+  Attempt_Fresh_that,
+};
+```
+
+Here, a level-2 member called `Attempt_Outcome` is imported by name into the `Attempt/Fresh/that` module to define a level-3 member called `Attempt_Fresh_that`.
+
+- Both of these are internal modules that will be explicitly exposed as `Attempt.Outcome` and `Attempt.Fresh.that` to external consumers of the entire library.
+- Because of this, it's important for other internal consumers to acknowledge that these members are safe to expose to these external consumers (e.g. when used as parameter types or return types).
+- Ergo, `default` imports/exports are avoided to help peer consumers avoid inadvertent aliases that may obfuscate how a member will actually look to an external consumer.
