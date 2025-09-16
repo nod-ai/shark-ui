@@ -128,3 +128,10 @@ However, the "declared" strategy must be used if the resulting symbol requires a
     - `function`: members at runtime and compile-time, requiring augmentation
 
 ### Switching Strategies
+
+For certain existing definitions, the strategy may be converted from one to the other **without affecting consumers**:
+
+- "declared" to "assembled": a declaration in TypeScript is no longer present
+  - i.e. central functionality was previously removed
+- "assembled" to "declared": a declaration in TypeScript is now required
+  - i.e. central functionality is about to be added
