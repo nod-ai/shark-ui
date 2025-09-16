@@ -4,6 +4,8 @@ This document describes how to define the core implementation of an object-orien
 
 ## Context
 
+To see how this helps expose functionality to external consumers, read about [barrel files](./barrel-files.md).
+
 ## Terms
 
 ## Flow
