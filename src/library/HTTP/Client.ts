@@ -68,9 +68,9 @@ class HTTP_Client {
 
     const response = outcomeOfSettlingResponse.unwrapped;
 
-    if (
-      !response.ok
-    ) return ends.inFailureDueTo(new HTTP_Endpoint.Error.Response(response.statusText, response.status));
+    if (!response.ok) { // eslint-disable-line curly
+      return ends.inFailureDueTo(new HTTP_Endpoint.Error.Response(response.statusText, response.status));
+    }
 
     const responseBody: unknown = await response.json();
     return ends.inSuccessWith(responseBody);

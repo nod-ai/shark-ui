@@ -17,9 +17,9 @@ const TextToImage_Config_Static_read = (): Promise<
 > => Attempt.Fresh.thatEventually(async (ends) => {
   const fileResponse = await fetch(TextToImage_Config_Static_file.toString());
 
-  if (
-    !fileResponse.ok
-  ) return ends.inFailureDueTo(new TextToImage_Config_Static_Reading.Error(TextToImage_Config_Static_file, fileResponse));
+  if (!fileResponse.ok) { // eslint-disable-line curly
+    return ends.inFailureDueTo(new TextToImage_Config_Static_Reading.Error(TextToImage_Config_Static_file, fileResponse));
+  }
 
   const rawConfig = await fileResponse.json() as unknown;
   const parsedConfig = TextToImage_Config.parsedFrom(rawConfig).forciblyUnwrap(/* Implementation must align with established contract. */);

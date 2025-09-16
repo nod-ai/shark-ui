@@ -26,9 +26,9 @@ class URLComponent_Path
       reality    : givenSubject,
     });
 
-    if (
-      exampleURL.pathname !== givenSubject
-    ) return ends.inFailureDueTo(newParsingError);
+    if (exampleURL.pathname !== givenSubject) { // eslint-disable-line curly
+      return ends.inFailureDueTo(newParsingError);
+    }
 
     const parsedURLPath = new URLComponent_Path(exampleURL.pathname);
     return ends.inSuccessWith(parsedURLPath);

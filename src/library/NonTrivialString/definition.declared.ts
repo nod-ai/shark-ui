@@ -27,9 +27,9 @@ class NonTrivialString
   > => Attempt.Fresh.that((ends) => {
     const trimmedSubject = givenSubject.trim();
 
-    if (
-      isEmpty(trimmedSubject)
-    ) return ends.inFailureDueTo(new NonTrivialString_ParsingError(givenSubject));
+    if (isEmpty(trimmedSubject)) { // eslint-disable-line curly
+      return ends.inFailureDueTo(new NonTrivialString_ParsingError(givenSubject));
+    }
 
     return ends.inSuccessWith(new NonTrivialString(givenSubject));
   });
