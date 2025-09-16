@@ -1,0 +1,137 @@
+# Definitions for Object-Oriented Directory-Based Modules
+
+This document describes how to define the core implementation of an object-oriented module that has a directory-based structure.
+
+## Context
+
+To see how this helps expose functionality to external consumers, read about [barrel files](./barrel-files.md).
+
+## Terms
+
+Within the confines of this project, a "definition" is a TypeScript symbol that represents the core implementation within an object-oriented module.
+
+Ergo, a definition _file_ is one that _creates_ the definition.
+
+For example, in the `/User/` module, it might be specified as the `User` class declaration found in `/User/definition.declared.ts`.
+
+## Flow
+
+The figure below illustrates how the core implementation of an object-oriented module is defined based on whether it's assembled or declared, and whether augmentation is needed.
+
+```mermaid
+flowchart TB
+  %% Primary export (single node fed by both strategies)
+  File_ExportsObjectPrimary["/exports.object.primary.ts"]
+
+  Decision_PrimaryObject@{ shape: diamond, label: "Does the primary object require a TypeScript declaration?" }
+  Decision_Augmentation@{ shape: diamond, label: "Need augmentation?" }
+
+  %% Object-oriented (assembled path)
+  File_DefinitionAssembledMembers["/definition.assembled.members.ts"]
+  File_DefinitionAssembled["/definition.assembled.ts"]
+
+  %% Object-oriented (declared path + optional augmentation)
+  File_DefinitionDeclared["/definition.declared.ts"]
+  File_DefinitionDeclaredAugmentation["/definition.declared.augmentation.ts"]
+  File_DefinitionDeclaredWithAugmentation["/definition.declared.withAugmentation.ts"]
+
+  Junction_End@{ shape: f-circ }
+
+  %% Core source peers
+  InternalModules(Internal Modules)
+
+  %% Graphs
+  File_ExportsObjectPrimary --> Decision_PrimaryObject
+
+  subgraph Files_Definition [" "]
+    Decision_PrimaryObject ==yes==> Decision_Augmentation
+    Decision_PrimaryObject ==no ==> File_DefinitionAssembled
+
+    Decision_Augmentation ==no ==> File_DefinitionDeclared
+    Decision_Augmentation ==yes==> File_DefinitionDeclaredWithAugmentation 
+
+    File_DefinitionDeclaredWithAugmentation --> File_DefinitionDeclared
+    File_DefinitionDeclaredWithAugmentation --> File_DefinitionDeclaredAugmentation -.-> File_DefinitionDeclared
+    File_DefinitionAssembled                --> File_DefinitionAssembledMembers 
+
+    File_DefinitionDeclaredAugmentation --- Junction_End
+    File_DefinitionDeclared             --- Junction_End
+    File_DefinitionAssembledMembers     --- Junction_End
+  end
+
+  Junction_End --> InternalModules
+
+  %% Styling
+  classDef definitionSubgraph fill:#333   ,           ;
+  classDef definition         fill:#eef   , color:#000;
+  classDef exports            fill:#fff4d6, color:#000;
+  classDef decision           fill:#9b3333, color:#fff;
+
+  class File_DefinitionAssembledMembers,File_DefinitionAssembled,File_DefinitionDeclared,File_DefinitionDeclaredAugmentation,File_DefinitionDeclaredWithAugmentation definition;
+  class File_ExportsObjectPrimary exports;
+  class Files_Definition definitionSubgraph;
+  class Decision_Augmentation,Decision_PrimaryObject decision;
+```
+
+### Legend
+
+- `/definition.declared.ts`:
+  - Has the core declaration pertaining to the module's namesake
+    - e.g. "User/" -> `User` class
+  - Should avoid side-effects.
+- `/definition.declared.augmentation.ts`:
+  - Adds additional static members to the primary symbol by performing a [module augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
+  - Should only exist to augment `/definition.declared.ts`.
+    - May import `/definition.declared.ts` to access the symbol and augment it at runtime.
+  - Should not re-`export` the augmented symbol.
+- `/definition.declared.withAugmentation.ts`:
+  - Combines the core logic and augmentations into a single symbol:
+
+    ```typescript
+    import './definition.declared.augmentation.ts';
+
+    export * from './definition.declared.ts';
+    ```
+
+  - Should only exist to re-`export` the augmented symbol.
+- `/definition.assembled.members.ts`:
+  - A [barrel file](./barrel-files.md) that gives the peer modules an alias they can be nested under a common namespace.
+- `/definition.assembled.ts`:
+  - A [barrel file](./barrel-files.md) that assembles all the members into a pre-labeled namespace:
+
+    ```typescript
+    import * as SomeAssembledObject from './definition.assembled.members.ts';
+    ```
+
+## Strategies
+
+There are two strategies for defining the core implementation of an object-oriented module:
+
+- "assembled": composed of multiple declarations that are brought together via member aliases and a namespace alias
+- "declared": requires a symbol declaration in TypeScript, can be implemented as:
+  - a `class` declaration
+  - a `function` declaration
+  - a `const` or `function` declaration
+  - an `interface` or `type` declaration
+
+### Choosing a Strategy
+
+"Assembled" is the simpler of the two and therefore the go-to strategy.
+
+However, the "declared" strategy must be used if the resulting symbol requires a declaration in TypeScript. This includes cases where it:
+
+- must be instantiable or have an inheritance chain (e.g. `class`)
+- must be callable (e.g. `function`)
+- must be a concrete type (e.g. `interface` or `type`)
+  - using the same identifier, can support extra members when merged with a
+    - `const`: runtime only members
+    - `function`: members at runtime and compile-time, requiring augmentation
+
+### Switching Strategies
+
+For certain existing definitions, the strategy may be converted from one to the other **without affecting consumers**:
+
+- "declared" to "assembled": a declaration in TypeScript is no longer present
+  - i.e. central functionality was previously removed
+- "assembled" to "declared": a declaration in TypeScript is now required
+  - i.e. central functionality is about to be added
