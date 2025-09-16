@@ -29,7 +29,9 @@ class NonTrivialString
 
     if (
       isEmpty(trimmedSubject)
-    ) return ends.inFailureDueTo(new NonTrivialString_ParsingError(givenSubject));
+    ) { // eslint-disable-line curly
+      return ends.inFailureDueTo(new NonTrivialString_ParsingError(givenSubject));
+    }
 
     return ends.inSuccessWith(new NonTrivialString(givenSubject));
   });

@@ -70,7 +70,9 @@ class HTTP_Client {
 
     if (
       !response.ok
-    ) return ends.inFailureDueTo(new HTTP_Endpoint.Error.Response(response.statusText, response.status));
+    ) { // eslint-disable-line curly
+      return ends.inFailureDueTo(new HTTP_Endpoint.Error.Response(response.statusText, response.status));
+    }
 
     const responseBody: unknown = await response.json();
     return ends.inSuccessWith(responseBody);

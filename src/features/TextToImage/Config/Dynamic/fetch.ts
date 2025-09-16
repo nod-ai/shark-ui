@@ -21,7 +21,9 @@ const TextToImage_Config_Dynamic_fetch = (): Promise<
 
   if (
     !endpointResponse.ok
-  ) return ends.inFailureDueTo(fetchingError);
+  ) { // eslint-disable-line curly
+    return ends.inFailureDueTo(fetchingError);
+  }
 
   const endpointResponseError = new TextToImage_Config_Dynamic_Fetching.Error.Response({
     endpoint: TextToImage_Config_Dynamic_endpoint,
@@ -30,7 +32,9 @@ const TextToImage_Config_Dynamic_fetch = (): Promise<
 
   if (
     !HTTP.Client.contentIsJSONIn(endpointResponse)
-  ) return ends.inFailureDueTo(endpointResponseError);
+  ) { // eslint-disable-line curly
+    return ends.inFailureDueTo(endpointResponseError);
+  }
 
   const rawConfig = await endpointResponse.json() as unknown;
   const parsedConfig = TextToImage_Config.parsedFrom(rawConfig).forciblyUnwrap(/* Implementation must align with established contract. */);

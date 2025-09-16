@@ -19,7 +19,9 @@ const TextToImage_Config_Static_read = (): Promise<
 
   if (
     !fileResponse.ok
-  ) return ends.inFailureDueTo(new TextToImage_Config_Static_Reading.Error(TextToImage_Config_Static_file, fileResponse));
+  ) { // eslint-disable-line curly
+    return ends.inFailureDueTo(new TextToImage_Config_Static_Reading.Error(TextToImage_Config_Static_file, fileResponse));
+  }
 
   const rawConfig = await fileResponse.json() as unknown;
   const parsedConfig = TextToImage_Config.parsedFrom(rawConfig).forciblyUnwrap(/* Implementation must align with established contract. */);

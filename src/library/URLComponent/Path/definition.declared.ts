@@ -28,7 +28,9 @@ class URLComponent_Path
 
     if (
       exampleURL.pathname !== givenSubject
-    ) return ends.inFailureDueTo(newParsingError);
+    ) { // eslint-disable-line curly
+      return ends.inFailureDueTo(newParsingError);
+    }
 
     const parsedURLPath = new URLComponent_Path(exampleURL.pathname);
     return ends.inSuccessWith(parsedURLPath);

@@ -28,7 +28,9 @@ class URLComponent_Origin
 
     if (
       derived.origin !== givenSubject
-    ) return ends.inFailureDueTo(newParsingError);
+    ) { // eslint-disable-line curly
+      return ends.inFailureDueTo(newParsingError);
+    }
 
     const parsedURLOrigin = new URLComponent_Origin(derived.origin);
     return ends.inSuccessWith(parsedURLOrigin);
