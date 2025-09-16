@@ -5,15 +5,17 @@ import {
   Sequence_Byte_Encoded_Compatibility_Error,
 } from './Error';
 
-const Sequence_Byte_Encoded_Compatibility_ensure = (
-  givenCharacterSequence: string,
+const Sequence_Byte_Encoded_Compatibility_ensure = <
+  SomeCharacterSequence extends string,
+>(
+  givenCharacterSequence: SomeCharacterSequence,
   {
     assuming: givenBitWidth,
   }: {
     assuming: number;
   },
 ): Attempt.Outcome<
-  string,
+  SomeCharacterSequence,
   Sequence_Byte_Encoded_Compatibility_Error
 > => Attempt.Fresh.that((ends) => {
   const byteCofactor = Byte.cofactorTo(givenBitWidth);
