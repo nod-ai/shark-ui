@@ -75,6 +75,12 @@ flowchart TB
 
 ### Legend
 
+- `/definition.declared.ts`:
+- `/definition.declared.augmentation.ts`:
+- `/definition.declared.withAugmentation.ts`:
+- `/definition.assembled.members.ts`:
+- `/definition.assembled.ts`:
+
 ## Strategies
 
 ### Choosing a Strategy
