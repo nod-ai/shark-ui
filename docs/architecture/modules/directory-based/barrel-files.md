@@ -60,16 +60,22 @@ flowchart TB
 ### Legend
 
 - `/index.ts`:
+  - Marks the entry point into the module for the bundler to resolve
 - `/exports.*.ts`:
+  - Curates what is exposed to external modules
 
 ## Handling Different Paradigms
 
 ### For object-oriented modules
 
 - `/index.ts`:
+  - **If at top level of a library**: determines which symbol should be designated `default`
 - `/exports.object.primary.ts`:
+  - States whether the primary object for the module is "declared" or "assembled".
 - `/exports.object.auxiliaries.ts`:
+  - States any objects or pure functions that compliment (but cannot be nested within) the primary object
 
 ### For functional modules
 
 - `/exports.toolbox.ts`:
+  - Lists all the "tools" that should be exposed to external modules
