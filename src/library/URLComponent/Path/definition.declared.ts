@@ -21,12 +21,12 @@ class URLComponent_Path
   > => Attempt.Fresh.that((ends) => {
     const exampleURL = new URL(`https://example.com${givenSubject}`);
 
-    const newParsingError = new URLComponent_Path_ParsingError({
-      expectation: exampleURL.pathname,
-      reality    : givenSubject,
-    });
+    if (exampleURL.pathname !== givenSubject) {
+      const newParsingError = new URLComponent_Path_ParsingError({
+        expectation: exampleURL.pathname,
+        reality    : givenSubject,
+      });
 
-    if (exampleURL.pathname !== givenSubject) { // eslint-disable-line curly
       return ends.inFailureDueTo(newParsingError);
     }
 

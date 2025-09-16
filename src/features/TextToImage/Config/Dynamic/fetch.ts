@@ -17,18 +17,18 @@ const TextToImage_Config_Dynamic_fetch = (): Promise<
   TextToImage_Config_Dynamic_Fetching.Outcome
 > => Attempt.Fresh.thatEventually(async (ends) => {
   const endpointResponse = await fetch(TextToImage_Config_Dynamic_endpoint.toString());
-  const fetchingError = new TextToImage_Config_Dynamic_Fetching.Error.Request(TextToImage_Config_Dynamic_endpoint);
 
-  if (!endpointResponse.ok) { // eslint-disable-line curly
+  if (!endpointResponse.ok) {
+    const fetchingError = new TextToImage_Config_Dynamic_Fetching.Error.Request(TextToImage_Config_Dynamic_endpoint);
     return ends.inFailureDueTo(fetchingError);
   }
 
-  const endpointResponseError = new TextToImage_Config_Dynamic_Fetching.Error.Response({
-    endpoint: TextToImage_Config_Dynamic_endpoint,
-    response: endpointResponse,
-  });
+  if (!HTTP.Client.contentIsJSONIn(endpointResponse)) {
+    const endpointResponseError = new TextToImage_Config_Dynamic_Fetching.Error.Response({
+      endpoint: TextToImage_Config_Dynamic_endpoint,
+      response: endpointResponse,
+    });
 
-  if (!HTTP.Client.contentIsJSONIn(endpointResponse)) { // eslint-disable-line curly
     return ends.inFailureDueTo(endpointResponseError);
   }
 

@@ -21,12 +21,12 @@ class URLComponent_Origin
   > => Attempt.Fresh.that((ends) => {
     const derived = new URL(givenSubject);
 
-    const newParsingError = new URLComponent_Origin_ParsingError({
-      expectation: derived.origin,
-      reality    : givenSubject,
-    });
+    if (derived.origin !== givenSubject) {
+      const newParsingError = new URLComponent_Origin_ParsingError({
+        expectation: derived.origin,
+        reality    : givenSubject,
+      });
 
-    if (derived.origin !== givenSubject) { // eslint-disable-line curly
       return ends.inFailureDueTo(newParsingError);
     }
 
