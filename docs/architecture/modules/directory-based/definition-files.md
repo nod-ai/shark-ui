@@ -8,6 +8,12 @@ To see how this helps expose functionality to external consumers, read about [ba
 
 ## Terms
 
+Within the confines of this project, a "definition" is a TypeScript symbol that represents the core implementation within an object-oriented module.
+
+Ergo, a definition _file_ is one that _creates_ the definition.
+
+For example, in the `/User/` module, it might be specified as the `User` class declaration found in `/User/definition.declared.ts`.
+
 ## Flow
 
 ### Legend
