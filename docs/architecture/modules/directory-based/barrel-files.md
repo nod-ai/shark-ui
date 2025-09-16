@@ -62,6 +62,7 @@ flowchart TB
 - `/index.ts`:
   - Marks the entry point into the module for the bundler to resolve
   - Should only re-`export` from `./exports.*.ts`
+  - Can re-`export` from multiple `./exports.*.ts` files to allow hybrid paradigms
 - `/exports.*.ts`:
   - Curates what is exposed to external modules
   - Should only re-`export` from peers (`./*`) within the module.
