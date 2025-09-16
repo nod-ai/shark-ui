@@ -6,4 +6,10 @@
 
 ## Flow
 
+### Legend
+
 ## Strategies
+
+### Choosing a Strategy
+
+### Switching Strategies
