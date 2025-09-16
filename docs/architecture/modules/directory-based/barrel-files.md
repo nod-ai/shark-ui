@@ -59,8 +59,17 @@ flowchart TB
 
 ### Legend
 
+- `/index.ts`:
+- `/exports.*.ts`:
+
 ## Handling Different Paradigms
 
 ### For object-oriented modules
 
+- `/index.ts`:
+- `/exports.object.primary.ts`:
+- `/exports.object.auxiliaries.ts`:
+
 ### For functional modules
+
+- `/exports.toolbox.ts`:
