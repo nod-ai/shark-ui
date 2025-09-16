@@ -116,4 +116,15 @@ There are two strategies for defining the core implementation of an object-orien
 
 ### Choosing a Strategy
 
+"Assembled" is the simpler of the two and therefore the go-to strategy.
+
+However, the "declared" strategy must be used if the resulting symbol requires a declaration in TypeScript. This includes cases where it:
+
+- must be instantiable or have an inheritance chain (e.g. `class`)
+- must be callable (e.g. `function`)
+- must be a concrete type (e.g. `interface` or `type`)
+  - using the same identifier, can support extra members when merged with a
+    - `const`: runtime only members
+    - `function`: members at runtime and compile-time, requiring augmentation
+
 ### Switching Strategies
