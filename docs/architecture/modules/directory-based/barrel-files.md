@@ -4,6 +4,8 @@ This document describes the conventions for naming and using "barrel" files with
 
 ## Context
 
+To see why barrel files might be needed, see ["Selecting a Module Structure"](../selecting-structure.md).
+
 ## Terms
 
 ## Flow
