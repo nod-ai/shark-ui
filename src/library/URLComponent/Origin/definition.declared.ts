@@ -26,9 +26,7 @@ class URLComponent_Origin
       reality    : givenSubject,
     });
 
-    if (
-      derived.origin !== givenSubject
-    ) { // eslint-disable-line curly
+    if (derived.origin !== givenSubject) { // eslint-disable-line curly
       return ends.inFailureDueTo(newParsingError);
     }
 

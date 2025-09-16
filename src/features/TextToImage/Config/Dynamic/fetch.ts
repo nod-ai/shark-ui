@@ -19,9 +19,7 @@ const TextToImage_Config_Dynamic_fetch = (): Promise<
   const endpointResponse = await fetch(TextToImage_Config_Dynamic_endpoint.toString());
   const fetchingError = new TextToImage_Config_Dynamic_Fetching.Error.Request(TextToImage_Config_Dynamic_endpoint);
 
-  if (
-    !endpointResponse.ok
-  ) { // eslint-disable-line curly
+  if (!endpointResponse.ok) { // eslint-disable-line curly
     return ends.inFailureDueTo(fetchingError);
   }
 
@@ -30,9 +28,7 @@ const TextToImage_Config_Dynamic_fetch = (): Promise<
     response: endpointResponse,
   });
 
-  if (
-    !HTTP.Client.contentIsJSONIn(endpointResponse)
-  ) { // eslint-disable-line curly
+  if (!HTTP.Client.contentIsJSONIn(endpointResponse)) { // eslint-disable-line curly
     return ends.inFailureDueTo(endpointResponseError);
   }
 

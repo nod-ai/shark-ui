@@ -68,9 +68,7 @@ class HTTP_Client {
 
     const response = outcomeOfSettlingResponse.unwrapped;
 
-    if (
-      !response.ok
-    ) { // eslint-disable-line curly
+    if (!response.ok) { // eslint-disable-line curly
       return ends.inFailureDueTo(new HTTP_Endpoint.Error.Response(response.statusText, response.status));
     }
 
