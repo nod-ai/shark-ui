@@ -79,6 +79,8 @@ flowchart TB
     - `./definition.declared(.withAugmentation)?.ts`
       OR
     - `./definition.assembled.ts`
+
+    NOTE: see [Definition Files](./definition-files.md) for more information
 - `/exports.object.auxiliaries.ts`:
   - States any objects or pure functions that compliment (but cannot be nested within) the primary object
 
