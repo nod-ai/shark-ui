@@ -78,8 +78,12 @@ flowchart TB
 - `/definition.declared.ts`:
   - Has the core declaration pertaining to the module's namesake
     - e.g. "User/" -> `User` class
+  - Should avoid side-effects.
 - `/definition.declared.augmentation.ts`:
   - Adds additional static members to the primary symbol by performing a [module augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
+  - Should only exist to augment `/definition.declared.ts`.
+    - May import `/definition.declared.ts` to access the symbol and augment it at runtime.
+  - Should not re-`export` the augmented symbol.
 - `/definition.declared.withAugmentation.ts`:
   - Combines the core logic and augmentations into a single symbol:
 
@@ -89,6 +93,7 @@ flowchart TB
     export * from './definition.declared.ts';
     ```
 
+  - Should only exist to re-`export` the augmented symbol.
 - `/definition.assembled.members.ts`:
   - A [barrel file](./barrel-files.md) that gives the peer modules an alias they can be nested under a common namespace.
 - `/definition.assembled.ts`:
