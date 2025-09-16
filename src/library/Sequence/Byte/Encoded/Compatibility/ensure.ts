@@ -19,10 +19,10 @@ const Sequence_Byte_Encoded_Compatibility_ensure = (
   const byteCofactor = Byte.cofactorTo(givenBitWidth);
 
   if (
-    givenSequence.length % byteCofactor !== 0
-  ) return ends.inFailureDueTo(new Sequence_Byte_Encoded_Compatibility_Error(givenBitWidth));
+    givenSequence.length % byteCofactor === 0
+  ) return ends.inSuccessWith(givenSequence);
 
-  return ends.inSuccessWith(givenSequence);
+  return ends.inFailureDueTo(new Sequence_Byte_Encoded_Compatibility_Error(givenBitWidth));
 });
 
 export {
