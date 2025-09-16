@@ -6,4 +6,10 @@
 
 ## Flow
 
+### Legend
+
 ## Handling Different Paradigms
+
+### For object-oriented modules
+
+### For functional modules
