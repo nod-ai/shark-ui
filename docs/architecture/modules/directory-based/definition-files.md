@@ -76,10 +76,27 @@ flowchart TB
 ### Legend
 
 - `/definition.declared.ts`:
+  - Has the core declaration pertaining to the module's namesake
+    - e.g. "User/" -> `User` class
 - `/definition.declared.augmentation.ts`:
+  - Adds additional static members to the primary symbol by performing a [module augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
 - `/definition.declared.withAugmentation.ts`:
+  - Combines the core logic and augmentations into a single symbol:
+
+    ```typescript
+    import './definition.declared.augmentation.ts';
+
+    export * from './definition.declared.ts';
+    ```
+
 - `/definition.assembled.members.ts`:
+  - A [barrel file](./barrel-files.md) that gives the peer modules an alias they can be nested under a common namespace.
 - `/definition.assembled.ts`:
+  - A [barrel file](./barrel-files.md) that assembles all the members into a pre-labeled namespace:
+
+    ```typescript
+    import * as SomeAssembledObject from './definition.assembled.members.ts';
+    ```
 
 ## Strategies
 
