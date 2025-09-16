@@ -6,7 +6,7 @@ import {
 } from './Error';
 
 const Sequence_Byte_Encoded_Compatibility_ensure = (
-  givenSequence: string,
+  givenCharacterSequence: string,
   {
     assuming: givenBitWidth,
   }: {
@@ -19,8 +19,8 @@ const Sequence_Byte_Encoded_Compatibility_ensure = (
   const byteCofactor = Byte.cofactorTo(givenBitWidth);
 
   if (
-    givenSequence.length % byteCofactor === 0
-  ) return ends.inSuccessWith(givenSequence);
+    givenCharacterSequence.length % byteCofactor === 0
+  ) return ends.inSuccessWith(givenCharacterSequence);
 
   const newCompatibilityError = new Sequence_Byte_Encoded_Compatibility_Error(givenBitWidth);
   return ends.inFailureDueTo(newCompatibilityError);
