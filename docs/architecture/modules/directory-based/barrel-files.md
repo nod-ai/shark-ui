@@ -61,8 +61,10 @@ flowchart TB
 
 - `/index.ts`:
   - Marks the entry point into the module for the bundler to resolve
+  - Should only re-`export` from `./exports.*.ts`
 - `/exports.*.ts`:
   - Curates what is exposed to external modules
+  - Should only re-`export` from peers (`./*`) within the module.
 
 ## Handling Different Paradigms
 
@@ -72,6 +74,10 @@ flowchart TB
   - **If at top level of a library**: determines which symbol should be designated `default`
 - `/exports.object.primary.ts`:
   - States whether the primary object for the module is "declared" or "assembled".
+  - Should only re-`export` from:
+    - `./definition.declared(.withAugmentation)?.ts`
+      OR
+    - `./definition.assembled.ts`
 - `/exports.object.auxiliaries.ts`:
   - States any objects or pure functions that compliment (but cannot be nested within) the primary object
 
