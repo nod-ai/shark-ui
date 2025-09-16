@@ -18,7 +18,8 @@ const Sequence_Base64_Conformance_ensure = (
     Sequence_Base64_pattern.test(givenCharacterSequence)
   ) return ends.inSuccessWith(givenCharacterSequence);
 
-  return ends.inFailureDueTo(new Sequence_Base64_Conformance_Error());
+  const newConformanceError = new Sequence_Base64_Conformance_Error();
+  return ends.inFailureDueTo(newConformanceError);
 });
 
 export {

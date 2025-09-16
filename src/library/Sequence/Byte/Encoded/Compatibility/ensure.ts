@@ -22,7 +22,8 @@ const Sequence_Byte_Encoded_Compatibility_ensure = (
     givenSequence.length % byteCofactor === 0
   ) return ends.inSuccessWith(givenSequence);
 
-  return ends.inFailureDueTo(new Sequence_Byte_Encoded_Compatibility_Error(givenBitWidth));
+  const newCompatibilityError = new Sequence_Byte_Encoded_Compatibility_Error(givenBitWidth);
+  return ends.inFailureDueTo(newCompatibilityError);
 });
 
 export {
