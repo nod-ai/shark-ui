@@ -105,6 +105,15 @@ flowchart TB
 
 ## Strategies
 
+There are two strategies for defining the core implementation of an object-oriented module:
+
+- "assembled": composed of multiple declarations that are brought together via member aliases and a namespace alias
+- "declared": requires a symbol declaration in TypeScript, can be implemented as:
+  - a `class` declaration
+  - a `function` declaration
+  - a `const` or `function` declaration
+  - an `interface` or `type` declaration
+
 ### Choosing a Strategy
 
 ### Switching Strategies
