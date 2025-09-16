@@ -244,3 +244,7 @@ By following these guidelines, contributors can:
 - support long-term maintainability
 
 > **Start simple.** Split only when complexity warrants it.
+
+## See Also
+
+- [barrel files](./directory-based/barrel-files.md)
