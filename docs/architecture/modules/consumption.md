@@ -105,3 +105,7 @@ Here, a level-2 member called `Attempt_Outcome` is imported by name into the `At
 - Both of these are internal modules that will be explicitly exposed as `Attempt.Outcome` and `Attempt.Fresh.that` to external consumers of the entire library.
 - Because of this, it's important for other internal consumers to acknowledge that these members are safe to expose to these external consumers (e.g. when used as parameter types or return types).
 - Ergo, `default` imports/exports are avoided to help peer consumers avoid inadvertent aliases that may obfuscate how a member will actually look to an external consumer.
+
+## See Also
+
+- [Selecting a Module Structure](./selecting-structure.md)
