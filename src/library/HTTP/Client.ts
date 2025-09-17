@@ -19,7 +19,8 @@ class HTTP_Client {
   public static contentIsJSONIn = (
     givenResponse: Response,
   ): boolean => {
-    const rawContentDescriptor = givenResponse.headers.get('Content-Type');
+    const HTTP_Header_Content_Descriptor = 'content-type';
+    const rawContentDescriptor = givenResponse.headers.get(HTTP_Header_Content_Descriptor);
 
     if (
       rawContentDescriptor === null

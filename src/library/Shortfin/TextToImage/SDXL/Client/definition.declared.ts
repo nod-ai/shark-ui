@@ -16,8 +16,10 @@ class Shortfin_TextToImage_SDXL_Client
   public constructor(
     givenOrigin: URLComponent.Origin,
   ) {
+    const HTTP_Header_Content_Descriptor = 'content-type';
+
     const defaultHeaders = {
-      'Content-Type': ContentDescriptor.json.serialized.toString(),
+      [HTTP_Header_Content_Descriptor]: ContentDescriptor.json.serialized.toString(),
     };
 
     super(
