@@ -9,7 +9,7 @@ class ShimmedStabilityAIClient_Version1
   private cachedClient?: ShimmedStabilityAIClient_Version1_Image;
 
   public get image(): ShimmedStabilityAIClient_Version1_Image {
-    this.cachedClient ??= new ShimmedStabilityAIClient_Version1_Image(this.origin, this.headers);
+    this.cachedClient ??= new ShimmedStabilityAIClient_Version1_Image(this.origin);
     return this.cachedClient;
   }
 }
