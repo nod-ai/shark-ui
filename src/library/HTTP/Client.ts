@@ -1,4 +1,5 @@
 import Attempt from '@/library/Attempt';
+import ContentDescriptor from '@/library/ContentDescriptor';
 import type URLComponent from '@/library/URLComponent';
 
 import {
@@ -24,7 +25,7 @@ class HTTP_Client {
       rawContentDescriptor === null
     ) return false;
 
-    const rawJSONDescriptor = 'application/json';
+    const rawJSONDescriptor = ContentDescriptor.json.serialized.toString();
     return rawContentDescriptor.includes(rawJSONDescriptor);
   };
 
