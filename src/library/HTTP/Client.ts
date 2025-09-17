@@ -24,7 +24,8 @@ class HTTP_Client {
       rawContentDescriptor === null
     ) return false;
 
-    return rawContentDescriptor.includes('application/json');
+    const rawJSONDescriptor = 'application/json';
+    return rawContentDescriptor.includes(rawJSONDescriptor);
   };
 
   public originAt(givenPath: URLComponent.Path): URL {
