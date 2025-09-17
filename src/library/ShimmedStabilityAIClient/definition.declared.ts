@@ -25,7 +25,7 @@ class ShimmedStabilityAIClient
   private cachedClient?: ShimmedStabilityAIClient_Version1;
 
   public get version1(): ShimmedStabilityAIClient_Version1 {
-    this.cachedClient ??= new ShimmedStabilityAIClient_Version1(this.origin, this.headers);
+    this.cachedClient ??= new ShimmedStabilityAIClient_Version1(this.origin);
     return this.cachedClient;
   }
 }
