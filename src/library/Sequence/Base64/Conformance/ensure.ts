@@ -8,10 +8,12 @@ import {
   Sequence_Base64_Conformance_Error,
 } from './Error';
 
-const Sequence_Base64_Conformance_ensure = (
-  givenCharacterSequence: string,
+const Sequence_Base64_Conformance_ensure = <
+  SomeCharacterSequence extends string,
+>(
+  givenCharacterSequence: SomeCharacterSequence,
 ): Attempt.Outcome<
-  string,
+  SomeCharacterSequence,
   Sequence_Base64_Conformance_Error
 > => Attempt.Fresh.that((ends) => {
   if (
