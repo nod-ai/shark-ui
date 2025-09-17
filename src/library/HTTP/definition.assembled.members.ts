@@ -1,4 +1,8 @@
 export {
+  HTTP_Header as Header,
+} from './Header';
+
+export {
   HTTP_Request as Request,
 } from './Request';
 
