@@ -23,7 +23,7 @@ class ShimmedStabilityAIClient_Version1_Image
       givenRequest.textToImageRequestBody,
     ]);
 
-    const textToImageSDXLShortfinClient = new Shortfin.TextToImage.SDXL.Client(this.origin, this.headers);
+    const textToImageSDXLShortfinClient = new Shortfin.TextToImage.SDXL.Client(this.origin);
 
     const outcomeOfGeneratingImage = await textToImageSDXLShortfinClient.generateImageFrom(derivedBatchedRequestBody);
     const generatedImage = outcomeOfGeneratingImage.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);

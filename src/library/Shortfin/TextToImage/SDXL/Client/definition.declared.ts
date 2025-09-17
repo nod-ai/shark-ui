@@ -12,6 +12,19 @@ import {
 
 class Shortfin_TextToImage_SDXL_Client
   extends HTTP.Client {
+  public constructor(
+    givenOrigin: URLComponent.Origin,
+  ) {
+    const defaultHeaders = {
+      'Content-Type': 'application/json',
+    };
+
+    super(
+      givenOrigin,
+      defaultHeaders,
+    );
+  }
+
   public generateImageFrom(
     givenBatchedRequestBody: Shortfin_TextToImage_SDXL_Client_Request.Body.Batched,
   ): Promise<
