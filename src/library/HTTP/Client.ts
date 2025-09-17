@@ -7,6 +7,10 @@ import {
 } from './Endpoint';
 
 import {
+  HTTP_Header,
+} from './Header';
+
+import {
   HTTP_Request,
 } from './Request';
 
@@ -19,8 +23,7 @@ class HTTP_Client {
   public static contentIsJSONIn = (
     givenResponse: Response,
   ): boolean => {
-    const HTTP_Header_Content_Descriptor = 'content-type';
-    const rawContentDescriptor = givenResponse.headers.get(HTTP_Header_Content_Descriptor);
+    const rawContentDescriptor = givenResponse.headers.get(HTTP_Header.Content.Descriptor);
 
     if (
       rawContentDescriptor === null
