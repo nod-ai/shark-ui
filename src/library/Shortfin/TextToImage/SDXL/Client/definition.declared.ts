@@ -1,4 +1,5 @@
 import Attempt from '@/library/Attempt';
+import ContentDescriptor from '@/library/ContentDescriptor';
 import HTTP from '@/library/HTTP';
 import URLComponent from '@/library/URLComponent';
 
@@ -16,7 +17,7 @@ class Shortfin_TextToImage_SDXL_Client
     givenOrigin: URLComponent.Origin,
   ) {
     const defaultHeaders = {
-      'Content-Type': 'application/json',
+      'Content-Type': ContentDescriptor.json.serialized.toString(),
     };
 
     super(
