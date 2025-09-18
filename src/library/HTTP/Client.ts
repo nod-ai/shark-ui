@@ -7,12 +7,12 @@ import {
 } from './Endpoint';
 
 import {
-  HTTP_Header,
-} from './Header';
-
-import {
   HTTP_Request,
 } from './Request';
+
+import {
+  bodyOf,
+} from './Response';
 
 class HTTP_Client {
   public constructor(
@@ -22,16 +22,7 @@ class HTTP_Client {
 
   public static contentIsJSONIn = (
     givenResponse: Response,
-  ): boolean => {
-    const rawContentDescriptor = givenResponse.headers.get(HTTP_Header.Content.Descriptor);
-
-    if (
-      rawContentDescriptor === null
-    ) return false;
-
-    const rawJSONDescriptor = ContentDescriptor.json.serialized.toString();
-    return rawContentDescriptor.includes(rawJSONDescriptor);
-  };
+  ): boolean => bodyOf(givenResponse).isSuggestedToBeDigestibleAs(ContentDescriptor.json);
 
   public originAt(givenPath: URLComponent.Path): URL {
     const serializedURLComponents = this.origin.appendedWith(givenPath);
