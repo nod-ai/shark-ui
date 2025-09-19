@@ -3,8 +3,8 @@ export {
 } from './Specification';
 
 export {
-  TextToImage_Server_Error_Connection as Connection,
-} from './Connection';
+  TextToImage_Server_Error_FailedToConnect as FailedToConnect,
+} from './FailedToConnect';
 
 export type {
   TextToImage_Server_Error_Any as Any,
