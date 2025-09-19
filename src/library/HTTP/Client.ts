@@ -72,8 +72,11 @@ class HTTP_Client {
       return ends.inFailureDueTo(newResponseError);
     }
 
-    const responseBody: unknown = await response.json();
-    return ends.inSuccessWith(responseBody);
+    const outcomeOfDigestingResponseBody = await bodyOf(response).digestAsUnknown();
+
+    return ends.inTermsOf(outcomeOfDigestingResponseBody, {
+      cause: $0 => new HTTP_Endpoint.Error.IndigestibleResponseBody(endpointURL, $0),
+    });
   });
 
   public async fetchResource(

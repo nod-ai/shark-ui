@@ -3,5 +3,5 @@ export {
 } from './StatusCode';
 
 export {
-  type HTTP_Response_Body as Body,
+  HTTP_Response_Body as Body,
 } from './Body';
