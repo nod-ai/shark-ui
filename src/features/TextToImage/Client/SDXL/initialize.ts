@@ -8,7 +8,7 @@ import {
 const TextToImage_Client_SDXL_initialize = async (): Promise<
   Attempt.Outcome<
     ShimmedStabilityAIClient,
-    TextToImage_Server.Error.Specification
+    TextToImage_Server.Error.MissingSpecification
   >
 > => {
   const outcomeOfRetrievingCurrentServer = await TextToImage_Server.Current.retrieve();

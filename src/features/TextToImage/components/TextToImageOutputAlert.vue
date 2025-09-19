@@ -11,7 +11,7 @@ defineProps<{
 
 <template>
   <TextToImageServerSpecificationAlert
-    v-if="(error instanceof TextToImage.Server.Error.Specification)"
+    v-if="(error instanceof TextToImage.Server.Error.MissingSpecification)"
     :error="error"
   />
   <TextToImageServerConnectionAlert
