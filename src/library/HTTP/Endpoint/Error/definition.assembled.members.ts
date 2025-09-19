@@ -3,8 +3,8 @@ export {
 } from './FailedToSendRequest';
 
 export {
-  HTTP_Endpoint_Error_Response as Response,
-} from './Response';
+  HTTP_Endpoint_Error_RespondedWithFailure as RespondedWithFailure,
+} from './RespondedWithFailure';
 
 export {
   HTTP_Endpoint_Error_IndigestibleResponseBody as IndigestibleResponseBody,
