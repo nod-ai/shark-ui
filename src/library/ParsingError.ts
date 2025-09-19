@@ -9,7 +9,9 @@ abstract class ParsingError<
     givenMessage: string,
     givenCause?: Error,
   ) {
-    super(givenMessage, givenCause);
+    super(givenMessage, {
+      cause: givenCause,
+    });
   }
 }
 
