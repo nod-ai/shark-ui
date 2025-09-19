@@ -63,7 +63,7 @@ class HTTP_Client {
           !clientFailedToReachServer
         ) return null;
 
-        return new HTTP_Endpoint.Error.Request(endpointURL);
+        return new HTTP_Endpoint.Error.FailedToSendRequest(endpointURL);
       },
     });
 

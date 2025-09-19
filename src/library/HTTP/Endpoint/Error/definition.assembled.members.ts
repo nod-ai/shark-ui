@@ -1,6 +1,6 @@
 export {
-  HTTP_Endpoint_Error_Request as Request,
-} from './Request';
+  HTTP_Endpoint_Error_FailedToSendRequest as FailedToSendRequest,
+} from './FailedToSendRequest';
 
 export {
   HTTP_Endpoint_Error_Response as Response,
