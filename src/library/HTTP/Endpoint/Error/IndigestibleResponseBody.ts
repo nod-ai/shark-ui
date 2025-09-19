@@ -10,7 +10,9 @@ class HTTP_Endpoint_Error_IndigestibleResponseBody
     public readonly endpoint: URL,
     givenCause: Error,
   ) {
-    super(`Could not digest body of response from "${endpoint.toString()}". ${givenCause.message}`);
+    super(`Could not digest body of response from "${endpoint.toString()}".`, {
+      cause: givenCause,
+    });
   }
 }
 
