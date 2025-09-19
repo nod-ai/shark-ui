@@ -8,10 +8,12 @@ class TextToImage_Config_Static_Reading_Error
   public override name = 'TextToImage_Config_Static_Reading_Error' as const;
 
   public constructor(
-    givenFile: URLComponent.Path,
-    givenResponse: Response,
+    public readonly filePath: URLComponent.Path,
+    givenCause: Error,
   ) {
-    super(`Failed to read config at "${givenFile.toString()}". Cause: "${givenResponse.statusText}"`);
+    super(`Failed to read config at "${filePath.toString()}".`, {
+      cause: givenCause,
+    });
   }
 }
 

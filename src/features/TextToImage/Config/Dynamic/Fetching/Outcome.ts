@@ -10,7 +10,7 @@ import type {
 
 type TextToImage_Config_Dynamic_Fetching_Outcome = Attempt.Outcome<
   TextToImage_Config,
-  TextToImage_Config_Dynamic_Fetching_Error.Any
+  TextToImage_Config_Dynamic_Fetching_Error
 >;
 
 export type {

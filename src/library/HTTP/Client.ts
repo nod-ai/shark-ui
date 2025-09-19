@@ -1,6 +1,6 @@
 import Attempt from '@/library/Attempt';
 import ContentDescriptor from '@/library/ContentDescriptor';
-import type URLComponent from '@/library/URLComponent';
+import URLComponent from '@/library/URLComponent';
 
 import {
   HTTP_Endpoint,
@@ -15,6 +15,12 @@ import {
 } from './Response';
 
 class HTTP_Client {
+  public static readonly local = (() => {
+    const outcomeOfParsingOrigin = URLComponent.Origin.parsedFrom(location.origin);
+    const parsedOrigin = outcomeOfParsingOrigin.forciblyUnwrap(/* the only way for the app to be browser-accessible is to have a parsable origin */);
+    return new HTTP_Client(parsedOrigin);
+  })();
+
   public constructor(
     public readonly origin: URLComponent.Origin,
     public readonly headers?: HTTP_Request.HeaderMap,
