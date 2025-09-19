@@ -1,11 +1,11 @@
 import Attempt from '@/library/Attempt';
 import type URLComponent from '@/library/URLComponent';
 
-class TextToImage_Server_Error_Specification
+class TextToImage_Server_Error_MissingSpecification
   extends Attempt.Error.Actionable<
-    'TextToImage_Server_Error_Specification'
+    'TextToImage_Server_Error_MissingSpecification'
   > {
-  public override name = 'TextToImage_Server_Error_Specification' as const;
+  public override name = 'TextToImage_Server_Error_MissingSpecification' as const;
 
   public constructor(
     public readonly environmentKey: string,
@@ -17,5 +17,5 @@ class TextToImage_Server_Error_Specification
 }
 
 export {
-  TextToImage_Server_Error_Specification,
+  TextToImage_Server_Error_MissingSpecification,
 };

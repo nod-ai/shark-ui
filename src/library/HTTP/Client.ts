@@ -63,7 +63,7 @@ class HTTP_Client {
           !clientFailedToReachServer
         ) return null;
 
-        return new HTTP_Endpoint.Error.Request(endpointURL);
+        return new HTTP_Endpoint.Error.FailedToSendRequest(endpointURL);
       },
     });
 
@@ -74,7 +74,7 @@ class HTTP_Client {
     const response = outcomeOfSettlingResponse.unwrapped;
 
     if (!response.ok) {
-      const newResponseError = new HTTP_Endpoint.Error.Response(response.statusText, response.status);
+      const newResponseError = new HTTP_Endpoint.Error.RespondedWithFailure(response.statusText, response.status);
       return ends.inFailureDueTo(newResponseError);
     }
 

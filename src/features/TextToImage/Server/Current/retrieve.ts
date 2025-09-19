@@ -20,7 +20,7 @@ import {
 const TextToImage_Server_Current_retrieve = (): Promise<
   Attempt.Outcome<
     WebAPI.Server,
-    TextToImage_Server_Error.Specification
+    TextToImage_Server_Error.MissingSpecification
   >
 > => Attempt.Fresh.thatEventually(async (ends) => {
   if (
@@ -39,7 +39,7 @@ const TextToImage_Server_Current_retrieve = (): Promise<
     dynamicConfig.server !== null
   ) return ends.inSuccessWith(dynamicConfig.server);
 
-  const newSpecificationError = new TextToImage_Server_Error.Specification(
+  const newSpecificationError = new TextToImage_Server_Error.MissingSpecification(
     TextToImage_Server_Origin.environmentKey,
     TextToImage_Config.Static.file,
     TextToImage_Config.Dynamic.endpoint,

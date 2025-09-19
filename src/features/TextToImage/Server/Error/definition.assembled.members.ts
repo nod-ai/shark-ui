@@ -1,10 +1,10 @@
 export {
-  TextToImage_Server_Error_Specification as Specification,
-} from './Specification';
+  TextToImage_Server_Error_MissingSpecification as MissingSpecification,
+} from './MissingSpecification';
 
 export {
-  TextToImage_Server_Error_Connection as Connection,
-} from './Connection';
+  TextToImage_Server_Error_FailedToConnect as FailedToConnect,
+} from './FailedToConnect';
 
 export type {
   TextToImage_Server_Error_Any as Any,

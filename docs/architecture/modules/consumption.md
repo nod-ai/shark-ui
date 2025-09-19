@@ -23,7 +23,7 @@ import HTTP from '@/library/HTTP';
 
 // HTTP.Request
 // HTTP.Response
-// HTTP.Endpoint.Error.Request
+// HTTP.Endpoint.Error.FailedToSendRequest
 // HTTP.Client.send(...)
 ```
 

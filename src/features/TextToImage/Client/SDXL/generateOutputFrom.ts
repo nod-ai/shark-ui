@@ -58,10 +58,10 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
   const outcomeOfSettlingTextToImageResponse = await Attempt.Adapted.toSettle(promisedTextToImageResponse, {
     interpretationOf: (caughtError) => {
       if (
-        !(caughtError instanceof HTTP.Endpoint.Error.Request)
+        !(caughtError instanceof HTTP.Endpoint.Error.FailedToSendRequest)
       ) return null;
 
-      return new TextToImage_Server.Error.Connection(caughtError.endpoint);
+      return new TextToImage_Server.Error.FailedToConnect(caughtError.endpoint);
     },
   });
 
