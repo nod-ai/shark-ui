@@ -36,6 +36,9 @@ const vitestConfig = mergeConfig(
           'src/**/definition.declared.withAugmentation.ts', // barrel files as object augmenters
           'src/**/external.ts', // facades for external libraries
         ],
+        reporter: [
+          'json-summary', // "json" to make it machine readable, "summary" for a schema that's easier to parse
+        ],
       },
     },
   }),
