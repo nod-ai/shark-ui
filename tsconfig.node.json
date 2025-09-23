@@ -1,14 +1,10 @@
 {
   "extends": "@tsconfig/node22/tsconfig.json",
   "include": [
-    "vite.config.*",
-    "vitest.config.*",
-    "cypress.config.*",
-    "playwright.config.*",
+    "*.config.*",
     "eslint.*",
     "cypress/eslint.config.*",
     "cypress/package.d.ts",
-    "lint-staged.config.*"
   ],
   "compilerOptions": {
     "noEmit": true,
