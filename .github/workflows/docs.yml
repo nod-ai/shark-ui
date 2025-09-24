@@ -30,7 +30,11 @@ jobs:
           config: .markdownlint-cli2.yaml
           globs: >-
             ${{
-              steps.changed-files.outputs.all_changed_files
+              (
+                'true'
+              )
+              && '**/*.md'
+              || steps.changed-files.outputs.all_changed_files
             }}
           separator: ','
         continue-on-error: true
