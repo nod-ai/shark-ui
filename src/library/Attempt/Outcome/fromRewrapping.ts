@@ -36,7 +36,7 @@ function Attempt_Outcome_fromRewrapping<
     SomeTransformedActionableError
   >,
 ): Attempt_Outcome_Failure<SomeTransformedActionableError>;
-//
+
 function Attempt_Outcome_fromRewrapping<
   SomeTransformableProduct,
   SomeTransformedProduct = SomeTransformableProduct,
@@ -47,7 +47,7 @@ function Attempt_Outcome_fromRewrapping<
     SomeTransformedProduct
   >,
 ): Attempt_Outcome_Success<SomeTransformedProduct>;
-//
+
 function Attempt_Outcome_fromRewrapping<
   SomeTransformableProduct,
   SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
@@ -68,7 +68,7 @@ function Attempt_Outcome_fromRewrapping<
   SomeTransformedProduct,
   SomeTransformedActionableError
 >;
-//
+
 function Attempt_Outcome_fromRewrapping<
   SomeTransformableProduct,
   SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
