@@ -58,6 +58,10 @@ const extraConfig: ConfigWithExtends = {
         },
       },
     ],
+    '@stylistic/padded-blocks': [
+      'error',
+      'never', // Reduces noise in diffs
+    ],
     '@stylistic/padding-line-between-statements': [
       'error',
       {
