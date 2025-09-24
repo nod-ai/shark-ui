@@ -19,7 +19,8 @@ jobs:
         uses: tj-actions/changed-files@v46
         id: changed-files
         with:
-          files: '**/*.md'
+          files: |
+            **/*.md
           separator: ','
       - name: Lint the updated Markdown files
         id: lint-markdown-files
