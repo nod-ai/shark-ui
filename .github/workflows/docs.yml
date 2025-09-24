@@ -20,6 +20,7 @@ jobs:
         id: changed-files
         with:
           files: |
+            .github/workflows/docs.yml
             **/*.md
           separator: ','
       - name: Lint the updated Markdown files
@@ -31,7 +32,7 @@ jobs:
           globs: >-
             ${{
               (
-                'true'
+                contains(steps.changed-files.outputs.all_changed_files, '.github/workflows/docs.yml')
               )
               && '**/*.md'
               || steps.changed-files.outputs.all_changed_files
