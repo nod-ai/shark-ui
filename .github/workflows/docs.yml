@@ -28,7 +28,10 @@ jobs:
         if: steps.changed-files.outputs.any_changed == 'true'
         with:
           config: .markdownlint-cli2.yaml
-          globs: ${{ steps.changed-files.outputs.all_changed_files }}
+          globs: >-
+            ${{
+              steps.changed-files.outputs.all_changed_files
+            }}
           separator: ','
         continue-on-error: true
       - name: If linter failed, highlight debug tools
