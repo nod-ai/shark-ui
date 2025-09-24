@@ -69,6 +69,28 @@ const extraConfig: ConfigWithExtends = {
         prev     : 'export',
         next     : 'export',
       },
+      {
+        blankLine: 'always', // reduces noise in diffs
+        prev     : '*',
+        next     : [
+          'block-like',
+          'class',
+          'function-overload',
+          'if', // for guard clauses
+          'multiline-expression', // i.e. const assignment from return value of multiline function call
+        ],
+      },
+      {
+        blankLine: 'always', // reduces noise in diffs
+        prev     : [
+          'block-like',
+          'class',
+          'function-overload',
+          'if', // for guard clauses
+          'multiline-expression', // i.e. const assignment from return value of multiline function call
+        ],
+        next: '*',
+      },
     ],
   },
 };
