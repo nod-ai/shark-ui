@@ -1,5 +1,6 @@
-import type {
-  Path,
+import {
+  FileSystem,
+  type Path,
 } from '@effect/platform';
 
 import {
@@ -102,6 +103,37 @@ class TestCompanion
     yield* Effect.try(() => currentProject.saveSync());
 
     return testCompanionSource;
+  });
+
+  public readonly doesExist: Effect.Effect<
+    boolean,
+    Error,
+    | Path.Path
+    | FileSystem.FileSystem
+  > = Effect.gen(this, function* () {
+    const /*     */ pathToTestCompanion = yield* this.path;
+    const serializedPathToTestCompanion = yield* pathToTestCompanion.serialized;
+    const ProvidedFileSystem = yield* FileSystem.FileSystem;
+    return yield* ProvidedFileSystem.exists(serializedPathToTestCompanion);
+  });
+
+  public static doesExistFor = (
+    givenUnit: TypeScript.File,
+  ): Effect.Effect<
+    boolean,
+    Error,
+    | Path.Path
+    | FileSystem.FileSystem
+  > => Effect.gen(this, function* () {
+    if (
+      !(yield* givenUnit.doesExist)
+    ) return yield* Effect.fail(new Error(`Unit does not exist at ${yield* givenUnit.path.serialized}`));
+
+    const expectedTestCompanion = new TestCompanion({
+      unit: givenUnit,
+    });
+
+    return yield* expectedTestCompanion.doesExist;
   });
 }
 
