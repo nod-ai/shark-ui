@@ -77,7 +77,7 @@ const extraConfig: ConfigWithExtends = {
           'class',
           'function-overload',
           'if', // for guard clauses
-          'multiline-expression', // i.e. const assignment from return value of multiline function call
+          'multiline-expression', // i.e. for multiline function calls
         ],
       },
       {
@@ -87,7 +87,7 @@ const extraConfig: ConfigWithExtends = {
           'class',
           'function-overload',
           'if', // for guard clauses
-          'multiline-expression', // i.e. const assignment from return value of multiline function call
+          'multiline-expression', // i.e. for multiline function calls
         ],
         next: '*',
       },
