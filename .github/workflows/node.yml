@@ -82,3 +82,13 @@ jobs:
         run: |
           echo "::notice::Run \`npm run test:unit\` in your dev environment for a detailed report about failed unit tests"
           exit 1
+      - name: Ensure all units are covered
+        if: steps.changed-files.outputs.any_changed == 'true'
+        id: test_unit_missing
+        run: npm run test:unit:ensure-all
+        continue-on-error: true
+      - name: If there are missing unit tests, highlight debug tools
+        if: steps.test_unit_missing.outcome == 'failure'
+        run: |
+          echo "::notice::Run \`npm run test:unit -- run && npm run test:unit:ensure-all\` in your dev environment to see which units are missing a test companion"
+          exit 1
