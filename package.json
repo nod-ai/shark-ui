@@ -14,6 +14,7 @@
     "build-only": "vite build",
     "preview": "vite preview",
     "test:unit": "vitest",
+    "test:unit:ensure-all": "jiti vitest/test-companion-cli ensure-none-are-missing",
     "test:unit:generate-missing": "jiti vitest/test-companion-cli generate-missing",
     "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'"
