@@ -3,6 +3,10 @@ import {
 } from '@effect/cli';
 
 import {
+  TestCompanionCLI_ensureNoneAreMissing,
+} from './ensure-none-are-missing';
+
+import {
   TestCompanionCLI_generateForUnit,
 } from './generate-for-unit';
 
@@ -17,6 +21,7 @@ const TestCompanionCLI = Command.make(
   Command.withSubcommands([
     TestCompanionCLI_generateForUnit,
     TestCompanionCLI_generateMissing,
+    TestCompanionCLI_ensureNoneAreMissing,
   ]),
   Command.run({
     name   : 'Test Companion CLI',
