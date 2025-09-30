@@ -46,7 +46,7 @@
     "husky": "^9.1.7",
     "jiti": "^2.6.0",
     "jsdom": "^27.0.0",
-    "lint-staged": "^16.2.1",
+    "lint-staged": "^16.2.3",
     "markdownlint-cli2": "^0.18.1",
     "npm-run-all2": "^8.0.4",
     "start-server-and-test": "^2.1.2",
