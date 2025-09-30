@@ -30,7 +30,6 @@ jobs:
         if: |
           contains(
             fromJSON('[
-              "vue-tsc"
             ]'),
             steps.metadata.outputs.dependency-names
           )
@@ -52,7 +51,8 @@ jobs:
               "typescript-eslint",
               "typescript",
               "vite",
-              "vite-plugin-vue-devtools"
+              "vite-plugin-vue-devtools",
+              "vue-tsc"
             ]'),
             steps.metadata.outputs.dependency-names
           )
