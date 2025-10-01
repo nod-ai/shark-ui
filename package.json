@@ -44,7 +44,7 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-vue": "^10.5.0",
     "husky": "^9.1.7",
-    "jiti": "^2.6.0",
+    "jiti": "^2.6.1",
     "jsdom": "^27.0.0",
     "lint-staged": "^16.2.3",
     "markdownlint-cli2": "^0.18.1",
