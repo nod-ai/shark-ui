@@ -1,8 +1,12 @@
+import {
+  ParseResult,
+  Schema,
+} from 'effect';
+
 import Attempt from '@/library/Attempt';
 import Base64 from '@/library/Base64';
 import Byte from '@/library/Byte';
 import type Parsable from '@/library/Parsable';
-import Schema from '@/library/Schema';
 import StringSubset from '@/library/StringSubset';
 
 import {
@@ -82,21 +86,29 @@ class Sequence_Byte_Encoded_Base64
     return outcomeOfParsingByteSequence;
   };
 
-  /** An alternative to `Schema.base64()` that avoids using the deprecated `atob` conversion under the hood */
-  public static Schema = Schema.string().transform((someSubject, currentContext) => {
-    const outcomeOfParsingSubject = this.parsedFrom(someSubject);
+  public static Schema = Schema.transformOrFail(
+    Schema.String,
+    Schema.instanceOf(Sequence_Byte_Encoded_Base64),
+    {
+      strict: true,
+      decode: (input, options, ast) => {
+        const outcomeOfParsingInput = this.parsedFrom(input);
 
-    if (
-      outcomeOfParsingSubject.isSuccess
-    ) return outcomeOfParsingSubject.unwrapped;
+        if (
+          outcomeOfParsingInput.isSuccess
+        ) return ParseResult.succeed(outcomeOfParsingInput.unwrapped);
 
-    currentContext.addIssue({
-      code   : 'custom',
-      message: outcomeOfParsingSubject.cause.message,
-    });
+        const newParsingIssue = new ParseResult.Type(
+          ast,
+          input,
+          outcomeOfParsingInput.cause.message,
+        );
 
-    return Schema.NEVER;
-  });
+        return ParseResult.fail(newParsingIssue);
+      },
+      encode: $0 => ParseResult.succeed($0.toString()),
+    },
+  );
 }
 
 export {

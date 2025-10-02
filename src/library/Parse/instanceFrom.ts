@@ -1,9 +1,14 @@
+import {
+  Either,
+  Schema,
+} from 'effect';
+
 import Attempt from '@/library/Attempt';
 import type ParsingError from '@/library/ParsingError';
-import type Schema from '@/library/Schema';
 
 const Parse_instanceFrom = <
-  SomeSchema extends Schema.ZodType,
+  SomeDecodingOutput,
+  SomeEncodingOutput,
   SomeParsingError extends ParsingError<string>,
 >(
   givenSubject: unknown,
@@ -11,20 +16,20 @@ const Parse_instanceFrom = <
     using: givenSchema,
     failingWith: GivenParsingError,
   }: {
-    using: SomeSchema;
+    using: Schema.Schema<SomeDecodingOutput, SomeEncodingOutput>;
     failingWith: new (message: string) => SomeParsingError;
   },
 ): Attempt.Outcome<
-  Schema.infer<SomeSchema>,
+  typeof givenSchema.Type,
   SomeParsingError
 > => Attempt.Fresh.that((ends) => {
-  const resultOfParsingSubject = givenSchema.safeParse(givenSubject);
+  const resultOfDecodingSubject = Schema.decodeUnknownEither(givenSchema)(givenSubject);
 
   if (
-    resultOfParsingSubject.success
-  ) return ends.inSuccessWith(resultOfParsingSubject.data);
+    Either.isRight(resultOfDecodingSubject)
+  ) return ends.inSuccessWith(resultOfDecodingSubject.right);
 
-  const newParsingError = new GivenParsingError(resultOfParsingSubject.error.message);
+  const newParsingError = new GivenParsingError(resultOfDecodingSubject.left.message);
   return ends.inFailureDueTo(newParsingError);
 });
 
