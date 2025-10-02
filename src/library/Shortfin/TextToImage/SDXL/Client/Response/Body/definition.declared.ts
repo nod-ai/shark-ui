@@ -5,7 +5,6 @@ import {
 import type Attempt from '@/library/Attempt';
 import type Parsable from '@/library/Parsable';
 import Parse from '@/library/Parse';
-import Schema_old from '@/library/Schema';
 import Sequence from '@/library/Sequence';
 
 import {
@@ -20,18 +19,6 @@ class Shortfin_TextToImage_SDXL_Client_Response_Body
     typeof Shortfin_TextToImage_SDXL_Client_Response_Body,
     /*  */ Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError
   > {
-  private static Schema_old = Schema_old
-    .object({
-      images: Schema_old
-        .tuple([
-          Sequence.Byte.Encoded.Base64.Schema_old,
-        ])
-        .rest(
-          Sequence.Byte.Encoded.Base64.Schema_old,
-        ),
-    })
-    .transform($0 => new Shortfin_TextToImage_SDXL_Client_Response_Body($0));
-
   public static parsedFrom(
     givenSubject: unknown,
   ): Attempt.Outcome<

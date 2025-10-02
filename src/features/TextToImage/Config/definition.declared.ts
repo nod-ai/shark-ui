@@ -5,7 +5,6 @@ import {
 import type Attempt from '@/library/Attempt';
 import type Parsable from '@/library/Parsable';
 import Parse from '@/library/Parse';
-import Schema_old from '@/library/Schema';
 import WebAPI from '@/library/WebAPI';
 
 import {
@@ -22,14 +21,6 @@ class TextToImage_Config
     typeof TextToImage_Config,
     /*  */ TextToImage_Config_ParsingError
   > {
-  private static Schema_old = Schema_old
-    .object({
-      server: WebAPI.Server.Schema_old
-        .nullable()
-        .catch(null),
-    })
-    .transform($0 => new TextToImage_Config($0));
-
   public static parsedFrom(
     givenSubject: unknown,
   ): Attempt.Outcome<

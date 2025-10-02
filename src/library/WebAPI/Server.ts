@@ -2,8 +2,6 @@ import {
   Schema,
 } from 'effect';
 
-import Schema_old from '@/library/Schema';
-
 /**
  * The machine conforming to some web API that:
  * - listens for requests
@@ -24,12 +22,6 @@ class WebAPI_Server
 
     return clonedServer;
   }
-
-  public static Schema_old = Schema_old
-    .object({
-      origin: Schema_old.string(),
-    })
-    .transform($0 => WebAPI_Server.from($0));
 }
 
 export {
