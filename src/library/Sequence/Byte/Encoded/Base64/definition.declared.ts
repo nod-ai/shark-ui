@@ -1,3 +1,8 @@
+import {
+  ParseResult,
+  Schema,
+} from 'effect';
+
 import Attempt from '@/library/Attempt';
 import Base64 from '@/library/Base64';
 import Byte from '@/library/Byte';
@@ -81,6 +86,30 @@ class Sequence_Byte_Encoded_Base64
 
     return outcomeOfParsingByteSequence;
   };
+
+  public static Schema = Schema.transformOrFail(
+    Schema.String,
+    Schema.instanceOf(Sequence_Byte_Encoded_Base64),
+    {
+      strict: true,
+      decode: (input, options, ast) => {
+        const outcomeOfParsingInput = this.parsedFrom(input);
+
+        if (
+          outcomeOfParsingInput.isSuccess
+        ) return ParseResult.succeed(outcomeOfParsingInput.unwrapped);
+
+        const newParsingIssue = new ParseResult.Type(
+          ast,
+          input,
+          outcomeOfParsingInput.cause.message,
+        );
+
+        return ParseResult.fail(newParsingIssue);
+      },
+      encode: $0 => ParseResult.succeed($0.toString()),
+    },
+  );
 
   /** An alternative to `Schema.base64()` that avoids using the deprecated `atob` conversion under the hood */
   public static Schema_old = Schema_old.string().transform((someSubject, currentContext) => {
