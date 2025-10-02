@@ -1,4 +1,4 @@
-import Schema from '@/library/Schema';
+import Schema_old from '@/library/Schema';
 
 /**
  * The machine conforming to some web API that:
@@ -22,9 +22,9 @@ class WebAPI_Server {
     return clonedServer;
   }
 
-  public static Schema = Schema
+  public static Schema_old = Schema_old
     .object({
-      origin: Schema.string(),
+      origin: Schema_old.string(),
     })
     .transform($0 => WebAPI_Server.from($0));
 }

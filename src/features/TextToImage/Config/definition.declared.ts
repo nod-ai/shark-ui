@@ -1,7 +1,7 @@
 import type Attempt from '@/library/Attempt';
 import type Parsable from '@/library/Parsable';
 import Parse from '@/library/Parse';
-import Schema from '@/library/Schema';
+import Schema_old from '@/library/Schema';
 import WebAPI from '@/library/WebAPI';
 
 import {
@@ -19,9 +19,9 @@ implements Parsable<
     public readonly server: WebAPI.Server | null,
   ) {}
 
-  private static Schema = Schema
+  private static Schema_old = Schema_old
     .object({
-      server: WebAPI.Server.Schema
+      server: WebAPI.Server.Schema_old
         .nullable()
         .catch(null),
     })
@@ -36,7 +36,7 @@ implements Parsable<
     TextToImage_Config_ParsingError
   > {
     const parsedConfig = Parse.instanceFrom(givenSubject, {
-      using      : this.Schema,
+      using      : this.Schema_old,
       failingWith: TextToImage_Config_ParsingError,
     });
 

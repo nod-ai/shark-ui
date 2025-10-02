@@ -1,9 +1,9 @@
 import Attempt from '@/library/Attempt';
 import type ParsingError from '@/library/ParsingError';
-import type Schema from '@/library/Schema';
+import type Schema_old from '@/library/Schema';
 
 const Parse_instanceFrom = <
-  SomeSchema extends Schema.ZodType,
+  SomeSchema extends Schema_old.ZodType,
   SomeParsingError extends ParsingError<string>,
 >(
   givenSubject: unknown,
@@ -15,7 +15,7 @@ const Parse_instanceFrom = <
     failingWith: new (message: string) => SomeParsingError;
   },
 ): Attempt.Outcome<
-  Schema.infer<SomeSchema>,
+  Schema_old.infer<SomeSchema>,
   SomeParsingError
 > => Attempt.Fresh.that((ends) => {
   const resultOfParsingSubject = givenSchema.safeParse(givenSubject);

@@ -1,7 +1,7 @@
 import type Attempt from '@/library/Attempt';
 import type Parsable from '@/library/Parsable';
 import Parse from '@/library/Parse';
-import Schema from '@/library/Schema';
+import Schema_old from '@/library/Schema';
 import Sequence from '@/library/Sequence';
 
 import {
@@ -20,14 +20,14 @@ implements Parsable<
     ],
   ) {}
 
-  private static Schema = Schema
+  private static Schema_old = Schema_old
     .object({
-      images: Schema
+      images: Schema_old
         .tuple([
-          Sequence.Byte.Encoded.Base64.Schema,
+          Sequence.Byte.Encoded.Base64.Schema_old,
         ])
         .rest(
-          Sequence.Byte.Encoded.Base64.Schema,
+          Sequence.Byte.Encoded.Base64.Schema_old,
         ),
     })
     .transform($0 => new Shortfin_TextToImage_SDXL_Client_Response_Body(
@@ -41,7 +41,7 @@ implements Parsable<
     Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError
   > {
     const parsedBody = Parse.instanceFrom(givenSubject, {
-      using      : this.Schema,
+      using      : this.Schema_old,
       failingWith: Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError,
     });
 
