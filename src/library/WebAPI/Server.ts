@@ -14,15 +14,7 @@ class WebAPI_Server
      * For example: https://api.example.com
      */
     origin: Schema.String,
-  }) {
-  public static from(given: WebAPI_Server): WebAPI_Server {
-    const clonedServer = new WebAPI_Server(
-      given,
-    );
-
-    return clonedServer;
-  }
-}
+  }) {}
 
 export {
   WebAPI_Server,

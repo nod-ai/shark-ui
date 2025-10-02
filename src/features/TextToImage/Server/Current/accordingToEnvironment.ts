@@ -11,7 +11,7 @@ const TextToImage_Server_Current_accordingToEnvironment = ((): WebAPI.Server | n
     originAccordingToEnvironment === undefined
   ) return null;
 
-  const serverAccordingToEnvironment = WebAPI.Server.from({
+  const serverAccordingToEnvironment = new WebAPI.Server({
     origin: originAccordingToEnvironment,
   });
 
