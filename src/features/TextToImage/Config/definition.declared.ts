@@ -37,7 +37,7 @@ class TextToImage_Config
     TextToImage_Config_ParsingError
   > {
     const parsedConfig = Parse.instanceFrom(givenSubject, {
-      using      : this.Schema_old,
+      using      : this,
       failingWith: TextToImage_Config_ParsingError,
     });
 

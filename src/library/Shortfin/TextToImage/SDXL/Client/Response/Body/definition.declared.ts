@@ -39,7 +39,7 @@ class Shortfin_TextToImage_SDXL_Client_Response_Body
     Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError
   > {
     const parsedBody = Parse.instanceFrom(givenSubject, {
-      using      : this.Schema_old,
+      using      : this,
       failingWith: Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError,
     });
 
