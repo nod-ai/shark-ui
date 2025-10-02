@@ -1,3 +1,7 @@
+import {
+  Schema,
+} from 'effect';
+
 import type Attempt from '@/library/Attempt';
 import type Parsable from '@/library/Parsable';
 import Parse from '@/library/Parse';
@@ -10,24 +14,21 @@ import {
 
 /** The user-provided settings for the text-to-image feature */
 class TextToImage_Config
-implements Parsable<
-  typeof TextToImage_Config,
-  /*  */ TextToImage_Config_ParsingError
-> {
-  public constructor(
+  extends Schema.Class<TextToImage_Config>('TextToImage_Config')({
     /** The details of the server that's providing text-to-image generation */
-    public readonly server: WebAPI.Server | null,
-  ) {}
-
+    server: Schema.NullOr(WebAPI.Server),
+  })
+  implements Parsable<
+    typeof TextToImage_Config,
+    /*  */ TextToImage_Config_ParsingError
+  > {
   private static Schema_old = Schema_old
     .object({
       server: WebAPI.Server.Schema_old
         .nullable()
         .catch(null),
     })
-    .transform($0 => new TextToImage_Config(
-      $0.server,
-    ));
+    .transform($0 => new TextToImage_Config($0));
 
   public static parsedFrom(
     givenSubject: unknown,
