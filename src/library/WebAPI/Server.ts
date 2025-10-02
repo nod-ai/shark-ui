@@ -1,3 +1,7 @@
+import {
+  Schema,
+} from 'effect';
+
 import Schema_old from '@/library/Schema';
 
 /**
@@ -5,18 +9,17 @@ import Schema_old from '@/library/Schema';
  * - listens for requests
  * - responds to those requests
  */
-class WebAPI_Server {
-  public constructor(
+class WebAPI_Server
+  extends Schema.Class<WebAPI_Server>('WebAPI_Server')({
     /**
      * The web location of the server, which is the base URL of the API.
      * For example: https://api.example.com
      */
-    public readonly origin: string,
-  ) {}
-
+    origin: Schema.String,
+  }) {
   public static from(given: WebAPI_Server): WebAPI_Server {
     const clonedServer = new WebAPI_Server(
-      given.origin,
+      given,
     );
 
     return clonedServer;
