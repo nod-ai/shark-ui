@@ -1,3 +1,7 @@
+import {
+  Schema,
+} from 'effect';
+
 import type Attempt from '@/library/Attempt';
 import type Parsable from '@/library/Parsable';
 import Parse from '@/library/Parse';
@@ -9,17 +13,13 @@ import {
 } from './ParsingError';
 
 class Shortfin_TextToImage_SDXL_Client_Response_Body
-implements Parsable<
-  typeof Shortfin_TextToImage_SDXL_Client_Response_Body,
-  /*  */ Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError
-> {
-  public constructor(
-    public images: [
-      Sequence.Byte.Encoded.Base64,
-      ...Sequence.Byte.Encoded.Base64[],
-    ],
-  ) {}
-
+  extends Schema.Class<Shortfin_TextToImage_SDXL_Client_Response_Body>('Shortfin_TextToImage_SDXL_Client_Response_Body')({
+    images: Schema.NonEmptyArray(Sequence.Byte.Encoded.Base64.Schema),
+  })
+  implements Parsable<
+    typeof Shortfin_TextToImage_SDXL_Client_Response_Body,
+    /*  */ Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError
+  > {
   private static Schema_old = Schema_old
     .object({
       images: Schema_old
@@ -30,9 +30,7 @@ implements Parsable<
           Sequence.Byte.Encoded.Base64.Schema_old,
         ),
     })
-    .transform($0 => new Shortfin_TextToImage_SDXL_Client_Response_Body(
-      $0.images,
-    ));
+    .transform($0 => new Shortfin_TextToImage_SDXL_Client_Response_Body($0));
 
   public static parsedFrom(
     givenSubject: unknown,
