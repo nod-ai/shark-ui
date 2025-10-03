@@ -9,7 +9,8 @@ import {
 class URLComponent_Path
   extends StringSubset<
     'URLComponent_Path'
-  > implements Parsable.String<
+  >
+  implements Parsable.String<
     typeof URLComponent_Path,
     /*  */ URLComponent_Path_ParsingError
   > {
