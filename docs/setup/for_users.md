@@ -23,9 +23,7 @@ Now, specify the existing Shortfin text-to-image server so the SHARK UI knows wh
         ```json
         {
             ...
-            "server": {
-                "origin": null
-            }
+            "server": null
             ...
         }
         ```
