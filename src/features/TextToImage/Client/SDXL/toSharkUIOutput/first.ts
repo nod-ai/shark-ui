@@ -3,13 +3,13 @@ import {
   Option,
 } from 'effect';
 
+import {
+  isNonEmptyArray,
+} from 'effect/Array';
+
 import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
-
-import {
-  hasAtLeastOne,
-} from '@/library/utilitiesByType/array';
 
 import type {
   TextToImage_Pipeline,
@@ -39,7 +39,7 @@ const toSharkUIOutput_first = (
   );
 
   if (
-    !hasAtLeastOne(inferredOutputs)
+    !isNonEmptyArray(inferredOutputs)
   ) return Effect.dieMessage('Expected at least one text-to-image output in response').pipe(Effect.runSync);
 
   const [firstPotentialOutput] = inferredOutputs;
