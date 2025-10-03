@@ -12,7 +12,8 @@ import type {
 
 interface Attempt_Outcome_Failure<
   SomeActionableError extends Attempt_Error.Actionable<string>,
-> extends Attempt_Outcome_Failure_SemanticallySugarfree<
+>
+  extends Attempt_Outcome_Failure_SemanticallySugarfree<
     SomeActionableError
   > {
   /**

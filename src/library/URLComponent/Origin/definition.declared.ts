@@ -9,7 +9,8 @@ import {
 class URLComponent_Origin
   extends StringSubset<
     'URLComponent_Origin'
-  > implements Parsable.String<
+  >
+  implements Parsable.String<
     typeof URLComponent_Origin,
     /*  */ URLComponent_Origin_ParsingError
   > {

@@ -12,7 +12,8 @@ import type {
 
 interface Attempt_Outcome_Success<
   SomeProduct,
-> extends Attempt_Outcome_Success_SemanticallySugarfree<
+>
+  extends Attempt_Outcome_Success_SemanticallySugarfree<
     SomeProduct
   > {
   /**

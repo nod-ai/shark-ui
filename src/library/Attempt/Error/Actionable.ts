@@ -22,7 +22,8 @@ import {
 /** Extend this class to describe errors from which callers ought to recover */
 abstract class Attempt_Error_Actionable<
   SomeBrand extends string,
-> extends Error
+>
+  extends Error
   implements Branded<
     SomeBrand
   > {

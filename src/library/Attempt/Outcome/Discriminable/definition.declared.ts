@@ -23,7 +23,8 @@ interface Attempt_Outcome_Discriminable<
       ? unknown
       : Attempt_Error.Actionable<string>
   ),
-> extends Attempt_Outcome_Discriminable_SyntacticallySugarfree<
+>
+  extends Attempt_Outcome_Discriminable_SyntacticallySugarfree<
     SomeDiscriminant
   > {
   readonly isSuccess: Is<this['discriminant'], 'success'>;

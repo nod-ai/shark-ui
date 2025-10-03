@@ -30,7 +30,8 @@ import {
 class Sequence_Byte_Encoded_Base64
   extends StringSubset<
     'Sequence_Byte_Encoded_Base64'
-  > implements Parsable.String<
+  >
+  implements Parsable.String<
     typeof Sequence_Byte_Encoded_Base64,
     /*  */ Sequence_Byte_Encoded_Base64_ParsingError
   > {

@@ -15,7 +15,8 @@ import {
 class NonTrivialString
   extends StringSubset<
     'NonTrivialString'
-  > implements Parsable.String<
+  >
+  implements Parsable.String<
     typeof NonTrivialString,
     /*  */ NonTrivialString_ParsingError
   > {
