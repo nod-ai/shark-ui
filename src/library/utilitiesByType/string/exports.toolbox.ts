@@ -6,6 +6,4 @@ export * from './asString';
 
 export * from './empty';
 
-export * from './character';
-
 export * from './concatenated';
