@@ -12,7 +12,8 @@ import {
  */
 abstract class StringSubset<
   SomeBrand extends string,
-> extends String
+>
+  extends String
   implements Branded<
     SomeBrand
   > {
