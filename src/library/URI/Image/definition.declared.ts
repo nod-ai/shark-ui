@@ -16,7 +16,7 @@ class URI_Image
   public constructor(
     public readonly format: URI_Image_Format.Any,
     givenEncoding: URI_Data.EncodingIdentifier.Any,
-    givenData: Sequence.Byte.Encoded.Base64_dep,
+    givenData: Sequence.Byte.Encoded.Base64,
   ) {
     super(
       null,

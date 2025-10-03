@@ -19,7 +19,7 @@ class URI_Data
   public constructor(
     private readonly overridableDescriptor: ContentDescriptor | null,
     public readonly encoding: URI_Data_EncodingIdentifier.Any,
-    public readonly data: Sequence.Byte.Encoded.Base64_dep,
+    public readonly data: Sequence.Byte.Encoded.Base64,
   ) {
     super(
       URI_Data.scheme,
@@ -48,7 +48,7 @@ class URI_Data
   public static readonly dataPrefix = ',';
 
   public get serializableData(): string {
-    const prefixedData = this.data.prependedWith(URI_Data.dataPrefix);
+    const prefixedData = URI_Data.dataPrefix.concat(this.data);
     return prefixedData;
   }
 
