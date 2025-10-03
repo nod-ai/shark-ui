@@ -22,9 +22,11 @@ Now, specify the existing Shortfin text-to-image server so the SHARK UI knows wh
 
         ```json
         {
+            ...
             "server": {
                 "origin": null
             }
+            ...
         }
         ```
 
@@ -32,9 +34,11 @@ Now, specify the existing Shortfin text-to-image server so the SHARK UI knows wh
 
         ```json
         {
+            ...
             "server": {
                 "origin": "http://localhost:8000"
             }
+            ...
         }
         ```
 
