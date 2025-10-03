@@ -17,17 +17,17 @@ Let's get SHARK UI up and swimming!
 Now, specify the existing Shortfin text-to-image server so the SHARK UI knows where to send generation requests:
 
 1. Open "config/text-to-image.json"
-1. Under `server.origin`, supply the location of your Shortfin text-to-image server, e.g.:
+1. Under `server`, supply the location of your Shortfin text-to-image server, e.g.:
     - Before:
 
         ```json
-        null
+        "origin": null
         ```
 
     - After:
 
         ```json
-        "http://localhost:8000"
+        "origin": "http://localhost:8000"
         ```
 
     - NOTE: Assumes you've already met the [prerequisite](#prerequisites) of having your local machine forward requests to the inference server
