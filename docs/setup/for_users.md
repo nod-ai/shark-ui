@@ -18,10 +18,17 @@ Now, specify the existing Shortfin text-to-image server so the SHARK UI knows wh
 
 1. Open "config/text-to-image.json"
 1. Under `server.origin`, replace `null` with the location of your Shortfin text-to-image server, e.g.:
+    - Before:
 
-    ```json
-    "http://localhost:8000"
-    ```
+        ```json
+        null
+        ```
+
+    - After:
+
+        ```json
+        "http://localhost:8000"
+        ```
 
     - NOTE: Assumes you've already met the [prerequisite](#prerequisites) of having your local machine forward requests to the inference server
 1. Save!
