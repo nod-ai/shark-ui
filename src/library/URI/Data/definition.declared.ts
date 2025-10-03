@@ -19,7 +19,7 @@ class URI_Data
   public constructor(
     private readonly overridableDescriptor: ContentDescriptor | null,
     public readonly encoding: URI_Data_EncodingIdentifier.Any,
-    public readonly data: Sequence.Byte.Encoded.Base64,
+    public readonly data: Sequence.Byte.Encoded.Base64_dep,
   ) {
     super(
       URI_Data.scheme,

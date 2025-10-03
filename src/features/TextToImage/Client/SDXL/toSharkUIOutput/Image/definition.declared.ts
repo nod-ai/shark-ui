@@ -17,7 +17,7 @@ function toSharkUIOutput_Image(
     givenImage.base64 === undefined
   ) return null;
 
-  const base64DataOfRawImage = Sequence.Byte.Encoded.Base64.parsedFrom(givenImage.base64).forciblyUnwrap(/* Broken web contracts require intervention */);
+  const base64DataOfRawImage = Sequence.Byte.Encoded.Base64_dep.parsedFrom(givenImage.base64).forciblyUnwrap(/* Broken web contracts require intervention */);
 
   const derivedImage = {
     uri        : new URI.Image('png', 'base64', base64DataOfRawImage),

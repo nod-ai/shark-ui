@@ -13,7 +13,7 @@ import {
 
 class Shortfin_TextToImage_SDXL_Client_Response_Body
   extends Schema.Class<Shortfin_TextToImage_SDXL_Client_Response_Body>('Shortfin_TextToImage_SDXL_Client_Response_Body')({
-    images: Schema.NonEmptyArray(Sequence.Byte.Encoded.Base64.Schema),
+    images: Schema.NonEmptyArray(Sequence.Byte.Encoded.Base64_dep.Schema),
   })
   implements Parsable<
     typeof Shortfin_TextToImage_SDXL_Client_Response_Body,
