@@ -17,20 +17,24 @@ Let's get SHARK UI up and swimming!
 Now, specify the existing Shortfin text-to-image server so the SHARK UI knows where to send generation requests:
 
 1. Open "config/text-to-image.json"
-1. For `server`, supply the details for your Shortfin text-to-image server, e.g.:
+1. Supply the details for your Shortfin text-to-image server, e.g.:
     - Before:
 
         ```json
-        "server": {
-            "origin": null
+        {
+            "server": {
+                "origin": null
+            }
         }
         ```
 
     - After:
 
         ```json
-        "server": {
-            "origin": "http://localhost:8000"
+        {
+            "server": {
+                "origin": "http://localhost:8000"
+            }
         }
         ```
 
