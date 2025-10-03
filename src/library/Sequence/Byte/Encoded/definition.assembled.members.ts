@@ -3,5 +3,5 @@ export {
 } from './Compatibility';
 
 export {
-  Sequence_Byte_Encoded_Base64 as Base64,
+  Sequence_Byte_Encoded_Base64_dep as Base64,
 } from './Base64_dep';

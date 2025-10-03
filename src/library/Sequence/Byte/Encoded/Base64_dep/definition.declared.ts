@@ -27,12 +27,12 @@ import {
 } from './ParsingError';
 
 /** See [RFC 4648 Section 4](https://www.rfc-editor.org/rfc/rfc4648.html#section-4) for more information */
-class Sequence_Byte_Encoded_Base64
+class Sequence_Byte_Encoded_Base64_dep
   extends StringSubset<
     'Sequence_Byte_Encoded_Base64'
   >
   implements Parsable.String<
-    typeof Sequence_Byte_Encoded_Base64,
+    typeof Sequence_Byte_Encoded_Base64_dep,
     /*  */ Sequence_Byte_Encoded_Base64_ParsingError
   > {
   public static paddingCharacter = '=';
@@ -60,7 +60,7 @@ class Sequence_Byte_Encoded_Base64
   public static parsedFrom = (
     givenCharacters: string,
   ): Attempt.Outcome<
-    Sequence_Byte_Encoded_Base64,
+    Sequence_Byte_Encoded_Base64_dep,
     Sequence_Byte_Encoded_Base64_ParsingError
   > => {
     const outcomeOfEnsuringEncodableCharacters = Sequence_Byte_Encoded_Compatibility.ensure(givenCharacters, {
@@ -89,7 +89,7 @@ class Sequence_Byte_Encoded_Base64
 
   public static Schema = Schema.transformOrFail(
     Schema.String,
-    Schema.instanceOf(Sequence_Byte_Encoded_Base64),
+    Schema.instanceOf(Sequence_Byte_Encoded_Base64_dep),
     {
       strict: true,
       decode: (input, options, ast) => {
@@ -113,5 +113,5 @@ class Sequence_Byte_Encoded_Base64
 }
 
 export {
-  Sequence_Byte_Encoded_Base64,
+  Sequence_Byte_Encoded_Base64_dep,
 };
