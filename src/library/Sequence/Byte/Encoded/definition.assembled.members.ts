@@ -5,3 +5,7 @@ export {
 export {
   Sequence_Byte_Encoded_Base64_dep as Base64_dep,
 } from './Base64_dep';
+
+export {
+  Sequence_Byte_Encoded_Base64 as Base64,
+} from './Base64';
