@@ -1,6 +1,5 @@
 import {
   Either,
-  ParseResult,
   Schema,
 } from 'effect';
 
@@ -43,30 +42,6 @@ class Sequence_Byte_Encoded_Base64_dep
     const newParsingError = new Sequence_Byte_Encoded_Base64_ParsingError(caughtError._tag);
     return ends.inFailureDueTo(newParsingError);
   });
-
-  public static Schema = Schema.transformOrFail(
-    Schema.String,
-    Schema.instanceOf(Sequence_Byte_Encoded_Base64_dep),
-    {
-      strict: true,
-      decode: (input, options, ast) => {
-        const outcomeOfParsingInput = this.parsedFrom(input);
-
-        if (
-          outcomeOfParsingInput.isSuccess
-        ) return ParseResult.succeed(outcomeOfParsingInput.unwrapped);
-
-        const newParsingIssue = new ParseResult.Type(
-          ast,
-          input,
-          outcomeOfParsingInput.cause.message,
-        );
-
-        return ParseResult.fail(newParsingIssue);
-      },
-      encode: $0 => ParseResult.succeed($0.toString()),
-    },
-  );
 }
 
 export {
