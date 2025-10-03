@@ -1,26 +1,16 @@
 import {
+  Either,
   ParseResult,
   Schema,
 } from 'effect';
 
 import Attempt from '@/library/Attempt';
-import Base64 from '@/library/Base64';
-import Byte from '@/library/Byte';
 import type Parsable from '@/library/Parsable';
 import StringSubset from '@/library/StringSubset';
 
 import {
-  droppingLastCharacter,
-  lastCharacterOf,
-} from '@/library/utilitiesByType/string';
-
-import {
-  Sequence_Base64,
-} from '../../../Base64';
-
-import {
-  Sequence_Byte_Encoded_Compatibility,
-} from '../Compatibility';
+  Sequence_Byte_Encoded_Base64,
+} from '../Base64';
 
 import {
   Sequence_Byte_Encoded_Base64_ParsingError,
@@ -35,57 +25,24 @@ class Sequence_Byte_Encoded_Base64_dep
     typeof Sequence_Byte_Encoded_Base64_dep,
     /*  */ Sequence_Byte_Encoded_Base64_ParsingError
   > {
-  public static paddingCharacter = '=';
-
-  private static readonly byteCofactor = Byte.cofactorTo(Base64.bitWidth);
-
-  private static readonly minNumberOf6BitSegments = 2; // lowest number of 6-bit segments (12 bits) to exceed an 8-bit segment
-  private static readonly maxNumberOfPaddingCharacters = this.byteCofactor - this.minNumberOf6BitSegments;
-
-  private static withPaddingDecoupled(givenSequence: string): [string, string] {
-    let remainingSequence = givenSequence;
-    let accumulatedPadding = '';
-
-    while (
-      (lastCharacterOf(remainingSequence) === this.paddingCharacter)
-      && accumulatedPadding.length <= this.maxNumberOfPaddingCharacters
-    ) {
-      remainingSequence = droppingLastCharacter(remainingSequence);
-      accumulatedPadding += this.paddingCharacter;
-    }
-
-    return [remainingSequence, accumulatedPadding];
-  }
-
   public static parsedFrom = (
     givenCharacters: string,
   ): Attempt.Outcome<
     Sequence_Byte_Encoded_Base64_dep,
     Sequence_Byte_Encoded_Base64_ParsingError
-  > => {
-    const outcomeOfEnsuringEncodableCharacters = Sequence_Byte_Encoded_Compatibility.ensure(givenCharacters, {
-      assuming: Base64.bitWidth,
-    });
+  > => Attempt.Fresh.that((ends) => {
+    const resultOfParsingByteSequence = Schema.decodeEither(
+      Schema.String.pipe(Schema.fromBrand(Sequence_Byte_Encoded_Base64)),
+    )(givenCharacters);
 
-    if (outcomeOfEnsuringEncodableCharacters.isFailure) {
-      const failureToEnsureEncodableCharacters = outcomeOfEnsuringEncodableCharacters.rewrappedWith({
-        cause: $0 => Sequence_Byte_Encoded_Base64_ParsingError.thatEscorts($0),
-      });
+    if (
+      Either.isRight(resultOfParsingByteSequence)
+    ) return ends.inSuccessWith(new this(resultOfParsingByteSequence.right));
 
-      return failureToEnsureEncodableCharacters;
-    }
-
-    const paddedByteEncodableCharacters = outcomeOfEnsuringEncodableCharacters.unwrapped;
-    const [byteEncodableCharacters, padding] = this.withPaddingDecoupled(paddedByteEncodableCharacters);
-    const outcomeOfEnsuringConformantCharacters = Sequence_Base64.Conformance.ensure(byteEncodableCharacters);
-
-    const outcomeOfParsingByteSequence = Attempt.Outcome.fromRewrapping(outcomeOfEnsuringConformantCharacters, {
-      product: $0 => new this($0.concat(padding)),
-      cause  : $0 => Sequence_Byte_Encoded_Base64_ParsingError.thatEscorts($0),
-    });
-
-    return outcomeOfParsingByteSequence;
-  };
+    const caughtError = resultOfParsingByteSequence.left;
+    const newParsingError = new Sequence_Byte_Encoded_Base64_ParsingError(caughtError._tag);
+    return ends.inFailureDueTo(newParsingError);
+  });
 
   public static Schema = Schema.transformOrFail(
     Schema.String,
