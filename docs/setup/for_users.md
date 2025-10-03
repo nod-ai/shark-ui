@@ -23,7 +23,7 @@ Now, specify the existing Shortfin text-to-image server so the SHARK UI knows wh
     "http://localhost:8000"
     ```
 
-   - NOTE: Assumes you've already met the [prerequisite](#prerequisites) of having your local machine forward requests to the inference server
+    - NOTE: Assumes you've already met the [prerequisite](#prerequisites) of having your local machine forward requests to the inference server
 1. Save!
 
 ## Serving
