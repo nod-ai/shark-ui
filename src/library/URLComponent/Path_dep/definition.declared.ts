@@ -27,7 +27,7 @@ class URLComponent_Path_dep
     const exampleURL = new URL(`https://example.com${givenSubject}`);
 
     if (URLComponent_Path.is(givenSubject)) {
-      const parsedURLPath = new URLComponent_Path_dep(exampleURL.pathname);
+      const parsedURLPath = new URLComponent_Path_dep(givenSubject);
       return ends.inSuccessWith(parsedURLPath);
     }
 
