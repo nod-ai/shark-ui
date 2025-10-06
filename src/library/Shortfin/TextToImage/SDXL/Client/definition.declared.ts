@@ -14,7 +14,7 @@ import {
 class Shortfin_TextToImage_SDXL_Client
   extends HTTP.Client {
   public constructor(
-    givenOrigin: URLComponent.Origin,
+    givenOrigin: URLComponent.DepOrigin,
   ) {
     const defaultHeaders = {
       [HTTP.Header.Content.Descriptor]: ContentDescriptor.json.serialized.toString(),

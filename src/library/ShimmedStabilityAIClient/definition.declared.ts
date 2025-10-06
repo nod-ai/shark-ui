@@ -10,7 +10,7 @@ class ShimmedStabilityAIClient
   public constructor(given: {
     serverURL: string;
   }) {
-    const serverOrigin = URLComponent.Origin.parsedFrom(given.serverURL).forciblyUnwrap(/* matches error propagation of actual StabilityAI client */);
+    const serverOrigin = URLComponent.DepOrigin.parsedFrom(given.serverURL).forciblyUnwrap(/* matches error propagation of actual StabilityAI client */);
 
     super(
       serverOrigin,

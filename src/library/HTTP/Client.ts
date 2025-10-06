@@ -16,13 +16,13 @@ import {
 
 class HTTP_Client {
   public static readonly local = (() => {
-    const outcomeOfParsingOrigin = URLComponent.Origin.parsedFrom(location.origin);
+    const outcomeOfParsingOrigin = URLComponent.DepOrigin.parsedFrom(location.origin);
     const parsedOrigin = outcomeOfParsingOrigin.forciblyUnwrap(/* the only way for the app to be browser-accessible is to have a parsable origin */);
     return new HTTP_Client(parsedOrigin);
   })();
 
   public constructor(
-    public readonly origin: URLComponent.Origin,
+    public readonly origin: URLComponent.DepOrigin,
     public readonly headers?: HTTP_Request.HeaderMap,
   ) {}
 
