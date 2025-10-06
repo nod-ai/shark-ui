@@ -18,9 +18,7 @@ class GitHub_Repository<
   ) {}
 
   public get path(): URLComponent.Path {
-    const outcomeOfParsingPath = URLComponent.Path.parsedFrom(`/${this.organization}/${this.project}`);
-    const parsedPath = outcomeOfParsingPath.forciblyUnwrap(/* a failed unwrap would mean the hardcoded template was malformed */);
-    return parsedPath;
+    return URLComponent.Path(`/${this.organization}/${this.project}`);
   }
 
   public get site(): URL {

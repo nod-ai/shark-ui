@@ -31,7 +31,7 @@ class Shortfin_TextToImage_SDXL_Client
   ): Promise<
     Shortfin_TextToImage_SDXL_Client_Request.Outcome
   > {
-    const generationEndpoint = URLComponent.Path.parsedFrom('/generate').forciblyUnwrap();
+    const generationEndpoint = URLComponent.Path('/generate');
 
     return Attempt.Fresh.thatEventually(async (ends) => {
       const outcomeOfSubmittingResource = await this.submitResource({
