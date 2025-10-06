@@ -1,5 +1,4 @@
 import Attempt from '@/library/Attempt';
-import type Parsable from '@/library/Parsable';
 import StringSubset from '@/library/StringSubset';
 
 import {
@@ -13,10 +12,6 @@ import {
 class URLComponent_Path_dep
   extends StringSubset<
     'URLComponent_Path'
-  >
-  implements Parsable.String<
-    typeof URLComponent_Path_dep,
-    /*  */ URLComponent_Path_ParsingError
   > {
   public static parsedFrom = (
     givenSubject: string,
