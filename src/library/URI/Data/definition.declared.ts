@@ -48,7 +48,7 @@ class URI_Data
   public static readonly dataPrefix = ',';
 
   public get serializableData(): string {
-    const prefixedData = this.data.prependedWith(URI_Data.dataPrefix);
+    const prefixedData = URI_Data.dataPrefix.concat(this.data);
     return prefixedData;
   }
 
