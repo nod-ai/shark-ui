@@ -4,4 +4,4 @@ export {
 
 export {
   URLComponent_Path as Path,
-} from './Path';
+} from './Path_dep';
