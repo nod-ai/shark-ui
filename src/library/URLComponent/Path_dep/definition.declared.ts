@@ -3,6 +3,10 @@ import type Parsable from '@/library/Parsable';
 import StringSubset from '@/library/StringSubset';
 
 import {
+  URLComponent_Path,
+} from '../Path';
+
+import {
   URLComponent_Path_ParsingError,
 } from './ParsingError';
 
@@ -22,7 +26,7 @@ class URLComponent_Path_dep
   > => Attempt.Fresh.that((ends) => {
     const exampleURL = new URL(`https://example.com${givenSubject}`);
 
-    if (exampleURL.pathname === givenSubject) {
+    if (URLComponent_Path.is(givenSubject)) {
       const parsedURLPath = new URLComponent_Path_dep(exampleURL.pathname);
       return ends.inSuccessWith(parsedURLPath);
     }
