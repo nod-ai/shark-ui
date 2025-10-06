@@ -6,18 +6,18 @@ import {
   URLComponent_Path_ParsingError,
 } from './ParsingError';
 
-class URLComponent_Path
+class URLComponent_Path_dep
   extends StringSubset<
     'URLComponent_Path'
   >
   implements Parsable.String<
-    typeof URLComponent_Path,
+    typeof URLComponent_Path_dep,
     /*  */ URLComponent_Path_ParsingError
   > {
   public static parsedFrom = (
     givenSubject: string,
   ): Attempt.Outcome<
-    URLComponent_Path,
+    URLComponent_Path_dep,
     URLComponent_Path_ParsingError
   > => Attempt.Fresh.that((ends) => {
     const exampleURL = new URL(`https://example.com${givenSubject}`);
@@ -31,11 +31,11 @@ class URLComponent_Path
       return ends.inFailureDueTo(newParsingError);
     }
 
-    const parsedURLPath = new URLComponent_Path(exampleURL.pathname);
+    const parsedURLPath = new URLComponent_Path_dep(exampleURL.pathname);
     return ends.inSuccessWith(parsedURLPath);
   });
 }
 
 export {
-  URLComponent_Path,
+  URLComponent_Path_dep,
 };
