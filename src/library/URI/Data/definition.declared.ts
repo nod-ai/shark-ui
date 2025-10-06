@@ -1,7 +1,11 @@
 import Attempt from '@/library/Attempt';
 import type ContentDescriptor from '@/library/ContentDescriptor';
-import DepNonTrivialString from '@/library/DepNonTrivialString';
+import NonTrivialString from '@/library/NonTrivialString';
 import type Sequence from '@/library/Sequence';
+
+import {
+  concatenated,
+} from '@/library/utilitiesByType/string';
 
 import {
   URI,
@@ -14,7 +18,7 @@ import type {
 /** See [RFC 2397](https://datatracker.ietf.org/doc/rfc2397) for more info */
 class URI_Data
   extends URI {
-  public static readonly scheme = DepNonTrivialString.parsedFrom('data').forciblyUnwrap();
+  public static readonly scheme = NonTrivialString('data');
 
   public constructor(
     private readonly overridableDescriptor: ContentDescriptor | null,
@@ -52,15 +56,15 @@ class URI_Data
     return prefixedData;
   }
 
-  public override get path(): DepNonTrivialString {
+  public override get path(): NonTrivialString {
     const orderedPathComponents = [
       this.descriptor.serialized,
       this.serializableEncoding,
       this.serializableData,
-    ] as const;
+    ];
 
-    const serializedPathComponents = DepNonTrivialString.fromConcatenating(...orderedPathComponents);
-    return serializedPathComponents;
+    const serializedPathComponents = concatenated(...orderedPathComponents);
+    return NonTrivialString(serializedPathComponents);
   }
 }
 

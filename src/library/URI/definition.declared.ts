@@ -1,5 +1,5 @@
 import Attempt from '@/library/Attempt';
-import type DepNonTrivialString from '@/library/DepNonTrivialString';
+import type NonTrivialString from '@/library/NonTrivialString';
 
 import {
   concatenated,
@@ -16,11 +16,11 @@ import {
  */
 class URI {
   public constructor(
-    public readonly scheme/*      */: DepNonTrivialString,
-    public readonly authority/*   */: DepNonTrivialString | null = null,
-    private readonly overridablePath: DepNonTrivialString | null = null,
-    public readonly query/*       */: DepNonTrivialString | null = null,
-    public readonly fragment/*    */: DepNonTrivialString | null = null,
+    public readonly scheme/*      */: NonTrivialString,
+    public readonly authority/*   */: NonTrivialString | null = null,
+    private readonly overridablePath: NonTrivialString | null = null,
+    public readonly query/*       */: NonTrivialString | null = null,
+    public readonly fragment/*    */: NonTrivialString | null = null,
   ) {}
 
   public static readonly schemeSuffix = ':';
@@ -37,7 +37,7 @@ class URI {
       this.authority === null
     ) return null;
 
-    const prefixedAuthority = this.authority.prependedWith(URI.authorityPrefix);
+    const prefixedAuthority = URI.authorityPrefix.concat(this.authority);
     return prefixedAuthority;
   }
 
@@ -56,7 +56,7 @@ class URI {
       this.query === null
     ) return null;
 
-    const prefixedQuery = this.query.prependedWith(URI.queryPrefix);
+    const prefixedQuery = URI.queryPrefix.concat(this.query);
     return prefixedQuery;
   }
 
@@ -67,7 +67,7 @@ class URI {
       this.fragment === null
     ) return null;
 
-    const prefixedFragment = this.fragment.prependedWith(URI.fragmentPrefix);
+    const prefixedFragment = URI.fragmentPrefix.concat(this.fragment);
     return prefixedFragment;
   }
 
