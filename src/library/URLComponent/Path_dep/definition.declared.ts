@@ -22,17 +22,17 @@ class URLComponent_Path_dep
   > => Attempt.Fresh.that((ends) => {
     const exampleURL = new URL(`https://example.com${givenSubject}`);
 
-    if (exampleURL.pathname !== givenSubject) {
-      const newParsingError = new URLComponent_Path_ParsingError({
-        expectation: exampleURL.pathname,
-        reality    : givenSubject,
-      });
-
-      return ends.inFailureDueTo(newParsingError);
+    if (exampleURL.pathname === givenSubject) {
+      const parsedURLPath = new URLComponent_Path_dep(exampleURL.pathname);
+      return ends.inSuccessWith(parsedURLPath);
     }
 
-    const parsedURLPath = new URLComponent_Path_dep(exampleURL.pathname);
-    return ends.inSuccessWith(parsedURLPath);
+    const newParsingError = new URLComponent_Path_ParsingError({
+      expectation: exampleURL.pathname,
+      reality    : givenSubject,
+    });
+
+    return ends.inFailureDueTo(newParsingError);
   });
 }
 
