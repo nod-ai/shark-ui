@@ -1,5 +1,3 @@
-export type * from './StringLike';
-
 export * from './isString';
 
 export * from './asString';
