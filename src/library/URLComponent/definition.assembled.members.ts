@@ -3,5 +3,5 @@ export {
 } from './Origin';
 
 export {
-  URLComponent_Path as Path,
+  URLComponent_Path as Path_dep,
 } from './Path_dep';

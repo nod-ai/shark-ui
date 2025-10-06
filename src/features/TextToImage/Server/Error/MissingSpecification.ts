@@ -9,8 +9,8 @@ class TextToImage_Server_Error_MissingSpecification
 
   public constructor(
     public readonly environmentKey: string,
-    public readonly file: URLComponent.Path,
-    public readonly endpoint: URLComponent.Path,
+    public readonly file: URLComponent.Path_dep,
+    public readonly endpoint: URLComponent.Path_dep,
   ) {
     super('Failed to determine text-to-image server');
   }
