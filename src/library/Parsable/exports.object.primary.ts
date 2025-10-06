@@ -1,1 +1,1 @@
-export type * from './definition.declared.withAugmentation.ts';
+export type * from './definition.declared.ts';
