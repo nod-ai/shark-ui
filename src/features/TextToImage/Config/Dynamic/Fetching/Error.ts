@@ -8,10 +8,10 @@ class TextToImage_Config_Dynamic_Fetching_Error
   public override name = 'TextToImage_Config_Dynamic_Fetching_Error' as const;
 
   public constructor(
-    public readonly endpoint: URLComponent.Path_dep,
+    public readonly endpoint: URLComponent.Path,
     givenCause: Error,
   ) {
-    super(`Failed to fetch config from "${endpoint.toString()}".`, {
+    super(`Failed to fetch config from "${endpoint}".`, {
       cause: givenCause,
     });
   }

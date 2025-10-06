@@ -30,7 +30,7 @@ class HTTP_Client {
     givenResponse: Response,
   ): boolean => bodyOf(givenResponse).isSuggestedToBeDigestibleAs(ContentDescriptor.json);
 
-  public originAt(givenPath: URLComponent.Path_dep): URL {
+  public originAt(givenPath: URLComponent.Path): URL {
     const serializedURLComponents = this.origin.appendedWith(givenPath);
     return new URL(serializedURLComponents);
   }
@@ -41,7 +41,7 @@ class HTTP_Client {
       to: givenPath,
       using: givenMethod,
     }: {
-      to: URLComponent.Path_dep;
+      to: URLComponent.Path;
       using: HTTP_Request.Method;
     },
   ): Promise<HTTP_Endpoint.Outcome> => Attempt.Fresh.thatEventually(async (ends) => {
@@ -89,7 +89,7 @@ class HTTP_Client {
     {
       from: givenPath,
     }: {
-      from: URLComponent.Path_dep;
+      from: URLComponent.Path;
     },
   ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(null, {
@@ -104,7 +104,7 @@ class HTTP_Client {
       to: givenPath,
     }: {
       bySending: unknown;
-      to: URLComponent.Path_dep;
+      to: URLComponent.Path;
     },
   ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(givenSubmission, {
@@ -119,7 +119,7 @@ class HTTP_Client {
       to: givenPath,
     }: {
       bySending: unknown;
-      to: URLComponent.Path_dep;
+      to: URLComponent.Path;
     },
   ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(givenProperties, {
@@ -134,7 +134,7 @@ class HTTP_Client {
       to: givenPath,
     }: {
       bySending: unknown;
-      to: URLComponent.Path_dep;
+      to: URLComponent.Path;
     },
   ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(givenChanges, {
@@ -144,7 +144,7 @@ class HTTP_Client {
   }
 
   public async deleteResourceAt(
-    givenPath: URLComponent.Path_dep,
+    givenPath: URLComponent.Path,
   ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(null, {
       to   : givenPath,
