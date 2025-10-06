@@ -24,12 +24,12 @@ class URLComponent_Path_dep
     URLComponent_Path_dep,
     URLComponent_Path_ParsingError
   > => Attempt.Fresh.that((ends) => {
-    const exampleURL = new URL(`https://example.com${givenSubject}`);
-
     if (URLComponent_Path.is(givenSubject)) {
       const parsedURLPath = new URLComponent_Path_dep(givenSubject);
       return ends.inSuccessWith(parsedURLPath);
     }
+
+    const exampleURL = new URL(`https://example.com${givenSubject}`);
 
     const newParsingError = new URLComponent_Path_ParsingError({
       expectation: exampleURL.pathname,
