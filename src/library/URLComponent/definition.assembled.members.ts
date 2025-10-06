@@ -1,5 +1,5 @@
 export {
-  URLComponent_Origin as DepOrigin,
+  URLComponent_DepOrigin as DepOrigin,
 } from './DepOrigin';
 
 export {

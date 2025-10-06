@@ -3,13 +3,13 @@ import {
 } from './ParsingError';
 
 import {
-  URLComponent_Origin,
+  URLComponent_DepOrigin,
 } from './definition.declared.ts';
 
-URLComponent_Origin.ParsingError = URLComponent_Origin_ParsingError;
+URLComponent_DepOrigin.ParsingError = URLComponent_Origin_ParsingError;
 
 declare module './definition.declared.ts' {
-  namespace URLComponent_Origin {
+  namespace URLComponent_DepOrigin {
     export {
       URLComponent_Origin_ParsingError as ParsingError,
     };

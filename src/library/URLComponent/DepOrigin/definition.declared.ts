@@ -6,18 +6,18 @@ import {
   URLComponent_Origin_ParsingError,
 } from './ParsingError';
 
-class URLComponent_Origin
+class URLComponent_DepOrigin
   extends StringSubset<
     'URLComponent_Origin'
   >
   implements Parsable.String<
-    typeof URLComponent_Origin,
+    typeof URLComponent_DepOrigin,
     /*  */ URLComponent_Origin_ParsingError
   > {
   public static parsedFrom = (
     givenSubject: string,
   ): Attempt.Outcome<
-    URLComponent_Origin,
+    URLComponent_DepOrigin,
     URLComponent_Origin_ParsingError
   > => Attempt.Fresh.that((ends) => {
     const derived = new URL(givenSubject);
@@ -31,11 +31,11 @@ class URLComponent_Origin
       return ends.inFailureDueTo(newParsingError);
     }
 
-    const parsedURLOrigin = new URLComponent_Origin(derived.origin);
+    const parsedURLOrigin = new URLComponent_DepOrigin(derived.origin);
     return ends.inSuccessWith(parsedURLOrigin);
   });
 }
 
 export {
-  URLComponent_Origin,
+  URLComponent_DepOrigin,
 };
