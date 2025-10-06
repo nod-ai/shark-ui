@@ -36,23 +36,6 @@ class DepNonTrivialString
     return ends.inSuccessWith(new DepNonTrivialString(givenSubject));
   });
 
-  public static nullableParsedFrom = (
-    givenSubject: string | null,
-  ): Attempt.Outcome<
-    DepNonTrivialString | null,
-    NonTrivialString_ParsingError
-  > => Attempt.Fresh.that((ends) => {
-    if (
-      givenSubject === null
-    ) return ends.inSuccessWith(givenSubject);
-
-    return this.parsedFrom(givenSubject);
-  });
-
-  public isEqualTo(that: DepNonTrivialString): boolean {
-    return this.toString() === that.toString();
-  }
-
   public concatenatedWith(
     ...givenOperands: (StringLike | null)[]
   ): DepNonTrivialString {
