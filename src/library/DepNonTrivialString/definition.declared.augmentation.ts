@@ -3,13 +3,13 @@ import {
 } from './ParsingError';
 
 import {
-  NonTrivialString,
+  DepNonTrivialString,
 } from './definition.declared.ts';
 
-NonTrivialString.ParsingError = NonTrivialString_ParsingError;
+DepNonTrivialString.ParsingError = NonTrivialString_ParsingError;
 
 declare module './definition.declared.ts' {
-  namespace NonTrivialString {
+  namespace DepNonTrivialString {
     export {
       NonTrivialString_ParsingError as ParsingError,
     };

@@ -1,5 +1,5 @@
 import Attempt from '@/library/Attempt';
-import type NonTrivialString from '@/library/NonTrivialString';
+import type DepNonTrivialString from '@/library/DepNonTrivialString';
 
 import {
   concatenated,
@@ -16,11 +16,11 @@ import {
  */
 class URI {
   public constructor(
-    public readonly scheme/*      */: NonTrivialString,
-    public readonly authority/*   */: NonTrivialString | null = null,
-    private readonly overridablePath: NonTrivialString | null = null,
-    public readonly query/*       */: NonTrivialString | null = null,
-    public readonly fragment/*    */: NonTrivialString | null = null,
+    public readonly scheme/*      */: DepNonTrivialString,
+    public readonly authority/*   */: DepNonTrivialString | null = null,
+    private readonly overridablePath: DepNonTrivialString | null = null,
+    public readonly query/*       */: DepNonTrivialString | null = null,
+    public readonly fragment/*    */: DepNonTrivialString | null = null,
   ) {}
 
   public static readonly schemeSuffix = ':';

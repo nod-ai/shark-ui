@@ -1,3 +1,3 @@
 export {
-  NonTrivialString as default,
+  DepNonTrivialString as default,
 } from './exports.object.primary.ts';

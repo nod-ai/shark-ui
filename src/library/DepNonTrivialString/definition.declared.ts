@@ -12,18 +12,18 @@ import {
   NonTrivialString_ParsingError,
 } from './ParsingError';
 
-class NonTrivialString
+class DepNonTrivialString
   extends StringSubset<
-    'NonTrivialString'
+    'DepNonTrivialString'
   >
   implements Parsable.String<
-    typeof NonTrivialString,
+    typeof DepNonTrivialString,
     /*  */ NonTrivialString_ParsingError
   > {
   public static parsedFrom = (
     givenSubject: string,
   ): Attempt.Outcome<
-    NonTrivialString,
+    DepNonTrivialString,
     NonTrivialString_ParsingError
   > => Attempt.Fresh.that((ends) => {
     const trimmedSubject = givenSubject.trim();
@@ -33,13 +33,13 @@ class NonTrivialString
       return ends.inFailureDueTo(newParsingError);
     }
 
-    return ends.inSuccessWith(new NonTrivialString(givenSubject));
+    return ends.inSuccessWith(new DepNonTrivialString(givenSubject));
   });
 
   public static nullableParsedFrom = (
     givenSubject: string | null,
   ): Attempt.Outcome<
-    NonTrivialString | null,
+    DepNonTrivialString | null,
     NonTrivialString_ParsingError
   > => Attempt.Fresh.that((ends) => {
     if (
@@ -49,25 +49,25 @@ class NonTrivialString
     return this.parsedFrom(givenSubject);
   });
 
-  public isEqualTo(that: NonTrivialString): boolean {
+  public isEqualTo(that: DepNonTrivialString): boolean {
     return this.toString() === that.toString();
   }
 
   public concatenatedWith(
     ...givenOperands: (StringLike | null)[]
-  ): NonTrivialString {
+  ): DepNonTrivialString {
     const concatenatedOperands = concatenated(this, ...givenOperands);
-    const outcomeOfParsingConcatenatedOperands = NonTrivialString.parsedFrom(concatenatedOperands);
+    const outcomeOfParsingConcatenatedOperands = DepNonTrivialString.parsedFrom(concatenatedOperands);
     const coercedConcatenatedOperands = outcomeOfParsingConcatenatedOperands.forciblyUnwrap(/* Safe to call since the leading string is always non-trivial and concatenation is purely additive */);
     return coercedConcatenatedOperands;
   }
 
   public static fromConcatenating(
     ...givenOperands: [
-      NonTrivialString,
+      DepNonTrivialString,
       ...(StringLike | null)[],
     ]
-  ): NonTrivialString {
+  ): DepNonTrivialString {
     const [
       firstOperand,
       ...remainingOperands
@@ -78,5 +78,5 @@ class NonTrivialString
 }
 
 export {
-  NonTrivialString,
+  DepNonTrivialString,
 };

@@ -1,4 +1,4 @@
-import NonTrivialString from '@/library/NonTrivialString';
+import DepNonTrivialString from '@/library/DepNonTrivialString';
 
 import {
   concatenated,
@@ -24,9 +24,9 @@ class ContentDescriptor {
 
   public static readonly suffixForTopLevelDescriptor = '/';
 
-  public get serializableTopLevelDescriptor(): NonTrivialString {
+  public get serializableTopLevelDescriptor(): DepNonTrivialString {
     const suffixedTopLevelDescriptor = this.topLevelDescriptor.concat(ContentDescriptor.suffixForTopLevelDescriptor);
-    const coercedTopLevelDescriptor = NonTrivialString.parsedFrom(suffixedTopLevelDescriptor).forciblyUnwrap(/* Proven safe by inspecting intellisense of `topLevelDescriptor` */);
+    const coercedTopLevelDescriptor = DepNonTrivialString.parsedFrom(suffixedTopLevelDescriptor).forciblyUnwrap(/* Proven safe by inspecting intellisense of `topLevelDescriptor` */);
     return coercedTopLevelDescriptor;
   }
 
@@ -68,7 +68,7 @@ class ContentDescriptor {
     return concatenated(...serializableParameterEntries);
   }
 
-  public get serialized(): NonTrivialString {
+  public get serialized(): DepNonTrivialString {
     const orderedComponents = [
       this.serializableTopLevelDescriptor,
       this.serializableTree,
@@ -77,7 +77,7 @@ class ContentDescriptor {
       this.serializableParameters,
     ] as const;
 
-    const serializedComponents = NonTrivialString.fromConcatenating(...orderedComponents);
+    const serializedComponents = DepNonTrivialString.fromConcatenating(...orderedComponents);
     return serializedComponents;
   }
 }
