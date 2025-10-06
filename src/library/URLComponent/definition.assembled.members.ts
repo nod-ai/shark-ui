@@ -1,6 +1,6 @@
 export {
   URLComponent_Origin as Origin,
-} from './Origin';
+} from './DepOrigin';
 
 export {
   URLComponent_Path as Path,
