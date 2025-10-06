@@ -4,6 +4,4 @@ export * from './isString';
 
 export * from './asString';
 
-export * from './empty';
-
 export * from './concatenated';
