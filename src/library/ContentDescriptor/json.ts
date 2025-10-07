@@ -1,13 +1,17 @@
 import {
+  Option,
+} from 'effect';
+
+import {
   ContentDescriptor,
 } from './definition.declared.ts';
 
 const ContentDescriptor_json = new ContentDescriptor(
   'application',
-  null,
+  Option.none(),
   'json',
-  null,
-  null,
+  Option.none(),
+  Option.none(),
 );
 
 export {

@@ -7,6 +7,10 @@ import {
 } from '@/library/vue';
 
 import {
+  Option,
+} from 'effect';
+
+import {
   VBtn,
 } from 'vuetify/components/VBtn';
 
@@ -38,7 +42,7 @@ import TextToImageInputSection from '@/features/TextToImage/components/TextToIma
 import TextToImageOutputAlert from '@/features/TextToImage/components/TextToImageOutputAlert.vue';
 import TextToImageOutputImg from '@/features/TextToImage/components/TextToImageOutputImg.vue';
 
-const currentPrompt: Ref<TextToImage.Pipeline.Input['text'] | null> = ref(null);
+const currentPrompt: Ref<Option.Option<TextToImage.Pipeline.Input['text']>> = ref(Option.none());
 
 const {
   range,
@@ -47,11 +51,10 @@ const {
 const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
 
 const imageGeneration = useStatefulAttemptThatEventually(async (ends) => {
-  const proposedPrompt = get(currentPrompt);
-
-  if (
-    proposedPrompt === null
-  ) return ends.inFlamesBecause('Prompt was not set before submission');
+  const proposedPrompt = Option.getOrThrowWith(
+    get(currentPrompt),
+    () => new Error('Prompt was not set before submission'),
+  );
 
   const outcomeOfGeneratingOutput = await TextToImage.Client.SDXL.generateOutputFrom({
     textToImageRequestBody: {
@@ -123,7 +126,7 @@ const imageGeneration = useStatefulAttemptThatEventually(async (ends) => {
       class="fill-height"
     >
       <VSkeletonLoader
-        v-if="imageGeneration.outcome === null"
+        v-if="Option.isNone(imageGeneration.outcome)"
         :boilerplate="!imageGeneration.isInProgress"
         width="100vh"
         :style="{
@@ -131,12 +134,12 @@ const imageGeneration = useStatefulAttemptThatEventually(async (ends) => {
         }"
       />
       <TextToImageOutputImg
-        v-else-if="imageGeneration.outcome.isSuccess"
-        :model-value="imageGeneration.outcome.unwrapped"
+        v-else-if="imageGeneration.outcome.value.isSuccess"
+        :model-value="imageGeneration.outcome.value.unwrapped"
       />
       <TextToImageOutputAlert
         v-else
-        :error="imageGeneration.outcome.causeOfFailure"
+        :error="imageGeneration.outcome.value.causeOfFailure"
       />
     </VContainer>
   </VMain>

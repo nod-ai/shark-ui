@@ -1,9 +1,7 @@
 const concatenated = (
-  ...givenOperands: (string | null)[]
+  ...givenOperands: string[]
 ): string => {
-  const joinableOperands = givenOperands.map($0 => $0 ?? '');
-  const joinedOperands = joinableOperands.join('');
-  return joinedOperands;
+  return givenOperands.join('');
 };
 
 export {

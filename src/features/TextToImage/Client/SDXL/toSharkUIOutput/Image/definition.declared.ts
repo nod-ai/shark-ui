@@ -1,3 +1,7 @@
+import {
+  Option,
+} from 'effect';
+
 import type * as StabilityAIClient from 'stabilityai-client-typescript/models/components';
 
 import Sequence from '@/library/Sequence';
@@ -12,10 +16,10 @@ function toSharkUIOutput_Image(
   given: {
     description: TextToImage_Pipeline.Output['image']['description'];
   },
-): TextToImage_Pipeline.Output['image'] | null {
+): Option.Option<TextToImage_Pipeline.Output['image']> {
   if (
     givenImage.base64 === undefined
-  ) return null;
+  ) return Option.none();
 
   const base64DataOfRawImage = Sequence.Byte.Encoded.Base64(givenImage.base64);
 
@@ -24,7 +28,7 @@ function toSharkUIOutput_Image(
     description: given.description,
   };
 
-  return derivedImage;
+  return Option.some(derivedImage);
 }
 
 export {

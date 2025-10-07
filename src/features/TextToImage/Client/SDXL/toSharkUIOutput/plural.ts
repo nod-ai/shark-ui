@@ -1,3 +1,7 @@
+import {
+  Option,
+} from 'effect';
+
 import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
@@ -20,22 +24,21 @@ const toSharkUIOutput_plural = (
     in: GenerateFromTextResponse;
     inferredFrom: TextToImage_Pipeline.Input['text'];
   },
-): (TextToImage_Pipeline.Output | null)[] | null => {
+): Option.Option<Option.Option<TextToImage_Pipeline.Output>[]> => {
   if (
     !('artifacts' in givenResponse.result)
   ) return Attempt.abandon('Expected response body rather than readable stream');
 
-  const inferredRawImages = givenResponse.result.artifacts;
+  const inferredRawImages = Option.fromNullable(givenResponse.result.artifacts);
 
-  if (
-    inferredRawImages === undefined
-  ) return null;
-
-  const inferredOutputs = inferredRawImages
-    .map($0 => toSharkUIOutput_Image($0, {
-      description: toSharkUIOutput_Image.Description.all(givenInputText),
-    }))
-    .map($0 => TextToImage_Pipeline.Output.Nullable.from($0));
+  const inferredOutputs = Option.map(
+    inferredRawImages,
+    $0 => $0
+      .map($0 => toSharkUIOutput_Image($0, {
+        description: toSharkUIOutput_Image.Description.all(givenInputText),
+      }))
+      .map($0 => TextToImage_Pipeline.Output.Option.from($0)),
+  );
 
   return inferredOutputs;
 };

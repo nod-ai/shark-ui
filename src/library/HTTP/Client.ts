@@ -1,3 +1,7 @@
+import {
+  Option,
+} from 'effect';
+
 import Attempt from '@/library/Attempt';
 import ContentDescriptor from '@/library/ContentDescriptor';
 import URLComponent from '@/library/URLComponent';
@@ -60,9 +64,9 @@ class HTTP_Client {
 
         if (
           !clientFailedToReachServer
-        ) return null;
+        ) return Option.none();
 
-        return new HTTP_Endpoint.Error.FailedToSendRequest(endpointURL);
+        return Option.some(new HTTP_Endpoint.Error.FailedToSendRequest(endpointURL));
       },
     });
 

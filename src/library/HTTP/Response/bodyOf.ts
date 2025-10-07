@@ -1,3 +1,7 @@
+import {
+  Option,
+} from 'effect';
+
 import Attempt from '@/library/Attempt';
 import ContentDescriptor from '@/library/ContentDescriptor';
 
@@ -36,9 +40,9 @@ const bodyOf = (
         interpretationOf: (caughtError) => {
           if (
             caughtError instanceof SyntaxError
-          ) return new HTTP_Response_Body.Digestion.Error.InvalidJSONSyntax(caughtError);
+          ) return Option.some(new HTTP_Response_Body.Digestion.Error.InvalidJSONSyntax(caughtError));
 
-          return null;
+          return Option.none();
         },
       });
 

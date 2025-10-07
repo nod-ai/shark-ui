@@ -1,3 +1,7 @@
+import {
+  Option,
+} from 'effect';
+
 import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
@@ -25,26 +29,28 @@ const toSharkUIOutput_first = (
     inferredFrom: TextToImage_Pipeline.Input['text'];
   },
 ): TextToImage_Pipeline.Output => {
-  const inferredOutputs = toSharkUIOutput_plural({
+  const potentialInferredOutputs = toSharkUIOutput_plural({
     in          : givenResponse,
     inferredFrom: givenInputText,
   });
 
-  if (
-    inferredOutputs === null
-  ) return Attempt.abandon('Expected text-to-image output in response result');
+  const inferredOutputs = Option.getOrThrowWith(
+    potentialInferredOutputs,
+    () => new Error('Expected text-to-image output in response result'),
+  );
 
   if (
     !hasAtLeastOne(inferredOutputs)
   ) return Attempt.abandon('Expected at least one text-to-image output in response');
 
-  const [firstInferredOutput] = inferredOutputs;
+  const [firstPotentialOutput] = inferredOutputs;
 
-  if (
-    firstInferredOutput === null
-  ) return Attempt.abandon('Expected at least one well-formed text-to-image output in response');
+  const firstPipelineOutput = Option.getOrThrowWith(
+    firstPotentialOutput,
+    () => new Error('Expected at least one well-formed text-to-image output in response'),
+  );
 
-  return firstInferredOutput;
+  return firstPipelineOutput;
 };
 
 export {

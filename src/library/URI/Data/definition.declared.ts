@@ -1,4 +1,8 @@
-import Attempt from '@/library/Attempt';
+import {
+  Array,
+  Option,
+} from 'effect';
+
 import type ContentDescriptor from '@/library/ContentDescriptor';
 import NonTrivialString from '@/library/NonTrivialString';
 import type Sequence from '@/library/Sequence';
@@ -21,7 +25,7 @@ class URI_Data
   public static readonly scheme = NonTrivialString('data');
 
   public constructor(
-    private readonly overridableDescriptor: ContentDescriptor | null,
+    private readonly overridableDescriptor: Option.Option<ContentDescriptor>,
     public readonly encoding: URI_Data_EncodingIdentifier.Any,
     public readonly data: Sequence.Byte.Encoded.Base64,
   ) {
@@ -30,23 +34,22 @@ class URI_Data
     );
   }
 
-  public get descriptor(): Exclude<URI_Data['overridableDescriptor'], null> {
-    if (
-      this.overridableDescriptor === null
-    ) return Attempt.abandon('Descriptor either needs to be initialized or overridden');
-
-    return this.overridableDescriptor;
+  public get descriptor(): Option.Option.Value<URI_Data['overridableDescriptor']> {
+    return Option.getOrThrowWith(
+      this.overridableDescriptor,
+      () => new Error('Descriptor either needs to be initialized or overridden'),
+    );
   }
 
   public static readonly encodingPrefix = ';';
 
-  public get serializableEncoding(): string | null {
+  public get serializableEncoding(): Option.Option<string> {
     if (
       this.encoding !== 'base64'
-    ) return null;
+    ) return Option.none();
 
     const prefixedEncoding = URI_Data.encodingPrefix.concat(this.encoding);
-    return prefixedEncoding;
+    return Option.some(prefixedEncoding);
   }
 
   public static readonly dataPrefix = ',';
@@ -57,12 +60,13 @@ class URI_Data
   }
 
   public override get path(): NonTrivialString {
-    const orderedPathComponents = [
-      this.descriptor.serialized,
-      this.serializableEncoding,
-      this.serializableData,
+    const sparseOrderedPathComponents: Option.Option<string>[] = [
+      Option.some(this.descriptor.serialized),
+      /*       */ this.serializableEncoding,
+      Option.some(this.serializableData),
     ];
 
+    const orderedPathComponents = Array.getSomes(sparseOrderedPathComponents);
     const serializedPathComponents = concatenated(...orderedPathComponents);
     return NonTrivialString(serializedPathComponents);
   }

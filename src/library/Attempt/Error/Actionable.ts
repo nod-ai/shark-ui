@@ -1,3 +1,7 @@
+import {
+  Option,
+} from 'effect';
+
 import type {
   Branded,
 } from '@/library/typeUtilities';
@@ -51,15 +55,17 @@ abstract class Attempt_Error_Actionable<
     const potentiallyActionableError = PotentiallyActionable.assume(givenError);
     const definitelyActionableError = interpretationOf(potentiallyActionableError);
 
-    if (
-      definitelyActionableError !== null
-    ) return definitelyActionableError;
-
-    return Attempt_Error_NonActionable.rethrow(potentiallyActionableError, {
-      message: NonActionableBuiltInError.describes(givenError)
-        ? 'Neglected to prevent built-in error'
-        : 'Neglected to interpret or prevent potentially actionable error',
-    });
+    return Option.getOrThrowWith(
+      definitelyActionableError,
+      () => new Error(
+        NonActionableBuiltInError.describes(givenError)
+          ? 'Neglected to prevent built-in error'
+          : 'Neglected to interpret or prevent potentially actionable error',
+        {
+          cause: potentiallyActionableError,
+        },
+      ),
+    );
   }
 }
 
