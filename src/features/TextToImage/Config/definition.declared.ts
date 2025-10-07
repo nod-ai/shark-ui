@@ -2,12 +2,11 @@ import {
   Schema,
 } from 'effect';
 
-import type Attempt from '@/library/Attempt';
+import Attempt from '@/library/Attempt';
 import type Parsable from '@/library/Parsable';
-import Parse from '@/library/Parse';
 import WebAPI from '@/library/WebAPI';
 
-import {
+import type {
   TextToImage_Config_ParsingError,
 } from './ParsingError';
 
@@ -27,12 +26,9 @@ class TextToImage_Config
     TextToImage_Config,
     TextToImage_Config_ParsingError
   > {
-    const parsedConfig = Parse.instanceFrom(givenSubject, {
-      using      : this,
-      failingWith: TextToImage_Config_ParsingError,
+    return Attempt.abandon('Pass', {
+      cause: givenSubject,
     });
-
-    return parsedConfig;
   }
 }
 
