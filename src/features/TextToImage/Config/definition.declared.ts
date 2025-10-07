@@ -15,7 +15,7 @@ class TextToImage_Config
     /** The details of the server that's providing text-to-image generation */
     server: Schema.NullOr(WebAPI.Server),
   }) {
-  public static parsedFrom(
+  private static parsedFrom(
     givenSubject: unknown,
   ): Attempt.Outcome<
     TextToImage_Config,

@@ -17,7 +17,7 @@ class Shortfin_TextToImage_SDXL_Client_Response_Body
       ),
     ),
   }) {
-  public static parsedFrom(
+  private static parsedFrom(
     givenSubject: unknown,
   ): Attempt.Outcome<
     Shortfin_TextToImage_SDXL_Client_Response_Body,
