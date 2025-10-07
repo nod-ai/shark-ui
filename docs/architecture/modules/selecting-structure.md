@@ -17,8 +17,8 @@ Choosing between a single-file or directory-based module structure is simple:
 ```mermaid
 flowchart TB
   Guard_A{"Does the bare minimum expression result in more than one top-level symbol?"}
-  Module_Directory["Use Directory Module (/User/)"]
-  Module_SingleFile["Use Single File (/User.ts)"]
+  Module_Directory["Use Directory Module (/GitHubRepositoryIssue/)"]
+  Module_SingleFile["Use Single File (/GitHubRepositoryIssue.ts)"]
 
   Guard_A -- Yes --> Module_Directory
   Guard_A -- No --> Module_SingleFile
@@ -47,39 +47,50 @@ Say we had a single-file module:
 
 ```plaintext
 src/
-├─ User.ts
+├─ GitHubRepositoryIssue.ts
 ```
 
-In this module, everything about a `User` can be described in a single class declaration:
+In this module, everything about a `GitHubRepositoryIssue` can be described in a single class declaration:
 
 ```typescript
-// User.ts
+// GitHubRepositoryIssue.ts
 
-class User {
+class GitHubRepositoryIssue
+{
   public constructor(
-    public readonly handle: string,
+    public title: string,
+    public body: string,
+    /** a.k.a. "type" */
+    public category:
+      | 'Feature'
+      | 'Bug'
+      | 'Task',
   ) {}
 }
 
 export {
-  User as default,
+  GitHubRepositoryIssue as default,
 };
 ```
 
 And using it is straightforward:
 
 ```typescript
-import User from './User';
+import GitHubRepositoryIssue from './GitHubRepositoryIssue';
 
-const someUser = new User('@JohnDoe');
+const someIssue = new GitHubRepositoryIssue(
+  'refactor: clean up modules',
+  '...',
+  'Task',
+);
 ```
 
 This same module _could_ be split into a directory structure, without affecting consumption:
 
 ```plaintext
 src/
-├─ User
-  ├─ definition.declared.ts    # Defines what a `User` is via a class declaration
+├─ GitHubRepositoryIssue
+  ├─ definition.declared.ts    # Defines what a `GitHubRepositoryIssue` is via a class declaration
   ├─ exports.object.primary.ts # Identifies the primary object to expose to consumers
   ├─ index.ts                  # Exposes the primary object as the `default` export from the entire module 
 ```
@@ -87,11 +98,11 @@ src/
 But it would be _excessive_ until a valid need actually presented itself, such as:
 
 - custom member types
-  - e.g. `User.Handle`
+  - e.g. `GitHubRepositoryIssue.Label`
 - nested classes
-  - e.g. `const someError = new User.ParsingError(...)`
+  - e.g. `const someError = new GitHubRepositoryIssue.DraftingError(...)`
 - nested types that require module augmentation
-  - e.g. `type SomeError = User.ParsingError`
+  - e.g. `type SomeError = GitHubRepositoryIssue.DraftingError`
 - declaration merging
   - e.g. an `enum` that's given static methods
 - multiple symbols to export
@@ -101,129 +112,86 @@ In fact, a directory structure like the one above would suggest that the module 
 
 ```plaintext
 src/
-├─ User.ts
+├─ GitHubRepositoryIssue.ts
 ```
 
 ### A Simple Case Becomes Complex
 
-Now, let's say that we add some parsing functionality to our `User` module:
+Now, let's say that we add support for `labels` to our `GitHubRepositoryIssue` module:
 
 ```typescript
-// User.ts
+// GitHubRepositoryIssue.ts
 
-import Attempt from '@/library/Attempt';
-import type Parsable from '@/library/Parsable';
-import ParsingError from '@/library/ParsingError';
+type GitHubRepositoryIssue_Label =
+  | 'bug'
+  | 'enhancement'
+  | 'documentation'
+;
 
-class User_ParsingError
-  extends ParsingError<
-    'User'
-  >
-{
-  ...
-}
-
-class User
-  implements Parsable.String<
-    typeof User,
-    /*  */ User_ParsingError
-  >
-{
+class GitHubRepositoryIssue {
   public constructor(
-    public readonly handle: string,
+    public title: string,
+    public body: string,
+    public labels: GitHubRepositoryIssue_Label[],
+    /** a.k.a. "type" */
+    public category:
+      | 'Feature'
+      | 'Bug'
+      | 'Task',
   ) {}
-
-  public static parsedFrom(
-    givenSubject: string,
-  ): Attempt.Outcome<
-    User,
-    User_ParsingError
-  > {
-    return Attempt.Fresh.that(ends => {
-      ...
-
-      if (
-        rawHandle.startsWith('@')
-      ) return ends.inSuccessWith(parsedUser);
-      
-      const newParsingError = new User_ParsingError('Expected handle to start with "@"');
-      return ends.inFailureWith(newParsingError);
-
-    });
-  }
 }
 
 export {
-  User as default,
-  User_ParsingError,
+  GitHubRepositoryIssue as default,
+  GitHubRepositoryIssue_Label,
 };
 ```
 
-By adding a single concept ("parsing"), the module has tripled in length and gained several new responsibilities:
+By adding a single concept ("labels"), the module has lengthened and gained several new responsibilities:
 
-- Importing necessary tools from the library.
-- Defining a new error type for parsing failures.
-- Exporting the new error type alongside the `User` class so consumers can identify those issues if they so choose.
+- Defining a new `GitHubRepositoryIssue_Label` type for our `labels` array.
+- Integrating it into `GitHubRepositoryIssue`.
+- Exporting the new type alongside the `GitHubRepositoryIssue` class so consumers can use it if they so choose.
 
-And because this module is a single file, we can't create `User.ParsingError` for easy consumer access without making the file even longer.
+And because this module is a single file, we can't create `GitHubRepositoryIssue.Label` for easy consumer access without making the file even longer.
 
 We can now justify splitting the module into a directory to better organize its components:
 
 ```plaintext
 src/
-├─ library/
-├─ User/
-  ├─ ParsingError.ts                         # Holds the `User_ParsingError` class
-  ├─ definition.declared.ts                  # Defines the `User` class
-  ├─ definition.declared.augmentation.ts     # Augments the `User` class with `User.ParsingError` type/constructor
-  ├─ definition.declared.withAugmentation.ts # Presents the augmented `User` class
-  ├─ exports.object.primary.ts               # Permits exposure of `User` (with nested `ParsingError`) to consumers
-  ├─ index.ts                                # Presents the final `User` object as the `default` export from the entire module
+├─ GitHubRepositoryIssue/
+  ├─ Label.ts                                # Holds the `GitHubRepositoryIssue_Label` type
+  ├─ definition.declared.ts                  # Defines the `GitHubRepositoryIssue` class
+  ├─ definition.declared.augmentation.ts     # Augments the `GitHubRepositoryIssue` class with `GitHubRepositoryIssue.Label` type
+  ├─ definition.declared.withAugmentation.ts # Presents the augmented `GitHubRepositoryIssue` class
+  ├─ exports.object.primary.ts               # Permits exposure of `GitHubRepositoryIssue` (with nested `Label`) to consumers
+  ├─ index.ts                                # Presents the final `GitHubRepositoryIssue` object as the `default` export from the entire module
 ```
 
 This leaves the core file with only a single declaration, narrowing its focus as much as possible:
 
 ```typescript
-// User/definition.declared.ts
+// GitHubRepositoryIssue/definition.declared.ts
 
-import Attempt from '@/library/Attempt';
-import type Parsable from '@/library/Parsable';
+import type {
+  GitHubRepositoryIssue_Label,
+} from './Label';
 
-import {
-  User_ParsingError
-} from './ParsingError';
-
-class User
-  implements Parsable.String<
-    typeof User,
-    /*  */ User_ParsingError
-  >
-{
+class GitHubRepositoryIssue {
   public constructor(
-    public readonly handle: string,
+    public title: string,
+    public body: string,
+    public labels: GitHubRepositoryIssue_Label[],
+    /** a.k.a. "type" */
+    public category:
+      | 'Feature'
+      | 'Bug'
+      | 'Task',
   ) {}
-
-  public static parsedFrom(
-    givenSubject: string,
-  ): Attempt.Outcome<
-    User,
-    User_ParsingError
-  > {
-    return Attempt.Fresh.that(ends => {
-      ...
-
-      if (
-        rawHandle.startsWith('@')
-      ) return ends.inSuccessWith(parsedUser);
-
-      const newParsingError = new User_ParsingError('Expected handle to start with "@"');
-      return ends.inFailureWith(newParsingError);
-    });
-  }
 }
 
 export {
-  User,
+  GitHubRepositoryIssue,
 };
 ```
 
