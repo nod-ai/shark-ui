@@ -16,5 +16,5 @@ type Parsable<
 > = SomeImplementer['prototype'];
 
 export type {
-  Parsable,
+  Parsable as default,
 };
