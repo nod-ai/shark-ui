@@ -97,8 +97,26 @@ const extendedConfig: ConfigWithExtends = {
   },
 };
 
+const ruleForNoUnusedModules: ConfigWithExtends = {
+  ignores: [
+    '*.d.ts',
+    '*.config.ts',
+    'eslint.*.ts',
+    'definition.declared.augmentation.ts',
+  ],
+  rules: {
+    'import/no-unused-modules': [
+      'error',
+      {
+        unusedExports: true,
+      },
+    ],
+  },
+};
+
 const pluginImport: ConfigWithExtends[] = [
   extendedConfig,
+  ruleForNoUnusedModules,
 ];
 
 export {
