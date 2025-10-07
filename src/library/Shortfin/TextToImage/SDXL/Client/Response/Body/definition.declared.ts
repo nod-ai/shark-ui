@@ -5,10 +5,6 @@ import {
 import Attempt from '@/library/Attempt';
 import Sequence from '@/library/Sequence';
 
-import type {
-  Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError,
-} from './ParsingError';
-
 class Shortfin_TextToImage_SDXL_Client_Response_Body
   extends Schema.Class<Shortfin_TextToImage_SDXL_Client_Response_Body>('Shortfin_TextToImage_SDXL_Client_Response_Body')({
     images: Schema.NonEmptyArray(
@@ -21,7 +17,7 @@ class Shortfin_TextToImage_SDXL_Client_Response_Body
     givenSubject: unknown,
   ): Attempt.Outcome<
     Shortfin_TextToImage_SDXL_Client_Response_Body,
-    Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError
+    Attempt.Error.Actionable<'Pass'>
   > {
     return Attempt.abandon('Pass', {
       cause: givenSubject,

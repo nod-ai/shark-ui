@@ -5,10 +5,6 @@ import {
 import Attempt from '@/library/Attempt';
 import WebAPI from '@/library/WebAPI';
 
-import type {
-  TextToImage_Config_ParsingError,
-} from './ParsingError';
-
 /** The user-provided settings for the text-to-image feature */
 class TextToImage_Config
   extends Schema.Class<TextToImage_Config>('TextToImage_Config')({
@@ -19,7 +15,7 @@ class TextToImage_Config
     givenSubject: unknown,
   ): Attempt.Outcome<
     TextToImage_Config,
-    TextToImage_Config_ParsingError
+    Attempt.Error.Actionable<'Pass'>
   > {
     return Attempt.abandon('Pass', {
       cause: givenSubject,
