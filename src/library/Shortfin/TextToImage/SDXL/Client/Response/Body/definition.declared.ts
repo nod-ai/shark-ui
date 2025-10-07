@@ -3,7 +3,6 @@ import {
 } from 'effect';
 
 import Attempt from '@/library/Attempt';
-import type Parsable from '@/library/Parsable';
 import Sequence from '@/library/Sequence';
 
 import type {
@@ -17,11 +16,7 @@ class Shortfin_TextToImage_SDXL_Client_Response_Body
         Schema.fromBrand(Sequence.Byte.Encoded.Base64),
       ),
     ),
-  })
-  implements Parsable<
-    typeof Shortfin_TextToImage_SDXL_Client_Response_Body,
-    /*  */ Shortfin_TextToImage_SDXL_Client_Response_Body_ParsingError
-  > {
+  }) {
   public static parsedFrom(
     givenSubject: unknown,
   ): Attempt.Outcome<

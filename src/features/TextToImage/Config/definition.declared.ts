@@ -3,7 +3,6 @@ import {
 } from 'effect';
 
 import Attempt from '@/library/Attempt';
-import type Parsable from '@/library/Parsable';
 import WebAPI from '@/library/WebAPI';
 
 import type {
@@ -15,11 +14,7 @@ class TextToImage_Config
   extends Schema.Class<TextToImage_Config>('TextToImage_Config')({
     /** The details of the server that's providing text-to-image generation */
     server: Schema.NullOr(WebAPI.Server),
-  })
-  implements Parsable<
-    typeof TextToImage_Config,
-    /*  */ TextToImage_Config_ParsingError
-  > {
+  }) {
   public static parsedFrom(
     givenSubject: unknown,
   ): Attempt.Outcome<
