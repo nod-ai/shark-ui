@@ -1,5 +1,0 @@
-const emptyString = '';
-
-export {
-  emptyString,
-};
