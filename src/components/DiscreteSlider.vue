@@ -73,7 +73,7 @@ const tickLabels = (
     by: SliderTickPosition;
     in: Range;
   },
-): SliderTickLabelsByPosition | null => {
+): SliderTickLabelsByPosition => {
   const derivedOffset = stylisticOffset({
     for: givenPosition,
     in : givenRange,
