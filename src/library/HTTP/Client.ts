@@ -16,9 +16,8 @@ import {
 
 class HTTP_Client {
   public static readonly local = (() => {
-    const outcomeOfParsingOrigin = URLComponent.Origin.parsedFrom(location.origin);
-    const parsedOrigin = outcomeOfParsingOrigin.forciblyUnwrap(/* the only way for the app to be browser-accessible is to have a parsable origin */);
-    return new HTTP_Client(parsedOrigin);
+    const localOrigin = URLComponent.Origin(location.origin);
+    return new HTTP_Client(localOrigin);
   })();
 
   public constructor(
@@ -31,7 +30,7 @@ class HTTP_Client {
   ): boolean => bodyOf(givenResponse).isSuggestedToBeDigestibleAs(ContentDescriptor.json);
 
   public originAt(givenPath: URLComponent.Path): URL {
-    const serializedURLComponents = this.origin.appendedWith(givenPath);
+    const serializedURLComponents = this.origin.concat(givenPath);
     return new URL(serializedURLComponents);
   }
 
