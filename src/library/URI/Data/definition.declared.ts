@@ -4,6 +4,10 @@ import NonTrivialString from '@/library/NonTrivialString';
 import type Sequence from '@/library/Sequence';
 
 import {
+  concatenated,
+} from '@/library/utilitiesByType/string';
+
+import {
   URI,
 } from '../definition.declared.ts';
 
@@ -14,7 +18,7 @@ import type {
 /** See [RFC 2397](https://datatracker.ietf.org/doc/rfc2397) for more info */
 class URI_Data
   extends URI {
-  public static readonly scheme = NonTrivialString.parsedFrom('data').forciblyUnwrap();
+  public static readonly scheme = NonTrivialString('data');
 
   public constructor(
     private readonly overridableDescriptor: ContentDescriptor | null,
@@ -57,10 +61,10 @@ class URI_Data
       this.descriptor.serialized,
       this.serializableEncoding,
       this.serializableData,
-    ] as const;
+    ];
 
-    const serializedPathComponents = NonTrivialString.fromConcatenating(...orderedPathComponents);
-    return serializedPathComponents;
+    const serializedPathComponents = concatenated(...orderedPathComponents);
+    return NonTrivialString(serializedPathComponents);
   }
 }
 

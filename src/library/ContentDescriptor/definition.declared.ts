@@ -26,7 +26,7 @@ class ContentDescriptor {
 
   public get serializableTopLevelDescriptor(): NonTrivialString {
     const suffixedTopLevelDescriptor = this.topLevelDescriptor.concat(ContentDescriptor.suffixForTopLevelDescriptor);
-    const coercedTopLevelDescriptor = NonTrivialString.parsedFrom(suffixedTopLevelDescriptor).forciblyUnwrap(/* Proven safe by inspecting intellisense of `topLevelDescriptor` */);
+    const coercedTopLevelDescriptor = NonTrivialString(suffixedTopLevelDescriptor);
     return coercedTopLevelDescriptor;
   }
 
@@ -75,10 +75,10 @@ class ContentDescriptor {
       this.bottomLevelDescriptor,
       this.serializableStructureDescriptor,
       this.serializableParameters,
-    ] as const;
+    ];
 
-    const serializedComponents = NonTrivialString.fromConcatenating(...orderedComponents);
-    return serializedComponents;
+    const serializedComponents = concatenated(...orderedComponents);
+    return NonTrivialString(serializedComponents);
   }
 }
 

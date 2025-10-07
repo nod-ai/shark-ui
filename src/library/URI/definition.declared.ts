@@ -37,7 +37,7 @@ class URI {
       this.authority === null
     ) return null;
 
-    const prefixedAuthority = this.authority.prependedWith(URI.authorityPrefix);
+    const prefixedAuthority = URI.authorityPrefix.concat(this.authority);
     return prefixedAuthority;
   }
 
@@ -56,7 +56,7 @@ class URI {
       this.query === null
     ) return null;
 
-    const prefixedQuery = this.query.prependedWith(URI.queryPrefix);
+    const prefixedQuery = URI.queryPrefix.concat(this.query);
     return prefixedQuery;
   }
 
@@ -67,7 +67,7 @@ class URI {
       this.fragment === null
     ) return null;
 
-    const prefixedFragment = this.fragment.prependedWith(URI.fragmentPrefix);
+    const prefixedFragment = URI.fragmentPrefix.concat(this.fragment);
     return prefixedFragment;
   }
 
