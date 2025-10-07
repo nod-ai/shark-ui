@@ -1,3 +1,7 @@
+import {
+  Schema,
+} from 'effect';
+
 import Attempt from '@/library/Attempt';
 import ContentDescriptor from '@/library/ContentDescriptor';
 import HTTP from '@/library/HTTP';
@@ -44,11 +48,8 @@ class Shortfin_TextToImage_SDXL_Client
       ) return outcomeOfSubmittingResource;
 
       const rawResource = outcomeOfSubmittingResource.unwrapped;
-
-      const parsedResource = Shortfin_TextToImage_SDXL_Client_Response.Body.parsedFrom(rawResource)
-        .forciblyUnwrap(/* Implementation must align with established contract. */);
-
-      const [soleGeneratedImage] = parsedResource.images;
+      const decodedResource = Schema.decodeUnknownSync(Shortfin_TextToImage_SDXL_Client_Response.Body)(rawResource);
+      const [soleGeneratedImage] = decodedResource.images;
       return ends.inSuccessWith(soleGeneratedImage);
     });
   }

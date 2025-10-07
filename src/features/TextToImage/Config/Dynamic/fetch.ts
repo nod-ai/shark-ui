@@ -1,3 +1,7 @@
+import {
+  Schema,
+} from 'effect';
+
 import Attempt from '@/library/Attempt';
 import HTTP from '@/library/HTTP';
 
@@ -21,7 +25,7 @@ const TextToImage_Config_Dynamic_fetch = (): Promise<
   });
 
   return ends.inTermsOf(outcomeOfFetchingResource, {
-    product: $0 => TextToImage_Config.parsedFrom($0).forciblyUnwrap(/* Implementation must align with established contract. */),
+    product: $0 => Schema.decodeUnknownSync(TextToImage_Config)($0),
     cause  : $0 => new TextToImage_Config_Dynamic_Fetching.Error(TextToImage_Config_Dynamic_endpoint, $0),
   });
 });
