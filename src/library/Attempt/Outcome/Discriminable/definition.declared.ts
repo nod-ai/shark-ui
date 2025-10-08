@@ -30,12 +30,16 @@ interface Attempt_Outcome_Discriminable<
   readonly isSuccess: Is<this['discriminant'], 'success'>;
   readonly isFailure: Not<this['isSuccess']>;
 
-  optionallyUnwrap(): If<this['isSuccess'],
+  unwrapOr<
+    SomeFallback,
+  >(
+    givenFallback: SomeFallback,
+  ): If<this['isSuccess'],
     SomePayload,
-    null
+    SomeFallback
   >;
 
-  forciblyUnwrap(): If<this['isSuccess'],
+  unwrapOrThrow(): If<this['isSuccess'],
     SomePayload,
     never
   >;
