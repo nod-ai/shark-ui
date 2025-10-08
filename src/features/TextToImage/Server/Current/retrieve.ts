@@ -27,13 +27,13 @@ const TextToImage_Server_Current_retrieve = (): Promise<
     TextToImage_Server_Current_accordingToEnvironment !== null
   ) return ends.inSuccessWith(TextToImage_Server_Current_accordingToEnvironment);
 
-  const staticConfig = (await TextToImage_Config.Static.read()).unwrapOrNull() ?? TextToImage_Config.empty;
+  const staticConfig = (await TextToImage_Config.Static.read()).unwrapOr(TextToImage_Config.empty);
 
   if (
     staticConfig.server !== null
   ) return ends.inSuccessWith(staticConfig.server);
 
-  const dynamicConfig = (await TextToImage_Config.Dynamic.fetch()).unwrapOrNull() ?? TextToImage_Config.empty;
+  const dynamicConfig = (await TextToImage_Config.Dynamic.fetch()).unwrapOr(TextToImage_Config.empty);
 
   if (
     dynamicConfig.server !== null
