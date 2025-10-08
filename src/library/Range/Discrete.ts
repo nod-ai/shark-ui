@@ -62,7 +62,7 @@ class Range_Discrete
     return (overstep === 0) && super.exclusivelyContains(givenValue);
   }
 
-  private* generateExclusiveSteps() {
+  private* generateExclusiveSteps(): Generator<number, void, unknown> {
     let eachExclusiveStep = this.lowerBound + this.stepSize;
 
     while (eachExclusiveStep < this.upperBound) {
@@ -71,7 +71,7 @@ class Range_Discrete
     }
   }
 
-  private* generateInclusiveSteps() {
+  private* generateInclusiveSteps(): Generator<number, void, unknown> {
     yield this.lowerBound;
 
     if (

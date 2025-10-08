@@ -13,7 +13,7 @@ function TextToImage_Pipeline_Output(
   namespaceOnly: never = Attempt.Error.NonActionable.throw(
     `Unexpected call of module augmentation provision for ${TextToImage_Pipeline_Output.name}.`,
   ),
-) {
+): never {
   return namespaceOnly;
 }
 

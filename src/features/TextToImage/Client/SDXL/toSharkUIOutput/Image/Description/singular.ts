@@ -11,7 +11,7 @@ const toSharkUIOutput_Image_Description_singular = (
 ): TextToImage_Pipeline.Output['image']['description'] => {
   const isDefault = (
     givenWeight: TextPrompt['weight'],
-  ) => {
+  ): givenWeight is 1 | undefined => {
     return (givenWeight === undefined) || (givenWeight === 1);
   };
 

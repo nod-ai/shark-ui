@@ -32,7 +32,7 @@ const given = defineProps<{
   tickStep: Range.Discrete['stepSize'];
 }>();
 
-const incrementCurrentValueBy = (givenStepCount: number) => {
+const incrementCurrentValueBy = (givenStepCount: number): void => {
   const changeInValue = givenStepCount * given.range.stepSize;
   const nextValue = get(currentValue) + changeInValue;
   set(currentValue, nextValue);

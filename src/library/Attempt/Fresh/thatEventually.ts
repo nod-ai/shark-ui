@@ -31,7 +31,7 @@ const Attempt_Fresh_thatEventually = async <
   >,
 >(
   endsAccordingTo: Attempt_End.Retriever<SomeInferredOutcome>,
-) => {
+): Promise<SomeEquivalentOutcome> => {
   return safeAsync({
     async try() {
       return await endsAccordingTo(handles) as unknown as SomeEquivalentOutcome;

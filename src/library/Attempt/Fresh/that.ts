@@ -32,7 +32,7 @@ const Attempt_Fresh_that = <
   >,
 >(
   endsAccordingTo: Attempt_End.Getter<SomeInferredOutcome>,
-) => {
+): SomeEquivalentOutcome => {
   return safe({
     try() {
       return endsAccordingTo(handles) as unknown as SomeEquivalentOutcome;
