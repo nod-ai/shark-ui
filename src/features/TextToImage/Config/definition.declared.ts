@@ -8,7 +8,7 @@ import WebAPI from '@/library/WebAPI';
 class TextToImage_Config
   extends Schema.Class<TextToImage_Config>('TextToImage_Config')({
     /** The details of the server that's providing text-to-image generation */
-    server: Schema.NullOr(WebAPI.Server),
+    server: Schema.OptionFromNullOr(WebAPI.Server),
   }) {
 }
 

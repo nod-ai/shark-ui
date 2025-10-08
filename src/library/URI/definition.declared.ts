@@ -1,4 +1,8 @@
-import Attempt from '@/library/Attempt';
+import {
+  Array,
+  Option,
+} from 'effect';
+
 import type NonTrivialString from '@/library/NonTrivialString';
 
 import {
@@ -16,11 +20,11 @@ import {
  */
 class URI {
   public constructor(
-    public readonly scheme/*      */: NonTrivialString,
-    public readonly authority/*   */: NonTrivialString | null = null,
-    private readonly overridablePath: NonTrivialString | null = null,
-    public readonly query/*       */: NonTrivialString | null = null,
-    public readonly fragment/*    */: NonTrivialString | null = null,
+    public readonly scheme/*      */: /*         */ NonTrivialString,
+    public readonly authority/*   */: Option.Option<NonTrivialString> = Option.none(),
+    private readonly overridablePath: Option.Option<NonTrivialString> = Option.none(),
+    public readonly query/*       */: Option.Option<NonTrivialString> = Option.none(),
+    public readonly fragment/*    */: Option.Option<NonTrivialString> = Option.none(),
   ) {}
 
   public static readonly schemeSuffix = ':';
@@ -32,54 +36,48 @@ class URI {
 
   public static readonly authorityPrefix = '//';
 
-  private get serializableAuthority(): string | null {
-    if (
-      this.authority === null
-    ) return null;
-
-    const prefixedAuthority = URI.authorityPrefix.concat(this.authority);
-    return prefixedAuthority;
+  private get serializableAuthority(): Option.Option<string> {
+    return Option.map(
+      this.authority,
+      $0 => URI.authorityPrefix.concat($0),
+    );
   }
 
-  public get path(): Exclude<URI['overridablePath'], null> {
-    if (
-      this.overridablePath === null
-    ) return Attempt.abandon('`path` must either be a) provided via constructor or b) overridden via public getter');
-
-    return this.overridablePath;
+  public get path(): Option.Option.Value<URI['overridablePath']> {
+    return Option.getOrThrowWith(
+      this.overridablePath,
+      () => new Error('`path` must either be a) provided via constructor or b) overridden via public getter'),
+    );
   }
 
   public static readonly queryPrefix = '?';
 
-  private get serializableQuery(): string | null {
-    if (
-      this.query === null
-    ) return null;
-
-    const prefixedQuery = URI.queryPrefix.concat(this.query);
-    return prefixedQuery;
+  private get serializableQuery(): Option.Option<string> {
+    return Option.map(
+      this.query,
+      $0 => URI.queryPrefix.concat($0),
+    );
   }
 
   public static readonly fragmentPrefix = '#';
 
-  private get serializableFragment(): string | null {
-    if (
-      this.fragment === null
-    ) return null;
-
-    const prefixedFragment = URI.fragmentPrefix.concat(this.fragment);
-    return prefixedFragment;
+  private get serializableFragment(): Option.Option<string> {
+    return Option.map(
+      this.fragment,
+      $0 => URI.fragmentPrefix.concat($0),
+    );
   }
 
   public get serialized(): string {
-    const orderedComponents = [
-      this.serializableScheme,
-      this.serializableAuthority,
-      this.path,
-      this.serializableQuery,
-      this.serializableFragment,
+    const sparseOrderedComponents: Option.Option<string>[] = [
+      Option.some(this.serializableScheme),
+      /*       */ this.serializableAuthority,
+      Option.some(this.path),
+      /*       */ this.serializableQuery,
+      /*       */ this.serializableFragment,
     ];
 
+    const orderedComponents = Array.getSomes(sparseOrderedComponents);
     const serializedComponents = concatenated(...orderedComponents);
     return serializedComponents;
   }

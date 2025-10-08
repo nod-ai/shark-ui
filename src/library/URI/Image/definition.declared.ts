@@ -1,3 +1,7 @@
+import {
+  Option,
+} from 'effect';
+
 import ContentDescriptor from '@/library/ContentDescriptor';
 import type Sequence from '@/library/Sequence';
 
@@ -19,7 +23,7 @@ class URI_Image
     givenData: Sequence.Byte.Encoded.Base64,
   ) {
     super(
-      null,
+      Option.none(),
       givenEncoding,
       givenData,
     );
@@ -28,10 +32,10 @@ class URI_Image
   public override get descriptor(): URI_Data['descriptor'] {
     const computedDescriptor = new ContentDescriptor(
       URI_Image.topLevelDescriptor,
-      null,
+      Option.none(),
       this.format,
-      null,
-      null,
+      Option.none(),
+      Option.none(),
     );
 
     return computedDescriptor;

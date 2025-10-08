@@ -1,3 +1,8 @@
+import {
+  Array,
+  Option,
+} from 'effect';
+
 import NonTrivialString from '@/library/NonTrivialString';
 
 import {
@@ -16,10 +21,10 @@ import type {
 class ContentDescriptor {
   public constructor(
     public topLevelDescriptor: ContentDescriptor_TopLevel.Any,
-    public tree: string[] | null,
+    public tree: Option.Option<string[]>,
     public bottomLevelDescriptor: string,
-    public structureDescriptor: ContentDescriptor_StructuredSyntaxNameSuffix.Any | null,
-    public parameters: Record<string, string> | null,
+    public structureDescriptor: Option.Option<ContentDescriptor_StructuredSyntaxNameSuffix.Any>,
+    public parameters: Option.Option<Record<string, string>>,
   ) {}
 
   public static readonly suffixForTopLevelDescriptor = '/';
@@ -32,51 +37,52 @@ class ContentDescriptor {
 
   public static readonly treeBranchSuffix = '.';
 
-  private get serializableTree(): string | null {
-    if (
-      this.tree === null
-    ) return null;
-
-    const suffixedTreeBranches = this.tree.map($0 => $0.concat(ContentDescriptor.treeBranchSuffix));
-    const serializedTreeBranches = concatenated(...suffixedTreeBranches);
-    return serializedTreeBranches;
+  private get serializableTree(): Option.Option<string> {
+    return Option.map(
+      this.tree,
+      ($0) => {
+        const suffixedTreeBranches = $0.map($0 => $0.concat(ContentDescriptor.treeBranchSuffix));
+        const serializedTreeBranches = concatenated(...suffixedTreeBranches);
+        return serializedTreeBranches;
+      },
+    );
   }
 
   public static readonly structureDescriptorPrefix = '+';
 
-  private get serializableStructureDescriptor(): string | null {
-    if (
-      this.structureDescriptor === null
-    ) return null;
-
-    const prefixedStructureDescriptor = ContentDescriptor.structureDescriptorPrefix.concat(this.structureDescriptor);
-    return prefixedStructureDescriptor;
+  private get serializableStructureDescriptor(): Option.Option<string> {
+    return Option.map(
+      this.structureDescriptor,
+      $0 => ContentDescriptor.structureDescriptorPrefix.concat($0),
+    );
   }
 
   public static readonly parameterPrefix = ';';
   public static readonly parameterKeyValueDelimiter = '=';
 
-  private get serializableParameters(): string | null {
-    if (
-      this.parameters === null
-    ) return null;
+  private get serializableParameters(): Option.Option<string> {
+    return Option.map(
+      this.parameters,
+      ($0) => {
+        const serializableParameterEntries = Object.entries($0)
+          .map($0 => $0.join(ContentDescriptor.parameterKeyValueDelimiter))
+          .map($0 => ContentDescriptor.parameterPrefix.concat($0));
 
-    const serializableParameterEntries = Object.entries(this.parameters)
-      .map($0 => $0.join(ContentDescriptor.parameterKeyValueDelimiter))
-      .map($0 => ContentDescriptor.parameterPrefix.concat($0));
-
-    return concatenated(...serializableParameterEntries);
+        return concatenated(...serializableParameterEntries);
+      },
+    );
   }
 
   public get serialized(): NonTrivialString {
-    const orderedComponents = [
-      this.serializableTopLevelDescriptor,
-      this.serializableTree,
-      this.bottomLevelDescriptor,
-      this.serializableStructureDescriptor,
-      this.serializableParameters,
+    const sparseOrderedComponents: Option.Option<string>[] = [
+      Option.some(this.serializableTopLevelDescriptor),
+      /*       */ this.serializableTree,
+      Option.some(this.bottomLevelDescriptor),
+      /*       */ this.serializableStructureDescriptor,
+      /*       */ this.serializableParameters,
     ];
 
+    const orderedComponents = Array.getSomes(sparseOrderedComponents);
     const serializedComponents = concatenated(...orderedComponents);
     return NonTrivialString(serializedComponents);
   }

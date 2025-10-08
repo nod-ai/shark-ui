@@ -1,4 +1,8 @@
 import type {
+  Option,
+} from 'effect';
+
+import type {
   Attempt_Error,
 } from './Error';
 
@@ -12,10 +16,12 @@ interface Attempt_Progressive<
 > {
   initiate: () => Promise<void>;
   isInProgress: boolean;
-  outcome: Attempt_Outcome<
-    SomeProduct,
-    SomeActionableError
-  > | null;
+  outcome: Option.Option<
+    Attempt_Outcome<
+      SomeProduct,
+      SomeActionableError
+    >
+  >;
 }
 
 export type {

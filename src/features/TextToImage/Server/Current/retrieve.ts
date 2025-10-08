@@ -1,3 +1,7 @@
+import {
+  Option,
+} from 'effect';
+
 import Attempt from '@/library/Attempt';
 import type WebAPI from '@/library/WebAPI';
 
@@ -24,20 +28,20 @@ const TextToImage_Server_Current_retrieve = (): Promise<
   >
 > => Attempt.Fresh.thatEventually(async (ends) => {
   if (
-    TextToImage_Server_Current_accordingToEnvironment !== null
-  ) return ends.inSuccessWith(TextToImage_Server_Current_accordingToEnvironment);
+    Option.isSome(TextToImage_Server_Current_accordingToEnvironment)
+  ) return ends.inSuccessWith(Option.getOrThrow(TextToImage_Server_Current_accordingToEnvironment));
 
   const staticConfig = (await TextToImage_Config.Static.read()).unwrapOr(TextToImage_Config.empty);
 
   if (
-    staticConfig.server !== null
-  ) return ends.inSuccessWith(staticConfig.server);
+    Option.isSome(staticConfig.server)
+  ) return ends.inSuccessWith(Option.getOrThrow(staticConfig.server));
 
   const dynamicConfig = (await TextToImage_Config.Dynamic.fetch()).unwrapOr(TextToImage_Config.empty);
 
   if (
-    dynamicConfig.server !== null
-  ) return ends.inSuccessWith(dynamicConfig.server);
+    Option.isSome(dynamicConfig.server)
+  ) return ends.inSuccessWith(Option.getOrThrow(dynamicConfig.server));
 
   const newSpecificationError = new TextToImage_Server_Error.MissingSpecification(
     TextToImage_Server_Origin.environmentKey,

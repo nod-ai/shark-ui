@@ -1,3 +1,7 @@
+import {
+  Array,
+} from 'effect';
+
 import type {
   GenerateFromTextRequest,
 } from 'stabilityai-client-typescript/models/operations';
@@ -11,9 +15,9 @@ import {
 const toShortfinRequestBody_Batched = (
   givenRequestBodies: GenerateFromTextRequest['textToImageRequestBody'][],
 ): Shortfin.TextToImage.SDXL.Client.Request.Body.Batched => {
-  const derivedShortfinRequestBodies = givenRequestBodies
-    .map(toShortfinRequestBody)
-    .filter($0 => $0 !== null);
+  const derivedShortfinRequestBodies = Array.getSomes(
+    givenRequestBodies.map(toShortfinRequestBody),
+  );
 
   const derivedBatchedRequestBody = new Shortfin.TextToImage.SDXL.Client.Request.Body.Batched();
 

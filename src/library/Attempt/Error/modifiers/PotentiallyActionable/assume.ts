@@ -1,4 +1,8 @@
 import {
+  Option,
+} from 'effect';
+
+import {
   Attempt_Error_Creation,
 } from '../../Creation';
 
@@ -21,8 +25,8 @@ const PotentiallyActionable_assume = <
 
   if (
     !(givenError instanceof Attempt_Error_Creation)
-    && (givenError.charge !== null)
-  ) return givenError.charge as PotentiallyActionable<SomeError>;
+    && Option.isSome(givenError.charge)
+  ) return Option.getOrThrow(givenError.charge) as PotentiallyActionable<SomeError>;
 
   return givenError.throw();
 };

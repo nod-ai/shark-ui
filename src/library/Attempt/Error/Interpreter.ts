@@ -1,4 +1,8 @@
 import type {
+  Option,
+} from 'effect';
+
+import type {
   Attempt_Error_Actionable,
 } from './Actionable';
 
@@ -10,7 +14,7 @@ type Attempt_Error_Interpreter<
   SomeActionableError extends Attempt_Error_Actionable<string>,
 > = (
   caughtError: PotentiallyActionable<Error>
-) => SomeActionableError | null;
+) => Option.Option<SomeActionableError>;
 
 export type {
   Attempt_Error_Interpreter,

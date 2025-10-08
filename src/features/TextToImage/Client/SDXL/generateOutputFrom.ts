@@ -1,3 +1,7 @@
+import {
+  Option,
+} from 'effect';
+
 import type {
   GenerateFromTextRequest,
 } from 'stabilityai-client-typescript/models/operations';
@@ -59,9 +63,9 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     interpretationOf: (caughtError) => {
       if (
         !(caughtError instanceof HTTP.Endpoint.Error.FailedToSendRequest)
-      ) return null;
+      ) return Option.none();
 
-      return new TextToImage_Server.Error.FailedToConnect(caughtError.endpoint);
+      return Option.some(new TextToImage_Server.Error.FailedToConnect(caughtError.endpoint));
     },
   });
 

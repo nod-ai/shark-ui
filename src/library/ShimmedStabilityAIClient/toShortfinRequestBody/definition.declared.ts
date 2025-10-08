@@ -1,3 +1,7 @@
+import {
+  Option,
+} from 'effect';
+
 import type {
   GenerateFromTextRequest,
 } from 'stabilityai-client-typescript/models/operations';
@@ -10,14 +14,14 @@ import {
 
 function toShortfinRequestBody(
   givenRequestBody: GenerateFromTextRequest['textToImageRequestBody'],
-): Shortfin.TextToImage.SDXL.Client.Request.Body | null {
+): Option.Option<Shortfin.TextToImage.SDXL.Client.Request.Body> {
   if (
     (givenRequestBody.height === undefined)
     || (givenRequestBody.width === undefined)
     || (givenRequestBody.steps === undefined)
     || (givenRequestBody.cfgScale === undefined)
     || (givenRequestBody.seed === undefined)
-  ) return null;
+  ) return Option.none();
 
   const derivedShortfinRequestBody = {
     prompt: toShortfinRequestBody_Prompt(givenRequestBody.textPrompts, {
@@ -33,7 +37,7 @@ function toShortfinRequestBody(
     seed          : givenRequestBody.seed,
   };
 
-  return derivedShortfinRequestBody;
+  return Option.some(derivedShortfinRequestBody);
 }
 
 export {

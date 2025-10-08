@@ -1,3 +1,7 @@
+import {
+  Option,
+} from 'effect';
+
 import type {
   Branded,
 } from '@/library/typeUtilities';
@@ -63,12 +67,12 @@ class Attempt_Error_NonActionable
   }
 
   /** The error being "escorted" across the call stack by this instance, if any */
-  public get charge(): Error | null {
+  public get charge(): Option.Option<Error> {
     if (
       this.cause instanceof Error
-    ) return this.cause;
+    ) return Option.some(this.cause);
 
-    return null;
+    return Option.none();
   }
 }
 
