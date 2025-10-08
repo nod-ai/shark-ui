@@ -22,17 +22,19 @@ import {
 
 const Attempt_Fresh_thatEventually = async <
   SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error.Actionable<string>>,
->(
-  endsAccordingTo: Attempt_End.Retriever<SomeInferredOutcome>,
-) => {
-  type EquivalentOutcome = Attempt_Outcome<
+  SomeEquivalentOutcome extends Attempt_Outcome<
     ProductOf<SomeInferredOutcome>,
     CauseOf<SomeInferredOutcome>
-  >;
-
+  > = Attempt_Outcome<
+    ProductOf<SomeInferredOutcome>,
+    CauseOf<SomeInferredOutcome>
+  >,
+>(
+  endsAccordingTo: Attempt_End.Retriever<SomeInferredOutcome>,
+): Promise<SomeEquivalentOutcome> => {
   return safeAsync({
     async try() {
-      return await endsAccordingTo(handles) as EquivalentOutcome;
+      return await endsAccordingTo(handles) as unknown as SomeEquivalentOutcome;
     },
     catch(someError) {
       return Attempt_Error.Creation.rethrow(someError);

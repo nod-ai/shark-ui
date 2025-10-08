@@ -2,6 +2,7 @@ import {
   GitHub_Repository_Issue,
 } from './definition.declared.ts';
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type -- needed to create mixin
 function GitHub_Repository_Issue_Draftable(
   givenSite: URL,
 ) {

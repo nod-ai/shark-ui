@@ -61,7 +61,7 @@ function Attempt_Outcome_Success(
   namespaceOnly: never = Attempt_Error.NonActionable.throw(
     `Unexpected call of module augmentation provision for "${Attempt_Outcome_Success.name}".`,
   ),
-) {
+): never {
   return namespaceOnly;
 }
 

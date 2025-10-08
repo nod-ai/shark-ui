@@ -8,7 +8,7 @@ import {
   Reporting_formatFor,
 } from './formatFor';
 
-const Reporting_promptUserWith = (givenError: Error) => {
+const Reporting_promptUserWith = (givenError: Error): void => {
   const unexpectedError = Contextualized.cast(givenError, 'Unexpected Error');
   console.debug(givenError);
   const formattedErrorDetails = Reporting_formatFor(unexpectedError);

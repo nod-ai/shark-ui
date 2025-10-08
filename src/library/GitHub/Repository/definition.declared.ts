@@ -25,7 +25,7 @@ class GitHub_Repository<
     return new URL(GitHub_site.toString().concat(this.path.toString()));
   }
 
-  public get Issue() {
+  public get Issue(): ReturnType<typeof GitHub_Repository_Issue.Draftable> {
     return GitHub_Repository_Issue.Draftable(this.site);
   }
 }

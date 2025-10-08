@@ -26,7 +26,7 @@ const Attempt_Adapted_toSettle = async <
     SomeActionableError
   >
 > => {
-  const getPromisedProduct = () => promisedProduct;
+  const getPromisedProduct = (): Promise<SomeProduct> => promisedProduct;
   return Attempt_Adapted_toEventually(getPromisedProduct, givenConfig);
 };
 

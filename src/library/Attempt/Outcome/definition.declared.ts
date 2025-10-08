@@ -22,7 +22,7 @@ function Attempt_Outcome(
   namespaceOnly: never = Attempt_Error.NonActionable.throw(
     `Unexpected call of module augmentation provision for ${Attempt_Outcome.name}.`,
   ),
-) {
+): never {
   return namespaceOnly;
 }
 

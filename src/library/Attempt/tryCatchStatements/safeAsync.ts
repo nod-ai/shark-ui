@@ -20,7 +20,7 @@ const safeAsync = async <
 ): Promise<
   SomeOutputOfResolvedPromise | SomeOutputOfRejectedPromise
 > => {
-  const safelyCatch = (whateverThatWasThrown: unknown) => safe({
+  const safelyCatch = (whateverThatWasThrown: unknown): SomeOutputOfRejectedPromise => safe({
     try: () => {
       throw whateverThatWasThrown; // eslint-disable-line no-restricted-syntax -- puts the error back through the safe catch
     },
