@@ -20,7 +20,6 @@ const Attempt_Outcome_Failure_dueTo = <
   isSuccess     : false,
   isFailure     : true,
   unwrapOr      : <SomeFallback>($0: SomeFallback) => $0,
-  unwrapOrNull  : () => null,
   unwrapOrThrow : () => givenCause.throwAnyway('Unexpected forceful unwrap of a failure'),
   causeOfFailure: givenCause,
   rewrappedWith : <

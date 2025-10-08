@@ -39,11 +39,6 @@ interface Attempt_Outcome_Discriminable<
     SomeFallback
   >;
 
-  unwrapOrNull(): If<this['isSuccess'],
-    SomePayload,
-    null
-  >;
-
   unwrapOrThrow(): If<this['isSuccess'],
     SomePayload,
     never
