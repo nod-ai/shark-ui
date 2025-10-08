@@ -11,14 +11,14 @@ const Attempt_Outcome_Success_thatYielded = <
 >(
   givenProduct: SomeProduct,
 ): Attempt_Outcome_Success<SomeProduct> => ({
-  discriminant  : 'success',
-  product       : givenProduct,
-  isSuccess     : true,
-  isFailure     : false,
-  unwrapOrNull  : () => givenProduct,
-  forciblyUnwrap: () => givenProduct,
-  unwrapped     : givenProduct,
-  rewrappedWith : <
+  discriminant : 'success',
+  product      : givenProduct,
+  isSuccess    : true,
+  isFailure    : false,
+  unwrapOrNull : () => givenProduct,
+  unwrapOrThrow: () => givenProduct,
+  unwrapped    : givenProduct,
+  rewrappedWith: <
     SomeTransformedProduct,
   >(
     {

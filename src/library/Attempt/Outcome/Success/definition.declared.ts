@@ -19,12 +19,12 @@ interface Attempt_Outcome_Success<
   /**
    * Access the product nested within a successful outcome.
    *
-   * Adds a guarded parallel to the `unwrapOrNull` and `forciblyUnwrapped` methods:
+   * Adds a guarded parallel to the `unwrapOrNull` and `unwrapOrThrow` methods:
    * ```ts
    * function doRiskyThingUnsafely(
    *   givenOutcome: Attempt.Outcome<CustomProduct, CustomError>,
    * ): void {
-   *   console.log(givenOutcome.forciblyUnwrap());
+   *   console.log(givenOutcome.unwrapOrThrow());
    * }
    *
    * function doRiskyThingSafelyWhileIgnoringErrors(

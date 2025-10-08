@@ -20,7 +20,7 @@ const Attempt_Outcome_Failure_dueTo = <
   isSuccess     : false,
   isFailure     : true,
   unwrapOrNull  : () => null,
-  forciblyUnwrap: () => givenCause.throwAnyway('Unexpected forceful unwrap of a failure'),
+  unwrapOrThrow : () => givenCause.throwAnyway('Unexpected forceful unwrap of a failure'),
   causeOfFailure: givenCause,
   rewrappedWith : <
     SomeTransformedActionableError extends Attempt_Error.Actionable<string>,

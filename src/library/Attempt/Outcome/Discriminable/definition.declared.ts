@@ -35,7 +35,7 @@ interface Attempt_Outcome_Discriminable<
     null
   >;
 
-  forciblyUnwrap(): If<this['isSuccess'],
+  unwrapOrThrow(): If<this['isSuccess'],
     SomePayload,
     never
   >;
