@@ -47,7 +47,7 @@ class HTTP_Client {
       to: URLComponent.Path;
       using: HTTP_Request.Method;
     },
-  ): Promise<HTTP_Endpoint.Outcome> => Attempt.Fresh.thatEventually(async (ends) => {
+  ): Promise<HTTP_Endpoint.Outcome> => Attempt.Fresh.thatEventually(async () => {
     const endpointURL = this.originAt(givenPath);
 
     const promisedResponse = fetch(endpointURL, {
@@ -78,7 +78,7 @@ class HTTP_Client {
 
     if (!response.ok) {
       const newResponseError = new HTTP_Endpoint.Error.RespondedWithFailure(response.statusText, response.status);
-      return ends.inFailureDueTo(newResponseError);
+      return Attempt.Outcome.failDueTo(newResponseError);
     }
 
     const outcomeOfDigestingResponseBody = await bodyOf(response).digestAsUnknown();

@@ -6,7 +6,7 @@ import {
   Attempt_Fresh,
 } from '../Fresh';
 
-import type {
+import {
   Attempt_Outcome,
 } from '../Outcome';
 
@@ -39,7 +39,7 @@ const Attempt_Adapted_toEventually = async <
       using: given.interpretationOf,
     });
 
-    return ends.inFailureDueTo(someActionableError);
+    return Attempt_Outcome.failDueTo(someActionableError);
   },
 }));
 
