@@ -25,7 +25,7 @@ class Range {
   ): Range {
     if (
       givenUpperBound < givenLowerBound
-    ) return Attempt.abandon('Upper bound must not be lower than lower bound');
+    ) return Attempt.Outcome.abandon('Upper bound must not be lower than lower bound');
 
     const validRange = new this(
       givenLowerBound,

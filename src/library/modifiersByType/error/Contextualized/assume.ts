@@ -23,7 +23,7 @@ const Contextualized_assume = <
     Contextualized_describes<SomeError, SomeCause>(givenError, GivenCause)
   ) return givenError;
 
-  return Attempt.abandon('Expected error to have a cause');
+  return Attempt.Outcome.abandon('Expected error to have a cause');
 };
 
 export {

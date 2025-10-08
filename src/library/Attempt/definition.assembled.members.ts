@@ -1,8 +1,4 @@
 export {
-  Attempt_abandon as abandon,
-} from './abandon';
-
-export {
   Attempt_Outcome as Outcome,
 } from './Outcome';
 
