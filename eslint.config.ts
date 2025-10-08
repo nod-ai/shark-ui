@@ -74,6 +74,13 @@ const extraConfigForTypeScriptESLint: ConfigWithExtends = {
         fixStyle: 'inline-type-imports', // allows for more compact imports and tees up problematic imports to '@typescript-eslint/no-import-type-side-effects'
       },
     ],
+    '@typescript-eslint/explicit-function-return-type': [
+      'error', // encourages developers to state the desired interface up front
+      {
+        allowExpressions             : true, // for situations where the function consuming the expression as an argument defines the interface
+        allowTypedFunctionExpressions: true, // for situations where the variable or property receiving the function defines the interface
+      },
+    ],
     '@typescript-eslint/explicit-member-accessibility': [
       'error', // Easier to see dead code in situations where a member is marked `private`
     ],
