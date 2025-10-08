@@ -19,12 +19,12 @@ import {
 
 const TextToImage_Config_Static_read = (): Promise<
   TextToImage_Config_Static_Reading.Outcome
-> => Attempt.Fresh.thatEventually(async (ends) => {
+> => Attempt.Fresh.thatEventually(async () => {
   const outcomeOfFetchingFile = await HTTP.Client.local.fetchResource({
     from: TextToImage_Config_Static_file,
   });
 
-  return ends.inTermsOf(outcomeOfFetchingFile, {
+  return Attempt.Outcome.fromRewrapping(outcomeOfFetchingFile, {
     product: $0 => Schema.decodeUnknownSync(TextToImage_Config)($0),
     cause  : $0 => new TextToImage_Config_Static_Reading.Error(TextToImage_Config_Static_file, $0),
   });
