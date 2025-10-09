@@ -37,14 +37,8 @@ const Attempt_Outcome_fromRewrappingBoth = <
     SomeTransformableActionableError
   >,
   {
-    product: toTransformedProduct = Attempt_Outcome_Success.Product.Transformer.identity<
-      SomeTransformableProduct,
-      SomeTransformedProduct
-    >,
-    cause: toTransformedCause = Attempt_Outcome_Failure.Cause.Transformer.identity<
-      SomeTransformableActionableError,
-      SomeTransformedActionableError
-    >,
+    product: toTransformedProduct,
+    cause: toTransformedCause,
   }: Attempt_Outcome_Transformer<
     SomeTransformableProduct,
     SomeTransformableActionableError,

@@ -16,34 +16,14 @@ type Attempt_Outcome_Transformer<
   SomeTransformedProduct,
   SomeTransformedActionableError extends Attempt_Error.Actionable<string>,
 > =
-  | (
-    & Required<
-      Attempt_Outcome_Success.Transformer<
-        SomeTransformableProduct,
-        SomeTransformedProduct
-      >
-    >
-    & Partial<
-      Attempt_Outcome_Failure.Transformer<
-        SomeTransformableActionableError,
-        SomeTransformedActionableError
-      >
-    >
-  )
-  | (
-    & Partial<
-      Attempt_Outcome_Success.Transformer<
-        SomeTransformableProduct,
-        SomeTransformedProduct
-      >
-    >
-    & Required<
-      Attempt_Outcome_Failure.Transformer<
-        SomeTransformableActionableError,
-        SomeTransformedActionableError
-      >
-    >
-  )
+  & Attempt_Outcome_Success.Transformer<
+    SomeTransformableProduct,
+    SomeTransformedProduct
+  >
+  & Attempt_Outcome_Failure.Transformer<
+    SomeTransformableActionableError,
+    SomeTransformedActionableError
+  >
 ;
 
 export type {
