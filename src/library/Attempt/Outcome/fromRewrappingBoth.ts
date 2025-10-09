@@ -26,7 +26,7 @@ import type {
 *
 * Helps avoid boilerplate when transforming outcomes.
 */
-function Attempt_Outcome_fromRewrappingBoth<
+const Attempt_Outcome_fromRewrappingBoth = <
   SomeTransformableProduct,
   SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
   SomeTransformedProduct = SomeTransformableProduct,
@@ -63,15 +63,13 @@ function Attempt_Outcome_fromRewrappingBoth<
 ): Attempt_Outcome<
   SomeTransformedProduct,
   SomeTransformedActionableError
-> {
-  return givenOutcome.isSuccess
-    ? givenOutcome.rewrappedWith({
-        product: toTransformedProduct,
-      })
-    : givenOutcome.rewrappedWith({
-        cause: toTransformedCause,
-      });
-}
+> => givenOutcome.isSuccess
+  ? givenOutcome.rewrappedWith({
+      product: toTransformedProduct,
+    })
+  : givenOutcome.rewrappedWith({
+      cause: toTransformedCause,
+    });
 
 export {
   Attempt_Outcome_fromRewrappingBoth,
