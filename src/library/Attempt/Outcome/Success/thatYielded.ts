@@ -1,4 +1,4 @@
-import {
+import type {
   Attempt_Outcome_Success_Product,
 } from './Product';
 
@@ -21,7 +21,7 @@ const Attempt_Outcome_Success_thatYielded = <
   rewrappedWith: <
     SomeTransformedProduct,
   >(
-    transformed = Attempt_Outcome_Success_Product.Transformer.identity<
+    transformed: Attempt_Outcome_Success_Product.Transformer<
       SomeProduct,
       SomeTransformedProduct
     >,

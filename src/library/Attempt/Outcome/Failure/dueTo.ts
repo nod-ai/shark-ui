@@ -2,7 +2,7 @@ import type {
   Attempt_Error,
 } from '../../Error';
 
-import {
+import type {
   Attempt_Outcome_Failure_Cause,
 } from './Cause';
 
@@ -24,7 +24,7 @@ const Attempt_Outcome_Failure_dueTo = <
   rewrappedWith: <
     SomeTransformedActionableError extends Attempt_Error.Actionable<string>,
   >(
-    transformed = Attempt_Outcome_Failure_Cause.Transformer.identity<
+    transformed: Attempt_Outcome_Failure_Cause.Transformer<
       SomeActionableError,
       SomeTransformedActionableError
     >,
