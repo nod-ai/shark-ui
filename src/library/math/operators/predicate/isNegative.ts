@@ -9,7 +9,7 @@ const isNegative = (
 ): boolean => {
   if (
     !isOperable(givenOperand)
-  ) return Attempt.abandon('Operand must be operable');
+  ) return Attempt.Outcome.abandon('Operand must be operable');
 
   return (givenOperand < 0);
 };
