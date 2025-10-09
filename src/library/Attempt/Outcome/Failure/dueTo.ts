@@ -25,14 +25,10 @@ const Attempt_Outcome_Failure_dueTo = <
   rewrappedWith : <
     SomeTransformedActionableError extends Attempt_Error.Actionable<string>,
   >(
-    {
-      cause: transformed,
-    } = {
-      cause: Attempt_Outcome_Failure_Cause.Transformer.identity<
-        SomeActionableError,
-        SomeTransformedActionableError
-      >,
-    },
+    transformed = Attempt_Outcome_Failure_Cause.Transformer.identity<
+      SomeActionableError,
+      SomeTransformedActionableError
+    >,
   ) => {
     const transformedCause = transformed(givenCause);
     const transformedFailure = Attempt_Outcome_Failure_dueTo(transformedCause);

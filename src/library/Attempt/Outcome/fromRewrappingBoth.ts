@@ -64,12 +64,8 @@ const Attempt_Outcome_fromRewrappingBoth = <
   SomeTransformedProduct,
   SomeTransformedActionableError
 > => givenOutcome.isSuccess
-  ? givenOutcome.rewrappedWith({
-      product: toTransformedProduct,
-    })
-  : givenOutcome.rewrappedWith({
-      cause: toTransformedCause,
-    });
+  ? givenOutcome.rewrappedWith(toTransformedProduct)
+  : givenOutcome.rewrappedWith(toTransformedCause);
 
 export {
   Attempt_Outcome_fromRewrappingBoth,

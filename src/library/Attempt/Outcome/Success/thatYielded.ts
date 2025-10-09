@@ -21,14 +21,10 @@ const Attempt_Outcome_Success_thatYielded = <
   rewrappedWith: <
     SomeTransformedProduct,
   >(
-    {
-      product: transformed,
-    } = {
-      product: Attempt_Outcome_Success_Product.Transformer.identity<
-        SomeProduct,
-        SomeTransformedProduct
-      >,
-    },
+    transformed = Attempt_Outcome_Success_Product.Transformer.identity<
+      SomeProduct,
+      SomeTransformedProduct
+    >,
   ) => {
     const transformedProduct = transformed(givenProduct);
     const transformedSuccess = Attempt_Outcome_Success_thatYielded(transformedProduct);

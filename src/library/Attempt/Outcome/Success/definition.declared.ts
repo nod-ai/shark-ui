@@ -3,12 +3,12 @@ import {
 } from '../../Error';
 
 import type {
-  Attempt_Outcome_Success_SemanticallySugarfree,
-} from './SemanticallySugarfree';
+  Attempt_Outcome_Success_Product,
+} from './Product';
 
 import type {
-  Attempt_Outcome_Success_Transformer,
-} from './Transformer';
+  Attempt_Outcome_Success_SemanticallySugarfree,
+} from './SemanticallySugarfree';
 
 interface Attempt_Outcome_Success<
   SomeProduct,
@@ -50,7 +50,7 @@ interface Attempt_Outcome_Success<
   rewrappedWith<
     SomeTransformedProduct = SomeProduct,
   >(
-    given?: Attempt_Outcome_Success_Transformer<
+    given?: Attempt_Outcome_Success_Product.Transformer<
       SomeProduct,
       SomeTransformedProduct
     >
