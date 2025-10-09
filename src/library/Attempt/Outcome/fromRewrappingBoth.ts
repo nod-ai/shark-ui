@@ -27,49 +27,6 @@ import type {
 * Helps avoid boilerplate when transforming outcomes.
 */
 function Attempt_Outcome_fromRewrappingBoth<
-  SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
-  SomeTransformedActionableError extends Attempt_Error.Actionable<string> = SomeTransformableActionableError,
->(
-  givenOutcome: Attempt_Outcome_Failure<SomeTransformableActionableError>,
-  given?: Attempt_Outcome_Failure.Transformer<
-    SomeTransformableActionableError,
-    SomeTransformedActionableError
-  >,
-): Attempt_Outcome_Failure<SomeTransformedActionableError>;
-
-function Attempt_Outcome_fromRewrappingBoth<
-  SomeTransformableProduct,
-  SomeTransformedProduct = SomeTransformableProduct,
->(
-  givenOutcome: Attempt_Outcome_Success<SomeTransformableProduct>,
-  given?: Attempt_Outcome_Success.Transformer<
-    SomeTransformableProduct,
-    SomeTransformedProduct
-  >,
-): Attempt_Outcome_Success<SomeTransformedProduct>;
-
-function Attempt_Outcome_fromRewrappingBoth<
-  SomeTransformableProduct,
-  SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
-  SomeTransformedProduct = SomeTransformableProduct,
-  SomeTransformedActionableError extends Attempt_Error.Actionable<string> = SomeTransformableActionableError,
->(
-  givenOutcome: Attempt_Outcome<
-    SomeTransformableProduct,
-    SomeTransformableActionableError
-  >,
-  given?: Attempt_Outcome_Transformer<
-    SomeTransformableProduct,
-    SomeTransformableActionableError,
-    SomeTransformedProduct,
-    SomeTransformedActionableError
-  >,
-): Attempt_Outcome<
-  SomeTransformedProduct,
-  SomeTransformedActionableError
->;
-
-function Attempt_Outcome_fromRewrappingBoth<
   SomeTransformableProduct,
   SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
   SomeTransformedProduct = SomeTransformableProduct,
