@@ -83,7 +83,7 @@ class HTTP_Client {
 
     const outcomeOfDigestingResponseBody = await bodyOf(response).digestAsUnknown();
 
-    return Attempt.Outcome.fromRewrappingBoth(outcomeOfDigestingResponseBody, {
+    return Attempt.Outcome.fromRewrappingErrorCause(outcomeOfDigestingResponseBody, {
       cause: $0 => new HTTP_Endpoint.Error.IndigestibleResponseBody(endpointURL, $0),
     });
   });
