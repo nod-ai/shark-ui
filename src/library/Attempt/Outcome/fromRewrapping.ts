@@ -34,9 +34,7 @@ const Attempt_Outcome_fromRewrapping = <
     SomeTransformableProduct,
     SomeTransformableActionableError
   >,
-  {
-    product: toTransformedProduct,
-  }: Attempt_Outcome_Success.Transformer<
+  givenProductTransformer: Attempt_Outcome_Success.Product.Transformer<
     SomeTransformableProduct,
     SomeTransformedProduct
   >,
@@ -44,7 +42,7 @@ const Attempt_Outcome_fromRewrapping = <
   SomeTransformedProduct,
   SomeTransformedActionableError
 > => Attempt_Outcome_fromRewrappingBoth(givenOutcome, {
-  product: toTransformedProduct,
+  product: givenProductTransformer,
   cause  : Attempt_Outcome_Failure.Cause.Transformer.identity<
     SomeTransformableActionableError,
     SomeTransformedActionableError

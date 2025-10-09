@@ -3,12 +3,12 @@ import {
 } from '../../Error';
 
 import type {
-  Attempt_Outcome_Failure_SemanticallySugarfree,
-} from './SemanticallySugarfree';
+  Attempt_Outcome_Failure_Cause,
+} from './Cause';
 
 import type {
-  Attempt_Outcome_Failure_Transformer,
-} from './Transformer';
+  Attempt_Outcome_Failure_SemanticallySugarfree,
+} from './SemanticallySugarfree';
 
 interface Attempt_Outcome_Failure<
   SomeActionableError extends Attempt_Error.Actionable<string>,
@@ -38,7 +38,7 @@ interface Attempt_Outcome_Failure<
   rewrappedWith<
     SomeTransformedActionableError extends Attempt_Error.Actionable<string> = SomeActionableError,
   >(
-    given?: Attempt_Outcome_Failure_Transformer<
+    given?: Attempt_Outcome_Failure_Cause.Transformer<
       SomeActionableError,
       SomeTransformedActionableError
     >

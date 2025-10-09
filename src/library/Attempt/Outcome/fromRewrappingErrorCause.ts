@@ -34,9 +34,7 @@ const Attempt_Outcome_fromRewrappingErrorCause = <
     SomeTransformableProduct,
     SomeTransformableActionableError
   >,
-  {
-    cause: toTransformedCause,
-  }: Attempt_Outcome_Failure.Transformer<
+  givenCauseTransformer: Attempt_Outcome_Failure.Cause.Transformer<
     SomeTransformableActionableError,
     SomeTransformedActionableError
   >,
@@ -48,7 +46,7 @@ const Attempt_Outcome_fromRewrappingErrorCause = <
     SomeTransformableProduct,
     SomeTransformedProduct
   >,
-  cause: toTransformedCause,
+  cause: givenCauseTransformer,
 });
 
 export {
