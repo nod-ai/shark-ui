@@ -26,7 +26,7 @@ import type {
 *
 * Helps avoid boilerplate when transforming outcomes.
 */
-function Attempt_Outcome_fromRewrapping<
+function Attempt_Outcome_fromRewrappingBoth<
   SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
   SomeTransformedActionableError extends Attempt_Error.Actionable<string> = SomeTransformableActionableError,
 >(
@@ -37,7 +37,7 @@ function Attempt_Outcome_fromRewrapping<
   >,
 ): Attempt_Outcome_Failure<SomeTransformedActionableError>;
 
-function Attempt_Outcome_fromRewrapping<
+function Attempt_Outcome_fromRewrappingBoth<
   SomeTransformableProduct,
   SomeTransformedProduct = SomeTransformableProduct,
 >(
@@ -48,7 +48,7 @@ function Attempt_Outcome_fromRewrapping<
   >,
 ): Attempt_Outcome_Success<SomeTransformedProduct>;
 
-function Attempt_Outcome_fromRewrapping<
+function Attempt_Outcome_fromRewrappingBoth<
   SomeTransformableProduct,
   SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
   SomeTransformedProduct = SomeTransformableProduct,
@@ -69,7 +69,7 @@ function Attempt_Outcome_fromRewrapping<
   SomeTransformedActionableError
 >;
 
-function Attempt_Outcome_fromRewrapping<
+function Attempt_Outcome_fromRewrappingBoth<
   SomeTransformableProduct,
   SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
   SomeTransformedProduct = SomeTransformableProduct,
@@ -117,5 +117,5 @@ function Attempt_Outcome_fromRewrapping<
 }
 
 export {
-  Attempt_Outcome_fromRewrapping,
+  Attempt_Outcome_fromRewrappingBoth,
 };
