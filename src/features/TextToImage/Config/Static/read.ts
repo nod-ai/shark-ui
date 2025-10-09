@@ -24,7 +24,7 @@ const TextToImage_Config_Static_read = (): Promise<
     from: TextToImage_Config_Static_file,
   });
 
-  return Attempt.Outcome.fromRewrapping(outcomeOfFetchingFile, {
+  return Attempt.Outcome.fromRewrappingBoth(outcomeOfFetchingFile, {
     product: $0 => Schema.decodeUnknownSync(TextToImage_Config)($0),
     cause  : $0 => new TextToImage_Config_Static_Reading.Error(TextToImage_Config_Static_file, $0),
   });
