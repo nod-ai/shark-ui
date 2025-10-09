@@ -50,7 +50,7 @@ class Shortfin_TextToImage_SDXL_Client
       const rawResource = outcomeOfSubmittingResource.unwrapped;
       const decodedResource = Schema.decodeUnknownSync(Shortfin_TextToImage_SDXL_Client_Response.Body)(rawResource);
       const [soleGeneratedImage] = decodedResource.images;
-      return Attempt.Outcome.succeedWith(soleGeneratedImage);
+      return Attempt.Outcome.succeed(soleGeneratedImage);
     });
   }
 }

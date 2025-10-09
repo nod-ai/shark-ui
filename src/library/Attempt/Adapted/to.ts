@@ -27,7 +27,7 @@ const Attempt_Adapted_to = <
 ): Attempt_Outcome<SomeProduct, SomeActionableError> => Attempt_Fresh.that(() => safe({
   try() {
     const gottenProduct = forciblyGetProduct();
-    return Attempt_Outcome.succeedWith(gottenProduct);
+    return Attempt_Outcome.succeed(gottenProduct);
   },
   catch(someError) {
     const someActionableError = Attempt_Error.Actionable.from(someError, {
