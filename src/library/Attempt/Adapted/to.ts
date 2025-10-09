@@ -6,7 +6,7 @@ import {
   Attempt_Fresh,
 } from '../Fresh';
 
-import type {
+import {
   Attempt_Outcome,
 } from '../Outcome';
 
@@ -24,17 +24,17 @@ const Attempt_Adapted_to = <
 >(
   forciblyGetProduct: () => SomeProduct,
   given: Attempt_Adapted_Config<SomeActionableError>,
-): Attempt_Outcome<SomeProduct, SomeActionableError> => Attempt_Fresh.that(ends => safe({
+): Attempt_Outcome<SomeProduct, SomeActionableError> => Attempt_Fresh.that(() => safe({
   try() {
     const gottenProduct = forciblyGetProduct();
-    return ends.inSuccessWith(gottenProduct);
+    return Attempt_Outcome.succeedWith(gottenProduct);
   },
   catch(someError) {
     const someActionableError = Attempt_Error.Actionable.from(someError, {
       using: given.interpretationOf,
     });
 
-    return ends.inFailureDueTo(someActionableError);
+    return Attempt_Outcome.failDueTo(someActionableError);
   },
 }));
 

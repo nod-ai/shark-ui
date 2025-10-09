@@ -28,10 +28,10 @@ const bodyOf = (
     return actualRawDescriptor.includes(givenDescriptor.serialized.toString());
   },
   async digestAsUnknown() {
-    return Attempt.Fresh.thatEventually(async (ends) => {
+    return Attempt.Fresh.thatEventually(async () => {
       if (!this.isSuggestedToBeDigestibleAs(ContentDescriptor.json)) {
         const newDescriptorMismatchError = new HTTP_Response_Body.Digestion.Error.DescriptorMismatch(givenResponse, ContentDescriptor.json);
-        return ends.inFailureDueTo(newDescriptorMismatchError);
+        return Attempt.Outcome.failDueTo(newDescriptorMismatchError);
       }
 
       const promiseForDigestedResponseBody: Promise<unknown> = givenResponse.json();

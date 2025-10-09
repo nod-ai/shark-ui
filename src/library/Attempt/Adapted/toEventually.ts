@@ -6,7 +6,7 @@ import {
   Attempt_Fresh,
 } from '../Fresh';
 
-import type {
+import {
   Attempt_Outcome,
 } from '../Outcome';
 
@@ -29,17 +29,17 @@ const Attempt_Adapted_toEventually = async <
     SomeProduct,
     SomeActionableError
   >
-> => Attempt_Fresh.thatEventually(ends => safeAsync({
+> => Attempt_Fresh.thatEventually(() => safeAsync({
   async try() {
     const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
-    return ends.inSuccessWith(retrievedProduct);
+    return Attempt_Outcome.succeedWith(retrievedProduct);
   },
   catch(someError) {
     const someActionableError = Attempt_Error.Actionable.from(someError, {
       using: given.interpretationOf,
     });
 
-    return ends.inFailureDueTo(someActionableError);
+    return Attempt_Outcome.failDueTo(someActionableError);
   },
 }));
 

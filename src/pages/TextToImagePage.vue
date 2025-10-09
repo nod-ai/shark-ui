@@ -30,6 +30,8 @@ import {
   VSkeletonLoader,
 } from 'vuetify/components/VSkeletonLoader';
 
+import Attempt from '@/library/Attempt';
+
 import {
   SDXL,
 } from '@/library/ShimmedStabilityAIClient';
@@ -50,7 +52,7 @@ const {
 
 const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
 
-const imageGeneration = useStatefulAttemptThatEventually(async (ends) => {
+const imageGeneration = useStatefulAttemptThatEventually(async () => {
   const proposedPrompt = Option.getOrThrowWith(
     get(currentPrompt),
     () => new Error('Prompt was not set before submission'),
@@ -67,7 +69,7 @@ const imageGeneration = useStatefulAttemptThatEventually(async (ends) => {
     },
   });
 
-  const outcomeOfGeneratingImage = ends.inTermsOf(outcomeOfGeneratingOutput, {
+  const outcomeOfGeneratingImage = Attempt.Outcome.fromRewrapping(outcomeOfGeneratingOutput, {
     product: $0 => $0.image,
   });
 
