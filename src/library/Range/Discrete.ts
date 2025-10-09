@@ -39,13 +39,13 @@ class Range_Discrete
 
     if (
       isNegative(givenStepSize)
-    ) return Attempt.Outcome.abandon('Step size must be non-negative');
+    ) return Attempt.Outcome.die('Step size must be non-negative');
 
     const overstep = validRange.width % givenStepSize;
 
     if (
       overstep !== 0
-    ) return Attempt.Outcome.abandon('Step size must fit evenly into the range');
+    ) return Attempt.Outcome.die('Step size must fit evenly into the range');
 
     const validDiscreteRange = new this(
       validRange.lowerBound,

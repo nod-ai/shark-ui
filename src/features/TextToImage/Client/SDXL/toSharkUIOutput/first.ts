@@ -41,7 +41,7 @@ const toSharkUIOutput_first = (
 
   if (
     !hasAtLeastOne(inferredOutputs)
-  ) return Attempt.Outcome.abandon('Expected at least one text-to-image output in response');
+  ) return Attempt.Outcome.die('Expected at least one text-to-image output in response');
 
   const [firstPotentialOutput] = inferredOutputs;
 

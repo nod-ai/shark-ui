@@ -24,9 +24,9 @@ const TextToImage_Config_Dynamic_fetch = (): Promise<
     from: TextToImage_Config_Dynamic_endpoint,
   });
 
-  return Attempt.Outcome.fromRewrappingBoth(outcomeOfFetchingResource, {
-    product: $0 => Schema.decodeUnknownSync(TextToImage_Config)($0),
-    cause  : $0 => new TextToImage_Config_Dynamic_Fetching.Error(TextToImage_Config_Dynamic_endpoint, $0),
+  return Attempt.Outcome.mapBoth(outcomeOfFetchingResource, {
+    onSuccess: $0 => Schema.decodeUnknownSync(TextToImage_Config)($0),
+    onFailure: $0 => new TextToImage_Config_Dynamic_Fetching.Error(TextToImage_Config_Dynamic_endpoint, $0),
   });
 });
 

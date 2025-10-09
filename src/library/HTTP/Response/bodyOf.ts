@@ -31,7 +31,7 @@ const bodyOf = (
     return Attempt.Fresh.thatEventually(async () => {
       if (!this.isSuggestedToBeDigestibleAs(ContentDescriptor.json)) {
         const newDescriptorMismatchError = new HTTP_Response_Body.Digestion.Error.DescriptorMismatch(givenResponse, ContentDescriptor.json);
-        return Attempt.Outcome.failDueTo(newDescriptorMismatchError);
+        return Attempt.Outcome.failCause(newDescriptorMismatchError);
       }
 
       const promiseForDigestedResponseBody: Promise<unknown> = givenResponse.json();

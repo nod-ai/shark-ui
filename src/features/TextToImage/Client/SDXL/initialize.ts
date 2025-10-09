@@ -13,7 +13,7 @@ const TextToImage_Client_SDXL_initialize = async (): Promise<
 > => {
   const outcomeOfRetrievingCurrentServer = await TextToImage_Server.Current.retrieve();
 
-  const outcomeOfInitializingClient = Attempt.Outcome.fromRewrapping(
+  const outcomeOfInitializingClient = Attempt.Outcome.map(
     outcomeOfRetrievingCurrentServer,
     textToImageServer => new ShimmedStabilityAIClient({
       serverURL: textToImageServer.origin,

@@ -2,23 +2,29 @@ import type {
   Attempt_Error,
 } from '../Error';
 
+import {
+  Attempt_Outcome_Failure,
+} from './Failure';
+
 import type {
-  Attempt_Outcome_Transformer,
-} from './Transformer';
+  Attempt_Outcome_Success,
+} from './Success';
 
 import type {
   Attempt_Outcome,
 } from './definition.declared.ts';
 
+import {
+  Attempt_Outcome_mapBoth,
+} from './mapBoth';
+
 /**
  * Convenience method for:
  * 1. unwrapping the contents of _this_ outcome,
- * 2. transforming them, and
+ * 2. transforming the product, and
  * 3. wrapping the transformed contents in a _new_ outcome.
-*
-* Helps avoid boilerplate when transforming outcomes.
-*/
-const Attempt_Outcome_fromRewrappingBoth = <
+ */
+const Attempt_Outcome_map = <
   SomeTransformableProduct,
   SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
   SomeTransformedProduct = SomeTransformableProduct,
@@ -28,22 +34,21 @@ const Attempt_Outcome_fromRewrappingBoth = <
     SomeTransformableProduct,
     SomeTransformableActionableError
   >,
-  {
-    product: toTransformedProduct,
-    cause: toTransformedCause,
-  }: Attempt_Outcome_Transformer<
+  givenProductTransformer: Attempt_Outcome_Success.Product.Transformer<
     SomeTransformableProduct,
-    SomeTransformableActionableError,
-    SomeTransformedProduct,
-    SomeTransformedActionableError
+    SomeTransformedProduct
   >,
 ): Attempt_Outcome<
   SomeTransformedProduct,
   SomeTransformedActionableError
-> => givenOutcome.isSuccess
-  ? givenOutcome.rewrappedWith(toTransformedProduct)
-  : givenOutcome.rewrappedWith(toTransformedCause);
+> => Attempt_Outcome_mapBoth(givenOutcome, {
+  onSuccess: givenProductTransformer,
+  onFailure: Attempt_Outcome_Failure.Cause.Transformer.identity<
+    SomeTransformableActionableError,
+    SomeTransformedActionableError
+  >,
+});
 
 export {
-  Attempt_Outcome_fromRewrappingBoth,
+  Attempt_Outcome_map,
 };

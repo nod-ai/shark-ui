@@ -16,11 +16,11 @@ interface Attempt_Outcome_Transformer<
   SomeTransformedProduct,
   SomeTransformedActionableError extends Attempt_Error.Actionable<string>,
 > {
-  product: Attempt_Outcome_Success.Product.Transformer<
+  onSuccess: Attempt_Outcome_Success.Product.Transformer<
     SomeTransformableProduct,
     SomeTransformedProduct
   >;
-  cause: Attempt_Outcome_Failure.Cause.Transformer<
+  onFailure: Attempt_Outcome_Failure.Cause.Transformer<
     SomeTransformableActionableError,
     SomeTransformedActionableError
   >;
