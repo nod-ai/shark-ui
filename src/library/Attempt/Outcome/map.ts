@@ -15,8 +15,8 @@ import type {
 } from './definition.declared.ts';
 
 import {
-  Attempt_Outcome_fromRewrappingBoth,
-} from './fromRewrappingBoth';
+  Attempt_Outcome_mapBoth,
+} from './mapBoth';
 
 /**
  * Convenience method for:
@@ -24,7 +24,7 @@ import {
  * 2. transforming the product, and
  * 3. wrapping the transformed contents in a _new_ outcome.
  */
-const Attempt_Outcome_fromRewrapping = <
+const Attempt_Outcome_map = <
   SomeTransformableProduct,
   SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
   SomeTransformedProduct = SomeTransformableProduct,
@@ -41,7 +41,7 @@ const Attempt_Outcome_fromRewrapping = <
 ): Attempt_Outcome<
   SomeTransformedProduct,
   SomeTransformedActionableError
-> => Attempt_Outcome_fromRewrappingBoth(givenOutcome, {
+> => Attempt_Outcome_mapBoth(givenOutcome, {
   onSuccess: givenProductTransformer,
   onFailure: Attempt_Outcome_Failure.Cause.Transformer.identity<
     SomeTransformableActionableError,
@@ -50,5 +50,5 @@ const Attempt_Outcome_fromRewrapping = <
 });
 
 export {
-  Attempt_Outcome_fromRewrapping,
+  Attempt_Outcome_map,
 };

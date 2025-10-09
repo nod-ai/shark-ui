@@ -69,7 +69,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     },
   });
 
-  const outcomeOfSettlingSoleTextToImageOutput = Attempt.Outcome.fromRewrapping(
+  const outcomeOfSettlingSoleTextToImageOutput = Attempt.Outcome.map(
     outcomeOfSettlingTextToImageResponse,
     textToImageResponse => toSharkUIOutput.first({
       in          : textToImageResponse,

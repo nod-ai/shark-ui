@@ -69,7 +69,7 @@ const imageGeneration = useStatefulAttemptThatEventually(async () => {
     },
   });
 
-  const outcomeOfGeneratingImage = Attempt.Outcome.fromRewrapping(
+  const outcomeOfGeneratingImage = Attempt.Outcome.map(
     outcomeOfGeneratingOutput,
     $0 => $0.image,
   );
