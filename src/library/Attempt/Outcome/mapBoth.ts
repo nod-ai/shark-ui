@@ -11,8 +11,16 @@ import type {
 } from './definition.declared.ts';
 
 import {
+  Attempt_Outcome_failCause,
+} from './failCause';
+
+import {
   Attempt_Outcome_isSuccess,
 } from './isSuccess';
+
+import {
+  Attempt_Outcome_succeed,
+} from './succeed';
 
 /**
  * Convenience method for:
@@ -45,8 +53,12 @@ const Attempt_Outcome_mapBoth = <
   SomeTransformedProduct,
   SomeTransformedActionableError
 > => Attempt_Outcome_isSuccess(givenOutcome)
-  ? givenOutcome.rewrappedWith(toTransformedProduct)
-  : givenOutcome.rewrappedWith(toTransformedCause);
+  ? Attempt_Outcome_succeed(
+      toTransformedProduct(givenOutcome.product),
+    )
+  : Attempt_Outcome_failCause(
+      toTransformedCause(givenOutcome.cause),
+    );
 
 export {
   Attempt_Outcome_mapBoth,
