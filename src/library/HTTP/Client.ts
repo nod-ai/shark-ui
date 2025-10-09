@@ -71,7 +71,7 @@ class HTTP_Client {
     });
 
     if (
-      outcomeOfSettlingResponse.isFailure
+      Attempt.Outcome.isFailure(outcomeOfSettlingResponse)
     ) return outcomeOfSettlingResponse;
 
     const response = outcomeOfSettlingResponse.value;

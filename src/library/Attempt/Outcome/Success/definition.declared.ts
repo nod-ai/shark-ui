@@ -38,7 +38,7 @@ interface Attempt_Outcome_Success<
    *   recoverFrom: (expectedError: CustomError) => void,
    * ): void {
    *   if (
-   *     givenOutcome.isFailure
+   *     Attempt.Outcome.isFailure(givenOutcome)
    *   ) recoverFrom(givenOutcome.cause);
    *
    *   console.log(givenOutcome.value);
