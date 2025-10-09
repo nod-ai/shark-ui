@@ -15,8 +15,8 @@ import {
 } from './definition.declared.ts';
 
 import {
-  Attempt_Outcome_failDueTo,
-} from './failDueTo';
+  Attempt_Outcome_failCause,
+} from './failCause';
 
 import {
   Attempt_Outcome_fromRewrapping,
@@ -35,7 +35,7 @@ import {
 } from './succeed';
 
 Attempt_Outcome.succeed /*                 */ = Attempt_Outcome_succeed;
-Attempt_Outcome.failDueTo /*               */ = Attempt_Outcome_failDueTo;
+Attempt_Outcome.failCause /*               */ = Attempt_Outcome_failCause;
 Attempt_Outcome.abandon /*                 */ = Attempt_Outcome_abandon;
 Attempt_Outcome.Failure /*                 */ = Attempt_Outcome_Failure;
 Attempt_Outcome.Success /*                 */ = Attempt_Outcome_Success;
@@ -47,7 +47,7 @@ declare module './definition.declared.ts' {
   namespace Attempt_Outcome {
     export {
       Attempt_Outcome_succeed /*                 */ as succeed,
-      Attempt_Outcome_failDueTo /*               */ as failDueTo,
+      Attempt_Outcome_failCause /*               */ as failCause,
       Attempt_Outcome_abandon /*                 */ as abandon,
       Attempt_Outcome_Failure /*                 */ as Failure,
       Attempt_Outcome_Success /*                 */ as Success,

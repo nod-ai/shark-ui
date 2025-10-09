@@ -78,7 +78,7 @@ class HTTP_Client {
 
     if (!response.ok) {
       const newResponseError = new HTTP_Endpoint.Error.RespondedWithFailure(response.statusText, response.status);
-      return Attempt.Outcome.failDueTo(newResponseError);
+      return Attempt.Outcome.failCause(newResponseError);
     }
 
     const outcomeOfDigestingResponseBody = await bodyOf(response).digestAsUnknown();

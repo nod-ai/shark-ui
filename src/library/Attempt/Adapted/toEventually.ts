@@ -39,7 +39,7 @@ const Attempt_Adapted_toEventually = async <
       using: given.interpretationOf,
     });
 
-    return Attempt_Outcome.failDueTo(someActionableError);
+    return Attempt_Outcome.failCause(someActionableError);
   },
 }));
 
