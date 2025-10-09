@@ -43,14 +43,6 @@ interface Attempt_Outcome_Discriminable<
     SomePayload,
     never
   >;
-
-  rewrappedWith<
-    SomeTransformedPayload extends (
-      SomeDiscriminant extends 'success'
-        ? unknown
-        : Attempt_Error.Actionable<string>
-    ) = SomePayload,
-  >(): Attempt_Outcome_Discriminable<SomeDiscriminant, SomeTransformedPayload>;
 }
 
 export type {

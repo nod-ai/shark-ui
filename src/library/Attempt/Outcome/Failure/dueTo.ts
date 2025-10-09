@@ -3,10 +3,6 @@ import type {
 } from '../../Error';
 
 import type {
-  Attempt_Outcome_Failure_Cause,
-} from './Cause';
-
-import type {
   Attempt_Outcome_Failure,
 } from './definition.declared.ts';
 
@@ -15,24 +11,12 @@ const Attempt_Outcome_Failure_dueTo = <
 >(
   givenCause: SomeActionableError,
 ): Attempt_Outcome_Failure<SomeActionableError> => ({
-  discriminant : 'failure',
-  cause        : givenCause,
-  isSuccess    : false,
-  isFailure    : true,
-  getOrElse    : <SomeFallback>($0: () => SomeFallback) => $0(),
-  getOrThrow   : () => givenCause.throwAnyway('Unexpected forceful unwrap of a failure'),
-  rewrappedWith: <
-    SomeTransformedActionableError extends Attempt_Error.Actionable<string>,
-  >(
-    transformed: Attempt_Outcome_Failure_Cause.Transformer<
-      SomeActionableError,
-      SomeTransformedActionableError
-    >,
-  ) => {
-    const transformedCause = transformed(givenCause);
-    const transformedFailure = Attempt_Outcome_Failure_dueTo(transformedCause);
-    return transformedFailure;
-  },
+  discriminant: 'failure',
+  cause       : givenCause,
+  isSuccess   : false,
+  isFailure   : true,
+  getOrElse   : <SomeFallback>($0: () => SomeFallback) => $0(),
+  getOrThrow  : () => givenCause.throwAnyway('Unexpected forceful unwrap of a failure'),
 });
 
 export {

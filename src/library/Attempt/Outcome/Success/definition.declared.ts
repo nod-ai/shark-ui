@@ -3,10 +3,6 @@ import {
 } from '../../Error';
 
 import type {
-  Attempt_Outcome_Success_Product,
-} from './Product';
-
-import type {
   Attempt_Outcome_Success_SemanticallySugarfree,
 } from './SemanticallySugarfree';
 
@@ -46,15 +42,6 @@ interface Attempt_Outcome_Success<
    * ```
    */
   readonly value: this['product'];
-
-  rewrappedWith<
-    SomeTransformedProduct = SomeProduct,
-  >(
-    given?: Attempt_Outcome_Success_Product.Transformer<
-      SomeProduct,
-      SomeTransformedProduct
-    >
-  ): Attempt_Outcome_Success<SomeTransformedProduct>;
 }
 
 function Attempt_Outcome_Success(
