@@ -10,6 +10,10 @@ import type {
   Attempt_Outcome,
 } from './definition.declared.ts';
 
+import {
+  Attempt_Outcome_isSuccess,
+} from './isSuccess';
+
 /**
  * Convenience method for:
  * 1. unwrapping the contents of _this_ outcome,
@@ -40,7 +44,7 @@ const Attempt_Outcome_mapBoth = <
 ): Attempt_Outcome<
   SomeTransformedProduct,
   SomeTransformedActionableError
-> => givenOutcome.isSuccess
+> => Attempt_Outcome_isSuccess(givenOutcome)
   ? givenOutcome.rewrappedWith(toTransformedProduct)
   : givenOutcome.rewrappedWith(toTransformedCause);
 
