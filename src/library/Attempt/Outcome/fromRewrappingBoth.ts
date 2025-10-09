@@ -29,8 +29,8 @@ const Attempt_Outcome_fromRewrappingBoth = <
     SomeTransformableActionableError
   >,
   {
-    product: toTransformedProduct,
-    cause: toTransformedCause,
+    onSuccess: toTransformedProduct,
+    onFailure: toTransformedCause,
   }: Attempt_Outcome_Transformer<
     SomeTransformableProduct,
     SomeTransformableActionableError,

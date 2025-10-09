@@ -25,8 +25,8 @@ const TextToImage_Config_Static_read = (): Promise<
   });
 
   return Attempt.Outcome.fromRewrappingBoth(outcomeOfFetchingFile, {
-    product: $0 => Schema.decodeUnknownSync(TextToImage_Config)($0),
-    cause  : $0 => new TextToImage_Config_Static_Reading.Error(TextToImage_Config_Static_file, $0),
+    onSuccess: $0 => Schema.decodeUnknownSync(TextToImage_Config)($0),
+    onFailure: $0 => new TextToImage_Config_Static_Reading.Error(TextToImage_Config_Static_file, $0),
   });
 });
 
