@@ -7,12 +7,12 @@ import {
 } from './Success';
 
 import {
-  Attempt_Outcome_abandon,
-} from './abandon';
-
-import {
   Attempt_Outcome,
 } from './definition.declared.ts';
+
+import {
+  Attempt_Outcome_die,
+} from './die';
 
 import {
   Attempt_Outcome_failCause,
@@ -36,7 +36,7 @@ import {
 
 Attempt_Outcome.succeed /*                 */ = Attempt_Outcome_succeed;
 Attempt_Outcome.failCause /*               */ = Attempt_Outcome_failCause;
-Attempt_Outcome.abandon /*                 */ = Attempt_Outcome_abandon;
+Attempt_Outcome.die /*                     */ = Attempt_Outcome_die;
 Attempt_Outcome.Failure /*                 */ = Attempt_Outcome_Failure;
 Attempt_Outcome.Success /*                 */ = Attempt_Outcome_Success;
 Attempt_Outcome.fromRewrapping /*          */ = Attempt_Outcome_fromRewrapping;
@@ -48,7 +48,7 @@ declare module './definition.declared.ts' {
     export {
       Attempt_Outcome_succeed /*                 */ as succeed,
       Attempt_Outcome_failCause /*               */ as failCause,
-      Attempt_Outcome_abandon /*                 */ as abandon,
+      Attempt_Outcome_die /*                     */ as die,
       Attempt_Outcome_Failure /*                 */ as Failure,
       Attempt_Outcome_Success /*                 */ as Success,
       Attempt_Outcome_fromRewrapping /*          */ as fromRewrapping,
