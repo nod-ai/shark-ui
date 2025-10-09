@@ -69,12 +69,13 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     },
   });
 
-  const outcomeOfSettlingSoleTextToImageOutput = Attempt.Outcome.fromRewrapping(outcomeOfSettlingTextToImageResponse, {
-    product: textToImageResponse => toSharkUIOutput.first({
+  const outcomeOfSettlingSoleTextToImageOutput = Attempt.Outcome.fromRewrapping(
+    outcomeOfSettlingTextToImageResponse,
+    textToImageResponse => toSharkUIOutput.first({
       in          : textToImageResponse,
       inferredFrom: given.textToImageRequestBody.textPrompts,
     }),
-  });
+  );
 
   return outcomeOfSettlingSoleTextToImageOutput;
 };

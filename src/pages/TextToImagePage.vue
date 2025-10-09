@@ -69,9 +69,10 @@ const imageGeneration = useStatefulAttemptThatEventually(async () => {
     },
   });
 
-  const outcomeOfGeneratingImage = Attempt.Outcome.fromRewrapping(outcomeOfGeneratingOutput, {
-    product: $0 => $0.image,
-  });
+  const outcomeOfGeneratingImage = Attempt.Outcome.fromRewrapping(
+    outcomeOfGeneratingOutput,
+    $0 => $0.image,
+  );
 
   return outcomeOfGeneratingImage;
 });
