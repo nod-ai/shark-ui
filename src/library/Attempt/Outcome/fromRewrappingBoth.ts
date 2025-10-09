@@ -2,14 +2,6 @@ import type {
   Attempt_Error,
 } from '../Error';
 
-import {
-  Attempt_Outcome_Failure,
-} from './Failure';
-
-import {
-  Attempt_Outcome_Success,
-} from './Success';
-
 import type {
   Attempt_Outcome_Transformer,
 } from './Transformer';
@@ -44,16 +36,7 @@ const Attempt_Outcome_fromRewrappingBoth = <
     SomeTransformableActionableError,
     SomeTransformedProduct,
     SomeTransformedActionableError
-  > = {
-    product: Attempt_Outcome_Success.Product.Transformer.identity<
-      SomeTransformableProduct,
-      SomeTransformedProduct
-    >,
-    cause: Attempt_Outcome_Failure.Cause.Transformer.identity<
-      SomeTransformableActionableError,
-      SomeTransformedActionableError
-    >,
-  },
+  >,
 ): Attempt_Outcome<
   SomeTransformedProduct,
   SomeTransformedActionableError
