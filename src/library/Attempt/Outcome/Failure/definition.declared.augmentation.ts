@@ -2,10 +2,6 @@ import {
   Attempt_Outcome_Failure_Cause,
 } from './Cause';
 
-import type {
-  Attempt_Outcome_Failure_Transformer,
-} from './Transformer';
-
 import {
   Attempt_Outcome_Failure,
 } from './definition.declared.ts';
@@ -21,7 +17,6 @@ declare module './definition.declared.ts' {
   namespace Attempt_Outcome_Failure {
     export {
       /**/ Attempt_Outcome_Failure_Cause /* */ as Cause,
-      type Attempt_Outcome_Failure_Transformer as Transformer,
       /**/ Attempt_Outcome_Failure_dueTo /* */ as dueTo,
     };
   }
