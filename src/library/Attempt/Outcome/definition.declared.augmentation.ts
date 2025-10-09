@@ -19,6 +19,10 @@ import {
 } from './failDueTo';
 
 import {
+  Attempt_Outcome_fromRewrapping,
+} from './fromRewrapping';
+
+import {
   Attempt_Outcome_fromRewrappingBoth,
 } from './fromRewrappingBoth';
 
@@ -35,6 +39,7 @@ Attempt_Outcome.failDueTo /*               */ = Attempt_Outcome_failDueTo;
 Attempt_Outcome.abandon /*                 */ = Attempt_Outcome_abandon;
 Attempt_Outcome.Failure /*                 */ = Attempt_Outcome_Failure;
 Attempt_Outcome.Success /*                 */ = Attempt_Outcome_Success;
+Attempt_Outcome.fromRewrapping /*          */ = Attempt_Outcome_fromRewrapping;
 Attempt_Outcome.fromRewrappingBoth /*      */ = Attempt_Outcome_fromRewrappingBoth;
 Attempt_Outcome.fromRewrappingErrorCause /**/ = Attempt_Outcome_fromRewrappingErrorCause;
 
@@ -46,6 +51,7 @@ declare module './definition.declared.ts' {
       Attempt_Outcome_abandon /*                 */ as abandon,
       Attempt_Outcome_Failure /*                 */ as Failure,
       Attempt_Outcome_Success /*                 */ as Success,
+      Attempt_Outcome_fromRewrapping /*          */ as fromRewrapping,
       Attempt_Outcome_fromRewrappingBoth /*      */ as fromRewrappingBoth,
       Attempt_Outcome_fromRewrappingErrorCause /**/ as fromRewrappingErrorCause,
     };
