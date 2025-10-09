@@ -13,10 +13,6 @@ import type {
 } from '../Outcome';
 
 import {
-  Attempt_ended as handles,
-} from '../ended';
-
-import {
   safe,
 } from '../tryCatchStatements';
 
@@ -31,11 +27,11 @@ const Attempt_Fresh_that = <
     CauseOf<SomeInferredOutcome>
   >,
 >(
-  endsAccordingTo: Attempt_End.Getter<SomeInferredOutcome>,
+  getEnd: Attempt_End.Getter<SomeInferredOutcome>,
 ): SomeEquivalentOutcome => {
   return safe({
     try() {
-      return endsAccordingTo(handles) as unknown as SomeEquivalentOutcome;
+      return getEnd() as unknown as SomeEquivalentOutcome;
     },
     catch(someError) {
       return Attempt_Error.Creation.rethrow(someError);

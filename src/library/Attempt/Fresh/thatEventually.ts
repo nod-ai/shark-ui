@@ -13,10 +13,6 @@ import type {
 } from '../Outcome';
 
 import {
-  Attempt_ended as handles,
-} from '../ended';
-
-import {
   safeAsync,
 } from '../tryCatchStatements';
 
@@ -30,11 +26,11 @@ const Attempt_Fresh_thatEventually = async <
     CauseOf<SomeInferredOutcome>
   >,
 >(
-  endsAccordingTo: Attempt_End.Retriever<SomeInferredOutcome>,
+  retrieveEnd: Attempt_End.Retriever<SomeInferredOutcome>,
 ): Promise<SomeEquivalentOutcome> => {
   return safeAsync({
     async try() {
-      return await endsAccordingTo(handles) as unknown as SomeEquivalentOutcome;
+      return await retrieveEnd() as unknown as SomeEquivalentOutcome;
     },
     catch(someError) {
       return Attempt_Error.Creation.rethrow(someError);
