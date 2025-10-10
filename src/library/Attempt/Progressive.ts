@@ -7,7 +7,7 @@ import type {
 } from './Error';
 
 import type {
-  Attempt_Outcome,
+  Attempt_Exit,
 } from './Exit';
 
 interface Attempt_Progressive<
@@ -17,7 +17,7 @@ interface Attempt_Progressive<
   initiate: () => Promise<void>;
   isInProgress: boolean;
   result: Option.Option<
-    Attempt_Outcome<
+    Attempt_Exit<
       SomeProduct,
       SomeActionableError
     >

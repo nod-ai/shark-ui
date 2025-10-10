@@ -1,4 +1,4 @@
-const Attempt_Outcome_Success_Product_Transformer_identity = <
+const Attempt_Exit_Success_Product_Transformer_identity = <
   SomeTransformableProduct,
   SomeTransformedProduct,
 >(
@@ -8,5 +8,5 @@ const Attempt_Outcome_Success_Product_Transformer_identity = <
 };
 
 export {
-  Attempt_Outcome_Success_Product_Transformer_identity,
+  Attempt_Exit_Success_Product_Transformer_identity,
 };

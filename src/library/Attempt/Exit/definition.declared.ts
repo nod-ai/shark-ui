@@ -3,29 +3,29 @@ import {
 } from '../Error';
 
 import type {
-  Attempt_Outcome_Failure,
+  Attempt_Exit_Failure,
 } from './Failure';
 
 import type {
-  Attempt_Outcome_Success,
+  Attempt_Exit_Success,
 } from './Success';
 
-type Attempt_Outcome<
+type Attempt_Exit<
   SomeProduct,
   SomeActionableError extends Attempt_Error.Actionable<string>,
 > =
-  | Attempt_Outcome_Success<SomeProduct>
-  | Attempt_Outcome_Failure<SomeActionableError>
+  | Attempt_Exit_Success<SomeProduct>
+  | Attempt_Exit_Failure<SomeActionableError>
 ;
 
-function Attempt_Outcome(
+function Attempt_Exit(
   namespaceOnly: never = Attempt_Error.NonActionable.throw(
-    `Unexpected call of module augmentation provision for ${Attempt_Outcome.name}.`,
+    `Unexpected call of module augmentation provision for ${Attempt_Exit.name}.`,
   ),
 ): never {
   return namespaceOnly;
 }
 
 export {
-  Attempt_Outcome,
+  Attempt_Exit,
 };

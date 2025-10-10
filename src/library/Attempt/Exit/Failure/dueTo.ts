@@ -3,18 +3,18 @@ import type {
 } from '../../Error';
 
 import type {
-  Attempt_Outcome_Failure,
+  Attempt_Exit_Failure,
 } from './definition.declared.ts';
 
-const Attempt_Outcome_Failure_dueTo = <
+const Attempt_Exit_Failure_dueTo = <
   SomeActionableError extends Attempt_Error.Actionable<string>,
 >(
   givenCause: SomeActionableError,
-): Attempt_Outcome_Failure<SomeActionableError> => ({
+): Attempt_Exit_Failure<SomeActionableError> => ({
   discriminant: 'failure',
   cause       : givenCause,
 });
 
 export {
-  Attempt_Outcome_Failure_dueTo,
+  Attempt_Exit_Failure_dueTo,
 };

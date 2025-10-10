@@ -7,7 +7,7 @@ import {
 } from '../Error';
 
 import type {
-  Attempt_Outcome,
+  Attempt_Exit,
   CauseOf,
   ProductOf,
 } from '../Exit';
@@ -17,12 +17,12 @@ import {
 } from '../tryCatchStatements';
 
 const Attempt_Fresh_that = <
-  SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error.Actionable<string>>,
+  SomeInferredOutcome extends Attempt_Exit<unknown, Attempt_Error.Actionable<string>>,
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
-  SomeEquivalentOutcome extends Attempt_Outcome<
+  SomeEquivalentOutcome extends Attempt_Exit<
     ProductOf<SomeInferredOutcome>,
     CauseOf<SomeInferredOutcome>
-  > = Attempt_Outcome<
+  > = Attempt_Exit<
     ProductOf<SomeInferredOutcome>,
     CauseOf<SomeInferredOutcome>
   >,

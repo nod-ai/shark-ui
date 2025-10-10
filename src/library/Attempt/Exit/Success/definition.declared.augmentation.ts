@@ -1,23 +1,23 @@
 import {
-  Attempt_Outcome_Success_Product,
+  Attempt_Exit_Success_Product,
 } from './Product';
 
 import {
-  Attempt_Outcome_Success,
+  Attempt_Exit_Success,
 } from './definition.declared.ts';
 
 import {
-  Attempt_Outcome_Success_thatYielded,
+  Attempt_Exit_Success_thatYielded,
 } from './thatYielded';
 
-Attempt_Outcome_Success.Product/**/ = Attempt_Outcome_Success_Product;
-Attempt_Outcome_Success.thatYielded = Attempt_Outcome_Success_thatYielded;
+Attempt_Exit_Success.Product/**/ = Attempt_Exit_Success_Product;
+Attempt_Exit_Success.thatYielded = Attempt_Exit_Success_thatYielded;
 
 declare module './definition.declared.ts' {
-  namespace Attempt_Outcome_Success {
+  namespace Attempt_Exit_Success {
     export {
-      /**/ Attempt_Outcome_Success_Product/**/ as Product,
-      /**/ Attempt_Outcome_Success_thatYielded as thatYielded,
+      /**/ Attempt_Exit_Success_Product/**/ as Product,
+      /**/ Attempt_Exit_Success_thatYielded as thatYielded,
     };
   }
 }

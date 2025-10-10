@@ -1,9 +1,9 @@
 import {
-  Attempt_Outcome_Failure,
+  Attempt_Exit_Failure,
 } from './Failure';
 
-const Attempt_Outcome_failCause = Attempt_Outcome_Failure.dueTo;
+const Attempt_Exit_failCause = Attempt_Exit_Failure.dueTo;
 
 export {
-  Attempt_Outcome_failCause,
+  Attempt_Exit_failCause,
 };

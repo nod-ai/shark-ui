@@ -3,16 +3,16 @@ import type {
 } from '../../Error';
 
 import type {
-  Attempt_Outcome_Success,
+  Attempt_Exit_Success,
 } from '../Success';
 
 import type {
-  Attempt_Outcome,
+  Attempt_Exit,
 } from '../definition.declared.ts';
 
 type ProductOf<
-  SomeOutcome extends Attempt_Outcome<unknown, Attempt_Error.Actionable<string>>,
-> = SomeOutcome extends Attempt_Outcome_Success<infer NestedProduct>
+  SomeOutcome extends Attempt_Exit<unknown, Attempt_Error.Actionable<string>>,
+> = SomeOutcome extends Attempt_Exit_Success<infer NestedProduct>
   ? NestedProduct
   : never;
 

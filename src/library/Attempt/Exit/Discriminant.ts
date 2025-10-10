@@ -1,8 +1,8 @@
-type Attempt_Outcome_Discriminant =
+type Attempt_Exit_Discriminant =
   | 'success'
   | 'failure'
 ;
 
 export type {
-  Attempt_Outcome_Discriminant,
+  Attempt_Exit_Discriminant,
 };

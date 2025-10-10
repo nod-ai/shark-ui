@@ -3,11 +3,11 @@ import type {
 } from '../Error';
 
 import type {
-  Attempt_Outcome,
+  Attempt_Exit,
 } from '../Exit';
 
 type Attempt_End_Retriever<
-  SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error.Actionable<string>>,
+  SomeInferredOutcome extends Attempt_Exit<unknown, Attempt_Error.Actionable<string>>,
 > = () => Promise<SomeInferredOutcome>;
 
 export type {

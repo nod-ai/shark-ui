@@ -3,25 +3,25 @@ import type {
 } from '../Error';
 
 import type {
-  Attempt_Outcome_Failure,
+  Attempt_Exit_Failure,
 } from './Failure';
 
 import type {
-  Attempt_Outcome,
+  Attempt_Exit,
 } from './definition.declared.ts';
 
-const Attempt_Outcome_isFailure = <
+const Attempt_Exit_isFailure = <
   SomeProduct,
   SomeActionableError extends Attempt_Error.Actionable<string>,
 >(
-  givenOutcome: Attempt_Outcome<
+  givenOutcome: Attempt_Exit<
     SomeProduct,
     SomeActionableError
   >,
-): givenOutcome is Attempt_Outcome_Failure<SomeActionableError> => {
+): givenOutcome is Attempt_Exit_Failure<SomeActionableError> => {
   return givenOutcome.discriminant === 'failure';
 };
 
 export {
-  Attempt_Outcome_isFailure,
+  Attempt_Exit_isFailure,
 };

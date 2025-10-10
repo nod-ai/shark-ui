@@ -3,23 +3,23 @@ import type {
 } from '../Error';
 
 import type {
-  Attempt_Outcome_Transformer,
+  Attempt_Exit_Transformer,
 } from './Transformer';
 
 import type {
-  Attempt_Outcome,
+  Attempt_Exit,
 } from './definition.declared.ts';
 
 import {
-  Attempt_Outcome_failCause,
+  Attempt_Exit_failCause,
 } from './failCause';
 
 import {
-  Attempt_Outcome_isSuccess,
+  Attempt_Exit_isSuccess,
 } from './isSuccess';
 
 import {
-  Attempt_Outcome_succeed,
+  Attempt_Exit_succeed,
 } from './succeed';
 
 /**
@@ -30,36 +30,36 @@ import {
 *
 * Helps avoid boilerplate when transforming outcomes.
 */
-const Attempt_Outcome_mapBoth = <
+const Attempt_Exit_mapBoth = <
   SomeTransformableProduct,
   SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
   SomeTransformedProduct = SomeTransformableProduct,
   SomeTransformedActionableError extends Attempt_Error.Actionable<string> = SomeTransformableActionableError,
 >(
-  givenOutcome: Attempt_Outcome<
+  givenOutcome: Attempt_Exit<
     SomeTransformableProduct,
     SomeTransformableActionableError
   >,
   {
     onSuccess: toTransformedProduct,
     onFailure: toTransformedCause,
-  }: Attempt_Outcome_Transformer<
+  }: Attempt_Exit_Transformer<
     SomeTransformableProduct,
     SomeTransformableActionableError,
     SomeTransformedProduct,
     SomeTransformedActionableError
   >,
-): Attempt_Outcome<
+): Attempt_Exit<
   SomeTransformedProduct,
   SomeTransformedActionableError
-> => Attempt_Outcome_isSuccess(givenOutcome)
-  ? Attempt_Outcome_succeed(
+> => Attempt_Exit_isSuccess(givenOutcome)
+  ? Attempt_Exit_succeed(
       toTransformedProduct(givenOutcome.value),
     )
-  : Attempt_Outcome_failCause(
+  : Attempt_Exit_failCause(
       toTransformedCause(givenOutcome.cause),
     );
 
 export {
-  Attempt_Outcome_mapBoth,
+  Attempt_Exit_mapBoth,
 };

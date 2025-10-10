@@ -3,7 +3,7 @@ import {
 } from '../Error';
 
 import {
-  Attempt_Outcome,
+  Attempt_Exit,
 } from '../Exit';
 
 import {
@@ -24,17 +24,17 @@ const Attempt_Adapted_to = <
 >(
   forciblyGetProduct: () => SomeProduct,
   given: Attempt_Adapted_Config<SomeActionableError>,
-): Attempt_Outcome<SomeProduct, SomeActionableError> => Attempt_Fresh.that(() => safe({
+): Attempt_Exit<SomeProduct, SomeActionableError> => Attempt_Fresh.that(() => safe({
   try() {
     const gottenProduct = forciblyGetProduct();
-    return Attempt_Outcome.succeed(gottenProduct);
+    return Attempt_Exit.succeed(gottenProduct);
   },
   catch(someError) {
     const someActionableError = Attempt_Error.Actionable.from(someError, {
       using: given.interpretationOf,
     });
 
-    return Attempt_Outcome.failCause(someActionableError);
+    return Attempt_Exit.failCause(someActionableError);
   },
 }));
 

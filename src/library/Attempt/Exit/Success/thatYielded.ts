@@ -1,16 +1,16 @@
 import type {
-  Attempt_Outcome_Success,
+  Attempt_Exit_Success,
 } from './definition.declared.ts';
 
-const Attempt_Outcome_Success_thatYielded = <
+const Attempt_Exit_Success_thatYielded = <
   SomeProduct,
 >(
   givenProduct: SomeProduct,
-): Attempt_Outcome_Success<SomeProduct> => ({
+): Attempt_Exit_Success<SomeProduct> => ({
   discriminant: 'success',
   value       : givenProduct,
 });
 
 export {
-  Attempt_Outcome_Success_thatYielded,
+  Attempt_Exit_Success_thatYielded,
 };

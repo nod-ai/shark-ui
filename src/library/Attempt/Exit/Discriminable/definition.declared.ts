@@ -1,17 +1,17 @@
 import type {
-  Attempt_Outcome_Discriminant,
+  Attempt_Exit_Discriminant,
 } from '../Discriminant';
 
 import type {
-  Attempt_Outcome_Discriminable_SyntacticallySugarfree,
+  Attempt_Exit_Discriminable_SyntacticallySugarfree,
 } from './SyntacticallySugarfree';
 
-type Attempt_Outcome_Discriminable<
-  SomeDiscriminant extends Attempt_Outcome_Discriminant,
-> = Attempt_Outcome_Discriminable_SyntacticallySugarfree<
+type Attempt_Exit_Discriminable<
+  SomeDiscriminant extends Attempt_Exit_Discriminant,
+> = Attempt_Exit_Discriminable_SyntacticallySugarfree<
   SomeDiscriminant
 >;
 
 export type {
-  Attempt_Outcome_Discriminable,
+  Attempt_Exit_Discriminable,
 };

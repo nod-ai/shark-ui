@@ -1,16 +1,16 @@
 import type {
-  Attempt_Outcome_Discriminable,
+  Attempt_Exit_Discriminable,
 } from '../Discriminable';
 
-interface Attempt_Outcome_Success_SemanticallySugarfree<
+interface Attempt_Exit_Success_SemanticallySugarfree<
   SomeProduct,
 >
-  extends Attempt_Outcome_Discriminable<
+  extends Attempt_Exit_Discriminable<
     'success'
   > {
   readonly value: SomeProduct;
 }
 
 export type {
-  Attempt_Outcome_Success_SemanticallySugarfree,
+  Attempt_Exit_Success_SemanticallySugarfree,
 };

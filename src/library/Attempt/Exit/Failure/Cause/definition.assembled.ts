@@ -1,1 +1,1 @@
-export * as Attempt_Outcome_Failure_Cause from './definition.assembled.members.ts';
+export * as Attempt_Exit_Failure_Cause from './definition.assembled.members.ts';

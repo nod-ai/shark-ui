@@ -3,16 +3,16 @@ import type {
 } from '../../Error';
 
 import type {
-  Attempt_Outcome_Failure,
+  Attempt_Exit_Failure,
 } from '../Failure';
 
 import type {
-  Attempt_Outcome,
+  Attempt_Exit,
 } from '../definition.declared.ts';
 
 type CauseOf<
-  SomeOutcome extends Attempt_Outcome<unknown, Attempt_Error.Actionable<string>>,
-> = SomeOutcome extends Attempt_Outcome_Failure<infer NestedError>
+  SomeOutcome extends Attempt_Exit<unknown, Attempt_Error.Actionable<string>>,
+> = SomeOutcome extends Attempt_Exit_Failure<infer NestedError>
   ? NestedError
   : never;
 

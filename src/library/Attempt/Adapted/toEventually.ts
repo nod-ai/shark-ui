@@ -3,7 +3,7 @@ import {
 } from '../Error';
 
 import {
-  Attempt_Outcome,
+  Attempt_Exit,
 } from '../Exit';
 
 import {
@@ -25,21 +25,21 @@ const Attempt_Adapted_toEventually = async <
   forciblyRetrieveProduct: () => Promise<SomeProduct>,
   given: Attempt_Adapted_Config<SomeActionableError>,
 ): Promise<
-  Attempt_Outcome<
+  Attempt_Exit<
     SomeProduct,
     SomeActionableError
   >
 > => Attempt_Fresh.thatEventually(() => safeAsync({
   async try() {
     const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
-    return Attempt_Outcome.succeed(retrievedProduct);
+    return Attempt_Exit.succeed(retrievedProduct);
   },
   catch(someError) {
     const someActionableError = Attempt_Error.Actionable.from(someError, {
       using: given.interpretationOf,
     });
 
-    return Attempt_Outcome.failCause(someActionableError);
+    return Attempt_Exit.failCause(someActionableError);
   },
 }));
 

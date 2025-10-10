@@ -1,9 +1,9 @@
 import {
-  Attempt_Outcome_Success,
+  Attempt_Exit_Success,
 } from './Success';
 
-const Attempt_Outcome_succeed = Attempt_Outcome_Success.thatYielded;
+const Attempt_Exit_succeed = Attempt_Exit_Success.thatYielded;
 
 export {
-  Attempt_Outcome_succeed,
+  Attempt_Exit_succeed,
 };

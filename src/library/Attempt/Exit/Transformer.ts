@@ -3,29 +3,29 @@ import type {
 } from '../Error';
 
 import type {
-  Attempt_Outcome_Failure,
+  Attempt_Exit_Failure,
 } from './Failure';
 
 import type {
-  Attempt_Outcome_Success,
+  Attempt_Exit_Success,
 } from './Success';
 
-interface Attempt_Outcome_Transformer<
+interface Attempt_Exit_Transformer<
   SomeTransformableProduct,
   SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
   SomeTransformedProduct,
   SomeTransformedActionableError extends Attempt_Error.Actionable<string>,
 > {
-  onSuccess: Attempt_Outcome_Success.Product.Transformer<
+  onSuccess: Attempt_Exit_Success.Product.Transformer<
     SomeTransformableProduct,
     SomeTransformedProduct
   >;
-  onFailure: Attempt_Outcome_Failure.Cause.Transformer<
+  onFailure: Attempt_Exit_Failure.Cause.Transformer<
     SomeTransformableActionableError,
     SomeTransformedActionableError
   >;
 }
 
 export type {
-  Attempt_Outcome_Transformer,
+  Attempt_Exit_Transformer,
 };

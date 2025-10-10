@@ -3,5 +3,5 @@ export {
 } from './Body';
 
 export type {
-  Shortfin_TextToImage_SDXL_Client_Request_Outcome as Exit,
+  Shortfin_TextToImage_SDXL_Client_Request_Exit as Exit,
 } from './Exit';

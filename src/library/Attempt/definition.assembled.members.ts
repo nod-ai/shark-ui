@@ -3,7 +3,7 @@ export {
 } from './Either';
 
 export {
-  Attempt_Outcome as Exit,
+  Attempt_Exit as Exit,
 } from './Exit';
 
 export {
