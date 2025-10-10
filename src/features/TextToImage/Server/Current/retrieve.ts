@@ -31,13 +31,13 @@ const TextToImage_Server_Current_retrieve = (): Promise<
     Option.isSome(TextToImage_Server_Current_accordingToEnvironment)
   ) return Attempt.Outcome.succeed(Option.getOrThrow(TextToImage_Server_Current_accordingToEnvironment));
 
-  const staticConfig = (await TextToImage_Config.Static.read()).unwrapOr(TextToImage_Config.empty);
+  const staticConfig = (await TextToImage_Config.Static.read()).unwrapOrElse(TextToImage_Config.empty);
 
   if (
     Option.isSome(staticConfig.server)
   ) return Attempt.Outcome.succeed(Option.getOrThrow(staticConfig.server));
 
-  const dynamicConfig = (await TextToImage_Config.Dynamic.fetch()).unwrapOr(TextToImage_Config.empty);
+  const dynamicConfig = (await TextToImage_Config.Dynamic.fetch()).unwrapOrElse(TextToImage_Config.empty);
 
   if (
     Option.isSome(dynamicConfig.server)

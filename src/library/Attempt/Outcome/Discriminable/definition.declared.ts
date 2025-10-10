@@ -30,7 +30,7 @@ interface Attempt_Outcome_Discriminable<
   readonly isSuccess: Is<this['discriminant'], 'success'>;
   readonly isFailure: Not<this['isSuccess']>;
 
-  unwrapOr<
+  unwrapOrElse<
     SomeFallback,
   >(
     givenFallback: SomeFallback,
