@@ -11,7 +11,7 @@ import {
 
 import Attempt from '@/library/Attempt';
 
-/** Useful when state of UI is dependent on some async operation and the outcome upon completion */
+/** Useful when state of UI is dependent on some async operation and the result upon completion */
 const useStatefulAttemptThatEventually = <
   SomeProduct,
   SomeActionableError extends Attempt.Error.Actionable<string>,
@@ -51,7 +51,7 @@ const useStatefulAttemptThatEventually = <
     get isInProgress() {
       return get(flagIsRaised);
     },
-    get outcome() {
+    get result() {
       if (
         this.isInProgress
       ) return Option.none();

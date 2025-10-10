@@ -129,7 +129,7 @@ const imageGeneration = useStatefulAttemptThatEventually(async () => {
       class="fill-height"
     >
       <VSkeletonLoader
-        v-if="Option.isNone(imageGeneration.outcome)"
+        v-if="Option.isNone(imageGeneration.result)"
         :boilerplate="!imageGeneration.isInProgress"
         width="100vh"
         :style="{
@@ -137,12 +137,12 @@ const imageGeneration = useStatefulAttemptThatEventually(async () => {
         }"
       />
       <TextToImageOutputImg
-        v-else-if="Attempt.Outcome.isSuccess(imageGeneration.outcome.value)"
-        :model-value="imageGeneration.outcome.value.value"
+        v-else-if="Attempt.Outcome.isSuccess(imageGeneration.result.value)"
+        :model-value="imageGeneration.result.value.value"
       />
       <TextToImageOutputAlert
         v-else
-        :error="imageGeneration.outcome.value.cause"
+        :error="imageGeneration.result.value.cause"
       />
     </VContainer>
   </VMain>
