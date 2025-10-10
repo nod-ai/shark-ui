@@ -6,10 +6,9 @@ interface Attempt_Outcome_Success_SemanticallySugarfree<
   SomeProduct,
 >
   extends Attempt_Outcome_Discriminable<
-    'success',
-    SomeProduct
+    'success'
   > {
-  readonly product: SomeProduct;
+  readonly value: SomeProduct;
 }
 
 export type {

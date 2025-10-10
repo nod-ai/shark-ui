@@ -19,7 +19,7 @@ const Attempt_Outcome_isFailure = <
     SomeActionableError
   >,
 ): givenOutcome is Attempt_Outcome_Failure<SomeActionableError> => {
-  return givenOutcome.isFailure;
+  return givenOutcome.discriminant === 'failure';
 };
 
 export {
