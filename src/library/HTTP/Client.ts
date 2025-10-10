@@ -74,7 +74,7 @@ class HTTP_Client {
       outcomeOfSettlingResponse.isFailure
     ) return outcomeOfSettlingResponse;
 
-    const response = outcomeOfSettlingResponse.unwrapped;
+    const response = outcomeOfSettlingResponse.value;
 
     if (!response.ok) {
       const newResponseError = new HTTP_Endpoint.Error.RespondedWithFailure(response.statusText, response.status);

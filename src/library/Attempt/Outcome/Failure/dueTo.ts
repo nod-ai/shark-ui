@@ -15,14 +15,13 @@ const Attempt_Outcome_Failure_dueTo = <
 >(
   givenCause: SomeActionableError,
 ): Attempt_Outcome_Failure<SomeActionableError> => ({
-  discriminant  : 'failure',
-  cause         : givenCause,
-  isSuccess     : false,
-  isFailure     : true,
-  unwrapOr      : <SomeFallback>($0: SomeFallback) => $0,
-  unwrapOrThrow : () => givenCause.throwAnyway('Unexpected forceful unwrap of a failure'),
-  causeOfFailure: givenCause,
-  rewrappedWith : <
+  discriminant : 'failure',
+  cause        : givenCause,
+  isSuccess    : false,
+  isFailure    : true,
+  unwrapOr     : <SomeFallback>($0: SomeFallback) => $0,
+  unwrapOrThrow: () => givenCause.throwAnyway('Unexpected forceful unwrap of a failure'),
+  rewrappedWith: <
     SomeTransformedActionableError extends Attempt_Error.Actionable<string>,
   >(
     transformed = Attempt_Outcome_Failure_Cause.Transformer.identity<

@@ -39,13 +39,13 @@ interface Attempt_Outcome_Success<
    * ): void {
    *   if (
    *     givenOutcome.isFailure
-   *   ) recoverFrom(givenOutcome.causeOfFailure);
+   *   ) recoverFrom(givenOutcome.cause);
    *
-   *   console.log(givenOutcome.unwrapped);
+   *   console.log(givenOutcome.value);
    * }
    * ```
    */
-  readonly unwrapped: this['product'];
+  readonly value: this['product'];
 
   rewrappedWith<
     SomeTransformedProduct = SomeProduct,

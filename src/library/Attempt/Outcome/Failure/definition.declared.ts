@@ -16,25 +16,6 @@ interface Attempt_Outcome_Failure<
   extends Attempt_Outcome_Failure_SemanticallySugarfree<
     SomeActionableError
   > {
-  /**
-   * Semantic sugar for `cause`; useful for juxtaposition against early exits:
-   * ```ts
-   * function safelyGetProductWhileHandlingErrors(
-   *   givenOutcome: Attempt.Outcome<CustomProduct, CustomError>,
-   *   recoverFrom: (expectedError: CustomError) => void,
-   * ): CustomProduct {
-   *   if (
-   *     givenOutcome.isSuccess
-   *   ) return givenOutcome.unwrapped;
-   *
-   *   ...
-   *
-   *   recoverFrom(givenOutcome.causeOfFailure);
-   * }
-   * ```
-   */
-  readonly causeOfFailure: this['cause'];
-
   rewrappedWith<
     SomeTransformedActionableError extends Attempt_Error.Actionable<string> = SomeActionableError,
   >(
