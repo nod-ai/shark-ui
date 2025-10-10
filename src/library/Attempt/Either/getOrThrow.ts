@@ -4,7 +4,7 @@ import type {
 
 import {
   Attempt_Outcome,
-} from '../Outcome';
+} from '../Exit';
 
 const Attempt_Either_getOrThrow = <
   SomeProduct,

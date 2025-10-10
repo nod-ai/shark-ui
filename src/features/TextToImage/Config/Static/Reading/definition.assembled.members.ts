@@ -4,4 +4,4 @@ export {
 
 export type {
   TextToImage_Config_Static_Reading_Outcome as Outcome,
-} from './Outcome';
+} from './Exit';

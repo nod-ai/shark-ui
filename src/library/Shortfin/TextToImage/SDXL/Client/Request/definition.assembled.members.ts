@@ -4,4 +4,4 @@ export {
 
 export type {
   Shortfin_TextToImage_SDXL_Client_Request_Outcome as Outcome,
-} from './Outcome';
+} from './Exit';

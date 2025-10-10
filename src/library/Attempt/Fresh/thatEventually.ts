@@ -10,7 +10,7 @@ import type {
   Attempt_Outcome,
   CauseOf,
   ProductOf,
-} from '../Outcome';
+} from '../Exit';
 
 import {
   safeAsync,

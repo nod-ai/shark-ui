@@ -3,12 +3,12 @@ import {
 } from '../Error';
 
 import {
-  Attempt_Fresh,
-} from '../Fresh';
+  Attempt_Outcome,
+} from '../Exit';
 
 import {
-  Attempt_Outcome,
-} from '../Outcome';
+  Attempt_Fresh,
+} from '../Fresh';
 
 import {
   safeAsync,

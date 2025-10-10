@@ -4,7 +4,7 @@ import type {
 
 import type {
   Attempt_Outcome,
-} from '../Outcome';
+} from '../Exit';
 
 type Attempt_End_Getter<
   SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error.Actionable<string>>,

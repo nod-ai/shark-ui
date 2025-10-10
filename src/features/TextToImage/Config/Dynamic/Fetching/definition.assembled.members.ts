@@ -4,4 +4,4 @@ export {
 
 export type {
   TextToImage_Config_Dynamic_Fetching_Outcome as Outcome,
-} from './Outcome';
+} from './Exit';

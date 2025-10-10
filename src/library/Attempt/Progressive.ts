@@ -8,7 +8,7 @@ import type {
 
 import type {
   Attempt_Outcome,
-} from './Outcome';
+} from './Exit';
 
 interface Attempt_Progressive<
   SomeProduct,

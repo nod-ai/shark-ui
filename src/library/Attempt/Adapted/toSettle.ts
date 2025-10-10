@@ -4,7 +4,7 @@ import type {
 
 import type {
   Attempt_Outcome,
-} from '../Outcome';
+} from '../Exit';
 
 import type {
   Attempt_Adapted_Config,

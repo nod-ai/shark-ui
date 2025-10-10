@@ -77,7 +77,7 @@ import {
   Attempt_Outcome,
   type ProductOf,
   type CauseOf,
-} from '../../Outcome';
+} from '../../Exit';
 
 ...
 

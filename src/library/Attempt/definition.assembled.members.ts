@@ -4,7 +4,7 @@ export {
 
 export {
   Attempt_Outcome as Outcome,
-} from './Outcome';
+} from './Exit';
 
 export {
   Attempt_Adapted as Adapted,
