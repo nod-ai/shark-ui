@@ -2,7 +2,7 @@ import type {
   Attempt_Error,
 } from '../Error';
 
-import type {
+import {
   Attempt_Outcome,
 } from '../Outcome';
 
@@ -12,7 +12,9 @@ const Attempt_Either_getOrThrow = <
 >(
   givenOutcome: Attempt_Outcome<SomeProduct, SomeActionableError>,
 ): SomeProduct => {
-  return givenOutcome.getOrThrow();
+  return Attempt_Outcome.isSuccess(givenOutcome)
+    ? givenOutcome.product
+    : givenOutcome.cause.throwAnyway('Expected product, got failure instead');
 };
 
 export {

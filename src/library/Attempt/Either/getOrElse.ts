@@ -2,7 +2,7 @@ import type {
   Attempt_Error,
 } from '../Error';
 
-import type {
+import {
   Attempt_Outcome,
 } from '../Outcome';
 
@@ -14,7 +14,9 @@ const Attempt_Either_getOrElse = <
   givenOutcome: Attempt_Outcome<SomeProduct, SomeActionableError>,
   givenFallbackGetter: () => SomeFallbackProduct,
 ): SomeProduct | SomeFallbackProduct => {
-  return givenOutcome.getOrElse(givenFallbackGetter);
+  return Attempt_Outcome.isSuccess(givenOutcome)
+    ? givenOutcome.product
+    : givenFallbackGetter();
 };
 
 export {
