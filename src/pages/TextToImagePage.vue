@@ -69,7 +69,7 @@ const imageGeneration = useStatefulAttemptThatEventually(async () => {
     },
   });
 
-  const outcomeOfGeneratingImage = Attempt.Outcome.map(
+  const outcomeOfGeneratingImage = Attempt.Exit.map(
     outcomeOfGeneratingOutput,
     $0 => $0.image,
   );
@@ -137,7 +137,7 @@ const imageGeneration = useStatefulAttemptThatEventually(async () => {
         }"
       />
       <TextToImageOutputImg
-        v-else-if="Attempt.Outcome.isSuccess(imageGeneration.result.value)"
+        v-else-if="Attempt.Exit.isSuccess(imageGeneration.result.value)"
         :model-value="imageGeneration.result.value.value"
       />
       <TextToImageOutputAlert

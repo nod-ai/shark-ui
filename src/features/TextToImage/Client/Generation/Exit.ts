@@ -8,7 +8,7 @@ import type {
   TextToImage_Server,
 } from '../../Server';
 
-type TextToImage_Client_Generation_Outcome = Attempt.Outcome<
+type TextToImage_Client_Generation_Outcome = Attempt.Exit<
   TextToImage_Pipeline.Output,
   TextToImage_Server.Error.Any
 >;

@@ -17,7 +17,7 @@ const useStatefulAttemptThatEventually = <
   SomeActionableError extends Attempt.Error.Actionable<string>,
 >(
   retrieveOutcome: Attempt.End.Retriever<
-    Attempt.Outcome<SomeProduct, SomeActionableError>
+    Attempt.Exit<SomeProduct, SomeActionableError>
   >,
 ): Attempt.Progressive<
   SomeProduct,
@@ -25,7 +25,7 @@ const useStatefulAttemptThatEventually = <
 > => {
   const flagIsRaised = ref(false);
 
-  type CapturedOutcome = Attempt.Outcome<
+  type CapturedOutcome = Attempt.Exit<
     SomeProduct,
     SomeActionableError
   >;

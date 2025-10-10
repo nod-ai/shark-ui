@@ -3,5 +3,5 @@ export {
 } from './Error';
 
 export type {
-  HTTP_Endpoint_Outcome as Outcome,
+  HTTP_Endpoint_Outcome as Exit,
 } from './Exit';

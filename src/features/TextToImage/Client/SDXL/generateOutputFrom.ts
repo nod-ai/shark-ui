@@ -37,12 +37,12 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     >;
   },
 ): Promise<
-  TextToImage_Client_Generation.Outcome
+  TextToImage_Client_Generation.Exit
 > => {
   const outcomeOfInitializingClient = await TextToImage_Client_SDXL_initialize();
 
   if (
-    Attempt.Outcome.isFailure(outcomeOfInitializingClient)
+    Attempt.Exit.isFailure(outcomeOfInitializingClient)
   ) return outcomeOfInitializingClient;
 
   const shimmedStabilityAIClient = outcomeOfInitializingClient.value;
@@ -69,7 +69,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     },
   });
 
-  const outcomeOfSettlingSoleTextToImageOutput = Attempt.Outcome.map(
+  const outcomeOfSettlingSoleTextToImageOutput = Attempt.Exit.map(
     outcomeOfSettlingTextToImageResponse,
     textToImageResponse => toSharkUIOutput.first({
       in          : textToImageResponse,

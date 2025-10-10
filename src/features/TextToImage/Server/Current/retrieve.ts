@@ -22,26 +22,26 @@ import {
 } from './accordingToEnvironment';
 
 const TextToImage_Server_Current_retrieve = (): Promise<
-  Attempt.Outcome<
+  Attempt.Exit<
     WebAPI.Server,
     TextToImage_Server_Error.MissingSpecification
   >
 > => Attempt.Fresh.thatEventually(async () => {
   if (
     Option.isSome(TextToImage_Server_Current_accordingToEnvironment)
-  ) return Attempt.Outcome.succeed(Option.getOrThrow(TextToImage_Server_Current_accordingToEnvironment));
+  ) return Attempt.Exit.succeed(Option.getOrThrow(TextToImage_Server_Current_accordingToEnvironment));
 
   const staticConfig = Attempt.Either.getOrElse(await TextToImage_Config.Static.read(), () => TextToImage_Config.empty);
 
   if (
     Option.isSome(staticConfig.server)
-  ) return Attempt.Outcome.succeed(Option.getOrThrow(staticConfig.server));
+  ) return Attempt.Exit.succeed(Option.getOrThrow(staticConfig.server));
 
   const dynamicConfig = Attempt.Either.getOrElse(await TextToImage_Config.Dynamic.fetch(), () => TextToImage_Config.empty);
 
   if (
     Option.isSome(dynamicConfig.server)
-  ) return Attempt.Outcome.succeed(Option.getOrThrow(dynamicConfig.server));
+  ) return Attempt.Exit.succeed(Option.getOrThrow(dynamicConfig.server));
 
   const newSpecificationError = new TextToImage_Server_Error.MissingSpecification(
     TextToImage_Server_Origin.environmentKey,
@@ -49,7 +49,7 @@ const TextToImage_Server_Current_retrieve = (): Promise<
     TextToImage_Config.Dynamic.endpoint,
   );
 
-  return Attempt.Outcome.failCause(newSpecificationError);
+  return Attempt.Exit.failCause(newSpecificationError);
 });
 
 export {

@@ -6,14 +6,14 @@ import {
 } from '../../Server';
 
 const TextToImage_Client_SDXL_initialize = async (): Promise<
-  Attempt.Outcome<
+  Attempt.Exit<
     ShimmedStabilityAIClient,
     TextToImage_Server.Error.MissingSpecification
   >
 > => {
   const outcomeOfRetrievingCurrentServer = await TextToImage_Server.Current.retrieve();
 
-  const outcomeOfInitializingClient = Attempt.Outcome.map(
+  const outcomeOfInitializingClient = Attempt.Exit.map(
     outcomeOfRetrievingCurrentServer,
     textToImageServer => new ShimmedStabilityAIClient({
       serverURL: textToImageServer.origin,

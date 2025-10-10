@@ -4,7 +4,7 @@ import type {
   HTTP_Endpoint_Error,
 } from './Error';
 
-type HTTP_Endpoint_Outcome = Attempt.Outcome<
+type HTTP_Endpoint_Outcome = Attempt.Exit<
   unknown,
   HTTP_Endpoint_Error.Any
 >;

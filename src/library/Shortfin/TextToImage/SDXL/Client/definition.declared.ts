@@ -33,7 +33,7 @@ class Shortfin_TextToImage_SDXL_Client
   public generateImageFrom(
     givenBatchedRequestBody: Shortfin_TextToImage_SDXL_Client_Request.Body.Batched,
   ): Promise<
-    Shortfin_TextToImage_SDXL_Client_Request.Outcome
+    Shortfin_TextToImage_SDXL_Client_Request.Exit
   > {
     const generationEndpoint = URLComponent.Path('/generate');
 
@@ -44,13 +44,13 @@ class Shortfin_TextToImage_SDXL_Client
       });
 
       if (
-        Attempt.Outcome.isFailure(outcomeOfSubmittingResource)
+        Attempt.Exit.isFailure(outcomeOfSubmittingResource)
       ) return outcomeOfSubmittingResource;
 
       const rawResource = outcomeOfSubmittingResource.value;
       const decodedResource = Schema.decodeUnknownSync(Shortfin_TextToImage_SDXL_Client_Response.Body)(rawResource);
       const [soleGeneratedImage] = decodedResource.images;
-      return Attempt.Outcome.succeed(soleGeneratedImage);
+      return Attempt.Exit.succeed(soleGeneratedImage);
     });
   }
 }

@@ -8,7 +8,7 @@ import type {
   TextToImage_Config_Dynamic_Fetching_Error,
 } from './Error';
 
-type TextToImage_Config_Dynamic_Fetching_Outcome = Attempt.Outcome<
+type TextToImage_Config_Dynamic_Fetching_Outcome = Attempt.Exit<
   TextToImage_Config,
   TextToImage_Config_Dynamic_Fetching_Error
 >;

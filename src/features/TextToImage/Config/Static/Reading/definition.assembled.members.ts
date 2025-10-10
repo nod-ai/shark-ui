@@ -3,5 +3,5 @@ export {
 } from './Error';
 
 export type {
-  TextToImage_Config_Static_Reading_Outcome as Outcome,
+  TextToImage_Config_Static_Reading_Outcome as Exit,
 } from './Exit';
