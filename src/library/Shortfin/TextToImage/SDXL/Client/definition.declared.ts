@@ -44,7 +44,7 @@ class Shortfin_TextToImage_SDXL_Client
       });
 
       if (
-        outcomeOfSubmittingResource.isFailure
+        Attempt.Outcome.isFailure(outcomeOfSubmittingResource)
       ) return outcomeOfSubmittingResource;
 
       const rawResource = outcomeOfSubmittingResource.value;

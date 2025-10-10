@@ -19,6 +19,14 @@ import {
 } from './failCause';
 
 import {
+  Attempt_Outcome_isFailure,
+} from './isFailure';
+
+import {
+  Attempt_Outcome_isSuccess,
+} from './isSuccess';
+
+import {
   Attempt_Outcome_map,
 } from './map';
 
@@ -34,6 +42,8 @@ import {
   Attempt_Outcome_succeed,
 } from './succeed';
 
+Attempt_Outcome.isSuccess /*    */ = Attempt_Outcome_isSuccess;
+Attempt_Outcome.isFailure /*    */ = Attempt_Outcome_isFailure;
 Attempt_Outcome.succeed /*      */ = Attempt_Outcome_succeed;
 Attempt_Outcome.failCause /*    */ = Attempt_Outcome_failCause;
 Attempt_Outcome.die /*          */ = Attempt_Outcome_die;
@@ -46,6 +56,8 @@ Attempt_Outcome.mapErrorCause /**/ = Attempt_Outcome_mapErrorCause;
 declare module './definition.declared.ts' {
   namespace Attempt_Outcome {
     export {
+      Attempt_Outcome_isSuccess /*    */ as isSuccess,
+      Attempt_Outcome_isFailure /*    */ as isFailure,
       Attempt_Outcome_succeed /*      */ as succeed,
       Attempt_Outcome_failCause /*    */ as failCause,
       Attempt_Outcome_die /*          */ as die,
