@@ -142,7 +142,7 @@ const imageGeneration = useStatefulAttemptThatEventually(async () => {
       />
       <TextToImageOutputAlert
         v-else
-        :error="imageGeneration.outcome.value.causeOfFailure"
+        :error="imageGeneration.outcome.value.cause"
       />
     </VContainer>
   </VMain>

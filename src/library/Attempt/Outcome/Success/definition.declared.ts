@@ -39,7 +39,7 @@ interface Attempt_Outcome_Success<
    * ): void {
    *   if (
    *     givenOutcome.isFailure
-   *   ) recoverFrom(givenOutcome.causeOfFailure);
+   *   ) recoverFrom(givenOutcome.cause);
    *
    *   console.log(givenOutcome.value);
    * }
