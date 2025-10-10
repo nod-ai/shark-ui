@@ -44,19 +44,6 @@ import {
 
 Here, the `math` module acts as a "toolbox", the "tools" being the various mathematical functions it exposes. In cases like this, the tools are to be used at runtime.
 
-This applies to "type functions" as well:
-
-```typescript
-import type {
-  Is,
-  Not,
-} from '@/library/typeUtilities';
-
-...
-```
-
-Here, the `typeUtilities` module also acts as a "toolbox", but the tools are to be used in the type system only.
-
 ### Hybrid
 
 Some modules may choose to expose both a primary object and named exports.
