@@ -24,13 +24,13 @@ interface Attempt_Outcome_Success<
    * function doRiskyThingUnsafely(
    *   givenOutcome: Attempt.Outcome<CustomProduct, CustomError>,
    * ): void {
-   *   console.log(givenOutcome.getOrThrow());
+   *   console.log(Attempt.Either.getOrThrow(givenOutcome));
    * }
    *
    * function doRiskyThingSafelyWhileIgnoringErrors(
    *   givenOutcome: Attempt.Outcome<CustomProduct, CustomError>,
    * ): void {
-   *   console.log(givenOutcome.getOrElse('Errors ignored'));
+   *   console.log(Attempt.Either.getOrElse(givenOutcome, () => 'Errors ignored'));
    * }
    *
    * function doRiskyThingSafelyWhileHandlingErrors(
