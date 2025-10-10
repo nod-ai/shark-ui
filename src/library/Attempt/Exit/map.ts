@@ -20,9 +20,9 @@ import {
 
 /**
  * Convenience method for:
- * 1. unwrapping the contents of _this_ outcome,
+ * 1. unwrapping the contents of _this_ exit,
  * 2. transforming the product, and
- * 3. wrapping the transformed contents in a _new_ outcome.
+ * 3. wrapping the transformed contents in a _new_ exit.
  */
 const Attempt_Exit_map = <
   SomeTransformableProduct,
