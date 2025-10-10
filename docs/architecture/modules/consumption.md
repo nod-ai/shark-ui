@@ -48,7 +48,6 @@ This applies to "type functions" as well:
 
 ```typescript
 import type {
-  If,
   Is,
   Not,
 } from '@/library/typeUtilities';
