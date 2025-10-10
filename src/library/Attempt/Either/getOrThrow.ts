@@ -13,7 +13,7 @@ const Attempt_Either_getOrThrow = <
   givenOutcome: Attempt_Outcome<SomeProduct, SomeActionableError>,
 ): SomeProduct => {
   return Attempt_Outcome.isSuccess(givenOutcome)
-    ? givenOutcome.product
+    ? givenOutcome.value
     : givenOutcome.cause.throwAnyway('Expected product, got failure instead');
 };
 

@@ -54,7 +54,7 @@ const Attempt_Outcome_mapBoth = <
   SomeTransformedActionableError
 > => Attempt_Outcome_isSuccess(givenOutcome)
   ? Attempt_Outcome_succeed(
-      toTransformedProduct(givenOutcome.product),
+      toTransformedProduct(givenOutcome.value),
     )
   : Attempt_Outcome_failCause(
       toTransformedCause(givenOutcome.cause),

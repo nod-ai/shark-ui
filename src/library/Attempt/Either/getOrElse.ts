@@ -15,7 +15,7 @@ const Attempt_Either_getOrElse = <
   givenFallbackGetter: () => SomeFallbackProduct,
 ): SomeProduct | SomeFallbackProduct => {
   return Attempt_Outcome.isSuccess(givenOutcome)
-    ? givenOutcome.product
+    ? givenOutcome.value
     : givenFallbackGetter();
 };
 

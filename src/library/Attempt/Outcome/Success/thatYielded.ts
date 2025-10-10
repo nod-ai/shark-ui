@@ -8,7 +8,6 @@ const Attempt_Outcome_Success_thatYielded = <
   givenProduct: SomeProduct,
 ): Attempt_Outcome_Success<SomeProduct> => ({
   discriminant: 'success',
-  product     : givenProduct,
   value       : givenProduct,
 });
 
