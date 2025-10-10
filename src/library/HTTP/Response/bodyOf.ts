@@ -36,7 +36,7 @@ const bodyOf = (
 
       const promiseForDigestedResponseBody: Promise<unknown> = givenResponse.json();
 
-      const outcomeOfDigestingResponseBody = await Attempt.Adapted.toSettle(promiseForDigestedResponseBody, {
+      const exitFromDigestingResponseBody = await Attempt.Adapted.toSettle(promiseForDigestedResponseBody, {
         interpretationOf: (caughtError) => {
           if (
             caughtError instanceof SyntaxError
@@ -46,7 +46,7 @@ const bodyOf = (
         },
       });
 
-      return outcomeOfDigestingResponseBody;
+      return exitFromDigestingResponseBody;
     });
   },
 });

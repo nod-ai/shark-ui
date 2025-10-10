@@ -58,7 +58,7 @@ class HTTP_Client {
         : JSON.stringify(givenRequestBody),
     });
 
-    const outcomeOfSettlingResponse = await Attempt.Adapted.toSettle(promisedResponse, {
+    const exitFromSettlingResponse = await Attempt.Adapted.toSettle(promisedResponse, {
       interpretationOf: (caughtError) => {
         const clientFailedToReachServer = caughtError.message.includes('Failed to fetch');
 
@@ -71,20 +71,20 @@ class HTTP_Client {
     });
 
     if (
-      Attempt.Exit.isFailure(outcomeOfSettlingResponse)
-    ) return outcomeOfSettlingResponse;
+      Attempt.Exit.isFailure(exitFromSettlingResponse)
+    ) return exitFromSettlingResponse;
 
-    const response = outcomeOfSettlingResponse.value;
+    const response = exitFromSettlingResponse.value;
 
     if (!response.ok) {
       const newResponseError = new HTTP_Endpoint.Error.RespondedWithFailure(response.statusText, response.status);
       return Attempt.Exit.failCause(newResponseError);
     }
 
-    const outcomeOfDigestingResponseBody = await bodyOf(response).digestAsUnknown();
+    const exitFromDigestingResponseBody = await bodyOf(response).digestAsUnknown();
 
     return Attempt.Exit.mapErrorCause(
-      outcomeOfDigestingResponseBody,
+      exitFromDigestingResponseBody,
       $0 => new HTTP_Endpoint.Error.IndigestibleResponseBody(endpointURL, $0),
     );
   });

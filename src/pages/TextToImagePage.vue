@@ -58,7 +58,7 @@ const imageGeneration = useStatefulAttemptThatEventually(async () => {
     () => new Error('Prompt was not set before submission'),
   );
 
-  const outcomeOfGeneratingOutput = await TextToImage.Client.SDXL.generateOutputFrom({
+  const exitFromGeneratingOutput = await TextToImage.Client.SDXL.generateOutputFrom({
     textToImageRequestBody: {
       textPrompts: proposedPrompt,
       height     : 1024,
@@ -69,12 +69,12 @@ const imageGeneration = useStatefulAttemptThatEventually(async () => {
     },
   });
 
-  const outcomeOfGeneratingImage = Attempt.Exit.map(
-    outcomeOfGeneratingOutput,
+  const exitFromGeneratingImage = Attempt.Exit.map(
+    exitFromGeneratingOutput,
     $0 => $0.image,
   );
 
-  return outcomeOfGeneratingImage;
+  return exitFromGeneratingImage;
 });
 </script>
 

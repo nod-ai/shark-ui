@@ -11,16 +11,16 @@ const TextToImage_Client_SDXL_initialize = async (): Promise<
     TextToImage_Server.Error.MissingSpecification
   >
 > => {
-  const outcomeOfRetrievingCurrentServer = await TextToImage_Server.Current.retrieve();
+  const exitFromRetrievingCurrentServer = await TextToImage_Server.Current.retrieve();
 
-  const outcomeOfInitializingClient = Attempt.Exit.map(
-    outcomeOfRetrievingCurrentServer,
+  const exitFromInitializingClient = Attempt.Exit.map(
+    exitFromRetrievingCurrentServer,
     textToImageServer => new ShimmedStabilityAIClient({
       serverURL: textToImageServer.origin,
     }),
   );
 
-  return outcomeOfInitializingClient;
+  return exitFromInitializingClient;
 };
 
 export {

@@ -38,16 +38,16 @@ class Shortfin_TextToImage_SDXL_Client
     const generationEndpoint = URLComponent.Path('/generate');
 
     return Attempt.Fresh.thatEventually(async () => {
-      const outcomeOfSubmittingResource = await this.submitResource({
+      const exitFromSubmittingResource = await this.submitResource({
         bySending: givenBatchedRequestBody,
         to       : generationEndpoint,
       });
 
       if (
-        Attempt.Exit.isFailure(outcomeOfSubmittingResource)
-      ) return outcomeOfSubmittingResource;
+        Attempt.Exit.isFailure(exitFromSubmittingResource)
+      ) return exitFromSubmittingResource;
 
-      const rawResource = outcomeOfSubmittingResource.value;
+      const rawResource = exitFromSubmittingResource.value;
       const decodedResource = Schema.decodeUnknownSync(Shortfin_TextToImage_SDXL_Client_Response.Body)(rawResource);
       const [soleGeneratedImage] = decodedResource.images;
       return Attempt.Exit.succeed(soleGeneratedImage);

@@ -20,11 +20,11 @@ import {
 const TextToImage_Config_Dynamic_fetch = (): Promise<
   TextToImage_Config_Dynamic_Fetching.Exit
 > => Attempt.Fresh.thatEventually(async () => {
-  const outcomeOfFetchingResource = await HTTP.Client.local.fetchResource({
+  const exitFromFetchingResource = await HTTP.Client.local.fetchResource({
     from: TextToImage_Config_Dynamic_endpoint,
   });
 
-  return Attempt.Exit.mapBoth(outcomeOfFetchingResource, {
+  return Attempt.Exit.mapBoth(exitFromFetchingResource, {
     onSuccess: $0 => Schema.decodeUnknownSync(TextToImage_Config)($0),
     onFailure: $0 => new TextToImage_Config_Dynamic_Fetching.Error(TextToImage_Config_Dynamic_endpoint, $0),
   });
