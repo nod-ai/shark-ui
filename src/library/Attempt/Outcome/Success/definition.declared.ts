@@ -19,18 +19,18 @@ interface Attempt_Outcome_Success<
   /**
    * Access the product nested within a successful outcome.
    *
-   * Adds a guarded parallel to the `unwrapOrElse` and `unwrapOrThrow` methods:
+   * Adds a guarded parallel to the `getOrElse` and `getOrThrow` methods:
    * ```ts
    * function doRiskyThingUnsafely(
    *   givenOutcome: Attempt.Outcome<CustomProduct, CustomError>,
    * ): void {
-   *   console.log(givenOutcome.unwrapOrThrow());
+   *   console.log(givenOutcome.getOrThrow());
    * }
    *
    * function doRiskyThingSafelyWhileIgnoringErrors(
    *   givenOutcome: Attempt.Outcome<CustomProduct, CustomError>,
    * ): void {
-   *   console.log(givenOutcome.unwrapOrElse('Errors ignored'));
+   *   console.log(givenOutcome.getOrElse('Errors ignored'));
    * }
    *
    * function doRiskyThingSafelyWhileHandlingErrors(
