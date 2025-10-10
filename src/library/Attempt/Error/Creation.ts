@@ -18,7 +18,7 @@ class Attempt_Error_Creation
   }
 
   private static readonly message = [
-    'Fresh attempt found a potentially actionable error that bypassed the outcome handler.',
+    'Fresh attempt found a potentially actionable error that bypassed the outcome constructor.',
     'Find the culprit and wrap it with `Attempt.to` or `Attempt.toEventually`.',
   ].join('\n');
 
