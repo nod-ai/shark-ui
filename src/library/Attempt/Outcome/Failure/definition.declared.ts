@@ -25,7 +25,7 @@ interface Attempt_Outcome_Failure<
    * ): CustomProduct {
    *   if (
    *     givenOutcome.isSuccess
-   *   ) return givenOutcome.unwrapped;
+   *   ) return givenOutcome.value;
    *
    *   ...
    *

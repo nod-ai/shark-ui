@@ -45,7 +45,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     outcomeOfInitializingClient.isFailure
   ) return outcomeOfInitializingClient;
 
-  const shimmedStabilityAIClient = outcomeOfInitializingClient.unwrapped;
+  const shimmedStabilityAIClient = outcomeOfInitializingClient.value;
 
   const promisedTextToImageResponse = shimmedStabilityAIClient.version1.image.forciblyGenerateFromText({
     engineId              : 'stable-diffusion-xl-1024-v1-0',

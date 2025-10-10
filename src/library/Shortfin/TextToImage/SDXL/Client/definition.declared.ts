@@ -47,7 +47,7 @@ class Shortfin_TextToImage_SDXL_Client
         outcomeOfSubmittingResource.isFailure
       ) return outcomeOfSubmittingResource;
 
-      const rawResource = outcomeOfSubmittingResource.unwrapped;
+      const rawResource = outcomeOfSubmittingResource.value;
       const decodedResource = Schema.decodeUnknownSync(Shortfin_TextToImage_SDXL_Client_Response.Body)(rawResource);
       const [soleGeneratedImage] = decodedResource.images;
       return Attempt.Outcome.succeed(soleGeneratedImage);

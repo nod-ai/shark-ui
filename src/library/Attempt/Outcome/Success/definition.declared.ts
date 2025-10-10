@@ -41,11 +41,11 @@ interface Attempt_Outcome_Success<
    *     givenOutcome.isFailure
    *   ) recoverFrom(givenOutcome.causeOfFailure);
    *
-   *   console.log(givenOutcome.unwrapped);
+   *   console.log(givenOutcome.value);
    * }
    * ```
    */
-  readonly unwrapped: this['product'];
+  readonly value: this['product'];
 
   rewrappedWith<
     SomeTransformedProduct = SomeProduct,
