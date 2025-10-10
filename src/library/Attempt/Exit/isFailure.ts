@@ -14,12 +14,12 @@ const Attempt_Exit_isFailure = <
   SomeProduct,
   SomeActionableError extends Attempt_Error.Actionable<string>,
 >(
-  givenOutcome: Attempt_Exit<
+  givenExit: Attempt_Exit<
     SomeProduct,
     SomeActionableError
   >,
-): givenOutcome is Attempt_Exit_Failure<SomeActionableError> => {
-  return givenOutcome.discriminant === 'failure';
+): givenExit is Attempt_Exit_Failure<SomeActionableError> => {
+  return givenExit.discriminant === 'failure';
 };
 
 export {

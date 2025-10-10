@@ -11,11 +11,11 @@ const Attempt_Either_getOrElse = <
   SomeActionableError extends Attempt_Error.Actionable<string>,
   SomeFallbackProduct,
 >(
-  givenOutcome: Attempt_Exit<SomeProduct, SomeActionableError>,
+  givenExit: Attempt_Exit<SomeProduct, SomeActionableError>,
   givenFallbackGetter: () => SomeFallbackProduct,
 ): SomeProduct | SomeFallbackProduct => {
-  return Attempt_Exit.isSuccess(givenOutcome)
-    ? givenOutcome.value
+  return Attempt_Exit.isSuccess(givenExit)
+    ? givenExit.value
     : givenFallbackGetter();
 };
 

@@ -11,8 +11,8 @@ import type {
 } from '../definition.declared.ts';
 
 type CauseOf<
-  SomeOutcome extends Attempt_Exit<unknown, Attempt_Error.Actionable<string>>,
-> = SomeOutcome extends Attempt_Exit_Failure<infer NestedError>
+  SomeExit extends Attempt_Exit<unknown, Attempt_Error.Actionable<string>>,
+> = SomeExit extends Attempt_Exit_Failure<infer NestedError>
   ? NestedError
   : never;
 

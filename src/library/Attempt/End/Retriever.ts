@@ -7,8 +7,8 @@ import type {
 } from '../Exit';
 
 type Attempt_End_Retriever<
-  SomeInferredOutcome extends Attempt_Exit<unknown, Attempt_Error.Actionable<string>>,
-> = () => Promise<SomeInferredOutcome>;
+  SomeInferredExit extends Attempt_Exit<unknown, Attempt_Error.Actionable<string>>,
+> = () => Promise<SomeInferredExit>;
 
 export type {
   Attempt_End_Retriever,

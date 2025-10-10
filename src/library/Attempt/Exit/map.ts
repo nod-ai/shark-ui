@@ -30,7 +30,7 @@ const Attempt_Exit_map = <
   SomeTransformedProduct = SomeTransformableProduct,
   SomeTransformedActionableError extends Attempt_Error.Actionable<string> = SomeTransformableActionableError,
 >(
-  givenOutcome: Attempt_Exit<
+  givenExit: Attempt_Exit<
     SomeTransformableProduct,
     SomeTransformableActionableError
   >,
@@ -41,7 +41,7 @@ const Attempt_Exit_map = <
 ): Attempt_Exit<
   SomeTransformedProduct,
   SomeTransformedActionableError
-> => Attempt_Exit_mapBoth(givenOutcome, {
+> => Attempt_Exit_mapBoth(givenExit, {
   onSuccess: givenProductTransformer,
   onFailure: Attempt_Exit_Failure.Cause.Transformer.identity<
     SomeTransformableActionableError,
