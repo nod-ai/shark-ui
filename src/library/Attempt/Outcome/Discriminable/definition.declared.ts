@@ -33,7 +33,7 @@ interface Attempt_Outcome_Discriminable<
   getOrElse<
     SomeFallback,
   >(
-    givenFallback: SomeFallback,
+    givenFallbackGetter: () => SomeFallback,
   ): If<this['isSuccess'],
     SomePayload,
     SomeFallback

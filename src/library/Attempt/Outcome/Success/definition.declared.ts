@@ -30,7 +30,7 @@ interface Attempt_Outcome_Success<
    * function doRiskyThingSafelyWhileIgnoringErrors(
    *   givenOutcome: Attempt.Outcome<CustomProduct, CustomError>,
    * ): void {
-   *   console.log(givenOutcome.getOrElse('Errors ignored'));
+   *   console.log(givenOutcome.getOrElse(() => 'Errors ignored'));
    * }
    *
    * function doRiskyThingSafelyWhileHandlingErrors(
