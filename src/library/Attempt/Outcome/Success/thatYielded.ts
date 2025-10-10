@@ -11,7 +11,6 @@ const Attempt_Outcome_Success_thatYielded = <
   product     : givenProduct,
   isSuccess   : true,
   isFailure   : false,
-  getOrElse   : () => givenProduct,
   value       : givenProduct,
 });
 

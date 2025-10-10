@@ -15,7 +15,6 @@ const Attempt_Outcome_Failure_dueTo = <
   cause       : givenCause,
   isSuccess   : false,
   isFailure   : true,
-  getOrElse   : <SomeFallback>($0: () => SomeFallback) => $0(),
 });
 
 export {

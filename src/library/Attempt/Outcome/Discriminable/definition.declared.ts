@@ -1,6 +1,5 @@
 import type {
   Is,
-  If,
   Not,
 } from '@/library/typeUtilities';
 
@@ -18,6 +17,7 @@ import type {
 
 interface Attempt_Outcome_Discriminable<
   SomeDiscriminant extends Attempt_Outcome_Discriminant,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   SomePayload extends (
     SomeDiscriminant extends 'success'
       ? unknown
@@ -29,15 +29,6 @@ interface Attempt_Outcome_Discriminable<
   > {
   readonly isSuccess: Is<this['discriminant'], 'success'>;
   readonly isFailure: Not<this['isSuccess']>;
-
-  getOrElse<
-    SomeFallback,
-  >(
-    givenFallbackGetter: () => SomeFallback,
-  ): If<this['isSuccess'],
-    SomePayload,
-    SomeFallback
-  >;
 }
 
 export type {
