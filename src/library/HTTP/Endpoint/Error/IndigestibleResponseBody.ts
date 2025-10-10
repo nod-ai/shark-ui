@@ -1,11 +1,9 @@
 import Attempt from '@/library/Attempt';
 
 class HTTP_Endpoint_Error_IndigestibleResponseBody
-  extends Attempt.Error.Actionable<
-    'HTTP_Endpoint_Error_IndigestibleResponseBody'
-  > {
-  public override name = 'HTTP_Endpoint_Error_IndigestibleResponseBody' as const;
-
+  extends Attempt.Error.Tagged(
+    'HTTP_Endpoint_Error_IndigestibleResponseBody',
+  ) {
   public constructor(
     public readonly endpoint: URL,
     givenCause: Error,

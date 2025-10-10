@@ -1,11 +1,9 @@
 import Attempt from '@/library/Attempt';
 
 class HTTP_Endpoint_Error_FailedToSendRequest
-  extends Attempt.Error.Actionable<
-    'HTTP_Endpoint_Error_FailedToSendRequest'
-  > {
-  public override name = 'HTTP_Endpoint_Error_FailedToSendRequest' as const;
-
+  extends Attempt.Error.Tagged(
+    'HTTP_Endpoint_Error_FailedToSendRequest',
+  ) {
   public constructor(
     public readonly endpoint: URL,
   ) {

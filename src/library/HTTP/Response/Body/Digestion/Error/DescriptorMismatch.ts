@@ -6,11 +6,9 @@ import {
 } from '@/library/HTTP/Header'; // eslint-disable-line import/no-internal-modules -- avoids long relative path
 
 class HTTP_Response_Body_Digestion_Error_DescriptorMismatch
-  extends Attempt.Error.Actionable<
-    'HTTP_Response_Body_Digestion_Error_DescriptorMismatch'
-  > {
-  public override readonly name = 'HTTP_Response_Body_Digestion_Error_DescriptorMismatch' as const;
-
+  extends Attempt.Error.Tagged(
+    'HTTP_Response_Body_Digestion_Error_DescriptorMismatch',
+  ) {
   public constructor(
     public readonly response: Response,
     public readonly expectedDescriptor: ContentDescriptor,
