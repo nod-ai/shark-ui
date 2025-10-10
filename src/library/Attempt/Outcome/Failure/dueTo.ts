@@ -16,7 +16,6 @@ const Attempt_Outcome_Failure_dueTo = <
   isSuccess   : false,
   isFailure   : true,
   getOrElse   : <SomeFallback>($0: () => SomeFallback) => $0(),
-  getOrThrow  : () => givenCause.throwAnyway('Unexpected forceful unwrap of a failure'),
 });
 
 export {

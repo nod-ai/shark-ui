@@ -38,11 +38,6 @@ interface Attempt_Outcome_Discriminable<
     SomePayload,
     SomeFallback
   >;
-
-  getOrThrow(): If<this['isSuccess'],
-    SomePayload,
-    never
-  >;
 }
 
 export type {
