@@ -15,8 +15,8 @@ const Attempt_Outcome_Success_thatYielded = <
   product      : givenProduct,
   isSuccess    : true,
   isFailure    : false,
-  unwrapOr     : () => givenProduct,
-  unwrapOrThrow: () => givenProduct,
+  getOrElse    : () => givenProduct,
+  getOrThrow   : () => givenProduct,
   value        : givenProduct,
   rewrappedWith: <
     SomeTransformedProduct,
