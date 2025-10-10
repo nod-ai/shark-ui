@@ -13,8 +13,6 @@ const Attempt_Outcome_Failure_dueTo = <
 ): Attempt_Outcome_Failure<SomeActionableError> => ({
   discriminant: 'failure',
   cause       : givenCause,
-  isSuccess   : false,
-  isFailure   : true,
 });
 
 export {

@@ -9,8 +9,6 @@ const Attempt_Outcome_Success_thatYielded = <
 ): Attempt_Outcome_Success<SomeProduct> => ({
   discriminant: 'success',
   product     : givenProduct,
-  isSuccess   : true,
-  isFailure   : false,
   value       : givenProduct,
 });
 

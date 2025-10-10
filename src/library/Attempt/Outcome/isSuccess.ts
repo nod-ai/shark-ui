@@ -19,7 +19,7 @@ const Attempt_Outcome_isSuccess = <
     SomeActionableError
   >,
 ): givenOutcome is Attempt_Outcome_Success<SomeProduct> => {
-  return givenOutcome.isSuccess;
+  return givenOutcome.discriminant === 'success';
 };
 
 export {
