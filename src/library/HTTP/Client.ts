@@ -1,9 +1,10 @@
-import Attempt from '@/library/Attempt';
+import {
+  Option,
+} from 'effect';
 
-import type {
-  URLComponent_Origin,
-  URLComponent_Path,
-} from '@/library/URLComponent';
+import Attempt from '@/library/Attempt';
+import ContentDescriptor from '@/library/ContentDescriptor';
+import URLComponent from '@/library/URLComponent';
 
 import {
   HTTP_Endpoint,
@@ -13,26 +14,27 @@ import {
   HTTP_Request,
 } from './Request';
 
+import {
+  bodyOf,
+} from './Response';
+
 class HTTP_Client {
+  public static readonly local = (() => {
+    const localOrigin = URLComponent.Origin(location.origin);
+    return new HTTP_Client(localOrigin);
+  })();
+
   public constructor(
-    public readonly origin: URLComponent_Origin,
-    public readonly headers: HTTP_Request.HeaderMap,
+    public readonly origin: URLComponent.Origin,
+    public readonly headers?: HTTP_Request.HeaderMap,
   ) {}
 
   public static contentIsJSONIn = (
     givenResponse: Response,
-  ): boolean => {
-    const rawContentDescriptor = givenResponse.headers.get('Content-Type');
+  ): boolean => bodyOf(givenResponse).isSuggestedToBeDigestibleAs(ContentDescriptor.json);
 
-    if (
-      rawContentDescriptor === null
-    ) return false;
-
-    return rawContentDescriptor.includes('application/json');
-  };
-
-  public originAt(givenPath: URLComponent_Path): URL {
-    const serializedURLComponents = this.origin.appendedWith(givenPath);
+  public originAt(givenPath: URLComponent.Path): URL {
+    const serializedURLComponents = this.origin.concat(givenPath);
     return new URL(serializedURLComponents);
   }
 
@@ -42,49 +44,56 @@ class HTTP_Client {
       to: givenPath,
       using: givenMethod,
     }: {
-      to: URLComponent_Path;
+      to: URLComponent.Path;
       using: HTTP_Request.Method;
     },
-  ): Promise<HTTP_Endpoint.Outcome> => Attempt.thatEventually(async (ends) => {
+  ): Promise<HTTP_Endpoint.Outcome> => Attempt.Fresh.thatEventually(async () => {
     const endpointURL = this.originAt(givenPath);
 
     const promisedResponse = fetch(endpointURL, {
       method : givenMethod,
       headers: this.headers,
-      body   : JSON.stringify(givenRequestBody),
+      body   : (givenMethod === HTTP_Request.Method.FETCH)
+        ? null
+        : JSON.stringify(givenRequestBody),
     });
 
-    const outcomeOfSettlingResponse = await Attempt.Adapted_toSettle(promisedResponse, {
+    const outcomeOfSettlingResponse = await Attempt.Adapted.toSettle(promisedResponse, {
       interpretationOf: (caughtError) => {
         const clientFailedToReachServer = caughtError.message.includes('Failed to fetch');
 
         if (
           !clientFailedToReachServer
-        ) return null;
+        ) return Option.none();
 
-        return new HTTP_Endpoint.Error.Request(endpointURL);
+        return Option.some(new HTTP_Endpoint.Error.FailedToSendRequest(endpointURL));
       },
     });
 
     if (
-      outcomeOfSettlingResponse.isFailure
+      Attempt.Outcome.isFailure(outcomeOfSettlingResponse)
     ) return outcomeOfSettlingResponse;
 
-    const response = outcomeOfSettlingResponse.unwrapped;
+    const response = outcomeOfSettlingResponse.value;
 
-    if (
-      !response.ok
-    ) return ends.inFailureDueTo(new HTTP_Endpoint.Error.Response(response.statusText, response.status));
+    if (!response.ok) {
+      const newResponseError = new HTTP_Endpoint.Error.RespondedWithFailure(response.statusText, response.status);
+      return Attempt.Outcome.failCause(newResponseError);
+    }
 
-    const responseBody: unknown = await response.json();
-    return ends.inSuccessWith(responseBody);
+    const outcomeOfDigestingResponseBody = await bodyOf(response).digestAsUnknown();
+
+    return Attempt.Outcome.mapErrorCause(
+      outcomeOfDigestingResponseBody,
+      $0 => new HTTP_Endpoint.Error.IndigestibleResponseBody(endpointURL, $0),
+    );
   });
 
   public async fetchResource(
     {
       from: givenPath,
     }: {
-      from: URLComponent_Path;
+      from: URLComponent.Path;
     },
   ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(null, {
@@ -99,7 +108,7 @@ class HTTP_Client {
       to: givenPath,
     }: {
       bySending: unknown;
-      to: URLComponent_Path;
+      to: URLComponent.Path;
     },
   ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(givenSubmission, {
@@ -114,7 +123,7 @@ class HTTP_Client {
       to: givenPath,
     }: {
       bySending: unknown;
-      to: URLComponent_Path;
+      to: URLComponent.Path;
     },
   ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(givenProperties, {
@@ -129,7 +138,7 @@ class HTTP_Client {
       to: givenPath,
     }: {
       bySending: unknown;
-      to: URLComponent_Path;
+      to: URLComponent.Path;
     },
   ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(givenChanges, {
@@ -139,7 +148,7 @@ class HTTP_Client {
   }
 
   public async deleteResourceAt(
-    givenPath: URLComponent_Path,
+    givenPath: URLComponent.Path,
   ): Promise<HTTP_Endpoint.Outcome> {
     return await this.send(null, {
       to   : givenPath,

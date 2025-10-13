@@ -1,4 +1,6 @@
-import Attempt_Error_NonActionable from './NonActionable';
+import {
+  Attempt_Error_NonActionable,
+} from './NonActionable';
 
 class Attempt_Error_Creation
   extends Attempt_Error_NonActionable {
@@ -30,5 +32,5 @@ class Attempt_Error_Creation
 }
 
 export {
-  Attempt_Error_Creation as default,
+  Attempt_Error_Creation,
 };

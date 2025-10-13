@@ -1,51 +1,31 @@
 import type {
-  Attempt_Error_Actionable,
+  Attempt_Error,
 } from '../Error';
 
 import type {
-  Attempt_Outcome_Failure_Transformer,
-} from './Failure/Transformer';
+  Attempt_Outcome_Failure,
+} from './Failure';
 
 import type {
-  Attempt_Outcome_Success_Transformer,
-} from './Success/Transformer';
+  Attempt_Outcome_Success,
+} from './Success';
 
-type Attempt_Outcome_Transformer<
+interface Attempt_Outcome_Transformer<
   SomeTransformableProduct,
-  SomeTransformableActionableError extends Attempt_Error_Actionable<string>,
+  SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
   SomeTransformedProduct,
-  SomeTransformedActionableError extends Attempt_Error_Actionable<string>,
-> =
-  | (
-    & Required<
-      Attempt_Outcome_Success_Transformer<
-        SomeTransformableProduct,
-        SomeTransformedProduct
-      >
-    >
-    & Partial<
-      Attempt_Outcome_Failure_Transformer<
-        SomeTransformableActionableError,
-        SomeTransformedActionableError
-      >
-    >
-  )
-  | (
-    & Partial<
-      Attempt_Outcome_Success_Transformer<
-        SomeTransformableProduct,
-        SomeTransformedProduct
-      >
-    >
-    & Required<
-      Attempt_Outcome_Failure_Transformer<
-        SomeTransformableActionableError,
-        SomeTransformedActionableError
-      >
-    >
-  )
-;
+  SomeTransformedActionableError extends Attempt_Error.Actionable<string>,
+> {
+  onSuccess: Attempt_Outcome_Success.Product.Transformer<
+    SomeTransformableProduct,
+    SomeTransformedProduct
+  >;
+  onFailure: Attempt_Outcome_Failure.Cause.Transformer<
+    SomeTransformableActionableError,
+    SomeTransformedActionableError
+  >;
+}
 
-export {
-  type Attempt_Outcome_Transformer,
+export type {
+  Attempt_Outcome_Transformer,
 };

@@ -1,9 +1,13 @@
+import {
+  Option,
+} from 'effect';
+
 import type {
   TextToImage_Config,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 const TextToImage_Config_empty: TextToImage_Config = {
-  server: null,
+  server: Option.none(),
 };
 
 export {

@@ -1,5 +1,3 @@
-import * as HTTP from './exports.ts';
-
 export {
   HTTP as default,
-};
+} from './exports.object.primary.ts';

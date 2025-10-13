@@ -1,34 +1,21 @@
-import Schema from '@/library/Schema';
+import {
+  Schema,
+} from 'effect';
 
 /**
  * The machine conforming to some web API that:
  * - listens for requests
  * - responds to those requests
  */
-class WebAPI_Server {
-  public constructor(
+class WebAPI_Server
+  extends Schema.Class<WebAPI_Server>('WebAPI_Server')({
     /**
      * The web location of the server, which is the base URL of the API.
      * For example: https://api.example.com
      */
-    public readonly origin: string,
-  ) {}
-
-  public static from(given: WebAPI_Server): WebAPI_Server {
-    const clonedServer = new WebAPI_Server(
-      given.origin,
-    );
-
-    return clonedServer;
-  }
-
-  public static Schema = Schema
-    .object({
-      origin: Schema.string(),
-    })
-    .transform($0 => WebAPI_Server.from($0));
-}
+    origin: Schema.String,
+  }) {}
 
 export {
-  WebAPI_Server as default,
+  WebAPI_Server,
 };

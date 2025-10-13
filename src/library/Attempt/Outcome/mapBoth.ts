@@ -1,0 +1,65 @@
+import type {
+  Attempt_Error,
+} from '../Error';
+
+import type {
+  Attempt_Outcome_Transformer,
+} from './Transformer';
+
+import type {
+  Attempt_Outcome,
+} from './definition.declared.ts';
+
+import {
+  Attempt_Outcome_failCause,
+} from './failCause';
+
+import {
+  Attempt_Outcome_isSuccess,
+} from './isSuccess';
+
+import {
+  Attempt_Outcome_succeed,
+} from './succeed';
+
+/**
+ * Convenience method for:
+ * 1. unwrapping the contents of _this_ outcome,
+ * 2. transforming them, and
+ * 3. wrapping the transformed contents in a _new_ outcome.
+*
+* Helps avoid boilerplate when transforming outcomes.
+*/
+const Attempt_Outcome_mapBoth = <
+  SomeTransformableProduct,
+  SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
+  SomeTransformedProduct = SomeTransformableProduct,
+  SomeTransformedActionableError extends Attempt_Error.Actionable<string> = SomeTransformableActionableError,
+>(
+  givenOutcome: Attempt_Outcome<
+    SomeTransformableProduct,
+    SomeTransformableActionableError
+  >,
+  {
+    onSuccess: toTransformedProduct,
+    onFailure: toTransformedCause,
+  }: Attempt_Outcome_Transformer<
+    SomeTransformableProduct,
+    SomeTransformableActionableError,
+    SomeTransformedProduct,
+    SomeTransformedActionableError
+  >,
+): Attempt_Outcome<
+  SomeTransformedProduct,
+  SomeTransformedActionableError
+> => Attempt_Outcome_isSuccess(givenOutcome)
+  ? Attempt_Outcome_succeed(
+      toTransformedProduct(givenOutcome.value),
+    )
+  : Attempt_Outcome_failCause(
+      toTransformedCause(givenOutcome.cause),
+    );
+
+export {
+  Attempt_Outcome_mapBoth,
+};

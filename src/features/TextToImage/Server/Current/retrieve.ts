@@ -1,68 +1,57 @@
+import {
+  Option,
+} from 'effect';
+
 import Attempt from '@/library/Attempt';
+import type WebAPI from '@/library/WebAPI';
 
 import {
-  Server as WebAPI_Server,
-} from '@/library/WebAPI';
-
-import {
-  Config_Dynamic as TextToImage_Config_Dynamic,
-  Config_Static as TextToImage_Config_Static,
-  TextToImage_Config_empty,
+  TextToImage_Config,
 } from '../../Config';
 
 import {
   TextToImage_Server_Error,
 } from '../Error';
 
-const TextToImage_Server_Origin_environmentKey = 'VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN';
+import {
+  TextToImage_Server_Origin,
+} from '../Origin';
 
-const TextToImage_Server_Current_accordingToEnvironment = ((): WebAPI_Server | null => {
-  const originAccordingToEnvironment = import.meta.env[TextToImage_Server_Origin_environmentKey];
-
-  if (
-    originAccordingToEnvironment === undefined
-  ) return null;
-
-  const serverAccordingToEnvironment = WebAPI_Server.from({
-    origin: originAccordingToEnvironment,
-  });
-
-  return serverAccordingToEnvironment;
-})();
+import {
+  TextToImage_Server_Current_accordingToEnvironment,
+} from './accordingToEnvironment';
 
 const TextToImage_Server_Current_retrieve = (): Promise<
   Attempt.Outcome<
-    WebAPI_Server,
-    TextToImage_Server_Error.Specification
+    WebAPI.Server,
+    TextToImage_Server_Error.MissingSpecification
   >
-> => Attempt.thatEventually(async (ends) => {
+> => Attempt.Fresh.thatEventually(async () => {
   if (
-    TextToImage_Server_Current_accordingToEnvironment !== null
-  ) return ends.inSuccessWith(TextToImage_Server_Current_accordingToEnvironment);
+    Option.isSome(TextToImage_Server_Current_accordingToEnvironment)
+  ) return Attempt.Outcome.succeed(Option.getOrThrow(TextToImage_Server_Current_accordingToEnvironment));
 
-  const staticConfig = (await TextToImage_Config_Static.read()).optionallyUnwrap() ?? TextToImage_Config_empty;
-
-  if (
-    staticConfig.server !== null
-  ) return ends.inSuccessWith(staticConfig.server);
-
-  const dynamicConfig = (await TextToImage_Config_Dynamic.fetch()).optionallyUnwrap() ?? TextToImage_Config_empty;
+  const staticConfig = Attempt.Either.getOrElse(await TextToImage_Config.Static.read(), () => TextToImage_Config.empty);
 
   if (
-    dynamicConfig.server !== null
-  ) return ends.inSuccessWith(dynamicConfig.server);
+    Option.isSome(staticConfig.server)
+  ) return Attempt.Outcome.succeed(Option.getOrThrow(staticConfig.server));
 
-  const newSpecificationError = new TextToImage_Server_Error.Specification(
-    TextToImage_Server_Origin_environmentKey,
-    TextToImage_Config_Static.file,
-    TextToImage_Config_Dynamic.endpoint,
+  const dynamicConfig = Attempt.Either.getOrElse(await TextToImage_Config.Dynamic.fetch(), () => TextToImage_Config.empty);
+
+  if (
+    Option.isSome(dynamicConfig.server)
+  ) return Attempt.Outcome.succeed(Option.getOrThrow(dynamicConfig.server));
+
+  const newSpecificationError = new TextToImage_Server_Error.MissingSpecification(
+    TextToImage_Server_Origin.environmentKey,
+    TextToImage_Config.Static.file,
+    TextToImage_Config.Dynamic.endpoint,
   );
 
-  return ends.inFailureDueTo(newSpecificationError);
+  return Attempt.Outcome.failCause(newSpecificationError);
 });
 
 export {
-  TextToImage_Server_Current_accordingToEnvironment as Current_accordingToEnvironment,
-  TextToImage_Server_Current_retrieve as Current_retrieve,
-  TextToImage_Server_Error as Error,
+  TextToImage_Server_Current_retrieve,
 };

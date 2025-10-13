@@ -1,42 +1,29 @@
+import {
+  Option,
+} from 'effect';
+
 import type {
   GenerateFromTextRequest,
 } from 'stabilityai-client-typescript/models/operations';
 
 import Attempt from '@/library/Attempt';
 import HTTP from '@/library/HTTP';
-import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient';
-
-import type {
-  Output as TextToImage_Pipeline_Output,
-} from '@/features/TextToImage/Pipeline';
-
-import * as TextToImage_Server from '../../Server';
 
 import {
-  firstTextToImageOutput,
-} from './conversions/GenerateFromTextResponse';
+  TextToImage_Server,
+} from '../../Server';
 
-const TextToImage_Client_SDXL_initialize = async (): Promise<
-  Attempt.Outcome<
-    ShimmedStabilityAIClient,
-    TextToImage_Server.Error.Specification
-  >
-> => {
-  const outcomeOfRetrievingCurrentServer = await TextToImage_Server.Current_retrieve();
+import type {
+  TextToImage_Client_Generation,
+} from '../Generation';
 
-  const outcomeOfInitializingClient = Attempt.Outcome.fromRewrapping(outcomeOfRetrievingCurrentServer, {
-    product: textToImageServer => new ShimmedStabilityAIClient({
-      serverURL: textToImageServer.origin,
-    }),
-  });
+import {
+  TextToImage_Client_SDXL_initialize,
+} from './initialize';
 
-  return outcomeOfInitializingClient;
-};
-
-type TextToImage_Client_Generation_Outcome = Attempt.Outcome<
-  TextToImage_Pipeline_Output,
-  TextToImage_Server.Error.Any
->;
+import {
+  toSharkUIOutput,
+} from './toSharkUIOutput';
 
 const TextToImage_Client_SDXL_generateOutputFrom = async (
   given: {
@@ -50,15 +37,15 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     >;
   },
 ): Promise<
-  TextToImage_Client_Generation_Outcome
+  TextToImage_Client_Generation.Outcome
 > => {
   const outcomeOfInitializingClient = await TextToImage_Client_SDXL_initialize();
 
   if (
-    outcomeOfInitializingClient.isFailure
+    Attempt.Outcome.isFailure(outcomeOfInitializingClient)
   ) return outcomeOfInitializingClient;
 
-  const shimmedStabilityAIClient = outcomeOfInitializingClient.unwrapped;
+  const shimmedStabilityAIClient = outcomeOfInitializingClient.value;
 
   const promisedTextToImageResponse = shimmedStabilityAIClient.version1.image.forciblyGenerateFromText({
     engineId              : 'stable-diffusion-xl-1024-v1-0',
@@ -72,30 +59,27 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     },
   });
 
-  const outcomeOfSettlingTextToImageResponse = await Attempt.Adapted_toSettle(promisedTextToImageResponse, {
+  const outcomeOfSettlingTextToImageResponse = await Attempt.Adapted.toSettle(promisedTextToImageResponse, {
     interpretationOf: (caughtError) => {
       if (
-        !(caughtError instanceof HTTP.Endpoint.Error.Request)
-      ) return null;
+        !(caughtError instanceof HTTP.Endpoint.Error.FailedToSendRequest)
+      ) return Option.none();
 
-      return new TextToImage_Server.Error.Connection(caughtError.endpoint);
+      return Option.some(new TextToImage_Server.Error.FailedToConnect(caughtError.endpoint));
     },
   });
 
-  const outcomeOfSettlingSoleTextToImageOutput = Attempt.Outcome.fromRewrapping(outcomeOfSettlingTextToImageResponse, {
-    product: textToImageResponse => firstTextToImageOutput({
+  const outcomeOfSettlingSoleTextToImageOutput = Attempt.Outcome.map(
+    outcomeOfSettlingTextToImageResponse,
+    textToImageResponse => toSharkUIOutput.first({
       in          : textToImageResponse,
       inferredFrom: given.textToImageRequestBody.textPrompts,
     }),
-  });
+  );
 
   return outcomeOfSettlingSoleTextToImageOutput;
 };
 
-const TextToImage_Client_SDXL = {
-  generateOutputFrom: TextToImage_Client_SDXL_generateOutputFrom,
-};
-
 export {
-  TextToImage_Client_SDXL,
+  TextToImage_Client_SDXL_generateOutputFrom,
 };

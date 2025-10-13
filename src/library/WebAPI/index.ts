@@ -1,1 +1,3 @@
-export * from './exports.ts';
+export {
+  WebAPI as default,
+} from './exports.object.primary.ts';

@@ -1,5 +1,3 @@
-import * as Attempt from './exports.ts';
-
 export {
   Attempt as default,
-};
+} from './exports.object.primary.ts';

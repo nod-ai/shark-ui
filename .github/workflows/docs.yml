@@ -19,7 +19,10 @@ jobs:
         uses: tj-actions/changed-files@v46
         id: changed-files
         with:
-          files: '**/*.md'
+          files: |
+            .github/workflows/docs.yml
+            package.json
+            **/*.md
           separator: ','
       - name: Lint the updated Markdown files
         id: lint-markdown-files
@@ -27,7 +30,15 @@ jobs:
         if: steps.changed-files.outputs.any_changed == 'true'
         with:
           config: .markdownlint-cli2.yaml
-          globs: ${{ steps.changed-files.outputs.all_changed_files }}
+          globs: >-
+            ${{
+              (
+                contains(steps.changed-files.outputs.all_changed_files, '.github/workflows/docs.yml') ||
+                contains(steps.changed-files.outputs.all_changed_files, 'package.json')
+              )
+              && '**/*.md'
+              || steps.changed-files.outputs.all_changed_files
+            }}
           separator: ','
         continue-on-error: true
       - name: If linter failed, highlight debug tools

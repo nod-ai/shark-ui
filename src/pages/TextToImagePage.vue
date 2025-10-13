@@ -7,6 +7,10 @@ import {
 } from '@/library/vue';
 
 import {
+  Option,
+} from 'effect';
+
+import {
   VBtn,
 } from 'vuetify/components/VBtn';
 
@@ -26,30 +30,33 @@ import {
   VSkeletonLoader,
 } from 'vuetify/components/VSkeletonLoader';
 
-import SDXLDiffusionStepCount from '@/library/ShimmedStabilityAIClient/models/SDXLDiffusionStepCount.ts';
+import Attempt from '@/library/Attempt';
+
+import {
+  SDXL,
+} from '@/library/ShimmedStabilityAIClient';
 
 import DiscreteSlider from '@/components/DiscreteSlider.vue';
 import NavigationPanel from '@/components/NavigationPanel.vue';
 
-import * as TextToImage from '@/features/TextToImage';
+import TextToImage from '@/features/TextToImage';
 import TextToImageInputSection from '@/features/TextToImage/components/TextToImageInputSection.vue';
 import TextToImageOutputAlert from '@/features/TextToImage/components/TextToImageOutputAlert.vue';
 import TextToImageOutputImg from '@/features/TextToImage/components/TextToImageOutputImg.vue';
 
-const currentPrompt: Ref<TextToImage.Input['text'] | null> = ref(null);
+const currentPrompt: Ref<Option.Option<TextToImage.Pipeline.Input['text']>> = ref(Option.none());
 
 const {
   range,
-} = SDXLDiffusionStepCount;
+} = SDXL.DiffusionStepCount;
 
 const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
 
-const imageGeneration = useStatefulAttemptThatEventually(async (ends) => {
-  const proposedPrompt = get(currentPrompt);
-
-  if (
-    proposedPrompt === null
-  ) return ends.inFlamesBecause('Prompt was not set before submission');
+const imageGeneration = useStatefulAttemptThatEventually(async () => {
+  const proposedPrompt = Option.getOrThrowWith(
+    get(currentPrompt),
+    () => new Error('Prompt was not set before submission'),
+  );
 
   const outcomeOfGeneratingOutput = await TextToImage.Client.SDXL.generateOutputFrom({
     textToImageRequestBody: {
@@ -62,9 +69,10 @@ const imageGeneration = useStatefulAttemptThatEventually(async (ends) => {
     },
   });
 
-  const outcomeOfGeneratingImage = ends.inTermsOf(outcomeOfGeneratingOutput, {
-    product: $0 => $0.image,
-  });
+  const outcomeOfGeneratingImage = Attempt.Outcome.map(
+    outcomeOfGeneratingOutput,
+    $0 => $0.image,
+  );
 
   return outcomeOfGeneratingImage;
 });
@@ -121,7 +129,7 @@ const imageGeneration = useStatefulAttemptThatEventually(async (ends) => {
       class="fill-height"
     >
       <VSkeletonLoader
-        v-if="imageGeneration.outcome === null"
+        v-if="Option.isNone(imageGeneration.outcome)"
         :boilerplate="!imageGeneration.isInProgress"
         width="100vh"
         :style="{
@@ -129,12 +137,12 @@ const imageGeneration = useStatefulAttemptThatEventually(async (ends) => {
         }"
       />
       <TextToImageOutputImg
-        v-else-if="imageGeneration.outcome.isSuccess"
-        :model-value="imageGeneration.outcome.unwrapped"
+        v-else-if="Attempt.Outcome.isSuccess(imageGeneration.outcome.value)"
+        :model-value="imageGeneration.outcome.value.value"
       />
       <TextToImageOutputAlert
         v-else
-        :error="imageGeneration.outcome.causeOfFailure"
+        :error="imageGeneration.outcome.value.cause"
       />
     </VContainer>
   </VMain>

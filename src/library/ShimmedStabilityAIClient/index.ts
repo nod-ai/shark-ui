@@ -1,3 +1,5 @@
 export {
   ShimmedStabilityAIClient as default,
-} from './exports.ts';
+} from './exports.object.primary.ts';
+
+export * from './exports.object.auxiliaries.ts';

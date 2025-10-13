@@ -7,24 +7,27 @@ import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
+import Attempt from '@/library/Attempt';
 import HTTP from '@/library/HTTP';
 import Shortfin from '@/library/Shortfin';
 
-import toShortfin from '../toShortfin';
+import {
+  toShortfinRequestBody,
+} from '../toShortfinRequestBody';
 
 class ShimmedStabilityAIClient_Version1_Image
   extends HTTP.Client {
   public async forciblyGenerateFromText(
     givenRequest: GenerateFromTextRequest,
   ): Promise<GenerateFromTextResponse> {
-    const derivedBatchedRequestBody = toShortfin.BatchedRequestBody([
+    const derivedBatchedRequestBody = toShortfinRequestBody.Batched([
       givenRequest.textToImageRequestBody,
     ]);
 
-    const textToImageSDXLShortfinClient = new Shortfin.TextToImage.SDXL.Client(this.origin, this.headers);
+    const textToImageSDXLShortfinClient = new Shortfin.TextToImage.SDXL.Client(this.origin);
 
     const outcomeOfGeneratingImage = await textToImageSDXLShortfinClient.generateImageFrom(derivedBatchedRequestBody);
-    const generatedImage = outcomeOfGeneratingImage.forciblyUnwrap(/* matches error propagation of actual StabilityAI Client */);
+    const generatedImage = Attempt.Either.getOrThrow(outcomeOfGeneratingImage); // matches error propagation of actual StabilityAI Client
 
     const soleGeneratedArtifact: StabilityAI_TextToImage_Pipeline_Output = {
       base64      : generatedImage.toString(),

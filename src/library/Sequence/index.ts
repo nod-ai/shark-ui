@@ -1,5 +1,3 @@
-import * as Sequence from './exports.ts';
-
 export {
   Sequence as default,
-};
+} from './exports.object.primary.ts';

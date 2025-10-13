@@ -1,1 +1,1 @@
-export * as ContentDescriptor_TopLevel_Discrete from './exports.ts';
+export * from './exports.object.primary.ts';

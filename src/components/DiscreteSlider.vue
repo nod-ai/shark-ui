@@ -16,12 +16,11 @@ import {
   VSlider,
 } from 'vuetify/components/VSlider';
 
-import type Range from '@/library/Range';
-import Range_Discrete from '@/library/Range/Discrete';
+import Range from '@/library/Range';
 
 import {
   shallowlyMerged,
-} from '@/library/utilitiesByType/record.ts';
+} from '@/library/utilitiesByType/record';
 
 const currentValue = defineModel<number>({
   required: true,
@@ -29,11 +28,11 @@ const currentValue = defineModel<number>({
 
 const given = defineProps<{
   label: string;
-  range: Range_Discrete;
-  tickStep: Range_Discrete['stepSize'];
+  range: Range.Discrete;
+  tickStep: Range.Discrete['stepSize'];
 }>();
 
-const incrementCurrentValueBy = (givenStepCount: number) => {
+const incrementCurrentValueBy = (givenStepCount: number): void => {
   const changeInValue = givenStepCount * given.range.stepSize;
   const nextValue = get(currentValue) + changeInValue;
   set(currentValue, nextValue);
@@ -74,7 +73,7 @@ const tickLabels = (
     by: SliderTickPosition;
     in: Range;
   },
-): SliderTickLabelsByPosition | null => {
+): SliderTickLabelsByPosition => {
   const derivedOffset = stylisticOffset({
     for: givenPosition,
     in : givenRange,
@@ -95,10 +94,10 @@ const tickLabelsAlong = (
   {
     atEvery: givenStepSize,
   }: {
-    atEvery: Range_Discrete['stepSize'];
+    atEvery: Range.Discrete['stepSize'];
   },
 ): SliderTickLabelsByPosition => {
-  const tickRange = Range_Discrete.spanning({
+  const tickRange = Range.Discrete.spanning({
     from: givenRange.lowerBound,
     to  : givenRange.upperBound,
     by  : givenStepSize,

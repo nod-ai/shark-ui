@@ -1,3 +1,3 @@
 export {
   Range as default,
-} from './exports.ts';
+} from './exports.object.primary.ts';

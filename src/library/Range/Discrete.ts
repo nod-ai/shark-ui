@@ -6,7 +6,7 @@ import {
 
 import {
   Range,
-} from './definition.ts';
+} from './definition.declared.ts';
 
 class Range_Discrete
   extends Range {
@@ -39,13 +39,13 @@ class Range_Discrete
 
     if (
       isNegative(givenStepSize)
-    ) return Attempt.abandon('Step size must be non-negative');
+    ) return Attempt.Outcome.die('Step size must be non-negative');
 
     const overstep = validRange.width % givenStepSize;
 
     if (
       overstep !== 0
-    ) return Attempt.abandon('Step size must fit evenly into the range');
+    ) return Attempt.Outcome.die('Step size must fit evenly into the range');
 
     const validDiscreteRange = new this(
       validRange.lowerBound,
@@ -62,7 +62,7 @@ class Range_Discrete
     return (overstep === 0) && super.exclusivelyContains(givenValue);
   }
 
-  private* generateExclusiveSteps() {
+  private* generateExclusiveSteps(): Generator<number, void, unknown> {
     let eachExclusiveStep = this.lowerBound + this.stepSize;
 
     while (eachExclusiveStep < this.upperBound) {
@@ -71,7 +71,7 @@ class Range_Discrete
     }
   }
 
-  private* generateInclusiveSteps() {
+  private* generateInclusiveSteps(): Generator<number, void, unknown> {
     yield this.lowerBound;
 
     if (
@@ -94,5 +94,5 @@ class Range_Discrete
 }
 
 export {
-  Range_Discrete as default,
+  Range_Discrete,
 };

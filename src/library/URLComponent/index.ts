@@ -1,1 +1,3 @@
-export * from './exports.ts';
+export {
+  URLComponent as default,
+} from './exports.object.primary.ts';

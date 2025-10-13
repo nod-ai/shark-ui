@@ -4,11 +4,14 @@ import {
   vueTsConfigs as VueTSConfig,
 } from '@vue/eslint-config-typescript';
 
+import {
+  defineConfig,
+} from 'eslint/config';
+
 import pluginVue from 'eslint-plugin-vue';
 
-import {
-  config,
-  type ConfigWithExtends,
+import type {
+  ConfigWithExtends,
 } from 'typescript-eslint';
 
 import pluginCypress from './cypress/eslint.config';
@@ -71,6 +74,13 @@ const extraConfigForTypeScriptESLint: ConfigWithExtends = {
         fixStyle: 'inline-type-imports', // allows for more compact imports and tees up problematic imports to '@typescript-eslint/no-import-type-side-effects'
       },
     ],
+    '@typescript-eslint/explicit-function-return-type': [
+      'error', // encourages developers to state the desired interface up front
+      {
+        allowExpressions             : true, // for situations where the function consuming the expression as an argument defines the interface
+        allowTypedFunctionExpressions: true, // for situations where the variable or property receiving the function defines the interface
+      },
+    ],
     '@typescript-eslint/explicit-member-accessibility': [
       'error', // Easier to see dead code in situations where a member is marked `private`
     ],
@@ -86,7 +96,7 @@ const extraConfigForTypeScriptESLint: ConfigWithExtends = {
 const VueTSConfig_overridesForAugmentationsToModuleDefinitions: ConfigWithExtends = {
   name : 'shark-ui/module-definition-augmentations',
   files: [
-    '**/definitionAugmentation.ts',
+    '**/definition.declared.augmentation.ts',
   ],
   rules: {
     '@typescript-eslint/no-namespace': [
@@ -128,8 +138,9 @@ const configWithVueTS = defineConfigWithVueTs(
   ...pluginCypress,
 );
 
-const completeConfig = config([
+const completeConfig = defineConfig([
   {
+    // @ts-expect-error: according to bullet "2." under https://typescript-eslint.io/packages/typescript-eslint/#migrating-to-defineconfig
     extends: configWithVueTS,
     ignores: [
       '**/*.md',

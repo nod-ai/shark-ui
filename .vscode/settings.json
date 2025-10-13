@@ -3,6 +3,7 @@
         "SDXL",
         "stabilityai",
         "vite",
+        "vitest",
         "vuetify"
     ],
     "cSpell.customDictionaries": {

@@ -1,1 +1,1 @@
-export * as ContentDescriptor_StructuredSyntaxNameSuffix from './exports.ts';
+export * from './exports.object.primary.ts';

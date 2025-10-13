@@ -1,1 +1,1 @@
-export type * as Shortfin_TextToImage_SDXL_Pipeline_Input_Text from './exports.ts';
+export type * from './exports.object.primary.ts';

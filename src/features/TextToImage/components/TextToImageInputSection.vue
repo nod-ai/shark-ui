@@ -8,6 +8,10 @@ import {
 } from '@/library/vue';
 
 import {
+  Option,
+} from 'effect';
+
+import {
   VCard,
 } from 'vuetify/components/VCard';
 
@@ -16,12 +20,12 @@ import {
 } from 'vuetify/components/VTextarea';
 
 import type {
-  Input as TextToImage_Pipeline_Input,
+  TextToImage_Pipeline,
 } from '../Pipeline';
 
-type StandardizedInputText = TextToImage_Pipeline_Input['text'];
+type StandardizedInputText = TextToImage_Pipeline.Input['text'];
 
-const exposedInputText = defineModel<StandardizedInputText | null>({
+const exposedInputText = defineModel<Option.Option<StandardizedInputText>>({
   required: true,
 });
 
@@ -95,11 +99,10 @@ const defaultInitialInputText: InputTextByQualitativeWeight = {
 const initialInputText: InputTextByQualitativeWeight = (() => {
   const initialExposedInputText = get(exposedInputText);
 
-  if (
-    initialExposedInputText === null
-  ) return defaultInitialInputText;
-
-  return byQualitativeWeight(initialExposedInputText);
+  return Option.match(initialExposedInputText, {
+    onNone: () => defaultInitialInputText,
+    onSome: $0 => byQualitativeWeight($0),
+  });
 })();
 
 const currentInputText: Ref<InputTextByQualitativeWeight> = ref(initialInputText);
@@ -107,7 +110,7 @@ const currentInputText: Ref<InputTextByQualitativeWeight> = ref(initialInputText
 watch(
   currentInputText,
   (updatedInputText) => {
-    set(exposedInputText, standardized(updatedInputText));
+    set(exposedInputText, Option.some(standardized(updatedInputText)));
   },
   {
     deep     : true,

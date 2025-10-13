@@ -1,6 +1,6 @@
 import {
   ContentDescriptor,
-} from '../definition.ts';
+} from '../definition.declared.ts';
 
 /**
  * A misnomer for {@link ContentDescriptor}.

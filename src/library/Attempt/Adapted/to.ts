@@ -1,42 +1,40 @@
-import type {
-  Attempt_Error_Actionable,
+import {
+  Attempt_Error,
 } from '../Error';
 
 import {
-  assertActionable,
-} from '../Error/assertions';
+  Attempt_Fresh,
+} from '../Fresh';
 
-import type {
+import {
   Attempt_Outcome,
 } from '../Outcome';
 
 import {
-  Attempt_that,
-} from '../factory';
+  safe,
+} from '../tryCatchStatements';
 
-import {
-  sanctioned,
-} from '../utilities/sanctionedTryCatch';
-
-import type Attempt_Adapted_Config from './Config';
+import type {
+  Attempt_Adapted_Config,
+} from './Config';
 
 const Attempt_Adapted_to = <
   SomeProduct,
-  SomeActionableError extends Attempt_Error_Actionable<string>,
+  SomeActionableError extends Attempt_Error.Actionable<string>,
 >(
   forciblyGetProduct: () => SomeProduct,
   given: Attempt_Adapted_Config<SomeActionableError>,
-): Attempt_Outcome<SomeProduct, SomeActionableError> => Attempt_that(ends => sanctioned({
+): Attempt_Outcome<SomeProduct, SomeActionableError> => Attempt_Fresh.that(() => safe({
   try() {
     const gottenProduct = forciblyGetProduct();
-    return ends.inSuccessWith(gottenProduct);
+    return Attempt_Outcome.succeed(gottenProduct);
   },
   catch(someError) {
-    const someActionableError = assertActionable(someError, {
+    const someActionableError = Attempt_Error.Actionable.from(someError, {
       using: given.interpretationOf,
     });
 
-    return ends.inFailureDueTo(someActionableError);
+    return Attempt_Outcome.failCause(someActionableError);
   },
 }));
 

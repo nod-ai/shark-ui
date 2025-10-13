@@ -3,10 +3,10 @@ import {
   VAlert,
 } from 'vuetify/components/VAlert';
 
-import type * as TextToImage from '@/features/TextToImage';
+import type TextToImage from '@/features/TextToImage';
 
 defineProps<{
-  error: TextToImage.Server.Error.Specification;
+  error: TextToImage.Server.Error.MissingSpecification;
 }>();
 </script>
 

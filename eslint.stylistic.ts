@@ -58,6 +58,44 @@ const extraConfig: ConfigWithExtends = {
         },
       },
     ],
+    '@stylistic/padded-blocks': [
+      'error',
+      'never', // Reduces noise in diffs
+    ],
+    '@stylistic/padding-line-between-statements': [
+      'error',
+      {
+        blankLine: 'always', // Each of these statements should be padded to look like an "island" since they will never express an order-sensitive procedure
+        prev     : 'export',
+        next     : 'export',
+      },
+      {
+        blankLine: 'always', // reduces noise in diffs
+        prev     : '*',
+        next     : [
+          'block-like',
+          'class',
+          'function-overload',
+          'if', // for guard clauses
+          'multiline-let', // i.e. for chained calls and object literals
+          'multiline-const', // i.e. for chained calls and object literals
+          'multiline-expression', // i.e. for multiline function calls
+        ],
+      },
+      {
+        blankLine: 'always', // reduces noise in diffs
+        prev     : [
+          'block-like',
+          'class',
+          'function-overload',
+          'if', // for guard clauses
+          'multiline-let', // i.e. for chained calls and object literals
+          'multiline-const', // i.e. for chained calls and object literals
+          'multiline-expression', // i.e. for multiline function calls
+        ],
+        next: '*',
+      },
+    ],
   },
 };
 

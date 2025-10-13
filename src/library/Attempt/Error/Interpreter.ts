@@ -1,15 +1,21 @@
-import type Attempt_Error_Actionable from './Actionable';
+import type {
+  Option,
+} from 'effect';
+
+import type {
+  Attempt_Error_Actionable,
+} from './Actionable';
 
 import type {
   PotentiallyActionable,
-} from './modifier';
+} from './modifiers';
 
-type Attempt_ErrorInterpreter<
+type Attempt_Error_Interpreter<
   SomeActionableError extends Attempt_Error_Actionable<string>,
 > = (
   caughtError: PotentiallyActionable<Error>
-) => SomeActionableError | null;
+) => Option.Option<SomeActionableError>;
 
 export type {
-  Attempt_ErrorInterpreter as default,
+  Attempt_Error_Interpreter,
 };

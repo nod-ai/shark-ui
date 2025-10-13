@@ -1,14 +1,19 @@
 import type {
-  HTTP_Endpoint_Error_Request,
-} from './Request';
+  HTTP_Endpoint_Error_FailedToSendRequest,
+} from './FailedToSendRequest';
 
 import type {
-  HTTP_Endpoint_Error_Response,
-} from './Response';
+  HTTP_Endpoint_Error_IndigestibleResponseBody,
+} from './IndigestibleResponseBody';
+
+import type {
+  HTTP_Endpoint_Error_RespondedWithFailure,
+} from './RespondedWithFailure';
 
 type HTTP_Endpoint_Error_Any =
-  | HTTP_Endpoint_Error_Request
-  | HTTP_Endpoint_Error_Response
+  | HTTP_Endpoint_Error_FailedToSendRequest
+  | HTTP_Endpoint_Error_RespondedWithFailure
+  | HTTP_Endpoint_Error_IndigestibleResponseBody
 ;
 
 export type {
