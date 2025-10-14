@@ -72,7 +72,7 @@ class HTTP_Client {
 
     if (
       Attempt.Exit.isFailure(exitFromSettlingResponse)
-    ) return exitFromSettlingResponse;
+    ) return Attempt.Exit.failCause(exitFromSettlingResponse.cause);
 
     const response = exitFromSettlingResponse.value;
 

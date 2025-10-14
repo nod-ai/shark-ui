@@ -43,7 +43,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
 
   if (
     Attempt.Exit.isFailure(exitFromInitializingClient)
-  ) return exitFromInitializingClient;
+  ) return Attempt.Exit.failCause(exitFromInitializingClient.cause);
 
   const shimmedStabilityAIClient = exitFromInitializingClient.value;
 
