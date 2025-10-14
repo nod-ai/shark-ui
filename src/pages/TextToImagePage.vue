@@ -41,8 +41,7 @@ import NavigationPanel from '@/components/NavigationPanel.vue';
 
 import TextToImage from '@/features/TextToImage';
 import TextToImageInputSection from '@/features/TextToImage/components/TextToImageInputSection.vue';
-import TextToImageOutputAlert from '@/features/TextToImage/components/TextToImageOutputAlert.vue';
-import TextToImageOutputImg from '@/features/TextToImage/components/TextToImageOutputImg.vue';
+import TextToImageOutputView from '@/features/TextToImage/components/TextToImageOutputView.vue';
 
 const currentPrompt: Ref<Option.Option<TextToImage.Pipeline.Input['text']>> = ref(Option.none());
 
@@ -136,13 +135,9 @@ const imageGeneration = useStatefulAttemptThatEventually(async () => {
           'aspect-ratio': 1,
         }"
       />
-      <TextToImageOutputImg
-        v-else-if="Attempt.Exit.isSuccess(imageGeneration.result.value)"
-        :model-value="imageGeneration.result.value.value"
-      />
-      <TextToImageOutputAlert
+      <TextToImageOutputView
         v-else
-        :error="imageGeneration.result.value.cause"
+        :output="imageGeneration.result.value"
       />
     </VContainer>
   </VMain>
