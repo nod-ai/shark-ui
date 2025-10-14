@@ -1,3 +1,7 @@
+import type {
+  Attempt_Exit_Exit,
+} from './Exit';
+
 import {
   Attempt_Exit_Failure,
 } from './Failure';
@@ -56,6 +60,7 @@ Attempt_Exit.mapErrorCause /**/ = Attempt_Exit_mapErrorCause;
 declare module './definition.declared.ts' {
   namespace Attempt_Exit {
     export {
+      type Attempt_Exit_Exit /*    */ as Exit,
       Attempt_Exit_isSuccess /*    */ as isSuccess,
       Attempt_Exit_isFailure /*    */ as isFailure,
       Attempt_Exit_succeed /*      */ as succeed,
