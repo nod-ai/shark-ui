@@ -1,3 +1,7 @@
+import {
+  Cause,
+} from 'effect';
+
 import type {
   Attempt_Error,
 } from '../Error';
@@ -15,7 +19,7 @@ const Attempt_Exit_fail = <
 >(
   givenError: SomeActionableError,
 ): Attempt_Exit_Failure<SomeActionableError> => Attempt_Exit_failCause(
-  givenError,
+  Cause.fail(givenError),
 );
 
 export {

@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import {
+  Cause,
+} from 'effect';
+
 import Attempt from '@/library/Attempt';
 
 import type TextToImage from '@/features/TextToImage';
@@ -20,7 +24,12 @@ defineProps<{
     :model-value="output.value"
   />
   <TextToImageOutputAlert
-    v-else
-    :error="output.cause"
+    v-else-if="Cause.isFailType(output.cause)"
+    :error="output.cause.error"
   />
+  <template
+    v-else
+  >
+    {{ Attempt.Exit.die(Cause.pretty(output.cause)) }}
+  </template>
 </template>
