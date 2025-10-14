@@ -17,11 +17,11 @@ import {
 } from '../tryCatchStatements';
 
 const Attempt_Fresh_thatEventually = async <
-  SomeInferredExit extends Attempt_Exit<unknown, Attempt_Error.Actionable<string>>,
-  SomeEquivalentExit extends Attempt_Exit<
+  SomeInferredExit extends Attempt_Exit.Exit<unknown, Attempt_Error.Actionable<string>>,
+  SomeEquivalentExit extends Attempt_Exit.Exit<
     ProductOf<SomeInferredExit>,
     CauseOf<SomeInferredExit>
-  > = Attempt_Exit<
+  > = Attempt_Exit.Exit<
     ProductOf<SomeInferredExit>,
     CauseOf<SomeInferredExit>
   >,

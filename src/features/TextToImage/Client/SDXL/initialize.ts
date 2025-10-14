@@ -6,7 +6,7 @@ import {
 } from '../../Server';
 
 const TextToImage_Client_SDXL_initialize = async (): Promise<
-  Attempt.Exit<
+  Attempt.Exit.Exit<
     ShimmedStabilityAIClient,
     TextToImage_Server.Error.MissingSpecification
   >

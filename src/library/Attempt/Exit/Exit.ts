@@ -1,4 +1,4 @@
-import {
+import type {
   Attempt_Error,
 } from '../Error';
 
@@ -10,7 +10,7 @@ import type {
   Attempt_Exit_Success,
 } from './Success';
 
-type Attempt_Exit<
+type Attempt_Exit_Exit<
   SomeProduct,
   SomeActionableError extends Attempt_Error.Actionable<string>,
 > =
@@ -18,14 +18,6 @@ type Attempt_Exit<
   | Attempt_Exit_Failure<SomeActionableError>
 ;
 
-function Attempt_Exit(
-  namespaceOnly: never = Attempt_Error.NonActionable.throw(
-    `Unexpected call of module augmentation provision for ${Attempt_Exit.name}.`,
-  ),
-): never {
-  return namespaceOnly;
-}
-
-export {
-  Attempt_Exit,
+export type {
+  Attempt_Exit_Exit,
 };

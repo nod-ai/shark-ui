@@ -3,12 +3,12 @@ import type {
 } from '../Error';
 
 import type {
-  Attempt_Exit_Transformer,
-} from './Transformer';
+  Attempt_Exit_Exit,
+} from './Exit';
 
 import type {
-  Attempt_Exit,
-} from './definition.declared.ts';
+  Attempt_Exit_Transformer,
+} from './Transformer';
 
 import {
   Attempt_Exit_failCause,
@@ -36,7 +36,7 @@ const Attempt_Exit_mapBoth = <
   SomeTransformedProduct = SomeTransformableProduct,
   SomeTransformedActionableError extends Attempt_Error.Actionable<string> = SomeTransformableActionableError,
 >(
-  givenExit: Attempt_Exit<
+  givenExit: Attempt_Exit_Exit<
     SomeTransformableProduct,
     SomeTransformableActionableError
   >,
@@ -49,7 +49,7 @@ const Attempt_Exit_mapBoth = <
     SomeTransformedProduct,
     SomeTransformedActionableError
   >,
-): Attempt_Exit<
+): Attempt_Exit_Exit<
   SomeTransformedProduct,
   SomeTransformedActionableError
 > => Attempt_Exit_isSuccess(givenExit)

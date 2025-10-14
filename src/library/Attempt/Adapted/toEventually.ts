@@ -25,7 +25,7 @@ const Attempt_Adapted_toEventually = async <
   forciblyRetrieveProduct: () => Promise<SomeProduct>,
   given: Attempt_Adapted_Config<SomeActionableError>,
 ): Promise<
-  Attempt_Exit<
+  Attempt_Exit.Exit<
     SomeProduct,
     SomeActionableError
   >

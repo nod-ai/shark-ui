@@ -21,7 +21,7 @@ const Attempt_Adapted_toSettle = async <
   promisedProduct: Promise<SomeProduct>,
   givenConfig: Attempt_Adapted_Config<SomeActionableError>,
 ): Promise<
-  Attempt_Exit<
+  Attempt_Exit.Exit<
     SomeProduct,
     SomeActionableError
   >

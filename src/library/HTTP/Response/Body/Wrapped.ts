@@ -11,7 +11,7 @@ interface HTTP_Response_Body_Wrapped {
   ) => boolean;
 
   digestAsUnknown: () => Promise<
-    Attempt.Exit<
+    Attempt.Exit.Exit<
       unknown,
       HTTP_Response_Body_Digestion.Error.Any
     >
