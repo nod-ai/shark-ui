@@ -1,4 +1,8 @@
 import type {
+  Cause,
+} from 'effect';
+
+import type {
   Attempt_Error,
 } from '../../Error';
 
@@ -12,7 +16,7 @@ interface Attempt_Exit_Failure_SemanticallySugarfree<
   extends Attempt_Exit_Discriminable<
     'failure'
   > {
-  readonly cause: SomeActionableError;
+  readonly cause: Cause.Cause<SomeActionableError>;
 }
 
 export type {

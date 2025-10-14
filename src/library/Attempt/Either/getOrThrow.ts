@@ -1,3 +1,7 @@
+import {
+  Cause,
+} from 'effect';
+
 import type {
   Attempt_Error,
 } from '../Error';
@@ -12,9 +16,15 @@ const Attempt_Either_getOrThrow = <
 >(
   givenExit: Attempt_Exit.Exit<SomeProduct, SomeActionableError>,
 ): SomeProduct => {
-  return Attempt_Exit.isSuccess(givenExit)
-    ? givenExit.value
-    : givenExit.cause.throwAnyway('Expected product, got failure instead');
+  if (
+    Attempt_Exit.isSuccess(givenExit)
+  ) return givenExit.value;
+
+  if (
+    !Cause.isFailType(givenExit.cause)
+  ) return Attempt_Exit.die(`Expected failure, got "${givenExit.cause._tag}" instead`);
+
+  return givenExit.cause.error.throwAnyway('Expected product, got failure instead');
 };
 
 export {

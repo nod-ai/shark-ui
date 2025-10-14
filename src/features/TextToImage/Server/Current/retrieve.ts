@@ -49,7 +49,7 @@ const TextToImage_Server_Current_retrieve = (): Promise<
     TextToImage_Config.Dynamic.endpoint,
   );
 
-  return Attempt.Exit.failCause(newSpecificationError);
+  return Attempt.Exit.fail(newSpecificationError);
 });
 
 export {

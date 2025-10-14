@@ -1,3 +1,7 @@
+import {
+  Cause,
+} from 'effect';
+
 import type {
   Attempt_Error,
 } from '../Error';
@@ -11,8 +15,12 @@ import type {
 } from './Transformer';
 
 import {
-  Attempt_Exit_failCause,
-} from './failCause';
+  Attempt_Exit_die,
+} from './die';
+
+import {
+  Attempt_Exit_fail,
+} from './fail';
 
 import {
   Attempt_Exit_isSuccess,
@@ -42,7 +50,7 @@ const Attempt_Exit_mapBoth = <
   >,
   {
     onSuccess: toTransformedProduct,
-    onFailure: toTransformedCause,
+    onFailure: toTransformedError,
   }: Attempt_Exit_Transformer<
     SomeTransformableProduct,
     SomeTransformableActionableError,
@@ -52,13 +60,21 @@ const Attempt_Exit_mapBoth = <
 ): Attempt_Exit_Exit<
   SomeTransformedProduct,
   SomeTransformedActionableError
-> => Attempt_Exit_isSuccess(givenExit)
-  ? Attempt_Exit_succeed(
-      toTransformedProduct(givenExit.value),
-    )
-  : Attempt_Exit_failCause(
-      toTransformedCause(givenExit.cause),
-    );
+> => {
+  if (
+    Attempt_Exit_isSuccess(givenExit)
+  ) return Attempt_Exit_succeed(
+    toTransformedProduct(givenExit.value),
+  );
+
+  if (
+    !Cause.isFailType(givenExit.cause)
+  ) return Attempt_Exit_die(`Expected failure cause, got ${givenExit.cause._tag} instead`);
+
+  return Attempt_Exit_fail(
+    toTransformedError(givenExit.cause.error),
+  );
+};
 
 export {
   Attempt_Exit_mapBoth,
