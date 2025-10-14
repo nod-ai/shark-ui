@@ -10,7 +10,7 @@ const Attempt_Either_getOrThrow = <
   SomeProduct,
   SomeActionableError extends Attempt_Error.Actionable<string>,
 >(
-  givenExit: Attempt_Exit<SomeProduct, SomeActionableError>,
+  givenExit: Attempt_Exit.Exit<SomeProduct, SomeActionableError>,
 ): SomeProduct => {
   return Attempt_Exit.isSuccess(givenExit)
     ? givenExit.value

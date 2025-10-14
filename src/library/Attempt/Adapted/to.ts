@@ -24,7 +24,7 @@ const Attempt_Adapted_to = <
 >(
   forciblyGetProduct: () => SomeProduct,
   given: Attempt_Adapted_Config<SomeActionableError>,
-): Attempt_Exit<SomeProduct, SomeActionableError> => Attempt_Fresh.that(() => safe({
+): Attempt_Exit.Exit<SomeProduct, SomeActionableError> => Attempt_Fresh.that(() => safe({
   try() {
     const gottenProduct = forciblyGetProduct();
     return Attempt_Exit.succeed(gottenProduct);
