@@ -12,7 +12,7 @@ import type {
 
 interface Attempt_Progressive<
   SomeProduct,
-  SomeActionableError extends Attempt_Error.Actionable<string>,
+  SomeActionableError extends Attempt_Error.Actionable,
 > {
   initiate: () => Promise<void>;
   isInProgress: boolean;

@@ -15,7 +15,7 @@ import {
 } from './failCause';
 
 const Attempt_Exit_fail = <
-  SomeActionableError extends Attempt_Error.Actionable<string>,
+  SomeActionableError extends Attempt_Error.Actionable,
 >(
   givenError: SomeActionableError,
 ): Attempt_Exit_Failure<SomeActionableError> => Attempt_Exit_failCause(

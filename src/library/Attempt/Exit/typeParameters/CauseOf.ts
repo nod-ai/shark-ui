@@ -11,7 +11,7 @@ import type {
 } from '../Failure';
 
 type CauseOf<
-  SomeExit extends Attempt_Exit_Exit<unknown, Attempt_Error.Actionable<string>>,
+  SomeExit extends Attempt_Exit_Exit<unknown, Attempt_Error.Actionable>,
 > = SomeExit extends Attempt_Exit_Failure<infer NestedError>
   ? NestedError
   : never;

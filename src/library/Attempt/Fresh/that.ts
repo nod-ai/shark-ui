@@ -17,7 +17,7 @@ import {
 } from '../tryCatchStatements';
 
 const Attempt_Fresh_that = <
-  SomeInferredExit extends Attempt_Exit.Exit<unknown, Attempt_Error.Actionable<string>>,
+  SomeInferredExit extends Attempt_Exit.Exit<unknown, Attempt_Error.Actionable>,
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
   SomeEquivalentExit extends Attempt_Exit.Exit<
     ProductOf<SomeInferredExit>,

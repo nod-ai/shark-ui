@@ -11,7 +11,7 @@ import type {
 } from '../Success';
 
 type ProductOf<
-  SomeExit extends Attempt_Exit_Exit<unknown, Attempt_Error.Actionable<string>>,
+  SomeExit extends Attempt_Exit_Exit<unknown, Attempt_Error.Actionable>,
 > = SomeExit extends Attempt_Exit_Success<infer NestedProduct>
   ? NestedProduct
   : never;

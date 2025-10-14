@@ -3,7 +3,7 @@ import type {
 } from '../Error';
 
 interface Attempt_Adapted_Config<
-  SomeActionableError extends Attempt_Error.Actionable<string>,
+  SomeActionableError extends Attempt_Error.Actionable,
 > {
   interpretationOf: Attempt_Error.Interpreter<SomeActionableError>;
 }

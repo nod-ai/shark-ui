@@ -7,8 +7,8 @@ import {
 } from './identity';
 
 type Attempt_Exit_Failure_Cause_Transformer<
-  SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
-  SomeTransformedActionableError extends Attempt_Error.Actionable<string>,
+  SomeTransformableActionableError extends Attempt_Error.Actionable,
+  SomeTransformedActionableError extends Attempt_Error.Actionable,
 > = (
   transformableCause: SomeTransformableActionableError,
 ) => SomeTransformedActionableError;
