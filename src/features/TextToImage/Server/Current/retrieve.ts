@@ -22,7 +22,7 @@ import {
 } from './accordingToEnvironment';
 
 const TextToImage_Server_Current_retrieve = (): Promise<
-  Attempt.Exit<
+  Attempt.Exit.Exit<
     WebAPI.Server,
     TextToImage_Server_Error.MissingSpecification
   >
