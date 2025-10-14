@@ -8,7 +8,7 @@ import {
 
 const Attempt_Either_getOrElse = <
   SomeProduct,
-  SomeActionableError extends Attempt_Error.Actionable<string>,
+  SomeActionableError extends Attempt_Error.Actionable,
   SomeFallbackProduct,
 >(
   givenExit: Attempt_Exit.Exit<SomeProduct, SomeActionableError>,

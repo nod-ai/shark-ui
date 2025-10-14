@@ -10,7 +10,7 @@ type AppropriatelyThrown<
   SomeError extends Error,
 > = Exclude<
   SomeError,
-  Attempt_Error_Actionable<string>
+  Attempt_Error_Actionable
 >;
 
 const AppropriatelyThrown = {

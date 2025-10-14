@@ -12,7 +12,7 @@ import {
 
 const Attempt_Either_getOrThrow = <
   SomeProduct,
-  SomeActionableError extends Attempt_Error.Actionable<string>,
+  SomeActionableError extends Attempt_Error.Actionable,
 >(
   givenExit: Attempt_Exit.Exit<SomeProduct, SomeActionableError>,
 ): SomeProduct => {

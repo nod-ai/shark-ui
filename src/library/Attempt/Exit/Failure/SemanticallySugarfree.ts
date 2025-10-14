@@ -11,7 +11,7 @@ import type {
 } from '../Discriminable';
 
 interface Attempt_Exit_Failure_SemanticallySugarfree<
-  SomeActionableError extends Attempt_Error.Actionable<string>,
+  SomeActionableError extends Attempt_Error.Actionable,
 >
   extends Attempt_Exit_Discriminable<
     'failure'

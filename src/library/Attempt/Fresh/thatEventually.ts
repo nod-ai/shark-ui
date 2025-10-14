@@ -17,7 +17,7 @@ import {
 } from '../tryCatchStatements';
 
 const Attempt_Fresh_thatEventually = async <
-  SomeInferredExit extends Attempt_Exit.Exit<unknown, Attempt_Error.Actionable<string>>,
+  SomeInferredExit extends Attempt_Exit.Exit<unknown, Attempt_Error.Actionable>,
   SomeEquivalentExit extends Attempt_Exit.Exit<
     ProductOf<SomeInferredExit>,
     CauseOf<SomeInferredExit>

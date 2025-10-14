@@ -26,9 +26,9 @@ import {
  */
 const Attempt_Exit_mapErrorCause = <
   SomeTransformableProduct,
-  SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
+  SomeTransformableActionableError extends Attempt_Error.Actionable,
   SomeTransformedProduct = SomeTransformableProduct,
-  SomeTransformedActionableError extends Attempt_Error.Actionable<string> = SomeTransformableActionableError,
+  SomeTransformedActionableError extends Attempt_Error.Actionable = SomeTransformableActionableError,
 >(
   givenExit: Attempt_Exit_Exit<
     SomeTransformableProduct,

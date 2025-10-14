@@ -11,7 +11,7 @@ import type {
 } from './definition.declared.ts';
 
 const Attempt_Exit_Failure_dueTo = <
-  SomeActionableError extends Attempt_Error.Actionable<string>,
+  SomeActionableError extends Attempt_Error.Actionable,
 >(
   givenCause: Cause.Cause<SomeActionableError>,
 ): Attempt_Exit_Failure<SomeActionableError> => ({

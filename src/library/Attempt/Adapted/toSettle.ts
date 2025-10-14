@@ -16,7 +16,7 @@ import {
 
 const Attempt_Adapted_toSettle = async <
   SomeProduct,
-  SomeActionableError extends Attempt_Error.Actionable<string>,
+  SomeActionableError extends Attempt_Error.Actionable,
 >(
   promisedProduct: Promise<SomeProduct>,
   givenConfig: Attempt_Adapted_Config<SomeActionableError>,

@@ -12,9 +12,9 @@ import type {
 
 interface Attempt_Exit_Transformer<
   SomeTransformableProduct,
-  SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
+  SomeTransformableActionableError extends Attempt_Error.Actionable,
   SomeTransformedProduct,
-  SomeTransformedActionableError extends Attempt_Error.Actionable<string>,
+  SomeTransformedActionableError extends Attempt_Error.Actionable,
 > {
   onSuccess: Attempt_Exit_Success.Product.Transformer<
     SomeTransformableProduct,

@@ -3,8 +3,8 @@ import type {
 } from '@/library/Attempt/Error'; // eslint-disable-line import/no-internal-modules -- avoids lengthy relative paths
 
 const Attempt_Exit_Failure_Cause_Transformer_identity = <
-  SomeTransformableActionableError extends Attempt_Error.Actionable<string>,
-  SomeTransformedActionableError extends Attempt_Error.Actionable<string>,
+  SomeTransformableActionableError extends Attempt_Error.Actionable,
+  SomeTransformedActionableError extends Attempt_Error.Actionable,
 >(
   transformableCause: NoInfer<SomeTransformableActionableError>,
 ): NoInfer<SomeTransformedActionableError> => {

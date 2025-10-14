@@ -14,7 +14,7 @@ import Attempt from '@/library/Attempt';
 /** Useful when state of UI is dependent on some async operation and the result upon completion */
 const useStatefulAttemptThatEventually = <
   SomeProduct,
-  SomeActionableError extends Attempt.Error.Actionable<string>,
+  SomeActionableError extends Attempt.Error.Actionable,
 >(
   retrieveExit: Attempt.End.Retriever<
     Attempt.Exit.Exit<SomeProduct, SomeActionableError>

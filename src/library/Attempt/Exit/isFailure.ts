@@ -12,7 +12,7 @@ import type {
 
 const Attempt_Exit_isFailure = <
   SomeProduct,
-  SomeActionableError extends Attempt_Error.Actionable<string>,
+  SomeActionableError extends Attempt_Error.Actionable,
 >(
   givenExit: Attempt_Exit_Exit<
     SomeProduct,

@@ -7,7 +7,7 @@ import type {
 } from './SemanticallySugarfree';
 
 type Attempt_Exit_Failure<
-  SomeActionableError extends Attempt_Error.Actionable<string>,
+  SomeActionableError extends Attempt_Error.Actionable,
 > = Attempt_Exit_Failure_SemanticallySugarfree<
   SomeActionableError
 >;

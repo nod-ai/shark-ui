@@ -20,7 +20,7 @@ import type {
 
 const Attempt_Adapted_toEventually = async <
   SomeProduct,
-  SomeActionableError extends Attempt_Error.Actionable<string>,
+  SomeActionableError extends Attempt_Error.Actionable,
 >(
   forciblyRetrieveProduct: () => Promise<SomeProduct>,
   given: Attempt_Adapted_Config<SomeActionableError>,

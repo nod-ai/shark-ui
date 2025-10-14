@@ -3,10 +3,6 @@ import {
 } from 'effect';
 
 import type {
-  Branded,
-} from '@/library/typeUtilities';
-
-import type {
   Attempt_Error_Interpreter,
 } from './Interpreter';
 
@@ -24,15 +20,8 @@ import {
 } from './modifiers';
 
 /** Extend this class to describe errors from which callers ought to recover */
-abstract class Attempt_Error_Actionable<
-  SomeBrand extends string,
->
-  extends Error
-  implements Branded<
-    SomeBrand
-  > {
-  public readonly brand!: SomeBrand;
-
+abstract class Attempt_Error_Actionable
+  extends Error {
   public throwAnyway = (
     givenJustification: string,
   ): never => {
@@ -43,7 +32,7 @@ abstract class Attempt_Error_Actionable<
   };
 
   public static from<
-    SomeActionableError extends Attempt_Error_Actionable<string>,
+    SomeActionableError extends Attempt_Error_Actionable,
   >(
     givenError: AppropriatelyThrown<Error>,
     {
