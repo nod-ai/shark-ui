@@ -1,11 +1,9 @@
 import Attempt from '@/library/Attempt';
 
 class TextToImage_Server_Error_FailedToConnect
-  extends Attempt.Error.Actionable<
-    'TextToImage_Server_Error_FailedToConnect'
-  > {
-  public override name = 'TextToImage_Server_Error_FailedToConnect' as const;
-
+  extends Attempt.Error.Tagged(
+    'TextToImage_Server_Error_FailedToConnect',
+  ) {
   public constructor(
     public readonly endpoint: URL,
   ) {

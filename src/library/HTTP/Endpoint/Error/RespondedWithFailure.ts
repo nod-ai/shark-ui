@@ -5,11 +5,9 @@ import type {
 } from '../../Response';
 
 class HTTP_Endpoint_Error_RespondedWithFailure
-  extends Attempt.Error.Actionable<
-    'HTTP_Endpoint_Error_RespondedWithFailure'
-  > {
-  public override name = 'HTTP_Endpoint_Error_RespondedWithFailure' as const;
-
+  extends Attempt.Error.Tagged(
+    'HTTP_Endpoint_Error_RespondedWithFailure',
+  ) {
   public constructor(
     givenMessage: string,
     public readonly status: HTTP_Response.StatusCode.Error.Any,

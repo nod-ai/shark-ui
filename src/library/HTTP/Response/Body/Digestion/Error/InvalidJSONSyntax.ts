@@ -1,11 +1,9 @@
 import Attempt from '@/library/Attempt';
 
 class HTTP_Response_Body_Digestion_Error_InvalidJSONSyntax
-  extends Attempt.Error.Actionable<
-    'HTTP_Response_Body_Digestion_Error_InvalidJSONSyntax'
-  > {
-  public override readonly name = 'HTTP_Response_Body_Digestion_Error_InvalidJSONSyntax' as const;
-
+  extends Attempt.Error.Tagged(
+    'HTTP_Response_Body_Digestion_Error_InvalidJSONSyntax',
+  ) {
   public constructor(
     givenCause: Error,
   ) {
