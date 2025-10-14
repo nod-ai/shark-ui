@@ -11,8 +11,8 @@ import type {
 } from './Transformer';
 
 import {
-  Attempt_Exit_failCause,
-} from './failCause';
+  Attempt_Exit_fail,
+} from './fail';
 
 import {
   Attempt_Exit_isSuccess,
@@ -56,7 +56,7 @@ const Attempt_Exit_mapBoth = <
   ? Attempt_Exit_succeed(
       toTransformedProduct(givenExit.value),
     )
-  : Attempt_Exit_failCause(
+  : Attempt_Exit_fail(
       toTransformedCause(givenExit.cause),
     );
 

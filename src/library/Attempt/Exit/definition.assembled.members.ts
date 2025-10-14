@@ -15,6 +15,10 @@ export {
 } from './die';
 
 export {
+  Attempt_Exit_fail as fail,
+} from './fail';
+
+export {
   Attempt_Exit_failCause as failCause,
 } from './failCause';
 

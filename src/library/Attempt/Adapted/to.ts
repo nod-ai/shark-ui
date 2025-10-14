@@ -34,7 +34,7 @@ const Attempt_Adapted_to = <
       using: given.interpretationOf,
     });
 
-    return Attempt_Exit.failCause(someActionableError);
+    return Attempt_Exit.fail(someActionableError);
   },
 }));
 

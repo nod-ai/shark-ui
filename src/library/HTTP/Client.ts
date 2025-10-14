@@ -78,7 +78,7 @@ class HTTP_Client {
 
     if (!response.ok) {
       const newResponseError = new HTTP_Endpoint.Error.RespondedWithFailure(response.statusText, response.status);
-      return Attempt.Exit.failCause(newResponseError);
+      return Attempt.Exit.fail(newResponseError);
     }
 
     const exitFromDigestingResponseBody = await bodyOf(response).digestAsUnknown();
