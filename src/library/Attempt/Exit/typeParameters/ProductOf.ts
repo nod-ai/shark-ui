@@ -1,18 +1,14 @@
 import type {
+  Exit,
+} from 'effect';
+
+import type {
   Attempt_Error,
 } from '../../Error';
 
-import type {
-  Attempt_Exit_Exit,
-} from '../Exit';
-
-import type {
-  Attempt_Exit_Success,
-} from '../Success';
-
 type ProductOf<
-  SomeExit extends Attempt_Exit_Exit<unknown, Attempt_Error.Actionable>,
-> = SomeExit extends Attempt_Exit_Success<infer NestedProduct>
+  SomeExit extends Exit.Exit<unknown, Attempt_Error.Actionable>,
+> = SomeExit extends Exit.Success<infer NestedProduct, never>
   ? NestedProduct
   : never;
 
