@@ -35,8 +35,8 @@ export {
 } from './mapBoth';
 
 export {
-  Attempt_Exit_mapErrorCause as mapErrorCause,
-} from './mapErrorCause';
+  Attempt_Exit_mapError as mapError,
+} from './mapError';
 
 export {
   Attempt_Exit_succeed as succeed,

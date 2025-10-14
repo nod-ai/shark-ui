@@ -24,7 +24,7 @@ import {
  * 2. transforming the error, and
  * 3. wrapping the transformed contents in a _new_ exit.
  */
-const Attempt_Exit_mapErrorCause = <
+const Attempt_Exit_mapError = <
   SomeTransformableProduct,
   SomeTransformableActionableError extends Attempt_Error.Actionable,
   SomeTransformedProduct = SomeTransformableProduct,
@@ -50,5 +50,5 @@ const Attempt_Exit_mapErrorCause = <
 });
 
 export {
-  Attempt_Exit_mapErrorCause,
+  Attempt_Exit_mapError,
 };
