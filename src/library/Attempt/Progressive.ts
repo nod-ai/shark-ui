@@ -16,7 +16,7 @@ interface Attempt_Progressive<
 > {
   initiate: () => Promise<void>;
   isInProgress: boolean;
-  outcome: Option.Option<
+  result: Option.Option<
     Attempt_Outcome<
       SomeProduct,
       SomeActionableError
