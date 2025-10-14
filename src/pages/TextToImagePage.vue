@@ -7,6 +7,7 @@ import {
 } from '@/library/vue';
 
 import {
+  Exit,
   Option,
 } from 'effect';
 
@@ -29,8 +30,6 @@ import {
 import {
   VSkeletonLoader,
 } from 'vuetify/components/VSkeletonLoader';
-
-import Attempt from '@/library/Attempt';
 
 import {
   SDXL,
@@ -68,7 +67,7 @@ const imageGeneration = useStatefulAttemptThatEventually(async () => {
     },
   });
 
-  const exitFromGeneratingImage = Attempt.Exit.map(
+  const exitFromGeneratingImage = Exit.map(
     exitFromGeneratingOutput,
     $0 => $0.image,
   );

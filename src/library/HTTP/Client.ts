@@ -1,4 +1,5 @@
 import {
+  Exit,
   Option,
 } from 'effect';
 
@@ -71,19 +72,19 @@ class HTTP_Client {
     });
 
     if (
-      Attempt.Exit.isFailure(exitFromSettlingResponse)
-    ) return Attempt.Exit.failCause(exitFromSettlingResponse.cause);
+      Exit.isFailure(exitFromSettlingResponse)
+    ) return Exit.failCause(exitFromSettlingResponse.cause);
 
     const response = exitFromSettlingResponse.value;
 
     if (!response.ok) {
       const newResponseError = new HTTP_Endpoint.Error.RespondedWithFailure(response.statusText, response.status);
-      return Attempt.Exit.fail(newResponseError);
+      return Exit.fail(newResponseError);
     }
 
     const exitFromDigestingResponseBody = await bodyOf(response).digestAsUnknown();
 
-    return Attempt.Exit.mapError(
+    return Exit.mapError(
       exitFromDigestingResponseBody,
       $0 => new HTTP_Endpoint.Error.IndigestibleResponseBody(endpointURL, $0),
     );

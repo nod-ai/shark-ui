@@ -1,4 +1,6 @@
-import type Attempt from '@/library/Attempt';
+import type {
+  Exit,
+} from 'effect';
 
 import type {
   TextToImage_Pipeline,
@@ -8,7 +10,7 @@ import type {
   TextToImage_Server,
 } from '../../Server';
 
-type TextToImage_Client_Generation_Exit = Attempt.Exit.Exit<
+type TextToImage_Client_Generation_Exit = Exit.Exit<
   TextToImage_Pipeline.Output,
   TextToImage_Server.Error.Any
 >;

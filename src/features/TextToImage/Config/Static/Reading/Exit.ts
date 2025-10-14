@@ -1,4 +1,6 @@
-import type Attempt from '@/library/Attempt';
+import type {
+  Exit,
+} from 'effect';
 
 import type {
   TextToImage_Config,
@@ -8,7 +10,7 @@ import type {
   TextToImage_Config_Static_Reading_Error,
 } from './Error';
 
-type TextToImage_Config_Static_Reading_Exit = Attempt.Exit.Exit<
+type TextToImage_Config_Static_Reading_Exit = Exit.Exit<
   TextToImage_Config,
   TextToImage_Config_Static_Reading_Error
 >;

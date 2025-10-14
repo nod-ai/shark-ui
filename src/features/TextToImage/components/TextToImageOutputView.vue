@@ -2,9 +2,8 @@
 import {
   Cause,
   Effect,
+  Exit,
 } from 'effect';
-
-import Attempt from '@/library/Attempt';
 
 import type TextToImage from '@/features/TextToImage';
 
@@ -12,7 +11,7 @@ import TextToImageOutputAlert from './TextToImageOutputAlert.vue';
 import TextToImageOutputImg from './TextToImageOutputImg.vue';
 
 defineProps<{
-  output: Attempt.Exit.Exit<
+  output: Exit.Exit<
     TextToImage.Pipeline.Output.Image,
     TextToImage.Server.Error.Any
   >;
@@ -21,7 +20,7 @@ defineProps<{
 
 <template>
   <TextToImageOutputImg
-    v-if="Attempt.Exit.isSuccess(output)"
+    v-if="Exit.isSuccess(output)"
     :model-value="output.value"
   />
   <TextToImageOutputAlert
