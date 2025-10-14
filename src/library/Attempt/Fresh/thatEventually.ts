@@ -7,30 +7,30 @@ import {
 } from '../Error';
 
 import type {
-  Attempt_Outcome,
+  Attempt_Exit,
   CauseOf,
   ProductOf,
-} from '../Outcome';
+} from '../Exit';
 
 import {
   safeAsync,
 } from '../tryCatchStatements';
 
 const Attempt_Fresh_thatEventually = async <
-  SomeInferredOutcome extends Attempt_Outcome<unknown, Attempt_Error.Actionable<string>>,
-  SomeEquivalentOutcome extends Attempt_Outcome<
-    ProductOf<SomeInferredOutcome>,
-    CauseOf<SomeInferredOutcome>
-  > = Attempt_Outcome<
-    ProductOf<SomeInferredOutcome>,
-    CauseOf<SomeInferredOutcome>
+  SomeInferredExit extends Attempt_Exit<unknown, Attempt_Error.Actionable<string>>,
+  SomeEquivalentExit extends Attempt_Exit<
+    ProductOf<SomeInferredExit>,
+    CauseOf<SomeInferredExit>
+  > = Attempt_Exit<
+    ProductOf<SomeInferredExit>,
+    CauseOf<SomeInferredExit>
   >,
 >(
-  retrieveEnd: Attempt_End.Retriever<SomeInferredOutcome>,
-): Promise<SomeEquivalentOutcome> => {
+  retrieveEnd: Attempt_End.Retriever<SomeInferredExit>,
+): Promise<SomeEquivalentExit> => {
   return safeAsync({
     async try() {
-      return await retrieveEnd() as unknown as SomeEquivalentOutcome;
+      return await retrieveEnd() as unknown as SomeEquivalentExit;
     },
     catch(someError) {
       return Attempt_Error.Creation.rethrow(someError);

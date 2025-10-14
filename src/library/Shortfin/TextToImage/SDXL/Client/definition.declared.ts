@@ -33,24 +33,24 @@ class Shortfin_TextToImage_SDXL_Client
   public generateImageFrom(
     givenBatchedRequestBody: Shortfin_TextToImage_SDXL_Client_Request.Body.Batched,
   ): Promise<
-    Shortfin_TextToImage_SDXL_Client_Request.Outcome
+    Shortfin_TextToImage_SDXL_Client_Request.Exit
   > {
     const generationEndpoint = URLComponent.Path('/generate');
 
     return Attempt.Fresh.thatEventually(async () => {
-      const outcomeOfSubmittingResource = await this.submitResource({
+      const exitFromSubmittingResource = await this.submitResource({
         bySending: givenBatchedRequestBody,
         to       : generationEndpoint,
       });
 
       if (
-        Attempt.Outcome.isFailure(outcomeOfSubmittingResource)
-      ) return outcomeOfSubmittingResource;
+        Attempt.Exit.isFailure(exitFromSubmittingResource)
+      ) return exitFromSubmittingResource;
 
-      const rawResource = outcomeOfSubmittingResource.value;
+      const rawResource = exitFromSubmittingResource.value;
       const decodedResource = Schema.decodeUnknownSync(Shortfin_TextToImage_SDXL_Client_Response.Body)(rawResource);
       const [soleGeneratedImage] = decodedResource.images;
-      return Attempt.Outcome.succeed(soleGeneratedImage);
+      return Attempt.Exit.succeed(soleGeneratedImage);
     });
   }
 }

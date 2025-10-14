@@ -47,7 +47,7 @@ class HTTP_Client {
       to: URLComponent.Path;
       using: HTTP_Request.Method;
     },
-  ): Promise<HTTP_Endpoint.Outcome> => Attempt.Fresh.thatEventually(async () => {
+  ): Promise<HTTP_Endpoint.Exit> => Attempt.Fresh.thatEventually(async () => {
     const endpointURL = this.originAt(givenPath);
 
     const promisedResponse = fetch(endpointURL, {
@@ -58,7 +58,7 @@ class HTTP_Client {
         : JSON.stringify(givenRequestBody),
     });
 
-    const outcomeOfSettlingResponse = await Attempt.Adapted.toSettle(promisedResponse, {
+    const exitFromSettlingResponse = await Attempt.Adapted.toSettle(promisedResponse, {
       interpretationOf: (caughtError) => {
         const clientFailedToReachServer = caughtError.message.includes('Failed to fetch');
 
@@ -71,20 +71,20 @@ class HTTP_Client {
     });
 
     if (
-      Attempt.Outcome.isFailure(outcomeOfSettlingResponse)
-    ) return outcomeOfSettlingResponse;
+      Attempt.Exit.isFailure(exitFromSettlingResponse)
+    ) return exitFromSettlingResponse;
 
-    const response = outcomeOfSettlingResponse.value;
+    const response = exitFromSettlingResponse.value;
 
     if (!response.ok) {
       const newResponseError = new HTTP_Endpoint.Error.RespondedWithFailure(response.statusText, response.status);
-      return Attempt.Outcome.failCause(newResponseError);
+      return Attempt.Exit.failCause(newResponseError);
     }
 
-    const outcomeOfDigestingResponseBody = await bodyOf(response).digestAsUnknown();
+    const exitFromDigestingResponseBody = await bodyOf(response).digestAsUnknown();
 
-    return Attempt.Outcome.mapErrorCause(
-      outcomeOfDigestingResponseBody,
+    return Attempt.Exit.mapErrorCause(
+      exitFromDigestingResponseBody,
       $0 => new HTTP_Endpoint.Error.IndigestibleResponseBody(endpointURL, $0),
     );
   });
@@ -95,7 +95,7 @@ class HTTP_Client {
     }: {
       from: URLComponent.Path;
     },
-  ): Promise<HTTP_Endpoint.Outcome> {
+  ): Promise<HTTP_Endpoint.Exit> {
     return await this.send(null, {
       to   : givenPath,
       using: HTTP_Request.Method.FETCH,
@@ -110,7 +110,7 @@ class HTTP_Client {
       bySending: unknown;
       to: URLComponent.Path;
     },
-  ): Promise<HTTP_Endpoint.Outcome> {
+  ): Promise<HTTP_Endpoint.Exit> {
     return await this.send(givenSubmission, {
       to   : givenPath,
       using: HTTP_Request.Method.SUBMIT,
@@ -125,7 +125,7 @@ class HTTP_Client {
       bySending: unknown;
       to: URLComponent.Path;
     },
-  ): Promise<HTTP_Endpoint.Outcome> {
+  ): Promise<HTTP_Endpoint.Exit> {
     return await this.send(givenProperties, {
       to   : givenPath,
       using: HTTP_Request.Method.CREATE,
@@ -140,7 +140,7 @@ class HTTP_Client {
       bySending: unknown;
       to: URLComponent.Path;
     },
-  ): Promise<HTTP_Endpoint.Outcome> {
+  ): Promise<HTTP_Endpoint.Exit> {
     return await this.send(givenChanges, {
       to   : givenPath,
       using: HTTP_Request.Method.UPDATE,
@@ -149,7 +149,7 @@ class HTTP_Client {
 
   public async deleteResourceAt(
     givenPath: URLComponent.Path,
-  ): Promise<HTTP_Endpoint.Outcome> {
+  ): Promise<HTTP_Endpoint.Exit> {
     return await this.send(null, {
       to   : givenPath,
       using: HTTP_Request.Method.DELETE,

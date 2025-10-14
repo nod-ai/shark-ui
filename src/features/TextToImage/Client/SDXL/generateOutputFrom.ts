@@ -37,15 +37,15 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     >;
   },
 ): Promise<
-  TextToImage_Client_Generation.Outcome
+  TextToImage_Client_Generation.Exit
 > => {
-  const outcomeOfInitializingClient = await TextToImage_Client_SDXL_initialize();
+  const exitFromInitializingClient = await TextToImage_Client_SDXL_initialize();
 
   if (
-    Attempt.Outcome.isFailure(outcomeOfInitializingClient)
-  ) return outcomeOfInitializingClient;
+    Attempt.Exit.isFailure(exitFromInitializingClient)
+  ) return exitFromInitializingClient;
 
-  const shimmedStabilityAIClient = outcomeOfInitializingClient.value;
+  const shimmedStabilityAIClient = exitFromInitializingClient.value;
 
   const promisedTextToImageResponse = shimmedStabilityAIClient.version1.image.forciblyGenerateFromText({
     engineId              : 'stable-diffusion-xl-1024-v1-0',
@@ -59,7 +59,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     },
   });
 
-  const outcomeOfSettlingTextToImageResponse = await Attempt.Adapted.toSettle(promisedTextToImageResponse, {
+  const exitFromSettlingTextToImageResponse = await Attempt.Adapted.toSettle(promisedTextToImageResponse, {
     interpretationOf: (caughtError) => {
       if (
         !(caughtError instanceof HTTP.Endpoint.Error.FailedToSendRequest)
@@ -69,15 +69,15 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     },
   });
 
-  const outcomeOfSettlingSoleTextToImageOutput = Attempt.Outcome.map(
-    outcomeOfSettlingTextToImageResponse,
+  const exitFromSettlingSoleTextToImageOutput = Attempt.Exit.map(
+    exitFromSettlingTextToImageResponse,
     textToImageResponse => toSharkUIOutput.first({
       in          : textToImageResponse,
       inferredFrom: given.textToImageRequestBody.textPrompts,
     }),
   );
 
-  return outcomeOfSettlingSoleTextToImageOutput;
+  return exitFromSettlingSoleTextToImageOutput;
 };
 
 export {

@@ -3,19 +3,19 @@ import type {
 } from '../Error';
 
 import {
-  Attempt_Outcome,
-} from '../Outcome';
+  Attempt_Exit,
+} from '../Exit';
 
 const Attempt_Either_getOrElse = <
   SomeProduct,
   SomeActionableError extends Attempt_Error.Actionable<string>,
   SomeFallbackProduct,
 >(
-  givenOutcome: Attempt_Outcome<SomeProduct, SomeActionableError>,
+  givenExit: Attempt_Exit<SomeProduct, SomeActionableError>,
   givenFallbackGetter: () => SomeFallbackProduct,
 ): SomeProduct | SomeFallbackProduct => {
-  return Attempt_Outcome.isSuccess(givenOutcome)
-    ? givenOutcome.value
+  return Attempt_Exit.isSuccess(givenExit)
+    ? givenExit.value
     : givenFallbackGetter();
 };
 

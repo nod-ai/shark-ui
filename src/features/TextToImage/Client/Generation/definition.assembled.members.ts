@@ -1,3 +1,3 @@
 export type {
-  TextToImage_Client_Generation_Outcome as Outcome,
-} from './Outcome';
+  TextToImage_Client_Generation_Exit as Exit,
+} from './Exit';

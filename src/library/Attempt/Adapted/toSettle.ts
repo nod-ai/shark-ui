@@ -3,8 +3,8 @@ import type {
 } from '../Error';
 
 import type {
-  Attempt_Outcome,
-} from '../Outcome';
+  Attempt_Exit,
+} from '../Exit';
 
 import type {
   Attempt_Adapted_Config,
@@ -21,7 +21,7 @@ const Attempt_Adapted_toSettle = async <
   promisedProduct: Promise<SomeProduct>,
   givenConfig: Attempt_Adapted_Config<SomeActionableError>,
 ): Promise<
-  Attempt_Outcome<
+  Attempt_Exit<
     SomeProduct,
     SomeActionableError
   >

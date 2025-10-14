@@ -74,10 +74,10 @@ Consider the import of a hybrid internal module from one of its peers:
 // @/library/Attempt/Fresh/that.ts
 
 import {
-  Attempt_Outcome,
+  Attempt_Exit,
   type ProductOf,
   type CauseOf,
-} from '../../Outcome';
+} from '../../Exit';
 
 ...
 
@@ -86,9 +86,9 @@ export {
 };
 ```
 
-Here, a level-2 member called `Attempt_Outcome` is imported by name into the `Attempt/Fresh/that` module to define a level-3 member called `Attempt_Fresh_that`.
+Here, a level-2 member called `Attempt_Exit` is imported by name into the `Attempt/Fresh/that` module to define a level-3 member called `Attempt_Fresh_that`.
 
-- Both of these are internal modules that will be explicitly exposed as `Attempt.Outcome` and `Attempt.Fresh.that` to external consumers of the entire library.
+- Both of these are internal modules that will be explicitly exposed as `Attempt.Exit` and `Attempt.Fresh.that` to external consumers of the entire library.
 - Because of this, it's important for other internal consumers to acknowledge that these members are safe to expose to these external consumers (e.g. when used as parameter types or return types).
 - Ergo, `default` imports/exports are avoided to help peer consumers avoid inadvertent aliases that may obfuscate how a member will actually look to an external consumer.
 

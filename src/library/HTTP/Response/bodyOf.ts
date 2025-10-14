@@ -31,12 +31,12 @@ const bodyOf = (
     return Attempt.Fresh.thatEventually(async () => {
       if (!this.isSuggestedToBeDigestibleAs(ContentDescriptor.json)) {
         const newDescriptorMismatchError = new HTTP_Response_Body.Digestion.Error.DescriptorMismatch(givenResponse, ContentDescriptor.json);
-        return Attempt.Outcome.failCause(newDescriptorMismatchError);
+        return Attempt.Exit.failCause(newDescriptorMismatchError);
       }
 
       const promiseForDigestedResponseBody: Promise<unknown> = givenResponse.json();
 
-      const outcomeOfDigestingResponseBody = await Attempt.Adapted.toSettle(promiseForDigestedResponseBody, {
+      const exitFromDigestingResponseBody = await Attempt.Adapted.toSettle(promiseForDigestedResponseBody, {
         interpretationOf: (caughtError) => {
           if (
             caughtError instanceof SyntaxError
@@ -46,7 +46,7 @@ const bodyOf = (
         },
       });
 
-      return outcomeOfDigestingResponseBody;
+      return exitFromDigestingResponseBody;
     });
   },
 });
