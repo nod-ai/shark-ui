@@ -1,12 +1,11 @@
 import {
+  Effect,
   Option,
 } from 'effect';
 
 import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
-
-import Attempt from '@/library/Attempt';
 
 import {
   TextToImage_Pipeline,
@@ -27,7 +26,7 @@ const toSharkUIOutput_plural = (
 ): Option.Option<Option.Option<TextToImage_Pipeline.Output>[]> => {
   if (
     !('artifacts' in givenResponse.result)
-  ) return Attempt.Exit.die('Expected response body rather than readable stream');
+  ) return Effect.runSync(Effect.dieMessage('Expected response body rather than readable stream'));
 
   const inferredRawImages = Option.fromNullable(givenResponse.result.artifacts);
 

@@ -1,5 +1,6 @@
 import {
   Cause,
+  Effect,
 } from 'effect';
 
 import type {
@@ -13,10 +14,6 @@ import type {
 import type {
   Attempt_Exit_Transformer,
 } from './Transformer';
-
-import {
-  Attempt_Exit_die,
-} from './die';
 
 import {
   Attempt_Exit_fail,
@@ -69,7 +66,7 @@ const Attempt_Exit_mapBoth = <
 
   if (
     !Cause.isFailType(givenExit.cause)
-  ) return Attempt_Exit_die(`Expected failure cause, got ${givenExit.cause._tag} instead`);
+  ) return Effect.runSync(Effect.dieMessage(`Expected failure cause, got ${givenExit.cause._tag} instead`));
 
   return Attempt_Exit_fail(
     toTransformedError(givenExit.cause.error),

@@ -1,10 +1,12 @@
 import {
+  Runtime,
+} from 'effect';
+
+import {
   describe,
   it,
   expect,
 } from 'vitest';
-
-import Attempt from '@/library/Attempt';
 
 import {
   numberTaxonomy,
@@ -42,7 +44,15 @@ describe(isNegative, () => {
       it('should safely propagate the error', () => {
         expect.assertions(1);
 
-        expect(() => isNegative(soleInoperableNumber)).toThrow(Attempt.Error.NonActionable);
+        expect((() => {
+          // eslint-disable-next-line no-restricted-syntax
+          try {
+            isNegative(soleInoperableNumber);
+          }
+          catch (error) {
+            return Runtime.isFiberFailure(error);
+          }
+        })()).toBe(true);
       });
 
       it('should communicate clearly with developers', () => {

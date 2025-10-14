@@ -11,10 +11,6 @@ export {
 } from './Success';
 
 export {
-  Attempt_Exit_die as die,
-} from './die';
-
-export {
   Attempt_Exit_fail as fail,
 } from './fail';
 

@@ -1,12 +1,11 @@
 import {
+  Effect,
   Option,
 } from 'effect';
 
 import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
-
-import Attempt from '@/library/Attempt';
 
 import {
   hasAtLeastOne,
@@ -41,7 +40,7 @@ const toSharkUIOutput_first = (
 
   if (
     !hasAtLeastOne(inferredOutputs)
-  ) return Attempt.Exit.die('Expected at least one text-to-image output in response');
+  ) return Effect.runSync(Effect.dieMessage('Expected at least one text-to-image output in response'));
 
   const [firstPotentialOutput] = inferredOutputs;
 
