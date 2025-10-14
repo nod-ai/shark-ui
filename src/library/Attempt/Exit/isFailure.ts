@@ -3,18 +3,18 @@ import type {
 } from '../Error';
 
 import type {
-  Attempt_Exit_Failure,
-} from './Failure';
+  Attempt_Exit_Exit,
+} from './Exit';
 
 import type {
-  Attempt_Exit,
-} from './definition.declared.ts';
+  Attempt_Exit_Failure,
+} from './Failure';
 
 const Attempt_Exit_isFailure = <
   SomeProduct,
   SomeActionableError extends Attempt_Error.Actionable<string>,
 >(
-  givenExit: Attempt_Exit<
+  givenExit: Attempt_Exit_Exit<
     SomeProduct,
     SomeActionableError
   >,
