@@ -12,7 +12,9 @@ class HTTP_Endpoint_Error_RespondedWithFailure
     givenMessage: string,
     public readonly status: HTTP_Response.StatusCode.Error.Any,
   ) {
-    super(givenMessage);
+    super({
+      message: givenMessage,
+    });
   }
 }
 

@@ -7,7 +7,9 @@ class HTTP_Endpoint_Error_FailedToSendRequest
   public constructor(
     public readonly endpoint: URL,
   ) {
-    super(`Failed to fetch from "${endpoint.toString()}".`);
+    super({
+      message: `Failed to fetch from "${endpoint.toString()}".`,
+    });
   }
 }
 
