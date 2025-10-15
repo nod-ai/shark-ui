@@ -1,8 +1,4 @@
 export {
-  Attempt_Either as Either,
-} from './Either';
-
-export {
   Attempt_Adapted as Adapted,
 } from './Adapted';
 
