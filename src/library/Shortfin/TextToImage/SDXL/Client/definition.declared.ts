@@ -45,7 +45,7 @@ class Shortfin_TextToImage_SDXL_Client
 
       if (
         Attempt.Exit.isFailure(exitFromSubmittingResource)
-      ) return exitFromSubmittingResource;
+      ) return Attempt.Exit.failCause(exitFromSubmittingResource.cause);
 
       const rawResource = exitFromSubmittingResource.value;
       const decodedResource = Schema.decodeUnknownSync(Shortfin_TextToImage_SDXL_Client_Response.Body)(rawResource);
