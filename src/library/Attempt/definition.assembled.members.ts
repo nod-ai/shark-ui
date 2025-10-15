@@ -3,10 +3,6 @@ export {
 } from './Either';
 
 export {
-  Attempt_Exit as Exit,
-} from './Exit';
-
-export {
   Attempt_Adapted as Adapted,
 } from './Adapted';
 
