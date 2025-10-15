@@ -4,7 +4,7 @@ import type {
 
 import type {
   Attempt_Error,
-} from '../../Error';
+} from '../Error';
 
 type ProductOf<
   SomeExit extends Exit.Exit<unknown, Attempt_Error.Actionable>,
