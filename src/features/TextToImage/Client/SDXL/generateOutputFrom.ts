@@ -1,13 +1,12 @@
 import {
+  Effect,
   Exit,
-  Option,
 } from 'effect';
 
 import type {
   GenerateFromTextRequest,
 } from 'stabilityai-client-typescript/models/operations';
 
-import Attempt from '@/library/Attempt';
 import HTTP from '@/library/HTTP';
 
 import {
@@ -60,15 +59,17 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     },
   });
 
-  const exitFromSettlingTextToImageResponse = await Attempt.Adapted.toSettle(promisedTextToImageResponse, {
-    interpretationOf: (caughtError) => {
+  const exitFromSettlingTextToImageResponse = await Effect.runPromiseExit(Effect.tryPromise(() => promisedTextToImageResponse).pipe(
+    Effect.catchAll((someException) => {
+      const caughtError = someException.cause;
+
       if (
         caughtError instanceof HTTP.Endpoint.Error.FailedToSendRequest
-      ) return Option.some(new TextToImage_Server.Error.FailedToConnect(caughtError.endpoint));
+      ) return new TextToImage_Server.Error.FailedToConnect(caughtError.endpoint);
 
-      return Option.none();
-    },
-  });
+      return Effect.die(caughtError);
+    }),
+  ));
 
   const exitFromSettlingSoleTextToImageOutput = Exit.map(
     exitFromSettlingTextToImageResponse,
