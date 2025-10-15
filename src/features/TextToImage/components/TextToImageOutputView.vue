@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {
   Cause,
+  Effect,
 } from 'effect';
 
 import Attempt from '@/library/Attempt';
@@ -30,6 +31,6 @@ defineProps<{
   <template
     v-else
   >
-    {{ Attempt.Exit.die(Cause.pretty(output.cause)) }}
+    {{ Effect.runSync(Effect.dieMessage(Cause.pretty(output.cause))) }}
   </template>
 </template>

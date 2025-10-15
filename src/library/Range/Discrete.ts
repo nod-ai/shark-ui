@@ -1,4 +1,6 @@
-import Attempt from '@/library/Attempt';
+import {
+  Effect,
+} from 'effect';
 
 import {
   isNegative,
@@ -39,13 +41,13 @@ class Range_Discrete
 
     if (
       isNegative(givenStepSize)
-    ) return Attempt.Exit.die('Step size must be non-negative');
+    ) return Effect.runSync(Effect.dieMessage('Step size must be non-negative'));
 
     const overstep = validRange.width % givenStepSize;
 
     if (
       overstep !== 0
-    ) return Attempt.Exit.die('Step size must fit evenly into the range');
+    ) return Effect.runSync(Effect.dieMessage('Step size must fit evenly into the range'));
 
     const validDiscreteRange = new this(
       validRange.lowerBound,

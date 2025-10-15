@@ -1,5 +1,6 @@
 import {
   Cause,
+  Effect,
 } from 'effect';
 
 import type {
@@ -22,7 +23,7 @@ const Attempt_Either_getOrThrow = <
 
   if (
     !Cause.isFailType(givenExit.cause)
-  ) return Attempt_Exit.die(`Expected failure, got "${givenExit.cause._tag}" instead`);
+  ) return Effect.runSync(Effect.dieMessage(`Expected failure, got "${givenExit.cause._tag}" instead`));
 
   return givenExit.cause.error.throwAnyway('Expected product, got failure instead');
 };

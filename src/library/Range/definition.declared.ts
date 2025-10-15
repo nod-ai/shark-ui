@@ -1,4 +1,6 @@
-import Attempt from '@/library/Attempt';
+import {
+  Effect,
+} from 'effect';
 
 import {
   arithmeticMeanOf,
@@ -25,7 +27,7 @@ class Range {
   ): Range {
     if (
       givenUpperBound < givenLowerBound
-    ) return Attempt.Exit.die('Upper bound must not be lower than lower bound');
+    ) return Effect.runSync(Effect.dieMessage('Upper bound must not be lower than lower bound'));
 
     const validRange = new this(
       givenLowerBound,

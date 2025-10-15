@@ -1,4 +1,6 @@
-import Attempt from '@/library/Attempt';
+import {
+  Effect,
+} from 'effect';
 
 import {
   isOperable,
@@ -9,7 +11,7 @@ const isNegative = (
 ): boolean => {
   if (
     !isOperable(givenOperand)
-  ) return Attempt.Exit.die('Operand must be operable');
+  ) return Effect.runSync(Effect.dieMessage('Operand must be operable'));
 
   return (givenOperand < 0);
 };

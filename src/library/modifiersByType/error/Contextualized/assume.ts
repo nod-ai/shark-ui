@@ -1,4 +1,6 @@
-import Attempt from '@/library/Attempt';
+import {
+  Effect,
+} from 'effect';
 
 import type {
   Instantiable,
@@ -23,7 +25,7 @@ const Contextualized_assume = <
     Contextualized_describes<SomeError, SomeCause>(givenError, GivenCause)
   ) return givenError;
 
-  return Attempt.Exit.die('Expected error to have a cause');
+  return Effect.runSync(Effect.dieMessage('Expected error to have a cause'));
 };
 
 export {
