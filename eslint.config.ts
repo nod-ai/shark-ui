@@ -52,7 +52,7 @@ const extraConfigForESLint: ConfigWithExtends = {
       },
       {
         selector: 'ThrowStatement',
-        message : 'Prefer `Attempt.that` callback for error propagation over `throw`.',
+        message : 'Prefer `Effect.gen` callback for error propagation over `throw`.',
       },
     ],
     'no-useless-rename': [
