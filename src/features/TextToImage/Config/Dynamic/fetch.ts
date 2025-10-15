@@ -1,9 +1,9 @@
 import {
+  Effect,
   Exit,
   Schema,
 } from 'effect';
 
-import Attempt from '@/library/Attempt';
 import HTTP from '@/library/HTTP';
 
 import {
@@ -20,7 +20,7 @@ import {
 
 const TextToImage_Config_Dynamic_fetch = (): Promise<
   TextToImage_Config_Dynamic_Fetching.Exit
-> => Attempt.Fresh.thatEventually(async () => {
+> => Effect.runPromise(Effect.promise(async () => {
   const exitFromFetchingResource = await HTTP.Client.local.fetchResource({
     from: TextToImage_Config_Dynamic_endpoint,
   });
@@ -29,7 +29,7 @@ const TextToImage_Config_Dynamic_fetch = (): Promise<
     onSuccess: $0 => Schema.decodeUnknownSync(TextToImage_Config)($0),
     onFailure: $0 => new TextToImage_Config_Dynamic_Fetching.Error(TextToImage_Config_Dynamic_endpoint, $0),
   });
-});
+}));
 
 export {
   TextToImage_Config_Dynamic_fetch,

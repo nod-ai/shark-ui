@@ -3,7 +3,6 @@ import {
   Exit,
 } from 'effect';
 
-import Attempt from '@/library/Attempt';
 import ContentDescriptor from '@/library/ContentDescriptor';
 import URLComponent from '@/library/URLComponent';
 
@@ -48,7 +47,7 @@ class HTTP_Client {
       to: URLComponent.Path;
       using: HTTP_Request.Method;
     },
-  ): Promise<HTTP_Endpoint.Exit> => Attempt.Fresh.thatEventually(async () => {
+  ): Promise<HTTP_Endpoint.Exit> => Effect.runPromise(Effect.promise(async () => {
     const endpointURL = this.originAt(givenPath);
 
     const promisedResponse = fetch(endpointURL, {
@@ -89,7 +88,7 @@ class HTTP_Client {
       exitFromDigestingResponseBody,
       $0 => new HTTP_Endpoint.Error.IndigestibleResponseBody(endpointURL, $0),
     );
-  });
+  }));
 
   public async fetchResource(
     {

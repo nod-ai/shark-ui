@@ -3,7 +3,6 @@ import {
   Exit,
 } from 'effect';
 
-import Attempt from '@/library/Attempt';
 import ContentDescriptor from '@/library/ContentDescriptor';
 
 import {
@@ -29,7 +28,7 @@ const bodyOf = (
     return actualRawDescriptor.includes(givenDescriptor.serialized.toString());
   },
   async digestAsUnknown() {
-    return Attempt.Fresh.thatEventually(async () => {
+    return Effect.runPromise(Effect.promise(async () => {
       if (!this.isSuggestedToBeDigestibleAs(ContentDescriptor.json)) {
         const newDescriptorMismatchError = new HTTP_Response_Body.Digestion.Error.DescriptorMismatch(givenResponse, ContentDescriptor.json);
         return Exit.fail(newDescriptorMismatchError);
@@ -50,7 +49,7 @@ const bodyOf = (
       ));
 
       return exitFromDigestingResponseBody;
-    });
+    }));
   },
 });
 

@@ -4,7 +4,6 @@ import {
   Option,
 } from 'effect';
 
-import Attempt from '@/library/Attempt';
 import type WebAPI from '@/library/WebAPI';
 
 import {
@@ -28,7 +27,7 @@ const TextToImage_Server_Current_retrieve = (): Promise<
     WebAPI.Server,
     TextToImage_Server_Error.MissingSpecification
   >
-> => Attempt.Fresh.thatEventually(async () => {
+> => Effect.runPromise(Effect.promise(async () => {
   if (
     Option.isSome(TextToImage_Server_Current_accordingToEnvironment)
   ) return Exit.succeed(Option.getOrThrow(TextToImage_Server_Current_accordingToEnvironment));
@@ -54,7 +53,7 @@ const TextToImage_Server_Current_retrieve = (): Promise<
   );
 
   return Exit.fail(newSpecificationError);
-});
+}));
 
 export {
   TextToImage_Server_Current_retrieve,

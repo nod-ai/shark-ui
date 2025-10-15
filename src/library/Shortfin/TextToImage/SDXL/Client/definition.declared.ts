@@ -1,9 +1,9 @@
 import {
+  Effect,
   Exit,
   Schema,
 } from 'effect';
 
-import Attempt from '@/library/Attempt';
 import ContentDescriptor from '@/library/ContentDescriptor';
 import HTTP from '@/library/HTTP';
 import URLComponent from '@/library/URLComponent';
@@ -38,7 +38,7 @@ class Shortfin_TextToImage_SDXL_Client
   > {
     const generationEndpoint = URLComponent.Path('/generate');
 
-    return Attempt.Fresh.thatEventually(async () => {
+    return Effect.runPromise(Effect.promise(async () => {
       const exitFromSubmittingResource = await this.submitResource({
         bySending: givenBatchedRequestBody,
         to       : generationEndpoint,
@@ -52,7 +52,7 @@ class Shortfin_TextToImage_SDXL_Client
       const decodedResource = Schema.decodeUnknownSync(Shortfin_TextToImage_SDXL_Client_Response.Body)(rawResource);
       const [soleGeneratedImage] = decodedResource.images;
       return Exit.succeed(soleGeneratedImage);
-    });
+    }));
   }
 }
 
