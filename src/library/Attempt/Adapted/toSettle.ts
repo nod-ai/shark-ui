@@ -1,10 +1,10 @@
 import type {
-  Attempt_Error,
-} from '../Error';
+  Exit,
+} from 'effect';
 
 import type {
-  Attempt_Exit,
-} from '../Exit';
+  Attempt_Error,
+} from '../Error';
 
 import type {
   Attempt_Adapted_Config,
@@ -21,7 +21,7 @@ const Attempt_Adapted_toSettle = async <
   promisedProduct: Promise<SomeProduct>,
   givenConfig: Attempt_Adapted_Config<SomeActionableError>,
 ): Promise<
-  Attempt_Exit.Exit<
+  Exit.Exit<
     SomeProduct,
     SomeActionableError
   >

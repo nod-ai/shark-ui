@@ -1,4 +1,8 @@
 import type {
+  Exit,
+} from 'effect';
+
+import type {
   Attempt_End,
 } from '../End';
 
@@ -7,7 +11,6 @@ import {
 } from '../Error';
 
 import type {
-  Attempt_Exit,
   CauseOf,
   ProductOf,
 } from '../Exit';
@@ -17,11 +20,11 @@ import {
 } from '../tryCatchStatements';
 
 const Attempt_Fresh_thatEventually = async <
-  SomeInferredExit extends Attempt_Exit.Exit<unknown, Attempt_Error.Actionable>,
-  SomeEquivalentExit extends Attempt_Exit.Exit<
+  SomeInferredExit extends Exit.Exit<unknown, Attempt_Error.Actionable>,
+  SomeEquivalentExit extends Exit.Exit<
     ProductOf<SomeInferredExit>,
     CauseOf<SomeInferredExit>
-  > = Attempt_Exit.Exit<
+  > = Exit.Exit<
     ProductOf<SomeInferredExit>,
     CauseOf<SomeInferredExit>
   >,

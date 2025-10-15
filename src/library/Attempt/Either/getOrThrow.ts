@@ -1,24 +1,21 @@
 import {
   Cause,
   Effect,
+  Exit,
 } from 'effect';
 
 import type {
   Attempt_Error,
 } from '../Error';
 
-import {
-  Attempt_Exit,
-} from '../Exit';
-
 const Attempt_Either_getOrThrow = <
   SomeProduct,
   SomeActionableError extends Attempt_Error.Actionable,
 >(
-  givenExit: Attempt_Exit.Exit<SomeProduct, SomeActionableError>,
+  givenExit: Exit.Exit<SomeProduct, SomeActionableError>,
 ): SomeProduct => {
   if (
-    Attempt_Exit.isSuccess(givenExit)
+    Exit.isSuccess(givenExit)
   ) return givenExit.value;
 
   if (

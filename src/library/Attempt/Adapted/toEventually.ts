@@ -1,10 +1,10 @@
 import {
-  Attempt_Error,
-} from '../Error';
+  Exit,
+} from 'effect';
 
 import {
-  Attempt_Exit,
-} from '../Exit';
+  Attempt_Error,
+} from '../Error';
 
 import {
   Attempt_Fresh,
@@ -25,21 +25,21 @@ const Attempt_Adapted_toEventually = async <
   forciblyRetrieveProduct: () => Promise<SomeProduct>,
   given: Attempt_Adapted_Config<SomeActionableError>,
 ): Promise<
-  Attempt_Exit.Exit<
+  Exit.Exit<
     SomeProduct,
     SomeActionableError
   >
 > => Attempt_Fresh.thatEventually(() => safeAsync({
   async try() {
     const retrievedProduct: SomeProduct = await forciblyRetrieveProduct();
-    return Attempt_Exit.succeed(retrievedProduct);
+    return Exit.succeed(retrievedProduct);
   },
   catch(someError) {
     const someActionableError = Attempt_Error.Actionable.from(someError, {
       using: given.interpretationOf,
     });
 
-    return Attempt_Exit.fail(someActionableError);
+    return Exit.fail(someActionableError);
   },
 }));
 

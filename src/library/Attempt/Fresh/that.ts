@@ -1,4 +1,8 @@
 import type {
+  Exit,
+} from 'effect';
+
+import type {
   Attempt_End,
 } from '../End';
 
@@ -7,7 +11,6 @@ import {
 } from '../Error';
 
 import type {
-  Attempt_Exit,
   CauseOf,
   ProductOf,
 } from '../Exit';
@@ -17,12 +20,12 @@ import {
 } from '../tryCatchStatements';
 
 const Attempt_Fresh_that = <
-  SomeInferredExit extends Attempt_Exit.Exit<unknown, Attempt_Error.Actionable>,
+  SomeInferredExit extends Exit.Exit<unknown, Attempt_Error.Actionable>,
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
-  SomeEquivalentExit extends Attempt_Exit.Exit<
+  SomeEquivalentExit extends Exit.Exit<
     ProductOf<SomeInferredExit>,
     CauseOf<SomeInferredExit>
-  > = Attempt_Exit.Exit<
+  > = Exit.Exit<
     ProductOf<SomeInferredExit>,
     CauseOf<SomeInferredExit>
   >,

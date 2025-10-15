@@ -1,13 +1,13 @@
 import type {
+  Exit,
+} from 'effect';
+
+import type {
   Attempt_Error,
 } from '../Error';
 
-import type {
-  Attempt_Exit,
-} from '../Exit';
-
 type Attempt_End_Retriever<
-  SomeInferredExit extends Attempt_Exit.Exit<unknown, Attempt_Error.Actionable>,
+  SomeInferredExit extends Exit.Exit<unknown, Attempt_Error.Actionable>,
 > = () => Promise<SomeInferredExit>;
 
 export type {
