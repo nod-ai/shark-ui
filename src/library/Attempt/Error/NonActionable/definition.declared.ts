@@ -45,22 +45,6 @@ class Attempt_Error_NonActionable
 
     return newError.throw();
   }
-
-  public static rethrow(
-    givenError: Error,
-    given: {
-      message: Attempt_Error_NonActionable['message'];
-    },
-  ): never {
-    if (
-      givenError instanceof Attempt_Error_NonActionable
-    ) return givenError.throw();
-
-    return this.throw(given.message, {
-      cause  : givenError,
-      thrower: this.rethrow, // eslint-disable-line @typescript-eslint/unbound-method -- `captureStackTrace` doesn't call the method, it only notes its reference
-    });
-  }
 }
 
 export {
