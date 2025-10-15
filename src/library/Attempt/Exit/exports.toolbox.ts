@@ -1,1 +1,3 @@
-export type * from './typeParameters';
+export type * from './ProductOf';
+
+export type * from './CauseOf';

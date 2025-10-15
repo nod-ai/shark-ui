@@ -1,4 +1,5 @@
 import {
+  Exit,
   Schema,
 } from 'effect';
 
@@ -44,13 +45,13 @@ class Shortfin_TextToImage_SDXL_Client
       });
 
       if (
-        Attempt.Exit.isFailure(exitFromSubmittingResource)
-      ) return Attempt.Exit.failCause(exitFromSubmittingResource.cause);
+        Exit.isFailure(exitFromSubmittingResource)
+      ) return Exit.failCause(exitFromSubmittingResource.cause);
 
       const rawResource = exitFromSubmittingResource.value;
       const decodedResource = Schema.decodeUnknownSync(Shortfin_TextToImage_SDXL_Client_Response.Body)(rawResource);
       const [soleGeneratedImage] = decodedResource.images;
-      return Attempt.Exit.succeed(soleGeneratedImage);
+      return Exit.succeed(soleGeneratedImage);
     });
   }
 }

@@ -1,4 +1,7 @@
-import type Attempt from '@/library/Attempt';
+import type {
+  Exit,
+} from 'effect';
+
 import type ContentDescriptor from '@/library/ContentDescriptor';
 
 import type {
@@ -11,7 +14,7 @@ interface HTTP_Response_Body_Wrapped {
   ) => boolean;
 
   digestAsUnknown: () => Promise<
-    Attempt.Exit.Exit<
+    Exit.Exit<
       unknown,
       HTTP_Response_Body_Digestion.Error.Any
     >

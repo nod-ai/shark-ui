@@ -1,4 +1,5 @@
 import {
+  Exit,
   Option,
 } from 'effect';
 
@@ -31,7 +32,7 @@ const bodyOf = (
     return Attempt.Fresh.thatEventually(async () => {
       if (!this.isSuggestedToBeDigestibleAs(ContentDescriptor.json)) {
         const newDescriptorMismatchError = new HTTP_Response_Body.Digestion.Error.DescriptorMismatch(givenResponse, ContentDescriptor.json);
-        return Attempt.Exit.fail(newDescriptorMismatchError);
+        return Exit.fail(newDescriptorMismatchError);
       }
 
       const promiseForDigestedResponseBody: Promise<unknown> = givenResponse.json();

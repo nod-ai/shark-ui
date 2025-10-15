@@ -1,4 +1,5 @@
 import {
+  Exit,
   Schema,
 } from 'effect';
 
@@ -24,7 +25,7 @@ const TextToImage_Config_Dynamic_fetch = (): Promise<
     from: TextToImage_Config_Dynamic_endpoint,
   });
 
-  return Attempt.Exit.mapBoth(exitFromFetchingResource, {
+  return Exit.mapBoth(exitFromFetchingResource, {
     onSuccess: $0 => Schema.decodeUnknownSync(TextToImage_Config)($0),
     onFailure: $0 => new TextToImage_Config_Dynamic_Fetching.Error(TextToImage_Config_Dynamic_endpoint, $0),
   });

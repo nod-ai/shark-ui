@@ -1,4 +1,5 @@
 import {
+  Exit,
   Schema,
 } from 'effect';
 
@@ -24,7 +25,7 @@ const TextToImage_Config_Static_read = (): Promise<
     from: TextToImage_Config_Static_file,
   });
 
-  return Attempt.Exit.mapBoth(exitFromFetchingFile, {
+  return Exit.mapBoth(exitFromFetchingFile, {
     onSuccess: $0 => Schema.decodeUnknownSync(TextToImage_Config)($0),
     onFailure: $0 => new TextToImage_Config_Static_Reading.Error(TextToImage_Config_Static_file, $0),
   });

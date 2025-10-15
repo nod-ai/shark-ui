@@ -6,6 +6,7 @@ import {
 } from '@/library/vue';
 
 import {
+  type Exit,
   Option,
 } from 'effect';
 
@@ -17,7 +18,7 @@ const useStatefulAttemptThatEventually = <
   SomeActionableError extends Attempt.Error.Actionable,
 >(
   retrieveExit: Attempt.End.Retriever<
-    Attempt.Exit.Exit<SomeProduct, SomeActionableError>
+    Exit.Exit<SomeProduct, SomeActionableError>
   >,
 ): Attempt.Progressive<
   SomeProduct,
@@ -25,7 +26,7 @@ const useStatefulAttemptThatEventually = <
 > => {
   const flagIsRaised = ref(false);
 
-  type CapturedExit = Attempt.Exit.Exit<
+  type CapturedExit = Exit.Exit<
     SomeProduct,
     SomeActionableError
   >;

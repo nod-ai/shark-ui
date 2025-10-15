@@ -1,4 +1,5 @@
 import {
+  Exit,
   Option,
 } from 'effect';
 
@@ -42,8 +43,8 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
   const exitFromInitializingClient = await TextToImage_Client_SDXL_initialize();
 
   if (
-    Attempt.Exit.isFailure(exitFromInitializingClient)
-  ) return Attempt.Exit.failCause(exitFromInitializingClient.cause);
+    Exit.isFailure(exitFromInitializingClient)
+  ) return Exit.failCause(exitFromInitializingClient.cause);
 
   const shimmedStabilityAIClient = exitFromInitializingClient.value;
 
@@ -69,7 +70,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     },
   });
 
-  const exitFromSettlingSoleTextToImageOutput = Attempt.Exit.map(
+  const exitFromSettlingSoleTextToImageOutput = Exit.map(
     exitFromSettlingTextToImageResponse,
     textToImageResponse => toSharkUIOutput.first({
       in          : textToImageResponse,

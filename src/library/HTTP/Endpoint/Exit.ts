@@ -1,10 +1,12 @@
-import type Attempt from '@/library/Attempt';
+import type {
+  Exit,
+} from 'effect';
 
 import type {
   HTTP_Endpoint_Error,
 } from './Error';
 
-type HTTP_Endpoint_Exit = Attempt.Exit.Exit<
+type HTTP_Endpoint_Exit = Exit.Exit<
   unknown,
   HTTP_Endpoint_Error.Any
 >;

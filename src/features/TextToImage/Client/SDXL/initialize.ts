@@ -1,4 +1,7 @@
-import Attempt from '@/library/Attempt';
+import {
+  Exit,
+} from 'effect';
+
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient';
 
 import {
@@ -6,14 +9,14 @@ import {
 } from '../../Server';
 
 const TextToImage_Client_SDXL_initialize = async (): Promise<
-  Attempt.Exit.Exit<
+  Exit.Exit<
     ShimmedStabilityAIClient,
     TextToImage_Server.Error.MissingSpecification
   >
 > => {
   const exitFromRetrievingCurrentServer = await TextToImage_Server.Current.retrieve();
 
-  const exitFromInitializingClient = Attempt.Exit.map(
+  const exitFromInitializingClient = Exit.map(
     exitFromRetrievingCurrentServer,
     textToImageServer => new ShimmedStabilityAIClient({
       serverURL: textToImageServer.origin,

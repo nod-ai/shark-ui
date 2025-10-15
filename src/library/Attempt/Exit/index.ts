@@ -1,3 +1,1 @@
-export * from './exports.object.primary.ts';
-
 export type * from './exports.toolbox.ts';
