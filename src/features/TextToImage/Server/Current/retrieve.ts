@@ -32,13 +32,15 @@ const TextToImage_Server_Current_retrieve = (): Promise<
     Option.isSome(TextToImage_Server_Current_accordingToEnvironment)
   ) return Exit.succeed(Option.getOrThrow(TextToImage_Server_Current_accordingToEnvironment));
 
-  const staticConfig = Attempt.Either.getOrElse(await TextToImage_Config.Static.read(), () => TextToImage_Config.empty);
+  const exitFromReadingStaticConfig = await TextToImage_Config.Static.read();
+  const staticConfig = Attempt.Either.getOrElse(exitFromReadingStaticConfig, () => TextToImage_Config.empty);
 
   if (
     Option.isSome(staticConfig.server)
   ) return Exit.succeed(Option.getOrThrow(staticConfig.server));
 
-  const dynamicConfig = Attempt.Either.getOrElse(await TextToImage_Config.Dynamic.fetch(), () => TextToImage_Config.empty);
+  const exitFromFetchingDynamicConfig = await TextToImage_Config.Dynamic.fetch();
+  const dynamicConfig = Attempt.Either.getOrElse(exitFromFetchingDynamicConfig, () => TextToImage_Config.empty);
 
   if (
     Option.isSome(dynamicConfig.server)
