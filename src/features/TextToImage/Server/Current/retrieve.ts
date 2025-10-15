@@ -1,4 +1,5 @@
 import {
+  Effect,
   Exit,
   Option,
 } from 'effect';
@@ -33,14 +34,14 @@ const TextToImage_Server_Current_retrieve = (): Promise<
   ) return Exit.succeed(Option.getOrThrow(TextToImage_Server_Current_accordingToEnvironment));
 
   const exitFromReadingStaticConfig = await TextToImage_Config.Static.read();
-  const staticConfig = Attempt.Either.getOrElse(exitFromReadingStaticConfig, () => TextToImage_Config.empty);
+  const staticConfig = Effect.runSync(Effect.orElseSucceed(exitFromReadingStaticConfig, () => TextToImage_Config.empty));
 
   if (
     Option.isSome(staticConfig.server)
   ) return Exit.succeed(Option.getOrThrow(staticConfig.server));
 
   const exitFromFetchingDynamicConfig = await TextToImage_Config.Dynamic.fetch();
-  const dynamicConfig = Attempt.Either.getOrElse(exitFromFetchingDynamicConfig, () => TextToImage_Config.empty);
+  const dynamicConfig = Effect.runSync(Effect.orElseSucceed(exitFromFetchingDynamicConfig, () => TextToImage_Config.empty));
 
   if (
     Option.isSome(dynamicConfig.server)
