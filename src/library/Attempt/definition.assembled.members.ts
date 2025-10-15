@@ -1,8 +1,4 @@
 export {
-  Attempt_Adapted as Adapted,
-} from './Adapted';
-
-export {
   Attempt_Error as Error,
 } from './Error';
 
