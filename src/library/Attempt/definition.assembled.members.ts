@@ -2,10 +2,6 @@ export {
   Attempt_Error as Error,
 } from './Error';
 
-export {
-  Attempt_Fresh as Fresh,
-} from './Fresh';
-
 export type {
   Attempt_Progressive as Progressive,
 } from './Progressive';
