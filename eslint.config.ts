@@ -48,7 +48,7 @@ const extraConfigForESLint: ConfigWithExtends = {
       'error',
       {
         selector: 'TryStatement',
-        message : 'Prefer `Attempt.to` for error matching over `try`/`catch`.',
+        message : 'Prefer `Effect.try` or `Effect.tryPromise` with `Effect.catch` for error matching over `try`/`catch`.',
       },
       {
         selector: 'ThrowStatement',
