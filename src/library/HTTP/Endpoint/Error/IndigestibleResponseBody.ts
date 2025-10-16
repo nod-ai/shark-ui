@@ -6,17 +6,11 @@ class HTTP_Endpoint_Error_IndigestibleResponseBody
   extends Data.TaggedError(
     'HTTP_Endpoint_Error_IndigestibleResponseBody',
   )<{
-    message: string;
+    endpoint: URL;
     cause: Error;
   }> {
-  public constructor(
-    public readonly endpoint: URL,
-    givenCause: Error,
-  ) {
-    super({
-      message: `Could not digest body of response from "${endpoint.toString()}".`,
-      cause  : givenCause,
-    });
+  public override get message(): string {
+    return `Could not digest body of response from "${this.endpoint.toString()}".`;
   }
 }
 

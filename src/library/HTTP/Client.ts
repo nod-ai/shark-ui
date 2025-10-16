@@ -86,7 +86,10 @@ class HTTP_Client {
 
     return Exit.mapError(
       exitFromDigestingResponseBody,
-      $0 => new HTTP_Endpoint.Error.IndigestibleResponseBody(endpointURL, $0),
+      $0 => new HTTP_Endpoint.Error.IndigestibleResponseBody({
+        endpoint: endpointURL,
+        cause   : $0,
+      }),
     );
   }));
 
