@@ -1,5 +1,6 @@
 import {
   Effect,
+  Either,
 } from 'effect';
 
 import type {
@@ -30,7 +31,14 @@ class ShimmedStabilityAIClient_Version1_Image
     const textToImageSDXLShortfinClient = new Shortfin.TextToImage.SDXL.Client(this.origin);
 
     const exitFromGeneratingImage = await textToImageSDXLShortfinClient.generateImageFrom(derivedBatchedRequestBody);
-    const generatedImage = Effect.runSync(exitFromGeneratingImage); // matches error propagation of actual StabilityAI Client
+    const resultOfGeneratingImage = Effect.runSync(Effect.either(exitFromGeneratingImage));
+
+    const generatedImage = Either.getOrThrowWith(
+      resultOfGeneratingImage,
+      (someFailure) => {
+        return someFailure.throwAnyway('matches error propagation of actual StabilityAI Client');
+      },
+    );
 
     const soleGeneratedArtifact: StabilityAI_TextToImage_Pipeline_Output = {
       base64      : generatedImage.toString(),
