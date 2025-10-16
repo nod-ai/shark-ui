@@ -1,13 +1,16 @@
 import {
-  Attempt_Error_Actionable,
-} from './Actionable';
+  Data,
+} from 'effect';
 
 const Attempt_Error_Tagged = <
   SomeBrand extends string,
 >(
   givenBrand: SomeBrand,
 ) => { // eslint-disable-line @typescript-eslint/explicit-function-return-type
-  return class extends Attempt_Error_Actionable {
+  return class extends Data.Error<{
+    message: string;
+    cause?: Error;
+  }> {
     public override readonly name = givenBrand;
   };
 };

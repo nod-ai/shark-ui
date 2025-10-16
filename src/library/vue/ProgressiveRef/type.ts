@@ -3,18 +3,16 @@ import type {
   Option,
 } from 'effect';
 
-import type Attempt from '@/library/Attempt';
-
 interface ProgressiveRef<
   SomeProduct,
-  SomeActionableError extends Attempt.Error.Actionable,
+  SomeFailure,
 > {
   initiate: () => Promise<void>;
   isInProgress: boolean;
   result: Option.Option<
     Exit.Exit<
       SomeProduct,
-      SomeActionableError
+      SomeFailure
     >
   >;
 }
