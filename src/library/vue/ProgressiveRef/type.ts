@@ -5,14 +5,14 @@ import type {
 
 interface ProgressiveRef<
   SomeProduct,
-  SomeActionableError,
+  SomeFailure,
 > {
   initiate: () => Promise<void>;
   isInProgress: boolean;
   result: Option.Option<
     Exit.Exit<
       SomeProduct,
-      SomeActionableError
+      SomeFailure
     >
   >;
 }

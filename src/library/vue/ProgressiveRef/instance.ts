@@ -18,20 +18,20 @@ import type {
 /** Useful when state of UI is dependent on some async operation and the result upon completion */
 const progressiveRef = <
   SomeProduct,
-  SomeActionableError,
+  SomeFailure,
 >(
   retrieveExit: () => Promise<
-    Exit.Exit<SomeProduct, SomeActionableError>
+    Exit.Exit<SomeProduct, SomeFailure>
   >,
 ): ProgressiveRef<
   SomeProduct,
-  SomeActionableError
+  SomeFailure
 > => {
   const flagIsRaised = ref(false);
 
   type CapturedExit = Exit.Exit<
     SomeProduct,
-    SomeActionableError
+    SomeFailure
   >;
 
   const capturedExit = ref(Option.none()) as Ref<Option.Option<CapturedExit>>;
