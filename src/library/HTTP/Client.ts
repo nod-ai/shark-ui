@@ -65,7 +65,9 @@ class HTTP_Client {
 
         if (
           isFailureToReachServer(caughtError)
-        ) return new HTTP_Endpoint.Error.FailedToSendRequest(endpointURL);
+        ) return new HTTP_Endpoint.Error.FailedToSendRequest({
+          endpoint: endpointURL,
+        });
 
         return Effect.die(someException);
       }),
