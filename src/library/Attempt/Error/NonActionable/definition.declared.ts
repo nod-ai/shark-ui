@@ -1,7 +1,3 @@
-import {
-  Option,
-} from 'effect';
-
 import type {
   Branded,
 } from '@/library/typeUtilities';
@@ -64,15 +60,6 @@ class Attempt_Error_NonActionable
       cause  : givenError,
       thrower: this.rethrow, // eslint-disable-line @typescript-eslint/unbound-method -- `captureStackTrace` doesn't call the method, it only notes its reference
     });
-  }
-
-  /** The error being "escorted" across the call stack by this instance, if any */
-  public get charge(): Option.Option<Error> {
-    if (
-      this.cause instanceof Error
-    ) return Option.some(this.cause);
-
-    return Option.none();
   }
 }
 
