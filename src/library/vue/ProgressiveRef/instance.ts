@@ -13,6 +13,10 @@ import {
 
 import type Attempt from '@/library/Attempt';
 
+import type {
+  ProgressiveRef,
+} from './type';
+
 /** Useful when state of UI is dependent on some async operation and the result upon completion */
 const progressiveRef = <
   SomeProduct,
@@ -21,7 +25,7 @@ const progressiveRef = <
   retrieveExit: () => Promise<
     Exit.Exit<SomeProduct, SomeActionableError>
   >,
-): Attempt.Progressive<
+): ProgressiveRef<
   SomeProduct,
   SomeActionableError
 > => {
