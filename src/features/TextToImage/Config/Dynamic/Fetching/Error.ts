@@ -8,17 +8,11 @@ class TextToImage_Config_Dynamic_Fetching_Error
   extends Data.TaggedError(
     'TextToImage_Config_Dynamic_Fetching_Error',
   )<{
-    message: string;
+    endpoint: URLComponent.Path;
     cause: Error;
   }> {
-  public constructor(
-    public readonly endpoint: URLComponent.Path,
-    givenCause: Error,
-  ) {
-    super({
-      message: `Failed to fetch config from "${endpoint}".`,
-      cause  : givenCause,
-    });
+  public override get message(): string {
+    return `Failed to fetch config from "${this.endpoint}".`;
   }
 }
 
