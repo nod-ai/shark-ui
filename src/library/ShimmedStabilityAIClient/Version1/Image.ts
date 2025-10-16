@@ -41,7 +41,7 @@ class ShimmedStabilityAIClient_Version1_Image
     );
 
     const soleGeneratedArtifact: StabilityAI_TextToImage_Pipeline_Output = {
-      base64      : generatedImage.toString(),
+      base64      : generatedImage,
       finishReason: 'SUCCESS',
       seed        : givenRequest.textToImageRequestBody.seed,
     };

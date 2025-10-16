@@ -22,7 +22,7 @@ class Shortfin_TextToImage_SDXL_Client
     givenOrigin: URLComponent.Origin,
   ) {
     const defaultHeaders = {
-      [HTTP.Header.Content.Descriptor]: ContentDescriptor.json.serialized.toString(),
+      [HTTP.Header.Content.Descriptor]: ContentDescriptor.json.serialized,
     };
 
     super(

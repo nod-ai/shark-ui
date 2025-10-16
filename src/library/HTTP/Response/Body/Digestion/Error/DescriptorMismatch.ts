@@ -16,7 +16,7 @@ class HTTP_Response_Body_Digestion_Error_DescriptorMismatch
     expectedDescriptor: ContentDescriptor;
   }> {
   public override get message(): string {
-    const /**/expectedRawDescriptor = this.expectedDescriptor.serialized.toString();
+    const /**/expectedRawDescriptor = this.expectedDescriptor.serialized;
     const /*  */actualRawDescriptor = this.response.headers.get(HTTP_Header.Content.Descriptor) ?? '';
 
     return `Expected content descriptor to be "${expectedRawDescriptor}", but it was actually "${actualRawDescriptor}"`;

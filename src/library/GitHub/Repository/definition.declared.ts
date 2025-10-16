@@ -22,7 +22,7 @@ class GitHub_Repository<
   }
 
   public get site(): URL {
-    return new URL(GitHub_site.toString().concat(this.path.toString()));
+    return new URL(GitHub_site.toString().concat(this.path));
   }
 
   public get Issue(): ReturnType<typeof GitHub_Repository_Issue.Draftable> {
