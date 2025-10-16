@@ -1,4 +1,6 @@
-import Attempt from '@/library/Attempt';
+import {
+  Effect,
+} from 'effect';
 
 import type {
   TextToImage_Pipeline_Output_Image,
@@ -10,9 +12,9 @@ interface TextToImage_Pipeline_Output {
 }
 
 function TextToImage_Pipeline_Output(
-  namespaceOnly: never = Attempt.Error.NonActionable.throw(
+  namespaceOnly: never = Effect.runSync(Effect.dieMessage(
     `Unexpected call of module augmentation provision for ${TextToImage_Pipeline_Output.name}.`,
-  ),
+  )),
 ): never {
   return namespaceOnly;
 }
