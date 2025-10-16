@@ -1,9 +1,14 @@
-import Attempt from '@/library/Attempt';
+import {
+  Data,
+} from 'effect';
 
 class HTTP_Endpoint_Error_IndigestibleResponseBody
-  extends Attempt.Error.Tagged(
+  extends Data.TaggedError(
     'HTTP_Endpoint_Error_IndigestibleResponseBody',
-  ) {
+  )<{
+    message: string;
+    cause: Error;
+  }> {
   public constructor(
     public readonly endpoint: URL,
     givenCause: Error,

@@ -1,9 +1,13 @@
-import Attempt from '@/library/Attempt';
+import {
+  Data,
+} from 'effect';
 
 class TextToImage_Server_Error_FailedToConnect
-  extends Attempt.Error.Tagged(
+  extends Data.TaggedError(
     'TextToImage_Server_Error_FailedToConnect',
-  ) {
+  )<{
+    message: string;
+  }> {
   public constructor(
     public readonly endpoint: URL,
   ) {

@@ -1,10 +1,16 @@
-import Attempt from '@/library/Attempt';
+import {
+  Data,
+} from 'effect';
+
 import type URLComponent from '@/library/URLComponent';
 
 class TextToImage_Config_Dynamic_Fetching_Error
-  extends Attempt.Error.Tagged(
+  extends Data.TaggedError(
     'TextToImage_Config_Dynamic_Fetching_Error',
-  ) {
+  )<{
+    message: string;
+    cause: Error;
+  }> {
   public constructor(
     public readonly endpoint: URLComponent.Path,
     givenCause: Error,

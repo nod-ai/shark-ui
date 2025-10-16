@@ -1,9 +1,14 @@
-import Attempt from '@/library/Attempt';
+import {
+  Data,
+} from 'effect';
 
 class HTTP_Response_Body_Digestion_Error_InvalidJSONSyntax
-  extends Attempt.Error.Tagged(
+  extends Data.TaggedError(
     'HTTP_Response_Body_Digestion_Error_InvalidJSONSyntax',
-  ) {
+  )<{
+    message: string;
+    cause: Error;
+  }> {
   public constructor(
     givenCause: Error,
   ) {
