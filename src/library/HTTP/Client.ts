@@ -64,10 +64,10 @@ class HTTP_Client {
         const clientFailedToReachServer = caughtError.message.includes('Failed to fetch');
 
         if (
-          !clientFailedToReachServer
-        ) return Option.none();
+          clientFailedToReachServer
+        ) return Option.some(new HTTP_Endpoint.Error.FailedToSendRequest(endpointURL));
 
-        return Option.some(new HTTP_Endpoint.Error.FailedToSendRequest(endpointURL));
+        return Option.none();
       },
     });
 
