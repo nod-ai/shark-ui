@@ -6,14 +6,10 @@ class TextToImage_Server_Error_FailedToConnect
   extends Data.TaggedError(
     'TextToImage_Server_Error_FailedToConnect',
   )<{
-    message: string;
+    endpoint: URL;
   }> {
-  public constructor(
-    public readonly endpoint: URL,
-  ) {
-    super({
-      message: `Failed to reach the text-to-image server at "${endpoint.origin}".`,
-    });
+  public override get message(): string {
+    return `Failed to reach the text-to-image server at "${this.endpoint.origin}".`;
   }
 }
 

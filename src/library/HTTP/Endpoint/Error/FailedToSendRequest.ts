@@ -6,14 +6,10 @@ class HTTP_Endpoint_Error_FailedToSendRequest
   extends Data.TaggedError(
     'HTTP_Endpoint_Error_FailedToSendRequest',
   )<{
-    message: string;
+    endpoint: URL;
   }> {
-  public constructor(
-    public readonly endpoint: URL,
-  ) {
-    super({
-      message: `Failed to fetch from "${endpoint.toString()}".`,
-    });
+  public override get message(): string {
+    return `Failed to fetch from "${this.endpoint.toString()}".`;
   }
 }
 

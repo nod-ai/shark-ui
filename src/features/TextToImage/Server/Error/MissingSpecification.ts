@@ -8,17 +8,11 @@ class TextToImage_Server_Error_MissingSpecification
   extends Data.TaggedError(
     'TextToImage_Server_Error_MissingSpecification',
   )<{
-    message: string;
+    environmentKey: string;
+    file: URLComponent.Path;
+    endpoint: URLComponent.Path;
   }> {
-  public constructor(
-    public readonly environmentKey: string,
-    public readonly file: URLComponent.Path,
-    public readonly endpoint: URLComponent.Path,
-  ) {
-    super({
-      message: 'Failed to determine text-to-image server',
-    });
-  }
+  public override message = 'Failed to determine text-to-image server';
 }
 
 export {

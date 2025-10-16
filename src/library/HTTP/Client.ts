@@ -65,7 +65,9 @@ class HTTP_Client {
 
         if (
           isFailureToReachServer(caughtError)
-        ) return new HTTP_Endpoint.Error.FailedToSendRequest(endpointURL);
+        ) return new HTTP_Endpoint.Error.FailedToSendRequest({
+          endpoint: endpointURL,
+        });
 
         return Effect.die(someException);
       }),
@@ -78,7 +80,11 @@ class HTTP_Client {
     const response = exitFromSettlingResponse.value;
 
     if (!response.ok) {
-      const newResponseError = new HTTP_Endpoint.Error.RespondedWithFailure(response.statusText, response.status);
+      const newResponseError = new HTTP_Endpoint.Error.RespondedWithFailure({
+        message: response.statusText,
+        status : response.status,
+      });
+
       return Exit.fail(newResponseError);
     }
 
@@ -86,7 +92,10 @@ class HTTP_Client {
 
     return Exit.mapError(
       exitFromDigestingResponseBody,
-      $0 => new HTTP_Endpoint.Error.IndigestibleResponseBody(endpointURL, $0),
+      $0 => new HTTP_Endpoint.Error.IndigestibleResponseBody({
+        endpoint: endpointURL,
+        cause   : $0,
+      }),
     );
   }));
 

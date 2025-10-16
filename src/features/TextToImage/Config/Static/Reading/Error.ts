@@ -8,17 +8,11 @@ class TextToImage_Config_Static_Reading_Error
   extends Data.TaggedError(
     'TextToImage_Config_Static_Reading_Error',
   )<{
-    message: string;
     cause: Error;
+    filePath: URLComponent.Path;
   }> {
-  public constructor(
-    public readonly filePath: URLComponent.Path,
-    givenCause: Error,
-  ) {
-    super({
-      message: `Failed to read config at "${filePath}".`,
-      cause  : givenCause,
-    });
+  public override get message(): string {
+    return `Failed to read config at "${this.filePath}".`;
   }
 }
 

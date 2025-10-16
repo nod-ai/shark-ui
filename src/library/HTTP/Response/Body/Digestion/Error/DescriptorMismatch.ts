@@ -12,18 +12,14 @@ class HTTP_Response_Body_Digestion_Error_DescriptorMismatch
   extends Data.TaggedError(
     'HTTP_Response_Body_Digestion_Error_DescriptorMismatch',
   )<{
-    message: string;
+    response: Response;
+    expectedDescriptor: ContentDescriptor;
   }> {
-  public constructor(
-    public readonly response: Response,
-    public readonly expectedDescriptor: ContentDescriptor,
-  ) {
-    const /**/expectedRawDescriptor = expectedDescriptor.serialized.toString();
-    const /*  */actualRawDescriptor = response.headers.get(HTTP_Header.Content.Descriptor) ?? '';
+  public override get message(): string {
+    const /**/expectedRawDescriptor = this.expectedDescriptor.serialized.toString();
+    const /*  */actualRawDescriptor = this.response.headers.get(HTTP_Header.Content.Descriptor) ?? '';
 
-    super({
-      message: `Expected content descriptor to be "${expectedRawDescriptor}", but it was actually "${actualRawDescriptor}"`,
-    });
+    return `Expected content descriptor to be "${expectedRawDescriptor}", but it was actually "${actualRawDescriptor}"`;
   }
 }
 

@@ -65,7 +65,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
 
       if (
         caughtError instanceof HTTP.Endpoint.Error.FailedToSendRequest
-      ) return new TextToImage_Server.Error.FailedToConnect(caughtError.endpoint);
+      ) return new TextToImage_Server.Error.FailedToConnect(caughtError);
 
       return Effect.die(caughtError);
     }),
