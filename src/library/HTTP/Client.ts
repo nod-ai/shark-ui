@@ -61,10 +61,10 @@ class HTTP_Client {
 
     const exitFromSettlingResponse = await Attempt.Adapted.toSettle(promisedResponse, {
       interpretationOf: (caughtError) => {
-        const clientFailedToReachServer = caughtError.message.includes('Failed to fetch');
+        const isFailureToReachServer = ($0: Error): boolean => $0.message.includes('Failed to fetch');
 
         if (
-          clientFailedToReachServer
+          isFailureToReachServer(caughtError)
         ) return Option.some(new HTTP_Endpoint.Error.FailedToSendRequest(endpointURL));
 
         return Option.none();
