@@ -18,7 +18,7 @@ const useStatefulAttemptThatEventually = <
   SomeProduct,
   SomeActionableError extends Attempt.Error.Actionable,
 >(
-  retrieveExit: Attempt.End.Retriever<
+  retrieveExit: () => Promise<
     Exit.Exit<SomeProduct, SomeActionableError>
   >,
 ): Attempt.Progressive<
