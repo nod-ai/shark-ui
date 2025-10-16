@@ -1,10 +1,15 @@
-import Attempt from '@/library/Attempt';
+import {
+  Data,
+} from 'effect';
+
 import type URLComponent from '@/library/URLComponent';
 
 class TextToImage_Server_Error_MissingSpecification
-  extends Attempt.Error.Tagged(
+  extends Data.TaggedError(
     'TextToImage_Server_Error_MissingSpecification',
-  ) {
+  )<{
+    message: string;
+  }> {
   public constructor(
     public readonly environmentKey: string,
     public readonly file: URLComponent.Path,

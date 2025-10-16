@@ -1,4 +1,7 @@
-import Attempt from '@/library/Attempt';
+import {
+  Data,
+} from 'effect';
+
 import type ContentDescriptor from '@/library/ContentDescriptor';
 
 import {
@@ -6,9 +9,11 @@ import {
 } from '@/library/HTTP/Header'; // eslint-disable-line import/no-internal-modules -- avoids long relative path
 
 class HTTP_Response_Body_Digestion_Error_DescriptorMismatch
-  extends Attempt.Error.Tagged(
+  extends Data.TaggedError(
     'HTTP_Response_Body_Digestion_Error_DescriptorMismatch',
-  ) {
+  )<{
+    message: string;
+  }> {
   public constructor(
     public readonly response: Response,
     public readonly expectedDescriptor: ContentDescriptor,
