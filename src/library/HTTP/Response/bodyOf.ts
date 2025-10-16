@@ -30,7 +30,11 @@ const bodyOf = (
   async digestAsUnknown() {
     return Effect.runPromise(Effect.promise(async () => {
       if (!this.isSuggestedToBeDigestibleAs(ContentDescriptor.json)) {
-        const newDescriptorMismatchError = new HTTP_Response_Body.Digestion.Error.DescriptorMismatch(givenResponse, ContentDescriptor.json);
+        const newDescriptorMismatchError = new HTTP_Response_Body.Digestion.Error.DescriptorMismatch({
+          response          : givenResponse,
+          expectedDescriptor: ContentDescriptor.json,
+        });
+
         return Exit.fail(newDescriptorMismatchError);
       }
 
