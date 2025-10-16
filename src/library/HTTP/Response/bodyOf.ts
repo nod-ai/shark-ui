@@ -25,7 +25,7 @@ const bodyOf = (
       actualRawDescriptor === null
     ) return false;
 
-    return actualRawDescriptor.includes(givenDescriptor.serialized.toString());
+    return actualRawDescriptor.includes(givenDescriptor.serialized);
   },
   async digestAsUnknown() {
     return Effect.runPromise(Effect.promise(async () => {
