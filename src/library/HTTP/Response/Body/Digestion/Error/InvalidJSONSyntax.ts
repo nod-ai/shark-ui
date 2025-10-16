@@ -7,12 +7,10 @@ class HTTP_Response_Body_Digestion_Error_InvalidJSONSyntax
   public constructor(
     givenCause: Error,
   ) {
-    super(
-      'The response body could not be parsed as JSON.',
-      {
-        cause: givenCause,
-      },
-    );
+    super({
+      message: 'The response body could not be parsed as JSON.',
+      cause  : givenCause,
+    });
   }
 }
 

@@ -9,8 +9,9 @@ class TextToImage_Config_Static_Reading_Error
     public readonly filePath: URLComponent.Path,
     givenCause: Error,
   ) {
-    super(`Failed to read config at "${filePath}".`, {
-      cause: givenCause,
+    super({
+      message: `Failed to read config at "${filePath}".`,
+      cause  : givenCause,
     });
   }
 }

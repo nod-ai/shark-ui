@@ -10,7 +10,9 @@ class TextToImage_Server_Error_MissingSpecification
     public readonly file: URLComponent.Path,
     public readonly endpoint: URLComponent.Path,
   ) {
-    super('Failed to determine text-to-image server');
+    super({
+      message: 'Failed to determine text-to-image server',
+    });
   }
 }
 

@@ -7,7 +7,9 @@ class TextToImage_Server_Error_FailedToConnect
   public constructor(
     public readonly endpoint: URL,
   ) {
-    super(`Failed to reach the text-to-image server at "${endpoint.origin}".`);
+    super({
+      message: `Failed to reach the text-to-image server at "${endpoint.origin}".`,
+    });
   }
 }
 
