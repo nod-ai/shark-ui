@@ -3,10 +3,6 @@ export {
 } from './NonActionable';
 
 export {
-  Attempt_Error_Creation as Creation,
-} from './Creation';
-
-export {
   Attempt_Error_Actionable as Actionable,
 } from './Actionable';
 
