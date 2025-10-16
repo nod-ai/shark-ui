@@ -3,7 +3,7 @@ import {
   get,
   ref,
   type Ref,
-  useStatefulAttemptThatEventually,
+  progressiveRef,
 } from '@/library/vue';
 
 import {
@@ -50,7 +50,7 @@ const {
 
 const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
 
-const imageGeneration = useStatefulAttemptThatEventually(async () => {
+const imageGeneration = progressiveRef(async () => {
   const proposedPrompt = Option.getOrThrowWith(
     get(currentPrompt),
     () => new Error('Prompt was not set before submission'),
