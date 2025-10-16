@@ -46,11 +46,11 @@ const TextToImage_Server_Current_retrieve = (): Promise<
     Option.isSome(dynamicConfig.server)
   ) return Exit.succeed(Option.getOrThrow(dynamicConfig.server));
 
-  const newSpecificationError = new TextToImage_Server_Error.MissingSpecification(
-    TextToImage_Server_Origin.environmentKey,
-    TextToImage_Config.Static.file,
-    TextToImage_Config.Dynamic.endpoint,
-  );
+  const newSpecificationError = new TextToImage_Server_Error.MissingSpecification({
+    environmentKey: TextToImage_Server_Origin.environmentKey,
+    file          : TextToImage_Config.Static.file,
+    endpoint      : TextToImage_Config.Dynamic.endpoint,
+  });
 
   return Exit.fail(newSpecificationError);
 }));
