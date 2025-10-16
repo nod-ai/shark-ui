@@ -80,7 +80,11 @@ class HTTP_Client {
     const response = exitFromSettlingResponse.value;
 
     if (!response.ok) {
-      const newResponseError = new HTTP_Endpoint.Error.RespondedWithFailure(response.statusText, response.status);
+      const newResponseError = new HTTP_Endpoint.Error.RespondedWithFailure({
+        message: response.statusText,
+        status : response.status,
+      });
+
       return Exit.fail(newResponseError);
     }
 

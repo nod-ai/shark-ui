@@ -11,15 +11,8 @@ class HTTP_Endpoint_Error_RespondedWithFailure
     'HTTP_Endpoint_Error_RespondedWithFailure',
   )<{
     message: string;
+    status: HTTP_Response.StatusCode.Error.Any;
   }> {
-  public constructor(
-    givenMessage: string,
-    public readonly status: HTTP_Response.StatusCode.Error.Any,
-  ) {
-    super({
-      message: givenMessage,
-    });
-  }
 }
 
 export {
