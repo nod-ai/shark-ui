@@ -14,7 +14,7 @@ import {
 import type Attempt from '@/library/Attempt';
 
 /** Useful when state of UI is dependent on some async operation and the result upon completion */
-const useStatefulAttemptThatEventually = <
+const progressiveRef = <
   SomeProduct,
   SomeActionableError extends Attempt.Error.Actionable,
 >(
@@ -64,5 +64,5 @@ const useStatefulAttemptThatEventually = <
 };
 
 export {
-  useStatefulAttemptThatEventually,
+  progressiveRef,
 };
