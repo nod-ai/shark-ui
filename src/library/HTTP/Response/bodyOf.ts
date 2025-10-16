@@ -1,6 +1,6 @@
 import {
+  Effect,
   Exit,
-  Option,
 } from 'effect';
 
 import Attempt from '@/library/Attempt';
@@ -37,15 +37,17 @@ const bodyOf = (
 
       const promiseForDigestedResponseBody: Promise<unknown> = givenResponse.json();
 
-      const exitFromDigestingResponseBody = await Attempt.Adapted.toSettle(promiseForDigestedResponseBody, {
-        interpretationOf: (caughtError) => {
+      const exitFromDigestingResponseBody = await Effect.runPromiseExit(Effect.tryPromise(() => promiseForDigestedResponseBody).pipe(
+        Effect.catchAll((someException) => {
+          const caughtError = someException.cause;
+
           if (
             caughtError instanceof SyntaxError
-          ) return Option.some(new HTTP_Response_Body.Digestion.Error.InvalidJSONSyntax(caughtError));
+          ) return new HTTP_Response_Body.Digestion.Error.InvalidJSONSyntax(caughtError);
 
-          return Option.none();
-        },
-      });
+          return Effect.die(caughtError);
+        }),
+      ));
 
       return exitFromDigestingResponseBody;
     });

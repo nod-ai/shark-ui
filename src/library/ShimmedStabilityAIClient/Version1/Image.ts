@@ -36,7 +36,7 @@ class ShimmedStabilityAIClient_Version1_Image
     const generatedImage = Either.getOrThrowWith(
       resultOfGeneratingImage,
       (someFailure) => {
-        return someFailure.throwAnyway('matches error propagation of actual StabilityAI Client');
+        throw someFailure; // eslint-disable-line no-restricted-syntax -- matches error propagation of actual StabilityAI Client
       },
     );
 

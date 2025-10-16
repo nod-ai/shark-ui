@@ -1,6 +1,6 @@
 import {
+  Effect,
   Exit,
-  Option,
 } from 'effect';
 
 import Attempt from '@/library/Attempt';
@@ -59,17 +59,18 @@ class HTTP_Client {
         : JSON.stringify(givenRequestBody),
     });
 
-    const exitFromSettlingResponse = await Attempt.Adapted.toSettle(promisedResponse, {
-      interpretationOf: (caughtError) => {
-        const isFailureToReachServer = ($0: Error): boolean => $0.message.includes('Failed to fetch');
+    const exitFromSettlingResponse = await Effect.runPromiseExit(Effect.tryPromise(() => promisedResponse).pipe(
+      Effect.catchAll((someException) => {
+        const caughtError = someException.cause;
+        const isFailureToReachServer = ($0: unknown): boolean => ($0 instanceof Error) && $0.message.includes('Failed to fetch');
 
         if (
           isFailureToReachServer(caughtError)
-        ) return Option.some(new HTTP_Endpoint.Error.FailedToSendRequest(endpointURL));
+        ) return new HTTP_Endpoint.Error.FailedToSendRequest(endpointURL);
 
-        return Option.none();
-      },
-    });
+        return Effect.die(someException);
+      }),
+    ));
 
     if (
       Exit.isFailure(exitFromSettlingResponse)
