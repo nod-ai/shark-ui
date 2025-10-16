@@ -6,11 +6,12 @@ import {
 } from '@/library/vue';
 
 import {
+  Effect,
   type Exit,
   Option,
 } from 'effect';
 
-import Attempt from '@/library/Attempt';
+import type Attempt from '@/library/Attempt';
 
 /** Useful when state of UI is dependent on some async operation and the result upon completion */
 const useStatefulAttemptThatEventually = <
@@ -43,7 +44,7 @@ const useStatefulAttemptThatEventually = <
       set(flagIsRaised, false);
     });
 
-    const retrievedExit = await Attempt.Fresh.thatEventually(retrieveExit);
+    const retrievedExit = await Effect.runPromise(Effect.promise(retrieveExit));
     set(capturedExit, Option.some(retrievedExit));
   };
 

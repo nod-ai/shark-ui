@@ -1,9 +1,9 @@
 import {
+  Effect,
   Exit,
   Schema,
 } from 'effect';
 
-import Attempt from '@/library/Attempt';
 import HTTP from '@/library/HTTP';
 
 import {
@@ -20,7 +20,7 @@ import {
 
 const TextToImage_Config_Static_read = (): Promise<
   TextToImage_Config_Static_Reading.Exit
-> => Attempt.Fresh.thatEventually(async () => {
+> => Effect.runPromise(Effect.promise(async () => {
   const exitFromFetchingFile = await HTTP.Client.local.fetchResource({
     from: TextToImage_Config_Static_file,
   });
@@ -29,7 +29,7 @@ const TextToImage_Config_Static_read = (): Promise<
     onSuccess: $0 => Schema.decodeUnknownSync(TextToImage_Config)($0),
     onFailure: $0 => new TextToImage_Config_Static_Reading.Error(TextToImage_Config_Static_file, $0),
   });
-});
+}));
 
 export {
   TextToImage_Config_Static_read,
