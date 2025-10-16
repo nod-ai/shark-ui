@@ -46,7 +46,9 @@ const bodyOf = (
 
           if (
             caughtError instanceof SyntaxError
-          ) return new HTTP_Response_Body.Digestion.Error.InvalidJSONSyntax(caughtError);
+          ) return new HTTP_Response_Body.Digestion.Error.InvalidJSONSyntax({
+            cause: caughtError,
+          });
 
           return Effect.die(caughtError);
         }),
