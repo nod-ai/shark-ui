@@ -35,23 +35,21 @@ class Shortfin_TextToImage_SDXL_Client
     givenBatchedRequestBody: Shortfin_TextToImage_SDXL_Client_Request.Body.Batched,
   ): Promise<
     Shortfin_TextToImage_SDXL_Client_Request.Exit
-  > => {
-    return Effect.runPromise(Effect.promise(async () => {
-      const exitFromSubmittingResource = await this.submitResource({
-        bySending: givenBatchedRequestBody,
-        to       : URLComponent.Path('/generate'),
-      });
+  > => Effect.runPromise(Effect.promise(async () => {
+    const exitFromSubmittingResource = await this.submitResource({
+      bySending: givenBatchedRequestBody,
+      to       : URLComponent.Path('/generate'),
+    });
 
-      if (
-        Exit.isFailure(exitFromSubmittingResource)
-      ) return Exit.failCause(exitFromSubmittingResource.cause);
+    if (
+      Exit.isFailure(exitFromSubmittingResource)
+    ) return Exit.failCause(exitFromSubmittingResource.cause);
 
-      const rawResource = exitFromSubmittingResource.value;
-      const decodedResource = Schema.decodeUnknownSync(Shortfin_TextToImage_SDXL_Client_Response.Body)(rawResource);
-      const [soleGeneratedImage] = decodedResource.images;
-      return Exit.succeed(soleGeneratedImage);
-    }));
-  };
+    const rawResource = exitFromSubmittingResource.value;
+    const decodedResource = Schema.decodeUnknownSync(Shortfin_TextToImage_SDXL_Client_Response.Body)(rawResource);
+    const [soleGeneratedImage] = decodedResource.images;
+    return Exit.succeed(soleGeneratedImage);
+  }));
 }
 
 export {
