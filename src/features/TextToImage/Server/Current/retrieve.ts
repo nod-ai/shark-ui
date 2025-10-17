@@ -35,7 +35,7 @@ const TextToImage_Server_Current_retrieve: Effect.Effect<
     Option.isSome(staticConfig.server)
   ) return Option.getOrThrow(staticConfig.server);
 
-  const dynamicConfig = yield* Effect.orElseSucceed(TextToImage_Config.Dynamic.fetch, () => TextToImage_Config.empty);
+  const dynamicConfig = yield* TextToImage_Config.Dynamic.fetch.pipe(Effect.orElseSucceed(() => TextToImage_Config.empty));
 
   if (
     Option.isSome(dynamicConfig.server)
