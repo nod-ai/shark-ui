@@ -17,8 +17,8 @@ import {
   TextToImage_Config_Static_file,
 } from './file';
 
-const TextToImage_Config_Static_read: TextToImage_Config_Static_Reading.Effect = Effect.suspend(() => {
-  const effectOfFetchingRawConfigFromFile = HTTP.Client.local.fetchResource({
+const TextToImage_Config_Static_read: TextToImage_Config_Static_Reading.Effect = Effect.gen(function* () {
+  const rawConfigFromFile = yield* HTTP.Client.local.fetchResource({
     from: TextToImage_Config_Static_file,
   }).pipe(
     Effect.mapError($0 => new TextToImage_Config_Static_Reading.Error({
@@ -27,11 +27,8 @@ const TextToImage_Config_Static_read: TextToImage_Config_Static_Reading.Effect =
     })),
   );
 
-  const effectOfDecodingConfigFromFile = effectOfFetchingRawConfigFromFile.pipe(
-    Effect.map($0 => Schema.decodeUnknownSync(TextToImage_Config)($0)),
-  );
-
-  return effectOfDecodingConfigFromFile;
+  const decodedConfigFromFile = Schema.decodeUnknownSync(TextToImage_Config)(rawConfigFromFile);
+  return decodedConfigFromFile;
 });
 
 export {

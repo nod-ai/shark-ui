@@ -17,8 +17,8 @@ import {
   TextToImage_Config_Dynamic_endpoint,
 } from './endpoint';
 
-const TextToImage_Config_Dynamic_fetch: TextToImage_Config_Dynamic_Fetching.Effect = Effect.suspend(() => {
-  const effectOfFetchingRawConfigFromEndpoint = HTTP.Client.local.fetchResource({
+const TextToImage_Config_Dynamic_fetch: TextToImage_Config_Dynamic_Fetching.Effect = Effect.gen(function* () {
+  const rawConfigFromEndpoint = yield* HTTP.Client.local.fetchResource({
     from: TextToImage_Config_Dynamic_endpoint,
   }).pipe(
     Effect.mapError($0 => new TextToImage_Config_Dynamic_Fetching.Error({
@@ -27,11 +27,8 @@ const TextToImage_Config_Dynamic_fetch: TextToImage_Config_Dynamic_Fetching.Effe
     })),
   );
 
-  const effectOfDecodingConfigFromEndpoint = effectOfFetchingRawConfigFromEndpoint.pipe(
-    Effect.map($0 => Schema.decodeUnknownSync(TextToImage_Config)($0)),
-  );
-
-  return effectOfDecodingConfigFromEndpoint;
+  const decodedConfigFromEndpoint = Schema.decodeUnknownSync(TextToImage_Config)(rawConfigFromEndpoint);
+  return decodedConfigFromEndpoint;
 });
 
 export {
