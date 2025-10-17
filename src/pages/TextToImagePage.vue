@@ -50,13 +50,13 @@ const {
 
 const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
 
-const imageGeneration = progressiveRef(Effect.suspend(() => {
+const imageGeneration = progressiveRef(Effect.gen(function* () {
   const proposedPrompt = Option.getOrThrowWith(
     get(currentPrompt),
     () => new Error('Prompt was not set before submission'),
   );
 
-  const effectOfGeneratingOutput = TextToImage.Client.SDXL.generateOutputFrom({
+  const generatedOutput = yield* TextToImage.Client.SDXL.generateOutputFrom({
     textToImageRequestBody: {
       textPrompts: proposedPrompt,
       height     : 1024,
@@ -67,12 +67,7 @@ const imageGeneration = progressiveRef(Effect.suspend(() => {
     },
   });
 
-  const effectOfGeneratingImage = Effect.map(
-    effectOfGeneratingOutput,
-    $0 => $0.image,
-  );
-
-  return effectOfGeneratingImage;
+  return generatedOutput.image;
 }));
 </script>
 
