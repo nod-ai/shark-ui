@@ -77,18 +77,18 @@ class HTTP_Client {
       Exit.isFailure(exitFromSettlingResponse)
     ) return Exit.failCause(exitFromSettlingResponse.cause);
 
-    const response = exitFromSettlingResponse.value;
+    const fetchedResponse = exitFromSettlingResponse.value;
 
-    if (!response.ok) {
+    if (!fetchedResponse.ok) {
       const newResponseError = new HTTP_Endpoint.Error.RespondedWithFailure({
-        message: response.statusText,
-        status : response.status,
+        message: fetchedResponse.statusText,
+        status : fetchedResponse.status,
       });
 
       return Exit.fail(newResponseError);
     }
 
-    const exitFromDigestingResponseBody = await bodyOf(response).digestAsUnknown();
+    const exitFromDigestingResponseBody = await bodyOf(fetchedResponse).digestAsUnknown();
 
     return Exit.mapError(
       exitFromDigestingResponseBody,
