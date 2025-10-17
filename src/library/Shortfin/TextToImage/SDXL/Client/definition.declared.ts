@@ -36,12 +36,10 @@ class Shortfin_TextToImage_SDXL_Client
   ): Promise<
     Shortfin_TextToImage_SDXL_Client_Request.Exit
   > {
-    const generationEndpoint = URLComponent.Path('/generate');
-
     return Effect.runPromise(Effect.promise(async () => {
       const exitFromSubmittingResource = await this.submitResource({
         bySending: givenBatchedRequestBody,
-        to       : generationEndpoint,
+        to       : URLComponent.Path('/generate'),
       });
 
       if (
