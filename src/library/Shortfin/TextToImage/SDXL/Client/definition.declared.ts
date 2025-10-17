@@ -31,11 +31,11 @@ class Shortfin_TextToImage_SDXL_Client
     );
   }
 
-  public generateImageFrom(
+  public generateImageFrom = (
     givenBatchedRequestBody: Shortfin_TextToImage_SDXL_Client_Request.Body.Batched,
   ): Promise<
     Shortfin_TextToImage_SDXL_Client_Request.Exit
-  > {
+  > => {
     return Effect.runPromise(Effect.promise(async () => {
       const exitFromSubmittingResource = await this.submitResource({
         bySending: givenBatchedRequestBody,
@@ -51,7 +51,7 @@ class Shortfin_TextToImage_SDXL_Client
       const [soleGeneratedImage] = decodedResource.images;
       return Exit.succeed(soleGeneratedImage);
     }));
-  }
+  };
 }
 
 export {
