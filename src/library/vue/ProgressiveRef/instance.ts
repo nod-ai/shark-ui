@@ -7,7 +7,7 @@ import {
 
 import {
   Effect,
-  type Exit,
+  type Either,
   Option,
 } from 'effect';
 
@@ -27,7 +27,7 @@ const progressiveRef = <
 > => {
   const flagIsRaised = ref(false);
 
-  type CapturedOutput = Exit.Exit<
+  type CapturedOutput = Either.Either<
     SomeProduct,
     SomeFailure
   >;
@@ -45,7 +45,7 @@ const progressiveRef = <
     });
 
     const outputOfOperation = await givenOperation.pipe(
-      Effect.exit,
+      Effect.either,
       Effect.runPromise,
     );
 
