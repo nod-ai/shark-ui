@@ -36,19 +36,15 @@ const TextToImage_Server_Current_retrieve: Effect.Effect<
     Effect.orElseSucceed(() => TextToImage_Config.empty),
   );
 
-  const currentTextToImageServer = remoteConfig.server;
+  const currentTextToImageServer = yield* remoteConfig.server.pipe(
+    Effect.orElse(() => new TextToImage_Server_Error.MissingSpecification({
+      environmentKey: TextToImage_Server_Origin.environmentKey,
+      file          : TextToImage_Config.Static.file,
+      endpoint      : TextToImage_Config.Dynamic.endpoint,
+    })),
+  );
 
-  if (
-    Option.isSome(currentTextToImageServer)
-  ) return Option.getOrThrow(currentTextToImageServer);
-
-  const newSpecificationError = yield* new TextToImage_Server_Error.MissingSpecification({
-    environmentKey: TextToImage_Server_Origin.environmentKey,
-    file          : TextToImage_Config.Static.file,
-    endpoint      : TextToImage_Config.Dynamic.endpoint,
-  });
-
-  return newSpecificationError;
+  return currentTextToImageServer;
 });
 
 export {
