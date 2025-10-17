@@ -27,7 +27,7 @@ const TextToImage_Server_Current_retrieve: Effect.Effect<
 > = Effect.gen(function* () {
   if (
     Option.isSome(TextToImage_Server_Current_accordingToEnvironment)
-  ) return Option.getOrThrow(TextToImage_Server_Current_accordingToEnvironment);
+  ) return TextToImage_Server_Current_accordingToEnvironment.value;
 
   const remoteConfig = yield* Effect.firstSuccessOf([
     TextToImage_Config.Static.read,
