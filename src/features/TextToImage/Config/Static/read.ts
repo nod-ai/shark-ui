@@ -25,13 +25,13 @@ const TextToImage_Config_Static_read = (): Promise<
     from: TextToImage_Config_Static_file,
   });
 
-  const exitFromDecodingConfigFromFile = Exit.mapBoth(exitFromFetchingRawConfigFromFile, {
+  const exitFromDecodingConfigFromFile = exitFromFetchingRawConfigFromFile.pipe(Exit.mapBoth({
     onSuccess: $0 => Schema.decodeUnknownSync(TextToImage_Config)($0),
     onFailure: $0 => new TextToImage_Config_Static_Reading.Error({
       cause   : $0,
       filePath: TextToImage_Config_Static_file,
     }),
-  });
+  }));
 
   return exitFromDecodingConfigFromFile;
 }));
