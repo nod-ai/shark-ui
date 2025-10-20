@@ -30,10 +30,9 @@ const TextToImage_Config_Static_read = (): Promise<
     })),
   );
 
-  const exitFromDecodingConfigFromFile = exitFromFetchingRawConfigFromFile.pipe(Exit.mapBoth({
-    onSuccess: $0 => Schema.decodeUnknownSync(TextToImage_Config)($0),
-    onFailure: $0 => $0,
-  }));
+  const exitFromDecodingConfigFromFile = exitFromFetchingRawConfigFromFile.pipe(
+    Exit.map($0 => Schema.decodeUnknownSync(TextToImage_Config)($0)),
+  );
 
   return exitFromDecodingConfigFromFile;
 }));

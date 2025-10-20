@@ -30,10 +30,9 @@ const TextToImage_Config_Dynamic_fetch = (): Promise<
     })),
   );
 
-  const exitFromDecodingConfigFromEndpoint = exitFromFetchingRawConfigFromEndpoint.pipe(Exit.mapBoth({
-    onSuccess: $0 => Schema.decodeUnknownSync(TextToImage_Config)($0),
-    onFailure: $0 => $0,
-  }));
+  const exitFromDecodingConfigFromEndpoint = exitFromFetchingRawConfigFromEndpoint.pipe(
+    Exit.map($0 => Schema.decodeUnknownSync(TextToImage_Config)($0)),
+  );
 
   return exitFromDecodingConfigFromEndpoint;
 }));
