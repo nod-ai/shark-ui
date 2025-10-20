@@ -1,4 +1,5 @@
 import {
+  Effect,
   Exit,
 } from 'effect';
 
@@ -14,7 +15,7 @@ const TextToImage_Client_SDXL_initialize = async (): Promise<
     TextToImage_Server.Error.MissingSpecification
   >
 > => {
-  const exitFromRetrievingCurrentServer = await TextToImage_Server.Current.retrieve();
+  const exitFromRetrievingCurrentServer = await Effect.runPromiseExit(TextToImage_Server.Current.retrieve);
 
   const exitFromInitializingClient = Exit.map(
     exitFromRetrievingCurrentServer,

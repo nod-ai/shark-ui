@@ -1,6 +1,5 @@
 import {
   Effect,
-  Exit,
   Option,
 } from 'effect';
 
@@ -22,38 +21,34 @@ import {
   TextToImage_Server_Current_accordingToEnvironment,
 } from './accordingToEnvironment';
 
-const TextToImage_Server_Current_retrieve = (): Promise<
-  Exit.Exit<
-    WebAPI.Server,
-    TextToImage_Server_Error.MissingSpecification
-  >
-> => Effect.runPromise(Effect.promise(async () => {
+const TextToImage_Server_Current_retrieve: Effect.Effect<
+  WebAPI.Server,
+  TextToImage_Server_Error.MissingSpecification
+> = Effect.gen(function* () {
   if (
     Option.isSome(TextToImage_Server_Current_accordingToEnvironment)
-  ) return Exit.succeed(Option.getOrThrow(TextToImage_Server_Current_accordingToEnvironment));
+  ) return Option.getOrThrow(TextToImage_Server_Current_accordingToEnvironment);
 
-  const exitFromReadingStaticConfig = await Effect.runPromiseExit(TextToImage_Config.Static.read);
-  const staticConfig = Effect.runSync(Effect.orElseSucceed(exitFromReadingStaticConfig, () => TextToImage_Config.empty));
+  const staticConfig = yield* Effect.orElseSucceed(TextToImage_Config.Static.read, () => TextToImage_Config.empty);
 
   if (
     Option.isSome(staticConfig.server)
-  ) return Exit.succeed(Option.getOrThrow(staticConfig.server));
+  ) return Option.getOrThrow(staticConfig.server);
 
-  const exitFromFetchingDynamicConfig = await Effect.runPromiseExit(TextToImage_Config.Dynamic.fetch);
-  const dynamicConfig = Effect.runSync(Effect.orElseSucceed(exitFromFetchingDynamicConfig, () => TextToImage_Config.empty));
+  const dynamicConfig = yield* Effect.orElseSucceed(TextToImage_Config.Dynamic.fetch, () => TextToImage_Config.empty);
 
   if (
     Option.isSome(dynamicConfig.server)
-  ) return Exit.succeed(Option.getOrThrow(dynamicConfig.server));
+  ) return Option.getOrThrow(dynamicConfig.server);
 
-  const newSpecificationError = new TextToImage_Server_Error.MissingSpecification({
+  const newSpecificationError = yield* new TextToImage_Server_Error.MissingSpecification({
     environmentKey: TextToImage_Server_Origin.environmentKey,
     file          : TextToImage_Config.Static.file,
     endpoint      : TextToImage_Config.Dynamic.endpoint,
   });
 
-  return Exit.fail(newSpecificationError);
-}));
+  return newSpecificationError;
+});
 
 export {
   TextToImage_Server_Current_retrieve,
