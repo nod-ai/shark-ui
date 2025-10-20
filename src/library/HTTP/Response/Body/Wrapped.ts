@@ -1,5 +1,5 @@
 import type {
-  Exit,
+  Effect,
 } from 'effect';
 
 import type ContentDescriptor from '@/library/ContentDescriptor';
@@ -13,11 +13,9 @@ interface HTTP_Response_Body_Wrapped {
     givenDescriptor: ContentDescriptor,
   ) => boolean;
 
-  digestAsUnknown: () => Promise<
-    Exit.Exit<
-      unknown,
-      HTTP_Response_Body_Digestion.Error.Any
-    >
+  readonly digestAsUnknown: Effect.Effect<
+    unknown,
+    HTTP_Response_Body_Digestion.Error.Any
   >;
 }
 

@@ -89,7 +89,7 @@ class HTTP_Client {
     }
 
     const exitFromDigestingResponseBody = Exit.mapError(
-      await bodyOf(fetchedResponse).digestAsUnknown(),
+      await Effect.runPromiseExit(bodyOf(fetchedResponse).digestAsUnknown),
       $0 => new HTTP_Endpoint.Error.IndigestibleResponseBody({
         endpoint: endpointURL,
         cause   : $0,
