@@ -29,13 +29,18 @@ const TextToImage_Server_Current_retrieve: Effect.Effect<
     Option.isSome(TextToImage_Server_Current_accordingToEnvironment)
   ) return Option.getOrThrow(TextToImage_Server_Current_accordingToEnvironment);
 
-  const staticConfig = yield* Effect.orElseSucceed(TextToImage_Config.Static.read, () => TextToImage_Config.empty);
+  const staticConfig = yield* Effect.orElseSucceed(
+    TextToImage_Config.Static.read,
+    () => TextToImage_Config.empty,
+  );
 
   if (
     Option.isSome(staticConfig.server)
   ) return Option.getOrThrow(staticConfig.server);
 
-  const dynamicConfig = yield* TextToImage_Config.Dynamic.fetch.pipe(Effect.orElseSucceed(() => TextToImage_Config.empty));
+  const dynamicConfig = yield* TextToImage_Config.Dynamic.fetch.pipe(
+    Effect.orElseSucceed(() => TextToImage_Config.empty),
+  );
 
   if (
     Option.isSome(dynamicConfig.server)
