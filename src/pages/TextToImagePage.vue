@@ -8,7 +8,6 @@ import {
 
 import {
   Effect,
-  Exit,
   Option,
 } from 'effect';
 
@@ -51,13 +50,13 @@ const {
 
 const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
 
-const imageGeneration = progressiveRef(async () => {
+const imageGeneration = progressiveRef(Effect.suspend(() => {
   const proposedPrompt = Option.getOrThrowWith(
     get(currentPrompt),
     () => new Error('Prompt was not set before submission'),
   );
 
-  const exitFromGeneratingOutput = await Effect.runPromiseExit(TextToImage.Client.SDXL.generateOutputFrom({
+  const effectOfGeneratingOutput = TextToImage.Client.SDXL.generateOutputFrom({
     textToImageRequestBody: {
       textPrompts: proposedPrompt,
       height     : 1024,
@@ -66,15 +65,15 @@ const imageGeneration = progressiveRef(async () => {
       cfgScale   : 7.5,
       seed       : 0,
     },
-  }));
+  });
 
-  const exitFromGeneratingImage = Exit.map(
-    exitFromGeneratingOutput,
+  const effectOfGeneratingImage = Effect.map(
+    effectOfGeneratingOutput,
     $0 => $0.image,
   );
 
-  return exitFromGeneratingImage;
-});
+  return effectOfGeneratingImage;
+}));
 </script>
 
 <template>
