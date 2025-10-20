@@ -7,6 +7,7 @@ import {
 } from '@/library/vue';
 
 import {
+  Effect,
   Exit,
   Option,
 } from 'effect';
@@ -56,7 +57,7 @@ const imageGeneration = progressiveRef(async () => {
     () => new Error('Prompt was not set before submission'),
   );
 
-  const exitFromGeneratingOutput = await TextToImage.Client.SDXL.generateOutputFrom({
+  const exitFromGeneratingOutput = await Effect.runPromiseExit(TextToImage.Client.SDXL.generateOutputFrom({
     textToImageRequestBody: {
       textPrompts: proposedPrompt,
       height     : 1024,
@@ -65,7 +66,7 @@ const imageGeneration = progressiveRef(async () => {
       cfgScale   : 7.5,
       seed       : 0,
     },
-  });
+  }));
 
   const exitFromGeneratingImage = Exit.map(
     exitFromGeneratingOutput,
