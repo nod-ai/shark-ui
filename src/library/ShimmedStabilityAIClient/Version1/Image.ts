@@ -21,27 +21,18 @@ import {
 
 class ShimmedStabilityAIClient_Version1_Image
   extends HTTP.Client {
-  public async forciblyGenerateFromText(
+  private safelyGenerateFromText = (
     givenRequest: GenerateFromTextRequest,
-  ): Promise<GenerateFromTextResponse> {
+  ): Effect.Effect<
+    GenerateFromTextResponse,
+    HTTP.Endpoint.Error.Any
+  > => Effect.gen(this, function* () {
     const derivedBatchedRequestBody = toShortfinRequestBody.Batched([
       givenRequest.textToImageRequestBody,
     ]);
 
     const textToImageSDXLShortfinClient = new Shortfin.TextToImage.SDXL.Client(this.origin);
-    const effectOfGeneratingImage = textToImageSDXLShortfinClient.generateImageFrom(derivedBatchedRequestBody);
-
-    const resultOfGeneratingImage = await effectOfGeneratingImage.pipe(
-      Effect.either,
-      Effect.runPromise,
-    );
-
-    const generatedImage = Either.getOrThrowWith(
-      resultOfGeneratingImage,
-      (someFailure) => {
-        throw someFailure; // eslint-disable-line no-restricted-syntax -- matches error propagation of actual StabilityAI Client
-      },
-    );
+    const generatedImage = yield* textToImageSDXLShortfinClient.generateImageFrom(derivedBatchedRequestBody);
 
     const soleGeneratedArtifact: StabilityAI_TextToImage_Pipeline_Output = {
       base64      : generatedImage,
@@ -59,6 +50,24 @@ class ShimmedStabilityAIClient_Version1_Image
     };
 
     return newStabilityAIGenerationResponse;
+  });
+
+  public async forciblyGenerateFromText(
+    givenRequest: GenerateFromTextRequest,
+  ): Promise<GenerateFromTextResponse> {
+    const resultOfGeneratingResponse = await this.safelyGenerateFromText(givenRequest).pipe(
+      Effect.either,
+      Effect.runPromise,
+    );
+
+    const generatedResponse = Either.getOrThrowWith(
+      resultOfGeneratingResponse,
+      (someFailure) => {
+        throw someFailure; // eslint-disable-line no-restricted-syntax -- matches error propagation of actual StabilityAI Client
+      },
+    );
+
+    return generatedResponse;
   }
 }
 
