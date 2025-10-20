@@ -77,26 +77,26 @@ class HTTP_Client {
       Exit.isFailure(exitFromSettlingResponse)
     ) return Exit.failCause(exitFromSettlingResponse.cause);
 
-    const response = exitFromSettlingResponse.value;
+    const fetchedResponse = exitFromSettlingResponse.value;
 
-    if (!response.ok) {
+    if (!fetchedResponse.ok) {
       const newResponseError = new HTTP_Endpoint.Error.RespondedWithFailure({
-        message: response.statusText,
-        status : response.status,
+        message: fetchedResponse.statusText,
+        status : fetchedResponse.status,
       });
 
       return Exit.fail(newResponseError);
     }
 
-    const exitFromDigestingResponseBody = await bodyOf(response).digestAsUnknown();
-
-    return Exit.mapError(
-      exitFromDigestingResponseBody,
+    const exitFromDigestingResponseBody = Exit.mapError(
+      await bodyOf(fetchedResponse).digestAsUnknown(),
       $0 => new HTTP_Endpoint.Error.IndigestibleResponseBody({
         endpoint: endpointURL,
         cause   : $0,
       }),
     );
+
+    return exitFromDigestingResponseBody;
   }));
 
   public async fetchResource(

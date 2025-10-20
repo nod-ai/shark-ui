@@ -21,17 +21,19 @@ import {
 const TextToImage_Config_Static_read = (): Promise<
   TextToImage_Config_Static_Reading.Exit
 > => Effect.runPromise(Effect.promise(async () => {
-  const exitFromFetchingFile = await HTTP.Client.local.fetchResource({
+  const exitFromFetchingRawConfigFromFile = await HTTP.Client.local.fetchResource({
     from: TextToImage_Config_Static_file,
   });
 
-  return Exit.mapBoth(exitFromFetchingFile, {
+  const exitFromDecodingConfigFromFile = Exit.mapBoth(exitFromFetchingRawConfigFromFile, {
     onSuccess: $0 => Schema.decodeUnknownSync(TextToImage_Config)($0),
     onFailure: $0 => new TextToImage_Config_Static_Reading.Error({
       cause   : $0,
       filePath: TextToImage_Config_Static_file,
     }),
   });
+
+  return exitFromDecodingConfigFromFile;
 }));
 
 export {
