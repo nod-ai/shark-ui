@@ -39,7 +39,7 @@ const TextToImage_Server_Current_retrieve = (): Promise<
     Option.isSome(staticConfig.server)
   ) return Exit.succeed(Option.getOrThrow(staticConfig.server));
 
-  const exitFromFetchingDynamicConfig = await TextToImage_Config.Dynamic.fetch();
+  const exitFromFetchingDynamicConfig = await Effect.runPromiseExit(TextToImage_Config.Dynamic.fetch);
   const dynamicConfig = Effect.runSync(Effect.orElseSucceed(exitFromFetchingDynamicConfig, () => TextToImage_Config.empty));
 
   if (

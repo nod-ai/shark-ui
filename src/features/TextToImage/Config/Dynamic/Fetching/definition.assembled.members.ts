@@ -3,5 +3,5 @@ export {
 } from './Error';
 
 export type {
-  TextToImage_Config_Dynamic_Fetching_Exit as Exit,
-} from './Exit';
+  TextToImage_Config_Dynamic_Fetching_Effect as Effect,
+} from './Effect';
