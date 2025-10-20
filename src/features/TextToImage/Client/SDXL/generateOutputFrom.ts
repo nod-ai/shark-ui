@@ -39,7 +39,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
 ): Promise<
   TextToImage_Client_Generation.Exit
 > => {
-  const exitFromInitializingClient = await TextToImage_Client_SDXL_initialize();
+  const exitFromInitializingClient = await Effect.runPromiseExit(TextToImage_Client_SDXL_initialize);
 
   if (
     Exit.isFailure(exitFromInitializingClient)
