@@ -32,7 +32,7 @@ const TextToImage_Server_Current_retrieve = (): Promise<
     Option.isSome(TextToImage_Server_Current_accordingToEnvironment)
   ) return Exit.succeed(Option.getOrThrow(TextToImage_Server_Current_accordingToEnvironment));
 
-  const exitFromReadingStaticConfig = await TextToImage_Config.Static.read();
+  const exitFromReadingStaticConfig = await Effect.runPromiseExit(TextToImage_Config.Static.read);
   const staticConfig = Effect.runSync(Effect.orElseSucceed(exitFromReadingStaticConfig, () => TextToImage_Config.empty));
 
   if (
