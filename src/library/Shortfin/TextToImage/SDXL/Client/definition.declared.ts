@@ -36,10 +36,10 @@ class Shortfin_TextToImage_SDXL_Client
   ): Promise<
     Shortfin_TextToImage_SDXL_Client_Request.Exit
   > => Effect.runPromise(Effect.promise(async () => {
-    const exitFromSubmittingResource = await this.submitResource({
+    const exitFromSubmittingResource = await Effect.runPromiseExit(this.submitResource({
       bySending: givenBatchedRequestBody,
       to       : URLComponent.Path('/generate'),
-    });
+    }));
 
     if (
       Exit.isFailure(exitFromSubmittingResource)

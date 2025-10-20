@@ -21,9 +21,9 @@ import {
 const TextToImage_Config_Static_read = (): Promise<
   TextToImage_Config_Static_Reading.Exit
 > => Effect.runPromise(Effect.promise(async () => {
-  const exitFromFetchingRawConfigFromFile = (await HTTP.Client.local.fetchResource({
+  const exitFromFetchingRawConfigFromFile = (await Effect.runPromiseExit(HTTP.Client.local.fetchResource({
     from: TextToImage_Config_Static_file,
-  })).pipe(
+  }))).pipe(
     Exit.mapError($0 => new TextToImage_Config_Static_Reading.Error({
       filePath: TextToImage_Config_Static_file,
       cause   : $0,

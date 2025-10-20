@@ -21,9 +21,9 @@ import {
 const TextToImage_Config_Dynamic_fetch = (): Promise<
   TextToImage_Config_Dynamic_Fetching.Exit
 > => Effect.runPromise(Effect.promise(async () => {
-  const exitFromFetchingRawConfigFromEndpoint = (await HTTP.Client.local.fetchResource({
+  const exitFromFetchingRawConfigFromEndpoint = (await Effect.runPromiseExit(HTTP.Client.local.fetchResource({
     from: TextToImage_Config_Dynamic_endpoint,
-  })).pipe(
+  }))).pipe(
     Exit.mapError($0 => new TextToImage_Config_Dynamic_Fetching.Error({
       endpoint: TextToImage_Config_Dynamic_endpoint,
       cause   : $0,
