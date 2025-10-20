@@ -36,9 +36,11 @@ const TextToImage_Server_Current_retrieve: Effect.Effect<
     Effect.orElseSucceed(() => TextToImage_Config.empty),
   );
 
+  const currentTextToImageServer = remoteConfig.server;
+
   if (
-    Option.isSome(remoteConfig.server)
-  ) return Option.getOrThrow(remoteConfig.server);
+    Option.isSome(currentTextToImageServer)
+  ) return Option.getOrThrow(currentTextToImageServer);
 
   const newSpecificationError = yield* new TextToImage_Server_Error.MissingSpecification({
     environmentKey: TextToImage_Server_Origin.environmentKey,
