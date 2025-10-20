@@ -1,15 +1,15 @@
 import type {
-  Exit,
+  Effect,
 } from 'effect';
 
 import type HTTP from '@/library/HTTP';
 import type Sequence from '@/library/Sequence';
 
-type Shortfin_TextToImage_SDXL_Client_Request_Exit = Exit.Exit<
+type Shortfin_TextToImage_SDXL_Client_Request_Effect = Effect.Effect<
   Sequence.Byte.Encoded.Base64,
   HTTP.Endpoint.Error.Any
 >;
 
 export type {
-  Shortfin_TextToImage_SDXL_Client_Request_Exit,
+  Shortfin_TextToImage_SDXL_Client_Request_Effect,
 };

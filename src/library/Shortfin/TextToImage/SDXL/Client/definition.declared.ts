@@ -1,6 +1,5 @@
 import {
   Effect,
-  Exit,
   Schema,
 } from 'effect';
 
@@ -33,23 +32,16 @@ class Shortfin_TextToImage_SDXL_Client
 
   public generateImageFrom = (
     givenBatchedRequestBody: Shortfin_TextToImage_SDXL_Client_Request.Body.Batched,
-  ): Promise<
-    Shortfin_TextToImage_SDXL_Client_Request.Exit
-  > => Effect.runPromise(Effect.promise(async () => {
-    const exitFromSubmittingResource = await Effect.runPromiseExit(this.submitResource({
+  ): Shortfin_TextToImage_SDXL_Client_Request.Effect => Effect.gen(this, function* () {
+    const rawResource = yield* this.submitResource({
       bySending: givenBatchedRequestBody,
       to       : URLComponent.Path('/generate'),
-    }));
+    });
 
-    if (
-      Exit.isFailure(exitFromSubmittingResource)
-    ) return Exit.failCause(exitFromSubmittingResource.cause);
-
-    const rawResource = exitFromSubmittingResource.value;
     const decodedResource = Schema.decodeUnknownSync(Shortfin_TextToImage_SDXL_Client_Response.Body)(rawResource);
     const [soleGeneratedImage] = decodedResource.images;
-    return Exit.succeed(soleGeneratedImage);
-  }));
+    return soleGeneratedImage;
+  });
 }
 
 export {
