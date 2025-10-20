@@ -88,15 +88,15 @@ class HTTP_Client {
       return Exit.fail(newResponseError);
     }
 
-    const exitFromDigestingResponseBody = await bodyOf(fetchedResponse).digestAsUnknown();
-
-    return Exit.mapError(
-      exitFromDigestingResponseBody,
+    const exitFromDigestingResponseBody = Exit.mapError(
+      await bodyOf(fetchedResponse).digestAsUnknown(),
       $0 => new HTTP_Endpoint.Error.IndigestibleResponseBody({
         endpoint: endpointURL,
         cause   : $0,
       }),
     );
+
+    return exitFromDigestingResponseBody;
   }));
 
   public async fetchResource(
