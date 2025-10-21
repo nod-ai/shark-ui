@@ -27,27 +27,24 @@ const TextToImage_Server_Current_retrieve: Effect.Effect<
 > = Effect.gen(function* () {
   if (
     Option.isSome(TextToImage_Server_Current_accordingToEnvironment)
-  ) return Option.getOrThrow(TextToImage_Server_Current_accordingToEnvironment);
+  ) return TextToImage_Server_Current_accordingToEnvironment.value;
 
-  const staticConfig = yield* Effect.orElseSucceed(TextToImage_Config.Static.read, () => TextToImage_Config.empty);
+  const remoteConfig = yield* Effect.firstSuccessOf([
+    TextToImage_Config.Static.read,
+    TextToImage_Config.Dynamic.fetch,
+  ]).pipe(
+    Effect.orElseSucceed(() => TextToImage_Config.empty),
+  );
 
-  if (
-    Option.isSome(staticConfig.server)
-  ) return Option.getOrThrow(staticConfig.server);
+  const currentTextToImageServer = yield* remoteConfig.server.pipe(
+    Effect.orElse(() => new TextToImage_Server_Error.MissingSpecification({
+      environmentKey: TextToImage_Server_Origin.environmentKey,
+      file          : TextToImage_Config.Static.file,
+      endpoint      : TextToImage_Config.Dynamic.endpoint,
+    })),
+  );
 
-  const dynamicConfig = yield* Effect.orElseSucceed(TextToImage_Config.Dynamic.fetch, () => TextToImage_Config.empty);
-
-  if (
-    Option.isSome(dynamicConfig.server)
-  ) return Option.getOrThrow(dynamicConfig.server);
-
-  const newSpecificationError = yield* new TextToImage_Server_Error.MissingSpecification({
-    environmentKey: TextToImage_Server_Origin.environmentKey,
-    file          : TextToImage_Config.Static.file,
-    endpoint      : TextToImage_Config.Dynamic.endpoint,
-  });
-
-  return newSpecificationError;
+  return currentTextToImageServer;
 });
 
 export {
