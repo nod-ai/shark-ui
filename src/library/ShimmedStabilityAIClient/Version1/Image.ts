@@ -29,9 +29,12 @@ class ShimmedStabilityAIClient_Version1_Image
     ]);
 
     const textToImageSDXLShortfinClient = new Shortfin.TextToImage.SDXL.Client(this.origin);
-
     const effectOfGeneratingImage = textToImageSDXLShortfinClient.generateImageFrom(derivedBatchedRequestBody);
-    const resultOfGeneratingImage = await Effect.runPromise(Effect.either(effectOfGeneratingImage));
+
+    const resultOfGeneratingImage = await effectOfGeneratingImage.pipe(
+      Effect.either,
+      Effect.runPromise,
+    );
 
     const generatedImage = Either.getOrThrowWith(
       resultOfGeneratingImage,

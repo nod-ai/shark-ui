@@ -26,7 +26,7 @@ const toSharkUIOutput_plural = (
 ): Option.Option<Option.Option<TextToImage_Pipeline.Output>[]> => {
   if (
     !('artifacts' in givenResponse.result)
-  ) return Effect.runSync(Effect.dieMessage('Expected response body rather than readable stream'));
+  ) return Effect.dieMessage('Expected response body rather than readable stream').pipe(Effect.runSync);
 
   const inferredRawImages = Option.fromNullable(givenResponse.result.artifacts);
 

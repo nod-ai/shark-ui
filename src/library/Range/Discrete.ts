@@ -41,13 +41,13 @@ class Range_Discrete
 
     if (
       isNegative(givenStepSize)
-    ) return Effect.runSync(Effect.dieMessage('Step size must be non-negative'));
+    ) return Effect.dieMessage('Step size must be non-negative').pipe(Effect.runSync);
 
     const overstep = validRange.width % givenStepSize;
 
     if (
       overstep !== 0
-    ) return Effect.runSync(Effect.dieMessage('Step size must fit evenly into the range'));
+    ) return Effect.dieMessage('Step size must fit evenly into the range').pipe(Effect.runSync);
 
     const validDiscreteRange = new this(
       validRange.lowerBound,
