@@ -27,42 +27,42 @@ const progressiveRef = <
 > => {
   const flagIsRaised = ref(false);
 
-  type CapturedExit = Exit.Exit<
+  type CapturedOutput = Exit.Exit<
     SomeProduct,
     SomeFailure
   >;
 
-  const capturedExit = ref(Option.none()) as Ref<Option.Option<CapturedExit>>;
+  const capturedOutput = ref(Option.none()) as Ref<Option.Option<CapturedOutput>>;
 
-  const captureExit = async (): Promise<void> => {
+  const captureOutput = async (): Promise<void> => {
     using cleanup = new DisposableStack();
 
-    set(capturedExit, Option.none());
+    set(capturedOutput, Option.none());
     set(flagIsRaised, true);
 
     cleanup.defer(() => {
       set(flagIsRaised, false);
     });
 
-    const exitFromOperation = await givenOperation.pipe(
+    const outputOfOperation = await givenOperation.pipe(
       Effect.exit,
       Effect.runPromise,
     );
 
-    set(capturedExit, Option.some(exitFromOperation));
+    set(capturedOutput, Option.some(outputOfOperation));
   };
 
   return {
-    initiate: captureExit,
+    initiate: captureOutput,
     get isInProgress() {
       return get(flagIsRaised);
     },
-    get result() {
+    get output() {
       if (
         this.isInProgress
       ) return Option.none();
 
-      return get(capturedExit);
+      return get(capturedOutput);
     },
   };
 };

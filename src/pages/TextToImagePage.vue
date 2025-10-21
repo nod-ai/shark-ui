@@ -122,7 +122,7 @@ const imageGeneration = progressiveRef(Effect.gen(function* () {
       class="fill-height"
     >
       <VSkeletonLoader
-        v-if="Option.isNone(imageGeneration.result)"
+        v-if="Option.isNone(imageGeneration.output)"
         :boilerplate="!imageGeneration.isInProgress"
         width="100vh"
         :style="{
@@ -131,7 +131,7 @@ const imageGeneration = progressiveRef(Effect.gen(function* () {
       />
       <TextToImageOutputView
         v-else
-        :output="imageGeneration.result.value"
+        :output="imageGeneration.output.value"
       />
     </VContainer>
   </VMain>

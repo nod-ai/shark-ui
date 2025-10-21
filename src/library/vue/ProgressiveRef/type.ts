@@ -9,7 +9,7 @@ interface ProgressiveRef<
 > {
   initiate: () => Promise<void>;
   isInProgress: boolean;
-  result: Option.Option<
+  output: Option.Option<
     Exit.Exit<
       SomeProduct,
       SomeFailure
