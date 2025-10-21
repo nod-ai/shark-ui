@@ -20,16 +20,16 @@ import {
 const TextToImage_Config_Static_read: TextToImage_Config_Static_Reading.Effect = Effect.gen(function* () {
   const rawConfigFromFile = yield* HTTP.Client.local.fetchResource({
     from: TextToImage_Config_Static_file,
-  }).pipe(
-    Effect.mapError($0 => new TextToImage_Config_Static_Reading.Error({
-      filePath: TextToImage_Config_Static_file,
-      cause   : $0,
-    })),
-  );
+  });
 
   const decodedConfigFromFile = Schema.decodeUnknownSync(TextToImage_Config)(rawConfigFromFile);
   return decodedConfigFromFile;
-});
+}).pipe(
+  Effect.mapError($0 => new TextToImage_Config_Static_Reading.Error({
+    filePath: TextToImage_Config_Static_file,
+    cause   : $0,
+  })),
+);
 
 export {
   TextToImage_Config_Static_read,
