@@ -25,7 +25,7 @@ const Contextualized_assume = <
     Contextualized_describes<SomeError, SomeCause>(givenError, GivenCause)
   ) return givenError;
 
-  return Effect.runSync(Effect.dieMessage('Expected error to have a cause'));
+  return Effect.dieMessage('Expected error to have a cause').pipe(Effect.runSync);
 };
 
 export {

@@ -30,6 +30,6 @@ defineProps<{
   <template
     v-else
   >
-    {{ Effect.runSync(Effect.dieMessage(Cause.pretty(output.cause))) }}
+    {{ Effect.dieMessage(Cause.pretty(output.cause)).pipe(Effect.runSync) }}
   </template>
 </template>

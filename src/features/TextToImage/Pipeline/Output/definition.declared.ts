@@ -12,9 +12,9 @@ interface TextToImage_Pipeline_Output {
 }
 
 function TextToImage_Pipeline_Output(
-  namespaceOnly: never = Effect.runSync(Effect.dieMessage(
+  namespaceOnly: never = Effect.dieMessage(
     `Unexpected call of module augmentation provision for ${TextToImage_Pipeline_Output.name}.`,
-  )),
+  ).pipe(Effect.runSync),
 ): never {
   return namespaceOnly;
 }

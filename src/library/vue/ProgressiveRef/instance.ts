@@ -44,7 +44,11 @@ const progressiveRef = <
       set(flagIsRaised, false);
     });
 
-    const exitFromOperation = await Effect.runPromise(Effect.exit(givenOperation));
+    const exitFromOperation = await givenOperation.pipe(
+      Effect.exit,
+      Effect.runPromise,
+    );
+
     set(capturedExit, Option.some(exitFromOperation));
   };
 
