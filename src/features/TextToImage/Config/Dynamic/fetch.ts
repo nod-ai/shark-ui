@@ -20,16 +20,16 @@ import {
 const TextToImage_Config_Dynamic_fetch: TextToImage_Config_Dynamic_Fetching.Effect = Effect.gen(function* () {
   const rawConfigFromEndpoint = yield* HTTP.Client.local.fetchResource({
     from: TextToImage_Config_Dynamic_endpoint,
-  }).pipe(
-    Effect.mapError($0 => new TextToImage_Config_Dynamic_Fetching.Error({
-      endpoint: TextToImage_Config_Dynamic_endpoint,
-      cause   : $0,
-    })),
-  );
+  });
 
-  const decodedConfigFromEndpoint = Schema.decodeUnknownSync(TextToImage_Config)(rawConfigFromEndpoint);
+  const decodedConfigFromEndpoint = yield* Schema.decodeUnknown(TextToImage_Config)(rawConfigFromEndpoint).pipe(Effect.orDie);
   return decodedConfigFromEndpoint;
-});
+}).pipe(
+  Effect.mapError($0 => new TextToImage_Config_Dynamic_Fetching.Error({
+    endpoint: TextToImage_Config_Dynamic_endpoint,
+    cause   : $0,
+  })),
+);
 
 export {
   TextToImage_Config_Dynamic_fetch,

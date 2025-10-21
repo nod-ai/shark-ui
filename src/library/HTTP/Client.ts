@@ -81,12 +81,11 @@ class HTTP_Client {
       return yield* newResponseError;
     }
 
-    const digestedResponseBody = yield* Effect.mapError(
-      bodyOf(fetchedResponse).digestAsUnknown,
-      $0 => new HTTP_Endpoint.Error.IndigestibleResponseBody({
+    const digestedResponseBody = yield* bodyOf(fetchedResponse).digestAsUnknown.pipe(
+      Effect.mapError($0 => new HTTP_Endpoint.Error.IndigestibleResponseBody({
         endpoint: endpointURL,
         cause   : $0,
-      }),
+      })),
     );
 
     return digestedResponseBody;
