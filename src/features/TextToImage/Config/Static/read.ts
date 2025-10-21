@@ -1,9 +1,12 @@
 import {
-  Effect,
-  Schema,
-} from 'effect';
+  FetchHttpClient,
+  HttpClient,
+  HttpClientResponse,
+} from '@effect/platform';
 
-import HTTP from '@/library/HTTP';
+import {
+  Effect,
+} from 'effect';
 
 import {
   TextToImage_Config,
@@ -18,18 +21,16 @@ import {
 } from './file';
 
 const TextToImage_Config_Static_read: TextToImage_Config_Static_Reading.Effect = Effect.gen(function* () {
-  const rawConfigFromFile = yield* HTTP.Client.local.fetchResource({
-    from: TextToImage_Config_Static_file,
-  });
-
-  const decoded = Schema.decodeUnknown(TextToImage_Config);
-  const decodedConfigFromFile = yield* decoded(rawConfigFromFile).pipe(Effect.orDie);
+  const fileResponse = yield* HttpClient.get(TextToImage_Config_Static_file);
+  const decodedBodyFrom = HttpClientResponse.schemaBodyJson(TextToImage_Config);
+  const decodedConfigFromFile = yield* decodedBodyFrom(fileResponse).pipe(Effect.orDie);
   return decodedConfigFromFile;
 }).pipe(
   Effect.mapError($0 => new TextToImage_Config_Static_Reading.Error({
     filePath: TextToImage_Config_Static_file,
     cause   : $0,
   })),
+  Effect.provide(FetchHttpClient.layer),
 );
 
 export {
