@@ -1,3 +1,7 @@
+import type {
+  HttpClientError,
+} from '@effect/platform';
+
 import {
   Effect,
   Either,
@@ -16,7 +20,6 @@ import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
-import type HTTP from '@/library/HTTP';
 import Shortfin from '@/library/Shortfin';
 import URLComponent from '@/library/URLComponent';
 
@@ -34,7 +37,7 @@ class ShimmedStabilityAIClient_Version1_Image
     givenRequest: GenerateFromTextRequest,
   ): Effect.Effect<
     GenerateFromTextResponse,
-    HTTP.Endpoint.Error.Any
+    HttpClientError.HttpClientError
   > => Effect.gen(this, function* () {
     const derivedBatchedRequestBody = toShortfinRequestBody.Batched([
       givenRequest.textToImageRequestBody,
