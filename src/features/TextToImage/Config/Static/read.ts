@@ -22,7 +22,8 @@ const TextToImage_Config_Static_read: TextToImage_Config_Static_Reading.Effect =
     from: TextToImage_Config_Static_file,
   });
 
-  const decodedConfigFromFile = yield* Schema.decodeUnknown(TextToImage_Config)(rawConfigFromFile).pipe(Effect.orDie);
+  const decoded = Schema.decodeUnknown(TextToImage_Config);
+  const decodedConfigFromFile = yield* decoded(rawConfigFromFile).pipe(Effect.orDie);
   return decodedConfigFromFile;
 }).pipe(
   Effect.mapError($0 => new TextToImage_Config_Static_Reading.Error({
