@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import {
-  Cause,
-  Effect,
-  Exit,
+  Either,
 } from 'effect';
 
 import type TextToImage from '@/features/TextToImage';
@@ -11,7 +9,7 @@ import TextToImageOutputAlert from './TextToImageOutputAlert.vue';
 import TextToImageOutputImg from './TextToImageOutputImg.vue';
 
 defineProps<{
-  output: Exit.Exit<
+  output: Either.Either<
     TextToImage.Pipeline.Output.Image,
     TextToImage.Server.Error.Any
   >;
@@ -20,16 +18,11 @@ defineProps<{
 
 <template>
   <TextToImageOutputImg
-    v-if="Exit.isSuccess(output)"
-    :model-value="output.value"
+    v-if="Either.isRight(output)"
+    :model-value="output.right"
   />
   <TextToImageOutputAlert
-    v-else-if="Cause.isFailType(output.cause)"
-    :error="output.cause.error"
-  />
-  <template
     v-else
-  >
-    {{ Effect.dieMessage(Cause.pretty(output.cause)).pipe(Effect.runSync) }}
-  </template>
+    :error="output.left"
+  />
 </template>

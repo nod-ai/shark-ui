@@ -1,5 +1,5 @@
 import type {
-  Exit,
+  Either,
   Option,
 } from 'effect';
 
@@ -9,8 +9,8 @@ interface ProgressiveRef<
 > {
   initiate: () => Promise<void>;
   isInProgress: boolean;
-  result: Option.Option<
-    Exit.Exit<
+  output: Option.Option<
+    Either.Either<
       SomeProduct,
       SomeFailure
     >
