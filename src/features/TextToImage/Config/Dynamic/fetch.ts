@@ -22,7 +22,7 @@ const TextToImage_Config_Dynamic_fetch: TextToImage_Config_Dynamic_Fetching.Effe
     from: TextToImage_Config_Dynamic_endpoint,
   });
 
-  const decodedConfigFromEndpoint = Schema.decodeUnknownSync(TextToImage_Config)(rawConfigFromEndpoint);
+  const decodedConfigFromEndpoint = yield* Schema.decodeUnknown(TextToImage_Config)(rawConfigFromEndpoint).pipe(Effect.orDie);
   return decodedConfigFromEndpoint;
 }).pipe(
   Effect.mapError($0 => new TextToImage_Config_Dynamic_Fetching.Error({
