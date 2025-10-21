@@ -1,9 +1,12 @@
 import {
-  Effect,
-  Schema,
-} from 'effect';
+  FetchHttpClient,
+  HttpClient,
+  HttpClientResponse,
+} from '@effect/platform';
 
-import HTTP from '@/library/HTTP';
+import {
+  Effect,
+} from 'effect';
 
 import {
   TextToImage_Config,
@@ -18,18 +21,16 @@ import {
 } from './endpoint';
 
 const TextToImage_Config_Dynamic_fetch: TextToImage_Config_Dynamic_Fetching.Effect = Effect.gen(function* () {
-  const rawConfigFromEndpoint = yield* HTTP.Client.local.fetchResource({
-    from: TextToImage_Config_Dynamic_endpoint,
-  });
-
-  const decoded = Schema.decodeUnknown(TextToImage_Config);
-  const decodedConfigFromEndpoint = yield* decoded(rawConfigFromEndpoint).pipe(Effect.orDie);
+  const endpointResponse = yield* HttpClient.get(TextToImage_Config_Dynamic_endpoint);
+  const decodedBodyFrom = HttpClientResponse.schemaBodyJson(TextToImage_Config);
+  const decodedConfigFromEndpoint = yield* decodedBodyFrom(endpointResponse).pipe(Effect.orDie);
   return decodedConfigFromEndpoint;
 }).pipe(
   Effect.mapError($0 => new TextToImage_Config_Dynamic_Fetching.Error({
     endpoint: TextToImage_Config_Dynamic_endpoint,
     cause   : $0,
   })),
+  Effect.provide(FetchHttpClient.layer),
 );
 
 export {
