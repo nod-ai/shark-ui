@@ -3,7 +3,9 @@ import {
   createWebHistory,
 } from 'vue-router';
 
-import TextToImagePage from '@/pages/TextToImagePage.vue';
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+const TextToImagePage = () => import('@/pages/TextToImagePage.vue');
+/* eslint-enable @typescript-eslint/explicit-function-return-type */
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
