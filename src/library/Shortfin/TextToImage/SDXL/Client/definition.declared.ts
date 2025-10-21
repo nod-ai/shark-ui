@@ -38,7 +38,8 @@ class Shortfin_TextToImage_SDXL_Client
       to       : URLComponent.Path('/generate'),
     });
 
-    const decodedResource = yield* Schema.decodeUnknown(Shortfin_TextToImage_SDXL_Client_Response.Body)(rawResource).pipe(Effect.orDie);
+    const decoded = Schema.decodeUnknown(Shortfin_TextToImage_SDXL_Client_Response.Body);
+    const decodedResource = yield* decoded(rawResource).pipe(Effect.orDie);
     const [soleGeneratedImage] = decodedResource.images;
     return soleGeneratedImage;
   });
