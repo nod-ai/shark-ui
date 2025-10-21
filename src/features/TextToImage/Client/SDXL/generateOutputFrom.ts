@@ -1,6 +1,5 @@
 import {
   Effect,
-  Exit,
 } from 'effect';
 
 import type {
@@ -25,7 +24,7 @@ import {
   toSharkUIOutput,
 } from './toSharkUIOutput';
 
-const TextToImage_Client_SDXL_generateOutputFrom = async (
+const TextToImage_Client_SDXL_generateOutputFrom = (
   given: {
     textToImageRequestBody: Pick<GenerateFromTextRequest['textToImageRequestBody'],
     | 'textPrompts'
@@ -36,16 +35,8 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     | 'seed'
     >;
   },
-): Promise<
-  TextToImage_Client_Generation.Exit
-> => {
-  const exitFromInitializingClient = await TextToImage_Client_SDXL_initialize();
-
-  if (
-    Exit.isFailure(exitFromInitializingClient)
-  ) return Exit.failCause(exitFromInitializingClient.cause);
-
-  const shimmedStabilityAIClient = exitFromInitializingClient.value;
+): TextToImage_Client_Generation.Effect => Effect.gen(function* () {
+  const shimmedStabilityAIClient = yield* TextToImage_Client_SDXL_initialize;
 
   const promisedTextToImageResponse = shimmedStabilityAIClient.version1.image.forciblyGenerateFromText({
     engineId              : 'stable-diffusion-xl-1024-v1-0',
@@ -59,7 +50,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     },
   });
 
-  const exitFromSettlingTextToImageResponse = await Effect.runPromiseExit(Effect.tryPromise(() => promisedTextToImageResponse).pipe(
+  const textToImageResponse = yield* Effect.tryPromise(() => promisedTextToImageResponse).pipe(
     Effect.catchAll((someException) => {
       const caughtError = someException.cause;
 
@@ -69,18 +60,15 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
 
       return Effect.die(caughtError);
     }),
-  ));
-
-  const exitFromSettlingSoleTextToImageOutput = Exit.map(
-    exitFromSettlingTextToImageResponse,
-    textToImageResponse => toSharkUIOutput.first({
-      in          : textToImageResponse,
-      inferredFrom: given.textToImageRequestBody.textPrompts,
-    }),
   );
 
-  return exitFromSettlingSoleTextToImageOutput;
-};
+  const soleTextToImageOutput = toSharkUIOutput.first({
+    in          : textToImageResponse,
+    inferredFrom: given.textToImageRequestBody.textPrompts,
+  });
+
+  return soleTextToImageOutput;
+});
 
 export {
   TextToImage_Client_SDXL_generateOutputFrom,

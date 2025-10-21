@@ -1,6 +1,5 @@
 import {
   Effect,
-  Exit,
 } from 'effect';
 
 import ContentDescriptor from '@/library/ContentDescriptor';
@@ -38,7 +37,7 @@ class HTTP_Client {
     return new URL(serializedURLComponents);
   }
 
-  public send = async (
+  public send = (
     givenRequestBody: unknown,
     {
       to: givenPath,
@@ -47,7 +46,7 @@ class HTTP_Client {
       to: URLComponent.Path;
       using: HTTP_Request.Method;
     },
-  ): Promise<HTTP_Endpoint.Exit> => Effect.runPromise(Effect.promise(async () => {
+  ): HTTP_Endpoint.Effect => Effect.gen(this, function* () {
     const endpointURL = this.originAt(givenPath);
 
     const promisedResponse = fetch(endpointURL, {
@@ -58,7 +57,7 @@ class HTTP_Client {
         : JSON.stringify(givenRequestBody),
     });
 
-    const exitFromSettlingResponse = await Effect.runPromiseExit(Effect.tryPromise(() => promisedResponse).pipe(
+    const fetchedResponse = yield* Effect.tryPromise(() => promisedResponse).pipe(
       Effect.catchAll((someException) => {
         const caughtError = someException.cause;
         const isFailureToReachServer = ($0: unknown): boolean => ($0 instanceof Error) && $0.message.includes('Failed to fetch');
@@ -71,13 +70,7 @@ class HTTP_Client {
 
         return Effect.die(someException);
       }),
-    ));
-
-    if (
-      Exit.isFailure(exitFromSettlingResponse)
-    ) return Exit.failCause(exitFromSettlingResponse.cause);
-
-    const fetchedResponse = exitFromSettlingResponse.value;
+    );
 
     if (!fetchedResponse.ok) {
       const newResponseError = new HTTP_Endpoint.Error.RespondedWithFailure({
@@ -85,34 +78,34 @@ class HTTP_Client {
         status : fetchedResponse.status,
       });
 
-      return Exit.fail(newResponseError);
+      return yield* newResponseError;
     }
 
-    const exitFromDigestingResponseBody = Exit.mapError(
-      await bodyOf(fetchedResponse).digestAsUnknown(),
+    const digestedResponseBody = yield* Effect.mapError(
+      bodyOf(fetchedResponse).digestAsUnknown,
       $0 => new HTTP_Endpoint.Error.IndigestibleResponseBody({
         endpoint: endpointURL,
         cause   : $0,
       }),
     );
 
-    return exitFromDigestingResponseBody;
-  }));
+    return digestedResponseBody;
+  });
 
-  public async fetchResource(
+  public fetchResource(
     {
       from: givenPath,
     }: {
       from: URLComponent.Path;
     },
-  ): Promise<HTTP_Endpoint.Exit> {
-    return await this.send(null, {
+  ): HTTP_Endpoint.Effect {
+    return this.send(null, {
       to   : givenPath,
       using: HTTP_Request.Method.FETCH,
     });
   }
 
-  public async submitResource(
+  public submitResource(
     {
       bySending: givenSubmission,
       to: givenPath,
@@ -120,14 +113,14 @@ class HTTP_Client {
       bySending: unknown;
       to: URLComponent.Path;
     },
-  ): Promise<HTTP_Endpoint.Exit> {
-    return await this.send(givenSubmission, {
+  ): HTTP_Endpoint.Effect {
+    return this.send(givenSubmission, {
       to   : givenPath,
       using: HTTP_Request.Method.SUBMIT,
     });
   }
 
-  public async createResource(
+  public createResource(
     {
       bySending: givenProperties,
       to: givenPath,
@@ -135,14 +128,14 @@ class HTTP_Client {
       bySending: unknown;
       to: URLComponent.Path;
     },
-  ): Promise<HTTP_Endpoint.Exit> {
-    return await this.send(givenProperties, {
+  ): HTTP_Endpoint.Effect {
+    return this.send(givenProperties, {
       to   : givenPath,
       using: HTTP_Request.Method.CREATE,
     });
   }
 
-  public async updateResource(
+  public updateResource(
     {
       bySending: givenChanges,
       to: givenPath,
@@ -150,17 +143,17 @@ class HTTP_Client {
       bySending: unknown;
       to: URLComponent.Path;
     },
-  ): Promise<HTTP_Endpoint.Exit> {
-    return await this.send(givenChanges, {
+  ): HTTP_Endpoint.Effect {
+    return this.send(givenChanges, {
       to   : givenPath,
       using: HTTP_Request.Method.UPDATE,
     });
   }
 
-  public async deleteResourceAt(
+  public deleteResourceAt(
     givenPath: URLComponent.Path,
-  ): Promise<HTTP_Endpoint.Exit> {
-    return await this.send(null, {
+  ): HTTP_Endpoint.Effect {
+    return this.send(null, {
       to   : givenPath,
       using: HTTP_Request.Method.DELETE,
     });

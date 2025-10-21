@@ -1,5 +1,5 @@
 import type {
-  Exit,
+  Effect,
 } from 'effect';
 
 import type {
@@ -10,11 +10,11 @@ import type {
   TextToImage_Config_Static_Reading_Error,
 } from './Error';
 
-type TextToImage_Config_Static_Reading_Exit = Exit.Exit<
+type TextToImage_Config_Static_Reading_Effect = Effect.Effect<
   TextToImage_Config,
   TextToImage_Config_Static_Reading_Error
 >;
 
 export type {
-  TextToImage_Config_Static_Reading_Exit,
+  TextToImage_Config_Static_Reading_Effect,
 };

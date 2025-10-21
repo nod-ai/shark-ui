@@ -20,9 +20,7 @@ const progressiveRef = <
   SomeProduct,
   SomeFailure,
 >(
-  retrieveExit: () => Promise<
-    Exit.Exit<SomeProduct, SomeFailure>
-  >,
+  givenOperation: Effect.Effect<SomeProduct, SomeFailure>,
 ): ProgressiveRef<
   SomeProduct,
   SomeFailure
@@ -46,8 +44,8 @@ const progressiveRef = <
       set(flagIsRaised, false);
     });
 
-    const retrievedExit = await Effect.runPromise(Effect.promise(retrieveExit));
-    set(capturedExit, Option.some(retrievedExit));
+    const exitFromOperation = await Effect.runPromise(Effect.exit(givenOperation));
+    set(capturedExit, Option.some(exitFromOperation));
   };
 
   return {

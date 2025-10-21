@@ -1,5 +1,5 @@
 import {
-  Exit,
+  Effect,
 } from 'effect';
 
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient';
@@ -8,23 +8,18 @@ import {
   TextToImage_Server,
 } from '../../Server';
 
-const TextToImage_Client_SDXL_initialize = async (): Promise<
-  Exit.Exit<
-    ShimmedStabilityAIClient,
-    TextToImage_Server.Error.MissingSpecification
-  >
-> => {
-  const exitFromRetrievingCurrentServer = await TextToImage_Server.Current.retrieve();
+const TextToImage_Client_SDXL_initialize: Effect.Effect<
+  ShimmedStabilityAIClient,
+  TextToImage_Server.Error.MissingSpecification
+> = Effect.gen(function* () {
+  const currentTextToImageServer = yield* TextToImage_Server.Current.retrieve;
 
-  const exitFromInitializingClient = Exit.map(
-    exitFromRetrievingCurrentServer,
-    textToImageServer => new ShimmedStabilityAIClient({
-      serverURL: textToImageServer.origin,
-    }),
-  );
+  const newStabilityAIClient = new ShimmedStabilityAIClient({
+    serverURL: currentTextToImageServer.origin,
+  });
 
-  return exitFromInitializingClient;
-};
+  return newStabilityAIClient;
+});
 
 export {
   TextToImage_Client_SDXL_initialize,

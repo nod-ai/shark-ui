@@ -3,5 +3,5 @@ export {
 } from './Error';
 
 export type {
-  TextToImage_Config_Static_Reading_Exit as Exit,
-} from './Exit';
+  TextToImage_Config_Static_Reading_Effect as Effect,
+} from './Effect';

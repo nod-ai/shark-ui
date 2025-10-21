@@ -1,6 +1,5 @@
 import {
   Effect,
-  Exit,
   Schema,
 } from 'effect';
 
@@ -18,24 +17,19 @@ import {
   TextToImage_Config_Static_file,
 } from './file';
 
-const TextToImage_Config_Static_read = (): Promise<
-  TextToImage_Config_Static_Reading.Exit
-> => Effect.runPromise(Effect.promise(async () => {
-  const exitFromFetchingRawConfigFromFile = (await HTTP.Client.local.fetchResource({
+const TextToImage_Config_Static_read: TextToImage_Config_Static_Reading.Effect = Effect.gen(function* () {
+  const rawConfigFromFile = yield* HTTP.Client.local.fetchResource({
     from: TextToImage_Config_Static_file,
-  })).pipe(
-    Exit.mapError($0 => new TextToImage_Config_Static_Reading.Error({
+  }).pipe(
+    Effect.mapError($0 => new TextToImage_Config_Static_Reading.Error({
       filePath: TextToImage_Config_Static_file,
       cause   : $0,
     })),
   );
 
-  const exitFromDecodingConfigFromFile = exitFromFetchingRawConfigFromFile.pipe(
-    Exit.map($0 => Schema.decodeUnknownSync(TextToImage_Config)($0)),
-  );
-
-  return exitFromDecodingConfigFromFile;
-}));
+  const decodedConfigFromFile = Schema.decodeUnknownSync(TextToImage_Config)(rawConfigFromFile);
+  return decodedConfigFromFile;
+});
 
 export {
   TextToImage_Config_Static_read,

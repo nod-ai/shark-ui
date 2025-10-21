@@ -7,7 +7,7 @@ import {
 } from '@/library/vue';
 
 import {
-  Exit,
+  Effect,
   Option,
 } from 'effect';
 
@@ -50,13 +50,13 @@ const {
 
 const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
 
-const imageGeneration = progressiveRef(async () => {
+const imageGeneration = progressiveRef(Effect.gen(function* () {
   const proposedPrompt = Option.getOrThrowWith(
     get(currentPrompt),
     () => new Error('Prompt was not set before submission'),
   );
 
-  const exitFromGeneratingOutput = await TextToImage.Client.SDXL.generateOutputFrom({
+  const generatedOutput = yield* TextToImage.Client.SDXL.generateOutputFrom({
     textToImageRequestBody: {
       textPrompts: proposedPrompt,
       height     : 1024,
@@ -67,13 +67,8 @@ const imageGeneration = progressiveRef(async () => {
     },
   });
 
-  const exitFromGeneratingImage = Exit.map(
-    exitFromGeneratingOutput,
-    $0 => $0.image,
-  );
-
-  return exitFromGeneratingImage;
-});
+  return generatedOutput.image;
+}));
 </script>
 
 <template>

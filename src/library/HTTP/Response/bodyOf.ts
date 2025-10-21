@@ -1,6 +1,5 @@
 import {
   Effect,
-  Exit,
 } from 'effect';
 
 import ContentDescriptor from '@/library/ContentDescriptor';
@@ -27,20 +26,20 @@ const bodyOf = (
 
     return actualRawDescriptor.includes(givenDescriptor.serialized);
   },
-  async digestAsUnknown() {
-    return Effect.runPromise(Effect.promise(async () => {
+  get digestAsUnknown() {
+    return Effect.gen(this, function* () {
       if (!this.isSuggestedToBeDigestibleAs(ContentDescriptor.json)) {
         const newDescriptorMismatchError = new HTTP_Response_Body.Digestion.Error.DescriptorMismatch({
           response          : givenResponse,
           expectedDescriptor: ContentDescriptor.json,
         });
 
-        return Exit.fail(newDescriptorMismatchError);
+        return yield* newDescriptorMismatchError;
       }
 
       const promiseForDigestedResponseBody: Promise<unknown> = givenResponse.json();
 
-      const exitFromDigestingResponseBody = await Effect.runPromiseExit(Effect.tryPromise(() => promiseForDigestedResponseBody).pipe(
+      const digestedResponseBody = yield* Effect.tryPromise(() => promiseForDigestedResponseBody).pipe(
         Effect.catchAll((someException) => {
           const caughtError = someException.cause;
 
@@ -52,10 +51,10 @@ const bodyOf = (
 
           return Effect.die(caughtError);
         }),
-      ));
+      );
 
-      return exitFromDigestingResponseBody;
-    }));
+      return digestedResponseBody;
+    });
   },
 });
 

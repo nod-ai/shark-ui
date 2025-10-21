@@ -1,5 +1,5 @@
 import type {
-  Exit,
+  Effect,
 } from 'effect';
 
 import type {
@@ -10,11 +10,11 @@ import type {
   TextToImage_Server,
 } from '../../Server';
 
-type TextToImage_Client_Generation_Exit = Exit.Exit<
+type TextToImage_Client_Generation_Effect = Effect.Effect<
   TextToImage_Pipeline.Output,
   TextToImage_Server.Error.Any
 >;
 
 export type {
-  TextToImage_Client_Generation_Exit,
+  TextToImage_Client_Generation_Effect,
 };
