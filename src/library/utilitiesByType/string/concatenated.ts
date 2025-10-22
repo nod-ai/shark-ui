@@ -1,9 +1,14 @@
+import {
+  Array,
+  pipe,
+} from 'effect';
+
 const concatenated = (
   ...givenOperands: string[]
-): string => {
-  return givenOperands
-    .join('');
-};
+): string => pipe(
+  givenOperands,
+  Array.join(''),
+);
 
 export {
   concatenated,
