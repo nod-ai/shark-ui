@@ -4,7 +4,9 @@ import {
 } from 'effect';
 
 const concatenated = (
-  ...givenOperands: string[]
+  ...givenOperands: (
+    | string
+  )[]
 ): string => pipe(
   givenOperands,
   Array.join(''),
