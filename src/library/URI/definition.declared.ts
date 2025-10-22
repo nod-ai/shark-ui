@@ -1,5 +1,4 @@
 import {
-  Array,
   Option,
 } from 'effect';
 
@@ -69,15 +68,14 @@ class URI {
   }
 
   public get serialized(): string {
-    const sparseOrderedComponents: Option.Option<string>[] = [
-      Option.some(this.serializableScheme),
-      /*       */ this.serializableAuthority,
-      Option.some(this.path),
-      /*       */ this.serializableQuery,
-      /*       */ this.serializableFragment,
+    const orderedComponents = [
+      this.serializableScheme,
+      this.serializableAuthority,
+      this.path,
+      this.serializableQuery,
+      this.serializableFragment,
     ];
 
-    const orderedComponents = Array.getSomes(sparseOrderedComponents);
     const serializedComponents = concatenated(...orderedComponents);
     return serializedComponents;
   }

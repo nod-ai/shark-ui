@@ -1,5 +1,4 @@
 import {
-  Array,
   Option,
 } from 'effect';
 
@@ -60,13 +59,12 @@ class URI_Data
   }
 
   public override get path(): NonTrivialString {
-    const sparseOrderedPathComponents: Option.Option<string>[] = [
-      Option.some(this.descriptor.serialized),
-      /*       */ this.serializableEncoding,
-      Option.some(this.serializableData),
+    const orderedPathComponents = [
+      this.descriptor.serialized,
+      this.serializableEncoding,
+      this.serializableData,
     ];
 
-    const orderedPathComponents = Array.getSomes(sparseOrderedPathComponents);
     const serializedPathComponents = concatenated(...orderedPathComponents);
     return NonTrivialString(serializedPathComponents);
   }

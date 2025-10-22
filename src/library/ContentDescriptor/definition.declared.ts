@@ -1,5 +1,4 @@
 import {
-  Array,
   Option,
 } from 'effect';
 
@@ -74,15 +73,14 @@ class ContentDescriptor {
   }
 
   public get serialized(): NonTrivialString {
-    const sparseOrderedComponents: Option.Option<string>[] = [
-      Option.some(this.serializableTopLevelDescriptor),
-      /*       */ this.serializableTree,
-      Option.some(this.bottomLevelDescriptor),
-      /*       */ this.serializableStructureDescriptor,
-      /*       */ this.serializableParameters,
+    const orderedComponents = [
+      this.serializableTopLevelDescriptor,
+      this.serializableTree,
+      this.bottomLevelDescriptor,
+      this.serializableStructureDescriptor,
+      this.serializableParameters,
     ];
 
-    const orderedComponents = Array.getSomes(sparseOrderedComponents);
     const serializedComponents = concatenated(...orderedComponents);
     return NonTrivialString(serializedComponents);
   }
