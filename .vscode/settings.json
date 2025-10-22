@@ -5,6 +5,12 @@
         "vuetify"
     ],
     "cSpell.customDictionaries": {
+        "package/effect": {
+            "name": "package/effect",
+            "path": "./dictionary.effect.txt",
+            "description": "Words introduced by the effect package",
+            "addWords": false
+        },
         "library/math": {
             "name": "library/math",
             "path": "./src/library/math/dictionary.txt",
