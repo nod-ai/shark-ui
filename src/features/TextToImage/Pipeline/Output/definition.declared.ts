@@ -1,5 +1,5 @@
 import {
-  Effect,
+  Data,
 } from 'effect';
 
 import type {
@@ -7,17 +7,10 @@ import type {
 } from './Image';
 
 /** The resulting information after a text-to-image model has ingested some input with some configuration */
-interface TextToImage_Pipeline_Output {
-  image: TextToImage_Pipeline_Output_Image;
-}
-
-function TextToImage_Pipeline_Output(
-  namespaceOnly: never = Effect.dieMessage(
-    `Unexpected call of module augmentation provision for ${TextToImage_Pipeline_Output.name}.`,
-  ).pipe(Effect.runSync),
-): never {
-  return namespaceOnly;
-}
+class TextToImage_Pipeline_Output
+  extends Data.Class<{
+    image: TextToImage_Pipeline_Output_Image;
+  }> {}
 
 export {
   TextToImage_Pipeline_Output,
