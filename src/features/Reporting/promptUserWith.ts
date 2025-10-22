@@ -1,17 +1,24 @@
+import {
+  toStringUnknown,
+} from 'effect/Inspectable';
+
+import {
+  isError,
+} from 'effect/Predicate';
+
 import GitHub from '@/library/GitHub';
 
-import {
-  Contextualized,
-} from '@/library/modifiersByType/error';
+const Reporting_promptUserWith = (givenIssue: unknown): void => {
+  console.debug(givenIssue);
 
-import {
-  Reporting_formatFor,
-} from './formatFor';
-
-const Reporting_promptUserWith = (givenError: Error): void => {
-  const unexpectedError = Contextualized.cast(givenError, 'Unexpected Error');
-  console.debug(givenError);
-  const formattedErrorDetails = Reporting_formatFor(unexpectedError);
+  const formattedErrorDetails = [
+    'Unexpected Error:',
+    '"""',
+    isError(givenIssue)
+      ? givenIssue.message
+      : toStringUnknown(givenIssue),
+    '"""',
+  ].join('\n');
 
   const userDidPermitDraftingNewIssue = window.confirm([
     formattedErrorDetails,
