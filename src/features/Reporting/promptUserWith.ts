@@ -1,8 +1,12 @@
-import GitHub from '@/library/GitHub';
+import {
+  toStringUnknown,
+} from 'effect/Inspectable';
 
 import {
-  Contextualized,
-} from '@/library/modifiersByType/error';
+  isError,
+} from 'effect/Predicate';
+
+import GitHub from '@/library/GitHub';
 
 import {
   asError,
@@ -10,13 +14,14 @@ import {
 
 const Reporting_promptUserWith = (givenIssue: unknown): void => {
   const givenError = asError(givenIssue);
-  const unexpectedError = Contextualized.cast(givenError, 'Unexpected Error');
   console.debug(givenError);
 
   const formattedErrorDetails = [
     'Unexpected Error:',
     '"""',
-    unexpectedError.cause.message,
+    isError(givenIssue)
+      ? givenIssue.message
+      : toStringUnknown(givenIssue),
     '"""',
   ].join('\n');
 
