@@ -59,7 +59,7 @@ class URI_Data
   }
 
   public override get path(): NonTrivialString {
-    const orderedPathComponents: Option.Option<string>[] = [
+    const orderedPathComponents = [
       Option.some(this.descriptor.serialized),
       /*       */ this.serializableEncoding,
       Option.some(this.serializableData),

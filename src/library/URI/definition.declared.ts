@@ -68,7 +68,7 @@ class URI {
   }
 
   public get serialized(): string {
-    const orderedComponents: Option.Option<string>[] = [
+    const orderedComponents = [
       Option.some(this.serializableScheme),
       /*       */ this.serializableAuthority,
       Option.some(this.path),
