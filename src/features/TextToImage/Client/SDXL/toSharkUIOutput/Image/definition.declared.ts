@@ -17,18 +17,20 @@ function toSharkUIOutput_Image(
     description: TextToImage_Pipeline.Output['image']['description'];
   },
 ): Option.Option<TextToImage_Pipeline.Output['image']> {
-  if (
-    givenImage.base64 === undefined
-  ) return Option.none();
+  return Option.gen(function* () {
+    if (
+      givenImage.base64 === undefined
+    ) return yield* Option.none();
 
-  const base64DataOfRawImage = Sequence.Byte.Encoded.Base64(givenImage.base64);
+    const base64DataOfRawImage = Sequence.Byte.Encoded.Base64(givenImage.base64);
 
-  const derivedImage = {
-    uri        : new URI.Image('png', 'base64', base64DataOfRawImage),
-    description: given.description,
-  };
+    const derivedImage = {
+      uri        : new URI.Image('png', 'base64', base64DataOfRawImage),
+      description: given.description,
+    };
 
-  return Option.some(derivedImage);
+    return derivedImage;
+  });
 }
 
 export {
