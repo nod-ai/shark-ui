@@ -8,15 +8,17 @@ import {
   asError,
 } from '@/library/utilitiesByType/error';
 
-import {
-  Reporting_formatFor,
-} from './formatFor';
-
 const Reporting_promptUserWith = (givenIssue: unknown): void => {
   const givenError = asError(givenIssue);
   const unexpectedError = Contextualized.cast(givenError, 'Unexpected Error');
   console.debug(givenError);
-  const formattedErrorDetails = Reporting_formatFor(unexpectedError);
+
+  const formattedErrorDetails = [
+    `${unexpectedError.message}:`,
+    '"""',
+    unexpectedError.cause.message,
+    '"""',
+  ].join('\n');
 
   const userDidPermitDraftingNewIssue = window.confirm([
     formattedErrorDetails,
