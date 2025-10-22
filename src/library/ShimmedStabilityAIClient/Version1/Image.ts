@@ -3,6 +3,10 @@ import {
   Either,
 } from 'effect';
 
+import {
+  ClientSDK,
+} from 'stabilityai-client-typescript/lib/sdks';
+
 import type {
   Image as StabilityAI_TextToImage_Pipeline_Output,
 } from 'stabilityai-client-typescript/models/components';
@@ -12,15 +16,20 @@ import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
-import HTTP from '@/library/HTTP';
+import type HTTP from '@/library/HTTP';
 import Shortfin from '@/library/Shortfin';
+import URLComponent from '@/library/URLComponent';
 
 import {
   toShortfinRequestBody,
 } from '../toShortfinRequestBody';
 
 class ShimmedStabilityAIClient_Version1_Image
-  extends HTTP.Client {
+  extends ClientSDK {
+  private get origin(): URLComponent.Origin {
+    return URLComponent.Origin(this._options.serverURL ?? '');
+  }
+
   private safelyGenerateFromText = (
     givenRequest: GenerateFromTextRequest,
   ): Effect.Effect<
