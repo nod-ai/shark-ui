@@ -74,11 +74,11 @@ class ContentDescriptor {
 
   public get serialized(): NonTrivialString {
     const orderedComponents = [
-      /*       */ this.serializableTopLevelDescriptor,
-      /*       */ this.serializableTree,
-      /*       */ this.bottomLevelDescriptor,
-      /*       */ this.serializableStructureDescriptor,
-      /*       */ this.serializableParameters,
+      this.serializableTopLevelDescriptor,
+      this.serializableTree,
+      this.bottomLevelDescriptor,
+      this.serializableStructureDescriptor,
+      this.serializableParameters,
     ];
 
     const serializedComponents = concatenated(...orderedComponents);

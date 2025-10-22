@@ -69,11 +69,11 @@ class URI {
 
   public get serialized(): string {
     const orderedComponents = [
-      /*       */ this.serializableScheme,
-      /*       */ this.serializableAuthority,
-      /*       */ this.path,
-      /*       */ this.serializableQuery,
-      /*       */ this.serializableFragment,
+      this.serializableScheme,
+      this.serializableAuthority,
+      this.path,
+      this.serializableQuery,
+      this.serializableFragment,
     ];
 
     const serializedComponents = concatenated(...orderedComponents);
