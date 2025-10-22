@@ -1,7 +1,5 @@
 {
     "cSpell.words": [
-        "SDXL",
-        "stabilityai",
         "vite",
         "vitest",
         "vuetify"
@@ -17,6 +15,12 @@
             "name": "library/Shortfin",
             "path": "./src/library/Shortfin/dictionary.txt",
             "description": "Words introduced by the @/library/Shortfin module",
+            "addWords": false
+        },
+        "stability-ai": {
+            "name": "stability-ai",
+            "path": "./dictionary.stability-ai.txt",
+            "description": "Words introduced by the stability-ai organization",
             "addWords": false
         },
     },
