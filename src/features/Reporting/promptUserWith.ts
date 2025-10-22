@@ -8,13 +8,8 @@ import {
 
 import GitHub from '@/library/GitHub';
 
-import {
-  asError,
-} from '@/library/utilitiesByType/error';
-
 const Reporting_promptUserWith = (givenIssue: unknown): void => {
-  const givenError = asError(givenIssue);
-  console.debug(givenError);
+  console.debug(givenIssue);
 
   const formattedErrorDetails = [
     'Unexpected Error:',
