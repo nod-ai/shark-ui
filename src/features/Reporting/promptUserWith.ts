@@ -14,7 +14,7 @@ const Reporting_promptUserWith = (givenIssue: unknown): void => {
   console.debug(givenError);
 
   const formattedErrorDetails = [
-    `${unexpectedError.message}:`,
+    'Unexpected Error:',
     '"""',
     unexpectedError.cause.message,
     '"""',
