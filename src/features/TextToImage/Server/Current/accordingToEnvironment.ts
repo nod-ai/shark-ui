@@ -8,18 +8,15 @@ import {
   TextToImage_Server_Origin,
 } from '../Origin';
 
-const TextToImage_Server_Current_accordingToEnvironment = ((): Option.Option<WebAPI.Server> => {
-  const originAccordingToEnvironment = Option.fromNullable(import.meta.env[TextToImage_Server_Origin.environmentKey]);
+const TextToImage_Server_Current_accordingToEnvironment = Option.gen(function* () {
+  const originAccordingToEnvironment = yield* Option.fromNullable(import.meta.env[TextToImage_Server_Origin.environmentKey]);
 
-  const serverAccordingToEnvironment = Option.map(
-    originAccordingToEnvironment,
-    ($0) => new WebAPI.Server({
-      origin: $0,
-    }),
-  );
+  const serverAccordingToEnvironment = new WebAPI.Server({
+    origin: originAccordingToEnvironment,
+  });
 
   return serverAccordingToEnvironment;
-})();
+});
 
 export {
   TextToImage_Server_Current_accordingToEnvironment,
