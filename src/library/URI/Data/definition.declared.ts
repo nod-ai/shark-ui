@@ -60,9 +60,9 @@ class URI_Data
 
   public override get path(): NonTrivialString {
     const orderedPathComponents = [
-      Option.some(this.descriptor.serialized),
+      /*       */ this.descriptor.serialized,
       /*       */ this.serializableEncoding,
-      Option.some(this.serializableData),
+      /*       */ this.serializableData,
     ];
 
     const serializedPathComponents = concatenated(...orderedPathComponents);

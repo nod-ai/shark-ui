@@ -74,9 +74,9 @@ class ContentDescriptor {
 
   public get serialized(): NonTrivialString {
     const orderedComponents = [
-      Option.some(this.serializableTopLevelDescriptor),
+      /*       */ this.serializableTopLevelDescriptor,
       /*       */ this.serializableTree,
-      Option.some(this.bottomLevelDescriptor),
+      /*       */ this.bottomLevelDescriptor,
       /*       */ this.serializableStructureDescriptor,
       /*       */ this.serializableParameters,
     ];
