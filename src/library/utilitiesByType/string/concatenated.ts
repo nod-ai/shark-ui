@@ -9,6 +9,7 @@ const concatenated = (
   )[]
 ): string => pipe(
   givenOperands,
+  Array.map($0 => $0),
   Array.join(''),
 );
 
