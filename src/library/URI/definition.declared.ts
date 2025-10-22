@@ -1,5 +1,4 @@
 import {
-  Array,
   Option,
 } from 'effect';
 
@@ -77,8 +76,7 @@ class URI {
       /*       */ this.serializableFragment,
     ];
 
-    const orderedComponents = Array.getSomes(sparseOrderedComponents);
-    const serializedComponents = concatenated(...orderedComponents);
+    const serializedComponents = concatenated(...sparseOrderedComponents);
     return serializedComponents;
   }
 }

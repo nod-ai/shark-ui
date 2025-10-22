@@ -1,5 +1,4 @@
 import {
-  Array,
   Option,
 } from 'effect';
 
@@ -82,8 +81,7 @@ class ContentDescriptor {
       /*       */ this.serializableParameters,
     ];
 
-    const orderedComponents = Array.getSomes(sparseOrderedComponents);
-    const serializedComponents = concatenated(...orderedComponents);
+    const serializedComponents = concatenated(...sparseOrderedComponents);
     return NonTrivialString(serializedComponents);
   }
 }

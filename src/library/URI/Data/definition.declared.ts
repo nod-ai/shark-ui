@@ -1,5 +1,4 @@
 import {
-  Array,
   Option,
 } from 'effect';
 
@@ -66,8 +65,7 @@ class URI_Data
       Option.some(this.serializableData),
     ];
 
-    const orderedPathComponents = Array.getSomes(sparseOrderedPathComponents);
-    const serializedPathComponents = concatenated(...orderedPathComponents);
+    const serializedPathComponents = concatenated(...sparseOrderedPathComponents);
     return NonTrivialString(serializedPathComponents);
   }
 }
