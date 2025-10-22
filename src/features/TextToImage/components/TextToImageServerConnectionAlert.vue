@@ -15,7 +15,7 @@ defineProps<{
     type="error"
     title="Failed to Connect"
   >
-    Server not found at specified origin "{{ error.endpoint.origin }}".<br>
+    Server not found at "{{ error.request.url }}".<br>
     <br>
     Ensure that:<br>
     a. the environment/config has the correct origin<br>

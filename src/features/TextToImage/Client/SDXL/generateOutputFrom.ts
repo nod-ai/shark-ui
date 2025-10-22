@@ -1,12 +1,14 @@
 import {
+  HttpClientError,
+} from '@effect/platform';
+
+import {
   Effect,
 } from 'effect';
 
 import type {
   GenerateFromTextRequest,
 } from 'stabilityai-client-typescript/models/operations';
-
-import HTTP from '@/library/HTTP';
 
 import {
   TextToImage_Server,
@@ -55,7 +57,8 @@ const TextToImage_Client_SDXL_generateOutputFrom = (
       const caughtError = someException.cause;
 
       if (
-        caughtError instanceof HTTP.Endpoint.Error.FailedToSendRequest
+        HttpClientError.isHttpClientError(caughtError)
+        && (caughtError.reason === 'Transport')
       ) return new TextToImage_Server.Error.FailedToConnect(caughtError);
 
       return Effect.die(caughtError);
