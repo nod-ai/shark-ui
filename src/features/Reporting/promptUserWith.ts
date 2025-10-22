@@ -5,10 +5,15 @@ import {
 } from '@/library/modifiersByType/error';
 
 import {
+  asError,
+} from '@/library/utilitiesByType/error';
+
+import {
   Reporting_formatFor,
 } from './formatFor';
 
-const Reporting_promptUserWith = (givenError: Error): void => {
+const Reporting_promptUserWith = (givenIssue: unknown): void => {
+  const givenError = asError(givenIssue);
   const unexpectedError = Contextualized.cast(givenError, 'Unexpected Error');
   console.debug(givenError);
   const formattedErrorDetails = Reporting_formatFor(unexpectedError);
