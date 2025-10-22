@@ -1,7 +1,8 @@
 const concatenated = (
   ...givenOperands: string[]
 ): string => {
-  return givenOperands.join('');
+  return givenOperands
+    .join('');
 };
 
 export {
