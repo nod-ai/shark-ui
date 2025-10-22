@@ -73,7 +73,7 @@ class ContentDescriptor {
   }
 
   public get serialized(): NonTrivialString {
-    const sparseOrderedComponents: Option.Option<string>[] = [
+    const orderedComponents: Option.Option<string>[] = [
       Option.some(this.serializableTopLevelDescriptor),
       /*       */ this.serializableTree,
       Option.some(this.bottomLevelDescriptor),
@@ -81,7 +81,7 @@ class ContentDescriptor {
       /*       */ this.serializableParameters,
     ];
 
-    const serializedComponents = concatenated(...sparseOrderedComponents);
+    const serializedComponents = concatenated(...orderedComponents);
     return NonTrivialString(serializedComponents);
   }
 }

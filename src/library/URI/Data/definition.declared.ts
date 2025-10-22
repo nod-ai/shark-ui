@@ -59,13 +59,13 @@ class URI_Data
   }
 
   public override get path(): NonTrivialString {
-    const sparseOrderedPathComponents: Option.Option<string>[] = [
+    const orderedPathComponents: Option.Option<string>[] = [
       Option.some(this.descriptor.serialized),
       /*       */ this.serializableEncoding,
       Option.some(this.serializableData),
     ];
 
-    const serializedPathComponents = concatenated(...sparseOrderedPathComponents);
+    const serializedPathComponents = concatenated(...orderedPathComponents);
     return NonTrivialString(serializedPathComponents);
   }
 }

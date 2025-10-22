@@ -68,7 +68,7 @@ class URI {
   }
 
   public get serialized(): string {
-    const sparseOrderedComponents: Option.Option<string>[] = [
+    const orderedComponents: Option.Option<string>[] = [
       Option.some(this.serializableScheme),
       /*       */ this.serializableAuthority,
       Option.some(this.path),
@@ -76,7 +76,7 @@ class URI {
       /*       */ this.serializableFragment,
     ];
 
-    const serializedComponents = concatenated(...sparseOrderedComponents);
+    const serializedComponents = concatenated(...orderedComponents);
     return serializedComponents;
   }
 }
