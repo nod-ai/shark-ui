@@ -96,21 +96,18 @@ const defaultInitialInputText: InputTextByQualitativeWeight = {
   negative: 'Watermark, blurry, over-saturated, low resolution, pollution',
 };
 
-const initialInputText: InputTextByQualitativeWeight = (() => {
-  const initialExposedInputText = get(exposedInputText);
-
-  return Option.match(initialExposedInputText, {
-    onNone: () => defaultInitialInputText,
-    onSome: ($0) => byQualitativeWeight($0),
-  });
-})();
+const initialInputText: InputTextByQualitativeWeight = Option.match(get(exposedInputText), {
+  onSome: ($0) => byQualitativeWeight($0),
+  onNone: () => defaultInitialInputText,
+});
 
 const currentInputText: Ref<InputTextByQualitativeWeight> = ref(initialInputText);
 
 watch(
   currentInputText,
   (updatedInputText) => {
-    set(exposedInputText, Option.some(standardized(updatedInputText)));
+    const wrappedInputText = Option.some(standardized(updatedInputText));
+    set(exposedInputText, wrappedInputText);
   },
   {
     deep     : true,
