@@ -106,7 +106,8 @@ const currentInputText: Ref<InputTextByQualitativeWeight> = ref(initialInputText
 watch(
   currentInputText,
   (updatedInputText) => {
-    set(exposedInputText, Option.some(standardized(updatedInputText)));
+    const wrappedInputText = Option.some(standardized(updatedInputText));
+    set(exposedInputText, wrappedInputText);
   },
   {
     deep     : true,
