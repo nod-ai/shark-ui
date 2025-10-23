@@ -32,11 +32,11 @@ const toSharkUIOutput_plural = (
 
   const inferredOutputs = Option.map(
     inferredRawImages,
-    $0 => $0
-      .map($0 => toSharkUIOutput_Image($0, {
+    ($0) => $0
+      .map(($0) => toSharkUIOutput_Image($0, {
         description: toSharkUIOutput_Image.Description.all(givenInputText),
       }))
-      .map($0 => TextToImage_Pipeline.Output.Option.from($0)),
+      .map(($0) => TextToImage_Pipeline.Output.Option.from($0)),
   );
 
   return inferredOutputs;

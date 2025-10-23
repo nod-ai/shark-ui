@@ -10,7 +10,7 @@ const TextToImage_Pipeline_Output_Option_from = (
   givenImage: Option.Option<TextToImage_Pipeline_Output['image']>,
 ): Option.Option<TextToImage_Pipeline_Output> => Option.map(
   givenImage,
-  $0 => ({
+  ($0) => ({
     image: $0,
   }),
 );
