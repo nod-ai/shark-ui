@@ -42,9 +42,8 @@ class URI {
   }
 
   public get path(): Option.Option.Value<URI['overridablePath']> {
-    return Option.getOrThrowWith(
-      this.overridablePath,
-      () => new Error('`path` must either be a) provided via constructor or b) overridden via public getter'),
+    return this.overridablePath.pipe(
+      Option.getOrThrowWith(() => new Error('`path` must either be a) provided via constructor or b) overridden via public getter')),
     );
   }
 
