@@ -33,9 +33,8 @@ const toSharkUIOutput_first = (
     inferredFrom: givenInputText,
   });
 
-  const inferredOutputs = Option.getOrThrowWith(
-    potentialInferredOutputs,
-    () => new Error('Expected text-to-image output in response result'),
+  const inferredOutputs = potentialInferredOutputs.pipe(
+    Option.getOrThrowWith(() => new Error('Expected text-to-image output in response result')),
   );
 
   if (
@@ -44,9 +43,8 @@ const toSharkUIOutput_first = (
 
   const [firstPotentialOutput] = inferredOutputs;
 
-  const firstPipelineOutput = Option.getOrThrowWith(
-    firstPotentialOutput,
-    () => new Error('Expected at least one well-formed text-to-image output in response'),
+  const firstPipelineOutput = firstPotentialOutput.pipe(
+    Option.getOrThrowWith(() => new Error('Expected at least one well-formed text-to-image output in response')),
   );
 
   return firstPipelineOutput;

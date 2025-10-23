@@ -34,9 +34,8 @@ class URI_Data
   }
 
   public get descriptor(): Option.Option.Value<URI_Data['overridableDescriptor']> {
-    return Option.getOrThrowWith(
-      this.overridableDescriptor,
-      () => new Error('Descriptor either needs to be initialized or overridden'),
+    return this.overridableDescriptor.pipe(
+      Option.getOrThrowWith(() => new Error('Descriptor either needs to be initialized or overridden')),
     );
   }
 
