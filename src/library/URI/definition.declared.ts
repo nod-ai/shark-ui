@@ -35,9 +35,11 @@ class URI {
 
   public static readonly authorityPrefix = '//';
 
-  private readonly serializableAuthority = Option.gen(this, function* () {
-    return URI.authorityPrefix.concat(yield* this.authority);
-  });
+  private get serializableAuthority(): Option.Option<string> {
+    return Option.gen(this, function* () {
+      return URI.authorityPrefix.concat(yield* this.authority);
+    });
+  }
 
   public get path(): Option.Option.Value<URI['overridablePath']> {
     return Option.getOrThrowWith(
@@ -48,15 +50,19 @@ class URI {
 
   public static readonly queryPrefix = '?';
 
-  private readonly serializableQuery = Option.gen(this, function* () {
-    return URI.queryPrefix.concat(yield* this.query);
-  });
+  private get serializableQuery(): Option.Option<string> {
+    return Option.gen(this, function* () {
+      return URI.queryPrefix.concat(yield* this.query);
+    });
+  }
 
   public static readonly fragmentPrefix = '#';
 
-  private readonly serializableFragment = Option.gen(this, function* () {
-    return URI.fragmentPrefix.concat(yield* this.fragment);
-  });
+  private get serializableFragment(): Option.Option<string> {
+    return Option.gen(this, function* () {
+      return URI.fragmentPrefix.concat(yield* this.fragment);
+    });
+  }
 
   public get serialized(): string {
     const orderedComponents = [
