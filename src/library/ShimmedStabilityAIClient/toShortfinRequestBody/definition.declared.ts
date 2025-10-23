@@ -16,13 +16,13 @@ function toShortfinRequestBody(
   givenRequestBody: GenerateFromTextRequest['textToImageRequestBody'],
 ): Option.Option<Shortfin.TextToImage.SDXL.Client.Request.Body> {
   return Option.gen(function* () {
-    if (
-      (givenRequestBody.height === undefined)
-      || (givenRequestBody.width === undefined)
-      || (givenRequestBody.steps === undefined)
-      || (givenRequestBody.cfgScale === undefined)
-      || (givenRequestBody.seed === undefined)
-    ) return yield* Option.none();
+    const remainderOfShortfinRequestBody = yield* Option.all({
+      height        : Option.fromNullable(givenRequestBody.height /*  */),
+      width         : Option.fromNullable(givenRequestBody.width /*   */),
+      steps         : Option.fromNullable(givenRequestBody.steps /*   */),
+      guidance_scale: Option.fromNullable(givenRequestBody.cfgScale /**/),
+      seed          : Option.fromNullable(givenRequestBody.seed /*    */),
+    });
 
     const promptsForShortfinRequestBody = {
       prompt: toShortfinRequestBody_Prompt(givenRequestBody.textPrompts, {
@@ -35,11 +35,7 @@ function toShortfinRequestBody(
 
     const derivedShortfinRequestBody = {
       ...promptsForShortfinRequestBody,
-      height        : givenRequestBody.height,
-      width         : givenRequestBody.width,
-      steps         : givenRequestBody.steps,
-      guidance_scale: givenRequestBody.cfgScale,
-      seed          : givenRequestBody.seed,
+      ...remainderOfShortfinRequestBody,
     };
 
     return derivedShortfinRequestBody;
