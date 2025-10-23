@@ -8,12 +8,11 @@ import type {
 
 const TextToImage_Pipeline_Output_Option_from = (
   givenImage: Option.Option<TextToImage_Pipeline_Output['image']>,
-): Option.Option<TextToImage_Pipeline_Output> => Option.map(
-  givenImage,
-  ($0) => ({
-    image: $0,
-  }),
-);
+): Option.Option<TextToImage_Pipeline_Output> => Option.gen(function* () {
+  return {
+    image: yield* givenImage,
+  };
+});
 
 export {
   TextToImage_Pipeline_Output_Option_from,
