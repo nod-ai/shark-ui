@@ -10,6 +10,10 @@ const extraConfig: ConfigWithExtends = {
     '@stylistic': stylistic,
   },
   rules: {
+    '@stylistic/arrow-parens': [
+      'error',
+      'always', // Helps minimize diffs and mitigate merge conflicts.
+    ],
     '@stylistic/function-call-argument-newline': [
       'error',
       'consistent', // Helps minimize diffs and mitigate merge conflicts.

@@ -40,7 +40,7 @@ class ContentDescriptor {
     return Option.map(
       this.tree,
       ($0) => {
-        const suffixedTreeBranches = $0.map($0 => $0.concat(ContentDescriptor.treeBranchSuffix));
+        const suffixedTreeBranches = $0.map(($0) => $0.concat(ContentDescriptor.treeBranchSuffix));
         const serializedTreeBranches = concatenated(...suffixedTreeBranches);
         return serializedTreeBranches;
       },
@@ -52,7 +52,7 @@ class ContentDescriptor {
   private get serializableStructureDescriptor(): Option.Option<string> {
     return Option.map(
       this.structureDescriptor,
-      $0 => ContentDescriptor.structureDescriptorPrefix.concat($0),
+      ($0) => ContentDescriptor.structureDescriptorPrefix.concat($0),
     );
   }
 
@@ -64,8 +64,8 @@ class ContentDescriptor {
       this.parameters,
       ($0) => {
         const serializableParameterEntries = Object.entries($0)
-          .map($0 => $0.join(ContentDescriptor.parameterKeyValueDelimiter))
-          .map($0 => ContentDescriptor.parameterPrefix.concat($0));
+          .map(($0) => $0.join(ContentDescriptor.parameterKeyValueDelimiter))
+          .map(($0) => ContentDescriptor.parameterPrefix.concat($0));
 
         return concatenated(...serializableParameterEntries);
       },

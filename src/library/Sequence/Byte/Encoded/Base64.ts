@@ -19,7 +19,7 @@ const Sequence_Byte_Encoded_Base64 = Brand.refined<
 
     const potentialRefinementError = Option.map(
       potentialParsingError,
-      $0 => Brand.error('String is not valid Base64-encoded byte sequence', {
+      ($0) => Brand.error('String is not valid Base64-encoded byte sequence', {
         cause: $0,
       }),
     );

@@ -18,7 +18,7 @@ const NonTrivialString = Brand.refined<
 
     const potentialRefinementError = Option.map(
       potentialParsingError,
-      $0 => Brand.error(`Expected string to contain something beyond just whitespace, got "${someString}"`, {
+      ($0) => Brand.error(`Expected string to contain something beyond just whitespace, got "${someString}"`, {
         cause: $0,
       }),
     );

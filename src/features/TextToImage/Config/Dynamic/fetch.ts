@@ -26,7 +26,7 @@ const TextToImage_Config_Dynamic_fetch: TextToImage_Config_Dynamic_Fetching.Effe
   const decodedConfigFromEndpoint = yield* decodedBodyFrom(endpointResponse).pipe(Effect.orDie);
   return decodedConfigFromEndpoint;
 }).pipe(
-  Effect.mapError($0 => new TextToImage_Config_Dynamic_Fetching.Error({
+  Effect.mapError(($0) => new TextToImage_Config_Dynamic_Fetching.Error({
     endpoint: TextToImage_Config_Dynamic_endpoint,
     cause   : $0,
   })),

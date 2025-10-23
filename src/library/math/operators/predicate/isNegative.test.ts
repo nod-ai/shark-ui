@@ -69,7 +69,7 @@ describe(isNegative, () => {
       [infinite.positive, false],
     ] as const;
 
-    const infiniteNumbers = infiniteAssertions.map($0 => $0[0]);
+    const infiniteNumbers = infiniteAssertions.map(($0) => $0[0]);
 
     const neutralFiniteNumbers = [
       neutralNumber,
@@ -86,7 +86,7 @@ describe(isNegative, () => {
       runtime.max,
     ];
 
-    const negativeFiniteNumbers = positiveFiniteNumbers.map($0 => $0 * signed.negative);
+    const negativeFiniteNumbers = positiveFiniteNumbers.map(($0) => $0 * signed.negative);
 
     const operableNumbers = [
       ...infiniteNumbers,

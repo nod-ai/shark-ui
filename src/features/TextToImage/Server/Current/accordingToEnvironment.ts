@@ -13,7 +13,7 @@ const TextToImage_Server_Current_accordingToEnvironment = ((): Option.Option<Web
 
   const serverAccordingToEnvironment = Option.map(
     originAccordingToEnvironment,
-    $0 => new WebAPI.Server({
+    ($0) => new WebAPI.Server({
       origin: $0,
     }),
   );

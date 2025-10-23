@@ -38,7 +38,7 @@ class URI {
   private get serializableAuthority(): Option.Option<string> {
     return Option.map(
       this.authority,
-      $0 => URI.authorityPrefix.concat($0),
+      ($0) => URI.authorityPrefix.concat($0),
     );
   }
 
@@ -54,7 +54,7 @@ class URI {
   private get serializableQuery(): Option.Option<string> {
     return Option.map(
       this.query,
-      $0 => URI.queryPrefix.concat($0),
+      ($0) => URI.queryPrefix.concat($0),
     );
   }
 
@@ -63,7 +63,7 @@ class URI {
   private get serializableFragment(): Option.Option<string> {
     return Option.map(
       this.fragment,
-      $0 => URI.fragmentPrefix.concat($0),
+      ($0) => URI.fragmentPrefix.concat($0),
     );
   }
 

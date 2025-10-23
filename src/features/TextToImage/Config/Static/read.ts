@@ -26,7 +26,7 @@ const TextToImage_Config_Static_read: TextToImage_Config_Static_Reading.Effect =
   const decodedConfigFromFile = yield* decodedBodyFrom(fileResponse).pipe(Effect.orDie);
   return decodedConfigFromFile;
 }).pipe(
-  Effect.mapError($0 => new TextToImage_Config_Static_Reading.Error({
+  Effect.mapError(($0) => new TextToImage_Config_Static_Reading.Error({
     filePath: TextToImage_Config_Static_file,
     cause   : $0,
   })),

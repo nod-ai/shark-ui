@@ -11,8 +11,8 @@ const toShortfinRequestBody_Prompt = (
   },
 ): Shortfin.TextToImage.SDXL.Client.Request.Body['prompt'] => {
   return givenTextPrompts
-    .filter($0 => $0.weight === given.weight)
-    .map($0 => $0.text.trim())
+    .filter(($0) => $0.weight === given.weight)
+    .map(($0) => $0.text.trim())
     .join(',');
 };
 

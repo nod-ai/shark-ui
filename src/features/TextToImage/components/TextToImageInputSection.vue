@@ -55,8 +55,8 @@ const byQualitativeWeight = (givenInputText: StandardizedInputText): InputTextBy
   const entriesForInputTextByQualitativeWeight = Object.entries(qualitativeToQuantitativeTextWeightMap)
     .map(([eachUnsafeQualitativeWeight, eachQuantitativeWeight]) => {
       const eachSerializationByWeight = givenInputText
-        .filter($0 => $0.weight === eachQuantitativeWeight)
-        .map($0 => $0.text.trim())
+        .filter(($0) => $0.weight === eachQuantitativeWeight)
+        .map(($0) => $0.text.trim())
         .join(', ');
 
       const eachDerivedEntry = [
@@ -101,7 +101,7 @@ const initialInputText: InputTextByQualitativeWeight = (() => {
 
   return Option.match(initialExposedInputText, {
     onNone: () => defaultInitialInputText,
-    onSome: $0 => byQualitativeWeight($0),
+    onSome: ($0) => byQualitativeWeight($0),
   });
 })();
 
