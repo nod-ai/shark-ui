@@ -11,16 +11,15 @@ type URLComponent_Origin = Brand.Branded<
 const URLComponent_Origin = Brand.refined<
   URLComponent_Origin
 >(
-  (someString) => {
+  (someString) => Option.gen(function* () {
     const derivedURL = new URL(someString);
 
     if (
       someString === derivedURL.origin
-    ) return Option.none();
+    ) return yield* Option.none();
 
-    const newRefinementError = Brand.error(`Expected pure origin: "${derivedURL.origin}", got "${someString}"`);
-    return Option.some(newRefinementError);
-  },
+    return Brand.error(`Expected pure origin: "${derivedURL.origin}", got "${someString}"`);
+  }),
 );
 
 export {
