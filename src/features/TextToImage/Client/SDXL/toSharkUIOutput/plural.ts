@@ -23,24 +23,21 @@ const toSharkUIOutput_plural = (
     in: GenerateFromTextResponse;
     inferredFrom: TextToImage_Pipeline.Input['text'];
   },
-): Option.Option<Option.Option<TextToImage_Pipeline.Output>[]> => {
+): Option.Option<Option.Option<TextToImage_Pipeline.Output>[]> => Option.gen(function* () {
   if (
     !('artifacts' in givenResponse.result)
   ) return Effect.dieMessage('Expected response body rather than readable stream').pipe(Effect.runSync);
 
-  const inferredRawImages = Option.fromNullable(givenResponse.result.artifacts);
+  const inferredRawImages = yield* Option.fromNullable(givenResponse.result.artifacts);
 
-  const inferredOutputs = Option.map(
-    inferredRawImages,
-    ($0) => $0
-      .map(($0) => toSharkUIOutput_Image($0, {
-        description: toSharkUIOutput_Image.Description.all(givenInputText),
-      }))
-      .map(($0) => TextToImage_Pipeline.Output.Option.from($0)),
-  );
+  const inferredOutputs = inferredRawImages
+    .map(($0) => toSharkUIOutput_Image($0, {
+      description: toSharkUIOutput_Image.Description.all(givenInputText),
+    }))
+    .map(($0) => TextToImage_Pipeline.Output.Option.from($0));
 
   return inferredOutputs;
-};
+});
 
 export {
   toSharkUIOutput_plural,
