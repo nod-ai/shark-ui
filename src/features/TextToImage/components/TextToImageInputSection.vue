@@ -97,8 +97,8 @@ const defaultInitialInputText: InputTextByQualitativeWeight = {
 };
 
 const initialInputText: InputTextByQualitativeWeight = Option.match(get(exposedInputText), {
-  onNone: () => defaultInitialInputText,
   onSome: ($0) => byQualitativeWeight($0),
+  onNone: () => defaultInitialInputText,
 });
 
 const currentInputText: Ref<InputTextByQualitativeWeight> = ref(initialInputText);
