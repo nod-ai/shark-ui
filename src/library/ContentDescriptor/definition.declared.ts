@@ -36,28 +36,34 @@ class ContentDescriptor {
 
   public static readonly treeBranchSuffix = '.';
 
-  private readonly serializableTree = Option.gen(this, function* () {
-    const suffixedTreeBranches = (yield* this.tree).map(($0) => $0.concat(ContentDescriptor.treeBranchSuffix));
-    const serializedTreeBranches = concatenated(...suffixedTreeBranches);
-    return serializedTreeBranches;
-  });
+  private get serializableTree(): Option.Option<string> {
+    return Option.gen(this, function* () {
+      const suffixedTreeBranches = (yield* this.tree).map(($0) => $0.concat(ContentDescriptor.treeBranchSuffix));
+      const serializedTreeBranches = concatenated(...suffixedTreeBranches);
+      return serializedTreeBranches;
+    });
+  }
 
   public static readonly structureDescriptorPrefix = '+';
 
-  private readonly serializableStructureDescriptor = Option.gen(this, function* () {
-    return ContentDescriptor.structureDescriptorPrefix.concat(yield* this.structureDescriptor);
-  });
+  private get serializableStructureDescriptor(): Option.Option<string> {
+    return Option.gen(this, function* () {
+      return ContentDescriptor.structureDescriptorPrefix.concat(yield* this.structureDescriptor);
+    });
+  }
 
   public static readonly parameterPrefix = ';';
   public static readonly parameterKeyValueDelimiter = '=';
 
-  private readonly serializableParameters = Option.gen(this, function* () {
-    const serializableParameterEntries = Object.entries(yield* this.parameters)
-      .map(($0) => $0.join(ContentDescriptor.parameterKeyValueDelimiter))
-      .map(($0) => ContentDescriptor.parameterPrefix.concat($0));
+  private get serializableParameters(): Option.Option<string> {
+    return Option.gen(this, function* () {
+      const serializableParameterEntries = Object.entries(yield* this.parameters)
+        .map(($0) => $0.join(ContentDescriptor.parameterKeyValueDelimiter))
+        .map(($0) => ContentDescriptor.parameterPrefix.concat($0));
 
-    return concatenated(...serializableParameterEntries);
-  });
+      return concatenated(...serializableParameterEntries);
+    });
+  }
 
   public get serialized(): NonTrivialString {
     const orderedComponents = [
