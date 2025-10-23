@@ -24,13 +24,17 @@ function toShortfinRequestBody(
       || (givenRequestBody.seed === undefined)
     ) return yield* Option.none();
 
-    const derivedShortfinRequestBody = {
+    const promptsForShortfinRequestBody = {
       prompt: toShortfinRequestBody_Prompt(givenRequestBody.textPrompts, {
         weight: 1,
       }),
       neg_prompt: toShortfinRequestBody_Prompt(givenRequestBody.textPrompts, {
         weight: -1,
       }),
+    };
+
+    const derivedShortfinRequestBody = {
+      ...promptsForShortfinRequestBody,
       height        : givenRequestBody.height,
       width         : givenRequestBody.width,
       steps         : givenRequestBody.steps,
