@@ -42,7 +42,7 @@ describe(isNegative, () => {
         expect(() => isNegative(soleInoperableNumber).pipe(Effect.runSync)).toThrow(Error);
       });
 
-      it('should safely propagate the error', () => {
+      it('should safely propagate the rejection', () => {
         expect.assertions(1);
 
         expect((() => {
@@ -56,7 +56,7 @@ describe(isNegative, () => {
         })()).toBe(true);
       });
 
-      it('should communicate clearly with developers', () => {
+      it('should clearly communicate the rejection to developers', () => {
         expect.assertions(1);
 
         expect(() => isNegative(soleInoperableNumber).pipe(Effect.runSync)).toThrow('Operand must be operable');

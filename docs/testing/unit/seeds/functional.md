@@ -108,9 +108,9 @@ describe(doSomething, () => {
       describe('due to <sadAdjectiveC> <pluralInputNoun>', () => {
         it.todo('should reject them');
 
-        it.todo('should safely propagate the error');
+        it.todo('should safely propagate the rejection');
 
-        it.todo('should communicate clearly with developers');
+        it.todo('should clearly communicate the rejection to developers');
       });
     });
   });
