@@ -18,11 +18,8 @@ function toSharkUIOutput_Image(
   },
 ): Option.Option<TextToImage_Pipeline.Output['image']> {
   return Option.gen(function* () {
-    if (
-      givenImage.base64 === undefined
-    ) return yield* Option.none();
-
-    const base64DataOfRawImage = Sequence.Byte.Encoded.Base64(givenImage.base64);
+    const rawBase64Data = yield* Option.fromNullable(givenImage.base64);
+    const base64DataOfRawImage = Sequence.Byte.Encoded.Base64(rawBase64Data);
 
     const derivedImage = {
       uri        : new URI.Image('png', 'base64', base64DataOfRawImage),
