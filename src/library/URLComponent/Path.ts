@@ -11,16 +11,15 @@ type URLComponent_Path = Brand.Branded<
 const URLComponent_Path = Brand.refined<
   URLComponent_Path
 >(
-  (someString) => {
+  (someString) => Option.gen(function* () {
     const exampleURL = new URL(`https://example.com${someString}`);
 
     if (
       someString === exampleURL.pathname
-    ) return Option.none();
+    ) return yield* Option.none();
 
-    const newBrandError = Brand.error(`Expected pure path: "${exampleURL.pathname}", got "${someString}"`);
-    return Option.some(newBrandError);
-  },
+    return Brand.error(`Expected pure path: "${exampleURL.pathname}", got "${someString}"`);
+  }),
 );
 
 export {
