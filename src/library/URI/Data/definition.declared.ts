@@ -42,14 +42,14 @@ class URI_Data
 
   public static readonly encodingPrefix = ';';
 
-  public get serializableEncoding(): Option.Option<string> {
+  public readonly serializableEncoding = Option.gen(this, function* () {
     if (
       this.encoding !== 'base64'
-    ) return Option.none();
+    ) return yield* Option.none();
 
     const prefixedEncoding = URI_Data.encodingPrefix.concat(this.encoding);
-    return Option.some(prefixedEncoding);
-  }
+    return prefixedEncoding;
+  });
 
   public static readonly dataPrefix = ',';
 
