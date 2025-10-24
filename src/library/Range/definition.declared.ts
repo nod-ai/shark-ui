@@ -24,7 +24,7 @@ class Range {
       from: Range['lowerBound'];
       to: Range['upperBound'];
     },
-  ): Range {
+  ): Effect.Effect<Range> {
     return Effect.gen(this, function* () {
       if (
         givenUpperBound < givenLowerBound
@@ -36,7 +36,7 @@ class Range {
       );
 
       return validRange;
-    }).pipe(Effect.runSync);
+    });
   }
 
   public get width(): number {

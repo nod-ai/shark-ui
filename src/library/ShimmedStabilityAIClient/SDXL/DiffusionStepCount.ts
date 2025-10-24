@@ -1,3 +1,7 @@
+import {
+  Effect,
+} from 'effect';
+
 import Range from '@/library/Range';
 
 /**
@@ -10,7 +14,7 @@ abstract class SDXL_DiffusionStepCount { // eslint-disable-line @typescript-esli
     from: 10,
     to  : 50,
     by  : 1,
-  });
+  }).pipe(Effect.runSync);
 }
 
 export {

@@ -17,7 +17,7 @@ function toSharkUIOutput_Image(
   given: {
     description: TextToImage_Pipeline.Output['image']['description'];
   },
-): TextToImage_Pipeline.Output['image'] {
+): Effect.Effect<TextToImage_Pipeline.Output['image']> {
   return Effect.gen(function* () {
     const rawBase64Data = Option.fromNullable(givenImage.base64).pipe(
       Effect.orDieWith(() => new Error('Data for Stability AI image was not present.')),
@@ -33,7 +33,7 @@ function toSharkUIOutput_Image(
     };
 
     return derivedImage;
-  }).pipe(Effect.runSync);
+  });
 }
 
 export {

@@ -33,15 +33,15 @@ class Range_Discrete
       to: Range_Discrete['upperBound'];
       by: Range_Discrete['stepSize'];
     },
-  ): Range_Discrete {
+  ): Effect.Effect<Range_Discrete> {
     const validRange = super.spanning({
       from: givenLowerBound,
       to  : givenUpperBound,
-    });
+    }).pipe(Effect.runSync);
 
     return Effect.gen(this, function* () {
       if (
-        isNegative(givenStepSize)
+        isNegative(givenStepSize).pipe(Effect.runSync)
       ) return Effect.dieMessage('Step size must be non-negative').pipe(Effect.runSync);
 
       const overstep = validRange.width % givenStepSize;
@@ -57,7 +57,7 @@ class Range_Discrete
       );
 
       return validDiscreteRange;
-    }).pipe(Effect.runSync);
+    });
   }
 
   public override exclusivelyContains(givenValue: number): boolean {
