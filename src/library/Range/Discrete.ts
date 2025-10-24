@@ -39,9 +39,9 @@ class Range_Discrete
       to  : givenUpperBound,
     });
 
-    const validRange = potentialRange.pipe(Effect.runSync);
-
     return Effect.gen(this, function* () {
+      const validRange = potentialRange.pipe(Effect.runSync);
+
       if (
         isNegative(givenStepSize).pipe(Effect.runSync)
       ) return Effect.dieMessage('Step size must be non-negative').pipe(Effect.runSync);
