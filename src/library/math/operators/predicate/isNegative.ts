@@ -11,7 +11,7 @@ const isNegative = (
 ): Effect.Effect<boolean> => Effect.gen(function* () {
   if (
     !isOperable(givenOperand)
-  ) return Effect.dieMessage('Operand must be operable').pipe(Effect.runSync);
+  ) return yield* Effect.dieMessage('Operand must be operable');
 
   return (givenOperand < 0);
 });
