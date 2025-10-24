@@ -8,13 +8,13 @@ import {
 
 const isNegative = (
   givenOperand: number,
-): boolean => {
+): boolean => Effect.gen(function* () {
   if (
     !isOperable(givenOperand)
   ) return Effect.dieMessage('Operand must be operable').pipe(Effect.runSync);
 
   return (givenOperand < 0);
-};
+}).pipe(Effect.runSync);
 
 export {
   isNegative,

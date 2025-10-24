@@ -18,20 +18,22 @@ function toSharkUIOutput_Image(
     description: TextToImage_Pipeline.Output['image']['description'];
   },
 ): TextToImage_Pipeline.Output['image'] {
-  const rawBase64Data = Option.fromNullable(givenImage.base64).pipe(
-    Effect.orDieWith(() => new Error('Data for Stability AI image was not present.')),
-  ).pipe(Effect.runSync);
+  return Effect.gen(function* () {
+    const rawBase64Data = Option.fromNullable(givenImage.base64).pipe(
+      Effect.orDieWith(() => new Error('Data for Stability AI image was not present.')),
+    ).pipe(Effect.runSync);
 
-  const base64DataOfRawImage = Sequence.Byte.Encoded.Base64.option(rawBase64Data).pipe(
-    Effect.orDieWith(() => new Error('Data for Stability AI image was not base64-encoded.')),
-  ).pipe(Effect.runSync);
+    const base64DataOfRawImage = Sequence.Byte.Encoded.Base64.option(rawBase64Data).pipe(
+      Effect.orDieWith(() => new Error('Data for Stability AI image was not base64-encoded.')),
+    ).pipe(Effect.runSync);
 
-  const derivedImage = {
-    uri        : new URI.Image('png', 'base64', base64DataOfRawImage),
-    description: given.description,
-  };
+    const derivedImage = {
+      uri        : new URI.Image('png', 'base64', base64DataOfRawImage),
+      description: given.description,
+    };
 
-  return derivedImage;
+    return derivedImage;
+  }).pipe(Effect.runSync);
 }
 
 export {

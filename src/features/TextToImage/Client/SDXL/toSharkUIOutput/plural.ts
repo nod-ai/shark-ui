@@ -23,7 +23,7 @@ const toSharkUIOutput_plural = (
     in: GenerateFromTextResponse;
     inferredFrom: TextToImage_Pipeline.Input['text'];
   },
-): TextToImage_Pipeline.Output[] => {
+): TextToImage_Pipeline.Output[] => Effect.gen(function* () {
   if (
     !('artifacts' in givenResponse.result)
   ) return Effect.dieMessage('Expected response body rather than readable stream').pipe(Effect.runSync);
@@ -45,7 +45,7 @@ const toSharkUIOutput_plural = (
   }));
 
   return inferredOutputs;
-};
+}).pipe(Effect.runSync);
 
 export {
   toSharkUIOutput_plural,

@@ -25,16 +25,18 @@ class Range {
       to: Range['upperBound'];
     },
   ): Range {
-    if (
-      givenUpperBound < givenLowerBound
-    ) return Effect.dieMessage('Upper bound must not be lower than lower bound').pipe(Effect.runSync);
+    return Effect.gen(this, function* () {
+      if (
+        givenUpperBound < givenLowerBound
+      ) return Effect.dieMessage('Upper bound must not be lower than lower bound').pipe(Effect.runSync);
 
-    const validRange = new this(
-      givenLowerBound,
-      givenUpperBound,
-    );
+      const validRange = new this(
+        givenLowerBound,
+        givenUpperBound,
+      );
 
-    return validRange;
+      return validRange;
+    }).pipe(Effect.runSync);
   }
 
   public get width(): number {

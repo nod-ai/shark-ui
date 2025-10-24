@@ -26,7 +26,7 @@ const toSharkUIOutput_first = (
     in: GenerateFromTextResponse;
     inferredFrom: TextToImage_Pipeline.Input['text'];
   },
-): TextToImage_Pipeline.Output => {
+): TextToImage_Pipeline.Output => Effect.gen(function* () {
   const inferredOutputs = toSharkUIOutput_plural({
     in          : givenResponse,
     inferredFrom: givenInputText,
@@ -38,7 +38,7 @@ const toSharkUIOutput_first = (
 
   const [firstPipelineOutput] = inferredOutputs;
   return firstPipelineOutput;
-};
+}).pipe(Effect.runSync);
 
 export {
   toSharkUIOutput_first,
