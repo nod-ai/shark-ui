@@ -1,4 +1,5 @@
 import {
+  Effect,
   Option,
 } from 'effect';
 
@@ -18,12 +19,12 @@ function toSharkUIOutput_Image(
   },
 ): TextToImage_Pipeline.Output['image'] {
   const rawBase64Data = Option.fromNullable(givenImage.base64).pipe(
-    Option.getOrThrowWith(() => new Error('Data for Stability AI image was not present.')),
-  );
+    Effect.orDieWith(() => new Error('Data for Stability AI image was not present.')),
+  ).pipe(Effect.runSync);
 
   const base64DataOfRawImage = Sequence.Byte.Encoded.Base64.option(rawBase64Data).pipe(
-    Option.getOrThrowWith(() => new Error('Data for Stability AI image was not base64-encoded.')),
-  );
+    Effect.orDieWith(() => new Error('Data for Stability AI image was not base64-encoded.')),
+  ).pipe(Effect.runSync);
 
   const derivedImage = {
     uri        : new URI.Image('png', 'base64', base64DataOfRawImage),
