@@ -44,13 +44,13 @@ class Range_Discrete
 
       if (
         yield* isNegative(givenStepSize)
-      ) return yield* Effect.die(new Error('Step size must be non-negative'));
+      ) return yield* Effect.fail(new Error('Step size must be non-negative')).pipe(Effect.orDie);
 
       const overstep = validRange.width % givenStepSize;
 
       if (
         overstep !== 0
-      ) return yield* Effect.die(new Error('Step size must fit evenly into the range'));
+      ) return yield* Effect.fail(new Error('Step size must fit evenly into the range')).pipe(Effect.orDie);
 
       const validDiscreteRange = new this(
         validRange.lowerBound,

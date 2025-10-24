@@ -26,7 +26,7 @@ const toSharkUIOutput_plural = (
 ): Effect.Effect<TextToImage_Pipeline.Output[]> => Effect.gen(function* () {
   if (
     !('artifacts' in givenResponse.result)
-  ) return yield* Effect.die(new Error('Expected response body rather than readable stream'));
+  ) return yield* Effect.fail(new Error('Expected response body rather than readable stream')).pipe(Effect.orDie);
 
   const inferredRawImages = yield* Option.fromNullable(givenResponse.result.artifacts).pipe(
     Effect.orDieWith(() => new Error('Expected text-to-image output in response result')),
