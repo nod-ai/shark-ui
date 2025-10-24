@@ -34,11 +34,11 @@ const toSharkUIOutput_first = (
 
   if (
     !isNonEmptyArray(inferredOutputs)
-  ) return yield* Effect.fail(new Error('Response had no text-to-image outputs.')).pipe(Effect.orDie);
+  ) return yield* Effect.fail(new Error('Response had no text-to-image outputs.'));
 
   const [firstPipelineOutput] = inferredOutputs;
   return firstPipelineOutput;
-});
+}).pipe(Effect.orDie);
 
 export {
   toSharkUIOutput_first,

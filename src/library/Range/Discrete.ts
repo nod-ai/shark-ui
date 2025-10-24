@@ -44,13 +44,13 @@ class Range_Discrete
 
       if (
         yield* isNegative(givenStepSize)
-      ) return yield* Effect.fail(new Error('Step size must be non-negative')).pipe(Effect.orDie);
+      ) return yield* Effect.fail(new Error('Step size must be non-negative'));
 
       const overstep = validRange.width % givenStepSize;
 
       if (
         overstep !== 0
-      ) return yield* Effect.fail(new Error('Step size must fit evenly into the range')).pipe(Effect.orDie);
+      ) return yield* Effect.fail(new Error('Step size must fit evenly into the range'));
 
       const validDiscreteRange = new this(
         validRange.lowerBound,
@@ -59,7 +59,7 @@ class Range_Discrete
       );
 
       return validDiscreteRange;
-    });
+    }).pipe(Effect.orDie);
   }
 
   public override exclusivelyContains(givenValue: number): boolean {

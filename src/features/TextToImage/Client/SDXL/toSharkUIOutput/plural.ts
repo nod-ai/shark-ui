@@ -26,11 +26,11 @@ const toSharkUIOutput_plural = (
 ): Effect.Effect<TextToImage_Pipeline.Output[]> => Effect.gen(function* () {
   if (
     !('artifacts' in givenResponse.result)
-  ) return yield* Effect.fail(new Error('Response had readable stream rather than body.')).pipe(Effect.orDie);
+  ) return yield* Effect.fail(new Error('Response had readable stream rather than body.'));
 
   const inferredRawImages = yield* Option.fromNullable(givenResponse.result.artifacts).pipe(
     Effect.orElseFail(() => new Error('Response body had no text-to-image results.')),
-  ).pipe(Effect.orDie);
+  );
 
   const potentialOutputImages = inferredRawImages.map(($0) => toSharkUIOutput_Image($0, {
     description: toSharkUIOutput_Image.Description.all(givenInputText),
@@ -38,14 +38,14 @@ const toSharkUIOutput_plural = (
 
   const inferredOutputImages = yield* Effect.all(potentialOutputImages).pipe(
     Effect.orElseFail(() => new Error('Response had one or more malformed text-to-image outputs.')),
-  ).pipe(Effect.orDie);
+  );
 
   const inferredOutputs = inferredOutputImages.map(($0) => new TextToImage_Pipeline.Output({
     image: $0,
   }));
 
   return inferredOutputs;
-});
+}).pipe(Effect.orDie);
 
 export {
   toSharkUIOutput_plural,

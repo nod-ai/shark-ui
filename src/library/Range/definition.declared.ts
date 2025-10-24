@@ -28,7 +28,7 @@ class Range {
     return Effect.gen(this, function* () {
       if (
         givenUpperBound < givenLowerBound
-      ) return yield* Effect.fail(new Error('Upper bound must not be lower than lower bound')).pipe(Effect.orDie);
+      ) return yield* Effect.fail(new Error('Upper bound must not be lower than lower bound'));
 
       const validRange = new this(
         givenLowerBound,
@@ -36,7 +36,7 @@ class Range {
       );
 
       return validRange;
-    });
+    }).pipe(Effect.orDie);
   }
 
   public get width(): number {
