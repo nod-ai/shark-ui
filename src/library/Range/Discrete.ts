@@ -33,7 +33,7 @@ class Range_Discrete
       to: Range_Discrete['upperBound'];
       by: Range_Discrete['stepSize'];
     },
-  ): Effect.Effect<Range_Discrete> {
+  ): Effect.Effect<Range_Discrete, Error> {
     const potentialRange = super.spanning({
       from: givenLowerBound,
       to  : givenUpperBound,
@@ -59,7 +59,7 @@ class Range_Discrete
       );
 
       return validDiscreteRange;
-    }).pipe(Effect.orDie);
+    });
   }
 
   public override exclusivelyContains(givenValue: number): boolean {
