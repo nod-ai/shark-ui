@@ -32,10 +32,12 @@ const toSharkUIOutput_plural = (
     Option.getOrThrowWith(() => new Error('Expected text-to-image output in response result')),
   );
 
-  const inferredOutputs = inferredRawImages
+  const potentialOutputImages = inferredRawImages
     .map(($0) => toSharkUIOutput_Image($0, {
       description: toSharkUIOutput_Image.Description.all(givenInputText),
-    }))
+    }));
+
+  const inferredOutputs = potentialOutputImages
     .map(($0) => TextToImage_Pipeline.Output.Option.from($0))
     .map(
       Option.getOrThrowWith(() => new Error('Failed to convert one or more raw images to Shark UI output')),
