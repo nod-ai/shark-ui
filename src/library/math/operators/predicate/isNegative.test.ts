@@ -39,7 +39,9 @@ describe(isNegative, () => {
       it('should reject the operand', () => {
         expect.assertions(1);
 
-        expect(() => isNegative(soleInoperableNumber).pipe(Effect.runSync)).toThrow(Error);
+        const soleFailingOperation = (): boolean => isNegative(soleInoperableNumber).pipe(Effect.runSync);
+
+        expect(soleFailingOperation).toThrow(Error);
       });
 
       it('should safely propagate the rejection', () => {
