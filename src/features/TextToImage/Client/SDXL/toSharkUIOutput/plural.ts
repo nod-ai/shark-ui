@@ -39,7 +39,11 @@ const toSharkUIOutput_plural = (
     .map(($0) => TextToImage_Pipeline.Output.Option.from($0));
 
   return Option.all(
-    inferredOutputs,
+    inferredOutputs
+      .map(
+        Option.getOrThrowWith(() => new Error('Failed to convert one or more raw images to Shark UI output')),
+      )
+      .map(Option.some),
   ).pipe(
     Option.getOrThrowWith(() => new Error('Expected at least one well-formed text-to-image output in response')),
   );
