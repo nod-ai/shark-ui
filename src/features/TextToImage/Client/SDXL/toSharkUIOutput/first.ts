@@ -41,8 +41,7 @@ const toSharkUIOutput_first = (
     !isNonEmptyArray(inferredOutputs)
   ) return Effect.dieMessage('Expected at least one text-to-image output in response').pipe(Effect.runSync);
 
-  const [firstPotentialOutput] = inferredOutputs;
-  const firstPipelineOutput = firstPotentialOutput;
+  const [firstPipelineOutput] = inferredOutputs;
   return firstPipelineOutput;
 };
 
