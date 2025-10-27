@@ -61,7 +61,9 @@ describe(isNegative, () => {
       it('should clearly communicate the rejection to developers', () => {
         expect.assertions(1);
 
-        expect(() => isNegative(soleInoperableNumber).pipe(Effect.runSync)).toThrow('Operand must be operable');
+        const soleFailingOperation = (): boolean => isNegative(soleInoperableNumber).pipe(Effect.runSync);
+
+        expect(soleFailingOperation).toThrow('Operand must be operable');
       });
     });
   });
