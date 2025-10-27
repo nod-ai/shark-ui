@@ -99,7 +99,9 @@ describe(isNegative, () => {
     it.each(operableNumbers)('should accept valid operands', (eachOperableNumber) => {
       expect.assertions(1);
 
-      expect(() => isNegative(eachOperableNumber).pipe(Effect.runSync)).not.toThrow();
+      const eachOperation = (): boolean => isNegative(eachOperableNumber).pipe(Effect.runSync);
+
+      expect(eachOperation).not.toThrow();
     });
 
     it.each(infiniteAssertions)('should support infinite operands', (eachInfiniteNumber, eachExpectedOutput) => {
