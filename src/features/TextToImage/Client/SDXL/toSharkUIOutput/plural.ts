@@ -36,7 +36,7 @@ const toSharkUIOutput_plural = (
     description: toSharkUIOutput_Image.Description.all(givenInputText),
   }));
 
-  const inferredOutputImages = Option.some(potentialOutputImages.map(Effect.runSync)).pipe(
+  const inferredOutputImages = Effect.succeed(potentialOutputImages.map(Effect.runSync)).pipe(
     Effect.orDieWith(() => new Error('Failed to convert one or more raw images to Shark UI output image.')),
   ).pipe(Effect.runSync);
 
