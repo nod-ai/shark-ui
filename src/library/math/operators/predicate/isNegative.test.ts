@@ -47,7 +47,7 @@ describe(isNegative, () => {
       it('should safely propagate the rejection', () => {
         expect.assertions(1);
 
-        expect((() => {
+        const soleOperationDidFail = (() => {
           // eslint-disable-next-line no-restricted-syntax
           try {
             isNegative(soleInoperableNumber).pipe(Effect.runSync);
@@ -55,7 +55,9 @@ describe(isNegative, () => {
           catch (error) {
             return Runtime.isFiberFailure(error);
           }
-        })()).toBe(true);
+        })();
+
+        expect(soleOperationDidFail).toBe(true);
       });
 
       it('should clearly communicate the rejection to developers', () => {
