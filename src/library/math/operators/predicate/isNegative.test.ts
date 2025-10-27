@@ -102,10 +102,10 @@ describe(isNegative, () => {
       expect(() => isNegative(eachOperableNumber).pipe(Effect.runSync)).not.toThrow();
     });
 
-    it.each(infiniteAssertions)('should support infinite operands', (eachInfiniteNumber, eachExpectOutput) => {
+    it.each(infiniteAssertions)('should support infinite operands', (eachInfiniteNumber, eachExpectedOutput) => {
       expect.assertions(1);
 
-      expect(isNegative(eachInfiniteNumber).pipe(Effect.runSync)).toBe(eachExpectOutput);
+      expect(isNegative(eachInfiniteNumber).pipe(Effect.runSync)).toBe(eachExpectedOutput);
     });
 
     it.each(neutralFiniteNumbers)('should detect neutral operands', (eachNeutralNumber) => {
