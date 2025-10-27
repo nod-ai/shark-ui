@@ -36,7 +36,9 @@ const toSharkUIOutput_plural = (
     description: toSharkUIOutput_Image.Description.all(givenInputText),
   }));
 
-  const inferredOutputs = potentialOutputImages.map(($0) => TextToImage_Pipeline.Output.Option.from($0))
+  const inferredOutputImages = potentialOutputImages;
+
+  const inferredOutputs = inferredOutputImages.map(($0) => TextToImage_Pipeline.Output.Option.from($0))
     .map(
       Option.getOrThrowWith(() => new Error('Failed to convert one or more raw images to Shark UI output')),
     );
