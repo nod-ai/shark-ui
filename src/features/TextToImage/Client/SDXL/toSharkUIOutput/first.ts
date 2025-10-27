@@ -33,7 +33,7 @@ const toSharkUIOutput_first = (
     inferredFrom: givenInputText,
   });
 
-  const inferredOutputs = Option.all(potentialInferredOutputs).pipe(
+  const inferredOutputs = potentialInferredOutputs.pipe(
     Option.getOrThrowWith(() => new Error('Expected at least one well-formed text-to-image output in response')),
   );
 
