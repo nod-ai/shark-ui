@@ -33,9 +33,7 @@ const toSharkUIOutput_first = (
     inferredFrom: givenInputText,
   });
 
-  const inferredOutputs = potentialInferredOutputs.pipe(
-    Option.getOrThrowWith(() => new Error('Expected text-to-image output in response result')),
-  );
+  const inferredOutputs = potentialInferredOutputs;
 
   if (
     !isNonEmptyArray(inferredOutputs)
