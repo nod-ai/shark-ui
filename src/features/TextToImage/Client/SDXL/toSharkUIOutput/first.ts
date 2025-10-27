@@ -33,18 +33,16 @@ const toSharkUIOutput_first = (
     inferredFrom: givenInputText,
   });
 
-  const inferredOutputs = potentialInferredOutputs;
+  const inferredOutputs = Option.all(potentialInferredOutputs).pipe(
+    Option.getOrThrowWith(() => new Error('Expected at least one well-formed text-to-image output in response')),
+  );
 
   if (
     !isNonEmptyArray(inferredOutputs)
   ) return Effect.dieMessage('Expected at least one text-to-image output in response').pipe(Effect.runSync);
 
   const [firstPotentialOutput] = inferredOutputs;
-
-  const firstPipelineOutput = firstPotentialOutput.pipe(
-    Option.getOrThrowWith(() => new Error('Expected at least one well-formed text-to-image output in response')),
-  );
-
+  const firstPipelineOutput = firstPotentialOutput;
   return firstPipelineOutput;
 };
 
