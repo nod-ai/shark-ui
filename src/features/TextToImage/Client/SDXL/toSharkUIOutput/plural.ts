@@ -41,11 +41,7 @@ const toSharkUIOutput_plural = (
       Option.getOrThrowWith(() => new Error('Failed to convert one or more raw images to Shark UI output')),
     );
 
-  return Option.some(
-    inferredOutputs,
-  ).pipe(
-    Option.getOrThrowWith(() => new Error('Expected at least one well-formed text-to-image output in response')),
-  );
+  return inferredOutputs;
 };
 
 export {
