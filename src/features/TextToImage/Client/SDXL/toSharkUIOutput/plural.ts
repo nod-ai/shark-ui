@@ -38,7 +38,9 @@ const toSharkUIOutput_plural = (
     }))
     .map(($0) => TextToImage_Pipeline.Output.Option.from($0));
 
-  return Option.all(inferredOutputs).pipe(
+  return Option.all(
+    inferredOutputs,
+  ).pipe(
     Option.getOrThrowWith(() => new Error('Expected at least one well-formed text-to-image output in response')),
   );
 };
