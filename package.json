@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@effect/platform": "^0.92.1",
+    "@effect/vitest": "^0.26.0",
     "effect": "^3.18.4",
     "stabilityai-client-typescript": "github:nod-ai/StabilityAI-client-typescript#npm/v0.1.0",
     "vue": "^3.5.22",
