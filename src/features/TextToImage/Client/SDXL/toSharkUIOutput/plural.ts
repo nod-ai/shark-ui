@@ -30,8 +30,8 @@ const toSharkUIOutput_plural = (
 
   const inferredRawImages = yield* Option.fromNullable(givenResponse.result.artifacts);
 
-  const potentialOutputImages = inferredRawImages.map(($0) => {
-    return toSharkUIOutput_Image($0, {
+  const potentialOutputImages = inferredRawImages.map((eachRawImage) => {
+    return toSharkUIOutput_Image(eachRawImage, {
       description: toSharkUIOutput_Image.Description.all(givenInputText),
     });
   });
