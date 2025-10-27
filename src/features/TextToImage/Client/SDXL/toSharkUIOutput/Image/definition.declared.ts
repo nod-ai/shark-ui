@@ -16,7 +16,7 @@ function toSharkUIOutput_Image(
   given: {
     description: TextToImage_Pipeline.Output['image']['description'];
   },
-): Option.Option<TextToImage_Pipeline.Output['image']> {
+): TextToImage_Pipeline.Output['image'] {
   const rawBase64Data = Option.fromNullable(givenImage.base64).pipe(
     Option.getOrThrowWith(() => new Error('Data for Stability AI image was not present.')),
   );
@@ -30,7 +30,7 @@ function toSharkUIOutput_Image(
     description: given.description,
   };
 
-  return Option.some(derivedImage);
+  return derivedImage;
 }
 
 export {
