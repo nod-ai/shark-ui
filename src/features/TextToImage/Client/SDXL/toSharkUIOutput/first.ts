@@ -1,6 +1,5 @@
 import {
   Effect,
-  Option,
 } from 'effect';
 
 import {
@@ -28,25 +27,16 @@ const toSharkUIOutput_first = (
     inferredFrom: TextToImage_Pipeline.Input['text'];
   },
 ): TextToImage_Pipeline.Output => {
-  const potentialInferredOutputs = toSharkUIOutput_plural({
+  const inferredOutputs = toSharkUIOutput_plural({
     in          : givenResponse,
     inferredFrom: givenInputText,
   });
-
-  const inferredOutputs = potentialInferredOutputs.pipe(
-    Option.getOrThrowWith(() => new Error('Expected text-to-image output in response result')),
-  );
 
   if (
     !isNonEmptyArray(inferredOutputs)
   ) return Effect.dieMessage('Expected at least one text-to-image output in response').pipe(Effect.runSync);
 
-  const [firstPotentialOutput] = inferredOutputs;
-
-  const firstPipelineOutput = firstPotentialOutput.pipe(
-    Option.getOrThrowWith(() => new Error('Expected at least one well-formed text-to-image output in response')),
-  );
-
+  const [firstPipelineOutput] = inferredOutputs;
   return firstPipelineOutput;
 };
 
