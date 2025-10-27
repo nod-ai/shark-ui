@@ -34,12 +34,14 @@ class Range_Discrete
       by: Range_Discrete['stepSize'];
     },
   ): Effect.Effect<Range_Discrete> {
-    const validRange = super.spanning({
+    const potentialRange = super.spanning({
       from: givenLowerBound,
       to  : givenUpperBound,
-    }).pipe(Effect.runSync);
+    });
 
     return Effect.gen(this, function* () {
+      const validRange = potentialRange.pipe(Effect.runSync);
+
       if (
         isNegative(givenStepSize).pipe(Effect.runSync)
       ) return Effect.dieMessage('Step size must be non-negative').pipe(Effect.runSync);
