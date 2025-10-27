@@ -33,7 +33,7 @@ class Range_Discrete
       to: Range_Discrete['upperBound'];
       by: Range_Discrete['stepSize'];
     },
-  ): Effect.Effect<Range_Discrete> {
+  ): Effect.Effect<Range_Discrete, Error> {
     const potentialRange = super.spanning({
       from: givenLowerBound,
       to  : givenUpperBound,
@@ -44,13 +44,13 @@ class Range_Discrete
 
       if (
         yield* isNegative(givenStepSize)
-      ) return yield* Effect.fail(new Error('Step size must be non-negative')).pipe(Effect.orDie);
+      ) return yield* Effect.fail(new Error('Step size must be non-negative'));
 
       const overstep = validRange.width % givenStepSize;
 
       if (
         overstep !== 0
-      ) return yield* Effect.fail(new Error('Step size must fit evenly into the range')).pipe(Effect.orDie);
+      ) return yield* Effect.fail(new Error('Step size must fit evenly into the range'));
 
       const validDiscreteRange = new this(
         validRange.lowerBound,
