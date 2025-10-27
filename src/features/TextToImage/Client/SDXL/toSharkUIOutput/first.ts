@@ -27,12 +27,10 @@ const toSharkUIOutput_first = (
     inferredFrom: TextToImage_Pipeline.Input['text'];
   },
 ): TextToImage_Pipeline.Output => {
-  const potentialInferredOutputs = toSharkUIOutput_plural({
+  const inferredOutputs = toSharkUIOutput_plural({
     in          : givenResponse,
     inferredFrom: givenInputText,
   });
-
-  const inferredOutputs = potentialInferredOutputs;
 
   if (
     !isNonEmptyArray(inferredOutputs)
