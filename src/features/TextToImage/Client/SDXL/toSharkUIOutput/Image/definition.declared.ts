@@ -20,12 +20,12 @@ function toSharkUIOutput_Image(
 ): Effect.Effect<TextToImage_Pipeline.Output['image']> {
   return Effect.gen(function* () {
     const rawBase64Data = yield* Option.fromNullable(givenImage.base64).pipe(
-      Effect.orDieWith(() => new Error('Data for Stability AI image was not present.')),
-    );
+      Effect.orElseFail(() => new Error('Data for Stability AI image was not present.')),
+    ).pipe(Effect.orDie);
 
     const base64DataOfRawImage = yield* Sequence.Byte.Encoded.Base64.option(rawBase64Data).pipe(
-      Effect.orDieWith(() => new Error('Data for Stability AI image was not base64-encoded.')),
-    );
+      Effect.orElseFail(() => new Error('Data for Stability AI image was not base64-encoded.')),
+    ).pipe(Effect.orDie);
 
     const derivedImage = {
       uri        : new URI.Image('png', 'base64', base64DataOfRawImage),
