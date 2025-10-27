@@ -1,6 +1,5 @@
 import {
   Effect,
-  Runtime,
 } from 'effect';
 
 import {
@@ -47,25 +46,17 @@ describe(isNegative, () => {
       it('should safely propagate the rejection', () => {
         expect.assertions(1);
 
-        const soleOperationDidFail = (() => {
-          // eslint-disable-next-line no-restricted-syntax
-          try {
-            isNegative(soleInoperableNumber).pipe(Effect.runSync);
-          }
-          catch (error) {
-            return Runtime.isFiberFailure(error);
-          }
-        })();
+        const soleFailure = Effect.flip(isNegative(soleInoperableNumber)).pipe(Effect.runSync);
 
-        expect(soleOperationDidFail).toBe(true);
+        expect(soleFailure).toBeInstanceOf(Error);
       });
 
       it('should clearly communicate the rejection to developers', () => {
         expect.assertions(1);
 
-        const soleFailingOperation = (): boolean => isNegative(soleInoperableNumber).pipe(Effect.runSync);
+        const soleFailure = Effect.flip(isNegative(soleInoperableNumber)).pipe(Effect.runSync);
 
-        expect(soleFailingOperation).toThrow('Operand must be operable');
+        expect(soleFailure.message).toBe('Operand must be operable');
       });
     });
   });
