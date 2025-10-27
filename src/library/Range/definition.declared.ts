@@ -28,7 +28,7 @@ class Range {
     return Effect.gen(this, function* () {
       if (
         givenUpperBound < givenLowerBound
-      ) return Effect.dieMessage('Upper bound must not be lower than lower bound').pipe(Effect.runSync);
+      ) return yield* Effect.dieMessage('Upper bound must not be lower than lower bound');
 
       const validRange = new this(
         givenLowerBound,

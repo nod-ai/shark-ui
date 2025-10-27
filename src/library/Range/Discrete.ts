@@ -40,17 +40,17 @@ class Range_Discrete
     });
 
     return Effect.gen(this, function* () {
-      const validRange = potentialRange.pipe(Effect.runSync);
+      const validRange = yield* potentialRange;
 
       if (
-        isNegative(givenStepSize).pipe(Effect.runSync)
-      ) return Effect.dieMessage('Step size must be non-negative').pipe(Effect.runSync);
+        yield* isNegative(givenStepSize)
+      ) return yield* Effect.dieMessage('Step size must be non-negative');
 
       const overstep = validRange.width % givenStepSize;
 
       if (
         overstep !== 0
-      ) return Effect.dieMessage('Step size must fit evenly into the range').pipe(Effect.runSync);
+      ) return yield* Effect.dieMessage('Step size must fit evenly into the range');
 
       const validDiscreteRange = new this(
         validRange.lowerBound,

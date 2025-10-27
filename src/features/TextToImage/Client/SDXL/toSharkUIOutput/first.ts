@@ -27,14 +27,14 @@ const toSharkUIOutput_first = (
     inferredFrom: TextToImage_Pipeline.Input['text'];
   },
 ): Effect.Effect<TextToImage_Pipeline.Output> => Effect.gen(function* () {
-  const inferredOutputs = toSharkUIOutput_plural({
+  const inferredOutputs = yield* toSharkUIOutput_plural({
     in          : givenResponse,
     inferredFrom: givenInputText,
-  }).pipe(Effect.runSync);
+  });
 
   if (
     !isNonEmptyArray(inferredOutputs)
-  ) return Effect.dieMessage('Expected at least one text-to-image output in response').pipe(Effect.runSync);
+  ) return yield* Effect.dieMessage('Expected at least one text-to-image output in response');
 
   const [firstPipelineOutput] = inferredOutputs;
   return firstPipelineOutput;
