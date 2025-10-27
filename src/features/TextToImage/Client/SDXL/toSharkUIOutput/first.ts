@@ -1,6 +1,5 @@
 import {
   Effect,
-  Option,
 } from 'effect';
 
 import {
@@ -33,9 +32,7 @@ const toSharkUIOutput_first = (
     inferredFrom: givenInputText,
   });
 
-  const inferredOutputs = potentialInferredOutputs.pipe(
-    Option.getOrThrowWith(() => new Error('Expected at least one well-formed text-to-image output in response')),
-  );
+  const inferredOutputs = potentialInferredOutputs;
 
   if (
     !isNonEmptyArray(inferredOutputs)
