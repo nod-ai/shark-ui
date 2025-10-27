@@ -33,29 +33,31 @@ class Range_Discrete
       to: Range_Discrete['upperBound'];
       by: Range_Discrete['stepSize'];
     },
-  ): Range_Discrete {
+  ): Effect.Effect<Range_Discrete> {
     const validRange = super.spanning({
       from: givenLowerBound,
       to  : givenUpperBound,
+    }).pipe(Effect.runSync);
+
+    return Effect.gen(this, function* () {
+      if (
+        isNegative(givenStepSize).pipe(Effect.runSync)
+      ) return Effect.dieMessage('Step size must be non-negative').pipe(Effect.runSync);
+
+      const overstep = validRange.width % givenStepSize;
+
+      if (
+        overstep !== 0
+      ) return Effect.dieMessage('Step size must fit evenly into the range').pipe(Effect.runSync);
+
+      const validDiscreteRange = new this(
+        validRange.lowerBound,
+        validRange.upperBound,
+        givenStepSize,
+      );
+
+      return validDiscreteRange;
     });
-
-    if (
-      isNegative(givenStepSize)
-    ) return Effect.dieMessage('Step size must be non-negative').pipe(Effect.runSync);
-
-    const overstep = validRange.width % givenStepSize;
-
-    if (
-      overstep !== 0
-    ) return Effect.dieMessage('Step size must fit evenly into the range').pipe(Effect.runSync);
-
-    const validDiscreteRange = new this(
-      validRange.lowerBound,
-      validRange.upperBound,
-      givenStepSize,
-    );
-
-    return validDiscreteRange;
   }
 
   public override exclusivelyContains(givenValue: number): boolean {

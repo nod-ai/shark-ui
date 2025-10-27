@@ -68,7 +68,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = (
   const soleTextToImageOutput = toSharkUIOutput.first({
     in          : textToImageResponse,
     inferredFrom: given.textToImageRequestBody.textPrompts,
-  });
+  }).pipe(Effect.runSync);
 
   return soleTextToImageOutput;
 });

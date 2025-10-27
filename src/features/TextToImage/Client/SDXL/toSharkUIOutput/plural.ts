@@ -23,7 +23,7 @@ const toSharkUIOutput_plural = (
     in: GenerateFromTextResponse;
     inferredFrom: TextToImage_Pipeline.Input['text'];
   },
-): TextToImage_Pipeline.Output[] => {
+): Effect.Effect<TextToImage_Pipeline.Output[]> => Effect.gen(function* () {
   if (
     !('artifacts' in givenResponse.result)
   ) return Effect.dieMessage('Expected response body rather than readable stream').pipe(Effect.runSync);
@@ -34,7 +34,7 @@ const toSharkUIOutput_plural = (
 
   const potentialOutputImages = inferredRawImages.map(($0) => toSharkUIOutput_Image($0, {
     description: toSharkUIOutput_Image.Description.all(givenInputText),
-  }));
+  })).map(Effect.runSync);
 
   const inferredOutputImages = Option.some(potentialOutputImages).pipe(
     Effect.orDieWith(() => new Error('Failed to convert one or more raw images to Shark UI output image.')),
@@ -45,7 +45,7 @@ const toSharkUIOutput_plural = (
   }));
 
   return inferredOutputs;
-};
+});
 
 export {
   toSharkUIOutput_plural,
