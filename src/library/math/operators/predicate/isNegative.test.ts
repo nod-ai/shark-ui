@@ -105,7 +105,9 @@ describe(isNegative, () => {
     it.each(infiniteAssertions)('should support infinite operands', (eachInfiniteNumber, eachExpectedOutput) => {
       expect.assertions(1);
 
-      expect(isNegative(eachInfiniteNumber).pipe(Effect.runSync)).toBe(eachExpectedOutput);
+      const eachActualOutput = isNegative(eachInfiniteNumber).pipe(Effect.runSync);
+
+      expect(eachActualOutput).toBe(eachExpectedOutput);
     });
 
     it.each(neutralFiniteNumbers)('should detect neutral operands', (eachNeutralNumber) => {
