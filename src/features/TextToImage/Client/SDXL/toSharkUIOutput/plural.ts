@@ -28,7 +28,9 @@ const toSharkUIOutput_plural = (
     !('artifacts' in givenResponse.result)
   ) return Effect.dieMessage('Expected response body rather than readable stream').pipe(Effect.runSync);
 
-  const inferredRawImages = yield* Option.fromNullable(givenResponse.result.artifacts);
+  const inferredRawImages = Option.fromNullable(givenResponse.result.artifacts).pipe(
+    Option.getOrThrowWith(() => new Error('Expected text-to-image output in response result')),
+  );
 
   const inferredOutputs = inferredRawImages
     .map(($0) => toSharkUIOutput_Image($0, {
@@ -40,7 +42,7 @@ const toSharkUIOutput_plural = (
     Option.getOrThrowWith(() => new Error('Expected at least one well-formed text-to-image output in response')),
   );
 }).pipe(
-  Option.getOrThrowWith(() => new Error('Expected text-to-image output in response result')),
+  Option.getOrThrow,
 );
 
 export {
