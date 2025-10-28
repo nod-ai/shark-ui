@@ -1,6 +1,5 @@
 import {
   Effect,
-  Runtime,
 } from 'effect';
 
 import {
@@ -39,33 +38,25 @@ describe(isNegative, () => {
       it('should reject the operand', () => {
         expect.assertions(1);
 
-        const soleFailingOperation = (): boolean => isNegative(soleInoperableNumber).pipe(Effect.runSync);
+        const inoperableInputDidResultInFailure = Effect.isFailure(isNegative(soleInoperableNumber)).pipe(Effect.runSync);
 
-        expect(soleFailingOperation).toThrow(Error);
+        expect(inoperableInputDidResultInFailure).toBe(true);
       });
 
       it('should safely propagate the rejection', () => {
         expect.assertions(1);
 
-        const soleOperationDidFail = (() => {
-          // eslint-disable-next-line no-restricted-syntax
-          try {
-            isNegative(soleInoperableNumber).pipe(Effect.runSync);
-          }
-          catch (error) {
-            return Runtime.isFiberFailure(error);
-          }
-        })();
+        const soleFailure = Effect.flip(isNegative(soleInoperableNumber)).pipe(Effect.runSync);
 
-        expect(soleOperationDidFail).toBe(true);
+        expect(soleFailure).toBeInstanceOf(Error);
       });
 
       it('should clearly communicate the rejection to developers', () => {
         expect.assertions(1);
 
-        const soleFailingOperation = (): boolean => isNegative(soleInoperableNumber).pipe(Effect.runSync);
+        const soleFailure = Effect.flip(isNegative(soleInoperableNumber)).pipe(Effect.runSync);
 
-        expect(soleFailingOperation).toThrow('Operand must be operable');
+        expect(soleFailure.message).toBe('Operand must be operable');
       });
     });
   });
@@ -105,9 +96,9 @@ describe(isNegative, () => {
     it.each(operableNumbers)('should accept valid operands', (eachOperableNumber) => {
       expect.assertions(1);
 
-      const eachOperation = (): boolean => isNegative(eachOperableNumber).pipe(Effect.runSync);
+      const eachOperationDidSucceed = Effect.isSuccess(isNegative(eachOperableNumber)).pipe(Effect.runSync);
 
-      expect(eachOperation).not.toThrow();
+      expect(eachOperationDidSucceed).toBe(true);
     });
 
     it.each(infiniteAssertions)('should support infinite operands', (eachInfiniteNumber, eachExpectedOutput) => {
