@@ -50,7 +50,6 @@ const extendedConfig: ConfigWithExtends = {
           '**/*.vue', // .vue files must be imported directly for bundler to enable type-safety
           '[a-z]*/**', // matches packages
           '@/*/*', // matches src modules
-          '@/library/modifiersByType/*', // bag of tools where consumer must pick a type
           '@/library/utilitiesByType/*', // bag of tools where consumer must pick a type
         ],
       },
