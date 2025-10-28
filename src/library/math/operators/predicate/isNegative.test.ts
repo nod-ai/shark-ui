@@ -39,13 +39,15 @@ describe(isNegative, () => {
       it('should reject the operand', () => {
         expect.assertions(1);
 
-        expect(() => isNegative(soleInoperableNumber).pipe(Effect.runSync)).toThrow(Error);
+        const soleFailingOperation = (): boolean => isNegative(soleInoperableNumber).pipe(Effect.runSync);
+
+        expect(soleFailingOperation).toThrow(Error);
       });
 
       it('should safely propagate the rejection', () => {
         expect.assertions(1);
 
-        expect((() => {
+        const soleOperationDidFail = (() => {
           // eslint-disable-next-line no-restricted-syntax
           try {
             isNegative(soleInoperableNumber).pipe(Effect.runSync);
@@ -53,13 +55,17 @@ describe(isNegative, () => {
           catch (error) {
             return Runtime.isFiberFailure(error);
           }
-        })()).toBe(true);
+        })();
+
+        expect(soleOperationDidFail).toBe(true);
       });
 
       it('should clearly communicate the rejection to developers', () => {
         expect.assertions(1);
 
-        expect(() => isNegative(soleInoperableNumber).pipe(Effect.runSync)).toThrow('Operand must be operable');
+        const soleFailingOperation = (): boolean => isNegative(soleInoperableNumber).pipe(Effect.runSync);
+
+        expect(soleFailingOperation).toThrow('Operand must be operable');
       });
     });
   });
@@ -99,31 +105,41 @@ describe(isNegative, () => {
     it.each(operableNumbers)('should accept valid operands', (eachOperableNumber) => {
       expect.assertions(1);
 
-      expect(() => isNegative(eachOperableNumber).pipe(Effect.runSync)).not.toThrow();
+      const eachOperation = (): boolean => isNegative(eachOperableNumber).pipe(Effect.runSync);
+
+      expect(eachOperation).not.toThrow();
     });
 
     it.each(infiniteAssertions)('should support infinite operands', (eachInfiniteNumber, eachExpectedOutput) => {
       expect.assertions(1);
 
-      expect(isNegative(eachInfiniteNumber).pipe(Effect.runSync)).toBe(eachExpectedOutput);
+      const eachActualOutput = isNegative(eachInfiniteNumber).pipe(Effect.runSync);
+
+      expect(eachActualOutput).toBe(eachExpectedOutput);
     });
 
     it.each(neutralFiniteNumbers)('should detect neutral operands', (eachNeutralNumber) => {
       expect.assertions(1);
 
-      expect(isNegative(eachNeutralNumber).pipe(Effect.runSync)).toBe(false);
+      const outputForEachNeutralNumber = isNegative(eachNeutralNumber).pipe(Effect.runSync);
+
+      expect(outputForEachNeutralNumber).toBe(false);
     });
 
     it.each(positiveFiniteNumbers)('should detect positive operands', (eachPositiveNumber) => {
       expect.assertions(1);
 
-      expect(isNegative(eachPositiveNumber).pipe(Effect.runSync)).toBe(false);
+      const outputForEachPositiveNumber = isNegative(eachPositiveNumber).pipe(Effect.runSync);
+
+      expect(outputForEachPositiveNumber).toBe(false);
     });
 
     it.each(negativeFiniteNumbers)('should detect negative operands', (eachNegativeNumber) => {
       expect.assertions(1);
 
-      expect(isNegative(eachNegativeNumber).pipe(Effect.runSync)).toBe(true);
+      const outputForEachNegativeNumber = isNegative(eachNegativeNumber).pipe(Effect.runSync);
+
+      expect(outputForEachNegativeNumber).toBe(true);
     });
   });
 });
