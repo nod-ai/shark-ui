@@ -8,7 +8,7 @@ import type * as StabilityAIClient from 'stabilityai-client-typescript/models/co
 import Sequence from '@/library/Sequence';
 import URI from '@/library/URI';
 
-import type {
+import {
   TextToImage_Pipeline,
 } from '@/features/TextToImage/Pipeline'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
 
@@ -27,10 +27,10 @@ function toSharkUIOutput_Image(
       Effect.orElseFail(() => new Error('Data for Stability AI image was not base64-encoded.')),
     );
 
-    const derivedImage = {
+    const derivedImage = TextToImage_Pipeline.Output.Image({
       uri        : new URI.Image('png', 'base64', base64DataOfRawImage),
       description: given.description,
-    };
+    });
 
     return derivedImage;
   });
