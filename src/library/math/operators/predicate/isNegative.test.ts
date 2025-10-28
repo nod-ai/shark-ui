@@ -121,7 +121,9 @@ describe(isNegative, () => {
     it.each(positiveFiniteNumbers)('should detect positive operands', (eachPositiveNumber) => {
       expect.assertions(1);
 
-      expect(isNegative(eachPositiveNumber).pipe(Effect.runSync)).toBe(false);
+      const outputForEachPositiveNumber = isNegative(eachPositiveNumber).pipe(Effect.runSync);
+
+      expect(outputForEachPositiveNumber).toBe(false);
     });
 
     it.each(negativeFiniteNumbers)('should detect negative operands', (eachNegativeNumber) => {
