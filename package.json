@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@effect/platform": "^0.93.6",
+    "@effect/platform-node": "^0.103.0",
     "@effect/vitest": "^0.27.0",
     "effect": "^3.19.10",
     "stabilityai-client-typescript": "github:nod-ai/StabilityAI-client-typescript#npm/v0.1.0",
