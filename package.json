@@ -9,13 +9,13 @@
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test:unit": "vitest",
-    "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
-    "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --cache --fix",
     "lint:docs": "markdownlint-cli2 --fix '**/*.md'",
-    "lint:json": "eslint '**/*.json' --fix"
+    "lint:json": "eslint '**/*.json' --fix",
+    "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
+    "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'"
   },
   "dependencies": {
     "@effect/platform": "^0.92.1",
