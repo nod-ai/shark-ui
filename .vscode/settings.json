@@ -37,15 +37,15 @@
         {
             "column": 80,
             "color": "#00ff0020"
-        }, // Might be time to refactor?
+        },
         {
             "column": 100,
             "color": "#ffff0020"
-        }, // Probably time to refactor.
+        },
         {
             "column": 120,
             "color": "#ff000020"
-        } // Definitely time to refactor!
+        }
     ],
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
