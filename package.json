@@ -18,6 +18,7 @@
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'"
   },
   "dependencies": {
+    "@effect/cli": "^0.72.1",
     "@effect/platform": "^0.93.6",
     "@effect/platform-node": "^0.103.0",
     "@effect/vitest": "^0.27.0",
