@@ -3,7 +3,7 @@
   "include": [
     "*.config.*",
     "eslint.*",
-    "cypress/eslint.config.*",
+    "cypress/eslint.config.*"
   ],
   "compilerOptions": {
     "noEmit": true,
@@ -13,7 +13,7 @@
     "moduleResolution": "Bundler",
     "types": [
       "node",
-      "vite/client",
+      "vite/client"
     ]
   }
 }
