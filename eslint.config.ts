@@ -17,6 +17,10 @@ import type {
 import pluginCypress from './cypress/eslint.config';
 import pluginImport from './eslint.import';
 
+import pluginJSON, {
+  jsonPatterns,
+} from './eslint.jsonc';
+
 import pluginMarkdown, {
   markdownPatterns,
 } from './eslint.markdown';
@@ -148,11 +152,16 @@ const completeConfig = defineConfig([
     extends: configWithVueTS,
     ignores: [
       ...markdownPatterns,
+      ...jsonPatterns,
     ],
   },
   {
     extends: pluginMarkdown,
     files  : markdownPatterns,
+  },
+  {
+    extends: pluginJSON,
+    files  : jsonPatterns,
   },
 ]);
 
