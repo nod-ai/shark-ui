@@ -4,7 +4,6 @@
     "*.config.*",
     "eslint.*",
     "cypress/eslint.config.*",
-    "cypress/package.d.ts",
   ],
   "compilerOptions": {
     "noEmit": true,
