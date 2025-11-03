@@ -18,6 +18,16 @@ const pluginJSON: Linter.Config[] = [
       '**/.vite/**',
     ],
   },
+  {
+    name : 'shark-ui/jsonc/rules',
+    files: jsonPatterns,
+    rules: {
+      'jsonc/indent': [
+        'error',
+        2,
+      ],
+    },
+  },
 ];
 
 export {
