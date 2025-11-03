@@ -16,7 +16,11 @@ import type {
 
 import pluginCypress from './cypress/eslint.config';
 import pluginImport from './eslint.import';
-import pluginMarkdown from './eslint.markdown';
+
+import pluginMarkdown, {
+  markdownPatterns,
+} from './eslint.markdown';
+
 import pluginStylistic from './eslint.stylistic';
 import pluginVitest from './eslint.vitest';
 
@@ -143,14 +147,12 @@ const completeConfig = defineConfig([
     // @ts-expect-error: according to bullet "2." under https://typescript-eslint.io/packages/typescript-eslint/#migrating-to-defineconfig
     extends: configWithVueTS,
     ignores: [
-      '**/*.md',
+      ...markdownPatterns,
     ],
   },
   {
     extends: pluginMarkdown,
-    files  : [
-      '**/*.md',
-    ],
+    files  : markdownPatterns,
   },
 ]);
 
