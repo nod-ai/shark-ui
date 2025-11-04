@@ -7,6 +7,7 @@
     "*.config.*",
     "eslint.*",
     "cypress/eslint.config.*",
+    "@internal/**/*",
     "eslint-internal/**/*.ts"
   ],
   "compilerOptions": {
