@@ -1,3 +1,3 @@
 export {
-  TypeScript_File as default,
+  TypeScript_File,
 } from './exports.object.primary.ts';

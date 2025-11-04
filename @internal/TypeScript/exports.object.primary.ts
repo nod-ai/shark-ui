@@ -1,1 +1,1 @@
-export type * from './definition.assembled.ts';
+export * from './definition.assembled.ts';
