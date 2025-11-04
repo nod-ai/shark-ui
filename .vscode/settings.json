@@ -28,6 +28,12 @@
       "path": "./dictionary.stability-ai.txt",
       "description": "Words introduced by the stability-ai organization",
       "addWords": false
+    },
+    "eslint-internal": {
+      "name": "eslint-internal",
+      "path": "./eslint-internal/dictionary.txt",
+      "description": "Words introduced by the eslint-internal module",
+      "addWords": false
     }
   },
   "editor.codeActionsOnSave": {
