@@ -16,6 +16,7 @@ import type {
 
 import pluginCypress from './cypress/eslint.config';
 import pluginImport from './eslint.import';
+import pluginInternal from './eslint.internal';
 
 import pluginJSON, {
   jsonPatterns,
@@ -142,6 +143,7 @@ const configWithVueTS = defineConfigWithVueTs(
   extraConfigForTypeScriptESLint,
   ...pluginStylistic,
   ...pluginImport,
+  ...pluginInternal,
 
   pluginVue.configs['flat/recommended'],
   VueTSConfig.strictTypeChecked,
