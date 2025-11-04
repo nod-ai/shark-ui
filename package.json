@@ -18,7 +18,7 @@
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'"
   },
   "dependencies": {
-    "@effect/platform": "^0.92.1",
+    "@effect/platform": "^0.93.0",
     "@effect/vitest": "^0.26.0",
     "effect": "^3.19.0",
     "stabilityai-client-typescript": "github:nod-ai/StabilityAI-client-typescript#npm/v0.1.0",
