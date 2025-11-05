@@ -3,7 +3,8 @@
   "include": [
     "*.config.*",
     "eslint.*",
-    "cypress/eslint.config.*"
+    "cypress/eslint.config.*",
+    "eslint-internal/**/*.ts"
   ],
   "compilerOptions": {
     "noEmit": true,
@@ -14,6 +15,7 @@
     "types": [
       "node",
       "vite/client"
-    ]
+    ],
+    "allowImportingTsExtensions": true
   }
 }
