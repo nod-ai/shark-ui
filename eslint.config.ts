@@ -92,6 +92,12 @@ const extraConfigForTypeScriptESLint: ConfigWithExtends = {
     '@typescript-eslint/explicit-member-accessibility': [
       'error', // Easier to see dead code in situations where a member is marked `private`
     ],
+    '@typescript-eslint/no-confusing-void-expression': [
+      'error',
+      {
+        ignoreArrowShorthand: true, // allows for immediately-ran `Effect.gen` callbacks that return `void`
+      },
+    ],
     '@typescript-eslint/no-import-type-side-effects': [
       'error', // Avoids unexpected behavior, trims down the size of the bundle
     ],
