@@ -8,7 +8,8 @@
     "eslint.*",
     "cypress/eslint.config.*",
     "@internal/**/*",
-    "eslint-internal/**/*.ts"
+    "eslint-internal/**/*.ts",
+    "TSMorph/**/*.ts"
   ],
   "compilerOptions": {
     "noEmit": true,
