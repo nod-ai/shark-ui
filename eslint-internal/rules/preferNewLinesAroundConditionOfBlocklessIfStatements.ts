@@ -10,12 +10,12 @@ import {
 } from '@typescript-eslint/utils/ast-utils';
 
 import {
-  RuleCreator,
-} from '@typescript-eslint/utils/eslint-utils';
-
-import {
   Effect,
 } from 'effect';
+
+import {
+  createInternalRule,
+} from '../createInternalRule';
 
 const hasBlock = (
   givenIfStatement: TSESTree.IfStatement,
@@ -90,8 +90,6 @@ const newLineExistsBefore = (
 
   return (previousToken.loc.end.line < givenToken.loc.start.line);
 });
-
-const createInternalRule = RuleCreator((name) => `eslint-internal/${name}`);
 
 const preferNewLinesAroundConditionOfBlocklessIfStatements = createInternalRule({
   name: 'prefer-new-lines-around-condition-of-blockless-if-statements',
