@@ -58,12 +58,12 @@ const preferNewLinesBetweenNamedImports = createInternalRule({
         });
       };
 
-      namedSpecifiers.forEach((eachSpecifier, indexOfEachSpecifier, allSpecifiers) => {
+      namedSpecifiers.forEach((eachSpecifier, indexOfEachSpecifier) => {
         if (
           indexOfEachSpecifier === 0
         ) return;
 
-        const previousSpecifier = allSpecifiers[indexOfEachSpecifier - 1];
+        const previousSpecifier = namedSpecifiers[indexOfEachSpecifier - 1];
 
         if (
           previousSpecifier.loc.end.line !== eachSpecifier.loc.start.line
