@@ -4,6 +4,10 @@ import {
 } from '@typescript-eslint/utils';
 
 import {
+  Effect,
+} from 'effect';
+
+import {
   isNonEmptyArray,
 } from 'effect/Array';
 
@@ -58,7 +62,7 @@ const preferNewLinesBetweenNamedImports = createInternalRule({
         });
       };
 
-      namedSpecifiers.forEach((eachSpecifier, indexOfEachSpecifier) => {
+      Effect.forEach(namedSpecifiers, (eachSpecifier, indexOfEachSpecifier) => Effect.gen(function* () {
         if (
           indexOfEachSpecifier === 0
         ) return;
@@ -68,7 +72,7 @@ const preferNewLinesBetweenNamedImports = createInternalRule({
         if (
           previousSpecifier.loc.end.line === eachSpecifier.loc.start.line
         ) reportFixableMissingNewLineBefore(eachSpecifier);
-      });
+      })).pipe(Effect.runSync);
     },
   }),
 });
