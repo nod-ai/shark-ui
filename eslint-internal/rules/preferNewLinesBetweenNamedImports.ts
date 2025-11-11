@@ -66,10 +66,8 @@ const preferNewLinesBetweenNamedImports = createInternalRule({
         const previousSpecifier = namedSpecifiers[indexOfEachSpecifier - 1];
 
         if (
-          previousSpecifier.loc.end.line !== eachSpecifier.loc.start.line
-        ) return;
-
-        reportFixableMissingNewLineBefore(eachSpecifier);
+          previousSpecifier.loc.end.line === eachSpecifier.loc.start.line
+        ) reportFixableMissingNewLineBefore(eachSpecifier);
       });
     },
   }),
