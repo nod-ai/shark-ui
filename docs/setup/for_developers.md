@@ -72,6 +72,12 @@ where:
     npm run lint
     ```
 
+1. Type check early and often by running:
+
+    ```shell
+    npm run type-check
+    ```
+
 1. Run [unit tests](../testing/unit/development.md):
 
 1. Run End-to-End Tests against the development server with [Cypress](https://www.cypress.io/):
