@@ -12,6 +12,10 @@ import {
 } from 'effect/Array';
 
 import {
+  isUndefined,
+} from 'effect/Predicate';
+
+import {
   createInternalRule,
 } from '../createInternalRule';
 
@@ -68,6 +72,10 @@ const preferNewLinesBetweenNamedImports = createInternalRule({
         ) return;
 
         const previousSpecifier = namedSpecifiers[indexOfEachSpecifier - 1];
+
+        if (
+          isUndefined(previousSpecifier)
+        ) return yield* Effect.dieMessage('Expected a previous specifier');
 
         if (
           previousSpecifier.loc.end.line === eachSpecifier.loc.start.line
