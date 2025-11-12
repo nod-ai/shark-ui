@@ -12,7 +12,7 @@ const TextToImage_Client_SDXL_initialize: Effect.Effect<
   ShimmedStabilityAIClient,
   TextToImage_Server.Error.MissingSpecification
 > = Effect.gen(function* () {
-  const currentTextToImageServer = yield* TextToImage_Server.Current.retrieve;
+  const currentTextToImageServer = yield* TextToImage_Server.Current.retrieve();
 
   const newStabilityAIClient = new ShimmedStabilityAIClient({
     serverURL: currentTextToImageServer.origin,
