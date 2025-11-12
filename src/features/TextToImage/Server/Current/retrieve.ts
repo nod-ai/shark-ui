@@ -30,7 +30,7 @@ const TextToImage_Server_Current_retrieve = (): Effect.Effect<
   ) return TextToImage_Server_Current_accordingToEnvironment.value;
 
   const remoteConfig = yield* Effect.firstSuccessOf([
-    TextToImage_Config.Static.read,
+    TextToImage_Config.Static.read(),
     TextToImage_Config.Dynamic.fetch,
   ]).pipe(
     Effect.orElseSucceed(() => TextToImage_Config.empty),
