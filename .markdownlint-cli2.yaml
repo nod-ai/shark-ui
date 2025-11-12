@@ -1,4 +1,5 @@
 config:
   line-length: false
   no-trailing-spaces: true
+  single-trailing-newline: true
 gitignore: true
