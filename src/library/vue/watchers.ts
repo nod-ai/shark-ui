@@ -1,3 +1,0 @@
-export {
-  watch,
-} from 'vue';

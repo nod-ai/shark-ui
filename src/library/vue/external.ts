@@ -5,4 +5,6 @@ export {
 
   reactive,
   type Reactive,
+
+  watch,
 } from 'vue';
