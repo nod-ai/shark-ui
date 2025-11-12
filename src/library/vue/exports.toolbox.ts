@@ -1,4 +1,4 @@
-export * from './app';
+export * from './external';
 
 export type * from './component';
 
