@@ -92,7 +92,7 @@ src/
 ├─ GitHubRepositoryIssue
   ├─ definition.declared.ts    # Defines what a `GitHubRepositoryIssue` is via a class declaration
   ├─ exports.object.primary.ts # Identifies the primary object to expose to consumers
-  ├─ index.ts                  # Exposes the primary object as the `default` export from the entire module 
+  ├─ index.ts                  # Exposes the primary object as the `default` export from the entire module
 ```
 
 But it would be _excessive_ until a valid need actually presented itself, such as:

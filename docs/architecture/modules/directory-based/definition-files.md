@@ -48,11 +48,11 @@ flowchart TB
     Decision_PrimaryObject ==no ==> File_DefinitionAssembled
 
     Decision_Augmentation ==no ==> File_DefinitionDeclared
-    Decision_Augmentation ==yes==> File_DefinitionDeclaredWithAugmentation 
+    Decision_Augmentation ==yes==> File_DefinitionDeclaredWithAugmentation
 
     File_DefinitionDeclaredWithAugmentation --> File_DefinitionDeclared
     File_DefinitionDeclaredWithAugmentation --> File_DefinitionDeclaredAugmentation -.-> File_DefinitionDeclared
-    File_DefinitionAssembled                --> File_DefinitionAssembledMembers 
+    File_DefinitionAssembled                --> File_DefinitionAssembledMembers
 
     File_DefinitionDeclaredAugmentation --- Junction_End
     File_DefinitionDeclared             --- Junction_End
