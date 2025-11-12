@@ -20,7 +20,7 @@ This repo uses [GitHub Flow](https://docs.github.com/en/get-started/using-github
 
 ```mermaid
 %%{
-    init: { 
+    init: {
         'logLevel': 'debug',
         'theme': 'default' ,
         'themeVariables': {

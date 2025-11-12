@@ -28,7 +28,7 @@ If these three machines are not the _same_ machine, then some forwarding will ma
 
 1. Use VSCode on the same machine that will be running the browser (i.e. your local machine)
 1. Install the [Remote SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) extension
-1. Leverage the **automatic port forwarding** by running services from the terminal within VSCode  
+1. Leverage the **automatic port forwarding** by running services from the terminal within VSCode
 
 NOTE: If you don't anticipate a workflow (i.e. development) that requires frequent coordination of the "three machines", just skip to the [The Short-Term Solution](#the-short-term-setup)
 
