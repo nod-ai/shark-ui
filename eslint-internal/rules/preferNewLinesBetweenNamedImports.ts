@@ -4,8 +4,16 @@ import {
 } from '@typescript-eslint/utils';
 
 import {
+  Effect,
+} from 'effect';
+
+import {
   isNonEmptyArray,
 } from 'effect/Array';
+
+import {
+  isUndefined,
+} from 'effect/Predicate';
 
 import {
   createInternalRule,
@@ -58,19 +66,21 @@ const preferNewLinesBetweenNamedImports = createInternalRule({
         });
       };
 
-      namedSpecifiers.forEach((eachSpecifier, indexOfEachSpecifier, allSpecifiers) => {
+      Effect.forEach(namedSpecifiers, (eachSpecifier, indexOfEachSpecifier) => Effect.gen(function* () {
         if (
           indexOfEachSpecifier === 0
         ) return;
 
-        const previousSpecifier = allSpecifiers[indexOfEachSpecifier - 1];
+        const previousSpecifier = namedSpecifiers[indexOfEachSpecifier - 1];
 
         if (
-          previousSpecifier.loc.end.line !== eachSpecifier.loc.start.line
-        ) return;
+          isUndefined(previousSpecifier)
+        ) return yield* Effect.dieMessage('Expected a previous specifier');
 
-        reportFixableMissingNewLineBefore(eachSpecifier);
-      });
+        if (
+          previousSpecifier.loc.end.line === eachSpecifier.loc.start.line
+        ) reportFixableMissingNewLineBefore(eachSpecifier);
+      })).pipe(Effect.runSync);
     },
   }),
 });
