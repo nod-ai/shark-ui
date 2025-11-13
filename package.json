@@ -29,7 +29,6 @@
   "devDependencies": {
     "@eslint/markdown": "^7.5.1",
     "@stylistic/eslint-plugin": "^5.5.0",
-    "@tsconfig/node22": "^22.0.2",
     "@tsconfig/node24": "^24.0.2",
     "@types/jsdom": "^27.0.0",
     "@types/node": "^24.10.1",
