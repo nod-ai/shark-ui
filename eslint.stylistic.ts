@@ -10,6 +10,18 @@ const extraConfig: ConfigWithExtends = {
     '@stylistic': stylistic,
   },
   rules: {
+    '@stylistic/array-bracket-newline': [
+      'error',
+      {
+        minItems: 1,
+      }, // Reduces diff churn by isolating changes to the array elements.
+    ],
+    '@stylistic/array-element-newline': [
+      'error',
+      {
+        minItems: 1,
+      }, // Reduces diff churn by isolating changes to each array element.
+    ],
     '@stylistic/arrow-parens': [
       'error',
       'always', // Helps minimize diffs and mitigate merge conflicts.
