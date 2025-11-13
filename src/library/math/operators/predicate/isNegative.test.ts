@@ -65,11 +65,17 @@ describe(isNegative, () => {
 
   describe('the happy outcomes', () => {
     const infiniteAssertions = [
-      [infinite.negative, true],
-      [infinite.positive, false],
+      {
+        value         : infinite.negative,
+        expectedOutput: true,
+      },
+      {
+        value         : infinite.positive,
+        expectedOutput: false,
+      },
     ] as const;
 
-    const infiniteNumbers = infiniteAssertions.map(($0) => $0[0]);
+    const infiniteNumbers = infiniteAssertions.map(($0) => $0.value);
 
     const neutralFiniteNumbers = [
       neutralNumber,
@@ -103,12 +109,12 @@ describe(isNegative, () => {
       expect(eachOperationDidSucceed).toBe(true);
     }));
 
-    it.effect.each(infiniteAssertions)('should support infinite operands', ([eachInfiniteNumber, eachExpectedOutput]) => Effect.gen(function* () {
+    it.effect.each(infiniteAssertions)('should support infinite operands', (eachAssertion) => Effect.gen(function* () {
       expect.assertions(1);
 
-      const eachActualOutput = yield* isNegative(eachInfiniteNumber);
+      const eachActualOutput = yield* isNegative(eachAssertion.value);
 
-      expect(eachActualOutput).toBe(eachExpectedOutput);
+      expect(eachActualOutput).toBe(eachAssertion.expectedOutput);
     }));
 
     it.effect.each(neutralFiniteNumbers)('should detect neutral operands', (eachNeutralNumber) => Effect.gen(function* () {

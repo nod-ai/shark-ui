@@ -33,9 +33,11 @@ const Reporting_promptUserWith = (givenIssue: unknown): void => {
   const SharkUIRepository = new GitHub.Repository('nod-ai', 'shark-ui');
 
   const newIssue = SharkUIRepository.Issue.from({
-    title   : `[Unexpected Error]: can't <some task> when <some context>`,
-    body    : `### Details\n${formattedErrorDetails}`.replaceAll('\n', '\n> '),
-    labels  : ['bug'],
+    title : `[Unexpected Error]: can't <some task> when <some context>`,
+    body  : `### Details\n${formattedErrorDetails}`.replaceAll('\n', '\n> '),
+    labels: [
+      'bug',
+    ],
     category: 'Bug',
   });
 

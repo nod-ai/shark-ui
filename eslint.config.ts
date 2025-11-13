@@ -127,7 +127,9 @@ configureVueProject({
 const configWithVueTS = defineConfigWithVueTs(
   {
     name : 'app/files-to-lint',
-    files: ['**/*.{ts,mts,tsx,vue}'],
+    files: [
+      '**/*.{ts,mts,tsx,vue}',
+    ],
   },
 
   {

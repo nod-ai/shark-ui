@@ -53,7 +53,12 @@ type InputTextByQualitativeWeight = Record<QualitativeTextWeight, string>;
 
 const byQualitativeWeight = (givenInputText: StandardizedInputText): InputTextByQualitativeWeight => {
   const entriesForInputTextByQualitativeWeight = Object.entries(qualitativeToQuantitativeTextWeightMap)
-    .map(([eachUnsafeQualitativeWeight, eachQuantitativeWeight]) => {
+    .map((eachWeightMapEntry) => {
+      const [
+        eachUnsafeQualitativeWeight,
+        eachQuantitativeWeight,
+      ] = eachWeightMapEntry;
+
       const eachSerializationByWeight = givenInputText
         .filter(($0) => $0.weight === eachQuantitativeWeight)
         .map(($0) => $0.text.trim())
@@ -76,7 +81,12 @@ const byQualitativeWeight = (givenInputText: StandardizedInputText): InputTextBy
 
 const standardized = (givenInputText: InputTextByQualitativeWeight): StandardizedInputText => {
   const computedInputText = Object.entries(qualitativeToQuantitativeTextWeightMap)
-    .map(([eachUnsafeQualitativeWeight, eachQuantitativeWeight]): StandardizedInputText[number] => {
+    .map((eachWeightMapEntry): StandardizedInputText[number] => {
+      const [
+        eachUnsafeQualitativeWeight,
+        eachQuantitativeWeight,
+      ] = eachWeightMapEntry;
+
       const eachQualitativeWeight = eachUnsafeQualitativeWeight as QualitativeTextWeight;
       const weightedText = givenInputText[eachQualitativeWeight];
 

@@ -35,7 +35,11 @@ class Shortfin_TextToImage_SDXL_Client {
 
     const decodedBodyFrom = HttpClientResponse.schemaBodyJson(Shortfin_TextToImage_SDXL_Client_Response.Body);
     const decodedResource = yield* decodedBodyFrom(generationResponse).pipe(Effect.orDie);
-    const [soleGeneratedImage] = decodedResource.images;
+
+    const [
+      soleGeneratedImage,
+    ] = decodedResource.images;
+
     return soleGeneratedImage;
   }).pipe(
     Effect.provide(FetchHttpClient.layer),

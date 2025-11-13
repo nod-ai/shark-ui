@@ -51,6 +51,18 @@ const pluginJSON: Linter.Config[] = [
     name : 'shark-ui/jsonc/rules',
     files: jsonPatterns,
     rules: {
+      'jsonc/array-bracket-newline': [
+        'error',
+        {
+          minItems: 1,
+        }, // Mirrors configuration specified in "eslint.stylistic.ts"
+      ],
+      'jsonc/array-element-newline': [
+        'error',
+        {
+          minItems: 1,
+        }, // Mirrors configuration specified in "eslint.stylistic.ts"
+      ],
       'jsonc/indent': [
         'error',
         2,
