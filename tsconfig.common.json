@@ -3,8 +3,6 @@
     "@tsconfig/strictest/tsconfig.json"
   ],
   "compilerOptions": {
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": false
   }
 }
