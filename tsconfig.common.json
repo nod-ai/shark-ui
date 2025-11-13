@@ -1,6 +1,10 @@
 {
+  "extends": [
+    "@tsconfig/strictest/tsconfig.json"
+  ],
   "compilerOptions": {
     "strict": true,
-    "noUncheckedIndexedAccess": true
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": false
   }
 }
