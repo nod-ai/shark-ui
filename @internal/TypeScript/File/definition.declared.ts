@@ -8,9 +8,10 @@ import {
   Effect,
 } from 'effect';
 
-import type {
-  Project,
-  Symbol,
+import {
+  Node,
+  type Project,
+  type Symbol,
 } from 'ts-morph';
 
 import {
@@ -20,6 +21,10 @@ import {
 import {
   soleElementIn,
 } from '../../utilitiesByType/array';
+
+import {
+  hasCallableTarget,
+} from '../Declaration';
 
 class TypeScript_File
   extends Data.Class<{
@@ -83,6 +88,25 @@ class TypeScript_File
   > = Effect.gen(this, function* () {
     const temporaryProject = new InternalProject();
     return yield* this.soleExportUsing(temporaryProject);
+  });
+
+  public readonly soleExportIsCallableUsing = (
+    givenProject: Project,
+  ): Effect.Effect<
+    boolean,
+    Error,
+    Path.Path
+  > => Effect.gen(this, function* () {
+    const soleExportSymbol = yield* this.soleExportUsing(givenProject);
+    const soleExportDeclaration = yield* soleElementIn(soleExportSymbol.getDeclarations());
+
+    if (
+      Node.isExportSpecifier(soleExportDeclaration)
+    ) return yield* hasCallableTarget(soleExportDeclaration);
+
+    const serializedPath = yield* this.path.serialized;
+    const exportSpecificationError = new Error(`Sole export declaration in ${serializedPath} was not an export specifier.`);
+    return yield* Effect.fail(exportSpecificationError);
   });
 }
 
