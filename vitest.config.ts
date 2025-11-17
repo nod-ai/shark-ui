@@ -11,6 +11,10 @@ import {
 
 import viteConfig from './vite.config';
 
+import {
+  BehavioralOnlyReporter,
+} from './vitest/BehavioralOnlyReporter';
+
 const vitestConfig = mergeConfig(
   viteConfig,
   defineConfig({
@@ -40,6 +44,9 @@ const vitestConfig = mergeConfig(
           'json-summary', // "json" to make it machine readable, "summary" for a schema that's easier to parse
         ],
       },
+      reporters: [
+        new BehavioralOnlyReporter(),
+      ],
     },
   }),
 );
