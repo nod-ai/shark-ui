@@ -53,10 +53,15 @@ type InputTextByQualitativeWeight = Record<QualitativeTextWeight, string>;
 
 const byQualitativeWeight = (givenInputText: StandardizedInputText): InputTextByQualitativeWeight => {
   const entriesForInputTextByQualitativeWeight = Object.entries(qualitativeToQuantitativeTextWeightMap)
-    .map(([eachUnsafeQualitativeWeight, eachQuantitativeWeight]) => {
+    .map((eachWeightMapEntry) => {
+      const [
+        eachUnsafeQualitativeWeight,
+        eachQuantitativeWeight,
+      ] = eachWeightMapEntry;
+
       const eachSerializationByWeight = givenInputText
-        .filter($0 => $0.weight === eachQuantitativeWeight)
-        .map($0 => $0.text.trim())
+        .filter(($0) => $0.weight === eachQuantitativeWeight)
+        .map(($0) => $0.text.trim())
         .join(', ');
 
       const eachDerivedEntry = [
@@ -76,7 +81,12 @@ const byQualitativeWeight = (givenInputText: StandardizedInputText): InputTextBy
 
 const standardized = (givenInputText: InputTextByQualitativeWeight): StandardizedInputText => {
   const computedInputText = Object.entries(qualitativeToQuantitativeTextWeightMap)
-    .map(([eachUnsafeQualitativeWeight, eachQuantitativeWeight]): StandardizedInputText[number] => {
+    .map((eachWeightMapEntry): StandardizedInputText[number] => {
+      const [
+        eachUnsafeQualitativeWeight,
+        eachQuantitativeWeight,
+      ] = eachWeightMapEntry;
+
       const eachQualitativeWeight = eachUnsafeQualitativeWeight as QualitativeTextWeight;
       const weightedText = givenInputText[eachQualitativeWeight];
 
@@ -96,21 +106,18 @@ const defaultInitialInputText: InputTextByQualitativeWeight = {
   negative: 'Watermark, blurry, over-saturated, low resolution, pollution',
 };
 
-const initialInputText: InputTextByQualitativeWeight = (() => {
-  const initialExposedInputText = get(exposedInputText);
-
-  return Option.match(initialExposedInputText, {
-    onNone: () => defaultInitialInputText,
-    onSome: $0 => byQualitativeWeight($0),
-  });
-})();
+const initialInputText: InputTextByQualitativeWeight = Option.match(get(exposedInputText), {
+  onSome: ($0) => byQualitativeWeight($0),
+  onNone: () => defaultInitialInputText,
+});
 
 const currentInputText: Ref<InputTextByQualitativeWeight> = ref(initialInputText);
 
 watch(
   currentInputText,
   (updatedInputText) => {
-    set(exposedInputText, Option.some(standardized(updatedInputText)));
+    const wrappedInputText = Option.some(standardized(updatedInputText));
+    set(exposedInputText, wrappedInputText);
   },
   {
     deep     : true,

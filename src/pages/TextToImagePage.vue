@@ -3,10 +3,11 @@ import {
   get,
   ref,
   type Ref,
-  useStatefulAttemptThatEventually,
+  progressiveRef,
 } from '@/library/vue';
 
 import {
+  Effect,
   Option,
 } from 'effect';
 
@@ -30,8 +31,6 @@ import {
   VSkeletonLoader,
 } from 'vuetify/components/VSkeletonLoader';
 
-import Attempt from '@/library/Attempt';
-
 import {
   SDXL,
 } from '@/library/ShimmedStabilityAIClient';
@@ -41,8 +40,7 @@ import NavigationPanel from '@/components/NavigationPanel.vue';
 
 import TextToImage from '@/features/TextToImage';
 import TextToImageInputSection from '@/features/TextToImage/components/TextToImageInputSection.vue';
-import TextToImageOutputAlert from '@/features/TextToImage/components/TextToImageOutputAlert.vue';
-import TextToImageOutputImg from '@/features/TextToImage/components/TextToImageOutputImg.vue';
+import TextToImageOutputView from '@/features/TextToImage/components/TextToImageOutputView.vue';
 
 const currentPrompt: Ref<Option.Option<TextToImage.Pipeline.Input['text']>> = ref(Option.none());
 
@@ -52,13 +50,12 @@ const {
 
 const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
 
-const imageGeneration = useStatefulAttemptThatEventually(async () => {
-  const proposedPrompt = Option.getOrThrowWith(
-    get(currentPrompt),
-    () => new Error('Prompt was not set before submission'),
+const imageGeneration = progressiveRef(Effect.gen(function* () {
+  const proposedPrompt = yield* get(currentPrompt).pipe(
+    Effect.orDieWith(() => new Error('Prompt was not set before submission')),
   );
 
-  const outcomeOfGeneratingOutput = await TextToImage.Client.SDXL.generateOutputFrom({
+  const generatedOutput = yield* TextToImage.Client.SDXL.generateOutputFrom({
     textToImageRequestBody: {
       textPrompts: proposedPrompt,
       height     : 1024,
@@ -69,13 +66,8 @@ const imageGeneration = useStatefulAttemptThatEventually(async () => {
     },
   });
 
-  const outcomeOfGeneratingImage = Attempt.Outcome.map(
-    outcomeOfGeneratingOutput,
-    $0 => $0.image,
-  );
-
-  return outcomeOfGeneratingImage;
-});
+  return generatedOutput.image;
+}));
 </script>
 
 <template>
@@ -129,20 +121,16 @@ const imageGeneration = useStatefulAttemptThatEventually(async () => {
       class="fill-height"
     >
       <VSkeletonLoader
-        v-if="Option.isNone(imageGeneration.outcome)"
+        v-if="Option.isNone(imageGeneration.output)"
         :boilerplate="!imageGeneration.isInProgress"
         width="100vh"
         :style="{
           'aspect-ratio': 1,
         }"
       />
-      <TextToImageOutputImg
-        v-else-if="Attempt.Outcome.isSuccess(imageGeneration.outcome.value)"
-        :model-value="imageGeneration.outcome.value.value"
-      />
-      <TextToImageOutputAlert
+      <TextToImageOutputView
         v-else
-        :error="imageGeneration.outcome.value.cause"
+        :output="imageGeneration.output.value"
       />
     </VContainer>
   </VMain>

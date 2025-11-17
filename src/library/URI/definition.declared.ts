@@ -1,5 +1,4 @@
 import {
-  Array,
   Option,
 } from 'effect';
 
@@ -37,47 +36,42 @@ class URI {
   public static readonly authorityPrefix = '//';
 
   private get serializableAuthority(): Option.Option<string> {
-    return Option.map(
-      this.authority,
-      $0 => URI.authorityPrefix.concat($0),
-    );
+    return Option.gen(this, function* () {
+      return URI.authorityPrefix.concat(yield* this.authority);
+    });
   }
 
   public get path(): Option.Option.Value<URI['overridablePath']> {
-    return Option.getOrThrowWith(
-      this.overridablePath,
-      () => new Error('`path` must either be a) provided via constructor or b) overridden via public getter'),
+    return this.overridablePath.pipe(
+      Option.getOrThrowWith(() => new Error('`path` must either be a) provided via constructor or b) overridden via public getter')),
     );
   }
 
   public static readonly queryPrefix = '?';
 
   private get serializableQuery(): Option.Option<string> {
-    return Option.map(
-      this.query,
-      $0 => URI.queryPrefix.concat($0),
-    );
+    return Option.gen(this, function* () {
+      return URI.queryPrefix.concat(yield* this.query);
+    });
   }
 
   public static readonly fragmentPrefix = '#';
 
   private get serializableFragment(): Option.Option<string> {
-    return Option.map(
-      this.fragment,
-      $0 => URI.fragmentPrefix.concat($0),
-    );
+    return Option.gen(this, function* () {
+      return URI.fragmentPrefix.concat(yield* this.fragment);
+    });
   }
 
   public get serialized(): string {
-    const sparseOrderedComponents: Option.Option<string>[] = [
-      Option.some(this.serializableScheme),
-      /*       */ this.serializableAuthority,
-      Option.some(this.path),
-      /*       */ this.serializableQuery,
-      /*       */ this.serializableFragment,
+    const orderedComponents = [
+      this.serializableScheme,
+      this.serializableAuthority,
+      this.path,
+      this.serializableQuery,
+      this.serializableFragment,
     ];
 
-    const orderedComponents = Array.getSomes(sparseOrderedComponents);
     const serializedComponents = concatenated(...orderedComponents);
     return serializedComponents;
   }

@@ -5,6 +5,10 @@ import {
 } from '@/library/vue';
 
 import {
+  Effect,
+} from 'effect';
+
+import {
   VBtn,
 } from 'vuetify/components/VBtn';
 
@@ -101,9 +105,9 @@ const tickLabelsAlong = (
     from: givenRange.lowerBound,
     to  : givenRange.upperBound,
     by  : givenStepSize,
-  });
+  }).pipe(Effect.runSync);
 
-  const labelSets = tickRange.inclusiveSteps.map(eachPosition => tickLabels({
+  const labelSets = tickRange.inclusiveSteps.map((eachPosition) => tickLabels({
     by: eachPosition,
     in: tickRange,
   }));

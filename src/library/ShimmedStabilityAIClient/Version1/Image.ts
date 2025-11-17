@@ -1,4 +1,17 @@
 import type {
+  HttpClientError,
+} from '@effect/platform';
+
+import {
+  Effect,
+  Either,
+} from 'effect';
+
+import {
+  ClientSDK,
+} from 'stabilityai-client-typescript/lib/sdks';
+
+import type {
   Image as StabilityAI_TextToImage_Pipeline_Output,
 } from 'stabilityai-client-typescript/models/components';
 
@@ -7,30 +20,34 @@ import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
 
-import Attempt from '@/library/Attempt';
-import HTTP from '@/library/HTTP';
 import Shortfin from '@/library/Shortfin';
+import URLComponent from '@/library/URLComponent';
 
 import {
   toShortfinRequestBody,
 } from '../toShortfinRequestBody';
 
 class ShimmedStabilityAIClient_Version1_Image
-  extends HTTP.Client {
-  public async forciblyGenerateFromText(
+  extends ClientSDK {
+  private get origin(): URLComponent.Origin {
+    return URLComponent.Origin(this._options.serverURL ?? '');
+  }
+
+  private safelyGenerateFromText = (
     givenRequest: GenerateFromTextRequest,
-  ): Promise<GenerateFromTextResponse> {
+  ): Effect.Effect<
+    GenerateFromTextResponse,
+    HttpClientError.HttpClientError
+  > => Effect.gen(this, function* () {
     const derivedBatchedRequestBody = toShortfinRequestBody.Batched([
       givenRequest.textToImageRequestBody,
     ]);
 
     const textToImageSDXLShortfinClient = new Shortfin.TextToImage.SDXL.Client(this.origin);
-
-    const outcomeOfGeneratingImage = await textToImageSDXLShortfinClient.generateImageFrom(derivedBatchedRequestBody);
-    const generatedImage = Attempt.Either.getOrThrow(outcomeOfGeneratingImage); // matches error propagation of actual StabilityAI Client
+    const generatedImage = yield* textToImageSDXLShortfinClient.generateImageFrom(derivedBatchedRequestBody);
 
     const soleGeneratedArtifact: StabilityAI_TextToImage_Pipeline_Output = {
-      base64      : generatedImage.toString(),
+      base64      : generatedImage,
       finishReason: 'SUCCESS',
       seed        : givenRequest.textToImageRequestBody.seed,
     };
@@ -45,6 +62,24 @@ class ShimmedStabilityAIClient_Version1_Image
     };
 
     return newStabilityAIGenerationResponse;
+  });
+
+  public async forciblyGenerateFromText(
+    givenRequest: GenerateFromTextRequest,
+  ): Promise<GenerateFromTextResponse> {
+    const resultOfGeneratingResponse = await this.safelyGenerateFromText(givenRequest).pipe(
+      Effect.either,
+      Effect.runPromise,
+    );
+
+    const generatedResponse = Either.getOrThrowWith(
+      resultOfGeneratingResponse,
+      (someFailure) => {
+        throw someFailure; // eslint-disable-line no-restricted-syntax -- matches error propagation of actual StabilityAI Client
+      },
+    );
+
+    return generatedResponse;
   }
 }
 

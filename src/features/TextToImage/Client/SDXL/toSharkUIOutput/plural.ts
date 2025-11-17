@@ -1,12 +1,11 @@
 import {
+  Effect,
   Option,
 } from 'effect';
 
 import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
-
-import Attempt from '@/library/Attempt';
 
 import {
   TextToImage_Pipeline,
@@ -24,24 +23,29 @@ const toSharkUIOutput_plural = (
     in: GenerateFromTextResponse;
     inferredFrom: TextToImage_Pipeline.Input['text'];
   },
-): Option.Option<Option.Option<TextToImage_Pipeline.Output>[]> => {
+): Effect.Effect<TextToImage_Pipeline.Output[], Error> => Effect.gen(function* () {
   if (
     !('artifacts' in givenResponse.result)
-  ) return Attempt.Outcome.die('Expected response body rather than readable stream');
+  ) return yield* Effect.fail(new Error('Response had readable stream rather than body.'));
 
-  const inferredRawImages = Option.fromNullable(givenResponse.result.artifacts);
-
-  const inferredOutputs = Option.map(
-    inferredRawImages,
-    $0 => $0
-      .map($0 => toSharkUIOutput_Image($0, {
-        description: toSharkUIOutput_Image.Description.all(givenInputText),
-      }))
-      .map($0 => TextToImage_Pipeline.Output.Option.from($0)),
+  const inferredRawImages = yield* Option.fromNullable(givenResponse.result.artifacts).pipe(
+    Effect.orElseFail(() => new Error('Response body had no text-to-image results.')),
   );
 
+  const potentialOutputImages = inferredRawImages.map(($0) => toSharkUIOutput_Image($0, {
+    description: toSharkUIOutput_Image.Description.all(givenInputText),
+  }));
+
+  const inferredOutputImages = yield* Effect.all(potentialOutputImages).pipe(
+    Effect.orElseFail(() => new Error('Response had one or more malformed text-to-image outputs.')),
+  );
+
+  const inferredOutputs = inferredOutputImages.map(($0) => new TextToImage_Pipeline.Output({
+    image: $0,
+  }));
+
   return inferredOutputs;
-};
+});
 
 export {
   toSharkUIOutput_plural,

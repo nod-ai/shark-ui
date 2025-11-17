@@ -1,4 +1,6 @@
-import Attempt from '@/library/Attempt';
+import {
+  Effect,
+} from 'effect';
 
 import {
   arithmeticMeanOf,
@@ -22,17 +24,19 @@ class Range {
       from: Range['lowerBound'];
       to: Range['upperBound'];
     },
-  ): Range {
-    if (
-      givenUpperBound < givenLowerBound
-    ) return Attempt.Outcome.die('Upper bound must not be lower than lower bound');
+  ): Effect.Effect<Range, Error> {
+    return Effect.gen(this, function* () {
+      if (
+        givenUpperBound < givenLowerBound
+      ) return yield* Effect.fail(new Error('Upper bound must not be lower than lower bound'));
 
-    const validRange = new this(
-      givenLowerBound,
-      givenUpperBound,
-    );
+      const validRange = new this(
+        givenLowerBound,
+        givenUpperBound,
+      );
 
-    return validRange;
+      return validRange;
+    });
   }
 
   public get width(): number {

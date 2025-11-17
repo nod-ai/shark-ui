@@ -1,16 +1,14 @@
 import {
-  Option,
+  Effect,
 } from 'effect';
+
+import {
+  isNonEmptyArray,
+} from 'effect/Array';
 
 import type {
   GenerateFromTextResponse,
 } from 'stabilityai-client-typescript/models/operations';
-
-import Attempt from '@/library/Attempt';
-
-import {
-  hasAtLeastOne,
-} from '@/library/utilitiesByType/array';
 
 import type {
   TextToImage_Pipeline,
@@ -28,30 +26,22 @@ const toSharkUIOutput_first = (
     in: GenerateFromTextResponse;
     inferredFrom: TextToImage_Pipeline.Input['text'];
   },
-): TextToImage_Pipeline.Output => {
-  const potentialInferredOutputs = toSharkUIOutput_plural({
+): Effect.Effect<TextToImage_Pipeline.Output, Error> => Effect.gen(function* () {
+  const inferredOutputs = yield* toSharkUIOutput_plural({
     in          : givenResponse,
     inferredFrom: givenInputText,
   });
 
-  const inferredOutputs = Option.getOrThrowWith(
-    potentialInferredOutputs,
-    () => new Error('Expected text-to-image output in response result'),
-  );
-
   if (
-    !hasAtLeastOne(inferredOutputs)
-  ) return Attempt.Outcome.die('Expected at least one text-to-image output in response');
+    !isNonEmptyArray(inferredOutputs)
+  ) return yield* Effect.fail(new Error('Response had no text-to-image outputs.'));
 
-  const [firstPotentialOutput] = inferredOutputs;
-
-  const firstPipelineOutput = Option.getOrThrowWith(
-    firstPotentialOutput,
-    () => new Error('Expected at least one well-formed text-to-image output in response'),
-  );
+  const [
+    firstPipelineOutput,
+  ] = inferredOutputs;
 
   return firstPipelineOutput;
-};
+});
 
 export {
   toSharkUIOutput_first,

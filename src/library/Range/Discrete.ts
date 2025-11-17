@@ -1,4 +1,6 @@
-import Attempt from '@/library/Attempt';
+import {
+  Effect,
+} from 'effect';
 
 import {
   isNegative,
@@ -31,29 +33,33 @@ class Range_Discrete
       to: Range_Discrete['upperBound'];
       by: Range_Discrete['stepSize'];
     },
-  ): Range_Discrete {
-    const validRange = super.spanning({
+  ): Effect.Effect<Range_Discrete, Error> {
+    const potentialRange = super.spanning({
       from: givenLowerBound,
       to  : givenUpperBound,
     });
 
-    if (
-      isNegative(givenStepSize)
-    ) return Attempt.Outcome.die('Step size must be non-negative');
+    return Effect.gen(this, function* () {
+      const validRange = yield* potentialRange;
 
-    const overstep = validRange.width % givenStepSize;
+      if (
+        yield* isNegative(givenStepSize)
+      ) return yield* Effect.fail(new Error('Step size must be non-negative'));
 
-    if (
-      overstep !== 0
-    ) return Attempt.Outcome.die('Step size must fit evenly into the range');
+      const overstep = validRange.width % givenStepSize;
 
-    const validDiscreteRange = new this(
-      validRange.lowerBound,
-      validRange.upperBound,
-      givenStepSize,
-    );
+      if (
+        overstep !== 0
+      ) return yield* Effect.fail(new Error('Step size must fit evenly into the range'));
 
-    return validDiscreteRange;
+      const validDiscreteRange = new this(
+        validRange.lowerBound,
+        validRange.upperBound,
+        givenStepSize,
+      );
+
+      return validDiscreteRange;
+    });
   }
 
   public override exclusivelyContains(givenValue: number): boolean {

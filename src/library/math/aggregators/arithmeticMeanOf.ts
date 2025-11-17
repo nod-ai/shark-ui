@@ -1,14 +1,14 @@
 import type {
-  Aggregator,
-} from './Aggregator';
+  NonEmptyArray,
+} from 'effect/Array';
 
 import {
-  sumOf,
-} from './sumOf';
+  sumAll,
+} from 'effect/Number';
 
-const arithmeticMeanOf: Aggregator = (
-  ...givenValues
-) => sumOf(...givenValues) / givenValues.length;
+const arithmeticMeanOf = (
+  ...givenValues: NonEmptyArray<number>
+): number => sumAll(givenValues) / givenValues.length;
 
 export {
   arithmeticMeanOf,

@@ -16,7 +16,16 @@ import type {
 
 import pluginCypress from './cypress/eslint.config';
 import pluginImport from './eslint.import';
-import pluginMarkdown from './eslint.markdown';
+import pluginInternal from './eslint.internal';
+
+import pluginJSON, {
+  jsonPatterns,
+} from './eslint.jsonc';
+
+import pluginMarkdown, {
+  markdownPatterns,
+} from './eslint.markdown';
+
 import pluginStylistic from './eslint.stylistic';
 import pluginVitest from './eslint.vitest';
 
@@ -48,11 +57,11 @@ const extraConfigForESLint: ConfigWithExtends = {
       'error',
       {
         selector: 'TryStatement',
-        message : 'Prefer `Attempt.to` for error matching over `try`/`catch`.',
+        message : 'Prefer `Effect.try` or `Effect.tryPromise` with `Effect.catch` for error matching over `try`/`catch`.',
       },
       {
         selector: 'ThrowStatement',
-        message : 'Prefer `Attempt.that` callback for error propagation over `throw`.',
+        message : 'Prefer `Effect.gen` callback for error propagation over `throw`.',
       },
     ],
     'no-useless-rename': [
@@ -84,6 +93,12 @@ const extraConfigForTypeScriptESLint: ConfigWithExtends = {
     '@typescript-eslint/explicit-member-accessibility': [
       'error', // Easier to see dead code in situations where a member is marked `private`
     ],
+    '@typescript-eslint/no-confusing-void-expression': [
+      'error',
+      {
+        ignoreArrowShorthand: true, // allows for immediately-ran `Effect.gen` callbacks that return `void`
+      },
+    ],
     '@typescript-eslint/no-import-type-side-effects': [
       'error', // Avoids unexpected behavior, trims down the size of the bundle
     ],
@@ -112,7 +127,9 @@ configureVueProject({
 const configWithVueTS = defineConfigWithVueTs(
   {
     name : 'app/files-to-lint',
-    files: ['**/*.{ts,mts,tsx,vue}'],
+    files: [
+      '**/*.{ts,mts,tsx,vue}',
+    ],
   },
 
   {
@@ -128,6 +145,7 @@ const configWithVueTS = defineConfigWithVueTs(
   extraConfigForTypeScriptESLint,
   ...pluginStylistic,
   ...pluginImport,
+  ...pluginInternal,
 
   pluginVue.configs['flat/recommended'],
   VueTSConfig.strictTypeChecked,
@@ -143,14 +161,17 @@ const completeConfig = defineConfig([
     // @ts-expect-error: according to bullet "2." under https://typescript-eslint.io/packages/typescript-eslint/#migrating-to-defineconfig
     extends: configWithVueTS,
     ignores: [
-      '**/*.md',
+      ...markdownPatterns,
+      ...jsonPatterns,
     ],
   },
   {
     extends: pluginMarkdown,
-    files  : [
-      '**/*.md',
-    ],
+    files  : markdownPatterns,
+  },
+  {
+    extends: pluginJSON,
+    files  : jsonPatterns,
   },
 ]);
 

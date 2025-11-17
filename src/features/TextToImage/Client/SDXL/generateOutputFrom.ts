@@ -1,13 +1,14 @@
 import {
-  Option,
+  HttpClientError,
+} from '@effect/platform';
+
+import {
+  Effect,
 } from 'effect';
 
 import type {
   GenerateFromTextRequest,
 } from 'stabilityai-client-typescript/models/operations';
-
-import Attempt from '@/library/Attempt';
-import HTTP from '@/library/HTTP';
 
 import {
   TextToImage_Server,
@@ -25,7 +26,7 @@ import {
   toSharkUIOutput,
 } from './toSharkUIOutput';
 
-const TextToImage_Client_SDXL_generateOutputFrom = async (
+const TextToImage_Client_SDXL_generateOutputFrom = (
   given: {
     textToImageRequestBody: Pick<GenerateFromTextRequest['textToImageRequestBody'],
     | 'textPrompts'
@@ -36,16 +37,8 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     | 'seed'
     >;
   },
-): Promise<
-  TextToImage_Client_Generation.Outcome
-> => {
-  const outcomeOfInitializingClient = await TextToImage_Client_SDXL_initialize();
-
-  if (
-    Attempt.Outcome.isFailure(outcomeOfInitializingClient)
-  ) return outcomeOfInitializingClient;
-
-  const shimmedStabilityAIClient = outcomeOfInitializingClient.value;
+): TextToImage_Client_Generation.Effect => Effect.gen(function* () {
+  const shimmedStabilityAIClient = yield* TextToImage_Client_SDXL_initialize;
 
   const promisedTextToImageResponse = shimmedStabilityAIClient.version1.image.forciblyGenerateFromText({
     engineId              : 'stable-diffusion-xl-1024-v1-0',
@@ -59,26 +52,26 @@ const TextToImage_Client_SDXL_generateOutputFrom = async (
     },
   });
 
-  const outcomeOfSettlingTextToImageResponse = await Attempt.Adapted.toSettle(promisedTextToImageResponse, {
-    interpretationOf: (caughtError) => {
+  const textToImageResponse = yield* Effect.tryPromise(() => promisedTextToImageResponse).pipe(
+    Effect.catchAll((someException) => {
+      const caughtError = someException.cause;
+
       if (
-        !(caughtError instanceof HTTP.Endpoint.Error.FailedToSendRequest)
-      ) return Option.none();
+        HttpClientError.isHttpClientError(caughtError)
+        && (caughtError.reason === 'Transport')
+      ) return new TextToImage_Server.Error.FailedToConnect(caughtError);
 
-      return Option.some(new TextToImage_Server.Error.FailedToConnect(caughtError.endpoint));
-    },
-  });
-
-  const outcomeOfSettlingSoleTextToImageOutput = Attempt.Outcome.map(
-    outcomeOfSettlingTextToImageResponse,
-    textToImageResponse => toSharkUIOutput.first({
-      in          : textToImageResponse,
-      inferredFrom: given.textToImageRequestBody.textPrompts,
+      return Effect.die(caughtError);
     }),
   );
 
-  return outcomeOfSettlingSoleTextToImageOutput;
-};
+  const soleTextToImageOutput = yield* toSharkUIOutput.first({
+    in          : textToImageResponse,
+    inferredFrom: given.textToImageRequestBody.textPrompts,
+  }).pipe(Effect.orDie);
+
+  return soleTextToImageOutput;
+});
 
 export {
   TextToImage_Client_SDXL_generateOutputFrom,

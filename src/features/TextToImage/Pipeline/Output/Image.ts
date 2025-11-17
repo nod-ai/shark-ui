@@ -1,3 +1,7 @@
+import {
+  Data,
+} from 'effect';
+
 import type URI from '@/library/URI';
 
 interface TextToImage_Pipeline_Output_Image {
@@ -5,6 +9,8 @@ interface TextToImage_Pipeline_Output_Image {
   description: string;
 }
 
-export type {
+const TextToImage_Pipeline_Output_Image = Data.case<TextToImage_Pipeline_Output_Image>();
+
+export {
   TextToImage_Pipeline_Output_Image,
 };

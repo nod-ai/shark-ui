@@ -1,19 +1,18 @@
-import Attempt from '@/library/Attempt';
+import {
+  Data,
+} from 'effect';
+
 import type URLComponent from '@/library/URLComponent';
 
 class TextToImage_Config_Static_Reading_Error
-  extends Attempt.Error.Actionable<
-    'TextToImage_Config_Static_Reading_Error'
-  > {
-  public override name = 'TextToImage_Config_Static_Reading_Error' as const;
-
-  public constructor(
-    public readonly filePath: URLComponent.Path,
-    givenCause: Error,
-  ) {
-    super(`Failed to read config at "${filePath}".`, {
-      cause: givenCause,
-    });
+  extends Data.TaggedError(
+    'TextToImage_Config_Static_Reading_Error',
+  )<{
+    cause: Error;
+    filePath: URLComponent.Path;
+  }> {
+  public override get message(): string {
+    return `Failed to read config at "${this.filePath}".`;
   }
 }
 

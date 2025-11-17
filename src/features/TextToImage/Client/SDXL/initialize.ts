@@ -1,27 +1,25 @@
-import Attempt from '@/library/Attempt';
+import {
+  Effect,
+} from 'effect';
+
 import ShimmedStabilityAIClient from '@/library/ShimmedStabilityAIClient';
 
 import {
   TextToImage_Server,
 } from '../../Server';
 
-const TextToImage_Client_SDXL_initialize = async (): Promise<
-  Attempt.Outcome<
-    ShimmedStabilityAIClient,
-    TextToImage_Server.Error.MissingSpecification
-  >
-> => {
-  const outcomeOfRetrievingCurrentServer = await TextToImage_Server.Current.retrieve();
+const TextToImage_Client_SDXL_initialize: Effect.Effect<
+  ShimmedStabilityAIClient,
+  TextToImage_Server.Error.MissingSpecification
+> = Effect.gen(function* () {
+  const currentTextToImageServer = yield* TextToImage_Server.Current.retrieve;
 
-  const outcomeOfInitializingClient = Attempt.Outcome.map(
-    outcomeOfRetrievingCurrentServer,
-    textToImageServer => new ShimmedStabilityAIClient({
-      serverURL: textToImageServer.origin,
-    }),
-  );
+  const newStabilityAIClient = new ShimmedStabilityAIClient({
+    serverURL: currentTextToImageServer.origin,
+  });
 
-  return outcomeOfInitializingClient;
-};
+  return newStabilityAIClient;
+});
 
 export {
   TextToImage_Client_SDXL_initialize,

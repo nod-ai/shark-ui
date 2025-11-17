@@ -13,19 +13,16 @@ type Sequence_Byte_Encoded_Base64 = Brand.Branded<
 const Sequence_Byte_Encoded_Base64 = Brand.refined<
   Sequence_Byte_Encoded_Base64
 >(
-  (someString) => {
+  (someString) => Option.gen(function* () {
     const resultOfDecodingByteSequence = Encoding.decodeBase64(someString);
-    const potentialParsingError = Option.getLeft(resultOfDecodingByteSequence);
+    const parsingError = yield* Option.getLeft(resultOfDecodingByteSequence);
 
-    const potentialRefinementError = Option.map(
-      potentialParsingError,
-      $0 => Brand.error('String is not valid Base64-encoded byte sequence', {
-        cause: $0,
-      }),
-    );
+    const refinementError = Brand.error('String is not valid Base64-encoded byte sequence', {
+      cause: parsingError,
+    });
 
-    return potentialRefinementError;
-  },
+    return refinementError;
+  }),
 );
 
 export {

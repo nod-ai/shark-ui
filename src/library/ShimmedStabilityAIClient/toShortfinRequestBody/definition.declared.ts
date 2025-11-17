@@ -15,29 +15,31 @@ import {
 function toShortfinRequestBody(
   givenRequestBody: GenerateFromTextRequest['textToImageRequestBody'],
 ): Option.Option<Shortfin.TextToImage.SDXL.Client.Request.Body> {
-  if (
-    (givenRequestBody.height === undefined)
-    || (givenRequestBody.width === undefined)
-    || (givenRequestBody.steps === undefined)
-    || (givenRequestBody.cfgScale === undefined)
-    || (givenRequestBody.seed === undefined)
-  ) return Option.none();
+  return Option.gen(function* () {
+    const remainderOfShortfinRequestBody = yield* Option.all({
+      height        : Option.fromNullable(givenRequestBody.height /*  */),
+      width         : Option.fromNullable(givenRequestBody.width /*   */),
+      steps         : Option.fromNullable(givenRequestBody.steps /*   */),
+      guidance_scale: Option.fromNullable(givenRequestBody.cfgScale /**/),
+      seed          : Option.fromNullable(givenRequestBody.seed /*    */),
+    });
 
-  const derivedShortfinRequestBody = {
-    prompt: toShortfinRequestBody_Prompt(givenRequestBody.textPrompts, {
-      weight: 1,
-    }),
-    neg_prompt: toShortfinRequestBody_Prompt(givenRequestBody.textPrompts, {
-      weight: -1,
-    }),
-    height        : givenRequestBody.height,
-    width         : givenRequestBody.width,
-    steps         : givenRequestBody.steps,
-    guidance_scale: givenRequestBody.cfgScale,
-    seed          : givenRequestBody.seed,
-  };
+    const promptsForShortfinRequestBody = {
+      prompt: toShortfinRequestBody_Prompt(givenRequestBody.textPrompts, {
+        weight: 1,
+      }),
+      neg_prompt: toShortfinRequestBody_Prompt(givenRequestBody.textPrompts, {
+        weight: -1,
+      }),
+    };
 
-  return Option.some(derivedShortfinRequestBody);
+    const derivedShortfinRequestBody = {
+      ...promptsForShortfinRequestBody,
+      ...remainderOfShortfinRequestBody,
+    };
+
+    return derivedShortfinRequestBody;
+  });
 }
 
 export {

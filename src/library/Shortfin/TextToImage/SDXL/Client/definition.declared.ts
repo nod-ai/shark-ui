@@ -1,11 +1,15 @@
 import {
-  Schema,
+  FetchHttpClient,
+  HttpBody,
+  HttpClient,
+  HttpClientResponse,
+} from '@effect/platform';
+
+import {
+  Effect,
 } from 'effect';
 
-import Attempt from '@/library/Attempt';
-import ContentDescriptor from '@/library/ContentDescriptor';
-import HTTP from '@/library/HTTP';
-import URLComponent from '@/library/URLComponent';
+import type URLComponent from '@/library/URLComponent';
 
 import type {
   Shortfin_TextToImage_SDXL_Client_Request,
@@ -15,44 +19,31 @@ import {
   Shortfin_TextToImage_SDXL_Client_Response,
 } from './Response';
 
-class Shortfin_TextToImage_SDXL_Client
-  extends HTTP.Client {
+class Shortfin_TextToImage_SDXL_Client {
   public constructor(
-    givenOrigin: URLComponent.Origin,
-  ) {
-    const defaultHeaders = {
-      [HTTP.Header.Content.Descriptor]: ContentDescriptor.json.serialized.toString(),
-    };
+    public readonly origin: URLComponent.Origin,
+  ) {}
 
-    super(
-      givenOrigin,
-      defaultHeaders,
-    );
-  }
-
-  public generateImageFrom(
+  public generateImageFrom = (
     givenBatchedRequestBody: Shortfin_TextToImage_SDXL_Client_Request.Body.Batched,
-  ): Promise<
-    Shortfin_TextToImage_SDXL_Client_Request.Outcome
-  > {
-    const generationEndpoint = URLComponent.Path('/generate');
+  ): Shortfin_TextToImage_SDXL_Client_Request.Effect => Effect.gen(this, function* () {
+    const encodedBatchedRequestBody = yield* HttpBody.json(givenBatchedRequestBody).pipe(Effect.orDie);
 
-    return Attempt.Fresh.thatEventually(async () => {
-      const outcomeOfSubmittingResource = await this.submitResource({
-        bySending: givenBatchedRequestBody,
-        to       : generationEndpoint,
-      });
-
-      if (
-        Attempt.Outcome.isFailure(outcomeOfSubmittingResource)
-      ) return outcomeOfSubmittingResource;
-
-      const rawResource = outcomeOfSubmittingResource.value;
-      const decodedResource = Schema.decodeUnknownSync(Shortfin_TextToImage_SDXL_Client_Response.Body)(rawResource);
-      const [soleGeneratedImage] = decodedResource.images;
-      return Attempt.Outcome.succeed(soleGeneratedImage);
+    const generationResponse = yield* HttpClient.post(this.origin.concat('/generate'), {
+      body: encodedBatchedRequestBody,
     });
-  }
+
+    const decodedBodyFrom = HttpClientResponse.schemaBodyJson(Shortfin_TextToImage_SDXL_Client_Response.Body);
+    const decodedResource = yield* decodedBodyFrom(generationResponse).pipe(Effect.orDie);
+
+    const [
+      soleGeneratedImage,
+    ] = decodedResource.images;
+
+    return soleGeneratedImage;
+  }).pipe(
+    Effect.provide(FetchHttpClient.layer),
+  );
 }
 
 export {

@@ -11,6 +11,11 @@ const pluginMarkdown: Linter.Config[] = [
   },
 ];
 
+const markdownPatterns = [
+  '**/*.md',
+];
+
 export {
   pluginMarkdown as default,
+  markdownPatterns,
 };

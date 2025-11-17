@@ -17,8 +17,8 @@ defineProps<{
   >
     Either:<br>
     a) supply it's corresponding environment variable named `{{ error.environmentKey }}` and rebuild<br>
-    b) specify it within "{{ error.file.toString() }}"<br>
+    b) specify it within "{{ error.file }}"<br>
     OR<br>
-    c) specify it within the response from "{{ error.endpoint.toString() }}"<br>
+    c) specify it within the response from "{{ error.endpoint }}"<br>
   </VAlert>
 </template>

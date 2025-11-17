@@ -71,24 +71,24 @@ For modules that are internal to a library (i.e., must be explicitly exposed for
 Consider the import of a hybrid internal module from one of its peers:
 
 ```typescript
-// @/library/Attempt/Fresh/that.ts
+// @/library/Range/definition.declared.ts
 
 import {
-  Attempt_Outcome,
-  type ProductOf,
-  type CauseOf,
-} from '../../Outcome';
+  Range_BoundContainment,
+} from './BoundContainment';
 
-...
+class Range {
+  ...
+}
 
 export {
-  Attempt_Fresh_that,
+  Range,
 };
 ```
 
-Here, a level-2 member called `Attempt_Outcome` is imported by name into the `Attempt/Fresh/that` module to define a level-3 member called `Attempt_Fresh_that`.
+Here, a level-2 member called `Range_BoundContainment` is imported by name into the "/Range/definition.declared.ts" module to define a top-level member called `Range`.
 
-- Both of these are internal modules that will be explicitly exposed as `Attempt.Outcome` and `Attempt.Fresh.that` to external consumers of the entire library.
+- Both of these are internal modules that will be explicitly exposed as `Range` and `Range.BoundContainment` to external consumers of the entire library.
 - Because of this, it's important for other internal consumers to acknowledge that these members are safe to expose to these external consumers (e.g. when used as parameter types or return types).
 - Ergo, `default` imports/exports are avoided to help peer consumers avoid inadvertent aliases that may obfuscate how a member will actually look to an external consumer.
 

@@ -1,10 +1,14 @@
+/* eslint-disable vitest/prefer-importing-vitest-globals */
+/* eslint-disable vitest/require-hook */
 import {
   describe,
-  it,
   expect,
-} from 'vitest';
+  it,
+} from '@effect/vitest';
 
-import Attempt from '@/library/Attempt';
+import {
+  Effect,
+} from 'effect';
 
 import {
   numberTaxonomy,
@@ -33,33 +37,45 @@ describe(isNegative, () => {
 
   describe('the sad outcomes', () => {
     describe('when generated due to inoperable operands', () => {
-      it('should reject the operand', () => {
+      it.effect('should reject the operand', () => Effect.gen(function* () {
         expect.assertions(1);
 
-        expect(() => isNegative(soleInoperableNumber)).toThrow(Error);
-      });
+        const inoperableInputDidResultInFailure = yield* Effect.isFailure(isNegative(soleInoperableNumber));
 
-      it('should safely propagate the error', () => {
+        expect(inoperableInputDidResultInFailure).toBe(true);
+      }));
+
+      it.effect('should safely propagate the rejection', () => Effect.gen(function* () {
         expect.assertions(1);
 
-        expect(() => isNegative(soleInoperableNumber)).toThrow(Attempt.Error.NonActionable);
-      });
+        const soleFailure = yield* Effect.flip(isNegative(soleInoperableNumber));
 
-      it('should communicate clearly with developers', () => {
+        expect(soleFailure).toBeInstanceOf(Error);
+      }));
+
+      it.effect('should clearly communicate the rejection to developers', () => Effect.gen(function* () {
         expect.assertions(1);
 
-        expect(() => isNegative(soleInoperableNumber)).toThrow('Operand must be operable');
-      });
+        const soleFailure = yield* Effect.flip(isNegative(soleInoperableNumber));
+
+        expect(soleFailure.message).toBe('Operand must be operable');
+      }));
     });
   });
 
   describe('the happy outcomes', () => {
     const infiniteAssertions = [
-      [infinite.negative, true],
-      [infinite.positive, false],
+      {
+        value         : infinite.negative,
+        expectedOutput: true,
+      },
+      {
+        value         : infinite.positive,
+        expectedOutput: false,
+      },
     ] as const;
 
-    const infiniteNumbers = infiniteAssertions.map($0 => $0[0]);
+    const infiniteNumbers = infiniteAssertions.map(($0) => $0.value);
 
     const neutralFiniteNumbers = [
       neutralNumber,
@@ -76,7 +92,7 @@ describe(isNegative, () => {
       runtime.max,
     ];
 
-    const negativeFiniteNumbers = positiveFiniteNumbers.map($0 => $0 * signed.negative);
+    const negativeFiniteNumbers = positiveFiniteNumbers.map(($0) => $0 * signed.negative);
 
     const operableNumbers = [
       ...infiniteNumbers,
@@ -85,34 +101,44 @@ describe(isNegative, () => {
       ...positiveFiniteNumbers,
     ];
 
-    it.each(operableNumbers)('should accept valid operands', (eachOperableNumber) => {
+    it.effect.each(operableNumbers)('should accept valid operands', (eachOperableNumber) => Effect.gen(function* () {
       expect.assertions(1);
 
-      expect(() => isNegative(eachOperableNumber)).not.toThrow();
-    });
+      const eachOperationDidSucceed = yield* Effect.isSuccess(isNegative(eachOperableNumber));
 
-    it.each(infiniteAssertions)('should support infinite operands', (eachInfiniteNumber, eachExpectOutput) => {
+      expect(eachOperationDidSucceed).toBe(true);
+    }));
+
+    it.effect.each(infiniteAssertions)('should support infinite operands', (eachAssertion) => Effect.gen(function* () {
       expect.assertions(1);
 
-      expect(isNegative(eachInfiniteNumber)).toBe(eachExpectOutput);
-    });
+      const eachActualOutput = yield* isNegative(eachAssertion.value);
 
-    it.each(neutralFiniteNumbers)('should detect neutral operands', (eachNeutralNumber) => {
+      expect(eachActualOutput).toBe(eachAssertion.expectedOutput);
+    }));
+
+    it.effect.each(neutralFiniteNumbers)('should detect neutral operands', (eachNeutralNumber) => Effect.gen(function* () {
       expect.assertions(1);
 
-      expect(isNegative(eachNeutralNumber)).toBe(false);
-    });
+      const outputForEachNeutralNumber = yield* isNegative(eachNeutralNumber);
 
-    it.each(positiveFiniteNumbers)('should detect positive operands', (eachPositiveNumber) => {
+      expect(outputForEachNeutralNumber).toBe(false);
+    }));
+
+    it.effect.each(positiveFiniteNumbers)('should detect positive operands', (eachPositiveNumber) => Effect.gen(function* () {
       expect.assertions(1);
 
-      expect(isNegative(eachPositiveNumber)).toBe(false);
-    });
+      const outputForEachPositiveNumber = yield* isNegative(eachPositiveNumber);
 
-    it.each(negativeFiniteNumbers)('should detect negative operands', (eachNegativeNumber) => {
+      expect(outputForEachPositiveNumber).toBe(false);
+    }));
+
+    it.effect.each(negativeFiniteNumbers)('should detect negative operands', (eachNegativeNumber) => Effect.gen(function* () {
       expect.assertions(1);
 
-      expect(isNegative(eachNegativeNumber)).toBe(true);
-    });
+      const outputForEachNegativeNumber = yield* isNegative(eachNegativeNumber);
+
+      expect(outputForEachNegativeNumber).toBe(true);
+    }));
   });
 });

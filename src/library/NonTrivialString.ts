@@ -12,19 +12,16 @@ type NonTrivialString = Brand.Branded<
 const NonTrivialString = Brand.refined<
   NonTrivialString
 >(
-  (someString) => {
+  (someString) => Option.gen(function* () {
     const resultOfDecodingTrivialString = Schema.decodeEither(Schema.NonEmptyTrimmedString)(someString);
-    const potentialParsingError = Option.getLeft(resultOfDecodingTrivialString);
+    const parsingError = yield* Option.getLeft(resultOfDecodingTrivialString);
 
-    const potentialRefinementError = Option.map(
-      potentialParsingError,
-      $0 => Brand.error(`Expected string to contain something beyond just whitespace, got "${someString}"`, {
-        cause: $0,
-      }),
-    );
+    const refinementError = Brand.error(`Expected string to contain something beyond just whitespace, got "${someString}"`, {
+      cause: parsingError,
+    });
 
-    return potentialRefinementError;
-  },
+    return refinementError;
+  }),
 );
 
 export {

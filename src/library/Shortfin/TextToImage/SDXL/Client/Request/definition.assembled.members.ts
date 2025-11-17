@@ -3,5 +3,5 @@ export {
 } from './Body';
 
 export type {
-  Shortfin_TextToImage_SDXL_Client_Request_Outcome as Outcome,
-} from './Outcome';
+  Shortfin_TextToImage_SDXL_Client_Request_Effect as Effect,
+} from './Effect';

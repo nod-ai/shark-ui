@@ -3,8 +3,9 @@ import type {
 } from 'lint-staged';
 
 const lintStagedConfig = {
-  '!(*.md)': 'npm run lint',
-  '*.md'   : 'npm run lint:docs',
+  '!(*.md|*.json)': 'npm run lint',
+  '*.md'          : 'npm run lint:docs',
+  '*.json'        : 'npm run lint:json',
 } satisfies Configuration;
 
 export {
