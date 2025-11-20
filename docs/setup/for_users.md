@@ -1,12 +1,12 @@
 # User Setup
 
-Let's get SHARK UI up and swimming!
+Let's get AMD-SHARK UI up and swimming!
 
 ## [Prerequisites](common_prerequisites.md)
 
 ## Installation
 
-1. Go to [the latest release](https://github.com/nod-ai/shark-ui/releases)
+1. Go to [the latest release](https://github.com/nod-ai/amdshark-ui/releases)
 1. Find the "Assets" section of the release
 1. Download a versioned copy
     - i.e. "package-v1.0.0.zip"
@@ -14,7 +14,7 @@ Let's get SHARK UI up and swimming!
 
 ## Configuration
 
-Now, specify the existing Shortfin text-to-image server so the SHARK UI knows where to send generation requests:
+Now, specify the existing Shortfin text-to-image server so the AMD-SHARK UI knows where to send generation requests:
 
 1. Open "config/text-to-image.json"
 1. Supply the details for your Shortfin text-to-image server, e.g.:

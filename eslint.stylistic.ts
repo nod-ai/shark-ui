@@ -5,7 +5,7 @@ import type {
 } from 'typescript-eslint';
 
 const extraConfig: ConfigWithExtends = {
-  name   : 'shark-ui/extra-stylistic',
+  name   : 'amdshark-ui/extra-stylistic',
   plugins: {
     '@stylistic': stylistic,
   },

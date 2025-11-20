@@ -6,7 +6,7 @@ import type {
   TextToImage_Pipeline,
 } from '@/features/TextToImage/Pipeline'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
 
-const toSharkUIOutput_Image_Description_singular = (
+const toAMDSharkUIOutput_Image_Description_singular = (
   givenPrompt: TextPrompt,
 ): TextToImage_Pipeline.Output['image']['description'] => {
   const isDefault = (
@@ -24,5 +24,5 @@ const toSharkUIOutput_Image_Description_singular = (
 };
 
 export {
-  toSharkUIOutput_Image_Description_singular,
+  toAMDSharkUIOutput_Image_Description_singular,
 };

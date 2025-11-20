@@ -15,10 +15,10 @@ import type {
 } from '@/features/TextToImage/Pipeline'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
 
 import {
-  toSharkUIOutput_plural,
+  toAMDSharkUIOutput_plural,
 } from './plural';
 
-const toSharkUIOutput_first = (
+const toAMDSharkUIOutput_first = (
   {
     in: givenResponse,
     inferredFrom: givenInputText,
@@ -27,7 +27,7 @@ const toSharkUIOutput_first = (
     inferredFrom: TextToImage_Pipeline.Input['text'];
   },
 ): Effect.Effect<TextToImage_Pipeline.Output, Error> => Effect.gen(function* () {
-  const inferredOutputs = yield* toSharkUIOutput_plural({
+  const inferredOutputs = yield* toAMDSharkUIOutput_plural({
     in          : givenResponse,
     inferredFrom: givenInputText,
   });
@@ -44,5 +44,5 @@ const toSharkUIOutput_first = (
 });
 
 export {
-  toSharkUIOutput_first,
+  toAMDSharkUIOutput_first,
 };

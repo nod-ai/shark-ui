@@ -30,7 +30,7 @@ import pluginStylistic from './eslint.stylistic';
 import pluginVitest from './eslint.vitest';
 
 const extraConfigForESLint: ConfigWithExtends = {
-  name : 'shark-ui/eslint',
+  name : 'amdshark-ui/eslint',
   rules: {
     'curly': [
       'error',
@@ -71,7 +71,7 @@ const extraConfigForESLint: ConfigWithExtends = {
 };
 
 const extraConfigForTypeScriptESLint: ConfigWithExtends = {
-  name : 'shark-ui/@typescript-eslint',
+  name : 'amdshark-ui/@typescript-eslint',
   rules: {
     '@typescript-eslint/consistent-type-exports': [
       'error',
@@ -109,7 +109,7 @@ const extraConfigForTypeScriptESLint: ConfigWithExtends = {
 };
 
 const VueTSConfig_overridesForAugmentationsToModuleDefinitions: ConfigWithExtends = {
-  name : 'shark-ui/module-definition-augmentations',
+  name : 'amdshark-ui/module-definition-augmentations',
   files: [
     '**/definition.declared.augmentation.ts',
   ],

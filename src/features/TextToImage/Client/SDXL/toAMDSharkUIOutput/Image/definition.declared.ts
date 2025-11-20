@@ -12,7 +12,7 @@ import {
   TextToImage_Pipeline,
 } from '@/features/TextToImage/Pipeline'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
 
-function toSharkUIOutput_Image(
+function toAMDSharkUIOutput_Image(
   givenImage: StabilityAIClient.Image,
   given: {
     description: TextToImage_Pipeline.Output['image']['description'];
@@ -37,5 +37,5 @@ function toSharkUIOutput_Image(
 }
 
 export {
-  toSharkUIOutput_Image,
+  toAMDSharkUIOutput_Image,
 };

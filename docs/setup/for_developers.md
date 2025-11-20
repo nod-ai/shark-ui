@@ -1,6 +1,6 @@
 # Developer Setup
 
-Let's sink some teeth into SHARK UI!
+Let's sink some teeth into AMD-SHARK UI!
 
 ## Prerequisites
 
@@ -15,8 +15,8 @@ Let's sink some teeth into SHARK UI!
 1. Clone the latest version
 
     ```shell
-    git clone https://github.com/nod-ai/shark-ui.git
-    cd shark-ui
+    git clone https://github.com/nod-ai/amdshark-ui.git
+    cd amdshark-ui
     ```
 
 1. Install it's dependencies:
@@ -29,9 +29,9 @@ Let's sink some teeth into SHARK UI!
 
 ## Configuration
 
-As mentioned in the [common prerequisites](#prerequisites), Shortfin defines an inference service for SHARK UI to use.
+As mentioned in the [common prerequisites](#prerequisites), Shortfin defines an inference service for AMD-SHARK UI to use.
 
-To point SHARK UI to a running service, add a configured environment:
+To point AMD-SHARK UI to a running service, add a configured environment:
 
 ```shell
 echo "VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN=http://localhost:<port>" > .env

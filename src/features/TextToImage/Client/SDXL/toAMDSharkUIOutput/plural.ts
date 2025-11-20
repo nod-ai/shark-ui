@@ -12,10 +12,10 @@ import {
 } from '@/features/TextToImage/Pipeline'; // eslint-disable-line import/no-internal-modules -- more concise than relative import
 
 import {
-  toSharkUIOutput_Image,
+  toAMDSharkUIOutput_Image,
 } from './Image';
 
-const toSharkUIOutput_plural = (
+const toAMDSharkUIOutput_plural = (
   {
     in: givenResponse,
     inferredFrom: givenInputText,
@@ -32,8 +32,8 @@ const toSharkUIOutput_plural = (
     Effect.orElseFail(() => new Error('Response body had no text-to-image results.')),
   );
 
-  const potentialOutputImages = inferredRawImages.map(($0) => toSharkUIOutput_Image($0, {
-    description: toSharkUIOutput_Image.Description.all(givenInputText),
+  const potentialOutputImages = inferredRawImages.map(($0) => toAMDSharkUIOutput_Image($0, {
+    description: toAMDSharkUIOutput_Image.Description.all(givenInputText),
   }));
 
   const inferredOutputImages = yield* Effect.all(potentialOutputImages).pipe(
@@ -48,5 +48,5 @@ const toSharkUIOutput_plural = (
 });
 
 export {
-  toSharkUIOutput_plural,
+  toAMDSharkUIOutput_plural,
 };
