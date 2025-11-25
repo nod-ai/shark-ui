@@ -23,8 +23,8 @@ import {
 } from './initialize';
 
 import {
-  toSharkUIOutput,
-} from './toSharkUIOutput';
+  toAMDSharkUIOutput,
+} from './toAMDSharkUIOutput';
 
 const TextToImage_Client_SDXL_generateOutputFrom = (
   given: {
@@ -65,7 +65,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = (
     }),
   );
 
-  const soleTextToImageOutput = yield* toSharkUIOutput.first({
+  const soleTextToImageOutput = yield* toAMDSharkUIOutput.first({
     in          : textToImageResponse,
     inferredFrom: given.textToImageRequestBody.textPrompts,
   }).pipe(Effect.orDie);

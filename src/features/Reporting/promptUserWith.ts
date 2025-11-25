@@ -30,9 +30,9 @@ const Reporting_promptUserWith = (givenIssue: unknown): void => {
     !userDidPermitDraftingNewIssue
   ) return;
 
-  const SharkUIRepository = new GitHub.Repository('nod-ai', 'shark-ui');
+  const AMDSharkUIRepository = new GitHub.Repository('nod-ai', 'amdshark-ui');
 
-  const newIssue = SharkUIRepository.Issue.from({
+  const newIssue = AMDSharkUIRepository.Issue.from({
     title : `[Unexpected Error]: can't <some task> when <some context>`,
     body  : `### Details\n${formattedErrorDetails}`.replaceAll('\n', '\n> '),
     labels: [
