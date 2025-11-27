@@ -35,8 +35,8 @@ import {
   SDXL,
 } from '@/library/ShimmedStabilityAIClient';
 
-import DiscreteSlider from '@/components/DiscreteSlider.vue';
 import NavigationPanel from '@/components/NavigationPanel.vue';
+import TextToImageModelSettings from '@/components/TextToImageModelSettings.vue';
 
 import TextToImage from '@/features/TextToImage';
 import TextToImageInputSection from '@/features/TextToImage/components/TextToImageInputSection.vue';
@@ -49,6 +49,21 @@ const {
 } = SDXL.DiffusionStepCount;
 
 const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
+const currentGuidanceScale = ref<number>(7.50);
+
+const diffusionStepProps = {
+  label   : 'Number of Diffusion Steps',
+  range   : range,
+  tickStep: 10,
+};
+
+const guidanceScaleProps = {
+  label    : 'Cfg Scale',
+  min      : 0.00,
+  max      : 20.00,
+  precision: 2,
+  step     : 0.5,
+};
 
 const imageGeneration = progressiveRef(Effect.gen(function* () {
   const proposedPrompt = yield* get(currentPrompt).pipe(
@@ -61,7 +76,7 @@ const imageGeneration = progressiveRef(Effect.gen(function* () {
       height     : 1024,
       width      : 1024,
       steps      : get(currentNumberOfDiffusionSteps),
-      cfgScale   : 7.5,
+      cfgScale   : get(currentGuidanceScale),
       seed       : 0,
     },
   });
@@ -91,11 +106,12 @@ const imageGeneration = progressiveRef(Effect.gen(function* () {
 
       <br>
 
-      <DiscreteSlider
-        v-model="currentNumberOfDiffusionSteps"
-        label="Number of Diffusion Steps"
-        :range="range"
-        :tick-step="10"
+      <TextToImageModelSettings
+        v-model:number-of-diffusion-steps="currentNumberOfDiffusionSteps"
+        v-model:guidance-scale="currentGuidanceScale"
+        label="Model Settings"
+        :diffusion-step-props="diffusionStepProps"
+        :guidance-scale-props="guidanceScaleProps"
       />
 
       <br>
