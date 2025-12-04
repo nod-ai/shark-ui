@@ -10,11 +10,11 @@ TIP: If you're trying to work with your remote machine's firewall, you're in the
 
 Consider the following scenario:
 
-|           | ...is running...                                 | Example                                           |
-|-----------|--------------------------------------------------|---------------------------------------------------|
+|           | ...is running...                                 | Example                                               |
+|-----------|--------------------------------------------------|-------------------------------------------------------|
 | Machine A | ...an instance of an inference service           | Serving inference via AMD-SHARK AI's Shortfin package |
 | Machine B | ...an instance of a browser application service  | Serving AMD-SHARK UI                                  |
-| Machine C | ...the browser with which the user will interact | Running Chrome                                    |
+| Machine C | ...the browser with which the user will interact | Running Chrome                                        |
 
 If these three machines are not the _same_ machine, then some forwarding will make it straightforward to allow:
 
