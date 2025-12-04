@@ -8,7 +8,7 @@ assignees: bjacobgordon
 
 ---
 
-### Checkpoints
+## Checkpoints
 
 - [ ] create `staging/v#.#.#` branch off of [integration](https://github.com/nod-ai/amdshark-ui/tree/integration)
   - [ ] commit version bump to "*-rc.0"
@@ -25,7 +25,7 @@ assignees: bjacobgordon
 - [ ] submit release draft
 - [ ] update [template](https://github.com/nod-ai/amdshark-ui/blob/integration/.github/ISSUE_TEMPLATE/track-release.md), if needed
 
-### Problems
+## Problems
 
 Edit this description to add new ones.
 
