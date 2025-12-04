@@ -21,10 +21,7 @@ jobs:
         uses: dependabot/fetch-metadata@v2
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
-      - name: Enable "auto-merge" for non-major version updates # Assumes the repository requires checks to pass before merging
-        if: |
-          (steps.metadata.outputs.update-type == 'version-update:semver-patch') ||
-          (steps.metadata.outputs.update-type == 'version-update:semver-minor')
+      - name: Enable "auto-merge" # Assumes the repository requires checks to pass before merging
         run: gh pr merge --squash --auto "$PR_URL"
       - name: 'Approve select dependencies for bump: patch'
         if: |
