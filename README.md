@@ -4,11 +4,11 @@
 
 ## Introduction
 
-Welcome to AMD-SHARK UI! This repo contains a basic app to demonstrate how to use the [Shortfin](https://github.com/nod-ai/amdshark-ai/tree/main/shortfin) Web APIs for text-to-image and text-to-text inference.
+Welcome to AMD-SHARK UI! This repo contains a basic app to demonstrate how to use the [Shortfin](https://github.com/nod-ai/amd-shark-ai/tree/main/shortfin) Web APIs for text-to-image and text-to-text inference.
 
 ## Preview
 
-![A screenshot of AMD-SHARK UI, depicted after a successful inference request for the legendary Blue-Eyes White Snow Cat](docs/screenshots/amdshark-ui-after-successful-image-generation.png "AMD-SHARK UI after Successful Image Generation")
+![A screenshot of AMD-SHARK UI, depicted after a successful inference request for the legendary Blue-Eyes White Snow Cat](docs/screenshots/amd-shark-ui-after-successful-image-generation.png "AMD-SHARK UI after Successful Image Generation")
 
 ## Setup
 
@@ -21,4 +21,4 @@ DISCLAIMER: this application is for demonstration purposes only and is not inten
 
 ## Need Anything?
 
-- [Create an issue](https://github.com/nod-ai/amdshark-ui/issues)
+- [Create an issue](https://github.com/nod-ai/amd-shark-ui/issues)

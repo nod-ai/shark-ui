@@ -10,20 +10,20 @@ assignees: bjacobgordon
 
 ## Checkpoints
 
-- [ ] create `staging/v#.#.#` branch off of [integration](https://github.com/nod-ai/amdshark-ui/tree/integration)
+- [ ] create `staging/v#.#.#` branch off of [integration](https://github.com/nod-ai/amd-shark-ui/tree/integration)
   - [ ] commit version bump to "*-rc.0"
 - [ ] open PR for branch: ?
 - [ ] perform QA, listing issues below
   - [ ] when done, commit version bump without pre-release component
-- [ ] [draft release entry](https://github.com/nod-ai/amdshark-ui/releases/new): ?
+- [ ] [draft release entry](https://github.com/nod-ai/amd-shark-ui/releases/new): ?
 - [ ] bundle package
 - [ ] add package to release notes
-- [ ] merge PR into [release](https://github.com/nod-ai/amdshark-ui/tree/release) branch
-  - [ ] add tag on [release](https://github.com/nod-ai/amdshark-ui/tree/release) branch: ?
-- [ ] open PR comparing [release](https://github.com/nod-ai/amdshark-ui/tree/release) to [integration](https://github.com/nod-ai/amdshark-ui/tree/integration): #???
+- [ ] merge PR into [release](https://github.com/nod-ai/amd-shark-ui/tree/release) branch
+  - [ ] add tag on [release](https://github.com/nod-ai/amd-shark-ui/tree/release) branch: ?
+- [ ] open PR comparing [release](https://github.com/nod-ai/amd-shark-ui/tree/release) to [integration](https://github.com/nod-ai/amd-shark-ui/tree/integration): #???
   - [ ] merge with merge commit rather than "squash and merge" or "rebase and merge" (ensures `release` is strictly behind `integration`)
 - [ ] submit release draft
-- [ ] update [template](https://github.com/nod-ai/amdshark-ui/blob/integration/.github/ISSUE_TEMPLATE/track-release.md), if needed
+- [ ] update [template](https://github.com/nod-ai/amd-shark-ui/blob/integration/.github/ISSUE_TEMPLATE/track-release.md), if needed
 
 ## Problems
 

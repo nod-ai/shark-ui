@@ -15,8 +15,8 @@ Let's sink some teeth into AMD-SHARK UI!
 1. Clone the latest version
 
     ```shell
-    git clone https://github.com/nod-ai/amdshark-ui.git
-    cd amdshark-ui
+    git clone https://github.com/nod-ai/amd-shark-ui.git
+    cd amd-shark-ui
     ```
 
 1. Install it's dependencies:
