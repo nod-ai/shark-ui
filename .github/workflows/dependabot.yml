@@ -45,6 +45,7 @@ jobs:
               "eslint",
               "eslint-plugin-cypress",
               "eslint-plugin-vue",
+              "markdownlint-cli2",
               "typescript-eslint",
               "typescript",
               "vite",
