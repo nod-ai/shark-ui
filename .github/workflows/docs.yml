@@ -24,22 +24,18 @@ jobs:
             package.json
             **/*.md
           separator: ','
+      - name: Set up Node.js
+        if: steps.changed-files.outputs.any_changed == 'true'
+        uses: actions/setup-node@v6
+        with:
+          cache: 'npm'
       - name: Lint the updated Markdown files
         id: lint-markdown-files
-        uses: DavidAnson/markdownlint-cli2-action@v21
         if: steps.changed-files.outputs.any_changed == 'true'
-        with:
-          config: .markdownlint-cli2.yaml
-          globs: >-
-            ${{
-              (
-                contains(steps.changed-files.outputs.all_changed_files, '.github/workflows/docs.yml') ||
-                contains(steps.changed-files.outputs.all_changed_files, 'package.json')
-              )
-              && '**/*.md'
-              || steps.changed-files.outputs.all_changed_files
-            }}
-          separator: ','
+        run: |
+          VERSION_RANGE=$(node -p "require('./package.json').devDependencies['markdownlint-cli2']")
+          VERSION=$(echo "$VERSION_RANGE" | sed 's/^[^0-9]*//')
+          npx markdownlint-cli2@${VERSION} '**/*.md'
         continue-on-error: true
       - name: If linter failed, highlight debug tools
         if: steps.lint-markdown-files.outcome == 'failure'
