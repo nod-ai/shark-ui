@@ -19,7 +19,6 @@ Now, specify the existing Shortfin text-to-image server so the AMD-SHARK UI know
 1. Open "config/text-to-image.json"
 1. Supply the details for your Shortfin text-to-image server, e.g.:
     - Before:
-
         ```json
         {
             ...
