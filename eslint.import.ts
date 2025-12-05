@@ -5,7 +5,7 @@ import type {
 } from 'typescript-eslint';
 
 const extendedConfig: ConfigWithExtends = {
-  name : 'amdshark-ui/import',
+  name : 'amd-shark-ui/import',
   files: [
     '**/*.{ts,vue}',
   ],

@@ -6,7 +6,7 @@ import eslintInternal from './eslint-internal';
 
 const pluginInternal: ConfigWithExtends[] = [
   {
-    name   : 'amdshark-ui/internal',
+    name   : 'amd-shark-ui/internal',
     plugins: {
       internal: eslintInternal,
     },

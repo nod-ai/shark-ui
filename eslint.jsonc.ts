@@ -5,7 +5,7 @@ import type {
 import pluginJsonc from 'eslint-plugin-jsonc';
 
 const rulesForPackageJSON: Linter.Config = {
-  name : 'amdshark-ui/jsonc/package-json',
+  name : 'amd-shark-ui/jsonc/package-json',
   files: [
     '**/package.json',
   ],
@@ -40,7 +40,7 @@ const jsonPatterns = [
 const pluginJSON: Linter.Config[] = [
   ...pluginJsonc.configs['flat/recommended-with-json'],
   {
-    name   : 'amdshark-ui/jsonc/ignore-generated',
+    name   : 'amd-shark-ui/jsonc/ignore-generated',
     ignores: [
       '**/package-lock.json',
       '**/coverage/**',
@@ -48,7 +48,7 @@ const pluginJSON: Linter.Config[] = [
     ],
   },
   {
-    name : 'amdshark-ui/jsonc/rules',
+    name : 'amd-shark-ui/jsonc/rules',
     files: jsonPatterns,
     rules: {
       'jsonc/array-bracket-newline': [

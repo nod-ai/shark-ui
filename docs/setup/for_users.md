@@ -6,7 +6,7 @@ Let's get AMD-SHARK UI up and swimming!
 
 ## Installation
 
-1. Go to [the latest release](https://github.com/nod-ai/amdshark-ui/releases)
+1. Go to [the latest release](https://github.com/nod-ai/amd-shark-ui/releases)
 1. Find the "Assets" section of the release
 1. Download a versioned copy
     - i.e. "package-v1.0.0.zip"
