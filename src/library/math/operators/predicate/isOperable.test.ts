@@ -35,7 +35,7 @@ describe(isOperable, () => {
     ])('should never fail', (someOperand) => {
       expect.assertions(1);
 
-      expect(() => isOperable(someOperand)).not.toThrow(Error);
+      expect(() => isOperable(someOperand)).not.toThrowError();
     });
   });
 
