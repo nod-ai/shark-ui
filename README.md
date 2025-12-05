@@ -8,7 +8,7 @@ Welcome to AMD-SHARK UI! This repo contains a basic app to demonstrate how to us
 
 ## Preview
 
-![A screenshot of AMD-SHARK UI, depicted after a successful inference request for the legendary Blue-Eyes White Snow Cat](docs/screenshots/amdshark-ui-after-successful-image-generation.png "AMD-Shark UI after Successful Image Generation")
+![A screenshot of AMD-SHARK UI, depicted after a successful inference request for the legendary Blue-Eyes White Snow Cat](docs/screenshots/amdshark-ui-after-successful-image-generation.png "AMD-SHARK UI after Successful Image Generation")
 
 ## Setup
 
