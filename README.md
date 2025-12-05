@@ -1,6 +1,6 @@
 # AMD-SHARK UI
 
-![The logo for AMD-SHARK UI, depicted as the letter "u" with amdshark teeth and the letter "i" with a amdshark fin instead of a dot](docs/branding/banner-1280x640.png "AMD-SHARK UI Logo")
+![The logo for AMD-SHARK UI, depicted as the letter "u" with shark teeth and the letter "i" with a shark fin instead of a dot](docs/branding/banner-1280x640.png "AMD-SHARK UI Logo")
 
 ## Introduction
 
