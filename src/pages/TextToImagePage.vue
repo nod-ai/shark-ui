@@ -94,7 +94,7 @@ const imageGeneration = progressiveRef(Effect.gen(function* () {
       <DiscreteSlider
         v-model="currentNumberOfDiffusionSteps"
         label="Number of Diffusion Steps"
-        :range="range"
+        :range
         :tick-step="10"
       />
 

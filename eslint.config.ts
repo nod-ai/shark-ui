@@ -8,8 +8,6 @@ import {
   defineConfig,
 } from 'eslint/config';
 
-import uncustomizedPluginVue from 'eslint-plugin-vue';
-
 import type {
   ConfigWithExtends,
 } from 'typescript-eslint';
@@ -28,6 +26,7 @@ import pluginMarkdown, {
 
 import pluginStylistic from './eslint.stylistic';
 import pluginVitest from './eslint.vitest';
+import pluginVue from './eslint.vue';
 
 const extraConfigForESLint: ConfigWithExtends = {
   name : 'amd-shark-ui/eslint',
@@ -147,7 +146,7 @@ const configWithVueTS = defineConfigWithVueTs(
   ...pluginImport,
   ...pluginInternal,
 
-  uncustomizedPluginVue.configs['flat/recommended'],
+  ...pluginVue,
   VueTSConfig.strictTypeChecked,
   VueTSConfig.stylisticTypeChecked,
   VueTSConfig_overridesForAugmentationsToModuleDefinitions,
