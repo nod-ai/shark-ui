@@ -1,4 +1,4 @@
-import pluginCypress from 'eslint-plugin-cypress';
+import uncustomizedPluginCypress from 'eslint-plugin-cypress';
 
 import type {
   ConfigWithExtends,
@@ -6,7 +6,7 @@ import type {
 
 const overriddenCypressPlugin: ConfigWithExtends[] = [
   {
-    ...pluginCypress.configs.recommended,
+    ...uncustomizedPluginCypress.configs.recommended,
     files: [
       'cypress/e2e/**/*.{cy,spec}.{js,ts,jsx,tsx}',
       'cypress/support/**/*.{js,ts,jsx,tsx}',

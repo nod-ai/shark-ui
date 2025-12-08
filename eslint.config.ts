@@ -8,7 +8,7 @@ import {
   defineConfig,
 } from 'eslint/config';
 
-import pluginVue from 'eslint-plugin-vue';
+import uncustomizedPluginVue from 'eslint-plugin-vue';
 
 import type {
   ConfigWithExtends,
@@ -147,7 +147,7 @@ const configWithVueTS = defineConfigWithVueTs(
   ...pluginImport,
   ...pluginInternal,
 
-  pluginVue.configs['flat/recommended'],
+  uncustomizedPluginVue.configs['flat/recommended'],
   VueTSConfig.strictTypeChecked,
   VueTSConfig.stylisticTypeChecked,
   VueTSConfig_overridesForAugmentationsToModuleDefinitions,

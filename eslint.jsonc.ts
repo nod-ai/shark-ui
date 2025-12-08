@@ -2,7 +2,7 @@ import type {
   Linter,
 } from 'eslint';
 
-import pluginJsonc from 'eslint-plugin-jsonc';
+import uncustomizedPluginJSONC from 'eslint-plugin-jsonc';
 
 const rulesForPackageJSON: Linter.Config = {
   name : 'amd-shark-ui/jsonc/package-json',
@@ -38,7 +38,7 @@ const jsonPatterns = [
 ];
 
 const pluginJSON: Linter.Config[] = [
-  ...pluginJsonc.configs['flat/recommended-with-json'],
+  ...uncustomizedPluginJSONC.configs['flat/recommended-with-json'],
   {
     name   : 'amd-shark-ui/jsonc/ignore-generated',
     ignores: [
