@@ -104,6 +104,9 @@ const extraConfigForTypeScriptESLint: ConfigWithExtends = {
     '@typescript-eslint/no-unnecessary-parameter-property-assignment': [
       'error', // See https://www.typescriptlang.org/docs/handbook/2/classes.html#parameter-properties for more information
     ],
+    '@typescript-eslint/strict-boolean-expressions': [
+      'error', // Encourages more explicit boolean expressions as well as better handling of empty values and optionals
+    ],
   },
 };
 
