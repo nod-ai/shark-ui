@@ -37,7 +37,7 @@ const jsonPatterns = [
   '**/*.json',
 ];
 
-const pluginJSON: Linter.Config[] = [
+const pluginJSONC: Linter.Config[] = [
   ...uncustomizedPluginJSONC.configs['flat/recommended-with-json'],
   {
     name   : 'amd-shark-ui/jsonc/ignore-generated',
@@ -73,6 +73,6 @@ const pluginJSON: Linter.Config[] = [
 ];
 
 export {
-  pluginJSON as default,
+  pluginJSONC as default,
   jsonPatterns,
 };

@@ -4,7 +4,7 @@ import type {
   ConfigWithExtends,
 } from 'typescript-eslint';
 
-const overriddenCypressPlugin: ConfigWithExtends[] = [
+const pluginCypress: ConfigWithExtends[] = [
   {
     ...uncustomizedPluginCypress.configs.recommended,
     files: [
@@ -15,5 +15,5 @@ const overriddenCypressPlugin: ConfigWithExtends[] = [
 ];
 
 export {
-  overriddenCypressPlugin as default,
+  pluginCypress as default,
 };

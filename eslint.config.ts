@@ -18,7 +18,7 @@ import pluginCypress from './cypress/eslint.config';
 import pluginImport from './eslint.import';
 import pluginInternal from './eslint.internal';
 
-import pluginJSON, {
+import pluginJSONC, {
   jsonPatterns,
 } from './eslint.jsonc';
 
@@ -170,7 +170,7 @@ const completeConfig = defineConfig([
     files  : markdownPatterns,
   },
   {
-    extends: pluginJSON,
+    extends: pluginJSONC,
     files  : jsonPatterns,
   },
 ]);
