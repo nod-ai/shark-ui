@@ -29,6 +29,7 @@ const pluginInternal: ConfigWithExtends[] = [
             'exports.object.primary.ts', // Always a barrel file, so should never be directory-based
             'exports.object.auxiliaries.ts', // Always a barrel file, so should never be directory-based
             'exports.toolbox.ts', // Always a barrel file, so should never be directory-based
+            'external.ts', // Always a barrel file, so should never be directory-based
           ],
         },
       ],
