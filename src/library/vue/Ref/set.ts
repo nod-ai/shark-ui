@@ -1,6 +1,6 @@
 import type {
   Ref,
-} from './core';
+} from './external';
 
 /** Updates the wrapped instance */
 const set = <SomeState>(
