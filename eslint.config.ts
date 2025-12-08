@@ -8,7 +8,7 @@ import {
   defineConfig,
 } from 'eslint/config';
 
-import pluginVue from 'eslint-plugin-vue';
+import uncustomizedPluginVue from 'eslint-plugin-vue';
 
 import type {
   ConfigWithExtends,
@@ -18,7 +18,7 @@ import pluginCypress from './cypress/eslint.config';
 import pluginImport from './eslint.import';
 import pluginInternal from './eslint.internal';
 
-import pluginJSON, {
+import pluginJSONC, {
   jsonPatterns,
 } from './eslint.jsonc';
 
@@ -147,7 +147,7 @@ const configWithVueTS = defineConfigWithVueTs(
   ...pluginImport,
   ...pluginInternal,
 
-  pluginVue.configs['flat/recommended'],
+  uncustomizedPluginVue.configs['flat/recommended'],
   VueTSConfig.strictTypeChecked,
   VueTSConfig.stylisticTypeChecked,
   VueTSConfig_overridesForAugmentationsToModuleDefinitions,
@@ -170,7 +170,7 @@ const completeConfig = defineConfig([
     files  : markdownPatterns,
   },
   {
-    extends: pluginJSON,
+    extends: pluginJSONC,
     files  : jsonPatterns,
   },
 ]);

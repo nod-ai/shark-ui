@@ -1,4 +1,4 @@
-import importPlugin from 'eslint-plugin-import';
+import uncustomizedPluginImport from 'eslint-plugin-import';
 
 import type {
   ConfigWithExtends,
@@ -10,8 +10,8 @@ const extendedConfig: ConfigWithExtends = {
     '**/*.{ts,vue}',
   ],
   extends: [
-    importPlugin.flatConfigs.recommended,
-    importPlugin.flatConfigs.typescript,
+    uncustomizedPluginImport.flatConfigs.recommended,
+    uncustomizedPluginImport.flatConfigs.typescript,
   ],
   settings: {
     'import/resolver': {
