@@ -38,7 +38,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = (
     >;
   },
 ): TextToImage_Client_Generation.Effect => Effect.gen(function* () {
-  const shimmedStabilityAIClient = yield* TextToImage_Client_SDXL_initialize;
+  const shimmedStabilityAIClient = yield* TextToImage_Client_SDXL_initialize();
 
   const promisedTextToImageResponse = shimmedStabilityAIClient.version1.image.forciblyGenerateFromText({
     engineId              : 'stable-diffusion-xl-1024-v1-0',

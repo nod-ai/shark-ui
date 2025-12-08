@@ -20,7 +20,7 @@ import {
   TextToImage_Config_Dynamic_endpoint,
 } from './endpoint';
 
-const TextToImage_Config_Dynamic_fetch: TextToImage_Config_Dynamic_Fetching.Effect = Effect.gen(function* () {
+const TextToImage_Config_Dynamic_fetch = (): TextToImage_Config_Dynamic_Fetching.Effect => Effect.gen(function* () {
   const endpointResponse = yield* HttpClient.get(TextToImage_Config_Dynamic_endpoint);
   const decodedBodyFrom = HttpClientResponse.schemaBodyJson(TextToImage_Config);
   const decodedConfigFromEndpoint = yield* decodedBodyFrom(endpointResponse).pipe(Effect.orDie);
