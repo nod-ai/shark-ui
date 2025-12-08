@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TextToImage from '@/features/TextToImage';
+import type TextToImage from '@/features/TextToImage';
 
 import TextToImageServerConnectionAlert from './TextToImageServerConnectionAlert.vue';
 import TextToImageServerSpecificationAlert from './TextToImageServerSpecificationAlert.vue';
@@ -11,7 +11,7 @@ defineProps<{
 
 <template>
   <TextToImageServerSpecificationAlert
-    v-if="(error instanceof TextToImage.Server.Error.MissingSpecification)"
+    v-if="error._tag === 'TextToImage_Server_Error_MissingSpecification'"
     :error
   />
   <TextToImageServerConnectionAlert
