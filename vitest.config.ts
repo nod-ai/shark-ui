@@ -19,7 +19,10 @@ const vitestConfig = mergeConfig(
         ...configDefaults.exclude,
         'e2e/**',
       ],
-      root: fileURLToPath(new URL('./', import.meta.url)),
+      root    : fileURLToPath(new URL('./', import.meta.url)),
+      coverage: {
+        enabled: true,
+      },
     },
   }),
 );
