@@ -8,11 +8,6 @@ import {
   Effect,
 } from 'effect';
 
-import {
-  isEmptyArray,
-  isNonEmptyArray,
-} from 'effect/Array';
-
 import type {
   Project,
   Symbol,
@@ -21,6 +16,10 @@ import type {
 import {
   InternalProject,
 } from '../../../TSMorph';
+
+import {
+  soleElementIn,
+} from '../../utilitiesByType/array';
 
 class TypeScript_File
   extends Data.Class<{
@@ -73,26 +72,8 @@ class TypeScript_File
     Path.Path
   > => Effect.gen(this, function* () {
     const exportsFromModule = yield* this.exportsUsing(givenProject);
-
-    if (
-      !isNonEmptyArray(exportsFromModule)
-    ) return yield* Effect.fail(new Error(`No exports found at ${yield* this.path.serialized}`));
-
-    const [
-      firstExportFromModule,
-      ...extraneousExportsFromModule
-    ] = exportsFromModule;
-
-    if (
-      isEmptyArray(extraneousExportsFromModule)
-    ) return firstExportFromModule;
-
-    const errorForExtraneousExports = new Error([
-      `Found ${extraneousExportsFromModule.length.toString()} extraneous exports at ${yield* this.path.serialized}:`,
-      ...extraneousExportsFromModule.map(($0) => $0.getName()),
-    ].join('\n'));
-
-    return yield* Effect.fail(errorForExtraneousExports);
+    const soleExportFromModule = yield* soleElementIn(exportsFromModule);
+    return soleExportFromModule;
   });
 
   public readonly soleExport: Effect.Effect<
