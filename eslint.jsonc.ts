@@ -25,6 +25,7 @@ const rulesForPackageJSON: Linter.Config = {
           'build-only',
           'preview',
           'test:unit',
+          'test:unit:generate-missing',
           'test:e2e',
           'test:e2e:dev',
         ],
