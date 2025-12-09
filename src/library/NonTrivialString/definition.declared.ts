@@ -25,5 +25,5 @@ const NonTrivialString = Brand.refined<
 );
 
 export {
-  NonTrivialString as default,
+  NonTrivialString,
 };
