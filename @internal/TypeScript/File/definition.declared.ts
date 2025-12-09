@@ -9,18 +9,22 @@ import {
 } from 'effect';
 
 import {
-  isEmptyArray,
-  isNonEmptyArray,
-} from 'effect/Array';
-
-import type {
-  Project,
-  Symbol,
+  Node,
+  type Project,
+  type Symbol,
 } from 'ts-morph';
 
 import {
   InternalProject,
 } from '../../../TSMorph';
+
+import {
+  soleElementIn,
+} from '../../utilitiesByType/array';
+
+import {
+  hasCallableTarget,
+} from '../Declaration';
 
 class TypeScript_File
   extends Data.Class<{
@@ -73,26 +77,8 @@ class TypeScript_File
     Path.Path
   > => Effect.gen(this, function* () {
     const exportsFromModule = yield* this.exportsUsing(givenProject);
-
-    if (
-      !isNonEmptyArray(exportsFromModule)
-    ) return yield* Effect.fail(new Error(`No exports found at ${yield* this.path.serialized}`));
-
-    const [
-      firstExportFromModule,
-      ...extraneousExportsFromModule
-    ] = exportsFromModule;
-
-    if (
-      isEmptyArray(extraneousExportsFromModule)
-    ) return firstExportFromModule;
-
-    const errorForExtraneousExports = new Error([
-      `Found ${extraneousExportsFromModule.length.toString()} extraneous exports at ${yield* this.path.serialized}:`,
-      ...extraneousExportsFromModule.map(($0) => $0.getName()),
-    ].join('\n'));
-
-    return yield* Effect.fail(errorForExtraneousExports);
+    const soleExportFromModule = yield* soleElementIn(exportsFromModule);
+    return soleExportFromModule;
   });
 
   public readonly soleExport: Effect.Effect<
@@ -102,6 +88,25 @@ class TypeScript_File
   > = Effect.gen(this, function* () {
     const temporaryProject = new InternalProject();
     return yield* this.soleExportUsing(temporaryProject);
+  });
+
+  public readonly soleExportIsCallableUsing = (
+    givenProject: Project,
+  ): Effect.Effect<
+    boolean,
+    Error,
+    Path.Path
+  > => Effect.gen(this, function* () {
+    const soleExportSymbol = yield* this.soleExportUsing(givenProject);
+    const soleExportDeclaration = yield* soleElementIn(soleExportSymbol.getDeclarations());
+
+    if (
+      Node.isExportSpecifier(soleExportDeclaration)
+    ) return yield* hasCallableTarget(soleExportDeclaration);
+
+    const serializedPath = yield* this.path.serialized;
+    const exportSpecificationError = new Error(`Sole export declaration in ${serializedPath} was not an export specifier.`);
+    return yield* Effect.fail(exportSpecificationError);
   });
 }
 
