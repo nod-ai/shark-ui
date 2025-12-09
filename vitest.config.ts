@@ -22,6 +22,10 @@ const vitestConfig = mergeConfig(
       root    : fileURLToPath(new URL('./', import.meta.url)),
       coverage: {
         enabled: true,
+        include: [
+          'src/library/**/*.ts',
+          'src/features/**/*.ts',
+        ],
       },
     },
   }),
