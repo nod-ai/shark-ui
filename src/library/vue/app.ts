@@ -1,3 +1,0 @@
-export {
-  createApp,
-} from 'vue';

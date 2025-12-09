@@ -1,5 +1,3 @@
-export * from './core';
-
-export * from './get';
+export * from './external';
 
 export * from './set';
