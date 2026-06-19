@@ -27,7 +27,7 @@
     "effect": "^3.19.14",
     "istanbul-lib-coverage": "^3.2.2",
     "stabilityai-client-typescript": "github:nod-ai/StabilityAI-client-typescript#npm/v0.1.0",
-    "vue": "^3.5.26",
+    "vue": "^3.5.27",
     "vue-router": "^4.6.4",
     "vuetify": "^3.11.6"
   },
